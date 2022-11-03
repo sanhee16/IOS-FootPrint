@@ -5,3 +5,8 @@
 !*.xcworkspace/contents.xcworkspacedata
 /*.gcno
 **/xcshareddata/WorkspaceSettings.xcsettings
+*.xcuserstate
+
+*.swp
+*.swo
+
