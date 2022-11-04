@@ -53,4 +53,14 @@ class AppCoordinator: Coordinator, Terminatable {
         let vc = AddFootprintView.vc(self)
         self.present(vc, animated: true)
     }
+    
+    func presentGalleryView(onClickItem: ((GalleryItem) -> ())?) {
+        let vc = GalleryView.vc(self, onClickItem: onClickItem)
+        self.present(vc, animated: true)
+    }
+    
+    func presentAlertView(_ type: AlertType, title: String?, description: String?, callback: ((Bool) -> ())?) {
+        let vc = AlertView.vc(self, type: type, title: title, description: description, callback: callback)
+        self.present(vc, animated: false)
+    }
 }

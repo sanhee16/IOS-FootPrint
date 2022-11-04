@@ -55,11 +55,11 @@ struct GalleryView: View {
                                         ForEach($vm.items.wrappedValue.indices, id: \.self) { idx in
                                             let item = vm.items[idx]
                                             ZStack(alignment: .topLeading) {
-                                                if let selectedImage = $vm.item.wrappedValue {
-                                                    Image("selected") //TODO: 이미지 필요함
-                                                        .resizable()
-                                                        .frame(both: 10)
-                                                }
+//                                                if let selectedImage = $vm.item.wrappedValue {
+//                                                    Image("selected") //TODO: 이미지 필요함
+//                                                        .resizable()
+//                                                        .frame(both: 10)
+//                                                }
                                                     
                                                 Image(uiImage: item.image)
                                                     .resizable()
@@ -99,6 +99,8 @@ struct GalleryView: View {
                                 .onTapGesture {
                                     vm.onSelectImage()
                                 }
+                                .padding(.bottom, 20)
+                                .zIndex(1)
                         }
                         .frame(width: geometry.size.width, height: geometry.size.height - 50, alignment: .center)
                     }

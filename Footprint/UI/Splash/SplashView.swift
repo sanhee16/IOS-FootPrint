@@ -25,7 +25,10 @@ struct SplashView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .center, spacing: 0) {
-                Text("splash")
+                Spacer()
+                LottieView(filename: "walking_dog")
+                    .frame(both: 300.0)
+                Spacer()
             }
             .padding(EdgeInsets(top: safeTop, leading: 0, bottom: safeBottom, trailing: 0))
             .edgesIgnoringSafeArea(.all)

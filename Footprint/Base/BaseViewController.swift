@@ -12,16 +12,17 @@ import FittedSheets
 // Content는 generic type
 class BaseViewController<Content>: UIViewController, Dismissible, Nameable where Content: View { // where: 타입에 대한 제약
     static func bottomSheet(_ rootView: Content, sizes: [SheetSize]) -> SheetViewController {
-      let options = SheetOptions(
-              pullBarHeight: 0,
-              shrinkPresentingViewController: false
-      )
-      let vc = BaseViewController(rootView, completion: nil)
-      let sheetController = SheetViewController(controller: vc, sizes: sizes, options: options)
-      sheetController.allowPullingPastMaxHeight = false
-      sheetController.gripColor = nil
-
-      return sheetController
+        let options = SheetOptions(
+            pullBarHeight: 0,
+            shrinkPresentingViewController: false
+        )
+        let vc = BaseViewController(rootView, completion: nil)
+        let sheetController = SheetViewController(controller: vc, sizes: sizes, options: options)
+        sheetController.allowPullingPastMaxHeight = false
+        sheetController.gripColor = nil
+        
+        print(("\(type(of: self)): init BottomSheet, \(String(describing: Content.self))"))
+        return sheetController
     }
     
     let rootView: Content

@@ -47,5 +47,9 @@ class BaseViewModel: ObservableObject {
     public func change(_ vc: UIViewController, animated: Bool = true) {
         self.coordinator?.change(vc, animated: animated)
     }
+    
+    public func alert(_ type: AlertType, title: String? = nil, description: String? = nil, callback: ((Bool) -> ())? = nil) {
+        self.coordinator?.presentAlertView(type, title: title, description: description, callback: callback)
+    }
 }
 

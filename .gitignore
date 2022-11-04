@@ -6,6 +6,7 @@
 /*.gcno
 **/xcshareddata/WorkspaceSettings.xcsettings
 *.xcuserstate
+.DS_Store
 
 *.swp
 *.swo

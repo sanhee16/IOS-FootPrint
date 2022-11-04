@@ -27,5 +27,25 @@ class AddFootprintViewModel: BaseViewModel {
         self.dismiss()
     }
     
+    func onClickGallery() {
+        self.coordinator?.presentGalleryView(onClickItem: { [weak self] (item: GalleryItem) in
+            guard let self = self else { return }
+            print("sandy, item: \(item.image)")
+            self.images.append(item.image)
+        })
+    }
     
+    func removeImage(_ item: UIImage) {
+        self.alert(.yesOrNo, title: nil, description: "삭제하시겠습니까?") {[weak self] allowRemove in
+            guard let self = self else { return }
+            if allowRemove {
+                for idx in self.images.indices {
+                    if self.images[idx] == item {
+                        self.images.remove(at: idx)
+                        break
+                    }
+                }
+            }
+        }
+    }
 }

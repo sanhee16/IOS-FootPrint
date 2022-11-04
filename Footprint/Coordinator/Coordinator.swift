@@ -8,6 +8,7 @@
 
 import SwiftUI
 import MessageUI
+import FittedSheets
 
 protocol Terminatable {
     func appTerminate()
@@ -25,6 +26,14 @@ class Coordinator {
     func present(_ viewController: UIViewController, animated: Bool = true, onDismiss: (() -> Void)? = nil) {
         if let baseViewController = viewController as? Dismissible {
             baseViewController.attachDismissCallback(completion: onDismiss)
+        }
+        if let bottomSheetViewController = viewController as? SheetViewController {
+            bottomSheetViewController.didDismiss = { sheet in
+                sheet.dismiss(animated: false) {
+                    self.popDismiss()
+                    onDismiss?()
+                }
+            }
         }
         
         self.presentViewController.present(viewController, animated: animated)

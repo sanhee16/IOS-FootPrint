@@ -81,6 +81,7 @@ class GalleryViewModel: BaseViewModel {
                 let options = PHImageRequestOptions()
                 options.isSynchronous = true
                 options.resizeMode = .fast
+                options.isNetworkAccessAllowed = true
                 
                 PHImageManager.default().requestImage(
                     for: asset,
@@ -110,13 +111,14 @@ class GalleryViewModel: BaseViewModel {
     
     func onSelectImage() {
         self.coordinator?.dismiss {[weak self] in
-            self?.onClickItem?(self?.item)
+            guard let self = self, let item = self.item else { return }
+            self.onClickItem?(item)
         }
     }
+    
     func onClickItem(_ item: GalleryItem) {
         self.item = item
     }
-    
     
     private func photoPermissionCheck() {
         let photoAuthStatus = PHPhotoLibrary.authorizationStatus()
