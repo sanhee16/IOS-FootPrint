@@ -20,4 +20,8 @@ class MainViewModel: BaseViewModel {
     func onAppear() {
         
     }
+    
+    func onClickAddFootprint() {
+        self.coordinator?.presentAddFootprintView()
+    }
 }

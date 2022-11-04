@@ -26,6 +26,12 @@ struct MainView: View {
         GeometryReader { geometry in
             VStack(alignment: .center, spacing: 0) {
                 Text("main")
+                Spacer()
+                Text("add foot print")
+                    .onTapGesture {
+                        vm.onClickAddFootprint()
+                    }
+                Spacer()
             }
             .padding(EdgeInsets(top: safeTop, leading: 0, bottom: safeBottom, trailing: 0))
             .edgesIgnoringSafeArea(.all)

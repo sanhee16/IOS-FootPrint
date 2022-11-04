@@ -62,6 +62,14 @@ class Coordinator {
         }
     }
     
+    func startProgress(_ animation: ProgressType = .loading) {
+        SProgress.instance.startProgress(animation: animation)
+    }
+    
+    func stopProgress() {
+        SProgress.instance.stopProgress()
+    }
+    
     func popDismiss(target: UIViewController? = nil) {
         let before = self.childViewControllers.count
         if target == nil { // pop할 타겟 vc가 없어서 맨 마지막꺼 제거

@@ -28,6 +28,14 @@ class BaseViewModel: ObservableObject {
         subscription.removeAll()
     }
     
+    public func startProgress(_ animation: ProgressType = .loading) {
+        self.coordinator?.startProgress(animation)
+    }
+    
+    public func stopProgress() {
+        self.coordinator?.stopProgress()
+    }
+    
     public func dismiss(animated: Bool = true, completion: (() -> Void)? = nil) {
         self.coordinator?.dismiss(animated, completion: completion)
     }
