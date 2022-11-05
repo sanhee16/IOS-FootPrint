@@ -7,6 +7,8 @@
 
 
 import SwiftUI
+import MapKit
+
 
 struct MainView: View {
     typealias VM = MainViewModel
@@ -41,6 +43,7 @@ struct MainView: View {
                     .frame(width: geometry.size.width - 24, height: 50, alignment: .center)
                 }
                 .frame(width: geometry.size.width, height: 50, alignment: .center)
+                Map(coordinateRegion: $vm.currenLocation)
                 Spacer()
                 Text("add foot print")
                     .onTapGesture {

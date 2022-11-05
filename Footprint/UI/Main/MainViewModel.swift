@@ -8,13 +8,16 @@
 
 import Foundation
 import Combine
+import MapKit
 import CoreLocation
 
 
 class MainViewModel: BaseViewModel {
     private var api: Api = Api.instance
-    var locationManager: CLLocationManager
-    var myLocation: CLLocation? = nil
+    private var locationManager: CLLocationManager
+    private var myLocation: CLLocation? = nil
+    @Published var currenLocation: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+    // MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.5666791, longitude: 126.9782914), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
     
     override init(_ coordinator: AppCoordinator) {
         self.locationManager = CLLocationManager()
@@ -46,6 +49,7 @@ class MainViewModel: BaseViewModel {
             print("위도 :\(latitude), 경도: \(longitude)")
             self.myLocation = CLLocation(latitude: latitude, longitude: longitude)
             print("myLocation :\(myLocation)")
+            self.currenLocation = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
         }
     }
 }
