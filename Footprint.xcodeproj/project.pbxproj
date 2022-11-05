@@ -126,8 +126,8 @@
 		63209FE62913C3BF00709227 /* Footprint */ = {
 			isa = PBXGroup;
 			children = (
-				63B1FB012914B378007E94B6 /* DataClass */,
 				63209FF52913C67E00709227 /* Info.plist */,
+				63B1FB012914B378007E94B6 /* DataClass */,
 				63F1325C2914A1C000B3A9E0 /* UI */,
 				63F1323F2914A18800B3A9E0 /* Common */,
 				63209FEB2913C3C000709227 /* Assets.xcassets */,

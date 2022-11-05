@@ -42,6 +42,7 @@ struct AddFootprintView: View {
                     .padding([.leading, .trailing], 12)
                     .frame(width: geometry.size.width - 24, height: 50, alignment: .center)
                 }
+                .frame(width: geometry.size.width, height: 50, alignment: .center)
                 VStack(alignment: .leading, spacing: 10) {
                     TextField("enter title", text: $vm.title)
                         .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))

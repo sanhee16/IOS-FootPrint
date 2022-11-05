@@ -25,7 +25,22 @@ struct MainView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .center, spacing: 0) {
-                Text("main")
+                ZStack(alignment: .leading) {
+                    Topbar("FootPrint", type: .none) {
+                    }
+                    HStack(alignment: .center, spacing: 0) {
+                        Spacer()
+                        Text("설정")
+                            .font(.kr12r)
+                            .foregroundColor(.gray100)
+                            .onTapGesture {
+                                vm.onClickSetting()
+                            }
+                    }
+                    .padding([.leading, .trailing], 12)
+                    .frame(width: geometry.size.width - 24, height: 50, alignment: .center)
+                }
+                .frame(width: geometry.size.width, height: 50, alignment: .center)
                 Spacer()
                 Text("add foot print")
                     .onTapGesture {

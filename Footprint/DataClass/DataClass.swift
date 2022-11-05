@@ -14,6 +14,7 @@ import Realm
 public typealias GalleryItem = (image: UIImage, asset: PHAsset)
 
 class FootPrint: Object {
+    //TODO: location 추가해야함
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var title: String
     @Persisted var content: String
