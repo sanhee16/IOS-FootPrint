@@ -49,8 +49,8 @@ class AppCoordinator: Coordinator, Terminatable {
         self.present(vc, animated: true)
     }
     
-    func presentAddFootprintView() {
-        let vc = AddFootprintView.vc(self)
+    func presentAddFootprintView(location: Location) {
+        let vc = AddFootprintView.vc(self, location: location)
         self.present(vc, animated: true)
     }
     

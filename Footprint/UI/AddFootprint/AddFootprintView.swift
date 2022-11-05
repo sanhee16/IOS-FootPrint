@@ -9,8 +9,8 @@ import SwiftUI
 
 struct AddFootprintView: View {
     typealias VM = AddFootprintViewModel
-    public static func vc(_ coordinator: AppCoordinator, completion: (()-> Void)? = nil) -> UIViewController {
-        let vm = VM.init(coordinator)
+    public static func vc(_ coordinator: AppCoordinator, location: Location, completion: (()-> Void)? = nil) -> UIViewController {
+        let vm = VM.init(coordinator, location: location)
         let view = Self.init(vm: vm)
         let vc = BaseViewController(view, completion: completion)
 //        let vc = BaseViewController.bottomSheet(view, sizes: [.fixed(500)])

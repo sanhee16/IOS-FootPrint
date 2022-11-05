@@ -15,10 +15,12 @@ class AddFootprintViewModel: BaseViewModel {
     @Published var title: String = ""
     @Published var content: String = ""
     @Published var images: [UIImage] = []
+    private let location: Location
     private let realm: Realm
     
-    override init(_ coordinator: AppCoordinator) {
+    init(_ coordinator: AppCoordinator, location: Location) {
         self.realm = try! Realm()
+        self.location = location
         super.init(coordinator)
     }
     
@@ -74,7 +76,7 @@ class AddFootprintViewModel: BaseViewModel {
         }
         
         try! realm.write {
-            realm.add(FootPrint(title: self.title, content: self.content, images: imageUrls))
+            realm.add(FootPrint(title: self.title, content: self.content, images: imageUrls, latitude: self.location.latitude, longitude: self.location.longitude))
             self.stopProgress()
             self.onClose()
         }

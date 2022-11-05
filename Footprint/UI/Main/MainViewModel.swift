@@ -35,7 +35,9 @@ class MainViewModel: BaseViewModel {
     }
     
     func onClickAddFootprint() {
-        self.coordinator?.presentAddFootprintView()
+        if let myLocation = self.myLocation {
+            self.coordinator?.presentAddFootprintView(location: (latitude: myLocation.coordinate.latitude, longitude: myLocation.coordinate.longitude))
+        }
     }
     
     func onClickSetting() {
