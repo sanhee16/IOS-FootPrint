@@ -26,8 +26,21 @@ struct AddFootprintView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 0) {
-                Topbar("", type: .back) {
-                    vm.onClose()
+                ZStack(alignment: .leading) {
+                    Topbar("", type: .back) {
+                        vm.onClose()
+                    }
+                    HStack(alignment: .center, spacing: 0) {
+                        Spacer()
+                        Text("저장")
+                            .font(.kr12r)
+                            .foregroundColor(.gray100)
+                            .onTapGesture {
+                                vm.onClickSave()
+                            }
+                    }
+                    .padding([.leading, .trailing], 12)
+                    .frame(width: geometry.size.width - 24, height: 50, alignment: .center)
                 }
                 VStack(alignment: .leading, spacing: 10) {
                     TextField("enter title", text: $vm.title)

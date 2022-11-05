@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		265A0A0C2916297E00027829 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 265A0A0B2916297E00027829 /* Realm */; };
+		265A0A0E2916297E00027829 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 265A0A0D2916297E00027829 /* RealmSwift */; };
 		63209FEC2913C3C000709227 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63209FEB2913C3C000709227 /* Assets.xcassets */; };
 		63209FEF2913C3C000709227 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63209FEE2913C3C000709227 /* Preview Assets.xcassets */; };
 		63B1FAE42914A6D8007E94B6 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 63B1FAE32914A6D8007E94B6 /* Lottie */; };
@@ -91,6 +93,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				265A0A0E2916297E00027829 /* RealmSwift in Frameworks */,
+				265A0A0C2916297E00027829 /* Realm in Frameworks */,
 				63B1FAF22914A91F007E94B6 /* FittedSheets in Frameworks */,
 				63B1FAE42914A6D8007E94B6 /* Lottie in Frameworks */,
 				63B1FB062914B5CB007E94B6 /* SwiftUIPullToRefresh in Frameworks */,
@@ -303,6 +307,8 @@
 				63B1FAF12914A91F007E94B6 /* FittedSheets */,
 				63B1FAFF2914B347007E94B6 /* Kingfisher */,
 				63B1FB052914B5CB007E94B6 /* SwiftUIPullToRefresh */,
+				265A0A0B2916297E00027829 /* Realm */,
+				265A0A0D2916297E00027829 /* RealmSwift */,
 			);
 			productName = Footprint;
 			productReference = 63209FE42913C3BF00709227 /* Footprint.app */;
@@ -339,6 +345,7 @@
 				63B1FAF02914A91F007E94B6 /* XCRemoteSwiftPackageReference "FittedSheets" */,
 				63B1FAFE2914B347007E94B6 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				63B1FB042914B5CB007E94B6 /* XCRemoteSwiftPackageReference "swiftui-pull-to-refresh" */,
+				265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 63209FE52913C3BF00709227 /* Products */;
 			projectDirPath = "";
@@ -601,6 +608,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		63B1FAE22914A6D8007E94B6 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
@@ -652,6 +667,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		265A0A0B2916297E00027829 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		265A0A0D2916297E00027829 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
 		63B1FAE32914A6D8007E94B6 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 63B1FAE22914A6D8007E94B6 /* XCRemoteSwiftPackageReference "lottie-ios" */;

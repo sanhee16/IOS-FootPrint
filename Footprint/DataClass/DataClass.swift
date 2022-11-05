@@ -7,7 +7,24 @@
 
 
 import Foundation
-import SwiftUI
 import Photos
+import RealmSwift
+import Realm
 
 public typealias GalleryItem = (image: UIImage, asset: PHAsset)
+
+class FootPrint: Object {
+    @Persisted(primaryKey: true) var id: ObjectId
+    @Persisted var title: String
+    @Persisted var content: String
+    @Persisted var images: List<String>
+    @Persisted var createdAt: Int
+
+    convenience init(title: String, content: String, images: List<String>) {
+        self.init()
+        self.title = title
+        self.content = content
+        self.images = images
+        self.createdAt = Int(Date().timeIntervalSince1970)
+    }
+}
