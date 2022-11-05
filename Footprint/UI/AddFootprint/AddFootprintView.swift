@@ -46,7 +46,7 @@ struct AddFootprintView: View {
                 VStack(alignment: .leading, spacing: 10) {
                     TextField("enter title", text: $vm.title)
                         .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
-                        .background(Color(uiColor: .secondarySystemBackground)) //TODO: remove
+                        .background(Color.gray30) //TODO: remove
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
                             ForEach($vm.images.wrappedValue.indices, id: \.self) { idx in
