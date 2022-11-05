@@ -43,7 +43,11 @@ struct MainView: View {
                     .frame(width: geometry.size.width - 24, height: 50, alignment: .center)
                 }
                 .frame(width: geometry.size.width, height: 50, alignment: .center)
-                Map(coordinateRegion: $vm.currenLocation)
+                // https://www.hackingwithswift.com/quick-start/swiftui/how-to-show-annotations-in-a-map-view
+                Map(coordinateRegion: $vm.currenLocation, annotationItems: $vm.annotations.wrappedValue) { item in
+                    MapPin(coordinate: item.coordinate)
+                }
+//                Map(coordinateRegion: $vm.currenLocation)
                 Spacer()
                 Text("add foot print")
                     .onTapGesture {
