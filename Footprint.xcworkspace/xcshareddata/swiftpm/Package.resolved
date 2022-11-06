@@ -1,0 +1,77 @@
+{
+  "pins" : [
+    {
+      "identity" : "alamofire",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Alamofire/Alamofire.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "bdecb2c87a21a236dcfe88b21532ad3f0e3d20f4"
+      }
+    },
+    {
+      "identity" : "fittedsheets",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/gordontucker/FittedSheets.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "3dcebb20ff42f644e9474a198acb886d4bd51793"
+      }
+    },
+    {
+      "identity" : "kingfisher",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/onevcat/Kingfisher",
+      "state" : {
+        "branch" : "master",
+        "revision" : "44e891bdb61426a95e31492a67c7c0dfad1f87c5"
+      }
+    },
+    {
+      "identity" : "lottie-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/airbnb/lottie-ios.git",
+      "state" : {
+        "revision" : "b4bd0604ded9574807f41b4004b57dd1226a30a4",
+        "version" : "3.5.0"
+      }
+    },
+    {
+      "identity" : "realm-core",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/realm/realm-core",
+      "state" : {
+        "revision" : "3c4b86da569368c4ee5ccca2a112d511cc6fa936",
+        "version" : "12.11.0"
+      }
+    },
+    {
+      "identity" : "realm-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/realm/realm-swift.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "c041b4d30ba9fdc2ee25af05228930a5c95ca335"
+      }
+    },
+    {
+      "identity" : "swiftui-pull-to-refresh",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/globulus/swiftui-pull-to-refresh.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "51ad9209243423d13c1c41b1c3fa2e69491466d8"
+      }
+    },
+    {
+      "identity" : "swiftuipager",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/fermoya/SwiftUIPager.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "4ddc04c801aac143090bb14cf26603a3bf9c74cb"
+      }
+    }
+  ],
+  "version" : 2
+}
