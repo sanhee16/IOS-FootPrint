@@ -24,36 +24,43 @@ struct AlertView: View {
     private var safeBottom: CGFloat { get { Util.safeBottom() }}
     
     var body: some View {
-        VStack(alignment: .center, spacing: 10) {
-            if let title = $vm.title.wrappedValue {
-                Text(title)
-                    .font(.kr18b)
-                    .foregroundColor(.gray100)
+        VStack(alignment: .center, spacing: 0) {
+            VStack(alignment: .center, spacing: 0) {
+                if let title = $vm.title.wrappedValue {
+                    Text(title)
+                        .font(.kr15b)
+                        .foregroundColor(.gray100)
+                }
+                if let description = $vm.description.wrappedValue {
+                    Text(description)
+                        .multilineTextAlignment(.center)
+                        .font(.kr14r)
+                        .foregroundColor(.gray90)
+                }
             }
-            if let description = $vm.description.wrappedValue {
-                Text(description)
-                    .multilineTextAlignment(.center)
-                    .font(.kr14r)
-                    .foregroundColor(.gray60)
-            }
+            .padding([.leading, .trailing, .top], 20)
+            Divider()
+                .padding(.top, 20)
             HStack(alignment: .center, spacing: 0) {
                 if $vm.type.wrappedValue == .ok {
                     Text("OK")
-                        .font(.kr16b)
+                        .font(.kr14r)
                         .foregroundColor(.gray90)
                         .onTapGesture {
                             vm.onClickOK()
                         }
                 } else {
                     Text("OK")
-                        .font(.kr16r)
+                        .font(.kr14r)
                         .foregroundColor(.gray90)
                         .frame(width: (UIScreen.main.bounds.width - 100)/2)
                         .onTapGesture {
                             vm.onClickOK()
                         }
+                    Divider()
+                        .frame(height: 40, alignment: .center)
                     Text("Cancel")
-                        .font(.kr16r)
+                        .font(.kr14r)
                         .foregroundColor(.gray60)
                         .frame(width: (UIScreen.main.bounds.width - 100)/2)
                         .onTapGesture {
@@ -61,9 +68,9 @@ struct AlertView: View {
                         }
                 }
             }
-            .padding([.top, .bottom], 10)
+            .frame(width: UIScreen.main.bounds.width - 100, height: 40, alignment: .center)
+            .padding([.leading, .trailing], 20)
         }
-        .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
         .frame(width: UIScreen.main.bounds.width - 100, alignment: .center)
         .background(
             RoundedRectangle(cornerRadius: 18)

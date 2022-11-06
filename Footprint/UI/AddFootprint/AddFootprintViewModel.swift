@@ -29,7 +29,12 @@ class AddFootprintViewModel: BaseViewModel {
     }
     
     func onClose() {
-        self.dismiss()
+        self.alert(.yesOrNo, title: nil, description: "저장하지 않고 나가시겠습니까?") {[weak self] isClose in
+            guard let self = self else { return }
+            if isClose {
+                self.dismiss()
+            }
+        }
     }
     
     func onClickGallery() {
@@ -57,10 +62,10 @@ class AddFootprintViewModel: BaseViewModel {
     
     func onClickSave() {
         if self.title.isEmpty {
-            self.alert(.ok, title: "title을 적어주세요")
+            self.alert(.ok, description: "title을 적어주세요")
             return
         } else if self.content.isEmpty {
-            self.alert(.ok, title: "내용을 적어주세요")
+            self.alert(.ok, description: "내용을 적어주세요")
             return
         }
         // image save
