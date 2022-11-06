@@ -14,7 +14,7 @@ import CoreLocation
 
 struct Pin: Identifiable {
     let id = UUID()
-    let title: String
+    let footPrint: FootPrint
     let coordinate: CLLocationCoordinate2D
 }
 
@@ -71,7 +71,11 @@ class MainViewModel: BaseViewModel {
         self.annotations.removeAll()
         for i in footPrints {
             print(i)
-            annotations.append(Pin(title: i.title, coordinate: CLLocationCoordinate2D(latitude: i.latitude, longitude: i.longitude)))
+            annotations.append(Pin(footPrint: i, coordinate: CLLocationCoordinate2D(latitude: i.latitude, longitude: i.longitude)))
         }
+    }
+    
+    func onClickAnnotation(_ item: Pin) {
+        print("onClickAnnotation: \(item)")
     }
 }

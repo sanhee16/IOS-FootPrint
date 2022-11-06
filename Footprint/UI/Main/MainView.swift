@@ -45,7 +45,16 @@ struct MainView: View {
                 .frame(width: geometry.size.width, height: 50, alignment: .center)
                 // https://www.hackingwithswift.com/quick-start/swiftui/how-to-show-annotations-in-a-map-view
                 Map(coordinateRegion: $vm.currenLocation, annotationItems: $vm.annotations.wrappedValue) { item in
-                    MapPin(coordinate: item.coordinate)
+//                    MapPin(coordinate: item.coordinate)
+                    MapAnnotation(coordinate: item.coordinate) {
+                        Image(item.footPrint.pinType.pinType().pinName)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(both: 20)
+                            .onTapGesture {
+                                vm.onClickAnnotation(item)
+                            }
+                    }
                 }
 //                Map(coordinateRegion: $vm.currenLocation)
                 Spacer()

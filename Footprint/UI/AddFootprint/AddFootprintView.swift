@@ -26,54 +26,13 @@ struct AddFootprintView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 0) {
-                ZStack(alignment: .leading) {
-                    Topbar("", type: .back) {
-                        vm.onClose()
-                    }
-                    HStack(alignment: .center, spacing: 0) {
-                        Spacer()
-                        Text("저장")
-                            .font(.kr12r)
-                            .foregroundColor(.gray100)
-                            .onTapGesture {
-                                vm.onClickSave()
-                            }
-                    }
-                    .padding([.leading, .trailing], 12)
-                    .frame(width: geometry.size.width - 24, height: 50, alignment: .center)
-                }
-                .frame(width: geometry.size.width, height: 50, alignment: .center)
+                drawHeader(geometry)
                 VStack(alignment: .leading, spacing: 10) {
                     TextField("enter title", text: $vm.title)
                         .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
                         .background(Color.gray30) //TODO: remove
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack {
-                            ForEach($vm.images.wrappedValue.indices, id: \.self) { idx in
-                                let image = $vm.images.wrappedValue[idx]
-                                Image(uiImage: image)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(both: IMAGE_SIZE)
-                                    .clipShape(RoundedRectangle(cornerRadius: 12))
-                                    .contentShape(Rectangle())
-                                    .onTapGesture {
-                                        vm.removeImage(image)
-                                    }
-                            }
-                            Text("+")
-                                .font(.kr16b)
-                                .foregroundColor(.white)
-                                .frame(both: IMAGE_SIZE, aligment: .center)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 12)
-                                        .foregroundColor(.gray60)
-                                )
-                                .onTapGesture {
-                                    vm.onClickGallery()
-                                }
-                        }
-                    }
+                    drawPinSelectArea(geometry)
+                    drawImageArea(geometry)
                     MultilineTextField("enter content", text: $vm.content) {
                         
                     }
@@ -89,5 +48,79 @@ struct AddFootprintView: View {
         .onAppear {
             vm.onAppear()
         }
+    }
+    
+    private func drawHeader(_ geometry: GeometryProxy) -> some View {
+        return ZStack(alignment: .leading) {
+            Topbar("", type: .back) {
+                vm.onClose()
+            }
+            HStack(alignment: .center, spacing: 0) {
+                Spacer()
+                Text("저장")
+                    .font(.kr12r)
+                    .foregroundColor(.gray100)
+                    .onTapGesture {
+                        vm.onClickSave()
+                    }
+            }
+            .padding([.leading, .trailing], 12)
+            .frame(width: geometry.size.width - 24, height: 50, alignment: .center)
+        }
+        .frame(width: geometry.size.width, height: 50, alignment: .center)
+    }
+    
+    private func drawImageArea(_ geometry: GeometryProxy) -> some View {
+        return ScrollView(.horizontal, showsIndicators: false) {
+            HStack {
+                ForEach($vm.images.wrappedValue.indices, id: \.self) { idx in
+                    let image = $vm.images.wrappedValue[idx]
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(both: IMAGE_SIZE)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            vm.removeImage(image)
+                        }
+                }
+                Text("+")
+                    .font(.kr16b)
+                    .foregroundColor(.white)
+                    .frame(both: IMAGE_SIZE, aligment: .center)
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .foregroundColor(.gray60)
+                    )
+                    .onTapGesture {
+                        vm.onClickGallery()
+                    }
+            }
+        }
+    }
+    
+    
+    private func drawPinSelectArea(_ geometry: GeometryProxy) -> some View {
+        return ScrollView(.horizontal, showsIndicators: false) {
+            HStack(alignment: .center, spacing: 12) {
+                ForEach($vm.pinList.wrappedValue, id: \.self) { item in
+                    pinItem(item, isSelected: $vm.pinType.wrappedValue == item)
+                }
+            }
+            .padding(EdgeInsets(top: 6, leading: 12, bottom: 6, trailing: 12))
+        }
+    }
+    
+    private func pinItem(_ item: PinType, isSelected: Bool) -> some View {
+        return Image(item.pinName)
+            .resizable()
+            .scaledToFit()
+            .frame(both: 30)
+            .padding(10)
+            .border(isSelected ? .lightblue01 : .clear, lineWidth: 2, cornerRadius: 12)
+            .onTapGesture {
+                vm.onSelectPin(item)
+            }
     }
 }

@@ -15,6 +15,8 @@ class AddFootprintViewModel: BaseViewModel {
     @Published var title: String = ""
     @Published var content: String = ""
     @Published var images: [UIImage] = []
+    @Published var pinType: PinType = .pin0
+    var pinList: [PinType] = [.pin0,.pin1,.pin2,.pin3,.pin4,.pin5,.pin6,.pin7,.pin8,.pin9]
     private let location: Location
     private let realm: Realm
     
@@ -81,9 +83,13 @@ class AddFootprintViewModel: BaseViewModel {
         }
         
         try! realm.write {
-            realm.add(FootPrint(title: self.title, content: self.content, images: imageUrls, latitude: self.location.latitude, longitude: self.location.longitude))
+            realm.add(FootPrint(title: self.title, content: self.content, images: imageUrls, latitude: self.location.latitude, longitude: self.location.longitude, pinType: self.pinType))
             self.stopProgress()
-            self.onClose()
+            self.dismiss(animated: true)
         }
+    }
+
+    func onSelectPin(_ item: PinType) {
+        self.pinType = item
     }
 }

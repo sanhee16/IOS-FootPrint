@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		265A0A0C2916297E00027829 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 265A0A0B2916297E00027829 /* Realm */; };
 		265A0A0E2916297E00027829 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 265A0A0D2916297E00027829 /* RealmSwift */; };
+		26C04F6D2917667F00890A76 /* SwiftUIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */; };
 		63209FEC2913C3C000709227 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63209FEB2913C3C000709227 /* Assets.xcassets */; };
 		63209FEF2913C3C000709227 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63209FEE2913C3C000709227 /* Preview Assets.xcassets */; };
 		63B1FAE42914A6D8007E94B6 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 63B1FAE32914A6D8007E94B6 /* Lottie */; };
@@ -51,6 +52,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIExtension.swift; sourceTree = "<group>"; };
 		63209FE42913C3BF00709227 /* Footprint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Footprint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63209FEB2913C3C000709227 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63209FEE2913C3C000709227 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -186,10 +188,11 @@
 			isa = PBXGroup;
 			children = (
 				63F132402914A18800B3A9E0 /* Alert */,
-				63F132432914A18800B3A9E0 /* SwiftExtension.swift */,
 				63F132442914A18800B3A9E0 /* Util.swift */,
 				63F132452914A18800B3A9E0 /* Defaults.swift */,
 				63F132462914A18800B3A9E0 /* Api.swift */,
+				63F132432914A18800B3A9E0 /* SwiftExtension.swift */,
+				26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -246,8 +249,8 @@
 		63F1325D2914A1C000B3A9E0 /* Splash */ = {
 			isa = PBXGroup;
 			children = (
-				63F1325E2914A1C000B3A9E0 /* SplashViewModel.swift */,
 				63F1325F2914A1C000B3A9E0 /* SplashView.swift */,
+				63F1325E2914A1C000B3A9E0 /* SplashViewModel.swift */,
 			);
 			path = Splash;
 			sourceTree = "<group>";
@@ -269,8 +272,8 @@
 		63F132852914A1C000B3A9E0 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				63F132862914A1C000B3A9E0 /* MainViewModel.swift */,
 				63F132872914A1C000B3A9E0 /* MainView.swift */,
+				63F132862914A1C000B3A9E0 /* MainViewModel.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -384,6 +387,7 @@
 				63F132552914A19F00B3A9E0 /* AppDelegate.swift in Sources */,
 				63B1FAFB2914B31E007E94B6 /* GalleryView.swift in Sources */,
 				63B1FAEF2914A861007E94B6 /* AddFootprintViewModel.swift in Sources */,
+				26C04F6D2917667F00890A76 /* SwiftUIExtension.swift in Sources */,
 				63F132972914A1C000B3A9E0 /* EmailSender.swift in Sources */,
 				63F132472914A18800B3A9E0 /* AlertViewModel.swift in Sources */,
 				63B1FB032914B381007E94B6 /* DataClass.swift in Sources */,
