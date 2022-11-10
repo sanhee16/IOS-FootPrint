@@ -8,6 +8,7 @@
 
 import SwiftUI
 import MapKit
+import NMapsMap
 
 
 struct MainView: View {
@@ -45,7 +46,7 @@ struct MainView: View {
                 .frame(width: geometry.size.width, height: 50, alignment: .center)
                 //Naver Map
                 if let myLocation = $vm.myLocation.wrappedValue {
-                    MapView(userLatitude: myLocation.coordinate.latitude, userLongitude: myLocation.coordinate.longitude)
+                    MapView(latitude: myLocation.coordinate.latitude, longitude: myLocation.coordinate.longitude)
                 }
                 
                 
@@ -79,4 +80,5 @@ struct MainView: View {
             vm.onAppear()
         }
     }
+    
 }

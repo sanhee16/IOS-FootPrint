@@ -1,42 +1,12 @@
 //
-//  DataClass.swift
+//  DataModel.swift
 //  Footprint
 //
-//  Created by Studio-SJ on 2022/11/04.
+//  Created by sandy on 2022/11/10.
 //
 
-
 import Foundation
-import Photos
-import RealmSwift
-import Realm
-
-public typealias GalleryItem = (image: UIImage, asset: PHAsset)
-public typealias Location = (latitude: Double, longitude: Double)
-
-
-class FootPrint: Object {
-    //TODO: location 추가해야함
-    @Persisted(primaryKey: true) var id: ObjectId
-    @Persisted var title: String
-    @Persisted var content: String
-    @Persisted var images: List<String>
-    @Persisted var createdAt: Int
-    @Persisted var latitude: Double
-    @Persisted var longitude: Double
-    @Persisted var pinType: Int
-
-    convenience init(title: String, content: String, images: List<String>, latitude: Double, longitude: Double, pinType: PinType) {
-        self.init()
-        self.title = title
-        self.content = content
-        self.images = images
-        self.createdAt = Int(Date().timeIntervalSince1970)
-        self.latitude = latitude
-        self.longitude = longitude
-        self.pinType = pinType.rawValue
-    }
-}
+import SwiftUI
 
 enum PinType: Int {
     case pin0
@@ -77,6 +47,21 @@ enum PinType: Int {
         case .pin7: return "#20C997"
         case .pin8: return "#94D82D"
         case .pin9: return "#FCC419"
+        }
+    }
+    
+    var pinUIColor: UIColor {
+        switch self {
+        case .pin0: return UIColor.pin0
+        case .pin1: return UIColor.pin1
+        case .pin2: return UIColor.pin2
+        case .pin3: return UIColor.pin3
+        case .pin4: return UIColor.pin4
+        case .pin5: return UIColor.pin5
+        case .pin6: return UIColor.pin6
+        case .pin7: return UIColor.pin7
+        case .pin8: return UIColor.pin8
+        case .pin9: return UIColor.pin9
         }
     }
 }
