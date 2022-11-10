@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		265A0A0C2916297E00027829 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 265A0A0B2916297E00027829 /* Realm */; };
 		265A0A0E2916297E00027829 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 265A0A0D2916297E00027829 /* RealmSwift */; };
+		265EA941291D112B00068A5C /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265EA940291D112B00068A5C /* MapView.swift */; };
 		26C04F6D2917667F00890A76 /* SwiftUIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */; };
 		63209FEC2913C3C000709227 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63209FEB2913C3C000709227 /* Assets.xcassets */; };
 		63209FEF2913C3C000709227 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63209FEE2913C3C000709227 /* Preview Assets.xcassets */; };
@@ -53,6 +54,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		265EA940291D112B00068A5C /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIExtension.swift; sourceTree = "<group>"; };
 		63209FE42913C3BF00709227 /* Footprint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Footprint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63209FEB2913C3C000709227 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -128,7 +130,6 @@
 				7920B9360643844CCED47299 /* Pods-Footprint.debug.xcconfig */,
 				A742FCCA55652387DC0B6200 /* Pods-Footprint.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -290,6 +291,7 @@
 				63F1326C2914A1C000B3A9E0 /* ProgressView.swift */,
 				63F1326D2914A1C000B3A9E0 /* Topbar.swift */,
 				63F1326E2914A1C000B3A9E0 /* WebView.swift */,
+				265EA940291D112B00068A5C /* MapView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -369,13 +371,13 @@
 			);
 			mainGroup = 63209FDB2913C3BF00709227;
 			packageReferences = (
-				63B1FAE22914A6D8007E94B6 /* XCRemoteSwiftPackageReference "lottie-ios.git" */,
-				63B1FAE52914A6FE007E94B6 /* XCRemoteSwiftPackageReference "Alamofire.git" */,
-				63B1FAE82914A718007E94B6 /* XCRemoteSwiftPackageReference "SwiftUIPager.git" */,
-				63B1FAF02914A91F007E94B6 /* XCRemoteSwiftPackageReference "FittedSheets.git" */,
+				63B1FAE22914A6D8007E94B6 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				63B1FAE52914A6FE007E94B6 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				63B1FAE82914A718007E94B6 /* XCRemoteSwiftPackageReference "SwiftUIPager" */,
+				63B1FAF02914A91F007E94B6 /* XCRemoteSwiftPackageReference "FittedSheets" */,
 				63B1FAFE2914B347007E94B6 /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				63B1FB042914B5CB007E94B6 /* XCRemoteSwiftPackageReference "swiftui-pull-to-refresh.git" */,
-				265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift.git" */,
+				63B1FB042914B5CB007E94B6 /* XCRemoteSwiftPackageReference "swiftui-pull-to-refresh" */,
+				265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 63209FE52913C3BF00709227 /* Products */;
 			projectDirPath = "";
@@ -447,6 +449,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63B1FAFD2914B324007E94B6 /* GalleryViewModel.swift in Sources */,
+				265EA941291D112B00068A5C /* MapView.swift in Sources */,
 				63F1328E2914A1C000B3A9E0 /* SplashViewModel.swift in Sources */,
 				63F1328F2914A1C000B3A9E0 /* SplashView.swift in Sources */,
 				63F132AF2914A1C000B3A9E0 /* BluePrintViewModel.swift in Sources */,
@@ -683,7 +686,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift.git" */ = {
+		265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
 			requirement = {
@@ -691,7 +694,7 @@
 				kind = branch;
 			};
 		};
-		63B1FAE22914A6D8007E94B6 /* XCRemoteSwiftPackageReference "lottie-ios.git" */ = {
+		63B1FAE22914A6D8007E94B6 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
 			requirement = {
@@ -699,7 +702,7 @@
 				minimumVersion = 3.0.0;
 			};
 		};
-		63B1FAE52914A6FE007E94B6 /* XCRemoteSwiftPackageReference "Alamofire.git" */ = {
+		63B1FAE52914A6FE007E94B6 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
@@ -707,7 +710,7 @@
 				kind = branch;
 			};
 		};
-		63B1FAE82914A718007E94B6 /* XCRemoteSwiftPackageReference "SwiftUIPager.git" */ = {
+		63B1FAE82914A718007E94B6 /* XCRemoteSwiftPackageReference "SwiftUIPager" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/fermoya/SwiftUIPager.git";
 			requirement = {
@@ -715,7 +718,7 @@
 				kind = branch;
 			};
 		};
-		63B1FAF02914A91F007E94B6 /* XCRemoteSwiftPackageReference "FittedSheets.git" */ = {
+		63B1FAF02914A91F007E94B6 /* XCRemoteSwiftPackageReference "FittedSheets" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/gordontucker/FittedSheets.git";
 			requirement = {
@@ -731,7 +734,7 @@
 				kind = branch;
 			};
 		};
-		63B1FB042914B5CB007E94B6 /* XCRemoteSwiftPackageReference "swiftui-pull-to-refresh.git" */ = {
+		63B1FB042914B5CB007E94B6 /* XCRemoteSwiftPackageReference "swiftui-pull-to-refresh" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/globulus/swiftui-pull-to-refresh.git";
 			requirement = {
@@ -744,32 +747,32 @@
 /* Begin XCSwiftPackageProductDependency section */
 		265A0A0B2916297E00027829 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift.git" */;
+			package = 265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = Realm;
 		};
 		265A0A0D2916297E00027829 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift.git" */;
+			package = 265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
 		};
 		63B1FAE32914A6D8007E94B6 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 63B1FAE22914A6D8007E94B6 /* XCRemoteSwiftPackageReference "lottie-ios.git" */;
+			package = 63B1FAE22914A6D8007E94B6 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
 		};
 		63B1FAE62914A6FE007E94B6 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 63B1FAE52914A6FE007E94B6 /* XCRemoteSwiftPackageReference "Alamofire.git" */;
+			package = 63B1FAE52914A6FE007E94B6 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
 		};
 		63B1FAE92914A718007E94B6 /* SwiftUIPager */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 63B1FAE82914A718007E94B6 /* XCRemoteSwiftPackageReference "SwiftUIPager.git" */;
+			package = 63B1FAE82914A718007E94B6 /* XCRemoteSwiftPackageReference "SwiftUIPager" */;
 			productName = SwiftUIPager;
 		};
 		63B1FAF12914A91F007E94B6 /* FittedSheets */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 63B1FAF02914A91F007E94B6 /* XCRemoteSwiftPackageReference "FittedSheets.git" */;
+			package = 63B1FAF02914A91F007E94B6 /* XCRemoteSwiftPackageReference "FittedSheets" */;
 			productName = FittedSheets;
 		};
 		63B1FAFF2914B347007E94B6 /* Kingfisher */ = {
@@ -779,7 +782,7 @@
 		};
 		63B1FB052914B5CB007E94B6 /* SwiftUIPullToRefresh */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 63B1FB042914B5CB007E94B6 /* XCRemoteSwiftPackageReference "swiftui-pull-to-refresh.git" */;
+			package = 63B1FB042914B5CB007E94B6 /* XCRemoteSwiftPackageReference "swiftui-pull-to-refresh" */;
 			productName = SwiftUIPullToRefresh;
 		};
 /* End XCSwiftPackageProductDependency section */

@@ -21,7 +21,7 @@ struct Pin: Identifiable {
 class MainViewModel: BaseViewModel {
     private var api: Api = Api.instance
     private var locationManager: CLLocationManager
-    private var myLocation: CLLocation? = nil
+    @Published var myLocation: CLLocation? = nil
     @Published var currenLocation: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
     @Published var annotations: [Pin] = []
     private let realm: Realm
