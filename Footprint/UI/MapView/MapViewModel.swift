@@ -7,6 +7,24 @@
 
 import Foundation
 
-class MapViewModel: ObservableObject {
+class MapViewModel: BaseViewModel {
+    @Published var location: Location
     
+    init(_ coordinator: AppCoordinator, location: Location) {
+        self.location = location
+        super.init(coordinator)
+    }
+    
+    func onAppear() {
+        
+    }
+    
+    func onClose() {
+        self.dismiss()
+    }
+    
+    func onTapMarker() {
+        print("on tap marker")
+        self.coordinator?.presentAddFootprintView(location: self.location)
+    }
 }

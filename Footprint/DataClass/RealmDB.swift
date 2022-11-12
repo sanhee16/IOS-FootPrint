@@ -13,8 +13,11 @@ import Realm
 
 
 public typealias GalleryItem = (image: UIImage, asset: PHAsset)
-public typealias Location = (latitude: Double, longitude: Double)
 
+struct Location {
+    var latitude: Double
+    var longitude: Double
+}
 
 class FootPrint: Object {
     //TODO: location 추가해야함

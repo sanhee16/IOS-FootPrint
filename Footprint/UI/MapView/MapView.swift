@@ -9,12 +9,16 @@ import SwiftUI
 import MapKit
 import NMapsMap
 import Combine
+import simd
 
 
 struct MapView: UIViewRepresentable {
-    @ObservedObject var viewModel = MapViewModel()
-    @State var latitude: Double
-    @State var longitude: Double
+    typealias VM = MapViewModel
+    @ObservedObject var vm: VM
+    
+    init(_ coordinator: AppCoordinator, location: Location) {
+        self.vm = MapViewModel(coordinator, location: location)
+    }
     
     func makeUIView(context: Context) -> NMFNaverMapView {
         let view = NMFNaverMapView()
@@ -33,7 +37,7 @@ struct MapView: UIViewRepresentable {
         view.mapView.addCameraDelegate(delegate: context.coordinator)
         view.mapView.addOptionDelegate(delegate: context.coordinator)
         
-        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: latitude, lng: longitude))
+        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: $vm.location.wrappedValue.latitude, lng: $vm.location.wrappedValue.longitude))
         view.mapView.moveCamera(cameraUpdate)
         return view
     }
@@ -42,16 +46,22 @@ struct MapView: UIViewRepresentable {
     
     
     class Coordinator: NSObject, NMFMapViewTouchDelegate, NMFMapViewCameraDelegate, NMFMapViewOptionDelegate {
-        @ObservedObject var viewModel: MapViewModel
-        var cancellable = Set<AnyCancellable>()
+        @ObservedObject var vm: VM
         
-        init(viewModel: MapViewModel) {
-            self.viewModel = viewModel
+        init(vm: VM) {
+            self.vm = vm
         }
         
-        func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
-            print("지도 탭했음 : \(latlng.lat) | \(latlng.lng)")
-            addMarker(mapView, location: Location(latitude: latlng.lat, longitude: latlng.lng), pinType: .pin3)
+        
+        func mapView(_ mapView: NMFMapView, didTapMap location: NMGLatLng, point: CGPoint) {
+            print("지도 탭했음 : \(location.lat) | \(location.lng) | \(location.description)")
+            print("지도 탭했음 : \(location.debugDescription)")
+            print("point : \(point.debugDescription)")
+            
+            print("wrap : \(location.wrap())")
+            
+            
+//            addMarker(mapView, location: Location(latitude: latlng.lat, longitude: latlng.lng), pinType: .pin3)
         }
         
         func addMarker(_ mapView: NMFMapView, location: Location, pinType: PinType) {
@@ -71,32 +81,15 @@ struct MapView: UIViewRepresentable {
             marker.mapView = mapView
             
             // marker 터치 이벤트 설정
-            //            marker.touchHandler = { (overlay) -> Bool in
-            //                print("marker touch")
-            //            }
+            marker.touchHandler = {[weak self] (overlay) in
+//                print("marker touch")
+                self?.vm.onTapMarker()
+                return true
+            }
         }
     }
     
     func makeCoordinator() -> Coordinator {
-        return Coordinator(viewModel: self.viewModel)
+        return Coordinator(vm: self.vm)
     }
-    
-    //    func addMarker(_ mapView: NMFNaverMapView, place: Place) {
-    //        // 마커 생성하기
-    //        let marker = placeToMarker(mapView, place: place)
-    //
-    //        // 마커 userInfo에 placeId 저장하기
-    //        marker.userInfo = ["placeId": place.placeId]
-    //        marker.mapView = mapView.mapView
-    //
-    //        // 터치 이벤트 설정
-    //        marker.touchHandler = { (overlay) -> Bool in
-    //            print("마커 터치")
-    //            print(overlay.userInfo["placeId"] ?? "placeId없음")
-    //            viewModel.place = place
-    //            viewModel.placeId = overlay.userInfo["placeId"] as! String
-    //            viewModel.isBottomPageUp = true
-    //            return true
-    //        }
-    //    }
 }
