@@ -34,12 +34,12 @@ class GalleryViewModel: BaseViewModel {
         self.dismiss()
     }
     
-    func loadAllImages(completion: (() -> Void)? = nil) {
+    func loadAllImages(_ done: (() -> Void)? = nil) {
         let options = PHFetchOptions()
         
         options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         let allImages = PHAsset.fetchAssets(with: .image, options: options)
-        if allImages.count <= 0 {
+        if allImages.count <= 0 { // 사진 없음
             self.images = nil
             isLoading = false
             hasNextPage = false
@@ -54,11 +54,14 @@ class GalleryViewModel: BaseViewModel {
         isFirstLoading = true
         items.removeAll()
         self.objectWillChange.send()
-        loadNextImage(completion: completion)
+        loadNextImage(done)
     }
     
-    func loadNextImage(completion: (() -> Void)? = nil) {
-        guard !isLoading, hasNextPage, let images = self.images else { return }
+    func loadNextImage(_ done: (() -> Void)? = nil) {
+        guard !isLoading, hasNextPage, let images = self.images else {
+            done?()
+            return
+        }
         
         let startAt = self.items.count
         var endAt = startAt + self.PAGE_SIZE
@@ -70,6 +73,7 @@ class GalleryViewModel: BaseViewModel {
         if startAt == endAt {
             self.hasNextPage = false
             self.objectWillChange.send()
+            done?()
             return
         }
         
@@ -101,7 +105,7 @@ class GalleryViewModel: BaseViewModel {
                         self.isFirstLoading = false
                     }
                     DispatchQueue.main.async {
-                        completion?()
+                        done?()
                         self.objectWillChange.send()
                     }
                 }

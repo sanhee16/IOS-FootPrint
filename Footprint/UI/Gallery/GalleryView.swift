@@ -37,9 +37,7 @@ struct GalleryView: View {
                     Spacer()
                 } else {
                     RefreshableScrollView(onRefresh: { done in
-                        vm.loadAllImages {
-                            done()
-                        }
+                        vm.loadAllImages(done)
                     }) {
                         ZStack(alignment: .bottom) {
                             VStack(alignment: .center, spacing: 0) {
@@ -51,38 +49,42 @@ struct GalleryView: View {
                                     Spacer()
                                 } else {
                                     let cellSize = geometry.size.width / 3 - 2
-                                    LazyVGrid(columns: Array(repeating: .init(.flexible(), spacing: 1), count: 3), spacing: 1) {
-                                        ForEach($vm.items.wrappedValue.indices, id: \.self) { idx in
-                                            let item = vm.items[idx]
-                                            ZStack(alignment: .topLeading) {
-//                                                if let selectedImage = $vm.item.wrappedValue {
-//                                                    Image("selected") //TODO: 이미지 필요함
-//                                                        .resizable()
-//                                                        .frame(both: 10)
-//                                                }
-                                                    
-                                                Image(uiImage: item.image)
-                                                    .resizable()
-                                                    .aspectRatio(contentMode: .fill)
-                                                    .frame(width: cellSize, height: cellSize)
-                                                    .clipped()
-                                                    .contentShape(Rectangle())
-                                                    .onTapGesture {
-                                                        vm.onClickItem(item)
-                                                    }
-                                                    .onAppear {
-                                                        if idx == $vm.items.wrappedValue.count - 1 {
-                                                            vm.loadNextImage()
+                                    RefreshableScrollView { done in
+                                        vm.loadAllImages(done)
+                                    } content: {
+                                        LazyVGrid(columns: Array(repeating: .init(.flexible(), spacing: 1), count: 3), spacing: 1) {
+                                            ForEach($vm.items.wrappedValue.indices, id: \.self) { idx in
+                                                let item = vm.items[idx]
+                                                ZStack(alignment: .topLeading) {
+    //                                                if let selectedImage = $vm.item.wrappedValue {
+    //                                                    Image("selected") //TODO: 이미지 필요함
+    //                                                        .resizable()
+    //                                                        .frame(both: 10)
+    //                                                }
+                                                        
+                                                    Image(uiImage: item.image)
+                                                        .resizable()
+                                                        .aspectRatio(contentMode: .fill)
+                                                        .frame(width: cellSize, height: cellSize)
+                                                        .clipped()
+                                                        .contentShape(Rectangle())
+                                                        .onTapGesture {
+                                                            vm.onClickItem(item)
                                                         }
-                                                    }
+                                                        .onAppear {
+                                                            if idx == $vm.items.wrappedValue.count - 1 {
+                                                                vm.loadNextImage()
+                                                            }
+                                                        }
+                                                }
                                             }
                                         }
-                                    }
-                                    if vm.hasNextPage && !vm.isFirstLoading {
-                                        VStack(alignment: .center, spacing: 0) {
-                                            ProgressView()
+                                        if vm.hasNextPage && !vm.isFirstLoading {
+                                            VStack(alignment: .center, spacing: 0) {
+                                                ProgressView()
+                                            }
+                                            .frame(width: geometry.size.width, height: 100, alignment: .center)
                                         }
-                                        .frame(width: geometry.size.width, height: 100, alignment: .center)
                                     }
                                 }
                             }
@@ -93,8 +95,8 @@ struct GalleryView: View {
                                 .foregroundColor(.white)
                                 .frame(width: geometry.size.width - 40, height: 40, alignment: .center)
                                 .background(
-                                    RoundedRectangle(cornerRadius: 16)
-                                        .foregroundColor($vm.item.wrappedValue == nil ? .gray30 : .blue80)
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .foregroundColor($vm.item.wrappedValue == nil ? .gray30 : .greenTint1)
                                 )
                                 .onTapGesture {
                                     vm.onSelectImage()
