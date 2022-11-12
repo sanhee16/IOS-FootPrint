@@ -16,6 +16,8 @@ class AddFootprintViewModel: BaseViewModel {
     @Published var content: String = ""
     @Published var images: [UIImage] = []
     @Published var pinType: PinType = .pin0
+    @Published var isKeyboardVisible = false
+
     var pinList: [PinType] = [.pin0,.pin1,.pin2,.pin3,.pin4,.pin5,.pin6,.pin7,.pin8,.pin9]
     private let location: Location
     private let realm: Realm
@@ -31,6 +33,7 @@ class AddFootprintViewModel: BaseViewModel {
     }
     
     func onClose() {
+        self.isKeyboardVisible = false
         self.alert(.yesOrNo, title: nil, description: "저장하지 않고 나가시겠습니까?") {[weak self] isClose in
             guard let self = self else { return }
             if isClose {
@@ -40,6 +43,7 @@ class AddFootprintViewModel: BaseViewModel {
     }
     
     func onClickGallery() {
+        self.isKeyboardVisible = false
         self.coordinator?.presentGalleryView(onClickItem: { [weak self] (item: GalleryItem) in
             guard let self = self else { return }
             if !self.images.contains(item.image) {
@@ -49,6 +53,7 @@ class AddFootprintViewModel: BaseViewModel {
     }
     
     func removeImage(_ item: UIImage) {
+        self.isKeyboardVisible = false
         self.alert(.yesOrNo, title: nil, description: "삭제하시겠습니까?") {[weak self] allowRemove in
             guard let self = self else { return }
             if allowRemove {
@@ -63,6 +68,7 @@ class AddFootprintViewModel: BaseViewModel {
     }
     
     func onClickSave() {
+        self.isKeyboardVisible = false
         if self.title.isEmpty {
             self.alert(.ok, description: "title을 적어주세요")
             return
@@ -90,6 +96,7 @@ class AddFootprintViewModel: BaseViewModel {
     }
 
     func onSelectPin(_ item: PinType) {
+        self.isKeyboardVisible = false
         self.pinType = item
     }
 }

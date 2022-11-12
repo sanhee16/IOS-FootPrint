@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AddFootprintView: View {
+struct AddFootprintView: View, KeyboardReadable {
     typealias VM = AddFootprintViewModel
     public static func vc(_ coordinator: AppCoordinator, location: Location, completion: (()-> Void)? = nil) -> UIViewController {
         let vm = VM.init(coordinator, location: location)
@@ -27,22 +27,44 @@ struct AddFootprintView: View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 0) {
                 drawHeader(geometry)
-                VStack(alignment: .leading, spacing: 10) {
-                    TextField("enter title", text: $vm.title)
-                        .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
-                        .background(Color.gray30) //TODO: remove
-                    drawPinSelectArea(geometry)
-                    drawImageArea(geometry)
-                    MultilineTextField("enter content", text: $vm.content) {
-                        
+                ScrollView(showsIndicators: false) {
+                    VStack(alignment: .leading, spacing: 10) {
+                        TextField("enter title", text: $vm.title)
+                            .padding(EdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 8))
+                            .background(
+                                RoundedRectangle(cornerRadius: 6)
+                                    .foregroundColor(.greenTint4)
+                            )
+                            .contentShape(Rectangle())
+                            .padding([.leading, .trailing], 16)
+                        drawPinSelectArea(geometry)
+                        drawImageArea(geometry)
+                        .padding([.leading, .trailing], 16)
+                        MultilineTextField("enter content", text: $vm.content) {
+                            
+                        }
+                        .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
+                        .contentShape(Rectangle())
+                        .background(
+                            RoundedRectangle(cornerRadius: 2)
+                                .foregroundColor(.greenTint4)
+                        )
+                        .onReceive(keyboardPublisher) { newIsKeyboardVisible in
+                            $vm.isKeyboardVisible.wrappedValue = newIsKeyboardVisible
+                        }
+                        .onChange(of: $vm.content.wrappedValue) { value in
+                            if value == " " {
+                                $vm.content.wrappedValue = ""
+                            }
+                        }
+                        .padding([.leading, .trailing], 16)
                     }
-                    .padding(EdgeInsets(top: 4, leading: 6, bottom: 4, trailing: 6))
+                    .padding([.top, .bottom], 14)
                 }
-                .padding(EdgeInsets(top: 10, leading: 16, bottom: 10, trailing: 16))
                 Spacer()
             }
-            .padding(EdgeInsets(top: safeTop, leading: 0, bottom: safeBottom, trailing: 0))
-            .edgesIgnoringSafeArea(.all)
+            .padding(EdgeInsets(top: safeTop, leading: 0, bottom: $vm.isKeyboardVisible.wrappedValue ? 0 : safeBottom, trailing: 0))
+            .ignoresSafeArea(.container, edges: [.top, .bottom])
             .frame(width: geometry.size.width, alignment: .leading)
         }
         .onAppear {
@@ -91,7 +113,7 @@ struct AddFootprintView: View {
                     .frame(both: IMAGE_SIZE, aligment: .center)
                     .background(
                         RoundedRectangle(cornerRadius: 12)
-                            .foregroundColor(.gray60)
+                            .foregroundColor(.gray30)
                     )
                     .onTapGesture {
                         vm.onClickGallery()
@@ -118,7 +140,7 @@ struct AddFootprintView: View {
             .scaledToFit()
             .frame(both: 30)
             .padding(10)
-            .border(isSelected ? .lightblue01 : .clear, lineWidth: 2, cornerRadius: 12)
+            .border(isSelected ? .greenTint4 : .clear, lineWidth: 2, cornerRadius: 12)
             .onTapGesture {
                 vm.onSelectPin(item)
             }

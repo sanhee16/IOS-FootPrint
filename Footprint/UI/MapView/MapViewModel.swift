@@ -28,11 +28,8 @@ class MapViewModel: BaseViewModel {
     
     func loadAllMarkers(_ mapView: NMFMapView) {
         self.startProgress()
-        print("loadAllMarkers")
         for item in self.markerList {
-            print("removeMarker: \(item.footPrint.title)")
-            item.marker.mapView = nil
-//            removeMarker(mapView, marker: i.marker)
+            removeMarker(mapView, marker: item.marker)
         }
         self.markerList.removeAll()
         let footPrints = realm.objects(FootPrint.self)
@@ -61,6 +58,9 @@ class MapViewModel: BaseViewModel {
         // 마커 생성하기
         let marker = NMFMarker()
         marker.position = NMGLatLng(lat: location.latitude, lng: location.longitude)
+        
+        // 마커 그룹
+//        marker.tag = IntValue
         
         // marker 사이즈 지정
         marker.width = 26
