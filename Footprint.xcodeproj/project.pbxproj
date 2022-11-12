@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		264B70BC291F8DD900CDAF9F /* ApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264B70BB291F8DD900CDAF9F /* ApiResponse.swift */; };
+		264B70C0291F8E9D00CDAF9F /* C.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264B70BF291F8E9C00CDAF9F /* C.swift */; };
 		265A0A0C2916297E00027829 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 265A0A0B2916297E00027829 /* Realm */; };
 		265A0A0E2916297E00027829 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 265A0A0D2916297E00027829 /* RealmSwift */; };
 		265EA941291D112B00068A5C /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265EA940291D112B00068A5C /* MapView.swift */; };
@@ -56,6 +58,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		264B70BB291F8DD900CDAF9F /* ApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponse.swift; sourceTree = "<group>"; };
+		264B70BF291F8E9C00CDAF9F /* C.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C.swift; sourceTree = "<group>"; };
 		265EA940291D112B00068A5C /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		265EA944291D134200068A5C /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		265EA946291D1E1400068A5C /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
@@ -137,6 +141,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		264B70BA291F8DD000CDAF9F /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				264B70BB291F8DD900CDAF9F /* ApiResponse.swift */,
+				63F132462914A18800B3A9E0 /* Api.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
 		265EA942291D133200068A5C /* MapView */ = {
 			isa = PBXGroup;
 			children = (
@@ -167,6 +180,7 @@
 		63209FE62913C3BF00709227 /* Footprint */ = {
 			isa = PBXGroup;
 			children = (
+				264B70BA291F8DD000CDAF9F /* Api */,
 				63209FF52913C67E00709227 /* Info.plist */,
 				63B1FB012914B378007E94B6 /* DataClass */,
 				63F1325C2914A1C000B3A9E0 /* UI */,
@@ -230,9 +244,9 @@
 				63F132402914A18800B3A9E0 /* Alert */,
 				63F132442914A18800B3A9E0 /* Util.swift */,
 				63F132452914A18800B3A9E0 /* Defaults.swift */,
-				63F132462914A18800B3A9E0 /* Api.swift */,
 				63F132432914A18800B3A9E0 /* SwiftExtension.swift */,
 				26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */,
+				264B70BF291F8E9C00CDAF9F /* C.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -465,6 +479,7 @@
 				63B1FAFD2914B324007E94B6 /* GalleryViewModel.swift in Sources */,
 				265EA941291D112B00068A5C /* MapView.swift in Sources */,
 				63F1328E2914A1C000B3A9E0 /* SplashViewModel.swift in Sources */,
+				264B70BC291F8DD900CDAF9F /* ApiResponse.swift in Sources */,
 				63F1328F2914A1C000B3A9E0 /* SplashView.swift in Sources */,
 				63F132AF2914A1C000B3A9E0 /* BluePrintViewModel.swift in Sources */,
 				63F132AE2914A1C000B3A9E0 /* BluePrintView.swift in Sources */,
@@ -482,6 +497,7 @@
 				265EA945291D134200068A5C /* MapViewModel.swift in Sources */,
 				63F132512914A18F00B3A9E0 /* BaseViewModel.swift in Sources */,
 				63F1324B2914A18800B3A9E0 /* Defaults.swift in Sources */,
+				264B70C0291F8E9D00CDAF9F /* C.swift in Sources */,
 				63F132982914A1C000B3A9E0 /* ProgressView.swift in Sources */,
 				63F1324A2914A18800B3A9E0 /* Util.swift in Sources */,
 				63F1325B2914A1A300B3A9E0 /* Coordinator.swift in Sources */,

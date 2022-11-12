@@ -48,28 +48,6 @@ struct MainView: View {
                 if let myLocation = $vm.myLocation.wrappedValue, let coordinator = $vm.coordinator.wrappedValue {
                     MapView(coordinator, location: Location(latitude: myLocation.coordinate.latitude, longitude: myLocation.coordinate.longitude))
                 }
-                
-                
-                // https://www.hackingwithswift.com/quick-start/swiftui/how-to-show-annotations-in-a-map-view
-//                Map(coordinateRegion: $vm.currenLocation, annotationItems: $vm.annotations.wrappedValue) { item in
-////                    MapPin(coordinate: item.coordinate)
-//                    MapAnnotation(coordinate: item.coordinate) {
-//                        Image(item.footPrint.pinType.pinType().pinName)
-//                            .resizable()
-//                            .scaledToFit()
-//                            .frame(both: 20)
-//                            .onTapGesture {
-//                                vm.onClickAnnotation(item)
-//                            }
-//                    }
-//                }
-//                Map(coordinateRegion: $vm.currenLocation)
-                Spacer()
-                Text("add foot print")
-                    .onTapGesture {
-                        vm.onClickAddFootprint()
-                    }
-                Spacer()
             }
             .padding(EdgeInsets(top: safeTop, leading: 0, bottom: safeBottom, trailing: 0))
             .edgesIgnoringSafeArea(.all)

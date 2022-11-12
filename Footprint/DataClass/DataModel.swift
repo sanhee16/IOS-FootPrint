@@ -7,6 +7,14 @@
 
 import Foundation
 import SwiftUI
+import MapKit
+import NMapsMap
+
+struct MarkerItem {
+    var marker: NMFMarker
+    var footPrint: FootPrint
+}
+
 
 enum PinType: Int {
     case pin0

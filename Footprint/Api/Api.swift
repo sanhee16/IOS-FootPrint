@@ -24,7 +24,6 @@ class APIEventLogger: EventMonitor {
             + "Headers: " + "\(request.request?.allHTTPHeaderFields ?? [:])" + "\n"
         )
         print("Authorization: " + (request.request?.headers["Authorization"] ?? ""))
-//        print("Body: " + (request.request?.httpBody?.toPrettyPrintedString ?? ""))
     }
     
     func request<Value>(_ request: DataRequest, didParseResponse response: DataResponse<Value, AFError>) {
@@ -33,7 +32,6 @@ class APIEventLogger: EventMonitor {
             "URL: " + (request.request?.url?.absoluteString ?? "") + "\n"
             + "Result: " + "\(response.result)" + "\n"
             + "StatusCode: " + "\(response.response?.statusCode ?? 0)" + "\n"
-//            + "Data: \(response.data?.toPrettyPrintedString ?? "")"
         )
     }
 }
@@ -115,7 +113,7 @@ class Api {
                             queue: DispatchQueue.global(qos: .background),
                             completionHandler: {[weak self](response: DataResponse<T, AFError>) in
                                 guard self != nil else { return }
-//                                print("response: \(response)")
+                                //                                print("response: \(response)")
                                 switch response.result {
                                 case .success(let value):
                                     promise(.success(value))

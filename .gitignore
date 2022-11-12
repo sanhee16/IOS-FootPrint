@@ -8,6 +8,17 @@
 *.xcuserstate
 .DS_Store
 
+## User settingsPods
+/Pods/Pods.xcodeproj/xcuserdata/
+./Pods/Pods.xcodeproj/xcuserdata/
+
+
+
+## Xcode 8 and earlier
+*.xcscmblueprint
+*.xccheckout
+
+
 *.swp
 *.swo
 *.xcconfig

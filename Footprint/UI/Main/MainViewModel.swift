@@ -35,7 +35,7 @@ class MainViewModel: BaseViewModel {
     }
     
     func onAppear() {
-        getSavedData()
+//        getSavedData()
         switch checkLocationPermission() {
         case .allow:
             getCurrentLocation()
@@ -44,11 +44,11 @@ class MainViewModel: BaseViewModel {
         }
     }
     
-    func onClickAddFootprint() {
-        if let myLocation = self.myLocation {
-            self.coordinator?.presentAddFootprintView(location: Location(latitude: myLocation.coordinate.latitude, longitude: myLocation.coordinate.longitude))
-        }
-    }
+//    func onClickAddFootprint() {
+//        if let myLocation = self.myLocation {
+//            self.coordinator?.presentAddFootprintView(location: Location(latitude: myLocation.coordinate.latitude, longitude: myLocation.coordinate.longitude))
+//        }
+//    }
     
     func onClickSetting() {
         

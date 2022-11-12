@@ -6,17 +6,45 @@
 //
 
 import Foundation
+import MapKit
+import NMapsMap
+import RealmSwift
 
 class MapViewModel: BaseViewModel {
     @Published var location: Location
+    @Published var markerList: [MarkerItem] = []
+    private let realm: Realm
+    
     
     init(_ coordinator: AppCoordinator, location: Location) {
         self.location = location
+        self.realm = try! Realm()
         super.init(coordinator)
     }
     
     func onAppear() {
         
+    }
+    
+    func loadAllMarkers(_ mapView: NMFMapView) {
+        self.startProgress()
+        print("loadAllMarkers")
+        for item in self.markerList {
+            print("removeMarker: \(item.footPrint.title)")
+            item.marker.mapView = nil
+//            removeMarker(mapView, marker: i.marker)
+        }
+        self.markerList.removeAll()
+        let footPrints = realm.objects(FootPrint.self)
+        for footPrint in footPrints {
+            markerList.append(MarkerItem(marker: drawMarker(mapView, location: Location(latitude: footPrint.latitude, longitude: footPrint.longitude), pinType: PinType(rawValue: footPrint.pinType) ?? .pin0), footPrint: footPrint))
+        }
+        self.stopProgress()
+    }
+
+    
+    func removeMarker(_ mapView: NMFMapView, marker: NMFMarker) {
+        marker.mapView = nil
     }
     
     func onClose() {
@@ -25,6 +53,60 @@ class MapViewModel: BaseViewModel {
     
     func onTapMarker() {
         print("on tap marker")
-        self.coordinator?.presentAddFootprintView(location: self.location)
+//        self.coordinator?.presentAddFootprintView(location: self.location)
+    }
+    
+    func addNewMarker(_ mapView: NMFMapView, location: Location) {
+        
+        // 마커 생성하기
+        let marker = NMFMarker()
+        marker.position = NMGLatLng(lat: location.latitude, lng: location.longitude)
+        
+        // marker 사이즈 지정
+        marker.width = 26
+        marker.height = 36
+        
+        // marker 색상 입히기
+        marker.iconImage = NMF_MARKER_IMAGE_BLACK
+        marker.iconTintColor = PinType.pin0.pinUIColor //TODO: change
+        
+        marker.mapView = mapView
+        
+        self.alert(.yesOrNo, title: "현재 위치에 마커를 추가하시겠습니까?") {[weak self] res in
+            guard let self = self else { return }
+            if res {
+                print("add New Marker ok")
+                marker.mapView = nil
+                self.coordinator?.presentAddFootprintView(location: location) {[weak self] in
+                    guard let self = self else { return }
+                    self.loadAllMarkers(mapView)
+                }
+            } else {
+                print("add New Marker cancel")
+                marker.mapView = nil
+            }
+        }
+    }
+    
+    func drawMarker(_ mapView: NMFMapView, location: Location, pinType: PinType) -> NMFMarker {
+        // 마커 생성하기
+        let marker = NMFMarker()
+        marker.position = NMGLatLng(lat: location.latitude, lng: location.longitude)
+        
+        // marker 사이즈 지정
+        marker.width = 22
+        marker.height = 30
+        
+        // marker 색상 입히기
+        marker.iconImage = NMF_MARKER_IMAGE_BLACK
+        marker.iconTintColor = pinType.pinUIColor //TODO: change
+        
+        marker.mapView = mapView
+        
+        marker.touchHandler = {[weak self] (overlay) in
+            self?.onTapMarker()
+            return true
+        }
+        return marker
     }
 }

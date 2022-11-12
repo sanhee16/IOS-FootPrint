@@ -17,11 +17,13 @@ struct MapView: UIViewRepresentable {
     @ObservedObject var vm: VM
     
     init(_ coordinator: AppCoordinator, location: Location) {
+        print("init")
         self.vm = MapViewModel(coordinator, location: location)
     }
     
     func makeUIView(context: Context) -> NMFNaverMapView {
         let view = NMFNaverMapView()
+        print("makeUIVIew")
         view.showZoomControls = false
         view.mapView.zoomLevel = 17
         view.mapView.mapType = .basic
@@ -39,10 +41,14 @@ struct MapView: UIViewRepresentable {
         
         let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: $vm.location.wrappedValue.latitude, lng: $vm.location.wrappedValue.longitude))
         view.mapView.moveCamera(cameraUpdate)
+        
+        vm.loadAllMarkers(view.mapView)
         return view
     }
     
-    func updateUIView(_ uiView: NMFNaverMapView, context: Context) {}
+    func updateUIView(_ uiView: NMFNaverMapView, context: Context) {
+        print("updateUIView")
+    }
     
     
     class Coordinator: NSObject, NMFMapViewTouchDelegate, NMFMapViewCameraDelegate, NMFMapViewOptionDelegate {
@@ -52,40 +58,18 @@ struct MapView: UIViewRepresentable {
             self.vm = vm
         }
         
-        
         func mapView(_ mapView: NMFMapView, didTapMap location: NMGLatLng, point: CGPoint) {
             print("지도 탭했음 : \(location.lat) | \(location.lng) | \(location.description)")
             print("지도 탭했음 : \(location.debugDescription)")
             print("point : \(point.debugDescription)")
-            
+            let loc: Location = Location(latitude: location.lat, longitude: location.lng)
             print("wrap : \(location.wrap())")
-            
-            
-//            addMarker(mapView, location: Location(latitude: latlng.lat, longitude: latlng.lng), pinType: .pin3)
-        }
-        
-        func addMarker(_ mapView: NMFMapView, location: Location, pinType: PinType) {
-            // 마커 생성하기
-            let marker = NMFMarker()
-            marker.position = NMGLatLng(lat: location.latitude, lng: location.longitude)
-            
-            // marker 사이즈 지정
-            marker.width = 22
-            marker.height = 30
-            
-            // marker 색상 입히기
-            marker.iconImage = NMF_MARKER_IMAGE_BLACK
-            marker.iconTintColor = pinType.pinUIColor
-            
-            
-            marker.mapView = mapView
-            
-            // marker 터치 이벤트 설정
-            marker.touchHandler = {[weak self] (overlay) in
-//                print("marker touch")
-                self?.vm.onTapMarker()
-                return true
-            }
+            vm.addNewMarker(mapView, location: loc)
+//            addMarker(mapView, location: loc)
+//            vm.addNewMarker {[weak self] in
+//                print("add New Marker cancel callback")
+//                self?.removeMarker(mapView, location: loc)
+//            }
         }
     }
     

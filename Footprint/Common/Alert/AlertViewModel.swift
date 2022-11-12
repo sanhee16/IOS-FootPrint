@@ -32,21 +32,13 @@ class AlertViewModel: BaseViewModel {
     }
     
     func onClickOK() {
-        if let callback = callback {
-            callback(true)
-            self.dismiss(animated: false)
-        } else {
-            self.dismiss(animated: false)
-        }
+        self.dismiss(animated: false)
+        callback?(true)
     }
     
     func onClickCancel() {
-        if let callback = callback {
-            callback(false)
-            self.dismiss(animated: false)
-        } else {
-            self.dismiss(animated: false)
-        }
+        self.dismiss(animated: false)
+        callback?(false)
     }
     
     func onClose() {
