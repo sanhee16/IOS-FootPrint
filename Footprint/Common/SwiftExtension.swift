@@ -11,6 +11,17 @@ extension Int {
     func pinType() -> PinType {
         return PinType(rawValue: self) ?? .pin0
     }
+    
+    func getDate() -> String {
+        let timeToDate = Date(timeIntervalSince1970: Double(self)) // 2021-10-13 17:16:15 +0000
+        let date = DateFormatter()
+        date.locale = Locale(identifier: "ko_kr")
+        date.timeZone = TimeZone(abbreviation: "KST") // "2018-03-21 18:07:27"
+        date.dateFormat = "MM월dd일 HH:mm"
+        
+        let kr = date.string(from: timeToDate)
+        return kr
+    }
 }
 
 extension Publisher {

@@ -43,16 +43,6 @@ class ShowFootPrintViewModel: BaseViewModel {
             .sorted(byKeyPath: "createdAt", ascending: true)
         print("\(items.count)")
         for i in items {
-//            for j in i.images {
-////                if let dir = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) {
-////                    print("dir: \(dir)")
-////
-////                    print("url2 : \(URL(fileURLWithPath: j))")
-////                    print("url2 : \(URL(string: j))")
-////                    print("url : \(URL(fileURLWithPath: dir.absoluteString).appendingPathComponent(j).path)")
-////                }
-//                print(j)
-//            }
             self.footPrints.append(i)
         }
         self.stopProgress()
@@ -60,10 +50,9 @@ class ShowFootPrintViewModel: BaseViewModel {
     }
     
     func onClickAddFootprint() {
-        self.coordinator?.changeAddFootprintView(location: self.location, onDismiss: { [weak self] in
-            guard let self = self else { return }
-            self.coordinator?.presentShowFootPrintView(self.location)
-        })
+        self.coordinator?.changeAddFootprintView(location: self.location) {
+            
+        }
     }
     
     func onClose() {

@@ -14,7 +14,7 @@ struct ShowFootPrintView: View {
     public static func vc(_ coordinator: AppCoordinator, location: Location, completion: (()-> Void)? = nil) -> UIViewController {
         let vm = VM.init(coordinator, location: location)
         let view = Self.init(vm: vm)
-        let vc = BaseViewController.bottomSheet(view, sizes: [.fixed(300), .fullscreen], options: SheetOptions(pullBarHeight: 0, useFullScreenMode: true, shrinkPresentingViewController: false))
+        let vc = BaseViewController.bottomSheet(view, sizes: [.fixed(500)])
         return vc
     }
     @ObservedObject var vm: VM
@@ -28,41 +28,7 @@ struct ShowFootPrintView: View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 0) {
                 drawHeader(geometry)
-                Pager(page: $vm.page.wrappedValue, data: $vm.footPrints.wrappedValue, id: \.self) { item in
-                    ScrollView(showsIndicators: false) {
-                        VStack(alignment: .leading, spacing: 10) {
-                            Text(item.title)
-                                .multilineTextAlignment(.leading)
-                                .padding(EdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 8))
-                                .frame(width: geometry.size.width - 32, alignment: .leading)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 6)
-                                        .foregroundColor(.greenTint5)
-                                )
-                                .contentShape(Rectangle())
-//                            drawPinSelectArea(geometry)
-                            drawImageArea(geometry, item: item)
-                            
-                            Divider()
-                                .background(Color.greenTint5)
-                                .padding([.top, .bottom], 4)
-                            
-                            Text(item.content)
-                                .frame(minHeight: 300.0, alignment: .topLeading)
-                                .padding(EdgeInsets(top: 0, leading: 6, bottom: 12, trailing: 6))
-                                .frame(width: geometry.size.width - 32, alignment: .leading)
-                                .contentShape(Rectangle())
-                                .multilineTextAlignment(.leading)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 2)
-                                        .foregroundColor(.greenTint5)
-                                )
-                        }
-                        .padding(EdgeInsets(top: 14, leading: 16, bottom: 14, trailing: 16))
-                    }
-                    .frame(width: geometry.size.width, alignment: .leading)
-                }
-                .frame(width: geometry.size.width, alignment: .leading)
+                drawBody(geometry)
             }
             .padding(EdgeInsets(top: safeTop, leading: 0, bottom: safeBottom, trailing: 0))
             .edgesIgnoringSafeArea(.all)
@@ -71,6 +37,57 @@ struct ShowFootPrintView: View {
         .onAppear {
             vm.onAppear()
         }
+    }
+    
+    private func drawBody(_ geometry: GeometryProxy) -> some View {
+        return Pager(page: $vm.page.wrappedValue, data: $vm.footPrints.wrappedValue, id: \.self) { item in
+            ScrollView(showsIndicators: false) {
+                VStack(alignment: .leading, spacing: 10) {
+                    Text(item.title)
+                        .font(.kr14b)
+                        .foregroundColor(Color.gray100)
+                        .multilineTextAlignment(.leading)
+                        .padding(EdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 8))
+                        .frame(width: geometry.size.width - 32, alignment: .leading)
+                        .background(
+                            RoundedRectangle(cornerRadius: 6)
+                                .foregroundColor(.greenTint5)
+                        )
+                        .contentShape(Rectangle())
+//                            drawPinSelectArea(geometry)
+                    HStack(alignment: .center, spacing: 0) {
+                        Spacer()
+                        Text(item.createdAt.getDate())
+                            .font(.kr9r)
+                            .foregroundColor(Color.gray60)
+                    }
+                    drawImageArea(geometry, item: item)
+                    
+                    Divider()
+                        .background(Color.greenTint5)
+                        .padding([.top, .bottom], 4)
+                    
+                    Text(item.content)
+                        .font(.kr12r)
+                        .foregroundColor(Color.gray100)
+                        .frame(minHeight: 300.0, alignment: .topLeading)
+                        .padding(EdgeInsets(top: 12, leading: 10, bottom: 12, trailing: 10))
+                        .frame(width: geometry.size.width - 32, alignment: .leading)
+                        .contentShape(Rectangle())
+                        .multilineTextAlignment(.leading)
+                        .background(
+                            RoundedRectangle(cornerRadius: 2)
+                                .foregroundColor(.greenTint5)
+                        )
+                }
+                .padding(EdgeInsets(top: 14, leading: 16, bottom: 14, trailing: 16))
+                .contentShape(Rectangle())
+            }
+            .frame(width: geometry.size.width, alignment: .leading)
+            .contentShape(Rectangle())
+        }
+        .frame(width: geometry.size.width, alignment: .leading)
+        .contentShape(Rectangle())
     }
     
     private func drawHeader(_ geometry: GeometryProxy) -> some View {

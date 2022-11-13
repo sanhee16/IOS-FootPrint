@@ -48,7 +48,7 @@ struct AddFootprintView: View, KeyboardReadable {
                             
                         }
                         .frame(minHeight: 300.0, alignment: .topLeading)
-                        .padding(EdgeInsets(top: 0, leading: 6, bottom: 12, trailing: 6))
+                        .padding(EdgeInsets(top: 12, leading: 10, bottom: 12, trailing: 10))
                         .contentShape(Rectangle())
                         .background(
                             RoundedRectangle(cornerRadius: 2)
