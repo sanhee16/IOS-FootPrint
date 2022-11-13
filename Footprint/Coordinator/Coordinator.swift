@@ -56,6 +56,10 @@ class Coordinator {
     }
     
     func dismiss(_ animated: Bool = true, completion: (() -> Void)? = nil) {
+        if let sheetViewController = self.childViewControllers.last as? SheetViewController {
+            sheetViewController.dismiss(animated: animated, completion: completion)
+            return
+        }
         if self.childViewControllers.isEmpty {
             completion?()
             return

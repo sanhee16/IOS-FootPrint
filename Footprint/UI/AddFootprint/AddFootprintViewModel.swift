@@ -81,11 +81,14 @@ class AddFootprintViewModel: BaseViewModel {
         let imageUrls: List<String> = List<String>()
         let currentTimeStamp = Int(Date().timeIntervalSince1970)
         for idx in self.images.indices {
-            let url = ImageManager.shared.saveImage(image: self.images[idx], imageName: "\(currentTimeStamp)_\(idx)")
-            if let url = url {
-                print("savedUrl : \(url)")
-                imageUrls.append(url)
-            }
+            let imageName = "\(currentTimeStamp)_\(idx)"
+            let url = ImageManager.shared.saveImage(image: self.images[idx], imageName: imageName)
+            print("savedUrl : \(url)")
+//            if let url = url {
+//                print("savedUrl : \(url)")
+//                imageUrls.append(url)
+//            }
+            imageUrls.append(imageName)
         }
         
         try! realm.write {

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26332176292095E90065AE3A /* ShowFootPrintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26332175292095E90065AE3A /* ShowFootPrintView.swift */; };
+		26332178292095F10065AE3A /* ShowFootPrintViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26332177292095F10065AE3A /* ShowFootPrintViewModel.swift */; };
 		2639921F291FEBA60049F047 /* KeyboardReadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2639921E291FEBA60049F047 /* KeyboardReadable.swift */; };
 		264B70BC291F8DD900CDAF9F /* ApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264B70BB291F8DD900CDAF9F /* ApiResponse.swift */; };
 		264B70C0291F8E9D00CDAF9F /* C.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264B70BF291F8E9C00CDAF9F /* C.swift */; };
@@ -59,6 +61,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		26332175292095E90065AE3A /* ShowFootPrintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowFootPrintView.swift; sourceTree = "<group>"; };
+		26332177292095F10065AE3A /* ShowFootPrintViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowFootPrintViewModel.swift; sourceTree = "<group>"; };
 		2639921E291FEBA60049F047 /* KeyboardReadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardReadable.swift; sourceTree = "<group>"; };
 		264B70BB291F8DD900CDAF9F /* ApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponse.swift; sourceTree = "<group>"; };
 		264B70BF291F8E9C00CDAF9F /* C.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C.swift; sourceTree = "<group>"; };
@@ -141,6 +145,15 @@
 				A742FCCA55652387DC0B6200 /* Pods-Footprint.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		26332174292095CD0065AE3A /* ShowFootPrint */ = {
+			isa = PBXGroup;
+			children = (
+				26332175292095E90065AE3A /* ShowFootPrintView.swift */,
+				26332177292095F10065AE3A /* ShowFootPrintViewModel.swift */,
+			);
+			path = ShowFootPrint;
 			sourceTree = "<group>";
 		};
 		264B70BA291F8DD000CDAF9F /* Api */ = {
@@ -293,6 +306,7 @@
 		63F1325C2914A1C000B3A9E0 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				26332174292095CD0065AE3A /* ShowFootPrint */,
 				265EA942291D133200068A5C /* MapView */,
 				63B1FAF92914B312007E94B6 /* Gallery */,
 				63F1325D2914A1C000B3A9E0 /* Splash */,
@@ -492,6 +506,7 @@
 				63B1FAFB2914B31E007E94B6 /* GalleryView.swift in Sources */,
 				63B1FAEF2914A861007E94B6 /* AddFootprintViewModel.swift in Sources */,
 				26C04F6D2917667F00890A76 /* SwiftUIExtension.swift in Sources */,
+				26332176292095E90065AE3A /* ShowFootPrintView.swift in Sources */,
 				63F132972914A1C000B3A9E0 /* EmailSender.swift in Sources */,
 				63F132472914A18800B3A9E0 /* AlertViewModel.swift in Sources */,
 				63B1FB032914B381007E94B6 /* RealmDB.swift in Sources */,
@@ -502,6 +517,7 @@
 				63F1324B2914A18800B3A9E0 /* Defaults.swift in Sources */,
 				264B70C0291F8E9D00CDAF9F /* C.swift in Sources */,
 				63F132982914A1C000B3A9E0 /* ProgressView.swift in Sources */,
+				26332178292095F10065AE3A /* ShowFootPrintViewModel.swift in Sources */,
 				63F1324A2914A18800B3A9E0 /* Util.swift in Sources */,
 				63F1325B2914A1A300B3A9E0 /* Coordinator.swift in Sources */,
 				63F132482914A18800B3A9E0 /* AlertView.swift in Sources */,

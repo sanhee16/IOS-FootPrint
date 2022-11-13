@@ -13,7 +13,6 @@ struct AddFootprintView: View, KeyboardReadable {
         let vm = VM.init(coordinator, location: location)
         let view = Self.init(vm: vm)
         let vc = BaseViewController(view, completion: completion)
-//        let vc = BaseViewController.bottomSheet(view, sizes: [.fixed(500)])
         return vc
     }
     @ObservedObject var vm: VM
@@ -33,21 +32,27 @@ struct AddFootprintView: View, KeyboardReadable {
                             .padding(EdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 8))
                             .background(
                                 RoundedRectangle(cornerRadius: 6)
-                                    .foregroundColor(.greenTint4)
+                                    .foregroundColor(.greenTint5)
                             )
                             .contentShape(Rectangle())
                             .padding([.leading, .trailing], 16)
                         drawPinSelectArea(geometry)
                         drawImageArea(geometry)
-                        .padding([.leading, .trailing], 16)
+                            .padding([.leading, .trailing], 16)
+                        
+                        Divider()
+                            .background(Color.greenTint5)
+                            .padding(EdgeInsets(top: 4, leading: 16, bottom: 4, trailing: 16))
+                        
                         MultilineTextField("enter content", text: $vm.content) {
                             
                         }
-                        .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
+                        .frame(minHeight: 300.0, alignment: .topLeading)
+                        .padding(EdgeInsets(top: 0, leading: 6, bottom: 12, trailing: 6))
                         .contentShape(Rectangle())
                         .background(
                             RoundedRectangle(cornerRadius: 2)
-                                .foregroundColor(.greenTint4)
+                                .foregroundColor(.greenTint5)
                         )
                         .onReceive(keyboardPublisher) { newIsKeyboardVisible in
                             $vm.isKeyboardVisible.wrappedValue = newIsKeyboardVisible
@@ -86,8 +91,7 @@ struct AddFootprintView: View, KeyboardReadable {
                         vm.onClickSave()
                     }
             }
-            .padding([.leading, .trailing], 12)
-            .frame(width: geometry.size.width - 24, height: 50, alignment: .center)
+            .frame(width: geometry.size.width - 32, height: 50, alignment: .center)
         }
         .frame(width: geometry.size.width, height: 50, alignment: .center)
     }

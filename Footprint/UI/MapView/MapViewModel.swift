@@ -48,8 +48,9 @@ class MapViewModel: BaseViewModel {
         self.dismiss()
     }
     
-    func onTapMarker() {
+    func onTapMarker(_ location: Location) {
         print("on tap marker")
+        self.coordinator?.presentShowFootPrintView(location)
 //        self.coordinator?.presentAddFootprintView(location: self.location)
     }
     
@@ -104,7 +105,7 @@ class MapViewModel: BaseViewModel {
         marker.mapView = mapView
         
         marker.touchHandler = {[weak self] (overlay) in
-            self?.onTapMarker()
+            self?.onTapMarker(location)
             return true
         }
         return marker

@@ -25,6 +25,16 @@ class BaseViewController<Content>: UIViewController, Dismissible, Nameable where
         return sheetController
     }
     
+    static func bottomSheet(_ rootView: Content, sizes: [SheetSize], options: SheetOptions) -> SheetViewController {
+        let vc = BaseViewController(rootView, completion: nil)
+        let sheetController = SheetViewController(controller: vc, sizes: sizes, options: options)
+        sheetController.allowPullingPastMaxHeight = false
+        sheetController.gripColor = nil
+        
+        print(("\(type(of: self)): init BottomSheet, \(String(describing: Content.self))"))
+        return sheetController
+    }
+    
     let rootView: Content
     let controller: UIHostingController<Content>
     var completion: (() -> Void)?

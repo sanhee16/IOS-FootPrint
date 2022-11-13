@@ -125,6 +125,7 @@ extension Color {
     public static let greenTint2: Color = Color(hex: "#69BC8D")
     public static let greenTint3: Color = Color(hex: "#D5E5DF")
     public static let greenTint4: Color = Color(hex: "#4B8A67", opacity: 0.3)
+    public static let greenTint5: Color = Color(hex: "#4B8A67", opacity: 0.1)
     
     public static let pin0: Color = Color(hex: "#000000")
     public static let pin1: Color = Color(hex: "#FC1961")
@@ -229,6 +230,7 @@ extension UIColor {
     public static let greenTint2: UIColor = UIColor(hex: "#69BC8D")
     public static let greenTint3: UIColor = UIColor(hex: "#D5E5DF")
     public static let greenTint4: UIColor = UIColor(hex: "#4B8A67", opacity: 0.3)
+    public static let greenTint5: UIColor = UIColor(hex: "#4B8A67", opacity: 0.1)
     
     public static let pin0: UIColor = UIColor(hex: "#000000")
     public static let pin1: UIColor = UIColor(hex: "#FC1961")

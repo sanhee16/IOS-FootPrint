@@ -39,11 +39,13 @@ class AppCoordinator: Coordinator, Terminatable {
         (self.navigationController as? Terminatable)?.appTerminate()
     }
     
+    //MARK: Start
     func startSplash() {
         let vc = SplashView.vc(self)
         self.present(vc, animated: true)
     }
     
+    //MARK: Present
     func presentMain() {
         let vc = MainView.vc(self)
         self.present(vc, animated: true)
@@ -62,5 +64,16 @@ class AppCoordinator: Coordinator, Terminatable {
     func presentAlertView(_ type: AlertType, title: String?, description: String?, callback: ((Bool) -> ())?) {
         let vc = AlertView.vc(self, type: type, title: title, description: description, callback: callback)
         self.present(vc, animated: false)
+    }
+    
+    func presentShowFootPrintView(_ location: Location) {
+        let vc = ShowFootPrintView.vc(self, location: location)
+        self.present(vc, animated: true)
+    }
+    
+    //MARK: Change
+    func changeAddFootprintView(location: Location, onDismiss: @escaping ()->()) {
+        let vc = AddFootprintView.vc(self, location: location)
+        self.change(vc, animated: true, onDismiss: onDismiss)
     }
 }
