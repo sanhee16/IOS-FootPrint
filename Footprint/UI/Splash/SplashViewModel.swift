@@ -28,12 +28,18 @@ class SplashViewModel: BaseViewModel {
         if !Defaults.launchBefore {
             //MARK: 최초실행 Setting
             Defaults.launchBefore = true
+            firstTask()
             locationManager.requestWhenInUseAuthorization()
             self.startRepeatTimer()
         } else {
             self.onStartSplashTimer()
         }
     }
+    
+    private func firstTask() {
+        
+    }
+    
     
     private func checkCameraPermission() {
        AVCaptureDevice.requestAccess(for: .video, completionHandler: {[weak self] (granted: Bool) in

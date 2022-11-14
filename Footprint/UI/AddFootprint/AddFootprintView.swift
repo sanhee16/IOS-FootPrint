@@ -37,6 +37,7 @@ struct AddFootprintView: View, KeyboardReadable {
                             .contentShape(Rectangle())
                             .padding([.leading, .trailing], 16)
                         drawPinSelectArea(geometry)
+                        drawCategorySelectArea(geometry)
                         drawImageArea(geometry)
                             .padding([.leading, .trailing], 16)
                         
@@ -128,14 +129,54 @@ struct AddFootprintView: View, KeyboardReadable {
     
     
     private func drawPinSelectArea(_ geometry: GeometryProxy) -> some View {
-        return ScrollView(.horizontal, showsIndicators: false) {
-            HStack(alignment: .center, spacing: 12) {
-                ForEach($vm.pinList.wrappedValue, id: \.self) { item in
-                    pinItem(item, isSelected: $vm.pinType.wrappedValue == item)
+        return VStack(alignment: .leading, spacing: 4) {
+            Text("pin 선택")
+                .font(.kr13b)
+                .foregroundColor(.gray90)
+                .padding(EdgeInsets(top: 10, leading: 18, bottom: 6, trailing: 12))
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(alignment: .center, spacing: 12) {
+                    ForEach($vm.pinList.wrappedValue, id: \.self) { item in
+                        pinItem(item, isSelected: $vm.pinType.wrappedValue == item)
+                    }
                 }
+                .padding(EdgeInsets(top: 6, leading: 12, bottom: 6, trailing: 12))
             }
-            .padding(EdgeInsets(top: 6, leading: 12, bottom: 6, trailing: 12))
         }
+    }
+    private func drawCategorySelectArea(_ geometry: GeometryProxy) -> some View {
+        return VStack(alignment: .leading, spacing: 4) {
+            HStack(alignment: .center, spacing: 0) {
+                Text("카테고리 선택")
+                    .font(.kr13b)
+                    .foregroundColor(.gray90)
+                Spacer()
+                Text("카테고리 추가")
+                    .font(.kr12r)
+                    .foregroundColor(.gray60)
+            }
+            .padding(EdgeInsets(top: 10, leading: 18, bottom: 6, trailing: 12))
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(alignment: .center, spacing: 12) {
+                    categoryItem(Category(tag: -1, name: "선택안함"), isSelected: $vm.category.wrappedValue == nil)
+                    ForEach($vm.categories.wrappedValue, id: \.self) { item in
+                        categoryItem(item, isSelected: $vm.category.wrappedValue == item)
+                    }
+                }
+                .padding(EdgeInsets(top: 6, leading: 12, bottom: 6, trailing: 12))
+            }
+        }
+    }
+    
+    private func categoryItem(_ item: Category, isSelected: Bool) -> some View {
+        return Text(item.name)
+            .font(isSelected ? .kr11b : .kr11r)
+            .foregroundColor(isSelected ? Color.gray90 : Color.gray60)
+            .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
+            .border(isSelected ? .greenTint4 : .clear, lineWidth: 2, cornerRadius: 6)
+            .onTapGesture {
+                
+            }
     }
     
     private func pinItem(_ item: PinType, isSelected: Bool) -> some View {

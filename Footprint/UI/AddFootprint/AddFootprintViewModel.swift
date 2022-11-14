@@ -16,9 +16,11 @@ class AddFootprintViewModel: BaseViewModel {
     @Published var content: String = ""
     @Published var images: [UIImage] = []
     @Published var pinType: PinType = .pin0
+    @Published var category: Category? = nil
     @Published var isKeyboardVisible = false
 
     var pinList: [PinType] = [.pin0,.pin1,.pin2,.pin3,.pin4,.pin5,.pin6,.pin7,.pin8,.pin9]
+    var categories: [Category] = []
     private let location: Location
     private let realm: Realm
     
@@ -26,10 +28,23 @@ class AddFootprintViewModel: BaseViewModel {
         self.realm = try! Realm()
         self.location = location
         super.init(coordinator)
+        
+        
     }
     
+    
+    private func getCategories() {
+        // 모든 객체 얻기
+        let categories = realm.objects(Category.self)
+        self.categories.removeAll()
+        for i in categories {
+            self.categories.append(i)
+        }
+    }
+    
+    
     func onAppear() {
-        
+        self.getCategories()
     }
     
     func onClose() {

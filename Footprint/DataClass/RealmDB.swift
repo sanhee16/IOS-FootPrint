@@ -20,7 +20,6 @@ struct Location {
 }
 
 class FootPrint: Object {
-    //TODO: location 추가해야함
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var title: String
     @Persisted var content: String
@@ -29,8 +28,9 @@ class FootPrint: Object {
     @Persisted var latitude: Double
     @Persisted var longitude: Double
     @Persisted var pinType: Int
+    @Persisted var tag: Int
 
-    convenience init(title: String, content: String, images: List<String>, latitude: Double, longitude: Double, pinType: PinType) {
+    convenience init(title: String, content: String, images: List<String>, latitude: Double, longitude: Double, pinType: PinType, tag: Int = -1) {
         self.init()
         self.title = title
         self.content = content
@@ -39,6 +39,18 @@ class FootPrint: Object {
         self.latitude = latitude
         self.longitude = longitude
         self.pinType = pinType.rawValue
+        self.tag = tag
     }
 }
 
+class Category: Object {
+    @Persisted(primaryKey: true) var id: ObjectId
+    @Persisted var tag: Int
+    @Persisted var name: String
+    
+    convenience init(tag: Int, name: String) {
+        self.init()
+        self.tag = tag
+        self.name = name
+    }
+}
