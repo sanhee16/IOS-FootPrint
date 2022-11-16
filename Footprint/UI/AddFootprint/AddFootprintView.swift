@@ -39,7 +39,6 @@ struct AddFootprintView: View, KeyboardReadable {
                         drawPinSelectArea(geometry)
                         drawCategorySelectArea(geometry)
                         drawImageArea(geometry)
-                            .padding([.leading, .trailing], 16)
                         
                         Divider()
                             .background(Color.greenTint5)
@@ -98,31 +97,38 @@ struct AddFootprintView: View, KeyboardReadable {
     }
     
     private func drawImageArea(_ geometry: GeometryProxy) -> some View {
-        return ScrollView(.horizontal, showsIndicators: false) {
-            HStack {
-                ForEach($vm.images.wrappedValue.indices, id: \.self) { idx in
-                    let image = $vm.images.wrappedValue[idx]
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(both: IMAGE_SIZE)
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
-                        .contentShape(Rectangle())
+        return VStack(alignment: .leading, spacing: 4) {
+            Text("이미지 선택")
+                .font(.kr13b)
+                .foregroundColor(.gray90)
+                .padding(EdgeInsets(top: 10, leading: 18, bottom: 6, trailing: 12))
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    ForEach($vm.images.wrappedValue.indices, id: \.self) { idx in
+                        let image = $vm.images.wrappedValue[idx]
+                        Image(uiImage: image)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(both: IMAGE_SIZE)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                vm.removeImage(image)
+                            }
+                    }
+                    Text("+")
+                        .font(.kr16b)
+                        .foregroundColor(.white)
+                        .frame(both: IMAGE_SIZE, aligment: .center)
+                        .background(
+                            RoundedRectangle(cornerRadius: 12)
+                                .foregroundColor(.gray30)
+                        )
                         .onTapGesture {
-                            vm.removeImage(image)
+                            vm.onClickGallery()
                         }
                 }
-                Text("+")
-                    .font(.kr16b)
-                    .foregroundColor(.white)
-                    .frame(both: IMAGE_SIZE, aligment: .center)
-                    .background(
-                        RoundedRectangle(cornerRadius: 12)
-                            .foregroundColor(.gray30)
-                    )
-                    .onTapGesture {
-                        vm.onClickGallery()
-                    }
+                .padding([.leading, .trailing], 16)
             }
         }
     }
@@ -144,6 +150,7 @@ struct AddFootprintView: View, KeyboardReadable {
             }
         }
     }
+    
     private func drawCategorySelectArea(_ geometry: GeometryProxy) -> some View {
         return VStack(alignment: .leading, spacing: 4) {
             HStack(alignment: .center, spacing: 0) {
@@ -154,11 +161,13 @@ struct AddFootprintView: View, KeyboardReadable {
                 Text("카테고리 추가")
                     .font(.kr12r)
                     .foregroundColor(.gray60)
+                    .onTapGesture {
+                        vm.onClickAddCategory()
+                    }
             }
             .padding(EdgeInsets(top: 10, leading: 18, bottom: 6, trailing: 12))
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(alignment: .center, spacing: 12) {
-                    categoryItem(Category(tag: -1, name: "선택안함"), isSelected: $vm.category.wrappedValue == nil)
                     ForEach($vm.categories.wrappedValue, id: \.self) { item in
                         categoryItem(item, isSelected: $vm.category.wrappedValue == item)
                     }
@@ -175,7 +184,7 @@ struct AddFootprintView: View, KeyboardReadable {
             .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
             .border(isSelected ? .greenTint4 : .clear, lineWidth: 2, cornerRadius: 6)
             .onTapGesture {
-                
+                vm.onSelectCategory(item)
             }
     }
     

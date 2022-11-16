@@ -72,7 +72,6 @@ class MapViewModel: BaseViewModel {
         marker.iconTintColor = PinType.pin0.pinUIColor //TODO: change
         
         marker.mapView = mapView
-        
         self.alert(.yesOrNo, title: "현재 위치에 마커를 추가하시겠습니까?") {[weak self] res in
             guard let self = self else { return }
             if res {
@@ -95,11 +94,12 @@ class MapViewModel: BaseViewModel {
         marker.position = NMGLatLng(lat: location.latitude, lng: location.longitude)
         
         // marker 사이즈 지정
-        marker.width = 22
-        marker.height = 30
+        marker.width = 30
+        marker.height = 29
         
         // marker 색상 입히기
-        marker.iconImage = NMF_MARKER_IMAGE_BLACK
+        marker.iconImage = NMFOverlayImage(name: pinType.pinName)
+//        marker.iconImage = NMF_MARKER_IMAGE_BLACK
         marker.iconTintColor = pinType.pinUIColor //TODO: change
         
         marker.mapView = mapView

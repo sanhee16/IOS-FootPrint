@@ -12,6 +12,8 @@
 		2639921F291FEBA60049F047 /* KeyboardReadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2639921E291FEBA60049F047 /* KeyboardReadable.swift */; };
 		264B70BC291F8DD900CDAF9F /* ApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264B70BB291F8DD900CDAF9F /* ApiResponse.swift */; };
 		264B70C0291F8E9D00CDAF9F /* C.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264B70BF291F8E9C00CDAF9F /* C.swift */; };
+		264EEF572925128300B89624 /* AddCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EEF562925128300B89624 /* AddCategoryView.swift */; };
+		264EEF592925128A00B89624 /* AddCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EEF582925128A00B89624 /* AddCategoryViewModel.swift */; };
 		265A0A0C2916297E00027829 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 265A0A0B2916297E00027829 /* Realm */; };
 		265A0A0E2916297E00027829 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 265A0A0D2916297E00027829 /* RealmSwift */; };
 		265EA941291D112B00068A5C /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265EA940291D112B00068A5C /* MapView.swift */; };
@@ -66,6 +68,8 @@
 		2639921E291FEBA60049F047 /* KeyboardReadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardReadable.swift; sourceTree = "<group>"; };
 		264B70BB291F8DD900CDAF9F /* ApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponse.swift; sourceTree = "<group>"; };
 		264B70BF291F8E9C00CDAF9F /* C.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C.swift; sourceTree = "<group>"; };
+		264EEF562925128300B89624 /* AddCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryView.swift; sourceTree = "<group>"; };
+		264EEF582925128A00B89624 /* AddCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryViewModel.swift; sourceTree = "<group>"; };
 		265EA940291D112B00068A5C /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		265EA944291D134200068A5C /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		265EA946291D1E1400068A5C /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
@@ -165,6 +169,15 @@
 			path = Api;
 			sourceTree = "<group>";
 		};
+		264EEF552925126200B89624 /* AddCategory */ = {
+			isa = PBXGroup;
+			children = (
+				264EEF562925128300B89624 /* AddCategoryView.swift */,
+				264EEF582925128A00B89624 /* AddCategoryViewModel.swift */,
+			);
+			path = AddCategory;
+			sourceTree = "<group>";
+		};
 		265EA942291D133200068A5C /* MapView */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +234,8 @@
 		63B1FAEB2914A838007E94B6 /* AddFootprint */ = {
 			isa = PBXGroup;
 			children = (
+				63B1FAF92914B312007E94B6 /* Gallery */,
+				264EEF552925126200B89624 /* AddCategory */,
 				63B1FAEC2914A85B007E94B6 /* AddFootprintView.swift */,
 				63B1FAEE2914A861007E94B6 /* AddFootprintViewModel.swift */,
 			);
@@ -308,7 +323,6 @@
 			children = (
 				26332174292095CD0065AE3A /* ShowFootPrint */,
 				265EA942291D133200068A5C /* MapView */,
-				63B1FAF92914B312007E94B6 /* Gallery */,
 				63F1325D2914A1C000B3A9E0 /* Splash */,
 				63F132852914A1C000B3A9E0 /* Main */,
 				63B1FAEB2914A838007E94B6 /* AddFootprint */,
@@ -495,6 +509,7 @@
 			files = (
 				63B1FAFD2914B324007E94B6 /* GalleryViewModel.swift in Sources */,
 				265EA941291D112B00068A5C /* MapView.swift in Sources */,
+				264EEF592925128A00B89624 /* AddCategoryViewModel.swift in Sources */,
 				63F1328E2914A1C000B3A9E0 /* SplashViewModel.swift in Sources */,
 				264B70BC291F8DD900CDAF9F /* ApiResponse.swift in Sources */,
 				63F1328F2914A1C000B3A9E0 /* SplashView.swift in Sources */,
@@ -511,6 +526,7 @@
 				63F132472914A18800B3A9E0 /* AlertViewModel.swift in Sources */,
 				63B1FB032914B381007E94B6 /* RealmDB.swift in Sources */,
 				63F132AA2914A1C000B3A9E0 /* MainViewModel.swift in Sources */,
+				264EEF572925128300B89624 /* AddCategoryView.swift in Sources */,
 				63F1325A2914A1A300B3A9E0 /* AppCoordinator.swift in Sources */,
 				265EA945291D134200068A5C /* MapViewModel.swift in Sources */,
 				63F132512914A18F00B3A9E0 /* BaseViewModel.swift in Sources */,

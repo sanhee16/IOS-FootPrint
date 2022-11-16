@@ -28,9 +28,9 @@ class FootPrint: Object {
     @Persisted var latitude: Double
     @Persisted var longitude: Double
     @Persisted var pinType: Int
-    @Persisted var tag: Int
+    @Persisted var tag: Int // categoryTag
 
-    convenience init(title: String, content: String, images: List<String>, latitude: Double, longitude: Double, pinType: PinType, tag: Int = -1) {
+    convenience init(title: String, content: String, images: List<String>, latitude: Double, longitude: Double, pinType: PinType, tag: Int) {
         self.init()
         self.title = title
         self.content = content
@@ -47,10 +47,12 @@ class Category: Object {
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var tag: Int
     @Persisted var name: String
+    @Persisted var pinType: Int
     
-    convenience init(tag: Int, name: String) {
+    convenience init(tag: Int, name: String, pinType: PinType) {
         self.init()
         self.tag = tag
         self.name = name
+        self.pinType = pinType.rawValue
     }
 }

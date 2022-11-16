@@ -16,7 +16,7 @@ class AddFootprintViewModel: BaseViewModel {
     @Published var content: String = ""
     @Published var images: [UIImage] = []
     @Published var pinType: PinType = .pin0
-    @Published var category: Category? = nil
+    @Published var category: Category = Category(tag: -1, name: "선택안함", pinType: .pin0)
     @Published var isKeyboardVisible = false
 
     var pinList: [PinType] = [.pin0,.pin1,.pin2,.pin3,.pin4,.pin5,.pin6,.pin7,.pin8,.pin9]
@@ -28,15 +28,17 @@ class AddFootprintViewModel: BaseViewModel {
         self.realm = try! Realm()
         self.location = location
         super.init(coordinator)
-        
-        
+
+        self.loadCategories()
     }
     
     
-    private func getCategories() {
+    private func loadCategories() {
         // 모든 객체 얻기
         let categories = realm.objects(Category.self)
         self.categories.removeAll()
+        self.categories.append(Category(tag: -1, name: "선택안함", pinType: .pin0))
+        self.category = self.categories.first ?? Category(tag: -1, name: "선택안함", pinType: .pin0)
         for i in categories {
             self.categories.append(i)
         }
@@ -44,7 +46,7 @@ class AddFootprintViewModel: BaseViewModel {
     
     
     func onAppear() {
-        self.getCategories()
+        
     }
     
     func onClose() {
@@ -107,7 +109,7 @@ class AddFootprintViewModel: BaseViewModel {
         }
         
         try! realm.write {
-            realm.add(FootPrint(title: self.title, content: self.content, images: imageUrls, latitude: self.location.latitude, longitude: self.location.longitude, pinType: self.pinType))
+            realm.add(FootPrint(title: self.title, content: self.content, images: imageUrls, latitude: self.location.latitude, longitude: self.location.longitude, pinType: self.pinType, tag: self.category.tag))
             self.stopProgress()
             self.dismiss(animated: true)
         }
@@ -116,5 +118,15 @@ class AddFootprintViewModel: BaseViewModel {
     func onSelectPin(_ item: PinType) {
         self.isKeyboardVisible = false
         self.pinType = item
+    }
+    
+    func onClickAddCategory() {
+        self.coordinator?.presentAddCategoryView(onDismiss: {[weak self] in
+            self?.loadCategories()
+        })
+    }
+    
+    func onSelectCategory(_ item: Category) {
+        self.category = item
     }
 }
