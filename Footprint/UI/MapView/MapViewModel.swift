@@ -34,7 +34,8 @@ class MapViewModel: BaseViewModel {
         self.markerList.removeAll()
         let footPrints = realm.objects(FootPrint.self)
         for footPrint in footPrints {
-            markerList.append(MarkerItem(marker: drawMarker(mapView, location: Location(latitude: footPrint.latitude, longitude: footPrint.longitude), pinType: PinType(rawValue: footPrint.pinType) ?? .pin0), footPrint: footPrint))
+            let copy = MarkerItem(marker: drawMarker(mapView, location: Location(latitude: footPrint.latitude, longitude: footPrint.longitude), pinType: PinType(rawValue: footPrint.pinType) ?? .pin0), footPrint: footPrint)
+            markerList.append(copy)
         }
         self.stopProgress()
     }

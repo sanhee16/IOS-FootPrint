@@ -11,13 +11,13 @@ import UIKit
 import RealmSwift
 
 class AddFootprintViewModel: BaseViewModel {
-    
     @Published var title: String = ""
     @Published var content: String = ""
     @Published var images: [UIImage] = []
     @Published var pinType: PinType = .pin0
     @Published var category: Category = Category(tag: -1, name: "선택안함", pinType: .pin0)
     @Published var isKeyboardVisible = false
+    @Published var isCategoryEditMode: Bool = false
 
     var pinList: [PinType] = [.pin0,.pin1,.pin2,.pin3,.pin4,.pin5,.pin6,.pin7,.pin8,.pin9]
     var categories: [Category] = []
@@ -29,19 +29,26 @@ class AddFootprintViewModel: BaseViewModel {
         self.location = location
         super.init(coordinator)
 
+        print("sandy init")
         self.loadCategories()
     }
     
     
     private func loadCategories() {
+        print("sandy loadCategories")
+        // 객체 초기화
+        self.categories = []
+        self.category = Category(tag: -1, name: "선택안함", pinType: .pin0)
+        
+        // let data = realm.objects(MyLocation.self).sorted(byKeyPath: "idx", ascending: true)
+
         // 모든 객체 얻기
-        let categories = realm.objects(Category.self)
-        self.categories.removeAll()
-        self.categories.append(Category(tag: -1, name: "선택안함", pinType: .pin0))
-        self.category = self.categories.first ?? Category(tag: -1, name: "선택안함", pinType: .pin0)
-        for i in categories {
-            self.categories.append(i)
+        let dbCategories = realm.objects(Category.self).sorted(byKeyPath: "tag", ascending: true)
+        self.categories.append(self.category)
+        for i in dbCategories {
+            self.categories.append(Category(tag: i.tag, name: i.name, pinType: i.pinType.pinType()))
         }
+        print("done")
     }
     
     
@@ -109,24 +116,59 @@ class AddFootprintViewModel: BaseViewModel {
         }
         
         try! realm.write {
-            realm.add(FootPrint(title: self.title, content: self.content, images: imageUrls, latitude: self.location.latitude, longitude: self.location.longitude, pinType: self.pinType, tag: self.category.tag))
+            let copy = FootPrint(title: self.title, content: self.content, images: imageUrls, latitude: self.location.latitude, longitude: self.location.longitude, pinType: self.pinType, tag: self.category.tag)
+            realm.add(copy)
             self.stopProgress()
             self.dismiss(animated: true)
         }
     }
 
     func onSelectPin(_ item: PinType) {
+        if self.category.tag != -1 {
+            self.alert(.ok, title: "카테고리의 핀으로 설정되어서 변경할 수 없습니다.", description: "핀 변경을 원하시면 카테고리 선택을 해제하세요.")
+            return
+        }
         self.isKeyboardVisible = false
         self.pinType = item
     }
     
     func onClickAddCategory() {
-        self.coordinator?.presentAddCategoryView(onDismiss: {[weak self] in
+        self.coordinator?.presentAddCategoryView(type: AddCategoryType(type: .create, category: nil), onDismiss: {[weak self] in
             self?.loadCategories()
         })
     }
     
+    func onClickEditCategory() {
+        self.isCategoryEditMode = !self.isCategoryEditMode
+    }
+    
     func onSelectCategory(_ item: Category) {
         self.category = item
+        if self.category.tag != -1, let pinType = PinType(rawValue: self.category.pinType) {
+            self.pinType = pinType
+        }
+    }
+    
+    func editCategory(_ item: Category) {
+        self.coordinator?.presentAddCategoryView(type: AddCategoryType(type: .update, category: item), onDismiss: {[weak self] in
+            print("edit dismiss")
+            self?.loadCategories()
+        })
+    }
+    
+    func deleteCategory(_ item: Category) {
+        self.alert(.yesOrNo, title: "카테고리를 삭제하시겠습니까?", description: "카테고리를 삭제하면 기존 저장된 노트들은 사라집니다.") {[weak self] isDelete in
+            guard let self = self else { return }
+            if isDelete {
+                if let filteredData = self.realm.object(ofType: Category.self, forPrimaryKey: item.tag) {
+                    try! self.realm.write {
+                        self.realm.delete(filteredData)
+                        self.loadCategories()
+                    }
+                }
+            } else {
+
+            }
+        }
     }
 }

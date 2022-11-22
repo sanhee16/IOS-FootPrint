@@ -153,11 +153,17 @@ struct AddFootprintView: View, KeyboardReadable {
     
     private func drawCategorySelectArea(_ geometry: GeometryProxy) -> some View {
         return VStack(alignment: .leading, spacing: 4) {
-            HStack(alignment: .center, spacing: 0) {
+            HStack(alignment: .center, spacing: 10) {
                 Text("카테고리 선택")
                     .font(.kr13b)
                     .foregroundColor(.gray90)
                 Spacer()
+                Text($vm.isCategoryEditMode.wrappedValue ? "편집 종료" : "카테고리 편집")
+                    .font(.kr12r)
+                    .foregroundColor(.gray60)
+                    .onTapGesture {
+                        vm.onClickEditCategory()
+                    }
                 Text("카테고리 추가")
                     .font(.kr12r)
                     .foregroundColor(.gray60)
@@ -178,14 +184,23 @@ struct AddFootprintView: View, KeyboardReadable {
     }
     
     private func categoryItem(_ item: Category, isSelected: Bool) -> some View {
-        return Text(item.name)
-            .font(isSelected ? .kr11b : .kr11r)
-            .foregroundColor(isSelected ? Color.gray90 : Color.gray60)
-            .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
-            .border(isSelected ? .greenTint4 : .clear, lineWidth: 2, cornerRadius: 6)
-            .onTapGesture {
-                vm.onSelectCategory(item)
-            }
+        return ZStack(alignment: .topTrailing) {
+            Text(item.name)
+                .font(isSelected ? .kr11b : .kr11r)
+                .foregroundColor(isSelected ? Color.gray90 : Color.gray60)
+                .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
+                .border(isSelected || $vm.isCategoryEditMode.wrappedValue ? .greenTint4 : .clear, lineWidth: 2, cornerRadius: 6)
+                .onTapGesture {
+                    if $vm.isCategoryEditMode.wrappedValue {
+                        if item.tag != -1 {
+                            vm.editCategory(item)
+                        }
+                    } else {
+                        vm.onSelectCategory(item)
+                    }
+                }
+                .padding([.top, .trailing], 5)
+        }
     }
     
     private func pinItem(_ item: PinType, isSelected: Bool) -> some View {

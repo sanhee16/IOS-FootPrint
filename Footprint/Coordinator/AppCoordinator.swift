@@ -71,8 +71,8 @@ class AppCoordinator: Coordinator, Terminatable {
         self.present(vc, animated: true)
     }
     
-    func presentAddCategoryView(onDismiss: @escaping ()->()) {
-        let vc = AddCategoryView.vc(self)
+    func presentAddCategoryView(type: AddCategoryType, onDismiss: @escaping ()->()) {
+        let vc = AddCategoryView.vc(self, type: type)
         self.present(vc, animated: true, onDismiss: onDismiss)
     }
     

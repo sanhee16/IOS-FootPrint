@@ -44,8 +44,7 @@ class FootPrint: Object {
 }
 
 class Category: Object {
-    @Persisted(primaryKey: true) var id: ObjectId
-    @Persisted var tag: Int
+    @Persisted(primaryKey: true) var tag: Int
     @Persisted var name: String
     @Persisted var pinType: Int
     

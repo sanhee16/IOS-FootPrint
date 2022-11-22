@@ -25,17 +25,18 @@ struct AlertView: View {
     
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
-            VStack(alignment: .center, spacing: 0) {
+            VStack(alignment: .center, spacing: 20) {
                 if let title = $vm.title.wrappedValue {
                     Text(title)
                         .font(.kr15b)
                         .foregroundColor(.gray100)
+                        .multilineTextAlignment(.center)
                 }
                 if let description = $vm.description.wrappedValue {
                     Text(description)
-                        .multilineTextAlignment(.center)
                         .font(.kr14r)
                         .foregroundColor(.gray90)
+                        .multilineTextAlignment(.center)
                 }
             }
             .padding([.leading, .trailing, .top], 20)

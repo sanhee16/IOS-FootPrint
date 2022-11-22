@@ -9,13 +9,14 @@ import SwiftUI
 
 struct AddCategoryView: View, KeyboardReadable {
     typealias VM = AddCategoryViewModel
-    public static func vc(_ coordinator: AppCoordinator, completion: (()-> Void)? = nil) -> UIViewController {
-        let vm = VM.init(coordinator)
+    public static func vc(_ coordinator: AppCoordinator, type: AddCategoryType, completion: (()-> Void)? = nil) -> UIViewController {
+        let vm = VM.init(coordinator, type: type)
         let view = Self.init(vm: vm)
-        let vc = BaseViewController.init(view, completion: completion)
-        vc.modalPresentationStyle = .overCurrentContext
-        vc.view.backgroundColor = UIColor.clear
-        vc.controller.view.backgroundColor = UIColor.dim
+        let vc = BaseViewController.bottomSheet(view, sizes: [.fixed(300.0)])
+//        let vc = BaseViewController.init(view, completion: completion)
+//        vc.modalPresentationStyle = .overCurrentContext
+//        vc.view.backgroundColor = UIColor.clear
+//        vc.controller.view.backgroundColor = UIColor.dim
         return vc
     }
     @ObservedObject var vm: VM
@@ -24,19 +25,32 @@ struct AddCategoryView: View, KeyboardReadable {
     private var safeBottom: CGFloat { get { Util.safeBottom() }}
     
     var body: some View {
-        VStack(alignment: .center, spacing: 0) {
+        VStack(alignment: .leading, spacing: 0) {
             ZStack(alignment: .trailing) {
                 Topbar("카테고리 추가", type: .close) {
                     vm.onClose()
                 }
-                if $vm.isAvailableSave.wrappedValue {
-                    Text("추가")
-                        .font(.kr12r)
-                        .foregroundColor(.gray90)
-                        .padding(.trailing, 12)
-                        .onTapGesture {
-                            vm.onClickSave()
-                        }
+                //TODO: 삭제 버튼 만들고 로직 추가
+                HStack(alignment: .center, spacing: 0) {
+                    Spacer()
+                    if $vm.type.wrappedValue.type == .update {
+                        Text("삭제")
+                            .font(.kr12r)
+                            .foregroundColor(.gray90)
+                            .padding(.trailing, 12)
+                            .onTapGesture {
+                                vm.onClickDelete()
+                            }
+                    }
+                    if $vm.isAvailableSave.wrappedValue {
+                        Text($vm.type.wrappedValue.type == .update ? "저장" : "추가")
+                            .font(.kr12r)
+                            .foregroundColor(.gray90)
+                            .padding(.trailing, 12)
+                            .onTapGesture {
+                                vm.onClickSave()
+                            }
+                    }
                 }
             }
             VStack(alignment: .center, spacing: 12) {
@@ -59,18 +73,15 @@ struct AddCategoryView: View, KeyboardReadable {
                         $vm.isKeyboardVisible.wrappedValue = newIsKeyboardVisible
                     }
                     .contentShape(Rectangle())
+                    .frame(width: UIScreen.main.bounds.width - 20, alignment: .center)
+                    .padding([.leading, .trailing], 10)
                 drawPinSelectArea()
             }
-            .padding(EdgeInsets(top: 4, leading: 20, bottom: 10, trailing: 20))
-            .frame(width: UIScreen.main.bounds.width - 80, alignment: .center)
-            .padding([.leading, .trailing], 20)
+            .padding(EdgeInsets(top: 4, leading: 0, bottom: 10, trailing: 0))
+            Spacer()
         }
         .ignoresSafeArea(.container, edges: [.top, .bottom])
-        .frame(width: UIScreen.main.bounds.width - 100, alignment: .center)
-        .background(
-            RoundedRectangle(cornerRadius: 18)
-                .foregroundColor(Color.white)
-        )
+        .frame(width: UIScreen.main.bounds.width, alignment: .leading)
         .onAppear {
             vm.onAppear()
         }
