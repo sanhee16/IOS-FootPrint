@@ -41,14 +41,32 @@ class SplashViewModel: BaseViewModel {
     }
     
     
+    private func photoPermissionCheck() {
+        PHPhotoLibrary.requestAuthorization() { status in
+            switch status {
+            case .denied:
+                print("거부됨")
+                self.stopRepeatTimer()
+                break
+            case .authorized:
+                print("승인됨")
+                self.stopRepeatTimer()
+                break
+            default:
+                self.stopRepeatTimer()
+                break
+            }
+        }
+    }
+    
     private func checkCameraPermission() {
        AVCaptureDevice.requestAccess(for: .video, completionHandler: {[weak self] (granted: Bool) in
            if granted {
                print("Camera: 권한 허용")
-               self?.stopRepeatTimer()
+               self?.photoPermissionCheck()
            } else {
                print("Camera: 권한 거부")
-               self?.stopRepeatTimer()
+               self?.photoPermissionCheck()
            }
        })
     }

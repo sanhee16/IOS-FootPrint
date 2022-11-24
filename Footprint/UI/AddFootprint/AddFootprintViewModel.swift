@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import UIKit
+import Photos
 import RealmSwift
 
 class AddFootprintViewModel: BaseViewModel {
@@ -40,12 +41,13 @@ class AddFootprintViewModel: BaseViewModel {
         self.categories = []
         self.category = Category(tag: -1, name: "선택안함", pinType: .pin0)
         
-        // let data = realm.objects(MyLocation.self).sorted(byKeyPath: "idx", ascending: true)
 
         // 모든 객체 얻기
         let dbCategories = realm.objects(Category.self).sorted(byKeyPath: "tag", ascending: true)
         self.categories.append(self.category)
         for i in dbCategories {
+            //MARK: 이슈 해결: realm 에 data를 넣을 때에는 copy(얕은 복사)를 해서 넣어야만 삭제시 삭제된 아이템 주소 참조가 안되어서 크래시발생 안함.
+            // 삭제했는데 같은 주소를 참조하기 때문에 계속 크래시 발생하기 때문
             self.categories.append(Category(tag: i.tag, name: i.name, pinType: i.pinType.pinType()))
         }
         print("done")
@@ -68,12 +70,19 @@ class AddFootprintViewModel: BaseViewModel {
     
     func onClickGallery() {
         self.isKeyboardVisible = false
-        self.coordinator?.presentGalleryView(onClickItem: { [weak self] (item: GalleryItem) in
+        self.photoPermissionCheck {[weak self] isAllow in
             guard let self = self else { return }
-            if !self.images.contains(item.image) {
-                self.images.append(item.image)
+            if isAllow {
+                self.coordinator?.presentGalleryView(onClickItem: { [weak self] (item: GalleryItem) in
+                    guard let self = self else { return }
+                    if !self.images.contains(item.image) {
+                        self.images.append(item.image)
+                    }
+                })
+            } else {
+                self.alert(.ok, title: nil, description: "사진권한을 허용해야 사용할 수 있습니다.")
             }
-        })
+        }
     }
     
     func removeImage(_ item: UIImage) {
@@ -169,6 +178,49 @@ class AddFootprintViewModel: BaseViewModel {
             } else {
 
             }
+        }
+    }
+    
+    private func photoPermissionCheck(_ callback: @escaping (Bool)->()) {
+        let photoAuthStatus = PHPhotoLibrary.authorizationStatus()
+        switch photoAuthStatus {
+        case .notDetermined:
+            print("권한 승인을 아직 하지 않음")
+            PHPhotoLibrary.requestAuthorization() { status in
+                switch status {
+                case .denied:
+                    print("거부됨")
+                    callback(false)
+                    break
+                case .authorized:
+                    print("승인됨")
+                    callback(true)
+                    break
+                default:
+                    callback(false)
+                    break
+                }
+            }
+        case .restricted:
+            print("권한을 부여할 수 없음")
+            callback(false)
+            break
+        case .denied:
+            print("거부됨")
+            callback(false)
+            break
+        case .authorized:
+            print("승인됨")
+            callback(true)
+            break
+        case .limited:
+            print("limited")
+            callback(false)
+            break
+        @unknown default:
+            print("unknown default")
+            callback(false)
+            break
         }
     }
 }
