@@ -115,6 +115,7 @@ struct AddFootprintView: View, KeyboardReadable {
                             .onTapGesture {
                                 vm.removeImage(image)
                             }
+                            .shadow(color: Color.black.opacity(0.6), radius: 3, x: 0.5, y: 2)
                     }
                     Text("+")
                         .font(.kr16b)
@@ -128,7 +129,7 @@ struct AddFootprintView: View, KeyboardReadable {
                             vm.onClickGallery()
                         }
                 }
-                .padding([.leading, .trailing], 16)
+                .padding(EdgeInsets(top: 3, leading: 16, bottom: 8, trailing: 16))
             }
         }
     }

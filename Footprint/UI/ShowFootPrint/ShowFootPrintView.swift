@@ -54,6 +54,7 @@ struct ShowFootPrintView: View {
                                 .foregroundColor(.greenTint5)
                         )
                         .contentShape(Rectangle())
+                        .padding([.leading, .trailing], 16)
 //                            drawPinSelectArea(geometry)
                     HStack(alignment: .center, spacing: 0) {
                         Spacer()
@@ -61,26 +62,28 @@ struct ShowFootPrintView: View {
                             .font(.kr9r)
                             .foregroundColor(Color.gray60)
                     }
+                    .padding([.leading, .trailing], 16)
                     drawImageArea(geometry, item: item)
                     
                     Divider()
                         .background(Color.greenTint5)
                         .padding([.top, .bottom], 4)
+                        .padding([.leading, .trailing], 16)
                     
                     Text(item.content)
                         .font(.kr12r)
                         .foregroundColor(Color.gray100)
-                        .frame(minHeight: 300.0, alignment: .topLeading)
                         .padding(EdgeInsets(top: 12, leading: 10, bottom: 12, trailing: 10))
-                        .frame(width: geometry.size.width - 32, alignment: .leading)
+                        .frame(width: geometry.size.width - 32, alignment: .topLeading)
                         .contentShape(Rectangle())
                         .multilineTextAlignment(.leading)
                         .background(
                             RoundedRectangle(cornerRadius: 2)
                                 .foregroundColor(.greenTint5)
                         )
+                        .padding([.leading, .trailing], 16)
                 }
-                .padding(EdgeInsets(top: 14, leading: 16, bottom: 14, trailing: 16))
+                .padding(EdgeInsets(top: 14, leading: 0, bottom: 14, trailing: 0))
                 .contentShape(Rectangle())
             }
             .frame(width: geometry.size.width, alignment: .leading)
@@ -121,9 +124,11 @@ struct ShowFootPrintView: View {
                             .frame(both: IMAGE_SIZE)
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                             .contentShape(Rectangle())
+                            .shadow(color: Color.black.opacity(0.6), radius: 3, x: 0.5, y: 2)
                     }
                 }
             }
+            .padding(EdgeInsets(top: 3, leading: 16, bottom: 8, trailing: 16))
         }
     }
     

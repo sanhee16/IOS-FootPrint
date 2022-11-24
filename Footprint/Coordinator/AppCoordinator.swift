@@ -56,7 +56,7 @@ class AppCoordinator: Coordinator, Terminatable {
         self.present(vc, animated: true, onDismiss: onDismiss)
     }
     
-    func presentGalleryView(onClickItem: ((GalleryItem) -> ())?) {
+    func presentGalleryView(onClickItem: (([GalleryItem]) -> ())?) {
         let vc = GalleryView.vc(self, onClickItem: onClickItem)
         self.present(vc, animated: true)
     }

@@ -73,10 +73,12 @@ class AddFootprintViewModel: BaseViewModel {
         self.photoPermissionCheck {[weak self] isAllow in
             guard let self = self else { return }
             if isAllow {
-                self.coordinator?.presentGalleryView(onClickItem: { [weak self] (item: GalleryItem) in
+                self.coordinator?.presentGalleryView(onClickItem: { [weak self] (items: [GalleryItem]) in
                     guard let self = self else { return }
-                    if !self.images.contains(item.image) {
-                        self.images.append(item.image)
+                    for item in items {
+                        if !self.images.contains(item.image) {
+                            self.images.append(item.image)
+                        }
                     }
                 })
             } else {

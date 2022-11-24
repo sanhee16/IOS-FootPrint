@@ -17,10 +17,11 @@ class GalleryViewModel: BaseViewModel {
     var hasNextPage: Bool = true
     var isFirstLoading = false
     var isLoading: Bool = false
-    var onClickItem: ((GalleryItem)->())?
-    @Published var item: GalleryItem? = nil
+    var onClickItem: (([GalleryItem])->())?
+//    @Published var item: GalleryItem? = nil
+    @Published var selectedImages: [GalleryItem] = []
     
-    init(_ coordinator: AppCoordinator, onClickItem: ((GalleryItem)->())?) {
+    init(_ coordinator: AppCoordinator, onClickItem: (([GalleryItem])->())?) {
         self.onClickItem = onClickItem
         super.init(coordinator)
         loadAllImages()
@@ -95,7 +96,7 @@ class GalleryViewModel: BaseViewModel {
                 ) {(image, info) in
                     guard let image = image else { return }
                     DispatchQueue.main.async {
-                        self.items.append((image, asset))
+                        self.items.append(GalleryItem(image: image, asset: asset, isSelected: false))
                     }
                 }
                 if self.items.count == endAt {
@@ -114,14 +115,25 @@ class GalleryViewModel: BaseViewModel {
     }
     
     func onSelectImage() {
+        if self.selectedImages.isEmpty {
+            return
+        }
         self.coordinator?.dismiss {[weak self] in
-            guard let self = self, let item = self.item else { return }
-            self.onClickItem?(item)
+            guard let self = self else { return }
+            self.onClickItem?(self.selectedImages)
         }
     }
     
     func onClickItem(_ item: GalleryItem) {
-        self.item = item
+        if let i = self.items.firstIndex(of: item) {
+            if let idx = self.selectedImages.firstIndex(of: item) {
+                self.items[i].isSelected = false
+                self.selectedImages.remove(at: idx)
+            } else {
+                self.items[i].isSelected = true
+                self.selectedImages.append(item)
+            }
+        }
     }
     
     private func photoPermissionCheck() {

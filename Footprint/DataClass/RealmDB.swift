@@ -12,7 +12,14 @@ import RealmSwift
 import Realm
 
 
-public typealias GalleryItem = (image: UIImage, asset: PHAsset)
+struct GalleryItem: Equatable {
+    public static func == (lhs: GalleryItem, rhs: GalleryItem) -> Bool {
+        return lhs.image == rhs.image
+    }
+    var image: UIImage
+    var asset: PHAsset
+    var isSelected: Bool
+}
 
 struct Location {
     var latitude: Double

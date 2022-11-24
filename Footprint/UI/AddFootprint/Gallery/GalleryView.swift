@@ -12,7 +12,7 @@ import Kingfisher
 
 struct GalleryView: View {
     typealias VM = GalleryViewModel
-    public static func vc(_ coordinator: AppCoordinator, onClickItem: ((GalleryItem)->())?, completion: (()-> Void)? = nil) -> UIViewController {
+    public static func vc(_ coordinator: AppCoordinator, onClickItem: (([GalleryItem])->())?, completion: (()-> Void)? = nil) -> UIViewController {
         let vm = VM.init(coordinator, onClickItem: onClickItem)
         let view = Self.init(vm: vm)
         let vc = BaseViewController.init(view, completion: completion)
@@ -56,26 +56,29 @@ struct GalleryView: View {
                                             ForEach($vm.items.wrappedValue.indices, id: \.self) { idx in
                                                 let item = vm.items[idx]
                                                 ZStack(alignment: .topLeading) {
-    //                                                if let selectedImage = $vm.item.wrappedValue {
-    //                                                    Image("selected") //TODO: 이미지 필요함
-    //                                                        .resizable()
-    //                                                        .frame(both: 10)
-    //                                                }
-                                                        
-                                                    Image(uiImage: item.image)
-                                                        .resizable()
-                                                        .aspectRatio(contentMode: .fill)
-                                                        .frame(width: cellSize, height: cellSize)
-                                                        .clipped()
-                                                        .contentShape(Rectangle())
-                                                        .onTapGesture {
-                                                            vm.onClickItem(item)
+                                                    ZStack(alignment: .center) {
+                                                        if item.isSelected {
+                                                            Rectangle()
+                                                                .frame(both: cellSize - 4, aligment: .center)
+                                                                .foregroundColor(.clear)
+                                                                .border(.greenTint1, lineWidth: 4, cornerRadius: 0.0)
+                                                                .zIndex(1)
                                                         }
-                                                        .onAppear {
-                                                            if idx == $vm.items.wrappedValue.count - 1 {
-                                                                vm.loadNextImage()
-                                                            }
+                                                        Image(uiImage: item.image)
+                                                            .resizable()
+                                                            .aspectRatio(contentMode: .fill)
+                                                            .frame(width: cellSize, height: cellSize)
+                                                            .clipped()
+                                                            .contentShape(Rectangle())
+                                                    }
+                                                    .onTapGesture {
+                                                        vm.onClickItem(item)
+                                                    }
+                                                    .onAppear {
+                                                        if idx == $vm.items.wrappedValue.count - 1 {
+                                                            vm.loadNextImage()
                                                         }
+                                                    }
                                                 }
                                             }
                                         }
@@ -93,10 +96,10 @@ struct GalleryView: View {
                             Text("선택하기")
                                 .font(.kr16b)
                                 .foregroundColor(.white)
-                                .frame(width: geometry.size.width - 40, height: 40, alignment: .center)
+                                .frame(width: geometry.size.width - 40, height: 50, alignment: .center)
                                 .background(
-                                    RoundedRectangle(cornerRadius: 12)
-                                        .foregroundColor($vm.item.wrappedValue == nil ? .gray30 : .greenTint1)
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .foregroundColor($vm.selectedImages.wrappedValue.isEmpty ? .gray30 : .greenTint1)
                                 )
                                 .onTapGesture {
                                     vm.onSelectImage()
