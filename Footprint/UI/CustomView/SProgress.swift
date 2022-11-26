@@ -15,7 +15,7 @@ public enum ProgressType {
     func fileName() -> String {
         switch self {
         case .loading:
-            return "walking_dog"
+            return "loading"
         }
     }
     
