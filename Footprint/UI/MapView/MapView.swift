@@ -13,12 +13,11 @@ import simd
 
 
 struct MapView: UIViewRepresentable {
-    typealias VM = MapViewModel
+    typealias VM = MainViewModel
     @ObservedObject var vm: VM
     
-    init(_ coordinator: AppCoordinator, location: Location) {
-        print("init")
-        self.vm = MapViewModel(coordinator, location: location)
+    init(_ coordinator: AppCoordinator, location: Location, vm: MainViewModel) {
+        self.vm = vm
     }
     
     func makeUIView(context: Context) -> NMFNaverMapView {
@@ -38,9 +37,10 @@ struct MapView: UIViewRepresentable {
         view.mapView.touchDelegate = context.coordinator
         view.mapView.addCameraDelegate(delegate: context.coordinator)
         view.mapView.addOptionDelegate(delegate: context.coordinator)
-        
-        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: $vm.location.wrappedValue.latitude, lng: $vm.location.wrappedValue.longitude))
-        view.mapView.moveCamera(cameraUpdate)
+        if let location = $vm.location.wrappedValue {
+            let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: location.latitude, lng: location.longitude))
+            view.mapView.moveCamera(cameraUpdate)
+        }
         
         vm.loadAllMarkers(view.mapView)
         return view

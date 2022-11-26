@@ -17,4 +17,14 @@ class Defaults {
             UserDefaults.standard.setValue(value, forKey: LAUNCH_BEFORE)
         }
     }
+    
+    private static let SHOWING_CATEGORIES = "SHOWING_CATEGORIES"
+    public static var showingCategories: [String] {
+        get {
+            UserDefaults.standard.stringArray(forKey: SHOWING_CATEGORIES) ?? []
+        }
+        set(value) {
+            UserDefaults.standard.setValue(value, forKey: SHOWING_CATEGORIES)
+        }
+    }
 }

@@ -44,9 +44,13 @@ struct MainView: View {
                     .frame(width: geometry.size.width - 24, height: 50, alignment: .center)
                 }
                 .frame(width: geometry.size.width, height: 50, alignment: .center)
+                
                 //Naver Map
-                if let myLocation = $vm.myLocation.wrappedValue, let coordinator = $vm.coordinator.wrappedValue {
-                    MapView(coordinator, location: Location(latitude: myLocation.coordinate.latitude, longitude: myLocation.coordinate.longitude))
+                if let myLocation = $vm.location.wrappedValue, let coordinator = $vm.coordinator.wrappedValue {
+                    ZStack(alignment: .topTrailing) {
+                        MapView(coordinator, location: myLocation, vm: vm)
+                        drawCategory(geometry)
+                    }
                 }
             }
             .padding(EdgeInsets(top: safeTop, leading: 0, bottom: safeBottom, trailing: 0))
@@ -58,5 +62,51 @@ struct MainView: View {
             vm.onAppear()
         }
     }
-    
+    private func drawCategory(_ geometry: GeometryProxy) -> some View {
+        return VStack(alignment: .trailing, spacing: 0) {
+            if !$vm.categories.wrappedValue.isEmpty {
+                Text("카테고리")
+                    .font(.kr12r)
+                    .foregroundColor(.white)
+                    .padding(EdgeInsets(top: 6, leading: 9, bottom: 6, trailing: 9))
+                    .background(
+                        RoundedRectangle(cornerRadius: 6)
+                            .foregroundColor($vm.isShowCategoriesPannel.wrappedValue ? Color.black.opacity(0.5) : Color.greenTint1.opacity(0.8))
+                    )
+                    .padding([.top, .trailing], 10)
+                    .onTapGesture {
+                        $vm.isShowCategoriesPannel.wrappedValue = !$vm.isShowCategoriesPannel.wrappedValue
+                    }
+                if $vm.isShowCategoriesPannel.wrappedValue {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(alignment: .center, spacing: 0) {
+                            ForEach($vm.categories.wrappedValue.indices, id: \.self) { idx in
+                                let category = $vm.categories.wrappedValue[idx]
+                                categoryItem(category)
+                            }
+                        }
+                    }
+                    .contentShape(Rectangle())
+                    .background(
+                        RoundedRectangle(cornerRadius: 6)
+                            .foregroundColor(Color.greenTint1.opacity(0.8))
+                    )
+                    .frame(width: geometry.size.width - 20, alignment: .trailing)
+                    .padding(8)
+                }
+            }
+        }
+        .contentShape(Rectangle())
+        .frame(width: geometry.size.width, alignment: .trailing)
+    }
+    private func categoryItem(_ category: Category) -> some View {
+        return Text(category.name)
+            .font(.kr13r)
+            .foregroundColor($vm.showingCategories.wrappedValue.contains(category.name) ? .black : .white.opacity(0.8))
+            .padding(10)
+            .contentShape(Rectangle())
+            .onTapGesture {
+                vm.onClickCategory(category)
+            }
+    }
 }
