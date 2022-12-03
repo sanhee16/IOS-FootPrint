@@ -19,9 +19,9 @@ class Defaults {
     }
     
     private static let SHOWING_CATEGORIES = "SHOWING_CATEGORIES"
-    public static var showingCategories: [String] {
+    public static var showingCategories: [Int] {
         get {
-            UserDefaults.standard.stringArray(forKey: SHOWING_CATEGORIES) ?? []
+            (UserDefaults.standard.array(forKey: SHOWING_CATEGORIES) as? [Int]) ?? [-1]
         }
         set(value) {
             UserDefaults.standard.setValue(value, forKey: SHOWING_CATEGORIES)

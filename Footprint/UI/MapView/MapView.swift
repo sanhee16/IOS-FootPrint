@@ -41,8 +41,8 @@ struct MapView: UIViewRepresentable {
             let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: location.latitude, lng: location.longitude))
             view.mapView.moveCamera(cameraUpdate)
         }
-        
-        vm.loadAllMarkers(view.mapView)
+        vm.initMapView(view.mapView)
+        vm.loadAllMarkers()
         return view
     }
     
@@ -64,12 +64,7 @@ struct MapView: UIViewRepresentable {
             print("point : \(point.debugDescription)")
             let loc: Location = Location(latitude: location.lat, longitude: location.lng)
             print("wrap : \(location.wrap())")
-            vm.addNewMarker(mapView, location: loc)
-//            addMarker(mapView, location: loc)
-//            vm.addNewMarker {[weak self] in
-//                print("add New Marker cancel callback")
-//                self?.removeMarker(mapView, location: loc)
-//            }
+            vm.addNewMarker(loc)
         }
     }
     

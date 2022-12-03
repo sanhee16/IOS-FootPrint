@@ -84,7 +84,7 @@ class AddCategoryViewModel: BaseViewModel {
             try! realm.write {
                 let copy = Category(tag: tag, name: self.name, pinType: pinType)
                 var showingCategories = Defaults.showingCategories
-                showingCategories.append(self.name)
+                showingCategories.append(tag)
                 Defaults.showingCategories = showingCategories
                 realm.add(copy)
                 self.stopProgress()

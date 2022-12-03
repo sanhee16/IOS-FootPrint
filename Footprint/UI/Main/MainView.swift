@@ -62,6 +62,7 @@ struct MainView: View {
             vm.onAppear()
         }
     }
+    
     private func drawCategory(_ geometry: GeometryProxy) -> some View {
         return VStack(alignment: .trailing, spacing: 0) {
             if !$vm.categories.wrappedValue.isEmpty {
@@ -102,7 +103,7 @@ struct MainView: View {
     private func categoryItem(_ category: Category) -> some View {
         return Text(category.name)
             .font(.kr13r)
-            .foregroundColor($vm.showingCategories.wrappedValue.contains(category.name) ? .black : .white.opacity(0.8))
+            .foregroundColor($vm.showingCategories.wrappedValue.contains(category.tag) ? .black : .white.opacity(0.8))
             .padding(10)
             .contentShape(Rectangle())
             .onTapGesture {

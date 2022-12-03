@@ -36,7 +36,6 @@ class AddFootprintViewModel: BaseViewModel {
     
     
     private func loadCategories() {
-        print("sandy loadCategories")
         // 객체 초기화
         self.categories = []
         self.category = Category(tag: -1, name: "선택안함", pinType: .pin0)
@@ -50,7 +49,6 @@ class AddFootprintViewModel: BaseViewModel {
             // 삭제했는데 같은 주소를 참조하기 때문에 계속 크래시 발생하기 때문
             self.categories.append(Category(tag: i.tag, name: i.name, pinType: i.pinType.pinType()))
         }
-        print("done")
     }
     
     
@@ -128,6 +126,7 @@ class AddFootprintViewModel: BaseViewModel {
         
         try! realm.write {
             let copy = FootPrint(title: self.title, content: self.content, images: imageUrls, latitude: self.location.latitude, longitude: self.location.longitude, pinType: self.pinType, tag: self.category.tag)
+            print("self.pinType : \(self.pinType)")
             realm.add(copy)
             self.stopProgress()
             self.dismiss(animated: true)
