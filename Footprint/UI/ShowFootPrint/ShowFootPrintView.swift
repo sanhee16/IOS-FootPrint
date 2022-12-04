@@ -30,7 +30,7 @@ struct ShowFootPrintView: View {
                 drawHeader(geometry)
                 drawBody(geometry)
             }
-            .padding(EdgeInsets(top: safeTop, leading: 0, bottom: safeBottom, trailing: 0))
+            .padding(EdgeInsets(top: 0, leading: 0, bottom: safeBottom, trailing: 0))
             .edgesIgnoringSafeArea(.all)
             .frame(width: geometry.size.width, alignment: .leading)
         }
@@ -76,27 +76,50 @@ struct ShowFootPrintView: View {
                         .frame(width: geometry.size.width - 32, alignment: .topLeading)
                         .contentShape(Rectangle())
                         .multilineTextAlignment(.leading)
-                        .background(
-                            RoundedRectangle(cornerRadius: 2)
-                                .foregroundColor(.greenTint5)
-                        )
+//                        .background(
+//                            RoundedRectangle(cornerRadius: 2)
+//                                .foregroundColor(.greenTint5)
+//                        )
                         .padding([.leading, .trailing], 16)
                 }
-                .padding(EdgeInsets(top: 14, leading: 0, bottom: 14, trailing: 0))
+                .padding(EdgeInsets(top: 0, leading: 0, bottom: 14, trailing: 0))
                 .contentShape(Rectangle())
             }
             .frame(width: geometry.size.width, alignment: .leading)
             .contentShape(Rectangle())
         }
+        .disableDragging()
         .frame(width: geometry.size.width, alignment: .leading)
         .contentShape(Rectangle())
     }
     
     private func drawHeader(_ geometry: GeometryProxy) -> some View {
-        return ZStack(alignment: .leading) {
+        return ZStack(alignment: .center) {
             Topbar("", type: .back) {
                 vm.onClose()
             }
+            HStack(alignment: .center, spacing: 6) {
+                Image("before")
+                    .resizable()
+                    .frame(both: 16, aligment: .center)
+                    .padding(3)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        vm.moveBefore()
+                    }
+                Text("\($vm.pageIdx.wrappedValue + 1) / \($vm.footPrints.wrappedValue.count)")
+                    .font(.kr12r)
+                    .foregroundColor(.gray90)
+                Image("forward")
+                    .resizable()
+                    .frame(both: 16, aligment: .center)
+                    .padding(3)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        vm.moveNext()
+                    }
+            }
+            
             HStack(alignment: .center, spacing: 0) {
                 Spacer()
                 Text("추가하기")
@@ -106,7 +129,7 @@ struct ShowFootPrintView: View {
                         vm.onClickAddFootprint()
                     }
             }
-            .frame(width: geometry.size.width - 32, height: 50, alignment: .center)
+            .frame(width: geometry.size.width - 24, height: 50, alignment: .center)
         }
         .frame(width: geometry.size.width, height: 50, alignment: .center)
     }
@@ -128,7 +151,7 @@ struct ShowFootPrintView: View {
                     .foregroundColor(Color.gray90)
             }
         }
-        .padding(EdgeInsets(top: 3, leading: 0, bottom: 8, trailing: 0))
+        .padding(EdgeInsets(top: 0, leading: 0, bottom: 8, trailing: 0))
     }
     
     private func drawImageArea(_ geometry: GeometryProxy, item: FootPrint) -> some View {

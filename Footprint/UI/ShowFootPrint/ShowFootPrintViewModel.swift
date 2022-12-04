@@ -10,11 +10,13 @@ import Combine
 import UIKit
 import SwiftUIPager
 import RealmSwift
+import SwiftUI
 
 class ShowFootPrintViewModel: BaseViewModel {
     
     @Published var footPrints: [FootPrint] = []
-    @Published var page: Page = .withIndex(0)
+    @Published var page: Page
+    @Published var pageIdx: Int = 0
     private let realm: Realm
     private let location: Location
     private var isLoading: Bool = false
@@ -23,7 +25,10 @@ class ShowFootPrintViewModel: BaseViewModel {
     init(_ coordinator: AppCoordinator, location: Location) {
         self.realm = try! Realm()
         self.location = location
+        self.page = .withIndex(0)
+        self.pageIdx = 0
         super.init(coordinator)
+        self.page.update(.new(index: 0))
     }
     
     func onAppear() {
@@ -59,16 +64,25 @@ class ShowFootPrintViewModel: BaseViewModel {
         self.dismiss()
     }
     
-//    func getCategory(_ item: FootPrint) -> Category? {
-//        let getCategory = realm.objects(Category.self)
-//            .sorted(byKeyPath: "tag", ascending: true)
-//            .filter { category in
-//                return category.tag == item.tag
-//            }
-//            .first
-//        if let getCategory = getCategory {
-//            return Category(tag: getCategory.tag, name: getCategory.name, pinType: getCategory.pinType.pinType(), pinColor: getCategory.pinColor.pinColor())
-//        }
-//        return nil
-//    }
+    func moveNext() {
+        if self.page.index + 1 >= self.footPrints.count {
+            return
+        }
+        withAnimation { [weak self] in
+            guard let self = self else { return }
+            self.page.update(.next)
+            self.pageIdx = self.page.index
+        }
+    }
+    
+    func moveBefore() {
+        if self.page.index - 1 < 0 {
+            return
+        }
+        withAnimation { [weak self] in
+            guard let self = self else { return }
+            self.page.update(.previous)
+            self.pageIdx = self.page.index
+        }
+    }
 }
