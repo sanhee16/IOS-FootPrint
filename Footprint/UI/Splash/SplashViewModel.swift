@@ -12,15 +12,18 @@ import AVFoundation
 import Photos
 import CoreLocation
 import UserNotifications
+import RealmSwift
 
 
 class SplashViewModel: BaseViewModel {
     private var timerRepeat: Timer?
     private var locationManager: CLLocationManager
+    private let realm: Realm
     
     override init(_ coordinator: AppCoordinator) {
         self.locationManager = CLLocationManager()
         self.locationManager.allowsBackgroundLocationUpdates = true
+        self.realm = try! Realm()
         super.init(coordinator)
     }
     
@@ -37,7 +40,24 @@ class SplashViewModel: BaseViewModel {
     }
     
     private func firstTask() {
-        
+        try! realm.write {
+            // 혹시 모르니까 다 지워버릴 것
+            self.realm.deleteAll()
+            let categories: [Category] = [
+                Category(tag: 0, name: "기본", pinType: .star, pinColor: PinColor.pin0),
+                Category(tag: 1, name: "맛집", pinType: .restaurant, pinColor: PinColor.pin1),
+                Category(tag: 2, name: "술집", pinType: .wine, pinColor: PinColor.pin2),
+                Category(tag: 3, name: "빵집", pinType: .bread, pinColor: PinColor.pin3),
+                Category(tag: 4, name: "디저트", pinType: .cake, pinColor: PinColor.pin4),
+                Category(tag: 5, name: "운동", pinType: .exercise, pinColor: PinColor.pin5)
+            ]
+            var showingCategories = Defaults.showingCategories
+
+            for category in categories {
+                showingCategories.append(category.tag)
+                realm.add(category)
+            }
+        }
     }
     
     

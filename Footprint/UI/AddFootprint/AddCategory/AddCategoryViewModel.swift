@@ -24,8 +24,13 @@ class AddCategoryViewModel: BaseViewModel {
     @Published var isAvailableSave: Bool
     
     @Published var name: String = ""
-    @Published var pinType: PinType = .pin0
-    var pinList: [PinType] = [.pin0,.pin1,.pin2,.pin3,.pin4,.pin5,.pin6,.pin7,.pin8,.pin9]
+    @Published var pinType: PinType = .star
+    @Published var pinColor: PinColor = .pin2
+    let pinList: [PinType] = [
+        .star,.restaurant,.coffee,.bread,.cake,.wine,.exercise,.heart,
+        .multiply,.like,.unlike,.done,.exclamation,.happy,.square
+    ]
+    let pinColorList: [PinColor] = [.pin0,.pin1,.pin2,.pin3,.pin4,.pin5,.pin6,.pin7,.pin8,.pin9]
     @Published var isKeyboardVisible = false
     @Published var type: AddCategoryType
     
@@ -36,7 +41,8 @@ class AddCategoryViewModel: BaseViewModel {
         super.init(coordinator)
         if self.type.type == .update, let item = self.type.category {
             self.name = item.name
-            self.pinType = PinType(rawValue: item.pinType) ?? .pin0
+            self.pinType = PinType(rawValue: item.pinType) ?? .star
+            self.pinColor = PinColor(rawValue: item.pinColor) ?? .pin2
         }
     }
     
@@ -54,6 +60,11 @@ class AddCategoryViewModel: BaseViewModel {
         self.pinType = item
     }
     
+    func onSelectPinColor(_ item: PinColor) {
+        self.isKeyboardVisible = false
+        self.pinColor = item
+    }
+    
     func onClickSave() {
         self.isKeyboardVisible = false
         if name.isEmpty {
@@ -67,7 +78,7 @@ class AddCategoryViewModel: BaseViewModel {
             
             if let category = self.type.category, let filteredData = self.realm.object(ofType: Category.self, forPrimaryKey: category.tag) {
                 try! self.realm.write {
-                    let item = Category(tag: filteredData.tag, name: self.name, pinType: self.pinType)
+                    let item = Category(tag: filteredData.tag, name: self.name, pinType: self.pinType, pinColor: self.pinColor)
                     
                     self.realm.add(item, update: .modified)
                     self.stopProgress()
@@ -82,7 +93,7 @@ class AddCategoryViewModel: BaseViewModel {
                 tag = lastCategory.tag + 1
             }
             try! realm.write {
-                let copy = Category(tag: tag, name: self.name, pinType: pinType)
+                let copy = Category(tag: tag, name: self.name, pinType: pinType, pinColor: self.pinColor)
                 var showingCategories = Defaults.showingCategories
                 showingCategories.append(tag)
                 Defaults.showingCategories = showingCategories

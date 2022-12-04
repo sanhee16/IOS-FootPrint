@@ -12,7 +12,7 @@ struct AddCategoryView: View, KeyboardReadable {
     public static func vc(_ coordinator: AppCoordinator, type: AddCategoryType, completion: (()-> Void)? = nil) -> UIViewController {
         let vm = VM.init(coordinator, type: type)
         let view = Self.init(vm: vm)
-        let vc = BaseViewController.bottomSheet(view, sizes: [.fixed(300.0)])
+        let vc = BaseViewController.bottomSheet(view, sizes: [.fixed(400.0)])
 //        let vc = BaseViewController.init(view, completion: completion)
 //        vc.modalPresentationStyle = .overCurrentContext
 //        vc.view.backgroundColor = UIColor.clear
@@ -75,7 +75,10 @@ struct AddCategoryView: View, KeyboardReadable {
                     .contentShape(Rectangle())
                     .frame(width: UIScreen.main.bounds.width - 20, alignment: .center)
                     .padding([.leading, .trailing], 10)
-                drawPinSelectArea()
+                VStack(alignment: .leading, spacing: 12) {
+                    drawPinSelectArea()
+                    drawPinColorSelectArea()
+                }
             }
             .padding(EdgeInsets(top: 4, leading: 0, bottom: 10, trailing: 0))
             Spacer()
@@ -93,26 +96,71 @@ struct AddCategoryView: View, KeyboardReadable {
                 .font(.kr11b)
                 .foregroundColor(.gray90)
                 .padding(EdgeInsets(top: 10, leading: 18, bottom: 6, trailing: 12))
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(alignment: .center, spacing: 6) {
-                    ForEach($vm.pinList.wrappedValue, id: \.self) { item in
-                        pinItem(item, isSelected: $vm.pinType.wrappedValue == item)
-                    }
+            
+            LazyVGrid(columns: Array(repeating: .init(.flexible(), spacing: 1), count: 8), spacing: 10) {
+                ForEach(vm.pinList, id: \.self) { item in
+                    pinItem(item, isSelected: $vm.pinType.wrappedValue == item)
                 }
-                .padding(EdgeInsets(top: 6, leading: 12, bottom: 6, trailing: 12))
             }
+            .padding(EdgeInsets(top: 6, leading: 12, bottom: 6, trailing: 12))
+//            ScrollView(.horizontal, showsIndicators: false) {
+//                HStack(alignment: .center, spacing: 6) {
+//                    ForEach(vm.pinList, id: \.self) { item in
+//                        pinItem(item, isSelected: $vm.pinType.wrappedValue == item)
+//                    }
+//                }
+//                .padding(EdgeInsets(top: 6, leading: 12, bottom: 6, trailing: 12))
+//            }
+        }
+    }
+    
+    private func drawPinColorSelectArea() -> some View {
+        return VStack(alignment: .leading, spacing: 4) {
+            Text("pin 색상 선택")
+                .font(.kr11b)
+                .foregroundColor(.gray90)
+                .padding(EdgeInsets(top: 10, leading: 18, bottom: 6, trailing: 12))
+            
+            HStack(alignment: .center, spacing: 0, content: {
+                ForEach(vm.pinColorList, id: \.self) { item in
+                    Spacer()
+                    pinColorItem(item, isSelected: $vm.pinColor.wrappedValue == item)
+                }
+                Spacer()
+            })
+            .padding(EdgeInsets(top: 6, leading: 12, bottom: 6, trailing: 12))
         }
     }
     
     private func pinItem(_ item: PinType, isSelected: Bool) -> some View {
-        return Image(item.pinName)
+        return Image(item.pinBlack)
             .resizable()
             .scaledToFit()
-            .frame(both: 20)
-            .padding(6)
+            .frame(both: (UIScreen.main.bounds.width - 24 - 6 * 10) / 8)
+            .padding(3)
             .border(isSelected ? .greenTint4 : .clear, lineWidth: 2, cornerRadius: 10)
             .onTapGesture {
                 vm.onSelectPin(item)
             }
+    }
+    
+    private func pinColorItem(_ item: PinColor, isSelected: Bool) -> some View {
+        return ZStack(alignment: .center) {
+            Circle()
+                .frame(both: 18.0, aligment: .center)
+                .foregroundColor(Color(hex: item.pinColorHex))
+            if isSelected {
+                Circle()
+                    .frame(both: 13.0, aligment: .center)
+                    .foregroundColor(Color(hex: item.pinColorHex))
+                    .overlay(
+                        Circle()
+                            .stroke(Color.white, lineWidth: 2.4)
+                    )
+            }
+        }
+        .onTapGesture {
+            vm.onSelectPinColor(item)
+        }
     }
 }

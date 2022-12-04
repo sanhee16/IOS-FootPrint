@@ -43,6 +43,7 @@ struct ShowFootPrintView: View {
         return Pager(page: $vm.page.wrappedValue, data: $vm.footPrints.wrappedValue, id: \.self) { item in
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 10) {
+                    drawCategory(geometry, item: item)
                     Text(item.title)
                         .font(.kr14b)
                         .foregroundColor(Color.gray100)
@@ -55,7 +56,6 @@ struct ShowFootPrintView: View {
                         )
                         .contentShape(Rectangle())
                         .padding([.leading, .trailing], 16)
-//                            drawPinSelectArea(geometry)
                     HStack(alignment: .center, spacing: 0) {
                         Spacer()
                         Text(item.createdAt.getDate())
@@ -64,7 +64,6 @@ struct ShowFootPrintView: View {
                     }
                     .padding([.leading, .trailing], 16)
                     drawImageArea(geometry, item: item)
-                    drawCategory(geometry, item: item)
                     Divider()
                         .background(Color.greenTint5)
                         .padding([.top, .bottom], 4)
@@ -114,19 +113,22 @@ struct ShowFootPrintView: View {
     
     private func drawCategory(_ geometry: GeometryProxy, item: FootPrint) -> some View {
         return HStack(alignment: .center, spacing: 4) {
-            if let pinName = PinType(rawValue: item.pinType)?.pinName {
+            if let pinName = item.tag.getCategory()?.name {
                 Image(pinName)
                     .resizable()
                     .frame(both: 18.0, aligment: .center)
             }
-            if let category = vm.getCategory(item) {
+            if let category = item.tag.getCategory() {
+                Image(category.pinType.pinType().pinWhite)
+                    .resizable()
+                    .frame(both: 14.0, aligment: .center)
+                    .colorMultiply(Color(hex: category.pinColor.pinColor().pinColorHex))
                 Text(category.name)
-                    .font(.kr14r)
-                    .foregroundColor(.gray100)
+                    .font(.kr11r)
+                    .foregroundColor(Color.gray90)
             }
-            
         }
-        .padding(EdgeInsets(top: 3, leading: 16, bottom: 8, trailing: 16))
+        .padding(EdgeInsets(top: 3, leading: 0, bottom: 8, trailing: 0))
     }
     
     private func drawImageArea(_ geometry: GeometryProxy, item: FootPrint) -> some View {
@@ -148,18 +150,6 @@ struct ShowFootPrintView: View {
             .padding(EdgeInsets(top: 3, leading: 16, bottom: 8, trailing: 16))
         }
     }
-    
-    
-//    private func drawPinSelectArea(_ geometry: GeometryProxy) -> some View {
-//        return ScrollView(.horizontal, showsIndicators: false) {
-//            HStack(alignment: .center, spacing: 12) {
-//                ForEach($vm.pinList.wrappedValue, id: \.self) { item in
-//                    pinItem(item, isSelected: $vm.pinType.wrappedValue == item)
-//                }
-//            }
-//            .padding(EdgeInsets(top: 6, leading: 12, bottom: 6, trailing: 12))
-//        }
-//    }
     
     private func pinItem(_ item: PinType, isSelected: Bool) -> some View {
         return Image(item.pinName)

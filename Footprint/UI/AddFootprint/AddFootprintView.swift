@@ -36,7 +36,7 @@ struct AddFootprintView: View, KeyboardReadable {
                             )
                             .contentShape(Rectangle())
                             .padding([.leading, .trailing], 16)
-                        drawPinSelectArea(geometry)
+//                        drawPinSelectArea(geometry)
                         drawCategorySelectArea(geometry)
                         drawImageArea(geometry)
                         
@@ -134,23 +134,23 @@ struct AddFootprintView: View, KeyboardReadable {
         }
     }
     
-    
-    private func drawPinSelectArea(_ geometry: GeometryProxy) -> some View {
-        return VStack(alignment: .leading, spacing: 4) {
-            Text("pin 선택")
-                .font(.kr13b)
-                .foregroundColor(.gray90)
-                .padding(EdgeInsets(top: 10, leading: 18, bottom: 6, trailing: 12))
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(alignment: .center, spacing: 12) {
-                    ForEach($vm.pinList.wrappedValue, id: \.self) { item in
-                        pinItem(item, isSelected: $vm.pinType.wrappedValue == item)
-                    }
-                }
-                .padding(EdgeInsets(top: 6, leading: 12, bottom: 6, trailing: 12))
-            }
-        }
-    }
+//
+//    private func drawPinSelectArea(_ geometry: GeometryProxy) -> some View {
+//        return VStack(alignment: .leading, spacing: 4) {
+//            Text("pin 선택")
+//                .font(.kr13b)
+//                .foregroundColor(.gray90)
+//                .padding(EdgeInsets(top: 10, leading: 18, bottom: 6, trailing: 12))
+//            ScrollView(.horizontal, showsIndicators: false) {
+//                HStack(alignment: .center, spacing: 12) {
+//                    ForEach($vm.pinList.wrappedValue, id: \.self) { item in
+//                        pinItem(item, isSelected: $vm.pinType.wrappedValue == item)
+//                    }
+//                }
+//                .padding(EdgeInsets(top: 6, leading: 12, bottom: 6, trailing: 12))
+//            }
+//        }
+//    }
     
     private func drawCategorySelectArea(_ geometry: GeometryProxy) -> some View {
         return VStack(alignment: .leading, spacing: 4) {
@@ -185,34 +185,37 @@ struct AddFootprintView: View, KeyboardReadable {
     }
     
     private func categoryItem(_ item: Category, isSelected: Bool) -> some View {
-        return ZStack(alignment: .topTrailing) {
+        return HStack(alignment: .center, spacing: 2) {
+            Image(item.pinType.pinType().pinWhite)
+                .resizable()
+                .frame(both: 14.0, aligment: .center)
+                .colorMultiply(Color(hex: item.pinColor.pinColor().pinColorHex))
             Text(item.name)
                 .font(isSelected ? .kr11b : .kr11r)
                 .foregroundColor(isSelected ? Color.gray90 : Color.gray60)
-                .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
-                .border(isSelected || $vm.isCategoryEditMode.wrappedValue ? .greenTint4 : .clear, lineWidth: 2, cornerRadius: 6)
-                .onTapGesture {
-                    if $vm.isCategoryEditMode.wrappedValue {
-                        if item.tag != -1 {
-                            vm.editCategory(item)
-                        }
-                    } else {
-                        vm.onSelectCategory(item)
-                    }
+        }
+        .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
+        .border(isSelected || $vm.isCategoryEditMode.wrappedValue ? .greenTint4 : .clear, lineWidth: 2, cornerRadius: 6)
+        .onTapGesture {
+            if $vm.isCategoryEditMode.wrappedValue {
+                if item.tag != -1 {
+                    vm.editCategory(item)
                 }
-                .padding([.top, .trailing], 5)
+            } else {
+                vm.onSelectCategory(item)
+            }
         }
     }
-    
-    private func pinItem(_ item: PinType, isSelected: Bool) -> some View {
-        return Image(item.pinName)
-            .resizable()
-            .scaledToFit()
-            .frame(both: 30)
-            .padding(10)
-            .border(isSelected ? .greenTint4 : .clear, lineWidth: 2, cornerRadius: 12)
-            .onTapGesture {
-                vm.onSelectPin(item)
-            }
-    }
+//
+//    private func pinItem(_ item: PinType, isSelected: Bool) -> some View {
+//        return Image(item.pinName)
+//            .resizable()
+//            .scaledToFit()
+//            .frame(both: 30)
+//            .padding(10)
+//            .border(isSelected ? .greenTint4 : .clear, lineWidth: 2, cornerRadius: 12)
+//            .onTapGesture {
+//                vm.onSelectPin(item)
+//            }
+//    }
 }

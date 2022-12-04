@@ -5,11 +5,31 @@
 //  Created by Studio-SJ on 2022/10/05.
 //
 import SwiftUI
+import RealmSwift
 import Combine
 
 extension Int {
     func pinType() -> PinType {
-        return PinType(rawValue: self) ?? .pin0
+        return PinType(rawValue: self) ?? .star
+    }
+    
+    func pinColor() -> PinColor {
+        return PinColor(rawValue: self) ?? .pin2
+    }
+    
+    func getCategory() -> Category? {
+        let realm = try! Realm()
+        // 모든 객체 얻기
+        let getCategory = realm.objects(Category.self)
+            .sorted(byKeyPath: "tag", ascending: true)
+            .filter { category in
+                category.tag == self
+            }
+            .first
+        if let cate = getCategory {
+            return Category(tag: cate.tag, name: cate.name, pinType: cate.pinType.pinType(), pinColor: cate.pinColor.pinColor())
+        }
+        return nil
     }
     
     func getDate() -> String {

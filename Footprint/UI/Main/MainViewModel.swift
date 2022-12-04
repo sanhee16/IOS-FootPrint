@@ -20,7 +20,7 @@ struct Pin: Identifiable {
 }
 
 class MainViewModel: BaseViewModel {
-    private var api: Api = Api.instance
+    //    private var api: Api = Api.instance
     private var locationManager: CLLocationManager
     @Published var myLocation: CLLocation? = nil
     @Published var currenLocation: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
@@ -64,7 +64,7 @@ class MainViewModel: BaseViewModel {
         self.showingCategories = Defaults.showingCategories
         let dbCategories = realm.objects(Category.self).sorted(byKeyPath: "tag", ascending: true)
         for i in dbCategories {
-            self.categories.append(Category(tag: i.tag, name: i.name, pinType: i.pinType.pinType()))
+            self.categories.append(Category(tag: i.tag, name: i.name, pinType: i.pinType.pinType(), pinColor: i.pinColor.pinColor()))
         }
     }
     
@@ -127,8 +127,16 @@ class MainViewModel: BaseViewModel {
             })
         
         for footPrint in footPrints {
-            let copy = MarkerItem(marker: drawMarker(self.mapView, location: Location(latitude: footPrint.latitude, longitude: footPrint.longitude), pinType: PinType(rawValue: footPrint.pinType) ?? .pin0), footPrint: footPrint)
-            markerList.append(copy)
+            if let category = footPrint.tag.getCategory() {
+                markerList.append(
+                    MarkerItem(marker:
+                                drawMarker(
+                                    mapView,
+                                    location: Location(latitude: footPrint.latitude, longitude: footPrint.longitude),
+                                    category: category),
+                               footPrint: footPrint)
+                )
+            }
         }
         self.stopProgress()
     }
@@ -145,11 +153,9 @@ class MainViewModel: BaseViewModel {
     func onTapMarker(_ location: Location) {
         print("on tap marker")
         self.coordinator?.presentShowFootPrintView(location)
-        //        self.coordinator?.presentAddFootprintView(location: self.location)
     }
     
     func addNewMarker(_ location: Location) {
-        
         // 마커 생성하기
         let marker = NMFMarker()
         marker.position = NMGLatLng(lat: location.latitude, lng: location.longitude)
@@ -158,12 +164,12 @@ class MainViewModel: BaseViewModel {
         //        marker.tag = IntValue
         
         // marker 사이즈 지정
-        marker.width = 36
-        marker.height = 34
+        marker.width = 20
+        marker.height = 20
         
         // marker 색상 입히기
-        marker.iconImage = NMFOverlayImage(name: PinType.pin0.pinName)
-        
+        marker.iconImage = NMFOverlayImage(name: PinType.star.marker)
+        marker.iconTintColor = PinColor.pin0.pinUIColor
         marker.mapView = self.mapView
         self.alert(.yesOrNo, title: "현재 위치에 마커를 추가하시겠습니까?") {[weak self] res in
             guard let self = self else { return }
@@ -181,22 +187,23 @@ class MainViewModel: BaseViewModel {
         }
     }
     
-    func drawMarker(_ mapView: NMFMapView, location: Location, pinType: PinType) -> NMFMarker {
+    func drawMarker(_ mapView: NMFMapView, location: Location, category: Category) -> NMFMarker {
         // 마커 생성하기
         let marker = NMFMarker()
         marker.position = NMGLatLng(lat: location.latitude, lng: location.longitude)
         
         // marker 사이즈 지정
-        marker.width = 36
-        marker.height = 34
+        marker.width = 20
+        marker.height = 20
         
         // marker 색상 입히기
-        marker.iconImage = NMFOverlayImage(name: pinType.pinName)
-        
+        marker.iconImage = NMFOverlayImage(name: category.pinType.pinType().marker)
+        marker.iconTintColor = category.pinColor.pinColor().pinUIColor
         marker.mapView = mapView
         
         marker.touchHandler = {[weak self] (overlay) in
-            self?.onTapMarker(location)
+            guard let self = self else { return false }
+            self.onTapMarker(location)
             return true
         }
         return marker
