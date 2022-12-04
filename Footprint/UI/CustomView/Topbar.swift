@@ -11,6 +11,7 @@ import SwiftUI
 enum TopbarType: String {
     case back = "back"
     case close = "close"
+    case closeWhite = "close_white"
     case none = ""
 }
 

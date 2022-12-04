@@ -85,4 +85,8 @@ class ShowFootPrintViewModel: BaseViewModel {
             self.pageIdx = self.page.index
         }
     }
+    
+    func showImage(_ image: UIImage) {
+        self.coordinator?.presentShowImageView(image)
+    }
 }

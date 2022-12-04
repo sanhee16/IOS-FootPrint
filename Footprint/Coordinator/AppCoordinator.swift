@@ -76,6 +76,11 @@ class AppCoordinator: Coordinator, Terminatable {
         self.present(vc, animated: true, onDismiss: onDismiss)
     }
     
+    func presentShowImageView(_ image: UIImage) {
+        let vc = ShowImageView.vc(self, image: image)
+        self.present(vc, animated: true)
+    }
+    
     //MARK: Change
     func changeAddFootprintView(location: Location, onDismiss: @escaping ()->()) {
         let vc = AddFootprintView.vc(self, location: location)
