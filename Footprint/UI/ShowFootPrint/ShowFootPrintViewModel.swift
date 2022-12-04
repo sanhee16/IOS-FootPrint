@@ -58,4 +58,17 @@ class ShowFootPrintViewModel: BaseViewModel {
     func onClose() {
         self.dismiss()
     }
+    
+    func getCategory(_ item: FootPrint) -> Category? {
+        let getCategory = realm.objects(Category.self)
+            .sorted(byKeyPath: "tag", ascending: true)
+            .filter { category in
+                return category.tag == item.tag
+            }
+            .first
+        if let getCategory = getCategory {
+            return Category(tag: getCategory.tag, name: getCategory.name, pinType: getCategory.pinType.pinType())
+        }
+        return nil
+    }
 }

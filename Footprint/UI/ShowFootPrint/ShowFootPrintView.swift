@@ -64,7 +64,7 @@ struct ShowFootPrintView: View {
                     }
                     .padding([.leading, .trailing], 16)
                     drawImageArea(geometry, item: item)
-                    
+                    drawCategory(geometry, item: item)
                     Divider()
                         .background(Color.greenTint5)
                         .padding([.top, .bottom], 4)
@@ -110,6 +110,23 @@ struct ShowFootPrintView: View {
             .frame(width: geometry.size.width - 32, height: 50, alignment: .center)
         }
         .frame(width: geometry.size.width, height: 50, alignment: .center)
+    }
+    
+    private func drawCategory(_ geometry: GeometryProxy, item: FootPrint) -> some View {
+        return HStack(alignment: .center, spacing: 4) {
+            if let pinName = PinType(rawValue: item.pinType)?.pinName {
+                Image(pinName)
+                    .resizable()
+                    .frame(both: 18.0, aligment: .center)
+            }
+            if let category = vm.getCategory(item) {
+                Text(category.name)
+                    .font(.kr14r)
+                    .foregroundColor(.gray100)
+            }
+            
+        }
+        .padding(EdgeInsets(top: 3, leading: 16, bottom: 8, trailing: 16))
     }
     
     private func drawImageArea(_ geometry: GeometryProxy, item: FootPrint) -> some View {
