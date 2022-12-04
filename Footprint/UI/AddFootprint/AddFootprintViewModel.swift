@@ -11,6 +11,19 @@ import UIKit
 import Photos
 import RealmSwift
 
+public enum AddFootprintType {
+    case new
+    case modify(content: FootprintContents)
+}
+
+public struct FootprintContents {
+    var title: String
+    var content: String
+    var images: [UIImage] = []
+    var category: Category
+}
+
+
 class AddFootprintViewModel: BaseViewModel {
     @Published var title: String = ""
     @Published var content: String = ""
@@ -28,13 +41,26 @@ class AddFootprintViewModel: BaseViewModel {
 //    let pinColorList: [PinColor] = [.pin0,.pin1,.pin2,.pin3,.pin4,.pin5,.pin6,.pin7,.pin8,.pin9]
     
     @Published var categories: [Category] = []
+    private let type: AddFootprintType
     private let location: Location
     private let realm: Realm
     
-    init(_ coordinator: AppCoordinator, location: Location) {
+    init(_ coordinator: AppCoordinator, location: Location, type: AddFootprintType) {
         self.realm = try! Realm()
         self.location = location
+        self.type = type
+        
+        self.categories = []
+        self.category = nil
+        
         super.init(coordinator)
+        
+        if case let .modify(contents) = self.type {
+            self.title = contents.title
+            self.content = contents.content
+            self.images = contents.images
+            self.category = contents.category
+        }
         
         print("sandy init")
         self.loadCategories()
@@ -42,9 +68,7 @@ class AddFootprintViewModel: BaseViewModel {
     
     
     private func loadCategories() {
-        // 객체 초기화
         self.categories = []
-        self.category = nil
         
         // 모든 객체 얻기
         let dbCategories = realm.objects(Category.self).sorted(byKeyPath: "tag", ascending: true)
@@ -124,18 +148,18 @@ class AddFootprintViewModel: BaseViewModel {
         let currentTimeStamp = Int(Date().timeIntervalSince1970)
         for idx in self.images.indices {
             let imageName = "\(currentTimeStamp)_\(idx)"
-            let url = ImageManager.shared.saveImage(image: self.images[idx], imageName: imageName)
-            //            print("savedUrl : \(url)")
-            //            if let url = url {
-            //                print("savedUrl : \(url)")
-            //                imageUrls.append(url)
-            //            }
+//            let url = ImageManager.shared.saveImage(image: self.images[idx], imageName: imageName)
             imageUrls.append(imageName)
         }
         
         try! realm.write {
-            let copy = FootPrint(title: self.title, content: self.content, images: imageUrls, latitude: self.location.latitude, longitude: self.location.longitude, tag: category.tag)
-            realm.add(copy)
+            let item = FootPrint(title: self.title, content: self.content, images: imageUrls, latitude: self.location.latitude, longitude: self.location.longitude, tag: category.tag)
+            switch self.type {
+            case .new:
+                realm.add(item)
+            case .modify(content: _):
+                self.realm.add(item, update: .modified)
+            }
             self.stopProgress()
             self.dismiss(animated: true)
         }

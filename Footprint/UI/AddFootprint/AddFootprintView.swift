@@ -9,8 +9,8 @@ import SwiftUI
 
 struct AddFootprintView: View, KeyboardReadable {
     typealias VM = AddFootprintViewModel
-    public static func vc(_ coordinator: AppCoordinator, location: Location, completion: (()-> Void)? = nil) -> UIViewController {
-        let vm = VM.init(coordinator, location: location)
+    public static func vc(_ coordinator: AppCoordinator, location: Location, type: AddFootprintType, completion: (()-> Void)? = nil) -> UIViewController {
+        let vm = VM.init(coordinator, location: location, type: type)
         let view = Self.init(vm: vm)
         let vc = BaseViewController(view, completion: completion)
         return vc
@@ -176,7 +176,7 @@ struct AddFootprintView: View, KeyboardReadable {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(alignment: .center, spacing: 12) {
                     ForEach($vm.categories.wrappedValue, id: \.self) { item in
-                        categoryItem(item, isSelected: $vm.category.wrappedValue == item)
+                        categoryItem(item, isSelected: $vm.category.wrappedValue?.tag == item.tag)
                     }
                 }
                 .padding(EdgeInsets(top: 6, leading: 12, bottom: 6, trailing: 12))

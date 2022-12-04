@@ -55,7 +55,25 @@ class ShowFootPrintViewModel: BaseViewModel {
     }
     
     func onClickAddFootprint() {
-        self.coordinator?.changeAddFootprintView(location: self.location) {
+        self.coordinator?.changeAddFootprintView(location: self.location, type: .new) {
+            
+        }
+    }
+    
+    func onClickModifyFootprint() {
+        let item = self.footPrints[pageIdx]
+        guard let category = item.tag.getCategory() else {
+            return
+        }
+        var uiImages: [UIImage] = []
+        for image in item.images {
+            if let dir = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false),
+                let uiImage = UIImage(contentsOfFile: URL(fileURLWithPath: dir.absoluteString).appendingPathComponent(image).path) {
+                uiImages.append(uiImage)
+            }
+        }
+    
+        self.coordinator?.changeAddFootprintView(location: self.location, type: .modify(content: FootprintContents(title: item.title, content: item.content, images: uiImages, category: category))) {
             
         }
     }

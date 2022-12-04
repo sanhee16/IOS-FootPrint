@@ -25,7 +25,7 @@ struct ShowImageView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .center, spacing: 0) {
-                Topbar("사진 상세보기", type: .closeWhite) {
+                Topbar("사진 상세보기", type: .closeWhite, textColor: .white) {
                     vm.onClose()
                 }
                 Image(uiImage: $vm.image.wrappedValue)

@@ -176,7 +176,7 @@ class MainViewModel: BaseViewModel {
             if res {
                 print("add New Marker ok")
                 marker.mapView = nil
-                self.coordinator?.presentAddFootprintView(location: location) {[weak self] in
+                self.coordinator?.presentAddFootprintView(location: location, type: .new) {[weak self] in
                     guard let self = self else { return }
                     self.loadAllMarkers()
                 }

@@ -5,8 +5,8 @@
 //  Created by Studio-SJ on 2022/10/06.
 //
 
-
 import SwiftUI
+import UIKit
 
 enum TopbarType: String {
     case back = "back"
@@ -18,12 +18,14 @@ enum TopbarType: String {
 struct Topbar: View {
     var title: String
     var type: TopbarType
+    var textColor: Color
     var callback: (() -> Void)?
     
-    init(_ title: String = "", type: TopbarType = .none, onTap: (() -> Void)? = nil) {
+    init(_ title: String = "", type: TopbarType = .none, textColor: Color = Color.gray90, onTap: (() -> Void)? = nil) {
         self.title = title
         self.type = type
         self.callback = onTap
+        self.textColor = textColor
     }
     
     var body: some View {
@@ -43,7 +45,7 @@ struct Topbar: View {
             }
             Text(title)
                 .font(.kr16b)
-                .foregroundColor(Color.gray90)
+                .foregroundColor(textColor)
         }
         .frame(height: 50, alignment: .center)
     }

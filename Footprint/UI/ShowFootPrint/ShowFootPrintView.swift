@@ -120,8 +120,14 @@ struct ShowFootPrintView: View {
                     }
             }
             
-            HStack(alignment: .center, spacing: 0) {
+            HStack(alignment: .center, spacing: 8) {
                 Spacer()
+                Text("수정하기")
+                    .font(.kr12r)
+                    .foregroundColor(.gray100)
+                    .onTapGesture {
+                        vm.onClickModifyFootprint()
+                    }
                 Text("추가하기")
                     .font(.kr12r)
                     .foregroundColor(.gray100)

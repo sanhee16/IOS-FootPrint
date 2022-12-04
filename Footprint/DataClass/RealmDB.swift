@@ -49,6 +49,10 @@ class FootPrint: Object {
 }
 
 class Category: Object {
+    public static func == (lhs: Category, rhs: Category) -> Bool {
+        return lhs.tag == rhs.tag
+    }
+    
     @Persisted(primaryKey: true) var tag: Int
     @Persisted var name: String
     @Persisted var pinType: Int
