@@ -76,10 +76,10 @@ struct ShowFootPrintView: View {
                         .frame(width: geometry.size.width - 32, alignment: .topLeading)
                         .contentShape(Rectangle())
                         .multilineTextAlignment(.leading)
-//                        .background(
-//                            RoundedRectangle(cornerRadius: 2)
-//                                .foregroundColor(.greenTint5)
-//                        )
+                    //                        .background(
+                    //                            RoundedRectangle(cornerRadius: 2)
+                    //                                .foregroundColor(.greenTint5)
+                    //                        )
                         .padding([.leading, .trailing], 16)
                 }
                 .padding(EdgeInsets(top: 0, leading: 0, bottom: 14, trailing: 0))
@@ -99,25 +99,29 @@ struct ShowFootPrintView: View {
                 vm.onClose()
             }
             HStack(alignment: .center, spacing: 6) {
-                Image("before")
-                    .resizable()
-                    .frame(both: 16, aligment: .center)
-                    .padding(3)
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        vm.moveBefore()
-                    }
+                if $vm.footPrints.wrappedValue.count > 1 {
+                    Image("before")
+                        .resizable()
+                        .frame(both: 16, aligment: .center)
+                        .padding(3)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            vm.moveBefore()
+                        }
+                }
                 Text("\($vm.pageIdx.wrappedValue + 1) / \($vm.footPrints.wrappedValue.count)")
                     .font(.kr12r)
                     .foregroundColor(.gray90)
-                Image("forward")
-                    .resizable()
-                    .frame(both: 16, aligment: .center)
-                    .padding(3)
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        vm.moveNext()
-                    }
+                if $vm.footPrints.wrappedValue.count > 1 {
+                    Image("forward")
+                        .resizable()
+                        .frame(both: 16, aligment: .center)
+                        .padding(3)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            vm.moveNext()
+                        }
+                }
             }
             
             HStack(alignment: .center, spacing: 8) {
@@ -165,7 +169,7 @@ struct ShowFootPrintView: View {
             HStack {
                 ForEach(item.images.indices, id: \.self) { idx in
                     if let dir = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false),
-                        let uiImage = UIImage(contentsOfFile: URL(fileURLWithPath: dir.absoluteString).appendingPathComponent(item.images[idx]).path) {
+                       let uiImage = UIImage(contentsOfFile: URL(fileURLWithPath: dir.absoluteString).appendingPathComponent(item.images[idx]).path) {
                         Image(uiImage: uiImage)
                             .resizable()
                             .scaledToFill()
@@ -191,7 +195,7 @@ struct ShowFootPrintView: View {
             .padding(10)
             .border(isSelected ? .greenTint4 : .clear, lineWidth: 2, cornerRadius: 12)
             .onTapGesture {
-//                vm.onSelectPin(item)
+                //                vm.onSelectPin(item)
             }
     }
 }
