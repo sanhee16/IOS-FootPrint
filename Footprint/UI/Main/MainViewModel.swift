@@ -80,7 +80,7 @@ class MainViewModel: BaseViewModel {
     }
     
     func onClickSetting() {
-        
+        self.coordinator?.presentSettingView()
     }
     
     private func getCurrentLocation() {
