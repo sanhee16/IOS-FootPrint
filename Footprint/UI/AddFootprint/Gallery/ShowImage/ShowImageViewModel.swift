@@ -8,12 +8,17 @@
 
 import Foundation
 import Combine
+import SwiftUIPager
 import UIKit
 
 class ShowImageViewModel: BaseViewModel {
-    @Published var image: UIImage
-    init(_ coordinator: AppCoordinator, image: UIImage) {
-        self.image = image
+    @Published var page: Page
+    @Published var images: [UIImage]
+    
+    
+    init(_ coordinator: AppCoordinator, imageIdx: Int, images: [UIImage]) {
+        self.images = images
+        self.page = .withIndex(imageIdx)
         super.init(coordinator)
     }
     

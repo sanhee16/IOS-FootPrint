@@ -5,11 +5,12 @@
 //  Created by sandy on 2022/12/04.
 //
 import SwiftUI
+import SwiftUIPager
 
 struct ShowImageView: View {
     typealias VM = ShowImageViewModel
-    public static func vc(_ coordinator: AppCoordinator, image: UIImage ,completion: (()-> Void)? = nil) -> UIViewController {
-        let vm = VM.init(coordinator, image: image)
+    public static func vc(_ coordinator: AppCoordinator, imageIdx: Int, images: [UIImage] ,completion: (()-> Void)? = nil) -> UIViewController {
+        let vm = VM.init(coordinator, imageIdx: imageIdx, images: images)
         let view = Self.init(vm: vm)
         let vc = BaseViewController.init(view, completion: completion)
         vc.modalPresentationStyle = .overCurrentContext
@@ -28,11 +29,19 @@ struct ShowImageView: View {
                 Topbar("사진 상세보기", type: .closeWhite, textColor: .white) {
                     vm.onClose()
                 }
-                Image(uiImage: $vm.image.wrappedValue)
-                    .resizable()
-                    .aspectRatio($vm.image.wrappedValue.size.width / $vm.image.wrappedValue.size.height, contentMode: .fill)
-                    .frame(width: geometry.size.width - 140, alignment: .center)
-                Spacer()
+                Pager(page: $vm.page.wrappedValue, data: $vm.images.wrappedValue.indices, id: \.self) { idx in
+                    let image = $vm.images.wrappedValue[idx]
+                    VStack(alignment: .center, spacing: 0) {
+                        Spacer()
+                        Image(uiImage: image)
+                            .resizable()
+                            .aspectRatio(image.size.width / image.size.height, contentMode: .fit)
+                            .frame(width: geometry.size.width - 40, alignment: .center)
+                        Spacer()
+                    }
+                }
+                .itemSpacing(10)
+                .interactive(scale: 0.8)
             }
             .padding(EdgeInsets(top: safeTop, leading: 0, bottom: safeBottom, trailing: 0))
             .edgesIgnoringSafeArea(.all)

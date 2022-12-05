@@ -76,8 +76,8 @@ class AppCoordinator: Coordinator, Terminatable {
         self.present(vc, animated: true, onDismiss: onDismiss)
     }
     
-    func presentShowImageView(_ image: UIImage) {
-        let vc = ShowImageView.vc(self, image: image)
+    func presentShowImageView(_ imageIdx: Int, images: [UIImage]) {
+        let vc = ShowImageView.vc(self, imageIdx: imageIdx, images: images)
         self.present(vc, animated: true)
     }
     

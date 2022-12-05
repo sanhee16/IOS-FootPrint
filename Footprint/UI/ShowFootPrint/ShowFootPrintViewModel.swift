@@ -105,7 +105,14 @@ class ShowFootPrintViewModel: BaseViewModel {
         }
     }
     
-    func showImage(_ image: UIImage) {
-        self.coordinator?.presentShowImageView(image)
+    func showImage(_ idx: Int) {
+        var uiImages: [UIImage] = []
+        let images = self.footPrints[self.pageIdx].images
+        for image in images {
+            if let uiImage = ImageManager.shared.getSavedImage(named: image) {
+                uiImages.append(uiImage)
+            }
+        }
+        self.coordinator?.presentShowImageView(idx, images: uiImages)
     }
 }

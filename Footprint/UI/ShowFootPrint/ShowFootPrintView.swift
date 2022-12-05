@@ -174,7 +174,7 @@ struct ShowFootPrintView: View {
                             .contentShape(Rectangle())
                             .shadow(color: Color.black.opacity(0.6), radius: 3, x: 0.5, y: 2)
                             .onTapGesture {
-                                vm.showImage(uiImage)
+                                vm.showImage(idx)
                             }
                     }
                 }
