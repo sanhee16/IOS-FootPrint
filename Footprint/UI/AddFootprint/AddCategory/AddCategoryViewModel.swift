@@ -33,11 +33,13 @@ class AddCategoryViewModel: BaseViewModel {
     let pinColorList: [PinColor] = [.pin0,.pin1,.pin2,.pin3,.pin4,.pin5,.pin6,.pin7,.pin8,.pin9]
     @Published var isKeyboardVisible = false
     @Published var type: AddCategoryType
+    private var onEraseCategory: (()->())?
     
-    init(_ coordinator: AppCoordinator, type: AddCategoryType) {
+    init(_ coordinator: AppCoordinator, type: AddCategoryType, onEraseCategory: (()->())?) {
         self.type = type
         self.realm = try! Realm()
         self.isAvailableSave = type.type == .update
+        self.onEraseCategory = onEraseCategory
         super.init(coordinator)
         if self.type.type == .update, let item = self.type.category {
             self.name = item.name
@@ -115,7 +117,9 @@ class AddCategoryViewModel: BaseViewModel {
                         let copy = filteredData
                         self.type.category = nil
                         self.realm.delete(copy)
-                        self.dismiss()
+                        self.dismiss(animated: true) { [weak self] in
+                            self?.onEraseCategory?()
+                        }
                     }
                 }
             }

@@ -9,8 +9,8 @@ import SwiftUI
 
 struct AddCategoryView: View, KeyboardReadable {
     typealias VM = AddCategoryViewModel
-    public static func vc(_ coordinator: AppCoordinator, type: AddCategoryType, completion: (()-> Void)? = nil) -> UIViewController {
-        let vm = VM.init(coordinator, type: type)
+    public static func vc(_ coordinator: AppCoordinator, type: AddCategoryType, onEraseCategory: (()->())?, completion: (()-> Void)?) -> UIViewController {
+        let vm = VM.init(coordinator, type: type, onEraseCategory: onEraseCategory)
         let view = Self.init(vm: vm)
         let vc = BaseViewController.bottomSheet(view, sizes: [.fixed(400.0)])
 //        let vc = BaseViewController.init(view, completion: completion)

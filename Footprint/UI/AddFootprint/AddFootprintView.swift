@@ -198,9 +198,7 @@ struct AddFootprintView: View, KeyboardReadable {
         .border(isSelected || $vm.isCategoryEditMode.wrappedValue ? .greenTint4 : .clear, lineWidth: 2, cornerRadius: 6)
         .onTapGesture {
             if $vm.isCategoryEditMode.wrappedValue {
-                if item.tag != -1 {
-                    vm.editCategory(item)
-                }
+                vm.editCategory(item)
             } else {
                 vm.onSelectCategory(item)
             }

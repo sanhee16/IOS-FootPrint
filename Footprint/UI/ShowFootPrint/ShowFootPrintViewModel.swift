@@ -47,6 +47,7 @@ class ShowFootPrintViewModel: BaseViewModel {
             .filter("latitude == \(location.latitude) AND longitude == \(location.longitude)")
             .sorted(byKeyPath: "createdAt", ascending: true)
         print("\(items.count)")
+        print("\(items)")
         for i in items {
             self.footPrints.append(i)
         }
@@ -67,14 +68,14 @@ class ShowFootPrintViewModel: BaseViewModel {
         }
         var uiImages: [UIImage] = []
         for image in item.images {
-            if let dir = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false),
-                let uiImage = UIImage(contentsOfFile: URL(fileURLWithPath: dir.absoluteString).appendingPathComponent(image).path) {
+            if let uiImage = ImageManager.shared.getSavedImage(named: image) {
                 uiImages.append(uiImage)
+            } else {
+                print("failed")
             }
         }
     
-        self.coordinator?.changeAddFootprintView(location: self.location, type: .modify(content: FootprintContents(title: item.title, content: item.content, images: uiImages, category: category))) {
-            
+        self.coordinator?.changeAddFootprintView(location: self.location, type: .modify(content: FootprintContents(title: item.title, content: item.content, images: uiImages, category: category, id: item.id))) {
         }
     }
     

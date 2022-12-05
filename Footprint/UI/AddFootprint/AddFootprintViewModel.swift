@@ -19,8 +19,9 @@ public enum AddFootprintType {
 public struct FootprintContents {
     var title: String
     var content: String
-    var images: [UIImage] = []
+    var images: [UIImage]
     var category: Category
+    var id: ObjectId
 }
 
 
@@ -41,6 +42,7 @@ class AddFootprintViewModel: BaseViewModel {
 //    let pinColorList: [PinColor] = [.pin0,.pin1,.pin2,.pin3,.pin4,.pin5,.pin6,.pin7,.pin8,.pin9]
     
     @Published var categories: [Category] = []
+    private var modifyId: ObjectId? = nil
     private let type: AddFootprintType
     private let location: Location
     private let realm: Realm
@@ -60,6 +62,7 @@ class AddFootprintViewModel: BaseViewModel {
             self.content = contents.content
             self.images = contents.images
             self.category = contents.category
+            self.modifyId = contents.id
         }
         
         print("sandy init")
@@ -69,6 +72,9 @@ class AddFootprintViewModel: BaseViewModel {
     
     private func loadCategories() {
         self.categories = []
+//        self.category = nil
+        //TODO: self.category 되어있는거 삭제되었을 때 문제되니까 nil로 했는데 이거 수정필요함 => beforeCategory 만들어두긴했는데 코드 안ㅅ짬 이거 사용하던지 다른방식 사용하던지 해야함. loadCategories()에 파라미터 넣어가지고 콜백으로 지금 있는거 지워져쓴지 안지워졌는지 체크해야할 듯(beforeCategory 사용하지 않고)
+        
         
         // 모든 객체 얻기
         let dbCategories = realm.objects(Category.self).sorted(byKeyPath: "tag", ascending: true)
@@ -77,6 +83,7 @@ class AddFootprintViewModel: BaseViewModel {
             // 삭제했는데 같은 주소를 참조하기 때문에 계속 크래시 발생하기 때문
             self.categories.append(Category(tag: i.tag, name: i.name, pinType: i.pinType.pinType(), pinColor: i.pinColor.pinColor()))
         }
+        
     }
     
     
@@ -130,7 +137,7 @@ class AddFootprintViewModel: BaseViewModel {
     
     func onClickSave() {
         self.isKeyboardVisible = false
-        guard let category = category else {
+        guard let category = self.category else {
             self.alert(.ok, description: "카테고리를 골라주세요")
             return
         }
@@ -148,17 +155,26 @@ class AddFootprintViewModel: BaseViewModel {
         let currentTimeStamp = Int(Date().timeIntervalSince1970)
         for idx in self.images.indices {
             let imageName = "\(currentTimeStamp)_\(idx)"
-//            let url = ImageManager.shared.saveImage(image: self.images[idx], imageName: imageName)
+            let _ = ImageManager.shared.saveImage(image: self.images[idx], imageName: imageName)
             imageUrls.append(imageName)
         }
+        print("imageUrls: \(imageUrls)")
+        //TODO: modify 안되고 add 되는데 primaryKey issue일 것 = update: .modified 글로벌 서치해서 addCategoryViewModel 참고하기
         
         try! realm.write {
-            let item = FootPrint(title: self.title, content: self.content, images: imageUrls, latitude: self.location.latitude, longitude: self.location.longitude, tag: category.tag)
+//            let item = FootPrint(title: self.title, content: self.content, images: imageUrls, latitude: self.location.latitude, longitude: self.location.longitude, tag: category.tag)
             switch self.type {
             case .new:
+                let item = FootPrint(title: self.title, content: self.content, images: imageUrls, latitude: self.location.latitude, longitude: self.location.longitude, tag: category.tag)
                 realm.add(item)
             case .modify(content: _):
-                self.realm.add(item, update: .modified)
+                if let id = self.modifyId, let item = self.realm.object(ofType: FootPrint.self, forPrimaryKey: id), let categoryTag = self.category?.tag {
+                    item.title = self.title
+                    item.tag = categoryTag
+                    item.content = self.content
+                    item.images = imageUrls
+                    self.realm.add(item, update: .modified)
+                }
             }
             self.stopProgress()
             self.dismiss(animated: true)
@@ -189,8 +205,15 @@ class AddFootprintViewModel: BaseViewModel {
     }
     
     func editCategory(_ item: Category) {
-        self.coordinator?.presentAddCategoryView(type: AddCategoryType(type: .update, category: item), onDismiss: {[weak self] in
-            print("edit dismiss")
+        if item.tag == 0 {
+            self.alert(.ok, title: "기본 카테고리는 편집할 수 없습니다.")
+            return
+        }
+        self.coordinator?.presentAddCategoryView(type: AddCategoryType(type: .update, category: item), onEraseCategory: {[weak self] in
+            if item.tag == self?.category?.tag {
+                self?.category = nil
+            }
+        }, onDismiss: { [weak self] in
             self?.loadCategories()
         })
     }

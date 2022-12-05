@@ -57,6 +57,7 @@ class SplashViewModel: BaseViewModel {
                 showingCategories.append(category.tag)
                 realm.add(category)
             }
+            Defaults.showingCategories = showingCategories
         }
     }
     
