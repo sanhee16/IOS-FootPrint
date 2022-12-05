@@ -212,6 +212,7 @@ class AddFootprintViewModel: BaseViewModel {
         self.coordinator?.presentAddCategoryView(type: AddCategoryType(type: .update, category: item), onEraseCategory: {[weak self] in
             if item.tag == self?.category?.tag {
                 self?.category = nil
+                self?.dismiss(animated: true)
             }
         }, onDismiss: { [weak self] in
             self?.loadCategories()

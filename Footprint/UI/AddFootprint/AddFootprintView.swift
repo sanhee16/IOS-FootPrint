@@ -195,7 +195,8 @@ struct AddFootprintView: View, KeyboardReadable {
                 .foregroundColor(isSelected ? Color.gray90 : Color.gray60)
         }
         .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
-        .border(isSelected || $vm.isCategoryEditMode.wrappedValue ? .greenTint4 : .clear, lineWidth: 2, cornerRadius: 6)
+        .border(isSelected ? .greenTint4 : .clear, lineWidth: 2, cornerRadius: 6)
+//        .border(isSelected || $vm.isCategoryEditMode.wrappedValue ? .greenTint4 : .clear, lineWidth: 2, cornerRadius: 6) // 좀 별로인거 같아서 뺌!
         .onTapGesture {
             if $vm.isCategoryEditMode.wrappedValue {
                 vm.editCategory(item)

@@ -108,12 +108,17 @@ class AddCategoryViewModel: BaseViewModel {
     
     func onClickDelete() {
         if let category = self.type.category, let filteredData = self.realm.object(ofType: Category.self, forPrimaryKey: category.tag) {
-            
-            self.alert(.yesOrNo, title: "카테고리를 삭제하시겠습니까?", description: "카테고리를 삭제하면 기존 저장된 노트들은 사라집니다.") {[weak self] isDelete in
+            self.alert(.yesOrNo, title: "카테고리를 삭제하시겠습니까?", description: "카테고리를 삭제하면 해당 카테고리에 저장된 노트들은 사라집니다.") {[weak self] isDelete in
                 guard let self = self else { return }
-                print("delete")
+                let items = self.realm.objects(FootPrint.self)
+                    .filter { footPrint in
+                        footPrint.tag == category.tag
+                    }
                 if isDelete {
                     try! self.realm.write {
+                        for i in items {
+                            self.realm.delete(i)
+                        }
                         let copy = filteredData
                         self.type.category = nil
                         self.realm.delete(copy)
