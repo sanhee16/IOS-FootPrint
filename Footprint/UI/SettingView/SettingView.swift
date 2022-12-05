@@ -37,13 +37,15 @@ struct SettingView: View {
                 Topbar("설정", type: .back) {
                     vm.onClose()
                 }
-//                drawTitle(geometry, title: "aaaa", description: "bbbb")
-//                drawItem(geometry, title: "content", description: "content content ~~~")
-//                drawTitle(geometry, title: "aaaa")
-//                drawItem(geometry, title: "content", description: "content content ~~~")
-//                drawItem(geometry, title: "content")
-//                drawItem(geometry, title: "content", description: "content content ~~~")
-                
+                drawTitle(geometry, title: "앱 설정")
+                drawItem(geometry, title: "권한 확인하기")
+                drawTitle(geometry, title: "기타")
+                drawItem(geometry, title: "문의하기") {
+                    vm.onClickContact()
+                }
+            }
+            .sheet(isPresented: $vm.isShowingMailView) {
+                MailView(isShowing: $vm.isShowingMailView, result: $vm.result)
             }
             .padding(EdgeInsets(top: safeTop, leading: 0, bottom: safeBottom, trailing: 0))
             .edgesIgnoringSafeArea(.all)
@@ -89,6 +91,7 @@ struct SettingView: View {
             .padding(EdgeInsets(top: 14, leading: 12, bottom: 14, trailing: 12))
             .contentShape(Rectangle())
             .onTapGesture {
+                print("onTap")
                 onTap?()
             }
             Divider()
