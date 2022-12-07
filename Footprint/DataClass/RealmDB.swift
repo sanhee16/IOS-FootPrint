@@ -66,3 +66,18 @@ class Category: Object {
         self.pinColor = pinColor.rawValue
     }
 }
+
+
+class Person: Object {
+    public static func == (lhs: Person, rhs: Person) -> Bool {
+        return lhs.name == rhs.name
+    }
+    
+    @Persisted(primaryKey: true) var name: String
+    
+    convenience init(name: String) {
+        self.init()
+        self.name = name
+    }
+}
+

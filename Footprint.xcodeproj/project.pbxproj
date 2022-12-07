@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2619FE8A2940D6AC00D24778 /* CheckPermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2619FE892940D6AC00D24778 /* CheckPermissionView.swift */; };
+		2619FE8C2940D6B300D24778 /* CheckPermissionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2619FE8B2940D6B300D24778 /* CheckPermissionViewModel.swift */; };
 		262D2A02293E2BA4005984DA /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262D2A01293E2BA4005984DA /* SettingView.swift */; };
 		262D2A04293E2BAA005984DA /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262D2A03293E2BAA005984DA /* SettingViewModel.swift */; };
 		262D2A06293E310E005984DA /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262D2A05293E310E005984DA /* MailView.swift */; };
@@ -69,6 +71,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2619FE892940D6AC00D24778 /* CheckPermissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPermissionView.swift; sourceTree = "<group>"; };
+		2619FE8B2940D6B300D24778 /* CheckPermissionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPermissionViewModel.swift; sourceTree = "<group>"; };
 		262D2A01293E2BA4005984DA /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		262D2A03293E2BAA005984DA /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		262D2A05293E310E005984DA /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
@@ -163,9 +167,19 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		2619FE882940D69700D24778 /* CheckPermission */ = {
+			isa = PBXGroup;
+			children = (
+				2619FE892940D6AC00D24778 /* CheckPermissionView.swift */,
+				2619FE8B2940D6B300D24778 /* CheckPermissionViewModel.swift */,
+			);
+			path = CheckPermission;
+			sourceTree = "<group>";
+		};
 		262D2A00293E2B97005984DA /* SettingView */ = {
 			isa = PBXGroup;
 			children = (
+				2619FE882940D69700D24778 /* CheckPermission */,
 				262D2A01293E2BA4005984DA /* SettingView.swift */,
 				262D2A03293E2BAA005984DA /* SettingViewModel.swift */,
 			);
@@ -570,6 +584,7 @@
 				265EA945291D134200068A5C /* MapViewModel.swift in Sources */,
 				262D2A04293E2BAA005984DA /* SettingViewModel.swift in Sources */,
 				63F132512914A18F00B3A9E0 /* BaseViewModel.swift in Sources */,
+				2619FE8C2940D6B300D24778 /* CheckPermissionViewModel.swift in Sources */,
 				63F1324B2914A18800B3A9E0 /* Defaults.swift in Sources */,
 				264B70C0291F8E9D00CDAF9F /* C.swift in Sources */,
 				63F132982914A1C000B3A9E0 /* ProgressView.swift in Sources */,
@@ -581,6 +596,7 @@
 				63F132AB2914A1C000B3A9E0 /* MainView.swift in Sources */,
 				63F132502914A18F00B3A9E0 /* BaseViewController.swift in Sources */,
 				63F132492914A18800B3A9E0 /* SwiftExtension.swift in Sources */,
+				2619FE8A2940D6AC00D24778 /* CheckPermissionView.swift in Sources */,
 				63F1324C2914A18800B3A9E0 /* Api.swift in Sources */,
 				63F1329A2914A1C000B3A9E0 /* WebView.swift in Sources */,
 				63F132562914A19F00B3A9E0 /* SceneDelegate.swift in Sources */,

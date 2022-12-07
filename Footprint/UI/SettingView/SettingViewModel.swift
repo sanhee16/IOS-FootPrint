@@ -29,6 +29,11 @@ class SettingViewModel: BaseViewModel {
         self.dismiss()
     }
     
+    //MARK: onClickSettingItem
+    func onClickCheckPermission() {
+        self.coordinator?.presentCheckPermission()
+    }
+    
     func onClickContact() {
         if MFMailComposeViewController.canSendMail() {
             self.isShowingMailView = true

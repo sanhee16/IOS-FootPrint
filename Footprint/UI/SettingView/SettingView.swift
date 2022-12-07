@@ -38,7 +38,9 @@ struct SettingView: View {
                     vm.onClose()
                 }
                 drawTitle(geometry, title: "앱 설정")
-                drawItem(geometry, title: "권한 확인하기")
+                drawItem(geometry, title: "권한 확인하기") {
+                    vm.onClickCheckPermission()
+                }
                 drawTitle(geometry, title: "기타")
                 drawItem(geometry, title: "문의하기") {
                     vm.onClickContact()
