@@ -30,8 +30,10 @@ class AddFootprintViewModel: BaseViewModel {
     @Published var content: String = ""
     @Published var images: [UIImage] = []
     @Published var category: Category? = nil
+    @Published var togethers: [Together] = []
     @Published var isKeyboardVisible = false
     @Published var isCategoryEditMode: Bool = false
+    @Published var isTogetherEditMode: Bool = false
     
 //    @Published var pinType: PinType = .star
 //    @Published var pinColor: PinColor = .pin2
@@ -42,6 +44,7 @@ class AddFootprintViewModel: BaseViewModel {
 //    let pinColorList: [PinColor] = [.pin0,.pin1,.pin2,.pin3,.pin4,.pin5,.pin6,.pin7,.pin8,.pin9]
     
     @Published var categories: [Category] = []
+    @Published var allTogethers: [Together] = []
     private var modifyId: ObjectId? = nil
     private let type: AddFootprintType
     private let location: Location

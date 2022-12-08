@@ -134,23 +134,40 @@ struct AddFootprintView: View, KeyboardReadable {
         }
     }
     
-//
-//    private func drawPinSelectArea(_ geometry: GeometryProxy) -> some View {
-//        return VStack(alignment: .leading, spacing: 4) {
-//            Text("pin 선택")
-//                .font(.kr13b)
-//                .foregroundColor(.gray90)
-//                .padding(EdgeInsets(top: 10, leading: 18, bottom: 6, trailing: 12))
-//            ScrollView(.horizontal, showsIndicators: false) {
-//                HStack(alignment: .center, spacing: 12) {
-//                    ForEach($vm.pinList.wrappedValue, id: \.self) { item in
-//                        pinItem(item, isSelected: $vm.pinType.wrappedValue == item)
-//                    }
-//                }
-//                .padding(EdgeInsets(top: 6, leading: 12, bottom: 6, trailing: 12))
-//            }
-//        }
-//    }
+    
+    private func drawPeopleSelectArea(_ geometry: GeometryProxy) -> some View {
+        return VStack(alignment: .leading, spacing: 4) {
+            HStack(alignment: .center, spacing: 10) {
+                Text("함께한 사람")
+                    .font(.kr13b)
+                    .foregroundColor(.gray90)
+                Spacer()
+                Text($vm.isTogetherEditMode.wrappedValue ? "편집 종료" : "편집")
+                    .font(.kr12r)
+                    .foregroundColor(.gray60)
+                    .onTapGesture {
+                        vm.onClickEditCategory()
+                    }
+                if $vm.isTogetherEditMode.wrappedValue {
+                    Text("추가")
+                        .font(.kr12r)
+                        .foregroundColor(.gray60)
+                        .onTapGesture {
+                            vm.onClickAddCategory()
+                        }
+                }
+            }
+            .padding(EdgeInsets(top: 10, leading: 18, bottom: 6, trailing: 12))
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(alignment: .center, spacing: 12) {
+                    ForEach($vm.categories.wrappedValue, id: \.self) { item in
+                        categoryItem(item, isSelected: $vm.category.wrappedValue?.tag == item.tag)
+                    }
+                }
+                .padding(EdgeInsets(top: 6, leading: 12, bottom: 6, trailing: 12))
+            }
+        }
+    }
     
     private func drawCategorySelectArea(_ geometry: GeometryProxy) -> some View {
         return VStack(alignment: .leading, spacing: 4) {
@@ -159,18 +176,20 @@ struct AddFootprintView: View, KeyboardReadable {
                     .font(.kr13b)
                     .foregroundColor(.gray90)
                 Spacer()
-                Text($vm.isCategoryEditMode.wrappedValue ? "편집 종료" : "카테고리 편집")
+                Text($vm.isCategoryEditMode.wrappedValue ? "편집 종료" : "편집")
                     .font(.kr12r)
                     .foregroundColor(.gray60)
                     .onTapGesture {
                         vm.onClickEditCategory()
                     }
-                Text("카테고리 추가")
-                    .font(.kr12r)
-                    .foregroundColor(.gray60)
-                    .onTapGesture {
-                        vm.onClickAddCategory()
-                    }
+                if $vm.isCategoryEditMode.wrappedValue {
+                    Text("추가")
+                        .font(.kr12r)
+                        .foregroundColor(.gray60)
+                        .onTapGesture {
+                            vm.onClickAddCategory()
+                        }
+                }
             }
             .padding(EdgeInsets(top: 10, leading: 18, bottom: 6, trailing: 12))
             ScrollView(.horizontal, showsIndicators: false) {

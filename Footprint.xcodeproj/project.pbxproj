@@ -44,6 +44,8 @@
 		63B1FB062914B5CB007E94B6 /* SwiftUIPullToRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 63B1FB052914B5CB007E94B6 /* SwiftUIPullToRefresh */; };
 		63C8CCF62941D60400BB861D /* DevInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C8CCF52941D60400BB861D /* DevInfoView.swift */; };
 		63C8CCF82941D60D00BB861D /* DevInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C8CCF72941D60D00BB861D /* DevInfoViewModel.swift */; };
+		63C8CCFB2941DD0B00BB861D /* AddTogetherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C8CCFA2941DD0B00BB861D /* AddTogetherView.swift */; };
+		63C8CCFD2941DD1000BB861D /* AddTogetherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C8CCFC2941DD1000BB861D /* AddTogetherViewModel.swift */; };
 		63F132472914A18800B3A9E0 /* AlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F132412914A18800B3A9E0 /* AlertViewModel.swift */; };
 		63F132482914A18800B3A9E0 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F132422914A18800B3A9E0 /* AlertView.swift */; };
 		63F132492914A18800B3A9E0 /* SwiftExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F132432914A18800B3A9E0 /* SwiftExtension.swift */; };
@@ -103,6 +105,8 @@
 		63B1FB022914B381007E94B6 /* RealmDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDB.swift; sourceTree = "<group>"; };
 		63C8CCF52941D60400BB861D /* DevInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevInfoView.swift; sourceTree = "<group>"; };
 		63C8CCF72941D60D00BB861D /* DevInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevInfoViewModel.swift; sourceTree = "<group>"; };
+		63C8CCFA2941DD0B00BB861D /* AddTogetherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTogetherView.swift; sourceTree = "<group>"; };
+		63C8CCFC2941DD1000BB861D /* AddTogetherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTogetherViewModel.swift; sourceTree = "<group>"; };
 		63F132412914A18800B3A9E0 /* AlertViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewModel.swift; sourceTree = "<group>"; };
 		63F132422914A18800B3A9E0 /* AlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		63F132432914A18800B3A9E0 /* SwiftExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftExtension.swift; sourceTree = "<group>"; };
@@ -281,6 +285,7 @@
 		63B1FAEB2914A838007E94B6 /* AddFootprint */ = {
 			isa = PBXGroup;
 			children = (
+				63C8CCF92941DCF700BB861D /* AddTogether */,
 				63B1FAF92914B312007E94B6 /* Gallery */,
 				264EEF552925126200B89624 /* AddCategory */,
 				63B1FAEC2914A85B007E94B6 /* AddFootprintView.swift */,
@@ -323,6 +328,15 @@
 				63C8CCF72941D60D00BB861D /* DevInfoViewModel.swift */,
 			);
 			path = DevInfo;
+			sourceTree = "<group>";
+		};
+		63C8CCF92941DCF700BB861D /* AddTogether */ = {
+			isa = PBXGroup;
+			children = (
+				63C8CCFA2941DD0B00BB861D /* AddTogetherView.swift */,
+				63C8CCFC2941DD1000BB861D /* AddTogetherViewModel.swift */,
+			);
+			path = AddTogether;
 			sourceTree = "<group>";
 		};
 		63F1323F2914A18800B3A9E0 /* Common */ = {
@@ -582,6 +596,7 @@
 				26C04F6D2917667F00890A76 /* SwiftUIExtension.swift in Sources */,
 				26332176292095E90065AE3A /* ShowFootPrintView.swift in Sources */,
 				63F132972914A1C000B3A9E0 /* EmailSender.swift in Sources */,
+				63C8CCFB2941DD0B00BB861D /* AddTogetherView.swift in Sources */,
 				63F132472914A18800B3A9E0 /* AlertViewModel.swift in Sources */,
 				262D2A06293E310E005984DA /* MailView.swift in Sources */,
 				63B1FB032914B381007E94B6 /* RealmDB.swift in Sources */,
@@ -609,6 +624,7 @@
 				63F132492914A18800B3A9E0 /* SwiftExtension.swift in Sources */,
 				2619FE8A2940D6AC00D24778 /* CheckPermissionView.swift in Sources */,
 				63F1324C2914A18800B3A9E0 /* Api.swift in Sources */,
+				63C8CCFD2941DD1000BB861D /* AddTogetherViewModel.swift in Sources */,
 				63F1329A2914A1C000B3A9E0 /* WebView.swift in Sources */,
 				63C8CCF82941D60D00BB861D /* DevInfoViewModel.swift in Sources */,
 				63F132562914A19F00B3A9E0 /* SceneDelegate.swift in Sources */,
