@@ -91,6 +91,11 @@ class AppCoordinator: Coordinator, Terminatable {
         self.present(vc, animated: true)
     }
     
+    func presentDevInfoView() {
+        let vc = DevInfoView.vc(self)
+        self.present(vc, animated: true)
+    }
+    
     //MARK: Change
     func changeAddFootprintView(location: Location, type: AddFootprintType, onDismiss: @escaping ()->()) {
         let vc = AddFootprintView.vc(self, location: location, type: type)

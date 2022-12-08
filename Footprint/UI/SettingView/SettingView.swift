@@ -45,6 +45,9 @@ struct SettingView: View {
                 drawItem(geometry, title: "문의하기") {
                     vm.onClickContact()
                 }
+                drawItem(geometry, title: "개발자 정보") {
+                    vm.onClickDevInfo()
+                }
             }
             .sheet(isPresented: $vm.isShowingMailView) {
                 MailView(isShowing: $vm.isShowingMailView, result: $vm.result)

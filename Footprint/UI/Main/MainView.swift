@@ -69,7 +69,7 @@ struct MainView: View {
                 Text("카테고리")
                     .font(.kr12r)
                     .foregroundColor(.white)
-                    .padding(EdgeInsets(top: 6, leading: 9, bottom: 6, trailing: 9))
+                    .padding(EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12))
                     .background(
                         RoundedRectangle(cornerRadius: 6)
                             .foregroundColor($vm.isShowCategoriesPannel.wrappedValue ? Color.black.opacity(0.5) : Color.greenTint1.opacity(0.8))
@@ -80,17 +80,18 @@ struct MainView: View {
                     }
                 if $vm.isShowCategoriesPannel.wrappedValue {
                     ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(alignment: .center, spacing: 0) {
+                        HStack(alignment: .center, spacing: 12) {
                             ForEach($vm.categories.wrappedValue.indices, id: \.self) { idx in
                                 let category = $vm.categories.wrappedValue[idx]
                                 categoryItem(category)
                             }
                         }
+                        .padding([.leading, .trailing], 16)
                     }
                     .contentShape(Rectangle())
                     .background(
                         RoundedRectangle(cornerRadius: 6)
-                            .foregroundColor(Color.greenTint1.opacity(0.8))
+                            .foregroundColor(Color.white.opacity(0.85))
                     )
                     .frame(width: geometry.size.width - 20, alignment: .trailing)
                     .padding(8)
@@ -100,11 +101,12 @@ struct MainView: View {
         .contentShape(Rectangle())
         .frame(width: geometry.size.width, alignment: .trailing)
     }
+    
     private func categoryItem(_ category: Category) -> some View {
         return Text(category.name)
             .font(.kr13r)
-            .foregroundColor($vm.showingCategories.wrappedValue.contains(category.tag) ? .black : .white.opacity(0.8))
-            .padding(10)
+            .foregroundColor($vm.showingCategories.wrappedValue.contains(category.tag) ? .green : .red)
+            .padding([.top, .bottom], 14)
             .contentShape(Rectangle())
             .onTapGesture {
                 vm.onClickCategory(category)
