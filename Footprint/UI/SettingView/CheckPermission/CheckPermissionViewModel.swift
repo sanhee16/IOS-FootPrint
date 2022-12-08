@@ -35,7 +35,7 @@ class CheckPermissionViewModel: BaseViewModel {
     }
     
     func onClose() {
-        self.dismiss()
+        self.dismiss(animated: false)
     }
     
     func openAppSetting() {

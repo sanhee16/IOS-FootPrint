@@ -88,7 +88,7 @@ class AppCoordinator: Coordinator, Terminatable {
     
     func presentCheckPermission() {
         let vc = CheckPermissionView.vc(self)
-        self.present(vc, animated: true)
+        self.present(vc, animated: false)
     }
     
     func presentDevInfoView() {

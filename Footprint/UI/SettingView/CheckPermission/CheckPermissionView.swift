@@ -89,6 +89,6 @@ struct CheckPermissionView: View {
                     }
             }
         }
-        .padding([.leading, .trailing], 10)
+        .padding([.leading, .trailing], 18)
     }
 }
