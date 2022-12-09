@@ -68,10 +68,11 @@
 		63F132AE2914A1C000B3A9E0 /* BluePrintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F1328C2914A1C000B3A9E0 /* BluePrintView.swift */; };
 		63F132AF2914A1C000B3A9E0 /* BluePrintViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F1328D2914A1C000B3A9E0 /* BluePrintViewModel.swift */; };
 		63F132B62914A56300B3A9E0 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F132B52914A56300B3A9E0 /* LottieView.swift */; };
-		BAE3CDDF1977B3015DD18E23 /* Pods_Footprint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D41FAC4461663FB082545713 /* Pods_Footprint.framework */; };
+		EA8F1CE5AADA34D35AD14494 /* Pods_Footprint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 345566BC804EBC9D85B35660 /* Pods_Footprint.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B7C258CB37306DD73C5B052 /* Pods-Footprint.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Footprint.debug.xcconfig"; path = "Target Support Files/Pods-Footprint/Pods-Footprint.debug.xcconfig"; sourceTree = "<group>"; };
 		2619FE892940D6AC00D24778 /* CheckPermissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPermissionView.swift; sourceTree = "<group>"; };
 		2619FE8B2940D6B300D24778 /* CheckPermissionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPermissionViewModel.swift; sourceTree = "<group>"; };
 		262D2A01293E2BA4005984DA /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
@@ -90,6 +91,7 @@
 		26940CAC293C9D0F0091E996 /* ShowImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowImageView.swift; sourceTree = "<group>"; };
 		26940CAE293C9D170091E996 /* ShowImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowImageViewModel.swift; sourceTree = "<group>"; };
 		26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIExtension.swift; sourceTree = "<group>"; };
+		345566BC804EBC9D85B35660 /* Pods_Footprint.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Footprint.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63209FE42913C3BF00709227 /* Footprint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Footprint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63209FEB2913C3C000709227 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63209FEE2913C3C000709227 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -127,9 +129,7 @@
 		63F1328C2914A1C000B3A9E0 /* BluePrintView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluePrintView.swift; sourceTree = "<group>"; };
 		63F1328D2914A1C000B3A9E0 /* BluePrintViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluePrintViewModel.swift; sourceTree = "<group>"; };
 		63F132B52914A56300B3A9E0 /* LottieView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
-		7920B9360643844CCED47299 /* Pods-Footprint.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Footprint.debug.xcconfig"; path = "Target Support Files/Pods-Footprint/Pods-Footprint.debug.xcconfig"; sourceTree = "<group>"; };
-		A742FCCA55652387DC0B6200 /* Pods-Footprint.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Footprint.release.xcconfig"; path = "Target Support Files/Pods-Footprint/Pods-Footprint.release.xcconfig"; sourceTree = "<group>"; };
-		D41FAC4461663FB082545713 /* Pods_Footprint.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Footprint.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABE65B1C5B31A01C8E2F03B9 /* Pods-Footprint.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Footprint.release.xcconfig"; path = "Target Support Files/Pods-Footprint/Pods-Footprint.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,26 +145,18 @@
 				63B1FAE72914A6FE007E94B6 /* Alamofire in Frameworks */,
 				63B1FAEA2914A718007E94B6 /* SwiftUIPager in Frameworks */,
 				63B1FB002914B347007E94B6 /* Kingfisher in Frameworks */,
-				BAE3CDDF1977B3015DD18E23 /* Pods_Footprint.framework in Frameworks */,
+				EA8F1CE5AADA34D35AD14494 /* Pods_Footprint.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		106C2B72DC81BA254E7D677B /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				D41FAC4461663FB082545713 /* Pods_Footprint.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		1522B1A1B0EADD34D7FC0D99 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				7920B9360643844CCED47299 /* Pods-Footprint.debug.xcconfig */,
-				A742FCCA55652387DC0B6200 /* Pods-Footprint.release.xcconfig */,
+				0B7C258CB37306DD73C5B052 /* Pods-Footprint.debug.xcconfig */,
+				ABE65B1C5B31A01C8E2F03B9 /* Pods-Footprint.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -240,7 +232,7 @@
 				63209FE62913C3BF00709227 /* Footprint */,
 				63209FE52913C3BF00709227 /* Products */,
 				1522B1A1B0EADD34D7FC0D99 /* Pods */,
-				106C2B72DC81BA254E7D677B /* Frameworks */,
+				CEDBEC64F26317C4867AA0E2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -432,6 +424,14 @@
 			path = BluePrint;
 			sourceTree = "<group>";
 		};
+		CEDBEC64F26317C4867AA0E2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				345566BC804EBC9D85B35660 /* Pods_Footprint.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -439,11 +439,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 63209FF22913C3C000709227 /* Build configuration list for PBXNativeTarget "Footprint" */;
 			buildPhases = (
-				E5E3E4D876D73E6EA526FAA1 /* [CP] Check Pods Manifest.lock */,
+				E7012FB84BBCA6F2EECF37B6 /* [CP] Check Pods Manifest.lock */,
 				63209FE02913C3BF00709227 /* Sources */,
 				63209FE12913C3BF00709227 /* Frameworks */,
 				63209FE22913C3BF00709227 /* Resources */,
-				6A0D3D3F006EF290FBD8FD16 /* [CP] Embed Pods Frameworks */,
+				1438933A45BECBC4F88C1AB2 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -489,13 +489,13 @@
 			);
 			mainGroup = 63209FDB2913C3BF00709227;
 			packageReferences = (
-				63B1FAE22914A6D8007E94B6 /* XCRemoteSwiftPackageReference "lottie-ios" */,
-				63B1FAE52914A6FE007E94B6 /* XCRemoteSwiftPackageReference "Alamofire" */,
-				63B1FAE82914A718007E94B6 /* XCRemoteSwiftPackageReference "SwiftUIPager" */,
-				63B1FAF02914A91F007E94B6 /* XCRemoteSwiftPackageReference "FittedSheets" */,
+				63B1FAE22914A6D8007E94B6 /* XCRemoteSwiftPackageReference "lottie-ios.git" */,
+				63B1FAE52914A6FE007E94B6 /* XCRemoteSwiftPackageReference "Alamofire.git" */,
+				63B1FAE82914A718007E94B6 /* XCRemoteSwiftPackageReference "SwiftUIPager.git" */,
+				63B1FAF02914A91F007E94B6 /* XCRemoteSwiftPackageReference "FittedSheets.git" */,
 				63B1FAFE2914B347007E94B6 /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				63B1FB042914B5CB007E94B6 /* XCRemoteSwiftPackageReference "swiftui-pull-to-refresh" */,
-				265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				63B1FB042914B5CB007E94B6 /* XCRemoteSwiftPackageReference "swiftui-pull-to-refresh.git" */,
+				265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift.git" */,
 			);
 			productRefGroup = 63209FE52913C3BF00709227 /* Products */;
 			projectDirPath = "";
@@ -520,7 +520,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6A0D3D3F006EF290FBD8FD16 /* [CP] Embed Pods Frameworks */ = {
+		1438933A45BECBC4F88C1AB2 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -537,7 +537,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Footprint/Pods-Footprint-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E5E3E4D876D73E6EA526FAA1 /* [CP] Check Pods Manifest.lock */ = {
+		E7012FB84BBCA6F2EECF37B6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -738,7 +738,7 @@
 		};
 		63209FF32913C3C000709227 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7920B9360643844CCED47299 /* Pods-Footprint.debug.xcconfig */;
+			baseConfigurationReference = 0B7C258CB37306DD73C5B052 /* Pods-Footprint.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -769,7 +769,7 @@
 		};
 		63209FF42913C3C000709227 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A742FCCA55652387DC0B6200 /* Pods-Footprint.release.xcconfig */;
+			baseConfigurationReference = ABE65B1C5B31A01C8E2F03B9 /* Pods-Footprint.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -822,7 +822,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+		265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
 			requirement = {
@@ -830,7 +830,7 @@
 				kind = branch;
 			};
 		};
-		63B1FAE22914A6D8007E94B6 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+		63B1FAE22914A6D8007E94B6 /* XCRemoteSwiftPackageReference "lottie-ios.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
 			requirement = {
@@ -838,7 +838,7 @@
 				minimumVersion = 3.0.0;
 			};
 		};
-		63B1FAE52914A6FE007E94B6 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+		63B1FAE52914A6FE007E94B6 /* XCRemoteSwiftPackageReference "Alamofire.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
@@ -846,7 +846,7 @@
 				kind = branch;
 			};
 		};
-		63B1FAE82914A718007E94B6 /* XCRemoteSwiftPackageReference "SwiftUIPager" */ = {
+		63B1FAE82914A718007E94B6 /* XCRemoteSwiftPackageReference "SwiftUIPager.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/fermoya/SwiftUIPager.git";
 			requirement = {
@@ -854,7 +854,7 @@
 				kind = branch;
 			};
 		};
-		63B1FAF02914A91F007E94B6 /* XCRemoteSwiftPackageReference "FittedSheets" */ = {
+		63B1FAF02914A91F007E94B6 /* XCRemoteSwiftPackageReference "FittedSheets.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/gordontucker/FittedSheets.git";
 			requirement = {
@@ -870,7 +870,7 @@
 				kind = branch;
 			};
 		};
-		63B1FB042914B5CB007E94B6 /* XCRemoteSwiftPackageReference "swiftui-pull-to-refresh" */ = {
+		63B1FB042914B5CB007E94B6 /* XCRemoteSwiftPackageReference "swiftui-pull-to-refresh.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/globulus/swiftui-pull-to-refresh.git";
 			requirement = {
@@ -883,32 +883,32 @@
 /* Begin XCSwiftPackageProductDependency section */
 		265A0A0B2916297E00027829 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			package = 265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift.git" */;
 			productName = Realm;
 		};
 		265A0A0D2916297E00027829 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			package = 265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift.git" */;
 			productName = RealmSwift;
 		};
 		63B1FAE32914A6D8007E94B6 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 63B1FAE22914A6D8007E94B6 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			package = 63B1FAE22914A6D8007E94B6 /* XCRemoteSwiftPackageReference "lottie-ios.git" */;
 			productName = Lottie;
 		};
 		63B1FAE62914A6FE007E94B6 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 63B1FAE52914A6FE007E94B6 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			package = 63B1FAE52914A6FE007E94B6 /* XCRemoteSwiftPackageReference "Alamofire.git" */;
 			productName = Alamofire;
 		};
 		63B1FAE92914A718007E94B6 /* SwiftUIPager */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 63B1FAE82914A718007E94B6 /* XCRemoteSwiftPackageReference "SwiftUIPager" */;
+			package = 63B1FAE82914A718007E94B6 /* XCRemoteSwiftPackageReference "SwiftUIPager.git" */;
 			productName = SwiftUIPager;
 		};
 		63B1FAF12914A91F007E94B6 /* FittedSheets */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 63B1FAF02914A91F007E94B6 /* XCRemoteSwiftPackageReference "FittedSheets" */;
+			package = 63B1FAF02914A91F007E94B6 /* XCRemoteSwiftPackageReference "FittedSheets.git" */;
 			productName = FittedSheets;
 		};
 		63B1FAFF2914B347007E94B6 /* Kingfisher */ = {
@@ -918,7 +918,7 @@
 		};
 		63B1FB052914B5CB007E94B6 /* SwiftUIPullToRefresh */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 63B1FB042914B5CB007E94B6 /* XCRemoteSwiftPackageReference "swiftui-pull-to-refresh" */;
+			package = 63B1FB042914B5CB007E94B6 /* XCRemoteSwiftPackageReference "swiftui-pull-to-refresh.git" */;
 			productName = SwiftUIPullToRefresh;
 		};
 /* End XCSwiftPackageProductDependency section */
