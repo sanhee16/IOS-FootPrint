@@ -28,6 +28,7 @@ struct MapView: UIViewRepresentable {
         view.mapView.mapType = .basic
         view.mapView.touchDelegate = context.coordinator
         view.mapView.positionMode = .direction
+        view.showLocationButton = true
         
         // 사용자의 현재 위치
         //        let locationOverlay = view.mapView.locationOverlay

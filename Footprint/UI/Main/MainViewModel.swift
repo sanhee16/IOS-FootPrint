@@ -30,8 +30,13 @@ class MainViewModel: BaseViewModel {
     @Published var markerList: [MarkerItem] = []
     
     @Published var isShowCategoriesPannel: Bool = false
+    @Published var isShowingSearchPannel: Bool = false
     @Published var categories: [Category] = []
     @Published var showingCategories: [Int] = []
+    @Published var serachText: String = ""
+    @Published var searchItems: [FootPrint] = []
+    
+    private var allFootprints: [FootPrint] = []
     
     private var mapView: NMFMapView = NMFMapView()
     private let realm: Realm
@@ -44,6 +49,7 @@ class MainViewModel: BaseViewModel {
     }
     
     func onAppear() {
+        print("onAppear")
         //        getSavedData()
         switch checkLocationPermission() {
         case .allow:
@@ -53,7 +59,7 @@ class MainViewModel: BaseViewModel {
             self.location = Location(latitude: 0.0, longitude: 0.0)
             break
         }
-        loadAllMarkers()
+        loadAllFootprints()
     }
     
     private func loadCategories() {
@@ -208,5 +214,40 @@ class MainViewModel: BaseViewModel {
             return true
         }
         return marker
+    }
+    
+    func onTapSearchPannel() {
+        self.isShowingSearchPannel = !self.isShowingSearchPannel
+        if self.isShowingSearchPannel {
+            loadAllFootprints()
+            self.searchItems = self.allFootprints
+        } else {
+            self.searchItems.removeAll()
+            self.serachText.removeAll()
+        }
+    }
+    
+    func loadAllFootprints() {
+        self.allFootprints = Array(self.realm.objects(FootPrint.self))
+    }
+    
+    func enterSearchText() {
+        let text = self.serachText
+        if text.isEmpty {
+            self.searchItems = self.allFootprints
+        } else {
+            self.allFootprints.contains { item in
+                item.title.contains(text)
+            }
+            self.searchItems = Array(self.realm.objects(FootPrint.self)
+                .filter { item in
+                    item.title.contains(text)
+                })
+        }
+    }
+    
+    func onClickSearchItem(_ item: FootPrint) {
+        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: item.latitude, lng: item.longitude))
+        mapView.moveCamera(cameraUpdate)
     }
 }

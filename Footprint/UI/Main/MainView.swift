@@ -49,7 +49,32 @@ struct MainView: View {
                 if let myLocation = $vm.location.wrappedValue, let coordinator = $vm.coordinator.wrappedValue {
                     ZStack(alignment: .topTrailing) {
                         MapView(coordinator, location: myLocation, vm: vm)
-                        drawCategory(geometry)
+                        VStack(alignment: .center, spacing: 0) {
+                            drawSearch(geometry)
+                            if !$vm.isShowingSearchPannel.wrappedValue {
+                                drawCategory(geometry)
+                            }
+                        }
+                        .zIndex(2)
+                        if $vm.isShowingSearchPannel.wrappedValue {
+                            ScrollView(.vertical, showsIndicators: false) {
+                                VStack(alignment: .leading, spacing: 8) {
+                                    ForEach($vm.searchItems.wrappedValue.indices, id: \.self) { idx in
+                                        let item = $vm.searchItems.wrappedValue[idx]
+                                        drawSearchItem(geometry, item: item)
+                                    }
+                                }
+                            }
+                            .padding(EdgeInsets(top: 12, leading: 10, bottom: 12, trailing: 10))
+                            .background(
+                                RoundedRectangle(cornerRadius: 6)
+                                    .foregroundColor(Color.white.opacity(0.45))
+                            )
+                            .zIndex(1)
+                            .frame(width: geometry.size.width - 20, height: geometry.size.height / 3, alignment: .center)
+                            .padding(EdgeInsets(top: 60, leading: 10, bottom: 0, trailing: 10))
+                            .ignoresSafeArea(.container, edges: [.bottom])
+                        }
                     }
                 }
             }
@@ -63,19 +88,84 @@ struct MainView: View {
         }
     }
     
+    
+    private func drawSearch(_ geometry: GeometryProxy) -> some View {
+        return HStack(alignment: .center, spacing: 0) {
+            if $vm.isShowingSearchPannel.wrappedValue {
+                VStack(alignment: .leading, spacing: 10) {
+                    TextField("", text: $vm.serachText)
+                        .font(.kr12r)
+                        .foregroundColor(.gray90)
+                        .padding([.leading, .trailing], 8)
+                        .frame(width: geometry.size.width - 60 - 30, height: 34, alignment: .center)
+                        .contentShape(Rectangle())
+                        .background(
+                            RoundedRectangle(cornerRadius: 6)
+                                .foregroundColor(Color.white.opacity(0.85))
+                        )
+                        .padding([.leading, .top, .trailing], 10)
+                        .onChange(of: $vm.serachText.wrappedValue) { _ in
+                            vm.enterSearchText()
+                        }
+                }
+            }
+            Text($vm.isShowingSearchPannel.wrappedValue ? "취소" : "검색")
+                .font(.kr12r)
+                .foregroundColor(.white)
+                .frame(width: 60, height: 34, alignment: .center)
+                .background(
+                    RoundedRectangle(cornerRadius: 6)
+                        .foregroundColor($vm.isShowCategoriesPannel.wrappedValue ? Color.black.opacity(0.5) : Color.greenTint1.opacity(0.8))
+                )
+                .padding([.top, .trailing], 10)
+                .onTapGesture {
+                    vm.onTapSearchPannel()
+                }
+        }
+        .contentShape(Rectangle())
+        .frame(width: geometry.size.width, alignment: .trailing)
+    }
+    
+    private func drawSearchItem(_ geometry: GeometryProxy, item: FootPrint) -> some View {
+        return HStack(alignment: .center, spacing: 12) {
+            HStack(alignment: .center, spacing: 6) {
+                if let category = item.tag.getCategory() {
+                    Image(category.pinType.pinType().pinWhite)
+                        .resizable()
+                        .frame(both: 18.0, aligment: .center)
+                        .colorMultiply(Color(hex: category.pinColor.pinColor().pinColorHex))
+                }
+                Text(item.title)
+                    .font(.kr12r)
+                    .foregroundColor(.gray90)
+                Spacer()
+            }
+            .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
+            .background(
+                RoundedRectangle(cornerRadius: 6)
+                    .foregroundColor(.white.opacity(0.8))
+            )
+            .contentShape(Rectangle())
+            .onTapGesture {
+                vm.onClickSearchItem(item)
+            }
+        }
+    }
+    
     private func drawCategory(_ geometry: GeometryProxy) -> some View {
         return VStack(alignment: .trailing, spacing: 0) {
             if !$vm.categories.wrappedValue.isEmpty {
                 Text("카테고리")
                     .font(.kr12r)
                     .foregroundColor(.white)
-                    .padding(EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12))
+                    .frame(width: 60, height: 34, alignment: .center)
                     .background(
                         RoundedRectangle(cornerRadius: 6)
                             .foregroundColor($vm.isShowCategoriesPannel.wrappedValue ? Color.black.opacity(0.5) : Color.greenTint1.opacity(0.8))
                     )
                     .padding([.top, .trailing], 10)
                     .onTapGesture {
+                        print("tap category")
                         $vm.isShowCategoriesPannel.wrappedValue = !$vm.isShowCategoriesPannel.wrappedValue
                     }
                 if $vm.isShowCategoriesPannel.wrappedValue {
