@@ -20,6 +20,8 @@
 		264B70C0291F8E9D00CDAF9F /* C.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264B70BF291F8E9C00CDAF9F /* C.swift */; };
 		264EEF572925128300B89624 /* AddCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EEF562925128300B89624 /* AddCategoryView.swift */; };
 		264EEF592925128A00B89624 /* AddCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EEF582925128A00B89624 /* AddCategoryViewModel.swift */; };
+		265924C729445BD9001E7025 /* FootprintListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265924C629445BD9001E7025 /* FootprintListView.swift */; };
+		265924C929445BE1001E7025 /* FootprintListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265924C829445BE1001E7025 /* FootprintListViewModel.swift */; };
 		265A0A0C2916297E00027829 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 265A0A0B2916297E00027829 /* Realm */; };
 		265A0A0E2916297E00027829 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 265A0A0D2916297E00027829 /* RealmSwift */; };
 		265EA941291D112B00068A5C /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265EA940291D112B00068A5C /* MapView.swift */; };
@@ -87,6 +89,8 @@
 		264B70BF291F8E9C00CDAF9F /* C.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C.swift; sourceTree = "<group>"; };
 		264EEF562925128300B89624 /* AddCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryView.swift; sourceTree = "<group>"; };
 		264EEF582925128A00B89624 /* AddCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryViewModel.swift; sourceTree = "<group>"; };
+		265924C629445BD9001E7025 /* FootprintListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootprintListView.swift; sourceTree = "<group>"; };
+		265924C829445BE1001E7025 /* FootprintListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootprintListViewModel.swift; sourceTree = "<group>"; };
 		265EA940291D112B00068A5C /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		265EA944291D134200068A5C /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		265EA946291D1E1400068A5C /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
@@ -208,6 +212,15 @@
 				264EEF582925128A00B89624 /* AddCategoryViewModel.swift */,
 			);
 			path = AddCategory;
+			sourceTree = "<group>";
+		};
+		265924C529445BC7001E7025 /* FootprintList */ = {
+			isa = PBXGroup;
+			children = (
+				265924C629445BD9001E7025 /* FootprintListView.swift */,
+				265924C829445BE1001E7025 /* FootprintListViewModel.swift */,
+			);
+			path = FootprintList;
 			sourceTree = "<group>";
 		};
 		265EA942291D133200068A5C /* MapView */ = {
@@ -373,6 +386,7 @@
 		63F1325C2914A1C000B3A9E0 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				265924C529445BC7001E7025 /* FootprintList */,
 				262D2A00293E2B97005984DA /* SettingView */,
 				26332174292095CD0065AE3A /* ShowFootPrint */,
 				265EA942291D133200068A5C /* MapView */,
@@ -574,6 +588,7 @@
 				265EA941291D112B00068A5C /* MapView.swift in Sources */,
 				264EEF592925128A00B89624 /* AddCategoryViewModel.swift in Sources */,
 				63F1328E2914A1C000B3A9E0 /* SplashViewModel.swift in Sources */,
+				265924C929445BE1001E7025 /* FootprintListViewModel.swift in Sources */,
 				264B70BC291F8DD900CDAF9F /* ApiResponse.swift in Sources */,
 				63F1328F2914A1C000B3A9E0 /* SplashView.swift in Sources */,
 				63F132AF2914A1C000B3A9E0 /* BluePrintViewModel.swift in Sources */,
@@ -587,6 +602,7 @@
 				26332176292095E90065AE3A /* ShowFootPrintView.swift in Sources */,
 				63F132972914A1C000B3A9E0 /* EmailSender.swift in Sources */,
 				63F132472914A18800B3A9E0 /* AlertViewModel.swift in Sources */,
+				265924C729445BD9001E7025 /* FootprintListView.swift in Sources */,
 				262D2A06293E310E005984DA /* MailView.swift in Sources */,
 				63B1FB032914B381007E94B6 /* RealmDB.swift in Sources */,
 				63F132AA2914A1C000B3A9E0 /* MainViewModel.swift in Sources */,

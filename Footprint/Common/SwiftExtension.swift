@@ -59,3 +59,15 @@ extension Publisher {
             .store(in: &set)
     }
 }
+
+extension Category {
+    func image() -> String {
+        return self.pinType.pinType().pinWhite
+    }
+}
+
+extension FootPrint {
+    func categoryImage() -> String? {
+        return self.tag.getCategory()?.image()
+    }
+}

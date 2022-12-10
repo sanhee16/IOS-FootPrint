@@ -89,6 +89,10 @@ class MainViewModel: BaseViewModel {
         self.coordinator?.presentSettingView()
     }
     
+    func onClickFootprintList() {
+        self.coordinator?.presentFootprintListView()
+    }
+    
     private func getCurrentLocation() {
         if let coor = locationManager.location?.coordinate {
             let latitude = coor.latitude

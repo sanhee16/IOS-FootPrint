@@ -32,6 +32,12 @@ struct MainView: View {
                     Topbar("FootPrint", type: .none) {
                     }
                     HStack(alignment: .center, spacing: 0) {
+                        Text("all")
+                            .font(.kr12r)
+                            .foregroundColor(.gray100)
+                            .onTapGesture {
+                                vm.onClickFootprintList()
+                            }
                         Spacer()
                         Text("설정")
                             .font(.kr12r)
