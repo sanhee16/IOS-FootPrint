@@ -59,7 +59,8 @@ class MainViewModel: BaseViewModel {
             self.location = Location(latitude: 0.0, longitude: 0.0)
             break
         }
-        loadAllFootprints()
+        self.loadAllMarkers()
+        self.loadAllFootprints()
     }
     
     private func loadCategories() {

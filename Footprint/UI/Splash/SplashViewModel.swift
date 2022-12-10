@@ -49,7 +49,8 @@ class SplashViewModel: BaseViewModel {
                 Category(tag: 2, name: "술집", pinType: .wine, pinColor: PinColor.pin2),
                 Category(tag: 3, name: "빵집", pinType: .bread, pinColor: PinColor.pin3),
                 Category(tag: 4, name: "디저트", pinType: .cake, pinColor: PinColor.pin4),
-                Category(tag: 5, name: "운동", pinType: .exercise, pinColor: PinColor.pin5)
+                Category(tag: 5, name: "운동", pinType: .exercise, pinColor: PinColor.pin5),
+                Category(tag: 6, name: "카페", pinType: .exercise, pinColor: PinColor.pin6)
             ]
             var showingCategories = Defaults.showingCategories
 

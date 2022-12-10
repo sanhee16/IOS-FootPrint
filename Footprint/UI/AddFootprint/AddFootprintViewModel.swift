@@ -53,7 +53,7 @@ class AddFootprintViewModel: BaseViewModel {
         self.type = type
         
         self.categories = []
-        self.category = nil
+        self.category = realm.object(ofType: Category.self, forPrimaryKey: 0) // 시작할 때 기본 카테고리로 설정하기!
         
         super.init(coordinator)
         
