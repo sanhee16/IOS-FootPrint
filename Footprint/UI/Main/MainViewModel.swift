@@ -217,6 +217,7 @@ class MainViewModel: BaseViewModel {
     }
     
     func onTapSearchPannel() {
+        self.isShowCategoriesPannel = false
         self.isShowingSearchPannel = !self.isShowingSearchPannel
         if self.isShowingSearchPannel {
             loadAllFootprints()

@@ -115,7 +115,7 @@ struct MainView: View {
                 .frame(width: 60, height: 34, alignment: .center)
                 .background(
                     RoundedRectangle(cornerRadius: 6)
-                        .foregroundColor($vm.isShowCategoriesPannel.wrappedValue ? Color.black.opacity(0.5) : Color.greenTint1.opacity(0.8))
+                        .foregroundColor($vm.isShowingSearchPannel.wrappedValue ? Color.black.opacity(0.8) : Color.greenTint1)
                 )
                 .padding([.top, .trailing], 10)
                 .onTapGesture {
@@ -153,21 +153,8 @@ struct MainView: View {
     }
     
     private func drawCategory(_ geometry: GeometryProxy) -> some View {
-        return VStack(alignment: .trailing, spacing: 0) {
+        return HStack(alignment: .center, spacing: 0) {
             if !$vm.categories.wrappedValue.isEmpty {
-                Text("카테고리")
-                    .font(.kr12r)
-                    .foregroundColor(.white)
-                    .frame(width: 60, height: 34, alignment: .center)
-                    .background(
-                        RoundedRectangle(cornerRadius: 6)
-                            .foregroundColor($vm.isShowCategoriesPannel.wrappedValue ? Color.black.opacity(0.5) : Color.greenTint1.opacity(0.8))
-                    )
-                    .padding([.top, .trailing], 10)
-                    .onTapGesture {
-                        print("tap category")
-                        $vm.isShowCategoriesPannel.wrappedValue = !$vm.isShowCategoriesPannel.wrappedValue
-                    }
                 if $vm.isShowCategoriesPannel.wrappedValue {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(alignment: .center, spacing: 12) {
@@ -176,16 +163,30 @@ struct MainView: View {
                                 categoryItem(category)
                             }
                         }
-                        .padding([.leading, .trailing], 16)
+                        .padding([.leading, .trailing], 8)
                     }
                     .contentShape(Rectangle())
+                    .padding([.leading, .trailing], 8)
+                    .frame(width: geometry.size.width - 60 - 30, height: 34, alignment: .center)
                     .background(
                         RoundedRectangle(cornerRadius: 6)
                             .foregroundColor(Color.white.opacity(0.85))
                     )
-                    .frame(width: geometry.size.width - 20, alignment: .trailing)
-                    .padding(8)
+                    .padding([.leading, .top, .trailing], 10)
                 }
+                Text("카테고리")
+                    .font(.kr12r)
+                    .foregroundColor(.white)
+                    .frame(width: 60, height: 34, alignment: .center)
+                    .background(
+                        RoundedRectangle(cornerRadius: 6)
+                            .foregroundColor($vm.isShowCategoriesPannel.wrappedValue ? Color.black.opacity(0.8) : Color.greenTint1)
+                    )
+                    .padding([.top, .trailing], 10)
+                    .onTapGesture {
+                        $vm.isShowingSearchPannel.wrappedValue = false
+                        $vm.isShowCategoriesPannel.wrappedValue = !$vm.isShowCategoriesPannel.wrappedValue
+                    }
             }
         }
         .contentShape(Rectangle())
