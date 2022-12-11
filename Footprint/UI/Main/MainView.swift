@@ -74,7 +74,7 @@ struct MainView: View {
                             .padding(EdgeInsets(top: 12, leading: 10, bottom: 12, trailing: 10))
                             .background(
                                 RoundedRectangle(cornerRadius: 6)
-                                    .foregroundColor(Color.white.opacity(0.45))
+                                    .foregroundColor(Color.white.opacity(0.9))
                             )
                             .zIndex(1)
                             .frame(width: geometry.size.width - 20, height: geometry.size.height / 3, alignment: .center)
@@ -121,7 +121,7 @@ struct MainView: View {
                 .frame(width: 60, height: 34, alignment: .center)
                 .background(
                     RoundedRectangle(cornerRadius: 6)
-                        .foregroundColor($vm.isShowingSearchPannel.wrappedValue ? Color.black.opacity(0.8) : Color.greenTint1)
+                        .foregroundColor($vm.isShowingSearchPannel.wrappedValue ? Color.black.opacity(0.9) : Color.greenTint1)
                 )
                 .padding([.top, .trailing], 10)
                 .onTapGesture {
@@ -149,7 +149,8 @@ struct MainView: View {
             .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
             .background(
                 RoundedRectangle(cornerRadius: 6)
-                    .foregroundColor(.white.opacity(0.8))
+//                    .foregroundColor(.white.opacity(0.8))
+                    .foregroundColor(.greenTint5)
             )
             .contentShape(Rectangle())
             .onTapGesture {
@@ -186,7 +187,7 @@ struct MainView: View {
                     .frame(width: 60, height: 34, alignment: .center)
                     .background(
                         RoundedRectangle(cornerRadius: 6)
-                            .foregroundColor($vm.isShowCategoriesPannel.wrappedValue ? Color.black.opacity(0.8) : Color.greenTint1)
+                            .foregroundColor($vm.isShowCategoriesPannel.wrappedValue ? Color.black.opacity(0.9) : Color.greenTint1)
                     )
                     .padding([.top, .trailing], 10)
                     .onTapGesture {
