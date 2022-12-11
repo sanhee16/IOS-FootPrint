@@ -145,9 +145,6 @@ class AddFootprintViewModel: BaseViewModel {
         if self.title.isEmpty {
             self.alert(.ok, description: "title을 적어주세요")
             return
-        } else if self.content.isEmpty {
-            self.alert(.ok, description: "내용을 적어주세요")
-            return
         }
         // image save
         self.startProgress()

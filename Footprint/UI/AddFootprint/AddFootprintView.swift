@@ -159,17 +159,19 @@ struct AddFootprintView: View, KeyboardReadable {
                     .font(.kr13b)
                     .foregroundColor(.gray90)
                 Spacer()
-                Text($vm.isCategoryEditMode.wrappedValue ? "편집 종료" : "카테고리 편집")
+                if $vm.isCategoryEditMode.wrappedValue {
+                    Text("추가")
+                        .font(.kr12r)
+                        .foregroundColor(.gray60)
+                        .onTapGesture {
+                            vm.onClickAddCategory()
+                        }
+                }
+                Text($vm.isCategoryEditMode.wrappedValue ? "편집 종료" : "편집")
                     .font(.kr12r)
                     .foregroundColor(.gray60)
                     .onTapGesture {
                         vm.onClickEditCategory()
-                    }
-                Text("카테고리 추가")
-                    .font(.kr12r)
-                    .foregroundColor(.gray60)
-                    .onTapGesture {
-                        vm.onClickAddCategory()
                     }
             }
             .padding(EdgeInsets(top: 10, leading: 18, bottom: 6, trailing: 12))

@@ -23,11 +23,12 @@ struct AddCategoryView: View, KeyboardReadable {
     
     private var safeTop: CGFloat { get { Util.safeTop() }}
     private var safeBottom: CGFloat { get { Util.safeBottom() }}
+    private let columnCnt: Int = 9
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             ZStack(alignment: .trailing) {
-                Topbar("카테고리 추가", type: .close) {
+                Topbar($vm.type.type.wrappedValue == .create ? "카테고리 추가" : "카테고리 편집", type: .close) {
                     vm.onClose()
                 }
                 //TODO: 삭제 버튼 만들고 로직 추가
@@ -97,7 +98,7 @@ struct AddCategoryView: View, KeyboardReadable {
                 .foregroundColor(.gray90)
                 .padding(EdgeInsets(top: 10, leading: 18, bottom: 6, trailing: 12))
             
-            LazyVGrid(columns: Array(repeating: .init(.flexible(), spacing: 1), count: 8), spacing: 10) {
+            LazyVGrid(columns: Array(repeating: .init(.flexible(), spacing: 1), count: columnCnt), spacing: 10) {
                 ForEach(vm.pinList, id: \.self) { item in
                     pinItem(item, isSelected: $vm.pinType.wrappedValue == item)
                 }
@@ -136,7 +137,7 @@ struct AddCategoryView: View, KeyboardReadable {
         return Image(item.pinBlack)
             .resizable()
             .scaledToFit()
-            .frame(both: (UIScreen.main.bounds.width - 24 - 6 * 10) / 8)
+            .frame(both: (UIScreen.main.bounds.width - 24 - CGFloat(columnCnt - 1) * 10) / CGFloat(columnCnt))
             .padding(3)
             .border(isSelected ? .greenTint4 : .clear, lineWidth: 2, cornerRadius: 10)
             .onTapGesture {
