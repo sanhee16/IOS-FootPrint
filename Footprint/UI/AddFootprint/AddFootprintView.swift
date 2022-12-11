@@ -38,6 +38,7 @@ struct AddFootprintView: View, KeyboardReadable {
                             .padding([.leading, .trailing], 16)
 //                        drawPinSelectArea(geometry)
                         drawCategorySelectArea(geometry)
+                        drawPeopleWithArea(geometry)
                         drawImageArea(geometry)
                         
                         Divider()
@@ -134,28 +135,38 @@ struct AddFootprintView: View, KeyboardReadable {
         }
     }
     
-//
-//    private func drawPinSelectArea(_ geometry: GeometryProxy) -> some View {
-//        return VStack(alignment: .leading, spacing: 4) {
-//            Text("pin 선택")
-//                .font(.kr13b)
-//                .foregroundColor(.gray90)
-//                .padding(EdgeInsets(top: 10, leading: 18, bottom: 6, trailing: 12))
-//            ScrollView(.horizontal, showsIndicators: false) {
-//                HStack(alignment: .center, spacing: 12) {
-//                    ForEach($vm.pinList.wrappedValue, id: \.self) { item in
-//                        pinItem(item, isSelected: $vm.pinType.wrappedValue == item)
-//                    }
-//                }
-//                .padding(EdgeInsets(top: 6, leading: 12, bottom: 6, trailing: 12))
-//            }
-//        }
-//    }
+    private func drawPeopleWithArea(_ geometry: GeometryProxy) -> some View {
+        return VStack(alignment: .leading, spacing: 4) {
+            HStack(alignment: .center, spacing: 10) {
+                Text("함께한 사람")
+                    .font(.kr13b)
+                    .foregroundColor(.gray90)
+                Spacer()
+                Text("추가")
+                    .font(.kr12r)
+                    .foregroundColor(.gray60)
+                    .onTapGesture {
+                        vm.onClickAddPeopleWith()
+                    }
+            }
+            .padding(EdgeInsets(top: 10, leading: 18, bottom: 6, trailing: 12))
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(alignment: .center, spacing: 12) {
+                    ForEach($vm.peopleWith.wrappedValue, id: \.self) { item in
+                        Text(item.name)
+                            .font(.kr11b)
+                            .foregroundColor(.gray100)
+                    }
+                }
+                .padding(EdgeInsets(top: 6, leading: 12, bottom: 6, trailing: 12))
+            }
+        }
+    }
     
     private func drawCategorySelectArea(_ geometry: GeometryProxy) -> some View {
         return VStack(alignment: .leading, spacing: 4) {
             HStack(alignment: .center, spacing: 10) {
-                Text("카테고리 선택")
+                Text("카테고리")
                     .font(.kr13b)
                     .foregroundColor(.gray90)
                 Spacer()

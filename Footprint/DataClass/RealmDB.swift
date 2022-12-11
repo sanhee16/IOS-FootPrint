@@ -35,8 +35,9 @@ class FootPrint: Object {
     @Persisted var latitude: Double
     @Persisted var longitude: Double
     @Persisted var tag: Int // categoryTag
+    @Persisted var peopleWithIds: List<Int> = List()
 
-    convenience init(title: String, content: String, images: List<String>, latitude: Double, longitude: Double, tag: Int) {
+    convenience init(title: String, content: String, images: List<String>, latitude: Double, longitude: Double, tag: Int, peopleWithIds: List<Int>) {
         self.init()
         self.title = title
         self.content = content
@@ -68,16 +69,18 @@ class Category: Object {
 }
 
 
-class Person: Object {
-    public static func == (lhs: Person, rhs: Person) -> Bool {
-        return lhs.name == rhs.name
-    }
+class PeopleWith: Object {
+    @Persisted(primaryKey: true) var id: Int
+    @Persisted var name: String
+    @Persisted var image: String
+    @Persisted var intro: String
     
-    @Persisted(primaryKey: true) var name: String
-    
-    convenience init(name: String) {
+    convenience init(id: Int, name: String, image: String, intro: String) {
         self.init()
+        self.id = id
         self.name = name
+        self.image = image
+        self.intro = intro
     }
 }
 

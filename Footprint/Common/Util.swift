@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import RealmSwift
 import CoreLocation
 
 enum PermissionStatus {

@@ -75,7 +75,17 @@ class ShowFootPrintViewModel: BaseViewModel {
             }
         }
     
-        self.coordinator?.changeAddFootprintView(location: self.location, type: .modify(content: FootprintContents(title: item.title, content: item.content, images: uiImages, category: category, id: item.id))) {
+        
+//        var peopleWith: [PeopleWith] = item.peopleWithIds
+//        let realm = try! Realm()
+        var peopleWith: [PeopleWith] = []
+        peopleWith = realm.objects(PeopleWith.self).filter { peopleWith in
+            item.peopleWithIds.contains { id in
+                peopleWith.id == id
+            }
+        }
+        
+        self.coordinator?.changeAddFootprintView(location: self.location, type: .modify(content: FootprintContents(title: item.title, content: item.content, images: uiImages, category: category, peopleWith: peopleWith, id: item.id))) {
         }
     }
     

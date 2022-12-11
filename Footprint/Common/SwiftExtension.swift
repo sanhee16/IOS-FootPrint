@@ -8,6 +8,7 @@ import SwiftUI
 import RealmSwift
 import Combine
 
+
 extension Int {
     func pinType() -> PinType {
         return PinType(rawValue: self) ?? .star

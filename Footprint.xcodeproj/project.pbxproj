@@ -16,6 +16,8 @@
 		26332176292095E90065AE3A /* ShowFootPrintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26332175292095E90065AE3A /* ShowFootPrintView.swift */; };
 		26332178292095F10065AE3A /* ShowFootPrintViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26332177292095F10065AE3A /* ShowFootPrintViewModel.swift */; };
 		2639921F291FEBA60049F047 /* KeyboardReadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2639921E291FEBA60049F047 /* KeyboardReadable.swift */; };
+		263A97BB2945852E008A69F5 /* PeopleWithSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263A97BA2945852E008A69F5 /* PeopleWithSelectorView.swift */; };
+		263A97BD29458533008A69F5 /* PeopleWithSelectorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263A97BC29458533008A69F5 /* PeopleWithSelectorViewModel.swift */; };
 		264B70BC291F8DD900CDAF9F /* ApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264B70BB291F8DD900CDAF9F /* ApiResponse.swift */; };
 		264B70C0291F8E9D00CDAF9F /* C.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264B70BF291F8E9C00CDAF9F /* C.swift */; };
 		264EEF572925128300B89624 /* AddCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EEF562925128300B89624 /* AddCategoryView.swift */; };
@@ -85,6 +87,8 @@
 		26332175292095E90065AE3A /* ShowFootPrintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowFootPrintView.swift; sourceTree = "<group>"; };
 		26332177292095F10065AE3A /* ShowFootPrintViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowFootPrintViewModel.swift; sourceTree = "<group>"; };
 		2639921E291FEBA60049F047 /* KeyboardReadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardReadable.swift; sourceTree = "<group>"; };
+		263A97BA2945852E008A69F5 /* PeopleWithSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleWithSelectorView.swift; sourceTree = "<group>"; };
+		263A97BC29458533008A69F5 /* PeopleWithSelectorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleWithSelectorViewModel.swift; sourceTree = "<group>"; };
 		264B70BB291F8DD900CDAF9F /* ApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponse.swift; sourceTree = "<group>"; };
 		264B70BF291F8E9C00CDAF9F /* C.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C.swift; sourceTree = "<group>"; };
 		264EEF562925128300B89624 /* AddCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryView.swift; sourceTree = "<group>"; };
@@ -196,6 +200,15 @@
 			path = ShowFootPrint;
 			sourceTree = "<group>";
 		};
+		263A97B929458516008A69F5 /* PeopleWithSelector */ = {
+			isa = PBXGroup;
+			children = (
+				263A97BA2945852E008A69F5 /* PeopleWithSelectorView.swift */,
+				263A97BC29458533008A69F5 /* PeopleWithSelectorViewModel.swift */,
+			);
+			path = PeopleWithSelector;
+			sourceTree = "<group>";
+		};
 		264B70BA291F8DD000CDAF9F /* Api */ = {
 			isa = PBXGroup;
 			children = (
@@ -288,6 +301,7 @@
 		63B1FAEB2914A838007E94B6 /* AddFootprint */ = {
 			isa = PBXGroup;
 			children = (
+				263A97B929458516008A69F5 /* PeopleWithSelector */,
 				63B1FAF92914B312007E94B6 /* Gallery */,
 				264EEF552925126200B89624 /* AddCategory */,
 				63B1FAEC2914A85B007E94B6 /* AddFootprintView.swift */,
@@ -612,6 +626,7 @@
 				63F1325A2914A1A300B3A9E0 /* AppCoordinator.swift in Sources */,
 				26940CAF293C9D170091E996 /* ShowImageViewModel.swift in Sources */,
 				265EA945291D134200068A5C /* MapViewModel.swift in Sources */,
+				263A97BB2945852E008A69F5 /* PeopleWithSelectorView.swift in Sources */,
 				262D2A04293E2BAA005984DA /* SettingViewModel.swift in Sources */,
 				63F132512914A18F00B3A9E0 /* BaseViewModel.swift in Sources */,
 				63C8CCF62941D60400BB861D /* DevInfoView.swift in Sources */,
@@ -619,6 +634,7 @@
 				63F1324B2914A18800B3A9E0 /* Defaults.swift in Sources */,
 				264B70C0291F8E9D00CDAF9F /* C.swift in Sources */,
 				63F132982914A1C000B3A9E0 /* ProgressView.swift in Sources */,
+				263A97BD29458533008A69F5 /* PeopleWithSelectorViewModel.swift in Sources */,
 				26332178292095F10065AE3A /* ShowFootPrintViewModel.swift in Sources */,
 				63F1324A2914A18800B3A9E0 /* Util.swift in Sources */,
 				63F1325B2914A1A300B3A9E0 /* Coordinator.swift in Sources */,

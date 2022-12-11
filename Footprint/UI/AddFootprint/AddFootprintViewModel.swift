@@ -21,6 +21,7 @@ public struct FootprintContents {
     var content: String
     var images: [UIImage]
     var category: Category
+    var peopleWith: [PeopleWith]
     var id: ObjectId
 }
 
@@ -32,6 +33,7 @@ class AddFootprintViewModel: BaseViewModel {
     @Published var category: Category? = nil
     @Published var isKeyboardVisible = false
     @Published var isCategoryEditMode: Bool = false
+    @Published var isPeopleWithEditMode: Bool = false
     
 //    @Published var pinType: PinType = .star
 //    @Published var pinColor: PinColor = .pin2
@@ -42,6 +44,9 @@ class AddFootprintViewModel: BaseViewModel {
 //    let pinColorList: [PinColor] = [.pin0,.pin1,.pin2,.pin3,.pin4,.pin5,.pin6,.pin7,.pin8,.pin9]
     
     @Published var categories: [Category] = []
+    @Published var peopleWith: [PeopleWith] = []
+    
+//    private var peopleWithIds: [Int] = []
     private var modifyId: ObjectId? = nil
     private let type: AddFootprintType
     private let location: Location
@@ -62,6 +67,7 @@ class AddFootprintViewModel: BaseViewModel {
             self.content = contents.content
             self.images = contents.images
             self.category = contents.category
+            self.peopleWith = contents.peopleWith
             self.modifyId = contents.id
         }
         
@@ -157,12 +163,16 @@ class AddFootprintViewModel: BaseViewModel {
         }
         print("imageUrls: \(imageUrls)")
         //TODO: modify 안되고 add 되는데 primaryKey issue일 것 = update: .modified 글로벌 서치해서 addCategoryViewModel 참고하기
+        var peopleWithIds: List<Int> = List<Int>()
+        peopleWithIds.append(objectsIn: self.peopleWith.map { selected in
+            selected.id
+        })
         
         try! realm.write {
 //            let item = FootPrint(title: self.title, content: self.content, images: imageUrls, latitude: self.location.latitude, longitude: self.location.longitude, tag: category.tag)
             switch self.type {
             case .new:
-                let item = FootPrint(title: self.title, content: self.content, images: imageUrls, latitude: self.location.latitude, longitude: self.location.longitude, tag: category.tag)
+                let item = FootPrint(title: self.title, content: self.content, images: imageUrls, latitude: self.location.latitude, longitude: self.location.longitude, tag: category.tag, peopleWithIds: peopleWithIds)
                 realm.add(item)
             case .modify(content: _):
                 if let id = self.modifyId, let item = self.realm.object(ofType: FootPrint.self, forPrimaryKey: id), let categoryTag = self.category?.tag {
@@ -170,6 +180,7 @@ class AddFootprintViewModel: BaseViewModel {
                     item.tag = categoryTag
                     item.content = self.content
                     item.images = imageUrls
+                    item.peopleWithIds = peopleWithIds
                     self.realm.add(item, update: .modified)
                 }
             }
@@ -216,21 +227,11 @@ class AddFootprintViewModel: BaseViewModel {
         })
     }
     
-//    func deleteCategory(_ item: Category) {
-//        self.alert(.yesOrNo, title: "카테고리를 삭제하시겠습니까?", description: "카테고리를 삭제하면 기존 저장된 노트들은 사라집니다.") {[weak self] isDelete in
-//            guard let self = self else { return }
-//            if isDelete {
-//                if let filteredData = self.realm.object(ofType: Category.self, forPrimaryKey: item.tag) {
-//                    try! self.realm.write {
-//                        self.realm.delete(filteredData)
-//                        self.loadCategories()
-//                    }
-//                }
-//            } else {
-//
-//            }
-//        }
-//    }
+    func onClickAddPeopleWith() {
+        self.coordinator?.presentPeopleWithSelectorView(callback: {[weak self] res in
+            self?.peopleWith = res
+        })
+    }
     
     private func photoPermissionCheck(_ callback: @escaping (Bool)->()) {
         let photoAuthStatus = PHPhotoLibrary.authorizationStatus()

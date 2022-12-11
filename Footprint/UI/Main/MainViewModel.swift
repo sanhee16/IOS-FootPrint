@@ -242,13 +242,9 @@ class MainViewModel: BaseViewModel {
         if text.isEmpty {
             self.searchItems = self.allFootprints
         } else {
-            self.allFootprints.contains { item in
+            self.searchItems = self.allFootprints.filter { item in
                 item.title.contains(text)
             }
-            self.searchItems = Array(self.realm.objects(FootPrint.self)
-                .filter { item in
-                    item.title.contains(text)
-                })
         }
     }
     
