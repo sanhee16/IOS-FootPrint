@@ -24,6 +24,13 @@ struct PeopleWithSelectorView: View {
     private var safeTop: CGFloat { get { Util.safeTop() }}
     private var safeBottom: CGFloat { get { Util.safeBottom() }}
     private let imageSize: CGFloat = 40.0
+    private var scrollViewHeight: CGFloat {
+        get {
+            500 - safeTop - safeBottom - 50 - 34 - 30
+        }
+    }
+    
+    
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 0) {
@@ -51,7 +58,10 @@ struct PeopleWithSelectorView: View {
                             peopleWithItem(geometry, item: item)
                         }
                     }
+                    .frame(width: geometry.size.width - 24, height: (scrollViewHeight) / 2 - 4 - 20, alignment: .leading)
                     .background(Color.greenTint1)
+                    Divider()
+                        .padding([.top, .bottom], 2)
                     VStack(alignment: .leading, spacing: 4) {
                         ForEach($vm.peopleWithShowList.wrappedValue.indices, id: \.self) { idx in
                             let item = $vm.peopleWithShowList.wrappedValue[idx]
@@ -60,9 +70,10 @@ struct PeopleWithSelectorView: View {
                             }
                         }
                     }
+                    .frame(width: geometry.size.width - 24, height: (scrollViewHeight) / 2 + 20, alignment: .leading)
                     .background(Color.greenTint2)
                 }
-                .frame(width: geometry.size.width - 24, height: 500 - safeTop - safeBottom - 50 - 34 - 30, alignment: .leading)
+                .frame(width: geometry.size.width - 24, height: scrollViewHeight, alignment: .leading)
                 .padding([.top, .bottom], 10)
                 
                 Text("선택하기")
