@@ -12,10 +12,11 @@ struct PeopleWithSelectorView: View {
     public static func vc(_ coordinator: AppCoordinator, callback: @escaping  ([PeopleWith])->(), completion: (()-> Void)? = nil) -> UIViewController {
         let vm = VM.init(coordinator, callback: callback)
         let view = Self.init(vm: vm)
-        let vc = BaseViewController.init(view, completion: completion)
-        vc.modalPresentationStyle = .overCurrentContext
-        vc.view.backgroundColor = UIColor.clear
-        vc.controller.view.backgroundColor = UIColor.dim
+//        let vc = BaseViewController.init(view, completion: completion)
+        let vc = BaseViewController.bottomSheet(view, sizes: [.fixed(500.0)])
+//        vc.modalPresentationStyle = .overCurrentContext
+//        vc.view.backgroundColor = UIColor.clear
+//        vc.controller.view.backgroundColor = UIColor.dim
         return vc
     }
     @ObservedObject var vm: VM
@@ -33,17 +34,15 @@ struct PeopleWithSelectorView: View {
                     .font(.kr12r)
                     .foregroundColor(.gray90)
                     .padding([.leading, .trailing], 8)
-                    .frame(width: geometry.size.width - 100 - 30, height: 34, alignment: .center)
+                    .frame(width: geometry.size.width - 24, height: 34, alignment: .center)
                     .contentShape(Rectangle())
                     .background(
                         RoundedRectangle(cornerRadius: 6)
                             .foregroundColor(.lightGray03)
                     )
-                    .padding([.leading, .top, .trailing], 10)
                     .onChange(of: $vm.serachText.wrappedValue) { _ in
                         vm.enterSearchText()
                     }
-                    .padding(EdgeInsets(top: 12, leading: 15, bottom: 20, trailing: 15))
                 
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 4) {
@@ -52,7 +51,7 @@ struct PeopleWithSelectorView: View {
                             peopleWithItem(geometry, item: item)
                         }
                     }
-                    .padding(EdgeInsets(top: 12, leading: 0, bottom: 8, trailing: 0))
+                    .background(Color.greenTint1)
                     VStack(alignment: .leading, spacing: 4) {
                         ForEach($vm.peopleWithShowList.wrappedValue.indices, id: \.self) { idx in
                             let item = $vm.peopleWithShowList.wrappedValue[idx]
@@ -61,13 +60,15 @@ struct PeopleWithSelectorView: View {
                             }
                         }
                     }
-                    .padding(.bottom, 12)
+                    .background(Color.greenTint2)
                 }
-                .frame(width: geometry.size.width - 100, height: geometry.size.height / 3, alignment: .center)
+                .frame(width: geometry.size.width - 24, height: 500 - safeTop - safeBottom - 50 - 34 - 30, alignment: .leading)
+                .padding([.top, .bottom], 10)
+                
                 Text("선택하기")
                     .font(.kr16b)
                     .foregroundColor(.white)
-                    .frame(width: geometry.size.width - 100 - 30, height: 50, alignment: .center)
+                    .frame(width: geometry.size.width - 24, height: 50, alignment: .center)
                     .background(
                         RoundedRectangle(cornerRadius: 8)
                             .foregroundColor($vm.peopleWithSelectList.wrappedValue.isEmpty ? .gray30 : .greenTint1)
@@ -75,13 +76,13 @@ struct PeopleWithSelectorView: View {
                     .onTapGesture {
                         vm.onFinishSelect()
                     }
-                    .padding(.bottom, 20)
+                    .padding(.bottom, 10)
             }
-            .padding(EdgeInsets(top: safeTop, leading: 0, bottom: safeBottom, trailing: 0))
+            .padding(EdgeInsets(top: 0, leading: 0, bottom: safeBottom, trailing: 0))
             .edgesIgnoringSafeArea(.all)
-            .frame(width: geometry.size.width - 100, alignment: .leading)
+            .frame(width: geometry.size.width, alignment: .leading)
             .background(Color.white)
-            .padding([.leading, .trailing], 50)
+            .padding([.leading, .trailing], 12)
         }
         .onAppear {
             vm.onAppear()
