@@ -38,6 +38,7 @@ class PeopleWithSelectorViewModel: BaseViewModel {
     
     func enterSearchText() {
         let text = self.serachText
+        print("self.serachText: \(self.serachText)")
         if text.isEmpty {
             self.peopleWithShowList = self.peopleWithList
         } else {
