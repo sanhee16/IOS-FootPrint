@@ -12,11 +12,11 @@ struct PeopleWithSelectorView: View {
     public static func vc(_ coordinator: AppCoordinator, callback: @escaping  ([PeopleWith])->(), completion: (()-> Void)? = nil) -> UIViewController {
         let vm = VM.init(coordinator, callback: callback)
         let view = Self.init(vm: vm)
-//        let vc = BaseViewController.init(view, completion: completion)
+        //        let vc = BaseViewController.init(view, completion: completion)
         let vc = BaseViewController.bottomSheet(view, sizes: [.fixed(500.0)])
-//        vc.modalPresentationStyle = .overCurrentContext
-//        vc.view.backgroundColor = UIColor.clear
-//        vc.controller.view.backgroundColor = UIColor.dim
+        //        vc.modalPresentationStyle = .overCurrentContext
+        //        vc.view.backgroundColor = UIColor.clear
+        //        vc.controller.view.backgroundColor = UIColor.dim
         return vc
     }
     @ObservedObject var vm: VM
@@ -26,7 +26,7 @@ struct PeopleWithSelectorView: View {
     private let imageSize: CGFloat = 40.0
     private var scrollViewHeight: CGFloat {
         get {
-            500 - safeTop - safeBottom - 50 - 34 - 30
+            500 - safeTop - safeBottom - 50 - 34 - 30 - 50
         }
     }
     
@@ -39,7 +39,7 @@ struct PeopleWithSelectorView: View {
                 }
                 TextField("", text: $vm.serachText)
                     .font(.kr12r)
-                    .foregroundColor(.gray90)
+                    .foregroundColor(.gray60)
                     .padding([.leading, .trailing], 8)
                     .frame(width: geometry.size.width - 24, height: 34, alignment: .center)
                     .contentShape(Rectangle())
@@ -50,31 +50,37 @@ struct PeopleWithSelectorView: View {
                     .onChange(of: $vm.serachText.wrappedValue) { _ in
                         vm.enterSearchText()
                     }
-                
-                ScrollView(.vertical, showsIndicators: false) {
-                    VStack(alignment: .leading, spacing: 4) {
-                        ForEach($vm.peopleWithSelectList.wrappedValue.indices, id: \.self) { idx in
-                            let item = $vm.peopleWithSelectList.wrappedValue[idx]
-                            peopleWithItem(geometry, item: item)
-                        }
+                if $vm.peopleWithSelectList.wrappedValue.isEmpty {
+                    VStack(alignment: .center, spacing: 0) {
+                        Spacer()
+                        Text("함께한 사람 목록이 비어있습니다.")
+                            .font(.kr12r)
+                            .foregroundColor(.gray90)
+                        Spacer()
                     }
-                    .frame(width: geometry.size.width - 24, height: (scrollViewHeight) / 2 - 4 - 20, alignment: .leading)
-                    .background(Color.greenTint1)
-                    Divider()
-                        .padding([.top, .bottom], 2)
-                    VStack(alignment: .leading, spacing: 4) {
-                        ForEach($vm.peopleWithShowList.wrappedValue.indices, id: \.self) { idx in
-                            let item = $vm.peopleWithShowList.wrappedValue[idx]
-                            if !vm.isSelectedPeople(item) {
+                    .frame(width: geometry.size.width - 24, height: scrollViewHeight, alignment: .center)
+                    .padding([.top, .bottom], 10)
+                } else {
+                    ScrollView(.vertical, showsIndicators: false) {
+                        VStack(alignment: .leading, spacing: 4) {
+//                            ForEach($vm.peopleWithSelectList.wrappedValue.indices, id: \.self) { idx in
+//                                let item = $vm.peopleWithSelectList.wrappedValue[idx]
+//                                peopleWithItem(geometry, item: item)
+//                            }
+//                            Divider()
+//                                .padding([.top, .bottom], 2)
+                            ForEach($vm.peopleWithShowList.wrappedValue.indices, id: \.self) { idx in
+                                let item = $vm.peopleWithShowList.wrappedValue[idx]
+//                                if !vm.isSelectedPeople(item) {
+//                                }
                                 peopleWithItem(geometry, item: item)
                             }
                         }
+                        .padding(EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12))
                     }
-                    .frame(width: geometry.size.width - 24, height: (scrollViewHeight) / 2 + 20, alignment: .leading)
-                    .background(Color.greenTint2)
+                    .frame(width: geometry.size.width - 24, height: scrollViewHeight, alignment: .leading)
+                    .padding([.top, .bottom], 10)
                 }
-                .frame(width: geometry.size.width - 24, height: scrollViewHeight, alignment: .leading)
-                .padding([.top, .bottom], 10)
                 
                 Text("선택하기")
                     .font(.kr16b)
