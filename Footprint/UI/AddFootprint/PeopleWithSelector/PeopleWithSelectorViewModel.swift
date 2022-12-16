@@ -34,6 +34,9 @@ class PeopleWithSelectorViewModel: BaseViewModel {
     
     private func loadAllPeopleList() {
         peopleWithList = Array(realm.objects(PeopleWith.self))
+        peopleWithShowList = peopleWithList
+        print(realm.objects(PeopleWith.self))
+        print(peopleWithShowList)
     }
     
     func enterSearchText() {
@@ -66,6 +69,12 @@ class PeopleWithSelectorViewModel: BaseViewModel {
             }
         } else {
             self.peopleWithSelectList.append(item)
+        }
+    }
+    
+    func onClickAddPeople() {
+        self.coordinator?.presentPeopleEditView(.new(name: self.serachText)) {[weak self] in
+            self?.loadAllPeopleList()
         }
     }
 }

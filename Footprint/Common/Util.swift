@@ -95,7 +95,8 @@ class ImageManager {
         do {
             try data.write(to: directory.appendingPathComponent(imageName)!)
             if let dir = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) {
-                return URL(fileURLWithPath: dir.absoluteString).appendingPathComponent(imageName).path
+//                return URL(fileURLWithPath: dir.absoluteString).appendingPathComponent(imageName).path
+                return imageName
             }
         } catch {
             print(error.localizedDescription)

@@ -1,27 +1,28 @@
 //
-//  GalleryViewModel.swift
+//  SingleSelectGalleryViewModel.swift
 //  Footprint
 //
-//  Created by Studio-SJ on 2022/11/04.
+//  Created by Studio-SJ on 2022/12/16.
 //
+
 import Foundation
 import Combine
 import Kingfisher
 import Photos
 import SwiftUI
 
-class GalleryViewModel: BaseViewModel {
+class SingleSelectGalleryViewModel: BaseViewModel {
     private var images: PHFetchResult<PHAsset>? = nil
     private let PAGE_SIZE = 30
     var items: [GalleryItem] = []
     var hasNextPage: Bool = true
     var isFirstLoading = false
     var isLoading: Bool = false
-    var onClickItem: (([GalleryItem])->())?
+    var onClickItem: ((GalleryItem)->())?
 //    @Published var item: GalleryItem? = nil
-    @Published var selectedImages: [GalleryItem] = []
+    @Published var selectedImage: GalleryItem? = nil
     
-    init(_ coordinator: AppCoordinator, onClickItem: (([GalleryItem])->())?) {
+    init(_ coordinator: AppCoordinator, onClickItem: ((GalleryItem)->())?) {
         self.onClickItem = onClickItem
         super.init(coordinator)
         loadAllImages()
@@ -115,24 +116,20 @@ class GalleryViewModel: BaseViewModel {
     }
     
     func onSelectImage() {
-        if self.selectedImages.isEmpty {
+        guard let selectedImage = self.selectedImage else {
             return
         }
         self.coordinator?.dismiss {[weak self] in
             guard let self = self else { return }
-            self.onClickItem?(self.selectedImages)
+            self.onClickItem?(selectedImage)
         }
     }
     
     func onClickItem(_ item: GalleryItem) {
-        if let i = self.items.firstIndex(of: item) {
-            if let idx = self.selectedImages.firstIndex(of: item) {
-                self.items[i].isSelected = false
-                self.selectedImages.remove(at: idx)
-            } else {
-                self.items[i].isSelected = true
-                self.selectedImages.append(item)
-            }
+        if selectedImage == item {
+            selectedImage = nil
+        } else {
+            selectedImage = item
         }
     }
     

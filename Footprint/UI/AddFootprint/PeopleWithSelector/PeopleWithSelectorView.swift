@@ -50,6 +50,7 @@ struct PeopleWithSelectorView: View {
                                 }
                         }
                     }
+                    .padding([.leading, .trailing], 12)
                 }
                 .frame(width: geometry.size.width, height: 50, alignment: .center)
                 TextField("", text: $vm.serachText)
@@ -65,7 +66,7 @@ struct PeopleWithSelectorView: View {
                     .onChange(of: $vm.serachText.wrappedValue) { _ in
                         vm.enterSearchText()
                     }
-                if $vm.peopleWithSelectList.wrappedValue.isEmpty {
+                if $vm.peopleWithShowList.wrappedValue.isEmpty {
                     VStack(alignment: .center, spacing: 0) {
                         Spacer()
                         Text("함께한 사람 목록이 비어있습니다.")
@@ -105,7 +106,7 @@ struct PeopleWithSelectorView: View {
                             .foregroundColor($vm.serachText.wrappedValue.isEmpty ? .gray30 : .greenTint1)
                     )
                     .onTapGesture {
-                        vm.onFinishSelect()
+                        vm.onClickAddPeople()
                     }
                     .padding(.bottom, 10)
             }
@@ -127,6 +128,9 @@ struct PeopleWithSelectorView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(both: imageSize, aligment: .center)
+                    .clipShape(Circle())
+                    .contentShape(Rectangle())
+                    .clipped()
             } else {
                 Circle()
                     .foregroundColor(.gray50)

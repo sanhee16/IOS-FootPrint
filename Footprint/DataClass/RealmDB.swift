@@ -69,7 +69,7 @@ class Category: Object {
 }
 
 
-class PeopleWith: Object {
+public class PeopleWith: Object {
     @Persisted(primaryKey: true) var id: Int
     @Persisted var name: String
     @Persisted var image: String

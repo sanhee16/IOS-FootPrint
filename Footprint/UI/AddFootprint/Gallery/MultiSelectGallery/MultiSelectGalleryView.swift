@@ -10,8 +10,8 @@ import SwiftUI
 import SwiftUIPullToRefresh
 import Kingfisher
 
-struct GalleryView: View {
-    typealias VM = GalleryViewModel
+struct MultiSelectGalleryView: View {
+    typealias VM = MultiSelectGalleryViewModel
     public static func vc(_ coordinator: AppCoordinator, onClickItem: (([GalleryItem])->())?, completion: (()-> Void)? = nil) -> UIViewController {
         let vm = VM.init(coordinator, onClickItem: onClickItem)
         let view = Self.init(vm: vm)

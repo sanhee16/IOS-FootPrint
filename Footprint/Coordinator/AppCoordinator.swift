@@ -56,8 +56,13 @@ class AppCoordinator: Coordinator, Terminatable {
         self.present(vc, animated: true, onDismiss: onDismiss)
     }
     
-    func presentGalleryView(onClickItem: (([GalleryItem]) -> ())?) {
-        let vc = GalleryView.vc(self, onClickItem: onClickItem)
+    func presentMultiSelectGalleryView(onClickItem: (([GalleryItem]) -> ())?) {
+        let vc = MultiSelectGalleryView.vc(self, onClickItem: onClickItem)
+        self.present(vc, animated: true)
+    }
+    
+    func presentSingleSelectGalleryView(onClickItem: ((GalleryItem) -> ())?) {
+        let vc = SingleSelectGalleryView.vc(self, onClickItem: onClickItem)
         self.present(vc, animated: true)
     }
     
@@ -104,6 +109,11 @@ class AppCoordinator: Coordinator, Terminatable {
     func presentPeopleWithSelectorView(callback: @escaping ([PeopleWith])->()) {
         let vc = PeopleWithSelectorView.vc(self, callback: callback)
         self.present(vc, animated: false)
+    }
+    
+    func presentPeopleEditView(_ type: PeopleEditType, onDismiss: @escaping ()->()) {
+        let vc = PeopleEditView.vc(self, type: type)
+        self.present(vc, animated: false, onDismiss: onDismiss)
     }
     
     //MARK: Change
