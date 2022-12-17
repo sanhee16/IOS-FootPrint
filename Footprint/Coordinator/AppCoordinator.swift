@@ -111,8 +111,8 @@ class AppCoordinator: Coordinator, Terminatable {
         self.present(vc, animated: false)
     }
     
-    func presentPeopleEditView(_ type: PeopleEditType, onDismiss: @escaping ()->()) {
-        let vc = PeopleEditView.vc(self, type: type)
+    func presentPeopleEditView(_ peopleEditStruct: PeopleEditStruct, onDismiss: @escaping ()->()) {
+        let vc = PeopleEditView.vc(self, peopleEditStruct: peopleEditStruct)
         self.present(vc, animated: false, onDismiss: onDismiss)
     }
     

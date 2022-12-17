@@ -168,7 +168,8 @@ class AddFootprintViewModel: BaseViewModel {
             selected.id
         })
         
-        try! realm.write {
+        try! realm.write {[weak self] in
+            guard let self = self else { return }
 //            let item = FootPrint(title: self.title, content: self.content, images: imageUrls, latitude: self.location.latitude, longitude: self.location.longitude, tag: category.tag)
             switch self.type {
             case .new:

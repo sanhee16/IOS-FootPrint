@@ -57,7 +57,7 @@ struct SingleSelectGalleryView: View {
                                                 let item = vm.items[idx]
                                                 ZStack(alignment: .topLeading) {
                                                     ZStack(alignment: .center) {
-                                                        if item.isSelected {
+                                                        if item == $vm.selectedImage.wrappedValue {
                                                             Rectangle()
                                                                 .frame(both: cellSize - 4, aligment: .center)
                                                                 .foregroundColor(.clear)

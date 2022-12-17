@@ -23,7 +23,7 @@ struct PeopleWithSelectorView: View {
     
     private var safeTop: CGFloat { get { Util.safeTop() }}
     private var safeBottom: CGFloat { get { Util.safeBottom() }}
-    private let imageSize: CGFloat = 40.0
+    private let imageSize: CGFloat = 26.0
     private var scrollViewHeight: CGFloat {
         get {
             400 - (safeTop + safeBottom + 50 + 34 + 20 + 60)
@@ -79,20 +79,12 @@ struct PeopleWithSelectorView: View {
                 } else {
                     ScrollView(.vertical, showsIndicators: false) {
                         VStack(alignment: .leading, spacing: 4) {
-//                            ForEach($vm.peopleWithSelectList.wrappedValue.indices, id: \.self) { idx in
-//                                let item = $vm.peopleWithSelectList.wrappedValue[idx]
-//                                peopleWithItem(geometry, item: item)
-//                            }
-//                            Divider()
-//                                .padding([.top, .bottom], 2)
                             ForEach($vm.peopleWithShowList.wrappedValue.indices, id: \.self) { idx in
                                 let item = $vm.peopleWithShowList.wrappedValue[idx]
-//                                if !vm.isSelectedPeople(item) {
-//                                }
                                 peopleWithItem(geometry, item: item)
                             }
                         }
-                        .padding(EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12))
+                        .padding(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
                     }
                     .frame(width: geometry.size.width - 24, height: scrollViewHeight, alignment: .leading)
                     .padding([.top, .bottom], 10)
@@ -103,7 +95,7 @@ struct PeopleWithSelectorView: View {
                     .frame(width: geometry.size.width - 24, height: 50, alignment: .center)
                     .background(
                         RoundedRectangle(cornerRadius: 8)
-                            .foregroundColor($vm.serachText.wrappedValue.isEmpty ? .gray30 : .greenTint1)
+                            .foregroundColor(!$vm.isMatching.wrappedValue && !$vm.serachText.wrappedValue.isEmpty ? .greenTint1 : .gray30)
                     )
                     .onTapGesture {
                         vm.onClickAddPeople()
@@ -132,9 +124,17 @@ struct PeopleWithSelectorView: View {
                     .contentShape(Rectangle())
                     .clipped()
             } else {
-                Circle()
-                    .foregroundColor(.gray50)
+                Image("person")
+                    .resizable()
+                    .scaledToFit()
                     .frame(both: imageSize, aligment: .center)
+                    .clipShape(Circle())
+                    .contentShape(Rectangle())
+                    .clipped()
+                    .background(
+                        Circle()
+                            .foregroundColor(.gray30)
+                    )
             }
             Text(item.name)
                 .font(.kr12r)
@@ -154,6 +154,9 @@ struct PeopleWithSelectorView: View {
         .contentShape(Rectangle())
         .onTapGesture {
             vm.onClickPeopleItem(item)
+        }
+        .onLongPressGesture {
+            vm.onClickEditPeople(item)
         }
     }
 }

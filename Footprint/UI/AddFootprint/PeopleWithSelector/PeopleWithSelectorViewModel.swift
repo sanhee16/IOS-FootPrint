@@ -15,6 +15,7 @@ class PeopleWithSelectorViewModel: BaseViewModel {
     private var peopleWithList: [PeopleWith] = []
     @Published var peopleWithShowList: [PeopleWith] = []
     @Published var peopleWithSelectList: [PeopleWith] = []
+    @Published var isMatching: Bool = false
     private let realm: Realm
     private let callback: ([PeopleWith])->()
     
@@ -35,8 +36,9 @@ class PeopleWithSelectorViewModel: BaseViewModel {
     private func loadAllPeopleList() {
         peopleWithList = Array(realm.objects(PeopleWith.self))
         peopleWithShowList = peopleWithList
-        print(realm.objects(PeopleWith.self))
-        print(peopleWithShowList)
+        self.isMatching = !self.peopleWithList.filter {item in
+            item.name == self.serachText
+        }.isEmpty
     }
     
     func enterSearchText() {
@@ -48,6 +50,9 @@ class PeopleWithSelectorViewModel: BaseViewModel {
             self.peopleWithShowList = self.peopleWithList.filter { item in
                 item.name.contains(text)
             }
+            self.isMatching = !self.peopleWithList.filter { item in
+                item.name == text
+            }.isEmpty
         }
     }
     
@@ -73,7 +78,16 @@ class PeopleWithSelectorViewModel: BaseViewModel {
     }
     
     func onClickAddPeople() {
-        self.coordinator?.presentPeopleEditView(.new(name: self.serachText)) {[weak self] in
+        if serachText.isEmpty || isMatching {
+            return
+        }
+        self.coordinator?.presentPeopleEditView(PeopleEditStruct(.new, name: self.serachText)) {[weak self] in
+            self?.loadAllPeopleList()
+        }
+    }
+    
+    func onClickEditPeople(_ item: PeopleWith) {
+        self.coordinator?.presentPeopleEditView(PeopleEditStruct(.modify, item: item)) {[weak self] in
             self?.loadAllPeopleList()
         }
     }

@@ -79,7 +79,8 @@ class AddCategoryViewModel: BaseViewModel {
             print("update")
             
             if let category = self.type.category, let filteredData = self.realm.object(ofType: Category.self, forPrimaryKey: category.tag) {
-                try! self.realm.write {
+                try! self.realm.write {[weak self] in
+                    guard let self = self else { return }
                     let item = Category(tag: filteredData.tag, name: self.name, pinType: self.pinType, pinColor: self.pinColor)
                     
                     self.realm.add(item, update: .modified)
@@ -94,7 +95,8 @@ class AddCategoryViewModel: BaseViewModel {
             if let lastCategory = self.realm.objects(Category.self).last {
                 tag = lastCategory.tag + 1
             }
-            try! realm.write {
+            try! realm.write {[weak self] in
+                guard let self = self else { return }
                 let copy = Category(tag: tag, name: self.name, pinType: pinType, pinColor: self.pinColor)
                 var showingCategories = Defaults.showingCategories
                 showingCategories.append(tag)
@@ -115,7 +117,8 @@ class AddCategoryViewModel: BaseViewModel {
                         footPrint.tag == category.tag
                     }
                 if isDelete {
-                    try! self.realm.write {
+                    try! self.realm.write {[weak self] in
+                        guard let self = self else { return }
                         for i in items {
                             self.realm.delete(i)
                         }

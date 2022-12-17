@@ -40,7 +40,8 @@ class SplashViewModel: BaseViewModel {
     }
     
     private func firstTask() {
-        try! realm.write {
+        try! realm.write {[weak self] in
+            guard let self = self else { return }
             // 혹시 모르니까 다 지워버릴 것
             self.realm.deleteAll()
             let categories: [Category] = [

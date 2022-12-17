@@ -11,28 +11,52 @@ import UIKit
 import RealmSwift
 
 public enum PeopleEditType: Equatable {
-    case new(name: String)
-    case modify(item: PeopleWith)
+    case new
+    case modify
+}
+
+public struct PeopleEditStruct {
+    let type: PeopleEditType
+    let item: PeopleWith
+    
+    init(_ type: PeopleEditType, item: PeopleWith) {
+        self.type = type
+        self.item = item
+    }
+    
+    init(_ type: PeopleEditType, name: String) {
+        self.type = type
+        self.item = PeopleWith(id: 0, name: name, image: "", intro: "")
+    }
 }
 
 class PeopleEditViewModel: BaseViewModel {
+    let peopleEditStruct: PeopleEditStruct
     let type: PeopleEditType
     @Published var name: String = ""
     @Published var image: UIImage? = nil
     @Published var intro: String = ""
+    private var id: Int? = nil
     private let realm: Realm
     var isChangeImage: Bool = false
     
-    init(_ coordinator: AppCoordinator, type: PeopleEditType) {
-        self.type = type
+    init(_ coordinator: AppCoordinator, peopleEditStruct: PeopleEditStruct) {
+        self.peopleEditStruct = peopleEditStruct
+        self.type = peopleEditStruct.type
         self.realm = try! Realm()
         super.init(coordinator)
-        if case .modify(let item) = type {
-            self.name = item.name
-            self.image = ImageManager.shared.getSavedImage(named: item.image)
-            self.intro = item.intro
-        } else if case .new(let name) = type {
-            self.name = name
+        
+        switch self.type {
+        case .new:
+            self.name = self.peopleEditStruct.item.name
+            self.image = nil
+            self.intro = ""
+            self.id = nil
+        case .modify:
+            self.name = self.peopleEditStruct.item.name
+            self.image = ImageManager.shared.getSavedImage(named: self.peopleEditStruct.item.image)
+            self.intro = self.peopleEditStruct.item.intro
+            self.id = self.peopleEditStruct.item.id
         }
     }
     
@@ -52,29 +76,39 @@ class PeopleEditViewModel: BaseViewModel {
     }
     
     func deleteItem() {
-        if case .modify(let item) = type {
-            self.startProgress()
-            let deleteItem = PeopleWith(id: item.id, name: item.name, image: item.image, intro: item.intro)
-            try! self.realm.write {[weak self] in
-                self?.realm.delete(deleteItem)
-                self?.stopProgress()
-                self?.dismiss()
-            }
-        } else {
+        if type == .new {
             return
+        }
+        self.alert(.yesOrNo, title: "삭제하시겠습니까?", description: "기존 노트는 유지됩니다.") {[weak self] res in
+            guard let self = self else { return }
+            if !res {
+                return
+            }
+            try! self.realm.write {[weak self] in
+                guard let self = self else { return }
+                self.startProgress()
+                let deleteItem = self.peopleEditStruct.item
+                self.realm.delete(deleteItem)
+                self.stopProgress()
+                self.dismiss()
+            }
         }
     }
     
     func addItem() {
-        if type == .new(name: self.name) {
-            var id: Int = 0
-            if self.realm.objects(PeopleWith.self).isEmpty {
-                id = 0
-            } else if let lastItem = self.realm.objects(PeopleWith.self).last {
-                id = lastItem.id + 1
-            } else {
-                return
-            }
+        if type == .modify {
+            return
+        }
+        var id: Int = 0
+        if self.realm.objects(PeopleWith.self).isEmpty {
+            id = 0
+        } else if let lastItem = self.realm.objects(PeopleWith.self).last {
+            id = lastItem.id + 1
+        } else {
+            return
+        }
+        try! self.realm.write {[weak self] in
+            guard let self = self else { return }
             self.startProgress()
             var imageName: String = ""
             if let image = self.image {
@@ -83,18 +117,20 @@ class PeopleEditViewModel: BaseViewModel {
                 _ = ImageManager.shared.saveImage(image: image, imageName: imageName)
             }
             let addItem = PeopleWith(id: id, name: self.name, image: imageName, intro: self.intro)
-            try! self.realm.write {[weak self] in
-                self?.realm.add(addItem)
-                self?.stopProgress()
-                self?.dismiss()
-            }
+            self.realm.add(addItem)
+            self.stopProgress()
+            self.dismiss()
         }
     }
     
     func saveItem() {
-        if case .modify(let item) = type {
+        if type == .new {
+            return
+        }
+        try! self.realm.write {[weak self] in
+            guard let self = self else { return }
             self.startProgress()
-            var imageName: String = item.image
+            var imageName: String = self.peopleEditStruct.item.image
             if self.isChangeImage {
                 if let image = self.image {
                     let currentTimeStamp = Int(Date().timeIntervalSince1970)
@@ -104,14 +140,10 @@ class PeopleEditViewModel: BaseViewModel {
                     imageName = ""
                 }
             }
-            let saveItem = PeopleWith(id: item.id, name: self.name, image: imageName, intro: self.intro)
-            try! self.realm.write {[weak self] in
-                self?.realm.add(saveItem, update: .modified)
-                self?.stopProgress()
-                self?.dismiss()
-            }
-        } else {
-            return
+            let saveItem = PeopleWith(id: self.peopleEditStruct.item.id, name: self.name, image: imageName, intro: self.intro)
+            self.realm.add(saveItem, update: .modified)
+            self.stopProgress()
+            self.dismiss()
         }
     }
     

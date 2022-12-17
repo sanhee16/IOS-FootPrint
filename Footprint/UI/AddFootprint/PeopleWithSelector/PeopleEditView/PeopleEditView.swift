@@ -10,8 +10,8 @@ import SwiftUI
 
 struct PeopleEditView: View {
     typealias VM = PeopleEditViewModel
-    public static func vc(_ coordinator: AppCoordinator, type: PeopleEditType, completion: (()-> Void)? = nil) -> UIViewController {
-        let vm = VM.init(coordinator, type: type)
+    public static func vc(_ coordinator: AppCoordinator, peopleEditStruct: PeopleEditStruct, completion: (()-> Void)? = nil) -> UIViewController {
+        let vm = VM.init(coordinator, peopleEditStruct: peopleEditStruct)
         let view = Self.init(vm: vm)
         let vc = BaseViewController.init(view, completion: completion)
         vc.modalPresentationStyle = .overCurrentContext
@@ -24,8 +24,8 @@ struct PeopleEditView: View {
     private var safeTop: CGFloat { get { Util.safeTop() }}
     private var safeBottom: CGFloat { get { Util.safeBottom() }}
     
-    private var width: CGFloat = UIScreen.main.bounds.width - 60
-    
+    private let width: CGFloat = UIScreen.main.bounds.width - 60
+    private let imageSize: CGFloat = 40.0
     
     var body: some View {
         GeometryReader { geometry in
@@ -55,7 +55,7 @@ struct PeopleEditView: View {
                 Image(uiImage: uiImage)
                     .resizable()
                     .scaledToFit()
-                    .frame(both: 40.0, aligment: .center)
+                    .frame(both: imageSize, aligment: .center)
                     .clipShape(Circle())
                     .contentShape(Rectangle())
                     .clipped()
@@ -63,9 +63,17 @@ struct PeopleEditView: View {
                         vm.selectImage()
                     }
             } else {
-                Circle()
-                    .foregroundColor(.gray60)
-                    .frame(both: 40.0, aligment: .center)
+                Image("person")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(both: imageSize, aligment: .center)
+                    .clipShape(Circle())
+                    .contentShape(Rectangle())
+                    .clipped()
+                    .background(
+                        Circle()
+                            .foregroundColor(.gray30)
+                    )
                     .onTapGesture {
                         vm.selectImage()
                     }
@@ -86,8 +94,7 @@ struct PeopleEditView: View {
                     }
                 }
                 .contentShape(Rectangle())
-                .frame(width: width - 24 - 20, alignment: .center)
-                .padding([.leading, .trailing], 10)
+                .frame(width: width - 24, alignment: .center)
             
             TextField("설명(최대 10자)", text: $vm.intro)
                 .padding(EdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 8))
@@ -104,20 +111,21 @@ struct PeopleEditView: View {
                     }
                 }
                 .contentShape(Rectangle())
-                .frame(width: width - 24 - 20, alignment: .center)
-                .padding([.leading, .trailing], 10)
+                .frame(width: width - 24, alignment: .center)
         }
         .padding(EdgeInsets(top: 10, leading: 12, bottom: 10, trailing: 12))
     }
     
     private func drawHeader() -> some View {
         return ZStack(alignment: .center) {
-            Topbar(vm.type == .new(name: $vm.name.wrappedValue) ? "함께한 사람 추가하기" : "함께한 사람 수정하기", type: .close) {
+            
+            
+            Topbar(vm.type == .new ? "함께한 사람 추가하기" : "함께한 사람 수정하기", type: .close) {
                 vm.onClose()
             }
             HStack(alignment: .center, spacing: 8) {
                 Spacer()
-                if vm.type == .new(name: $vm.name.wrappedValue) {
+                if vm.type == .new {
                     Text("추가")
                         .font(.kr12r)
                         .foregroundColor(.gray90)
