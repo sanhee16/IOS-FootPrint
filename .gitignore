@@ -144,3 +144,5 @@ iOSInjectionProject/
 **/xcshareddata/WorkspaceSettings.xcsettings
 
 # End of https://www.toptal.com/developers/gitignore/api/swift,xcode,cocoapods
+Footprint.xcworkspace/xcuserdata/sandy.xcuserdatad/xcschemes/xcschememanagement.plist
+Pods/Pods.xcodeproj/xcuserdata/sandy.xcuserdatad/xcschemes/xcschememanagement.plist
