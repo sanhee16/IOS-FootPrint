@@ -74,10 +74,10 @@ class ShowFootPrintViewModel: BaseViewModel {
                 print("failed")
             }
         }
-    
         
-//        var peopleWith: [PeopleWith] = item.peopleWithIds
-//        let realm = try! Realm()
+        
+        //        var peopleWith: [PeopleWith] = item.peopleWithIds
+        //        let realm = try! Realm()
         if let footprint = self.realm.object(ofType: FootPrint.self, forPrimaryKey: item.id) {
             var peopleWith: [PeopleWith] = []
             for i in footprint.peopleWithIds {
@@ -127,5 +127,15 @@ class ShowFootPrintViewModel: BaseViewModel {
             }
         }
         self.coordinator?.presentShowImageView(idx, images: uiImages)
+    }
+    
+    func getPeopleWith(_ list: [Int]) -> [PeopleWith] {
+        var result: [PeopleWith] = []
+        for i in list {
+            if let item = i.getPeopleWith() {
+                result.append(item)
+            }
+        }
+        return result
     }
 }

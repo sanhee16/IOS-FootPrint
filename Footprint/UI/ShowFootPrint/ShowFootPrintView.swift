@@ -43,6 +43,9 @@ struct ShowFootPrintView: View {
         return Pager(page: $vm.page.wrappedValue, data: $vm.footPrints.wrappedValue, id: \.self) { item in
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 10) {
+                    if !item.peopleWithIds.isEmpty {
+                        drawPeopleWith(geometry, items: vm.getPeopleWith(Array(item.peopleWithIds)))
+                    }
                     drawCategory(geometry, item: item)
                     Text(item.title)
                         .font(.kr14b)
@@ -76,10 +79,6 @@ struct ShowFootPrintView: View {
                         .frame(width: geometry.size.width - 32, alignment: .topLeading)
                         .contentShape(Rectangle())
                         .multilineTextAlignment(.leading)
-                    //                        .background(
-                    //                            RoundedRectangle(cornerRadius: 2)
-                    //                                .foregroundColor(.greenTint5)
-                    //                        )
                         .padding([.leading, .trailing], 16)
                 }
                 .padding(EdgeInsets(top: 0, leading: 0, bottom: 14, trailing: 0))
@@ -124,15 +123,15 @@ struct ShowFootPrintView: View {
                 }
             }
             
-            HStack(alignment: .center, spacing: 8) {
+            HStack(alignment: .center, spacing: 12) {
                 Spacer()
-                Text("수정하기")
+                Text("수정")
                     .font(.kr12r)
                     .foregroundColor(.gray100)
                     .onTapGesture {
                         vm.onClickModifyFootprint()
                     }
-                Text("추가하기")
+                Text("추가")
                     .font(.kr12r)
                     .foregroundColor(.gray100)
                     .onTapGesture {
@@ -144,13 +143,25 @@ struct ShowFootPrintView: View {
         .frame(width: geometry.size.width, height: 50, alignment: .center)
     }
     
+    private func drawPeopleWith(_ geometry: GeometryProxy, items: [PeopleWith]) -> some View {
+        return HStack(alignment: .center, spacing: 4) {
+            Image("person")
+                .resizable()
+                .frame(both: 14.0, aligment: .center)
+            HStack(alignment: .center, spacing: 8) {
+                ForEach(items, id: \.self) { item in
+                    Text(item.name)
+                        .font(.kr11r)
+                        .foregroundColor(Color.gray90)
+                }
+            }
+        }
+        .padding(EdgeInsets(top: 0, leading: 16, bottom: 2, trailing: 0))
+    }
+    
+
     private func drawCategory(_ geometry: GeometryProxy, item: FootPrint) -> some View {
         return HStack(alignment: .center, spacing: 4) {
-            if let pinName = item.tag.getCategory()?.name {
-                Image(pinName)
-                    .resizable()
-                    .frame(both: 18.0, aligment: .center)
-            }
             if let category = item.tag.getCategory() {
                 Image(category.pinType.pinType().pinWhite)
                     .resizable()
@@ -161,7 +172,7 @@ struct ShowFootPrintView: View {
                     .foregroundColor(Color.gray90)
             }
         }
-        .padding(EdgeInsets(top: 0, leading: 0, bottom: 8, trailing: 0))
+        .padding(EdgeInsets(top: 0, leading: 16, bottom: 8, trailing: 0))
     }
     
     private func drawImageArea(_ geometry: GeometryProxy, item: FootPrint) -> some View {
