@@ -12,11 +12,7 @@ struct PeopleWithSelectorView: View {
     public static func vc(_ coordinator: AppCoordinator, peopleWith: [PeopleWith], callback: @escaping ([PeopleWith])->(), completion: (()-> Void)? = nil) -> UIViewController {
         let vm = VM.init(coordinator, peopleWith: peopleWith, callback: callback)
         let view = Self.init(vm: vm)
-        //        let vc = BaseViewController.init(view, completion: completion)
         let vc = BaseViewController.bottomSheet(view, sizes: [.fixed(400.0)])
-        //        vc.modalPresentationStyle = .overCurrentContext
-        //        vc.view.backgroundColor = UIColor.clear
-        //        vc.controller.view.backgroundColor = UIColor.dim
         return vc
     }
     @ObservedObject var vm: VM

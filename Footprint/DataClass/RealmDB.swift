@@ -46,6 +46,7 @@ class FootPrint: Object {
         self.latitude = latitude
         self.longitude = longitude
         self.tag = tag
+        self.peopleWithIds = peopleWithIds
     }
 }
 

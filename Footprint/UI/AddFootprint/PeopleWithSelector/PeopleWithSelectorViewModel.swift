@@ -36,9 +36,16 @@ class PeopleWithSelectorViewModel: BaseViewModel {
     }
     
     func onClose() {
-        self.dismiss(animated: false) {[weak self] in
+        self.alert(.yesOrNo, title: "저장하지 않고 종료하시겠습니까?", description: "이미 삭제된 데이터는 복원되지 않습니다.") {[weak self] isAllowDismiss in
             guard let self = self else { return }
-            self.callback(self.originalList)
+            if isAllowDismiss {
+                self.dismiss(animated: false) {[weak self] in
+                    guard let self = self else { return }
+                    self.callback(self.originalList)
+                }
+            } else {
+                return
+            }
         }
     }
     
@@ -100,7 +107,6 @@ class PeopleWithSelectorViewModel: BaseViewModel {
             peopleWith.id == item.id
         }
     }
-    
     
     private func makeCopyPeopleWith(_ item: PeopleWith) -> PeopleWith {
         return PeopleWith(id: item.id, name: item.name, image: item.image, intro: item.intro)

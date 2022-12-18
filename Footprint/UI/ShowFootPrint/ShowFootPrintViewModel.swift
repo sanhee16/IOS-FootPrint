@@ -78,14 +78,17 @@ class ShowFootPrintViewModel: BaseViewModel {
         
 //        var peopleWith: [PeopleWith] = item.peopleWithIds
 //        let realm = try! Realm()
-        var peopleWith: [PeopleWith] = []
-        peopleWith = realm.objects(PeopleWith.self).filter { peopleWith in
-            item.peopleWithIds.contains { id in
-                peopleWith.id == id
+        if let footprint = self.realm.object(ofType: FootPrint.self, forPrimaryKey: item.id) {
+            var peopleWith: [PeopleWith] = []
+            for i in footprint.peopleWithIds {
+                if let peopleWithItem = i.getPeopleWith() {
+                    peopleWith.append(peopleWithItem)
+                }
             }
-        }
-        
-        self.coordinator?.changeAddFootprintView(location: self.location, type: .modify(content: FootprintContents(title: item.title, content: item.content, images: uiImages, category: category, peopleWith: peopleWith, id: item.id))) {
+            print("peopleWith: \(peopleWith)")
+            
+            self.coordinator?.changeAddFootprintView(location: self.location, type: .modify(content: FootprintContents(title: item.title, content: item.content, images: uiImages, category: category, peopleWith: peopleWith, id: item.id))) {
+            }
         }
     }
     

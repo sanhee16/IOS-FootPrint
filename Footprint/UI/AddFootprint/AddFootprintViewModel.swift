@@ -162,16 +162,18 @@ class AddFootprintViewModel: BaseViewModel {
         }
         print("imageUrls: \(imageUrls)")
         //TODO: modify 안되고 add 되는데 primaryKey issue일 것 = update: .modified 글로벌 서치해서 addCategoryViewModel 참고하기
-        var peopleWithIds: List<Int> = List<Int>()
+        let peopleWithIds: List<Int> = List<Int>()
         peopleWithIds.append(objectsIn: self.peopleWith.map { selected in
             selected.id
         })
+        print("peopleWithIds: \(peopleWithIds)")
         
         try! realm.write {[weak self] in
             guard let self = self else { return }
 //            let item = FootPrint(title: self.title, content: self.content, images: imageUrls, latitude: self.location.latitude, longitude: self.location.longitude, tag: category.tag)
             switch self.type {
             case .new:
+                print("new peopleWithIds: \(peopleWithIds)")
                 let item = FootPrint(title: self.title, content: self.content, images: imageUrls, latitude: self.location.latitude, longitude: self.location.longitude, tag: category.tag, peopleWithIds: peopleWithIds)
                 realm.add(item)
             case .modify(content: _):
