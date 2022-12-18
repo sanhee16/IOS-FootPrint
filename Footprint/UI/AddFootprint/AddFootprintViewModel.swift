@@ -170,13 +170,13 @@ class AddFootprintViewModel: BaseViewModel {
         
         try! realm.write {[weak self] in
             guard let self = self else { return }
-//            let item = FootPrint(title: self.title, content: self.content, images: imageUrls, latitude: self.location.latitude, longitude: self.location.longitude, tag: category.tag)
             switch self.type {
             case .new:
-                print("new peopleWithIds: \(peopleWithIds)")
+                print("new")
                 let item = FootPrint(title: self.title, content: self.content, images: imageUrls, latitude: self.location.latitude, longitude: self.location.longitude, tag: category.tag, peopleWithIds: peopleWithIds)
                 realm.add(item)
             case .modify(content: _):
+                print("modify")
                 if let id = self.modifyId, let item = self.realm.object(ofType: FootPrint.self, forPrimaryKey: id), let categoryTag = self.category?.tag {
                     item.title = self.title
                     item.tag = categoryTag

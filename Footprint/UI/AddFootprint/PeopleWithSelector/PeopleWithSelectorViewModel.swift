@@ -77,10 +77,9 @@ class PeopleWithSelectorViewModel: BaseViewModel {
             for item in deleteList {
                 try! self.realm.write({ [weak self] in
                     guard let self = self else { return }
-                    let copy = Util.makeFootprintCopy(item)
-                    if let idx = copy.peopleWithIds.firstIndex(of: deleteId) {
-                        copy.peopleWithIds.remove(at: idx)
-                        self.realm.add(copy, update: .modified)
+                    if let idx = item.peopleWithIds.firstIndex(of: deleteId) {
+                        item.peopleWithIds.remove(at: idx)
+                        self.realm.add(item, update: .modified)
                     }
                 })
             }

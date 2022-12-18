@@ -63,7 +63,7 @@ struct PeopleEditView: View {
                         vm.selectImage()
                     }
             } else {
-                Image("person")
+                Image("profile")
                     .resizable()
                     .scaledToFit()
                     .frame(both: imageSize, aligment: .center)

@@ -36,15 +36,13 @@ struct PeopleWithSelectorView: View {
                     }
                     HStack(alignment: .center, spacing: 0) {
                         Spacer()
-                        if !$vm.peopleWithSelectList.wrappedValue.isEmpty {
-                            Text("완료")
-                                .font(.kr12r)
-                                .foregroundColor(.gray90)
-                                .padding(.trailing, 12)
-                                .onTapGesture {
-                                    vm.onFinishSelect()
-                                }
-                        }
+                        Text("완료")
+                            .font(.kr12r)
+                            .foregroundColor(.gray90)
+                            .padding(.trailing, 12)
+                            .onTapGesture {
+                                vm.onFinishSelect()
+                            }
                     }
                     .padding([.leading, .trailing], 12)
                 }
@@ -73,14 +71,20 @@ struct PeopleWithSelectorView: View {
                     .frame(width: geometry.size.width - 24, height: scrollViewHeight, alignment: .center)
                     .padding([.top, .bottom], 10)
                 } else {
-                    ScrollView(.vertical, showsIndicators: false) {
-                        VStack(alignment: .leading, spacing: 4) {
-                            ForEach($vm.peopleWithShowList.wrappedValue.indices, id: \.self) { idx in
-                                let item = $vm.peopleWithShowList.wrappedValue[idx]
-                                peopleWithItem(geometry, item: item)
+                    VStack(alignment: .center, spacing: 0) {
+                        Text("항목을 꾹 누르면 편집이 가능합니다.")
+                            .font(.kr12r)
+                            .foregroundColor(.gray90)
+                            .padding([.top, .bottom], 6)
+                        ScrollView(.vertical, showsIndicators: false) {
+                            VStack(alignment: .leading, spacing: 4) {
+                                ForEach($vm.peopleWithShowList.wrappedValue.indices, id: \.self) { idx in
+                                    let item = $vm.peopleWithShowList.wrappedValue[idx]
+                                    peopleWithItem(geometry, item: item)
+                                }
                             }
+                            .padding(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
                         }
-                        .padding(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
                     }
                     .frame(width: geometry.size.width - 24, height: scrollViewHeight, alignment: .leading)
                     .padding([.top, .bottom], 10)
@@ -120,7 +124,7 @@ struct PeopleWithSelectorView: View {
                     .contentShape(Rectangle())
                     .clipped()
             } else {
-                Image("person")
+                Image("profile")
                     .resizable()
                     .scaledToFit()
                     .frame(both: imageSize, aligment: .center)
