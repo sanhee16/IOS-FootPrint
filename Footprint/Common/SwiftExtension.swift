@@ -18,6 +18,19 @@ extension Int {
         return PinColor(rawValue: self) ?? .pin2
     }
     
+    func getPeopleWith() -> PeopleWith? {
+        let realm = try! Realm()
+        let getPeopleWith = realm.objects(PeopleWith.self)
+            .filter { peopleWith in
+                peopleWith.id == self
+            }
+            .first
+        if let item = getPeopleWith {
+            return PeopleWith(id: item.id, name: item.name, image: item.image, intro: item.intro)
+        }
+        return nil
+    }
+    
     func getCategory() -> Category? {
         let realm = try! Realm()
         // 모든 객체 얻기

@@ -70,6 +70,10 @@ class Category: Object {
 
 
 public class PeopleWith: Object {
+    public static func == (lhs: PeopleWith, rhs: PeopleWith) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
     @Persisted(primaryKey: true) var id: Int
     @Persisted var name: String
     @Persisted var image: String

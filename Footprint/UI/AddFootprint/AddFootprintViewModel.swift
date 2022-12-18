@@ -71,7 +71,6 @@ class AddFootprintViewModel: BaseViewModel {
             self.modifyId = contents.id
         }
         
-        print("sandy init")
         self.loadCategories()
     }
     
@@ -229,9 +228,9 @@ class AddFootprintViewModel: BaseViewModel {
     }
     
     func onClickAddPeopleWith() {
-        self.coordinator?.presentPeopleWithSelectorView(callback: {[weak self] res in
+        self.coordinator?.presentPeopleWithSelectorView(self.peopleWith) {[weak self] res in
             self?.peopleWith = res
-        })
+        }
     }
     
     private func photoPermissionCheck(_ callback: @escaping (Bool)->()) {

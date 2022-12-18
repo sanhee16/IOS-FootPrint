@@ -33,6 +33,18 @@ class Util {
     static func safeTop() -> CGFloat {
         return safeAreaInsets()?.top ?? 0
     }
+    
+    static func makeFootprintCopy(_ footprint: FootPrint) -> FootPrint {
+        return FootPrint(title: footprint.title, content: footprint.content, images: footprint.images, latitude: footprint.latitude, longitude: footprint.longitude, tag: footprint.tag, peopleWithIds: footprint.peopleWithIds)
+    }
+    
+    static func makePeopleWithCopy(_ peopleWith: PeopleWith) -> PeopleWith {
+        return PeopleWith(id: peopleWith.id, name: peopleWith.name, image: peopleWith.image, intro: peopleWith.intro)
+    }
+    
+    static func makeCategoryCopy(_ category: Category) -> Category {
+        return Category(tag: category.tag, name: category.name, pinType: category.pinType.pinType(), pinColor: category.pinColor.pinColor())
+    }
 }
 
 

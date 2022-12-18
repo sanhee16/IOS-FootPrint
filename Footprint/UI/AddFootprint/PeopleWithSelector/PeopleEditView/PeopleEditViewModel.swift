@@ -36,14 +36,17 @@ class PeopleEditViewModel: BaseViewModel {
     @Published var name: String = ""
     @Published var image: UIImage? = nil
     @Published var intro: String = ""
+    var isChange: Bool = false
     private var id: Int? = nil
     private let realm: Realm
     var isChangeImage: Bool = false
+    private let callback: ((Int?) -> ())
     
-    init(_ coordinator: AppCoordinator, peopleEditStruct: PeopleEditStruct) {
+    init(_ coordinator: AppCoordinator, peopleEditStruct: PeopleEditStruct, callback: @escaping ((Int?) -> ())) {
         self.peopleEditStruct = peopleEditStruct
         self.type = peopleEditStruct.type
         self.realm = try! Realm()
+        self.callback = callback
         super.init(coordinator)
         
         switch self.type {
@@ -65,6 +68,10 @@ class PeopleEditViewModel: BaseViewModel {
     }
     
     func onClose() {
+        if !isChange {
+            self.dismiss()
+            return
+        }
         self.alert(.yesOrNo, title: "저장하지 않고 나가시겠습니까?") {[weak self] res in
             guard let self = self else { return }
             if res {
@@ -88,9 +95,12 @@ class PeopleEditViewModel: BaseViewModel {
                 guard let self = self else { return }
                 self.startProgress()
                 let deleteItem = self.peopleEditStruct.item
+                let deleteId = deleteItem.id
                 self.realm.delete(deleteItem)
                 self.stopProgress()
-                self.dismiss()
+                self.dismiss { [weak self] in
+                    self?.callback(deleteId)
+                }
             }
         }
     }
@@ -119,7 +129,9 @@ class PeopleEditViewModel: BaseViewModel {
             let addItem = PeopleWith(id: id, name: self.name, image: imageName, intro: self.intro)
             self.realm.add(addItem)
             self.stopProgress()
-            self.dismiss()
+            self.dismiss { [weak self] in
+                self?.callback(nil)
+            }
         }
     }
     
@@ -143,12 +155,15 @@ class PeopleEditViewModel: BaseViewModel {
             let saveItem = PeopleWith(id: self.peopleEditStruct.item.id, name: self.name, image: imageName, intro: self.intro)
             self.realm.add(saveItem, update: .modified)
             self.stopProgress()
-            self.dismiss()
+            self.dismiss { [weak self] in
+                self?.callback(nil)
+            }
         }
     }
     
     func selectImage() {
         self.isChangeImage = true
+        self.isChange = true
         self.coordinator?.presentSingleSelectGalleryView(onClickItem: {[weak self] item in
             guard let self = self else { return }
             self.image = item.image
@@ -157,6 +172,7 @@ class PeopleEditViewModel: BaseViewModel {
     
     func onClickImage() {
         self.isChangeImage = true
+        self.isChange = true
         self.image = nil
     }
 }

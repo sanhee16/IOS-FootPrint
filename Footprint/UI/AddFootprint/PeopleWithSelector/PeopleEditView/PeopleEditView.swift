@@ -10,8 +10,8 @@ import SwiftUI
 
 struct PeopleEditView: View {
     typealias VM = PeopleEditViewModel
-    public static func vc(_ coordinator: AppCoordinator, peopleEditStruct: PeopleEditStruct, completion: (()-> Void)? = nil) -> UIViewController {
-        let vm = VM.init(coordinator, peopleEditStruct: peopleEditStruct)
+    public static func vc(_ coordinator: AppCoordinator, peopleEditStruct: PeopleEditStruct, callback: @escaping ((Int?) -> ()), completion: (()-> Void)? = nil) -> UIViewController {
+        let vm = VM.init(coordinator, peopleEditStruct: peopleEditStruct, callback: callback)
         let view = Self.init(vm: vm)
         let vc = BaseViewController.init(view, completion: completion)
         vc.modalPresentationStyle = .overCurrentContext
@@ -86,6 +86,7 @@ struct PeopleEditView: View {
                         .foregroundColor(.greenTint5)
                 )
                 .onChange(of: $vm.name.wrappedValue) { newValue in
+                    vm.isChange = true
                     if $vm.name.wrappedValue == " " {
                         $vm.name.wrappedValue = ""
                     }
@@ -103,6 +104,7 @@ struct PeopleEditView: View {
                         .foregroundColor(.greenTint5)
                 )
                 .onChange(of: $vm.intro.wrappedValue) { newValue in
+                    vm.isChange = true
                     if $vm.intro.wrappedValue == " " {
                         $vm.intro.wrappedValue = ""
                     }

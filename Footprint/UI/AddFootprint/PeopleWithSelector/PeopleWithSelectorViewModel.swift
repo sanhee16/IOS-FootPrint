@@ -17,12 +17,18 @@ class PeopleWithSelectorViewModel: BaseViewModel {
     @Published var peopleWithSelectList: [PeopleWith] = []
     @Published var isMatching: Bool = false
     private let realm: Realm
+    private var originalList: [PeopleWith]
     private let callback: ([PeopleWith])->()
     
-    init(_ coordinator: AppCoordinator, callback: @escaping ([PeopleWith])->()) {
+    init(_ coordinator: AppCoordinator, peopleWith: [PeopleWith], callback: @escaping ([PeopleWith])->()) {
         self.realm = try! Realm()
         self.callback = callback
+        self.originalList = peopleWith
         super.init(coordinator)
+        
+        for item in peopleWith {
+            self.peopleWithSelectList.append(item)
+        }
     }
     
     func onAppear() {
@@ -30,15 +36,48 @@ class PeopleWithSelectorViewModel: BaseViewModel {
     }
     
     func onClose() {
-        self.dismiss(animated: false)
+        self.dismiss(animated: false) {[weak self] in
+            guard let self = self else { return }
+            self.callback(self.originalList)
+        }
     }
     
-    private func loadAllPeopleList() {
+    private func loadAllPeopleList(_ deleteId: Int? = nil) {
         peopleWithList = Array(realm.objects(PeopleWith.self))
         peopleWithShowList = peopleWithList
         self.isMatching = !self.peopleWithList.filter {item in
             item.name == self.serachText
         }.isEmpty
+        
+        if let deleteId = deleteId {
+            if let idx = peopleWithSelectList.firstIndex(where: { item in
+                item.id == deleteId
+            }) {
+                peopleWithSelectList.remove(at: idx)
+            }
+            if let idx = originalList.firstIndex(where: { item in
+                item.id == deleteId
+            }) {
+                originalList.remove(at: idx)
+            }
+            
+            let deleteList = Array(self.realm.objects(FootPrint.self)
+                .filter { footprint in
+                    footprint.peopleWithIds.contains { id in
+                        id == deleteId
+                    }
+                })
+            for item in deleteList {
+                try! self.realm.write({ [weak self] in
+                    guard let self = self else { return }
+                    let copy = Util.makeFootprintCopy(item)
+                    if let idx = copy.peopleWithIds.firstIndex(of: deleteId) {
+                        copy.peopleWithIds.remove(at: idx)
+                        self.realm.add(copy, update: .modified)
+                    }
+                })
+            }
+        }
     }
     
     func enterSearchText() {
@@ -57,7 +96,14 @@ class PeopleWithSelectorViewModel: BaseViewModel {
     }
     
     func isSelectedPeople(_ item: PeopleWith) -> Bool {
-        return self.peopleWithSelectList.contains(item)
+        return self.peopleWithSelectList.contains { peopleWith in
+            peopleWith.id == item.id
+        }
+    }
+    
+    
+    private func makeCopyPeopleWith(_ item: PeopleWith) -> PeopleWith {
+        return PeopleWith(id: item.id, name: item.name, image: item.image, intro: item.intro)
     }
     
     func onFinishSelect() {
@@ -73,7 +119,7 @@ class PeopleWithSelectorViewModel: BaseViewModel {
                 listItem.name == item.name
             }
         } else {
-            self.peopleWithSelectList.append(item)
+            self.peopleWithSelectList.append(makeCopyPeopleWith(item))
         }
     }
     
@@ -81,14 +127,14 @@ class PeopleWithSelectorViewModel: BaseViewModel {
         if serachText.isEmpty || isMatching {
             return
         }
-        self.coordinator?.presentPeopleEditView(PeopleEditStruct(.new, name: self.serachText)) {[weak self] in
-            self?.loadAllPeopleList()
-        }
+        self.coordinator?.presentPeopleEditView(PeopleEditStruct(.new, name: self.serachText), callback: { [weak self] deleteId in
+            self?.loadAllPeopleList(deleteId)
+        })
     }
     
     func onClickEditPeople(_ item: PeopleWith) {
-        self.coordinator?.presentPeopleEditView(PeopleEditStruct(.modify, item: item)) {[weak self] in
-            self?.loadAllPeopleList()
-        }
+        self.coordinator?.presentPeopleEditView(PeopleEditStruct(.modify, item: item), callback: { [weak self] deleteId in
+            self?.loadAllPeopleList(deleteId)
+        })
     }
 }
