@@ -29,6 +29,9 @@
 		265EA941291D112B00068A5C /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265EA940291D112B00068A5C /* MapView.swift */; };
 		265EA945291D134200068A5C /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265EA944291D134200068A5C /* MapViewModel.swift */; };
 		265EA947291D1E1400068A5C /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265EA946291D1E1400068A5C /* DataModel.swift */; };
+		2691D9C3294EE4B1002825B9 /* FootprintListFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2691D9C2294EE4B1002825B9 /* FootprintListFilterView.swift */; };
+		2691D9C5294EE4B6002825B9 /* FootprintListFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2691D9C4294EE4B6002825B9 /* FootprintListFilterViewModel.swift */; };
+		2691D9C7294EE505002825B9 /* BluePrintBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2691D9C6294EE505002825B9 /* BluePrintBottomSheetView.swift */; };
 		26940CAD293C9D0F0091E996 /* ShowImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26940CAC293C9D0F0091E996 /* ShowImageView.swift */; };
 		26940CAF293C9D170091E996 /* ShowImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26940CAE293C9D170091E996 /* ShowImageViewModel.swift */; };
 		26C04F6D2917667F00890A76 /* SwiftUIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */; };
@@ -102,6 +105,9 @@
 		265EA940291D112B00068A5C /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		265EA944291D134200068A5C /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		265EA946291D1E1400068A5C /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		2691D9C2294EE4B1002825B9 /* FootprintListFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootprintListFilterView.swift; sourceTree = "<group>"; };
+		2691D9C4294EE4B6002825B9 /* FootprintListFilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootprintListFilterViewModel.swift; sourceTree = "<group>"; };
+		2691D9C6294EE505002825B9 /* BluePrintBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluePrintBottomSheetView.swift; sourceTree = "<group>"; };
 		26940CAC293C9D0F0091E996 /* ShowImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowImageView.swift; sourceTree = "<group>"; };
 		26940CAE293C9D170091E996 /* ShowImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowImageViewModel.swift; sourceTree = "<group>"; };
 		26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIExtension.swift; sourceTree = "<group>"; };
@@ -239,6 +245,7 @@
 		265924C529445BC7001E7025 /* FootprintList */ = {
 			isa = PBXGroup;
 			children = (
+				2691D9C1294EE49E002825B9 /* FootprintListFilter */,
 				265924C629445BD9001E7025 /* FootprintListView.swift */,
 				265924C829445BE1001E7025 /* FootprintListViewModel.swift */,
 			);
@@ -252,6 +259,15 @@
 				265EA944291D134200068A5C /* MapViewModel.swift */,
 			);
 			path = MapView;
+			sourceTree = "<group>";
+		};
+		2691D9C1294EE49E002825B9 /* FootprintListFilter */ = {
+			isa = PBXGroup;
+			children = (
+				2691D9C2294EE4B1002825B9 /* FootprintListFilterView.swift */,
+				2691D9C4294EE4B6002825B9 /* FootprintListFilterViewModel.swift */,
+			);
+			path = FootprintListFilter;
 			sourceTree = "<group>";
 		};
 		26940CAB293C9D000091E996 /* ShowImage */ = {
@@ -460,6 +476,7 @@
 			children = (
 				63F1328C2914A1C000B3A9E0 /* BluePrintView.swift */,
 				63F1328D2914A1C000B3A9E0 /* BluePrintViewModel.swift */,
+				2691D9C6294EE505002825B9 /* BluePrintBottomSheetView.swift */,
 			);
 			path = BluePrint;
 			sourceTree = "<group>";
@@ -638,6 +655,7 @@
 				265EA941291D112B00068A5C /* MapView.swift in Sources */,
 				264EEF592925128A00B89624 /* AddCategoryViewModel.swift in Sources */,
 				63F1328E2914A1C000B3A9E0 /* SplashViewModel.swift in Sources */,
+				2691D9C5294EE4B6002825B9 /* FootprintListFilterViewModel.swift in Sources */,
 				265924C929445BE1001E7025 /* FootprintListViewModel.swift in Sources */,
 				264B70BC291F8DD900CDAF9F /* ApiResponse.swift in Sources */,
 				63F1328F2914A1C000B3A9E0 /* SplashView.swift in Sources */,
@@ -672,6 +690,7 @@
 				63F1324B2914A18800B3A9E0 /* Defaults.swift in Sources */,
 				264B70C0291F8E9D00CDAF9F /* C.swift in Sources */,
 				63F132982914A1C000B3A9E0 /* ProgressView.swift in Sources */,
+				2691D9C7294EE505002825B9 /* BluePrintBottomSheetView.swift in Sources */,
 				263A97BD29458533008A69F5 /* PeopleWithSelectorViewModel.swift in Sources */,
 				26332178292095F10065AE3A /* ShowFootPrintViewModel.swift in Sources */,
 				63F1324A2914A18800B3A9E0 /* Util.swift in Sources */,
@@ -684,6 +703,7 @@
 				2619FE8A2940D6AC00D24778 /* CheckPermissionView.swift in Sources */,
 				63F1324C2914A18800B3A9E0 /* Api.swift in Sources */,
 				63F1329A2914A1C000B3A9E0 /* WebView.swift in Sources */,
+				2691D9C3294EE4B1002825B9 /* FootprintListFilterView.swift in Sources */,
 				63C8CCF82941D60D00BB861D /* DevInfoViewModel.swift in Sources */,
 				63F132562914A19F00B3A9E0 /* SceneDelegate.swift in Sources */,
 				63B1FAED2914A85B007E94B6 /* AddFootprintView.swift in Sources */,

@@ -116,6 +116,11 @@ class AppCoordinator: Coordinator, Terminatable {
         self.present(vc, animated: false)
     }
     
+    func presentFootprintListFilterView(onDismiss: @escaping ()->()) {
+        let vc = FootprintListFilterView.vc(self)
+        self.present(vc, animated: false, onDismiss: onDismiss)
+    }
+    
     //MARK: Change
     func changeAddFootprintView(location: Location, type: AddFootprintType, onDismiss: @escaping ()->()) {
         let vc = AddFootprintView.vc(self, location: location, type: type)

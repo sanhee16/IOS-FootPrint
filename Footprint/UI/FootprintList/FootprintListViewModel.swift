@@ -33,10 +33,46 @@ class FootprintListViewModel: BaseViewModel {
     }
     
     func onClickFilter() {
-        
+        self.coordinator?.presentFootprintListFilterView(onDismiss: { [weak self] in
+            self?.loadAllItems()
+        })
     }
     
     func loadAllItems() {
-        self.list = Array(self.realm.objects(FootPrint.self))
+        let filterPeopleWithIds: [Int] = Defaults.filterPeopleIds
+        let filterCategoryIds: [Int] = Defaults.filterCategoryIds
+        print("filterPeopleWithIds: \(filterPeopleWithIds), filterCategoryIds: \(filterCategoryIds)")
+        
+        self.list = Array(self.realm.objects(FootPrint.self)
+            .filter({footprint in
+                self.isContain(items: footprint.peopleWithIds, filter: filterPeopleWithIds) && self.isContain(itemId: footprint.tag, filter: filterCategoryIds)
+            }))
+    }
+    
+    private func isContain(items: List<Int>, filter: [Int]) -> Bool {
+        if filter.isEmpty {
+            return true
+        }
+        //filter와 items 중에 하나!라도 일치하면 됨
+        for itemId in items {
+            if filter.contains(where: { filterId in
+                filterId == itemId
+            }) {
+                return true
+            }
+        }
+        return false
+    }
+    
+    private func isContain(itemId: Int, filter: [Int]) -> Bool {
+        if filter.isEmpty {
+            return true
+        }
+        if filter.contains(where: { filterId in
+            filterId == itemId
+        }) {
+            return true
+        }
+        return false
     }
 }

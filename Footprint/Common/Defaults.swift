@@ -27,4 +27,24 @@ class Defaults {
             UserDefaults.standard.setValue(value, forKey: SHOWING_CATEGORIES)
         }
     }
+    
+    private static let FILTER_PEOPLE_IDS = "FILTER_PEOPLE_IDS"
+    public static var filterPeopleIds: [Int] {
+        get {
+            (UserDefaults.standard.array(forKey: FILTER_PEOPLE_IDS) as? [Int]) ?? []
+        }
+        set(value) {
+            UserDefaults.standard.setValue(value, forKey: FILTER_PEOPLE_IDS)
+        }
+    }
+    
+    private static let FILTER_CATEGORY_IDS = "FILTER_CATEGORY_IDS"
+    public static var filterCategoryIds: [Int] {
+        get {
+            (UserDefaults.standard.array(forKey: FILTER_CATEGORY_IDS) as? [Int]) ?? []
+        }
+        set(value) {
+            UserDefaults.standard.setValue(value, forKey: FILTER_CATEGORY_IDS)
+        }
+    }
 }
