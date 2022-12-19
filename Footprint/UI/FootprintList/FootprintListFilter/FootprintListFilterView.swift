@@ -33,9 +33,9 @@ struct FootprintListFilterView: View {
                     drawTitle("함께한 사람")
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(alignment: .center, spacing: 10.0) {
-                            ForEach(Array($vm.peopleWithList.wrappedValue.keys), id: \.self) { item in
-                                if let value = $vm.peopleWithList.wrappedValue[item] {
-                                    drawPeopleWith(item, isSelected: value)
+                            ForEach($vm.peopleWithList.wrappedValue.indices, id: \.self) { idx in
+                                if let item = $vm.peopleWithList.wrappedValue[idx] {
+                                    drawPeopleWith(item.item, isSelected: item.isSelected)
                                 }
                             }
                         }
@@ -44,9 +44,9 @@ struct FootprintListFilterView: View {
                     drawTitle("카테고리")
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(alignment: .center, spacing: 10.0) {
-                            ForEach(Array($vm.categoryList.wrappedValue.keys), id: \.self) { item in
-                                if let value = $vm.categoryList.wrappedValue[item] {
-                                    drawCategoryItem(item, isSelected: value)
+                            ForEach($vm.categoryList.wrappedValue.indices, id: \.self) { idx in
+                                if let item = $vm.categoryList.wrappedValue[idx] {
+                                    drawCategoryItem(item.item, isSelected: item.isSelected)
                                 }
                             }
                         }

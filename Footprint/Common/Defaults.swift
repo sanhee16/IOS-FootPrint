@@ -28,6 +28,16 @@ class Defaults {
         }
     }
     
+    private static let IS_SET_FILTER = "IS_SET_FILTER"
+    public static var isSetFilter: Bool {
+        get {
+            UserDefaults.standard.bool(forKey: IS_SET_FILTER)
+        }
+        set(value) {
+            UserDefaults.standard.setValue(value, forKey: IS_SET_FILTER)
+        }
+    }
+    
     private static let FILTER_PEOPLE_IDS = "FILTER_PEOPLE_IDS"
     public static var filterPeopleIds: [Int] {
         get {
