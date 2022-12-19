@@ -32,24 +32,46 @@ struct FootprintListFilterView: View {
                 VStack(alignment: .leading, spacing: 0) {
                     drawTitle("함께한 사람")
                     ScrollView(.horizontal, showsIndicators: false) {
-                        LazyHGrid(rows: Array(repeating: .init(.flexible(), spacing: 10.0), count: 3), alignment: .center, spacing: 10.0) {
+                        HStack(alignment: .center, spacing: 10.0) {
                             ForEach(Array($vm.peopleWithList.wrappedValue.keys), id: \.self) { item in
                                 if let value = $vm.peopleWithList.wrappedValue[item] {
                                     drawPeopleWith(item, isSelected: value)
                                 }
                             }
                         }
+                        .padding(EdgeInsets(top: 2, leading: 12, bottom: 2, trailing: 12))
                     }
                     drawTitle("카테고리")
                     ScrollView(.horizontal, showsIndicators: false) {
-                        LazyHGrid(rows: Array(repeating: .init(.flexible(), spacing: 10.0), count: 3), alignment: .center, spacing: 10.0) {
+                        HStack(alignment: .center, spacing: 10.0) {
                             ForEach(Array($vm.categoryList.wrappedValue.keys), id: \.self) { item in
                                 if let value = $vm.categoryList.wrappedValue[item] {
                                     drawCategoryItem(item, isSelected: value)
                                 }
                             }
                         }
+                        .padding(EdgeInsets(top: 2, leading: 12, bottom: 2, trailing: 12))
                     }
+                    Spacer()
+                    HStack(alignment: .center, spacing: 20) {
+                        Text("Clear")
+                            .font(.kr16r)
+                            .foregroundColor(Color.gray60)
+                            .frame(width: (geometry.size.width - horizontalPadding * 2 - 20) / 2, height: 45, alignment: .center)
+                            .border(.gray60, lineWidth: 2, cornerRadius: 12)
+                            .onTapGesture {
+                                vm.onClickClear()
+                            }
+                        Text("Save")
+                            .font(.kr16r)
+                            .foregroundColor(Color.greenTint1)
+                            .frame(width: (geometry.size.width - horizontalPadding * 2 - 20) / 2, height: 45, alignment: .center)
+                            .border(.greenTint1, lineWidth: 2, cornerRadius: 12)
+                            .onTapGesture {
+                                vm.onClickSave()
+                            }
+                    }
+                    .padding(.bottom, 20)
                 }
                 .frame(width: geometry.size.width - horizontalPadding * 2, height: 400 - 50, alignment: .center)
             }
@@ -67,6 +89,7 @@ struct FootprintListFilterView: View {
         return Text(title)
             .font(.kr13b)
             .foregroundColor(.gray100)
+            .padding(EdgeInsets(top: 16, leading: 0, bottom: 12, trailing: 0))
     }
     
     private func drawCategoryItem(_ item: Category, isSelected: Bool) -> some View {
@@ -74,17 +97,20 @@ struct FootprintListFilterView: View {
             Image(item.pinType.pinType().pinWhite)
                 .resizable()
                 .frame(both: 14.0, aligment: .center)
-                .colorMultiply(Color(hex: item.pinColor.pinColor().pinColorHex))
+                .colorMultiply(isSelected ? Color(hex: item.pinColor.pinColor().pinColorHex) : .lightGray02)
             Text(item.name)
                 .font(.kr12r)
-                .foregroundColor(isSelected ? Color(hex: item.pinColor.pinColor().pinColorHex) : .lightGray01)
+                .foregroundColor(isSelected ? Color(hex: item.pinColor.pinColor().pinColorHex) : .lightGray02)
         }
-        .padding(EdgeInsets(top: 4, leading: 6, bottom: 4, trailing: 6))
+        .padding(EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12))
         .border(
-            isSelected ? Color(hex: item.pinColor.pinColor().pinColorHex) : .lightGray01,
-            lineWidth: 1.4,
+            isSelected ? Color(hex: item.pinColor.pinColor().pinColorHex) : .lightGray02,
+            lineWidth: 1.6,
             cornerRadius: 8
         )
+        .onTapGesture {
+            vm.onClickCategory(item)
+        }
     }
     
     private func drawPeopleWith(_ item: PeopleWith, isSelected: Bool) -> some View {
@@ -100,14 +126,17 @@ struct FootprintListFilterView: View {
 //            }
             Text(item.name)
                 .font(.kr12r)
-                .foregroundColor(isSelected ? .greenTint5 : .lightGray01)
+                .foregroundColor(isSelected ? .greenTint2 : .lightGray02)
         }
-        .padding(EdgeInsets(top: 4, leading: 6, bottom: 4, trailing: 6))
+        .padding(EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12))
         .border(
-            isSelected ? .greenTint5 : .lightGray01,
-            lineWidth: 1.4,
+            isSelected ? .greenTint2 : .lightGray02,
+            lineWidth: 1.6,
             cornerRadius: 8
         )
+        .onTapGesture {
+            vm.onClickPeopleWith(item)
+        }
     }
 }
 
