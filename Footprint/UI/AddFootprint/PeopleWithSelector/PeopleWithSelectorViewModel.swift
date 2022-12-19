@@ -50,7 +50,9 @@ class PeopleWithSelectorViewModel: BaseViewModel {
     }
     
     private func loadAllPeopleList(_ deleteId: Int? = nil) {
-        peopleWithList = Array(realm.objects(PeopleWith.self))
+        peopleWithList = Array(realm.objects(PeopleWith.self).filter({ item in
+            item.id > 0
+        }))
         peopleWithShowList = peopleWithList
         self.isMatching = !self.peopleWithList.filter {item in
             item.name == self.serachText

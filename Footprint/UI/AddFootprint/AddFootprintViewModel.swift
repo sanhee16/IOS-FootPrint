@@ -69,6 +69,11 @@ class AddFootprintViewModel: BaseViewModel {
             self.category = contents.category
             self.peopleWith = contents.peopleWith
             self.modifyId = contents.id
+        } else {
+            let item = self.realm.object(ofType: PeopleWith.self, forPrimaryKey: 0)
+            if let item = item {
+                self.peopleWith.append(item)
+            }
         }
         
         self.loadCategories()
@@ -230,8 +235,23 @@ class AddFootprintViewModel: BaseViewModel {
     }
     
     func onClickAddPeopleWith() {
-        self.coordinator?.presentPeopleWithSelectorView(self.peopleWith) {[weak self] res in
-            self?.peopleWith = res
+        var list: [PeopleWith] = self.peopleWith
+        if let idx = self.peopleWith.firstIndex(where: { item in
+            item.id == 0
+        }) {
+            list.remove(at: idx)
+        }
+        self.coordinator?.presentPeopleWithSelectorView(list) {[weak self] res in
+            guard let self = self else { return }
+            self.peopleWith.removeAll()
+            if res.isEmpty {
+                let item = self.realm.object(ofType: PeopleWith.self, forPrimaryKey: 0)
+                if let item = item {
+                    self.peopleWith.append(item)
+                }
+            } else {
+                self.peopleWith = res
+            }
         }
     }
     

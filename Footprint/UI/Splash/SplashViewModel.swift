@@ -44,6 +44,9 @@ class SplashViewModel: BaseViewModel {
             guard let self = self else { return }
             // 혹시 모르니까 다 지워버릴 것
             self.realm.deleteAll()
+            
+            self.realm.add(PeopleWith(id: 0, name: "없음", image: "", intro: ""))
+            
             let categories: [Category] = [
                 Category(tag: 0, name: "기본", pinType: .star, pinColor: PinColor.pin0),
                 Category(tag: 1, name: "맛집", pinType: .restaurant, pinColor: PinColor.pin1),
@@ -51,7 +54,7 @@ class SplashViewModel: BaseViewModel {
                 Category(tag: 3, name: "빵집", pinType: .bread, pinColor: PinColor.pin3),
                 Category(tag: 4, name: "디저트", pinType: .cake, pinColor: PinColor.pin4),
                 Category(tag: 5, name: "운동", pinType: .exercise, pinColor: PinColor.pin5),
-                Category(tag: 6, name: "카페", pinType: .exercise, pinColor: PinColor.pin6)
+                Category(tag: 6, name: "카페", pinType: .coffee, pinColor: PinColor.pin6)
             ]
             var showingCategories = Defaults.showingCategories
 
