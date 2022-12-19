@@ -35,6 +35,7 @@ class MainViewModel: BaseViewModel {
     @Published var showingCategories: [Int] = []
     @Published var serachText: String = ""
     @Published var searchItems: [FootPrint] = []
+    @Published var locationPermission: Bool = false
     
     private var allFootprints: [FootPrint] = []
     
@@ -53,9 +54,11 @@ class MainViewModel: BaseViewModel {
         //        getSavedData()
         switch checkLocationPermission() {
         case .allow:
+            self.locationPermission = true
             getCurrentLocation()
             loadCategories()
         default:
+            self.locationPermission = false
             self.location = Location(latitude: 0.0, longitude: 0.0)
             break
         }
@@ -251,5 +254,17 @@ class MainViewModel: BaseViewModel {
     func onClickSearchItem(_ item: FootPrint) {
         let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: item.latitude, lng: item.longitude))
         mapView.moveCamera(cameraUpdate)
+    }
+    
+    func onClickLocationPermission() {
+        self.alert(.yesOrNo, title: "원활한 사용을 위해 위치권한이 필요합니다.", description: "OK를 누르면 권한설정으로 이동합니다.") { isAllow in
+            if isAllow {
+                guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+                
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url)
+                }
+            }
+        }
     }
 }

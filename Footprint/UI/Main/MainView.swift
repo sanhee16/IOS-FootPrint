@@ -39,6 +39,16 @@ struct MainView: View {
                                 vm.onClickFootprintList()
                             }
                         Spacer()
+                        Image("icon_gps")
+                            .resizable()
+                            .frame(both: 20.0, aligment: .center)
+                            .colorMultiply($vm.locationPermission.wrappedValue ? .green : .red)
+                            .padding(.trailing, 8)
+                            .onTapGesture {
+                                if !$vm.locationPermission.wrappedValue {
+                                    vm.onClickLocationPermission()
+                                }
+                            }
                         Text("설정")
                             .font(.kr12r)
                             .foregroundColor(.gray100)
@@ -46,8 +56,8 @@ struct MainView: View {
                                 vm.onClickSetting()
                             }
                     }
-                    .padding([.leading, .trailing], 12)
                     .frame(width: geometry.size.width - 24, height: 50, alignment: .center)
+                    .padding([.leading, .trailing], 12)
                 }
                 .frame(width: geometry.size.width, height: 50, alignment: .center)
                 
@@ -149,7 +159,7 @@ struct MainView: View {
             .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
             .background(
                 RoundedRectangle(cornerRadius: 6)
-//                    .foregroundColor(.white.opacity(0.8))
+                //                    .foregroundColor(.white.opacity(0.8))
                     .foregroundColor(.greenTint5)
             )
             .contentShape(Rectangle())

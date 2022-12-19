@@ -85,7 +85,6 @@ class BaseViewController<Content>: UIViewController, Dismissible, Nameable where
         self.view.backgroundColor = UIColor.white
     }
     
-    
     public func attachDismissCallback(completion: (() -> Void)?) {
         self.completion = completion
     }

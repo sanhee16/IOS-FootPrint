@@ -29,7 +29,7 @@ class CheckPermissionViewModel: BaseViewModel {
             guard let self = self else { return }
             self.checkCameraPermission()
             self.checkPhotoPermission()
-            self.chackLocationPermission()
+            self.checkLocationPermission()
             self.checkNotiPermission()
         }
     }
@@ -83,7 +83,7 @@ class CheckPermissionViewModel: BaseViewModel {
     }
     
     
-    private func chackLocationPermission() {
+    private func checkLocationPermission() {
         switch CLLocationManager().authorizationStatus {
         case .authorizedAlways, .authorizedWhenInUse:
             self.locationPermission = true
