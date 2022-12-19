@@ -42,12 +42,32 @@ struct FootprintListView: View {
                     .frame(width: geometry.size.width - 24, height: 50, alignment: .center)
                 }
                 .frame(width: geometry.size.width, height: 50, alignment: .center)
-                ScrollView(.vertical, showsIndicators: false) {
-                    ForEach($vm.list.wrappedValue.indices, id: \.self) { idx in
-                        let item = $vm.list.wrappedValue[idx]
-                        drawFootprintItem(geometry, item: item)
+                ScrollViewReader { value in
+                    ZStack(alignment: .bottomTrailing) {
+                        ScrollView(.vertical, showsIndicators: false) {
+                            ForEach($vm.list.wrappedValue.indices, id: \.self) { idx in
+                                let item = $vm.list.wrappedValue[idx]
+                                drawFootprintItem(geometry, item: item)
+                            }
+                            .padding([.top, .bottom], 16)
+                        }
+                        .frame(width: geometry.size.width, height: geometry.size.height - safeTop - safeBottom - 50, alignment: .leading)
+                        
+                        Image("up")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(both: 24.0, aligment: .center)
+                            .padding(10)
+                            .background(
+                                Circle()
+                                    .foregroundColor(.gray30)
+                            )
+                            .padding(EdgeInsets(top: 0, leading: 0, bottom: safeBottom + 24, trailing: 24))
+                            .zIndex(1)
+                            .onTapGesture {
+                                value.scrollTo(0, anchor: .top)
+                            }
                     }
-                    .padding([.top, .bottom], 16)
                 }
             }
             .padding(EdgeInsets(top: safeTop, leading: 0, bottom: safeBottom, trailing: 0))
