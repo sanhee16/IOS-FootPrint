@@ -20,6 +20,7 @@ struct FootprintListView: View {
     
     private var safeTop: CGFloat { get { Util.safeTop() }}
     private var safeBottom: CGFloat { get { Util.safeBottom() }}
+    private let IMAGE_SIZE: CGFloat = 50.0
     
     var body: some View {
         GeometryReader { geometry in
@@ -41,7 +42,13 @@ struct FootprintListView: View {
                     .frame(width: geometry.size.width - 24, height: 50, alignment: .center)
                 }
                 .frame(width: geometry.size.width, height: 50, alignment: .center)
-                
+                ScrollView(.vertical, showsIndicators: false) {
+                    ForEach($vm.list.wrappedValue.indices, id: \.self) { idx in
+                        let item = $vm.list.wrappedValue[idx]
+                        drawFootprintItem(geometry, item: item)
+                    }
+                    .padding([.top, .bottom], 16)
+                }
             }
             .padding(EdgeInsets(top: safeTop, leading: 0, bottom: safeBottom, trailing: 0))
             .edgesIgnoringSafeArea(.all)
@@ -56,19 +63,88 @@ struct FootprintListView: View {
     }
     
     private func drawFootprintItem(_ geometry: GeometryProxy, item: FootPrint) -> some View {
-        return VStack(alignment: .leading, spacing: 0) {
+        return VStack(alignment: .leading, spacing: 8) {
             Text(item.title)
                 .font(.kr14b)
                 .foregroundColor(.gray100)
+                .padding([.leading, .trailing], 12)
+            
             if let category = item.tag.getCategory() {
-                Image(category.pinType.pinType().pinWhite)
-                    .resizable()
-                    .frame(both: 18.0, aligment: .center)
-                    .colorMultiply(Color(hex: category.pinColor.pinColor().pinColorHex))
+                HStack(alignment: .center, spacing: 6) {
+                    Image(category.pinType.pinType().pinWhite)
+                        .resizable()
+                        .frame(both: 18.0, aligment: .center)
+                        .colorMultiply(Color(hex: category.pinColor.pinColor().pinColorHex))
+                    Text(category.name)
+                        .font(.kr12r)
+                        .foregroundColor(Color(hex: category.pinColor.pinColor().pinColorHex))
+                }
+                .padding([.leading, .trailing], 12)
+            }
+            drawPeopleWith(geometry, items: vm.getPeopleWiths(Array(item.peopleWithIds)))
+                .padding([.leading, .trailing], 12)
+            if $vm.expandedItem.wrappedValue == item {
+                if !item.images.isEmpty {
+                    drawImageArea(geometry, item: item)
+                }
+                Text(item.content)
+                    .font(.kr13r)
+                    .foregroundColor(.gray90)
+                    .padding([.leading, .trailing], 12)
             }
         }
-        .padding(EdgeInsets(top: 16, leading: 12, bottom: 16, trailing: 12))
-        .background(Color.white)
+        .padding([.top, .bottom], 16)
+        .frame(width: geometry.size.width - 40, alignment: .leading)
+        .contentShape(Rectangle())
+        .background(
+            RoundedRectangle(cornerRadius: 12)
+                .foregroundColor(Color.white)
+        )
+        .padding([.leading, .trailing], 20)
+        .onTapGesture {
+            withAnimation {
+                vm.onClickItem(item)
+            }
+        }
     }
+    
+    private func drawPeopleWith(_ geometry: GeometryProxy, items: [PeopleWith]) -> some View {
+        return HStack(alignment: .center, spacing: 4) {
+            Image("person")
+                .resizable()
+                .frame(both: 18.0, aligment: .center)
+            HStack(alignment: .center, spacing: 8) {
+                ForEach(items, id: \.self) { item in
+                    Text(item.name)
+                        .font(.kr11r)
+                        .foregroundColor(Color.gray90)
+                }
+            }
+        }
+    }
+
+    private func drawImageArea(_ geometry: GeometryProxy, item: FootPrint) -> some View {
+        return ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                ForEach(item.images.indices, id: \.self) { idx in
+                    if let dir = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false),
+                       let uiImage = UIImage(contentsOfFile: URL(fileURLWithPath: dir.absoluteString).appendingPathComponent(item.images[idx]).path) {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(both: IMAGE_SIZE)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .contentShape(Rectangle())
+                            .shadow(color: Color.black.opacity(0.6), radius: 3, x: 0.5, y: 2)
+                            .onTapGesture {
+                                vm.showImage(idx)
+                            }
+                    }
+                }
+            }
+            .padding(EdgeInsets(top: 3, leading: 12, bottom: 8, trailing: 12))
+        }
+    }
+
 }
 
