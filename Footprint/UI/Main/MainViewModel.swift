@@ -66,6 +66,27 @@ class MainViewModel: BaseViewModel {
         self.loadAllFootprints()
     }
     
+    func viewDidLoad() {
+        print("viewDidLoad")
+        //        getSavedData()
+        switch checkLocationPermission() {
+        case .allow:
+            self.locationPermission = true
+            getCurrentLocation()
+            loadCategories()
+            if let location = self.location {
+                let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: location.latitude, lng: location.longitude))
+                self.mapView.moveCamera(cameraUpdate)
+            }
+        default:
+            self.locationPermission = false
+            self.location = Location(latitude: 0.0, longitude: 0.0)
+            break
+        }
+        self.loadAllMarkers()
+        self.loadAllFootprints()
+    }
+    
     private func loadCategories() {
         print("sandy loadCategories")
         // 객체 초기화

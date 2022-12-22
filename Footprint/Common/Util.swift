@@ -50,10 +50,18 @@ class Util {
 
 func checkLocationPermission() -> PermissionStatus {
     switch CLLocationManager.authorizationStatus() {
-    case .authorizedAlways, .authorizedWhenInUse: return .allow
-    case .restricted, .notDetermined: return .notYet
-    case .denied: return .notAllow
-    default: return .unknown
+    case .authorizedAlways, .authorizedWhenInUse:
+        C.permissionLocation = true
+        return .allow
+    case .restricted, .notDetermined:
+        C.permissionLocation = false
+        return .notYet
+    case .denied:
+        C.permissionLocation = false
+        return .notAllow
+    default:
+        C.permissionLocation = false
+        return .unknown
     }
 }
 

@@ -8,6 +8,7 @@
 import UIKit
 import SwiftUI
 import Combine
+import CoreLocation
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
@@ -45,6 +46,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // scene이 setup되고 화면에 보여지면서 사용될 준비가 완료 된 상태. 즉, inactive -> active로 전활될 때도 불리고, 처음 active 될 때도 불림
     func sceneDidBecomeActive(_ scene: UIScene) {
         print("sceneDidBecomeActive")
+        switch CLLocationManager().authorizationStatus {
+        case .authorizedAlways, .authorizedWhenInUse:
+            C.permissionLocation = true
+            break
+        default:
+            C.permissionLocation = false
+            break
+        }
     }
     
     // active한 상태에서 inactive 상태로 빠질 때 불려짐(ex. 사용 중 전화가 걸려오는 것 처럼 임시 interruption때문에 발생할 수 있음)

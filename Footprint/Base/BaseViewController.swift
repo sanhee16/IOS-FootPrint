@@ -8,9 +8,11 @@
 import SwiftUI
 import FittedSheets
 
-
+// https://yagom.net/forums/topic/detecting-background-foreground-in-viewcontroller/
 // Content는 generic type
 class BaseViewController<Content>: UIViewController, Dismissible, Nameable where Content: View { // where: 타입에 대한 제약
+    private var observer: NSObjectProtocol?
+    
     static func bottomSheet(_ rootView: Content, sizes: [SheetSize]) -> SheetViewController {
         let options = SheetOptions(
             pullBarHeight: 0,
@@ -38,12 +40,24 @@ class BaseViewController<Content>: UIViewController, Dismissible, Nameable where
     let rootView: Content
     let controller: UIHostingController<Content>
     var completion: (() -> Void)?
+    var viewDidLoadCallback: (() -> ())? = nil
     
     var name: String {
         get {
             return String(describing: Content.self)
         }
     }
+    
+    public init(_ rootView: Content, completion: (() -> Void)? = nil, viewDidLoadCallback: (() -> ())? = nil) {
+        print("\(type(of: self)): init, \(String(describing: Content.self))")
+        self.rootView = rootView
+        self.controller = UIHostingController(rootView: rootView)
+        self.completion = completion
+        self.viewDidLoadCallback = viewDidLoadCallback
+        super.init(nibName: nil, bundle: nil)
+        self.modalPresentationStyle = .fullScreen
+    }
+    
     
     public init(_ rootView: Content, completion: (() -> Void)? = nil) {
         print("\(type(of: self)): init, \(String(describing: Content.self))")
@@ -61,6 +75,9 @@ class BaseViewController<Content>: UIViewController, Dismissible, Nameable where
     
     deinit {
         print("deinit (\(type(of: self)))")
+        if type(of: self) == BaseViewController<MainView>.self, let observer = self.observer {
+            NotificationCenter.default.removeObserver(observer)
+        }
     }
     
     open override func viewDidLoad() {
@@ -83,6 +100,18 @@ class BaseViewController<Content>: UIViewController, Dismissible, Nameable where
         ])
         controller.view.backgroundColor = UIColor.white
         self.view.backgroundColor = UIColor.white
+        
+        if type(of: self) == BaseViewController<MainView>.self {
+            print("MainView type viewDidload!!!")
+            observer = NotificationCenter.default.addObserver(
+                forName: UIApplication.willEnterForegroundNotification,
+                object: nil,
+                queue: .main) {
+                    [unowned self] notification in
+                    print("notification: \(notification)")
+                    self.viewDidLoadCallback?()
+                }
+        }
     }
     
     public func attachDismissCallback(completion: (() -> Void)?) {

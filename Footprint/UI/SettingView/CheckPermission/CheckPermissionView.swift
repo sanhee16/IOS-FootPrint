@@ -39,7 +39,7 @@ struct CheckPermissionView: View {
                         .frame(width: UIScreen.main.bounds.width - 100, alignment: .center)
                         .padding(.bottom, 4)
                     VStack(alignment: .center, spacing: 10) {
-                        drawPermissionItem(geometry, text: "위치사용권한", isAllow: $vm.locationPermission.wrappedValue)
+                        drawPermissionItem(geometry, text: "위치사용권한", isAllow: C.permissionLocation)
                         drawPermissionItem(geometry, text: "카메라사용권한", isAllow: $vm.cameraPermission.wrappedValue)
                         drawPermissionItem(geometry, text: "사진접근권한", isAllow: $vm.photoPermission.wrappedValue)
                         drawPermissionItem(geometry, text: "알림허용", isAllow: $vm.notiPermission.wrappedValue)

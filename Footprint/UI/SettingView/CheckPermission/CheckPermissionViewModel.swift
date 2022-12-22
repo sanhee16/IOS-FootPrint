@@ -16,7 +16,7 @@ import UIKit
 
 class CheckPermissionViewModel: BaseViewModel {
     @Published var photoPermission: Bool = false
-    @Published var locationPermission: Bool = false
+//    @Published var locationPermission: Bool = false
     @Published var cameraPermission: Bool = false
     @Published var notiPermission: Bool = false
     
@@ -29,7 +29,7 @@ class CheckPermissionViewModel: BaseViewModel {
             guard let self = self else { return }
             self.checkCameraPermission()
             self.checkPhotoPermission()
-            self.checkLocationPermission()
+//            self.checkLocationPermission()
             self.checkNotiPermission()
         }
     }
@@ -83,16 +83,16 @@ class CheckPermissionViewModel: BaseViewModel {
     }
     
     
-    private func checkLocationPermission() {
-        switch CLLocationManager().authorizationStatus {
-        case .authorizedAlways, .authorizedWhenInUse:
-            self.locationPermission = true
-            break
-        default:
-            self.locationPermission = false
-            break
-        }
-    }
+//    private func checkLocationPermission() {
+//        switch CLLocationManager().authorizationStatus {
+//        case .authorizedAlways, .authorizedWhenInUse:
+//            self.locationPermission = true
+//            break
+//        default:
+//            self.locationPermission = false
+//            break
+//        }
+//    }
     
     
     private func checkNotiPermission() {
