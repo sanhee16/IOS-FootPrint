@@ -37,6 +37,7 @@ class MainViewModel: BaseViewModel {
     @Published var searchItems: [FootPrint] = []
     @Published var locationPermission: Bool = false
     
+    private var currentTapMarker: NMFMarker? = nil
     private var allFootprints: [FootPrint] = []
     
     private var mapView: NMFMapView = NMFMapView()
@@ -101,6 +102,7 @@ class MainViewModel: BaseViewModel {
     }
     
     func onClickCategory(_ category: Category) {
+        self.removeCurrentMarker()
         if let idx = self.showingCategories.firstIndex(of: category.tag) {
             self.showingCategories.remove(at: idx)
         } else {
@@ -111,10 +113,12 @@ class MainViewModel: BaseViewModel {
     }
     
     func onClickSetting() {
+        self.removeCurrentMarker()
         self.coordinator?.presentSettingView()
     }
     
     func onClickFootprintList() {
+        self.removeCurrentMarker()
         self.coordinator?.presentFootprintListView()
     }
     
@@ -188,8 +192,29 @@ class MainViewModel: BaseViewModel {
     
     func onTapMarker(_ location: Location) {
         print("on tap marker")
-        self.coordinator?.presentShowFootPrintView(location)
+        self.removeCurrentMarker()
+        drawCurrentMarker(location)
+        self.coordinator?.presentShowFootPrintView(location, onDismiss: {[weak self] in
+            guard let self = self else { return }
+            self.removeCurrentMarker()
+        })
     }
+    
+    func drawCurrentMarker(_ location: Location) {
+        // 마커 생성하기
+        self.currentTapMarker = nil
+        let marker = NMFMarker()
+        marker.position = NMGLatLng(lat: location.latitude, lng: location.longitude)
+        
+        marker.width = 30
+        marker.height = 30
+        // marker 색상 입히기
+        marker.iconImage = NMFOverlayImage(name: "pin0")
+        marker.iconTintColor = .greenTint2
+        marker.mapView = self.mapView
+        self.currentTapMarker = marker
+    }
+
     
     func addNewMarker(_ location: Location) {
         // 마커 생성하기
@@ -246,6 +271,7 @@ class MainViewModel: BaseViewModel {
     }
     
     func onTapSearchPannel() {
+        self.removeCurrentMarker()
         self.isShowCategoriesPannel = false
         self.isShowingSearchPannel = !self.isShowingSearchPannel
         if self.isShowingSearchPannel {
@@ -273,11 +299,13 @@ class MainViewModel: BaseViewModel {
     }
     
     func onClickSearchItem(_ item: FootPrint) {
+        self.removeCurrentMarker()
         let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: item.latitude, lng: item.longitude))
         mapView.moveCamera(cameraUpdate)
     }
     
     func onClickLocationPermission() {
+        self.removeCurrentMarker()
         self.alert(.yesOrNo, title: "원활한 사용을 위해 위치권한이 필요합니다.", description: "OK를 누르면 권한설정으로 이동합니다.") { isAllow in
             if isAllow {
                 guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
@@ -286,6 +314,12 @@ class MainViewModel: BaseViewModel {
                     UIApplication.shared.open(url)
                 }
             }
+        }
+    }
+    
+    private func removeCurrentMarker() {
+        if let currentTapMarker = self.currentTapMarker {
+            self.removeMarker(self.mapView, marker: currentTapMarker)
         }
     }
 }

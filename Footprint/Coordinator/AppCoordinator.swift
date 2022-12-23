@@ -71,9 +71,9 @@ class AppCoordinator: Coordinator, Terminatable {
         self.present(vc, animated: false)
     }
     
-    func presentShowFootPrintView(_ location: Location) {
+    func presentShowFootPrintView(_ location: Location, onDismiss: @escaping ()->()) {
         let vc = ShowFootPrintView.vc(self, location: location)
-        self.present(vc, animated: true)
+        self.present(vc, animated: true, onDismiss: onDismiss)
     }
     
     func presentAddCategoryView(type: AddCategoryType, onEraseCategory: (()->())? = nil, onDismiss: @escaping ()->()) {
