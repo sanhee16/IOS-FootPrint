@@ -96,11 +96,11 @@ struct MainView: View {
                     }
                 }
             }
-            .padding(EdgeInsets(top: safeTop, leading: 0, bottom: safeBottom, trailing: 0))
-            .edgesIgnoringSafeArea(.all)
+//            .padding(EdgeInsets(top: safeTop, leading: 0, bottom: safeBottom, trailing: 0))
+//            .edgesIgnoringSafeArea(.all)
             .frame(width: geometry.size.width, alignment: .center)
         }
-        .ignoresSafeArea(.all)
+//        .edgesIgnoringSafeArea(.all)
         .onAppear {
             vm.onAppear()
         }

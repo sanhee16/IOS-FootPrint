@@ -11,7 +11,8 @@ import FittedSheets
 // https://yagom.net/forums/topic/detecting-background-foreground-in-viewcontroller/
 // Content는 generic type
 class BaseViewController<Content>: UIViewController, Dismissible, Nameable where Content: View { // where: 타입에 대한 제약
-    private var observer: NSObjectProtocol?
+//    private var observer: NSObjectProtocol?
+    private var mainObserver: NSObjectProtocol?
     
     static func bottomSheet(_ rootView: Content, sizes: [SheetSize]) -> SheetViewController {
         let options = SheetOptions(
@@ -75,7 +76,7 @@ class BaseViewController<Content>: UIViewController, Dismissible, Nameable where
     
     deinit {
         print("deinit (\(type(of: self)))")
-        if type(of: self) == BaseViewController<MainView>.self, let observer = self.observer {
+        if type(of: self) == BaseViewController<MainView>.self, let observer = self.mainObserver {
             NotificationCenter.default.removeObserver(observer)
         }
     }
@@ -103,7 +104,7 @@ class BaseViewController<Content>: UIViewController, Dismissible, Nameable where
         
         if type(of: self) == BaseViewController<MainView>.self {
             print("MainView type viewDidload!!!")
-            observer = NotificationCenter.default.addObserver(
+            mainObserver = NotificationCenter.default.addObserver(
                 forName: UIApplication.willEnterForegroundNotification,
                 object: nil,
                 queue: .main) {
