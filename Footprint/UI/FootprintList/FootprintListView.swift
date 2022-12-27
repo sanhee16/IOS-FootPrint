@@ -53,7 +53,8 @@ struct FootprintListView: View {
                         }
                         .frame(width: geometry.size.width, height: geometry.size.height - safeTop - safeBottom - 50, alignment: .leading)
                         
-                        Image("up")
+                        // TODO: 뺄지 말지 결정하기
+                        Image("up_arrow")
                             .resizable()
                             .scaledToFit()
                             .frame(both: 24.0, aligment: .center)
@@ -84,10 +85,17 @@ struct FootprintListView: View {
     
     private func drawFootprintItem(_ geometry: GeometryProxy, item: FootPrint) -> some View {
         return VStack(alignment: .leading, spacing: 8) {
-            Text(item.title)
-                .font(.kr14b)
-                .foregroundColor(.gray100)
-                .padding([.leading, .trailing], 12)
+            HStack(alignment: .center, spacing: 0) {
+                Text(item.title)
+                    .font(.kr14b)
+                    .foregroundColor(.gray100)
+                Spacer()
+                Image($vm.expandedItem.wrappedValue == item ? "up_arrow" : "down_arrow")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(both: 16.0, aligment: .center)
+            }
+            .padding([.leading, .trailing], 12)
             
             if let category = item.tag.getCategory() {
                 HStack(alignment: .center, spacing: 6) {
@@ -101,9 +109,9 @@ struct FootprintListView: View {
                 }
                 .padding([.leading, .trailing], 12)
             }
-            drawPeopleWith(geometry, items: vm.getPeopleWiths(Array(item.peopleWithIds)))
-                .padding([.leading, .trailing], 12)
             if $vm.expandedItem.wrappedValue == item {
+                drawPeopleWith(geometry, items: vm.getPeopleWiths(Array(item.peopleWithIds)))
+                    .padding([.leading, .trailing], 12)
                 if !item.images.isEmpty {
                     drawImageArea(geometry, item: item)
                 }
