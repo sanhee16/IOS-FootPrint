@@ -110,8 +110,12 @@ struct FootprintListView: View {
                 .padding([.leading, .trailing], 12)
             }
             if $vm.expandedItem.wrappedValue == item {
-                drawPeopleWith(geometry, items: vm.getPeopleWiths(Array(item.peopleWithIds)))
-                    .padding([.leading, .trailing], 12)
+                VStack(alignment: .leading, spacing: 8) {
+                    drawPeopleWith(geometry, items: vm.getPeopleWiths(Array(item.peopleWithIds)))
+                    drawCreatedAt(geometry, item: item)
+                }
+                .padding([.leading, .trailing], 12)
+                
                 if !item.images.isEmpty {
                     drawImageArea(geometry, item: item)
                 }
@@ -133,6 +137,17 @@ struct FootprintListView: View {
             withAnimation {
                 vm.onClickItem(item)
             }
+        }
+    }
+    
+    private func drawCreatedAt(_ geometry: GeometryProxy, item: FootPrint) -> some View {
+        return HStack(alignment: .center, spacing: 4) {
+            Image("calendar")
+                .resizable()
+                .frame(both: 18.0, aligment: .center)
+            Text(item.createdAt.getDate())
+                .font(.kr11r)
+                .foregroundColor(Color.gray90)
         }
     }
     
