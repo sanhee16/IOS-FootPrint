@@ -121,6 +121,16 @@ class AppCoordinator: Coordinator, Terminatable {
         self.present(vc, animated: false, onDismiss: onDismiss)
     }
     
+    func presentTravelListView() {
+        let vc = TravelListView.vc(self)
+        self.present(vc, animated: false)
+    }
+    
+    func presentCreateTravelView() {
+        let vc = CreateTravelView.vc(self)
+        self.present(vc, animated: false)
+    }
+    
     //MARK: Change
     func changeAddFootprintView(location: Location, type: AddFootprintType, onDismiss: @escaping ()->()) {
         let vc = AddFootprintView.vc(self, location: location, type: type)

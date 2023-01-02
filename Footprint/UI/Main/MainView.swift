@@ -33,12 +33,18 @@ struct MainView: View {
                 ZStack(alignment: .leading) {
                     Topbar("FootPrint", type: .none) {
                     }
-                    HStack(alignment: .center, spacing: 0) {
-                        Text("all")
+                    HStack(alignment: .center, spacing: 12) {
+                        Text("전체보기")
                             .font(.kr12r)
                             .foregroundColor(.gray100)
                             .onTapGesture {
                                 vm.onClickFootprintList()
+                            }
+                        Text("travel")
+                            .font(.kr12r)
+                            .foregroundColor(.gray100)
+                            .onTapGesture {
+                                vm.onClickTravelList()
                             }
                         Spacer()
                         Image("icon_gps")

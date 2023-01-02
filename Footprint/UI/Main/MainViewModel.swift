@@ -122,6 +122,11 @@ class MainViewModel: BaseViewModel {
         self.coordinator?.presentFootprintListView()
     }
     
+    func onClickTravelList() {
+        self.removeCurrentMarker()
+        self.coordinator?.presentTravelListView()
+    }
+    
     private func getCurrentLocation() {
         if let coor = locationManager.location?.coordinate {
             let latitude = coor.latitude

@@ -50,6 +50,24 @@ class FootPrint: Object {
     }
 }
 
+class Travel: Object {
+    @Persisted(primaryKey: true) var id: ObjectId
+    @Persisted var footprints: List<FootPrint>
+    @Persisted var title: String
+    @Persisted var intro: String
+    @Persisted var createdAt: Int
+    @Persisted var color: String
+    
+    convenience init(footprints: List<FootPrint>, title: String, intro: String, color: String = "#FFFFFF") {
+        self.init()
+        self.footprints = footprints
+        self.title = title
+        self.intro = intro
+        self.color = color
+        self.createdAt = Int(Date().timeIntervalSince1970)
+    }
+}
+
 class Category: Object {
     public static func == (lhs: Category, rhs: Category) -> Bool {
         return lhs.tag == rhs.tag

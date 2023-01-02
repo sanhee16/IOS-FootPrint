@@ -118,6 +118,38 @@ extension Color {
         }
     }
     
+//    func hexToString() -> String {
+//        let r: CGFloat = 0
+//        let g: CGFloat = 0
+//        let b: CGFloat = 0
+//        let a: CGFloat = 0
+//
+//        let rgb: Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
+//
+//        return String(format: "#%06x", rgb)
+//    }
+    
+    func toHex() -> String? {
+        let uic = UIColor(self)
+        guard let components = uic.cgColor.components, components.count >= 3 else {
+            return nil
+        }
+        let r = Float(components[0])
+        let g = Float(components[1])
+        let b = Float(components[2])
+        var a = Float(1.0)
+
+        if components.count >= 4 {
+            a = Float(components[3])
+        }
+
+        if a != Float(1.0) {
+            return String(format: "#%02lX%02lX%02lX%02lX", lroundf(r * 255), lroundf(g * 255), lroundf(b * 255), lroundf(a * 255))
+        } else {
+            return String(format: "#%02lX%02lX%02lX", lroundf(r * 255), lroundf(g * 255), lroundf(b * 255))
+        }
+    }
+    
     var uiColor: UIColor {
         get { UIColor(cgColor: cgColor!) }
     }
@@ -325,6 +357,9 @@ extension Font {
     public static let kr11b: Font = .system(size: 11, weight: .bold, design: .default)
     public static let kr11r: Font = .system(size: 11, weight: .regular, design: .default)
     
+    public static let kr10b: Font = .system(size: 10, weight: .bold, design: .default)
+    public static let kr10r: Font = .system(size: 10, weight: .regular, design: .default)
+    
     public static let kr9r: Font = .system(size: 9, weight: .regular, design: .default)
 }
 
@@ -361,6 +396,9 @@ extension UIFont {
     
     public static let kr11b: UIFont = .systemFont(ofSize: 11, weight: .bold)
     public static let kr11r: UIFont = .systemFont(ofSize: 11, weight: .regular)
+    
+    public static let kr10b: UIFont = .systemFont(ofSize: 10, weight: .bold)
+    public static let kr10r: UIFont = .systemFont(ofSize: 10, weight: .regular)
     
     public static let kr9r: UIFont = .systemFont(ofSize: 9, weight: .regular)
 }
