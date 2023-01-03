@@ -131,6 +131,11 @@ class AppCoordinator: Coordinator, Terminatable {
         self.present(vc, animated: false)
     }
     
+    func presentSelectFootprintsView(selectedList: [FootPrint], callback: @escaping ([FootPrint])->()) {
+        let vc = SelectFootprintsView.vc(self, selectedList: selectedList, callback: callback)
+        self.present(vc, animated: true)
+    }
+    
     //MARK: Change
     func changeAddFootprintView(location: Location, type: AddFootprintType, onDismiss: @escaping ()->()) {
         let vc = AddFootprintView.vc(self, location: location, type: type)

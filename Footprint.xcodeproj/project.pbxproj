@@ -50,6 +50,8 @@
 		63B1FB002914B347007E94B6 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 63B1FAFF2914B347007E94B6 /* Kingfisher */; };
 		63B1FB032914B381007E94B6 /* RealmDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B1FB022914B381007E94B6 /* RealmDB.swift */; };
 		63B1FB062914B5CB007E94B6 /* SwiftUIPullToRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 63B1FB052914B5CB007E94B6 /* SwiftUIPullToRefresh */; };
+		63C81AB52963BD3D0001A70B /* SelectFootprintsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C81AB42963BD3D0001A70B /* SelectFootprintsView.swift */; };
+		63C81AB72963BD430001A70B /* SelectFootprintsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C81AB62963BD430001A70B /* SelectFootprintsViewModel.swift */; };
 		63C8CCF62941D60400BB861D /* DevInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C8CCF52941D60400BB861D /* DevInfoView.swift */; };
 		63C8CCF82941D60D00BB861D /* DevInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C8CCF72941D60D00BB861D /* DevInfoViewModel.swift */; };
 		63E2756929502DFA00E4AABC /* PinchZoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E2756829502DFA00E4AABC /* PinchZoom.swift */; };
@@ -128,6 +130,8 @@
 		63B1FAFA2914B31E007E94B6 /* MultiSelectGalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelectGalleryView.swift; sourceTree = "<group>"; };
 		63B1FAFC2914B324007E94B6 /* MultiSelectGalleryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelectGalleryViewModel.swift; sourceTree = "<group>"; };
 		63B1FB022914B381007E94B6 /* RealmDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDB.swift; sourceTree = "<group>"; };
+		63C81AB42963BD3D0001A70B /* SelectFootprintsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFootprintsView.swift; sourceTree = "<group>"; };
+		63C81AB62963BD430001A70B /* SelectFootprintsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFootprintsViewModel.swift; sourceTree = "<group>"; };
 		63C8CCF52941D60400BB861D /* DevInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevInfoView.swift; sourceTree = "<group>"; };
 		63C8CCF72941D60D00BB861D /* DevInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevInfoViewModel.swift; sourceTree = "<group>"; };
 		63E2756829502DFA00E4AABC /* PinchZoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchZoom.swift; sourceTree = "<group>"; };
@@ -374,6 +378,15 @@
 			path = DataClass;
 			sourceTree = "<group>";
 		};
+		63C81AB32963BD280001A70B /* SelectFootprints */ = {
+			isa = PBXGroup;
+			children = (
+				63C81AB42963BD3D0001A70B /* SelectFootprintsView.swift */,
+				63C81AB62963BD430001A70B /* SelectFootprintsViewModel.swift */,
+			);
+			path = SelectFootprints;
+			sourceTree = "<group>";
+		};
 		63C8CCF42941D5F700BB861D /* DevInfo */ = {
 			isa = PBXGroup;
 			children = (
@@ -386,6 +399,7 @@
 		63E8489F295ABE5D0037D7A3 /* Travel */ = {
 			isa = PBXGroup;
 			children = (
+				63C81AB32963BD280001A70B /* SelectFootprints */,
 				63E848A5295ABEAF0037D7A3 /* TravelList */,
 				63E848A4295ABEA40037D7A3 /* CreateTravel */,
 			);
@@ -696,6 +710,7 @@
 				63E2756929502DFA00E4AABC /* PinchZoom.swift in Sources */,
 				63E848A3295ABE7E0037D7A3 /* CreateTravelViewModel.swift in Sources */,
 				63F1328E2914A1C000B3A9E0 /* SplashViewModel.swift in Sources */,
+				63C81AB72963BD430001A70B /* SelectFootprintsViewModel.swift in Sources */,
 				2691D9C5294EE4B6002825B9 /* FootprintListFilterViewModel.swift in Sources */,
 				265924C929445BE1001E7025 /* FootprintListViewModel.swift in Sources */,
 				264B70BC291F8DD900CDAF9F /* ApiResponse.swift in Sources */,
@@ -749,6 +764,7 @@
 				63F1329A2914A1C000B3A9E0 /* WebView.swift in Sources */,
 				2691D9C3294EE4B1002825B9 /* FootprintListFilterView.swift in Sources */,
 				63C8CCF82941D60D00BB861D /* DevInfoViewModel.swift in Sources */,
+				63C81AB52963BD3D0001A70B /* SelectFootprintsView.swift in Sources */,
 				63F132562914A19F00B3A9E0 /* SceneDelegate.swift in Sources */,
 				63B1FAED2914A85B007E94B6 /* AddFootprintView.swift in Sources */,
 				265EA947291D1E1400068A5C /* DataModel.swift in Sources */,

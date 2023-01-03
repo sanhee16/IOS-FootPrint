@@ -58,4 +58,11 @@ class CreateTravelViewModel: BaseViewModel {
     func onClickSave() {
         
     }
+    
+    func onClickAddFootprints() {
+        self.coordinator?.presentSelectFootprintsView(selectedList: self.footprints, callback: { res in
+            print(res)
+            self.footprints = res
+        })
+    }
 }
