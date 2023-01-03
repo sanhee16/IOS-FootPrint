@@ -53,7 +53,8 @@ struct CreateTravelView: View {
     }
     
     private func drawInputBox(_ geometry: GeometryProxy) -> some View {
-        return VStack(alignment: .leading, spacing: 14) {
+        return VStack(alignment: .leading, spacing: 10) {
+            drawTitle("여행 제목")
             TextField("enter title", text: $vm.title)
                 .padding(EdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 8))
                 .background(
@@ -62,6 +63,7 @@ struct CreateTravelView: View {
                 )
                 .contentShape(Rectangle())
             
+            drawTitle("간단 소개글")
             TextField("enter intro", text: $vm.intro)
                 .padding(EdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 8))
                 .background(
@@ -70,17 +72,27 @@ struct CreateTravelView: View {
                 )
                 .contentShape(Rectangle())
             
-            ColorPicker("색상 선택", selection: $vm.color)
-                .padding()
+            drawTitle("색상 선택")
+            ColorPicker("", selection: $vm.color)
+            
+            drawTitle("노트 선택")
             ScrollView(.vertical, showsIndicators: false) {
                 ForEach($vm.footprints.wrappedValue.indices, id: \.self) { idx in
                     let item = $vm.footprints.wrappedValue[idx]
                     drawSelectFootprintBox(geometry, item: item)
                 }
                 drawAddNewItem(geometry)
+                    .padding(.bottom, 20)
             }
         }
         .padding([.leading, .trailing], 16)
+    }
+    
+    private func drawTitle(_ title: String) -> some View {
+        return Text(title)
+            .font(.kr12b)
+            .foregroundColor(.gray100)
+            .padding(.top, 4)
     }
     
     private func drawSelectFootprintBox(_ geometry: GeometryProxy, item: FootPrint) -> some View {
