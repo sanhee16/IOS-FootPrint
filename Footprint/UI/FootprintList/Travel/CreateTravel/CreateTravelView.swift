@@ -85,15 +85,29 @@ struct CreateTravelView: View {
     
     private func drawSelectFootprintBox(_ geometry: GeometryProxy, item: FootPrint) -> some View {
         return VStack(alignment: .leading, spacing: 6) {
-            Text(item.title)
-                .font(.kr12b)
-                .foregroundColor(.gray90)
-            
+            HStack(alignment: .center, spacing: 0) {
+                Text(item.title)
+                    .font(.kr12b)
+                    .foregroundColor(.gray90)
+                Spacer()
+                Image("close")
+                    .resizable()
+                    .frame(both: 10.0, aligment: .center)
+                    .padding(6)
+                    .background(
+                        Circle()
+                            .foregroundColor(.white)
+                    )
+                    .onTapGesture {
+                        vm.onClickDeleteFootprint(item)
+                    }
+            }
+            Spacer()
         }
-        .padding(EdgeInsets(top: 4, leading: 6, bottom: 4, trailing: 6))
+        .padding(EdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 8))
         .contentShape(Rectangle())
         .frame(
-            minWidth:  geometry.size.width - 24, idealWidth:  geometry.size.width - 24, maxWidth: geometry.size.width - 24,
+            minWidth:  geometry.size.width - 32, idealWidth:  geometry.size.width - 32, maxWidth: geometry.size.width - 32,
             minHeight: 100, idealHeight: nil, maxHeight: nil, alignment: .leading
         )
         .background(
@@ -116,7 +130,7 @@ struct CreateTravelView: View {
         }
         .padding(EdgeInsets(top: 4, leading: 6, bottom: 4, trailing: 6))
         .contentShape(Rectangle())
-        .frame(width: geometry.size.width - 24, height: 100, alignment: .center)
+        .frame(width: geometry.size.width - 32, height: 100, alignment: .center)
         .background(
             RoundedRectangle(cornerRadius: 12)
                 .foregroundColor(.gray60)

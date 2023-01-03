@@ -56,6 +56,15 @@ class CreateTravelViewModel: BaseViewModel {
         }
     }
     
+    func onClickDeleteFootprint(_ item: FootPrint) {
+        guard let idx = self.footprints.firstIndex(where: { listItem in
+            listItem.id == item.id
+        }) else { return }
+        withAnimation {[weak self] in
+            self?.footprints.remove(at: idx)
+        }
+    }
+    
     func onClickSave() {
         
     }
