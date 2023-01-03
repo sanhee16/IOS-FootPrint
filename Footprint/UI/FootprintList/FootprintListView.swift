@@ -51,7 +51,7 @@ struct FootprintListView: View {
                             }
                             .padding([.top, .bottom], 16)
                         }
-                        .frame(width: geometry.size.width, height: geometry.size.height - safeTop - safeBottom - 50, alignment: .leading)
+                        .frame(width: geometry.size.width, height: geometry.size.height - 50, alignment: .leading)
                         
                         // TODO: 뺄지 말지 결정하기
                         Image("up_arrow")
@@ -63,7 +63,7 @@ struct FootprintListView: View {
                                 Circle()
                                     .foregroundColor(.gray30)
                             )
-                            .padding(EdgeInsets(top: 0, leading: 0, bottom: safeBottom + 24, trailing: 24))
+                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 24, trailing: 24))
                             .zIndex(1)
                             .onTapGesture {
                                 value.scrollTo(0, anchor: .top)

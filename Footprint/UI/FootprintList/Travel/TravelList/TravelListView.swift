@@ -71,8 +71,9 @@ struct TravelListView: View {
         )
         .background(
             RoundedRectangle(cornerRadius: 12)
-                .foregroundColor(Color(hex: item.color, opacity: 0.5))
+                .foregroundColor(Color(hex: item.color))
         )
+        .shadow(color: Color.black.opacity(0.3), radius: 2, x: 0.5, y: 0.5)
         .onTapGesture {
             vm.onClickShowTravel(item)
         }

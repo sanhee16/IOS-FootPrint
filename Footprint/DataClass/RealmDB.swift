@@ -58,7 +58,7 @@ class Travel: Object {
     @Persisted var createdAt: Int
     @Persisted var color: String
     
-    convenience init(footprints: List<FootPrint>, title: String, intro: String, color: String = "#FFFFFF") {
+    convenience init(footprints: List<FootPrint>, title: String, intro: String, color: String) {
         self.init()
         self.footprints = footprints
         self.title = title

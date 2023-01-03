@@ -34,7 +34,7 @@ struct CreateTravelView: View {
                             .font(.kr12r)
                             .foregroundColor(.gray90)
                             .onTapGesture {
-                                
+                                vm.onClickSave()
                             }
                     }
                     .padding([.leading, .trailing], 12)

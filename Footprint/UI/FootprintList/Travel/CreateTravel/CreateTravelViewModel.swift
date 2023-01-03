@@ -60,13 +60,25 @@ class CreateTravelViewModel: BaseViewModel {
         guard let idx = self.footprints.firstIndex(where: { listItem in
             listItem.id == item.id
         }) else { return }
-        withAnimation {[weak self] in
+        _ = withAnimation {[weak self] in
             self?.footprints.remove(at: idx)
         }
     }
     
     func onClickSave() {
-        
+        try! self.realm.write {[weak self] in
+            guard let self = self else { return }
+            self.startProgress()
+            let saveFootprints: RealmSwift.List<FootPrint> = RealmSwift.List<FootPrint>()
+            for item in self.footprints {
+                saveFootprints.append(item)
+            }
+
+            let item: Travel = Travel(footprints: saveFootprints, title: self.title, intro: self.intro, color: color.toHex() ?? "#FFFFFF")
+            self.realm.add(item)
+            self.stopProgress()
+            self.onClose()
+        }
     }
     
     func onClickAddFootprints() {
