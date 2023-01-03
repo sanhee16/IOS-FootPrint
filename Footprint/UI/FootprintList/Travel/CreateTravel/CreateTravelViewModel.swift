@@ -23,6 +23,7 @@ class CreateTravelViewModel: BaseViewModel {
     @Published var footprints: [FootPrint] = []
     @Published var allFootprints: [FootPrint] = []
     @Published var color: Color = Color.white
+    @Published var draggedItem: FootPrint? = nil
     
     
     override init(_ coordinator: AppCoordinator) {

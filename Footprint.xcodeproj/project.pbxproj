@@ -52,6 +52,7 @@
 		63B1FB062914B5CB007E94B6 /* SwiftUIPullToRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 63B1FB052914B5CB007E94B6 /* SwiftUIPullToRefresh */; };
 		63C81AB52963BD3D0001A70B /* SelectFootprintsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C81AB42963BD3D0001A70B /* SelectFootprintsView.swift */; };
 		63C81AB72963BD430001A70B /* SelectFootprintsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C81AB62963BD430001A70B /* SelectFootprintsViewModel.swift */; };
+		63C81AB92963D6EF0001A70B /* DragAndDropService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C81AB82963D6EF0001A70B /* DragAndDropService.swift */; };
 		63C8CCF62941D60400BB861D /* DevInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C8CCF52941D60400BB861D /* DevInfoView.swift */; };
 		63C8CCF82941D60D00BB861D /* DevInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C8CCF72941D60D00BB861D /* DevInfoViewModel.swift */; };
 		63E2756929502DFA00E4AABC /* PinchZoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E2756829502DFA00E4AABC /* PinchZoom.swift */; };
@@ -132,6 +133,7 @@
 		63B1FB022914B381007E94B6 /* RealmDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDB.swift; sourceTree = "<group>"; };
 		63C81AB42963BD3D0001A70B /* SelectFootprintsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFootprintsView.swift; sourceTree = "<group>"; };
 		63C81AB62963BD430001A70B /* SelectFootprintsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFootprintsViewModel.swift; sourceTree = "<group>"; };
+		63C81AB82963D6EF0001A70B /* DragAndDropService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragAndDropService.swift; sourceTree = "<group>"; };
 		63C8CCF52941D60400BB861D /* DevInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevInfoView.swift; sourceTree = "<group>"; };
 		63C8CCF72941D60D00BB861D /* DevInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevInfoViewModel.swift; sourceTree = "<group>"; };
 		63E2756829502DFA00E4AABC /* PinchZoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchZoom.swift; sourceTree = "<group>"; };
@@ -511,6 +513,7 @@
 				63F1326E2914A1C000B3A9E0 /* WebView.swift */,
 				262D2A05293E310E005984DA /* MailView.swift */,
 				63E2756829502DFA00E4AABC /* PinchZoom.swift */,
+				63C81AB82963D6EF0001A70B /* DragAndDropService.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -766,6 +769,7 @@
 				63C8CCF82941D60D00BB861D /* DevInfoViewModel.swift in Sources */,
 				63C81AB52963BD3D0001A70B /* SelectFootprintsView.swift in Sources */,
 				63F132562914A19F00B3A9E0 /* SceneDelegate.swift in Sources */,
+				63C81AB92963D6EF0001A70B /* DragAndDropService.swift in Sources */,
 				63B1FAED2914A85B007E94B6 /* AddFootprintView.swift in Sources */,
 				265EA947291D1E1400068A5C /* DataModel.swift in Sources */,
 				63FA2387294C35CB00D31506 /* PeopleEditView.swift in Sources */,
