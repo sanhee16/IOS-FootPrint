@@ -7,6 +7,8 @@
 
 
 import UIKit
+import GoogleMaps
+import GooglePlaces
 
 //@UIApplicationDelegateAdaptor(AppDelegate.self) var delegate ??
 @main
@@ -31,6 +33,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         print("application : didFinishLaunchingWithOptions")
         UNUserNotificationCenter.current().delegate = self // notification
+
+        let googleApiKey: String = Bundle.main.googleApiKey
+        GMSServices.provideAPIKey(googleApiKey)
+        GMSPlacesClient.provideAPIKey(googleApiKey)
+
         
         if #available(iOS 11.0, *) {
             // 경고창 배지 사운드를 사용하는 알림 환경 정보를 생성하고, 사용자 동의여부 창을 실행
