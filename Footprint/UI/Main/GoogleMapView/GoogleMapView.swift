@@ -63,6 +63,16 @@ struct GoogleMapView: UIViewRepresentable {
             self.vm = vm
         }
         
+        func mapView(_ mapView: GMSMapView, didTapPOIWithPlaceID placeID: String, name: String, location: CLLocationCoordinate2D) {
+            print("[GoogleMapView] onTapPlace placeId: \(placeID), name: \(name)")
+            // 클릭하면 장소의 이름과 placeId가 나옴!
+            var newName = name
+            if let newLineIdx = name.firstIndex(of: "\n") {
+                newName.removeSubrange(newLineIdx...)
+            }
+            vm.addNewMarker(Location(latitude: location.latitude, longitude: location.longitude), name: newName)
+        }
+        
         func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
             print("[GoogleMapView] on tap marker")
             print("marker info: \(marker)")

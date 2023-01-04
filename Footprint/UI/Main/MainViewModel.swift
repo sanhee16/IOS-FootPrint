@@ -219,7 +219,7 @@ class MainViewModel: BaseViewModel {
     }
 
     
-    func addNewMarker(_ location: Location) {
+    func addNewMarker(_ location: Location, name: String? = nil) {
         // 마커 생성하기
         let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
 
@@ -228,12 +228,16 @@ class MainViewModel: BaseViewModel {
         
         markerView.tintColor = PinColor.pin0.pinUIColor
         marker.iconView = markerView
-        self.alert(.yesOrNo, title: "현재 위치에 마커를 추가하시겠습니까?") {[weak self] res in
+        var message: String = "해당 위치에 마커를 추가하시겠습니까?"
+        if let name = name {
+            message = "\(name)에 마커를 추가하시겠습니까?"
+        }
+        self.alert(.yesOrNo, title: message) {[weak self] res in
             guard let self = self else { return }
             if res {
                 print("add New Marker ok")
                 marker.map = nil
-                self.coordinator?.presentAddFootprintView(location: location, type: .new) {[weak self] in
+                self.coordinator?.presentAddFootprintView(location: location, type: .new(name: name)) {[weak self] in
                     guard let self = self else { return }
                     self.loadAllMarkers()
                 }

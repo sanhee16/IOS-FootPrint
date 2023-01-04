@@ -56,7 +56,7 @@ class ShowFootPrintViewModel: BaseViewModel {
     }
     
     func onClickAddFootprint() {
-        self.coordinator?.changeAddFootprintView(location: self.location, type: .new) {
+        self.coordinator?.changeAddFootprintView(location: self.location, type: .new(name: nil)) {
             
         }
     }

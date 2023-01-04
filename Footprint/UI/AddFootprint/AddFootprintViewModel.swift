@@ -12,7 +12,7 @@ import Photos
 import RealmSwift
 
 public enum AddFootprintType {
-    case new
+    case new(name: String?)
     case modify(content: FootprintContents)
 }
 
@@ -69,6 +69,12 @@ class AddFootprintViewModel: BaseViewModel {
             self.category = contents.category
             self.peopleWith = contents.peopleWith
             self.modifyId = contents.id
+        } else if case let .new(name) = self.type {
+            self.title = name ?? ""
+            let item = self.realm.object(ofType: PeopleWith.self, forPrimaryKey: 0)
+            if let item = item {
+                self.peopleWith.append(item)
+            }
         } else {
             let item = self.realm.object(ofType: PeopleWith.self, forPrimaryKey: 0)
             if let item = item {
