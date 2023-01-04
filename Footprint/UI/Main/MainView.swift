@@ -8,7 +8,8 @@
 
 import SwiftUI
 import MapKit
-import NMapsMap
+import GoogleMaps
+import GooglePlaces
 
 
 struct MainView: View {
@@ -69,44 +70,46 @@ struct MainView: View {
                 }
                 .frame(width: geometry.size.width, height: 50, alignment: .center)
                 
-                //Naver Map
-                if let myLocation = $vm.location.wrappedValue, let coordinator = $vm.coordinator.wrappedValue {
-                    ZStack(alignment: .topTrailing) {
-                        MapView(coordinator, location: myLocation, vm: vm)
-                        VStack(alignment: .center, spacing: 0) {
-                            drawSearch(geometry)
-                            if !$vm.isShowingSearchPannel.wrappedValue {
-                                drawCategory(geometry)
-                            }
-                        }
-                        .zIndex(2)
-                        if $vm.isShowingSearchPannel.wrappedValue {
-                            ScrollView(.vertical, showsIndicators: false) {
-                                VStack(alignment: .leading, spacing: 8) {
-                                    ForEach($vm.searchItems.wrappedValue.indices, id: \.self) { idx in
-                                        let item = $vm.searchItems.wrappedValue[idx]
-                                        drawSearchItem(geometry, item: item)
-                                    }
-                                }
-                            }
-                            .padding(EdgeInsets(top: 12, leading: 10, bottom: 12, trailing: 10))
-                            .background(
-                                RoundedRectangle(cornerRadius: 6)
-                                    .foregroundColor(Color.white.opacity(0.9))
-                            )
-                            .zIndex(1)
-                            .frame(width: geometry.size.width - 20, height: geometry.size.height / 3, alignment: .center)
-                            .padding(EdgeInsets(top: 60, leading: 10, bottom: 0, trailing: 10))
-                            .ignoresSafeArea(.container, edges: [.bottom])
-                        }
-                    }
+                //Google Map
+                if let coordinator = $vm.coordinator.wrappedValue {
+                    GoogleMapView(coordinator, vm: vm)
                 }
+                
+                //Naver Map
+//                if let myLocation = $vm.location.wrappedValue, let coordinator = $vm.coordinator.wrappedValue {
+//                    ZStack(alignment: .topTrailing) {
+//                        MapView(coordinator, location: myLocation, vm: vm)
+//                        VStack(alignment: .center, spacing: 0) {
+//                            drawSearch(geometry)
+//                            if !$vm.isShowingSearchPannel.wrappedValue {
+//                                drawCategory(geometry)
+//                            }
+//                        }
+//                        .zIndex(2)
+//                        if $vm.isShowingSearchPannel.wrappedValue {
+//                            ScrollView(.vertical, showsIndicators: false) {
+//                                VStack(alignment: .leading, spacing: 8) {
+//                                    ForEach($vm.searchItems.wrappedValue.indices, id: \.self) { idx in
+//                                        let item = $vm.searchItems.wrappedValue[idx]
+//                                        drawSearchItem(geometry, item: item)
+//                                    }
+//                                }
+//                            }
+//                            .padding(EdgeInsets(top: 12, leading: 10, bottom: 12, trailing: 10))
+//                            .background(
+//                                RoundedRectangle(cornerRadius: 6)
+//                                    .foregroundColor(Color.white.opacity(0.9))
+//                            )
+//                            .zIndex(1)
+//                            .frame(width: geometry.size.width - 20, height: geometry.size.height / 3, alignment: .center)
+//                            .padding(EdgeInsets(top: 60, leading: 10, bottom: 0, trailing: 10))
+//                            .ignoresSafeArea(.container, edges: [.bottom])
+//                        }
+//                    }
+//                }
             }
-//            .padding(EdgeInsets(top: safeTop, leading: 0, bottom: safeBottom, trailing: 0))
-//            .edgesIgnoringSafeArea(.all)
             .frame(width: geometry.size.width, alignment: .center)
         }
-//        .edgesIgnoringSafeArea(.all)
         .onAppear {
             vm.onAppear()
         }

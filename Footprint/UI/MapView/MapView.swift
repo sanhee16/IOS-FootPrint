@@ -38,11 +38,11 @@ struct MapView: UIViewRepresentable {
         view.mapView.touchDelegate = context.coordinator
         view.mapView.addCameraDelegate(delegate: context.coordinator)
         view.mapView.addOptionDelegate(delegate: context.coordinator)
-        if let location = $vm.location.wrappedValue {
-            let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: location.latitude, lng: location.longitude))
+        if let myLocation = $vm.myLocation.wrappedValue {
+            let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: myLocation.latitude, lng: myLocation.longitude))
             view.mapView.moveCamera(cameraUpdate)
         }
-        vm.initMapView(view.mapView)
+//        vm.initMapView(view.mapView)
         vm.loadAllMarkers()
         return view
     }

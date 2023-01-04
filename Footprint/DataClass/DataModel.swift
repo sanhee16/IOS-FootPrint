@@ -9,9 +9,10 @@ import Foundation
 import SwiftUI
 import MapKit
 import NMapsMap
+import GoogleMaps
 
 struct MarkerItem {
-    var marker: NMFMarker
+    var marker: GMSMarker
     var footPrint: FootPrint
 }
 
@@ -154,6 +155,26 @@ enum PinType: Int {
         case .exclamation: return "mark_exclamation"
         case .happy: return "mark_happy"
         case .square: return "mark_square"
+        }
+    }
+    
+    var markerW: String {
+        switch self {
+        case .restaurant: return "mark_restaurant_w"
+        case .coffee: return "mark_coffee_w"
+        case .bread: return "mark_bread_w"
+        case .cake: return "mark_cake_w"
+        case .wine: return "mark_wine_w"
+        case .exercise: return "mark_exercise_w"
+        case .heart: return "mark_heart_w"
+        case .star: return "mark_star_w"
+        case .multiply: return "mark_multiply_w"
+        case .like: return "mark_like_w"
+        case .unlike: return "mark_unlike_w"
+        case .done: return "mark_done_w"
+        case .exclamation: return "mark_exclamation_w"
+        case .happy: return "mark_happy_w"
+        case .square: return "mark_square_w"
         }
     }
 }

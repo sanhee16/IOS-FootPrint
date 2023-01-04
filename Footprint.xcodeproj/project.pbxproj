@@ -52,6 +52,7 @@
 		63B1FB062914B5CB007E94B6 /* SwiftUIPullToRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 63B1FB052914B5CB007E94B6 /* SwiftUIPullToRefresh */; };
 		63C102B329651E690099AF6A /* Footprint++Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C102B229651E690099AF6A /* Footprint++Bundle.swift */; };
 		63C102B529652E010099AF6A /* ApiInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63C102B429652E010099AF6A /* ApiInfo.plist */; };
+		63C102B8296530680099AF6A /* GoogleMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C102B7296530680099AF6A /* GoogleMapView.swift */; };
 		63C81AB52963BD3D0001A70B /* SelectFootprintsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C81AB42963BD3D0001A70B /* SelectFootprintsView.swift */; };
 		63C81AB72963BD430001A70B /* SelectFootprintsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C81AB62963BD430001A70B /* SelectFootprintsViewModel.swift */; };
 		63C81AB92963D6EF0001A70B /* DragAndDropService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C81AB82963D6EF0001A70B /* DragAndDropService.swift */; };
@@ -135,6 +136,7 @@
 		63B1FB022914B381007E94B6 /* RealmDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDB.swift; sourceTree = "<group>"; };
 		63C102B229651E690099AF6A /* Footprint++Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Footprint++Bundle.swift"; sourceTree = "<group>"; };
 		63C102B429652E010099AF6A /* ApiInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiInfo.plist; sourceTree = "<group>"; };
+		63C102B7296530680099AF6A /* GoogleMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapView.swift; sourceTree = "<group>"; };
 		63C81AB42963BD3D0001A70B /* SelectFootprintsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFootprintsView.swift; sourceTree = "<group>"; };
 		63C81AB62963BD430001A70B /* SelectFootprintsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFootprintsViewModel.swift; sourceTree = "<group>"; };
 		63C81AB82963D6EF0001A70B /* DragAndDropService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragAndDropService.swift; sourceTree = "<group>"; };
@@ -328,7 +330,6 @@
 				63B1FB012914B378007E94B6 /* DataClass */,
 				63F1325C2914A1C000B3A9E0 /* UI */,
 				63F1323F2914A18800B3A9E0 /* Common */,
-				63209FEB2913C3C000709227 /* Assets.xcassets */,
 				63F132572914A1A300B3A9E0 /* Coordinator */,
 				63F132522914A19F00B3A9E0 /* Delegate */,
 				63B1FAF62914B29A007E94B6 /* Resource */,
@@ -361,6 +362,7 @@
 		63B1FAF62914B29A007E94B6 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				63209FEB2913C3C000709227 /* Assets.xcassets */,
 				2606B4CC29437BD10012349A /* loading.json */,
 				63B1FAF72914B2B0007E94B6 /* walking_dog.json */,
 			);
@@ -384,6 +386,14 @@
 				265EA946291D1E1400068A5C /* DataModel.swift */,
 			);
 			path = DataClass;
+			sourceTree = "<group>";
+		};
+		63C102B62965305D0099AF6A /* GoogleMapView */ = {
+			isa = PBXGroup;
+			children = (
+				63C102B7296530680099AF6A /* GoogleMapView.swift */,
+			);
+			path = GoogleMapView;
 			sourceTree = "<group>";
 		};
 		63C81AB32963BD280001A70B /* SelectFootprints */ = {
@@ -527,6 +537,7 @@
 		63F132852914A1C000B3A9E0 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				63C102B62965305D0099AF6A /* GoogleMapView */,
 				63F132872914A1C000B3A9E0 /* MainView.swift */,
 				63F132862914A1C000B3A9E0 /* MainViewModel.swift */,
 			);
@@ -798,6 +809,7 @@
 				63B1FAED2914A85B007E94B6 /* AddFootprintView.swift in Sources */,
 				265EA947291D1E1400068A5C /* DataModel.swift in Sources */,
 				63FA2387294C35CB00D31506 /* PeopleEditView.swift in Sources */,
+				63C102B8296530680099AF6A /* GoogleMapView.swift in Sources */,
 				63F132992914A1C000B3A9E0 /* Topbar.swift in Sources */,
 				63F132B62914A56300B3A9E0 /* LottieView.swift in Sources */,
 				63FA2390294C42CE00D31506 /* SingleSelectGalleryViewModel.swift in Sources */,
