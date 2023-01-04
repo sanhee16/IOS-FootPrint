@@ -253,12 +253,15 @@ class MainViewModel: BaseViewModel {
         let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
 
         
-        let image: UIImage? = UIImage(named: category.pinType.pinType().pinBlack)?.resizeImageTo(size: CGSize(width: 20, height: 20))
-        
+        let image: UIImage? = UIImage(named: category.pinType.pinType().pinBlack)?.resizeImageTo(size: CGSize(width: 22, height: 22))
         let markerView = UIImageView(image: image!.withRenderingMode(.alwaysTemplate))
         
         markerView.tintColor = category.pinColor.pinColor().pinUIColor
-        
+//        if let backgroundImage = UIImage(named: "mark_background_black")?.resizeImageTo(size: CGSize(width: 22, height: 22)) {
+////            backgroundImage.withTintColor(category.pinColor.pinColor().pinUIColor)
+//            backgroundImage.withTintColor(category.pinColor.pinColor().pinUIColor, renderingMode: .alwaysTemplate)
+//            markerView.backgroundColor = UIColor(patternImage: backgroundImage)
+//        }
         marker.iconView = markerView
         marker.map = self.mapView
         marker.isTappable = true

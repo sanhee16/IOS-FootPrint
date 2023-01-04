@@ -177,4 +177,24 @@ enum PinType: Int {
         case .square: return "mark_square_w"
         }
     }
+    
+    var markerClear: String {
+        switch self {
+        case .restaurant: return "mark_restaurant_clear"
+        case .coffee: return "mark_coffee_clear"
+        case .bread: return "mark_bread_clear"
+        case .cake: return "mark_cake_clear"
+        case .wine: return "mark_wine_clear"
+        case .exercise: return "mark_exercise_clear"
+        case .heart: return "mark_heart_clear"
+        case .star: return "mark_star_clear"
+        case .multiply: return "mark_multiply_clear"
+        case .like: return "mark_like_clear"
+        case .unlike: return "mark_unlike_clear"
+        case .done: return "mark_done_clear"
+        case .exclamation: return "mark_exclamation_clear"
+        case .happy: return "mark_happy_clear"
+        case .square: return "mark_square_clear"
+        }
+    }
 }
