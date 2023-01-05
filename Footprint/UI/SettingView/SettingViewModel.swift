@@ -45,4 +45,8 @@ class SettingViewModel: BaseViewModel {
     func onClickDevInfo() {
         self.coordinator?.presentDevInfoView()
     }
+    
+    func onClickEditPeopleWith() {
+        self.coordinator?.presentPeopleWithEditView()
+    }
 }

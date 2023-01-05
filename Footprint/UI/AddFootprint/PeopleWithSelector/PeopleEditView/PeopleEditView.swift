@@ -54,7 +54,7 @@ struct PeopleEditView: View {
             if let uiImage = $vm.image.wrappedValue {
                 Image(uiImage: uiImage)
                     .resizable()
-                    .scaledToFit()
+                    .scaledToFill()
                     .frame(both: imageSize, aligment: .center)
                     .clipShape(Circle())
                     .contentShape(Rectangle())
@@ -65,7 +65,7 @@ struct PeopleEditView: View {
             } else {
                 Image("profile")
                     .resizable()
-                    .scaledToFit()
+                    .scaledToFill()
                     .frame(both: imageSize, aligment: .center)
                     .clipShape(Circle())
                     .contentShape(Rectangle())

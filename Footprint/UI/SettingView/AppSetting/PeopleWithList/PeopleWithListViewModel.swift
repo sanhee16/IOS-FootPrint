@@ -1,0 +1,39 @@
+//
+//  PeopleWithEditViewModel.swift
+//  Footprint
+//
+//  Created by Studio-SJ on 2023/01/05.
+//
+
+import Foundation
+import RealmSwift
+import Combine
+import UIKit
+
+class PeopleWithListViewModel: BaseViewModel {
+    @Published var peopleWithList: [PeopleWith] = []
+    private let realm: Realm
+    
+    override init(_ coordinator: AppCoordinator) {
+        self.realm = try! Realm()
+        super.init(coordinator)
+    }
+    
+    func onAppear() {
+        self.loadAllPeopleList()
+    }
+    
+    func onClose() {
+        self.dismiss()
+    }
+    
+    func onClickEdit(_ item: PeopleWith) {
+        
+    }
+    
+    private func loadAllPeopleList() {
+        self.peopleWithList = Array(realm.objects(PeopleWith.self).filter({ item in
+            item.id > 0
+        }))
+    }
+}

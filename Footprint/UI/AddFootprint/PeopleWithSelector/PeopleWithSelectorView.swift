@@ -120,7 +120,7 @@ struct PeopleWithSelectorView: View {
             if let image = ImageManager.shared.getSavedImage(named: item.image) {
                 Image(uiImage: image)
                     .resizable()
-                    .scaledToFit()
+                    .scaledToFill()
                     .frame(both: imageSize, aligment: .center)
                     .clipShape(Circle())
                     .contentShape(Rectangle())
@@ -157,8 +157,34 @@ struct PeopleWithSelectorView: View {
         .onTapGesture {
             vm.onClickPeopleItem(item)
         }
-        .onLongPressGesture {
-            vm.onClickEditPeople(item)
+//        .onLongPressGesture {
+//            vm.onClickEditPeople(item)
+//        }
+    }
+    private func addPeopleWithItem(_ geometry: GeometryProxy, item: PeopleWith) -> some View {
+        return HStack(alignment: .center, spacing: 12) {
+            Spacer()
+            Text(item.name)
+                .font(.kr12r)
+                .foregroundColor(.gray100)
+            Spacer()
+            if vm.isSelectedPeople(item) {
+                Image("done_b")
+                    .resizable()
+                    .frame(both: 16, aligment: .center)
+            }
         }
+        .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
+        .background(
+            RoundedRectangle(cornerRadius: 8)
+                .foregroundColor(vm.isSelectedPeople(item) ? .lightGray03 : .greenTint5)
+        )
+        .contentShape(Rectangle())
+        .onTapGesture {
+            vm.onClickPeopleItem(item)
+        }
+//        .onLongPressGesture {
+//            vm.onClickEditPeople(item)
+//        }
     }
 }

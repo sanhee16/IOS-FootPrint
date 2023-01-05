@@ -38,6 +38,8 @@
 		631D75242966619B00464F33 /* SToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D75232966619B00464F33 /* SToggleView.swift */; };
 		631D7528296661FA00464F33 /* MainMapOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D7527296661FA00464F33 /* MainMapOptionView.swift */; };
 		631D752A296661FE00464F33 /* MainMapOptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D7529296661FE00464F33 /* MainMapOptionViewModel.swift */; };
+		631D752D29667A4700464F33 /* PeopleWithListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D752C29667A4700464F33 /* PeopleWithListView.swift */; };
+		631D752F29667A4D00464F33 /* PeopleWithListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D752E29667A4D00464F33 /* PeopleWithListViewModel.swift */; };
 		63209FEC2913C3C000709227 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63209FEB2913C3C000709227 /* Assets.xcassets */; };
 		63209FEF2913C3C000709227 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63209FEE2913C3C000709227 /* Preview Assets.xcassets */; };
 		63B1FAE42914A6D8007E94B6 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 63B1FAE32914A6D8007E94B6 /* Lottie */; };
@@ -129,6 +131,8 @@
 		631D75232966619B00464F33 /* SToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SToggleView.swift; sourceTree = "<group>"; };
 		631D7527296661FA00464F33 /* MainMapOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapOptionView.swift; sourceTree = "<group>"; };
 		631D7529296661FE00464F33 /* MainMapOptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapOptionViewModel.swift; sourceTree = "<group>"; };
+		631D752C29667A4700464F33 /* PeopleWithListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleWithListView.swift; sourceTree = "<group>"; };
+		631D752E29667A4D00464F33 /* PeopleWithListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleWithListViewModel.swift; sourceTree = "<group>"; };
 		63209FE42913C3BF00709227 /* Footprint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Footprint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63209FEB2913C3C000709227 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63209FEE2913C3C000709227 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -311,6 +315,7 @@
 		631D7525296661D300464F33 /* AppSetting */ = {
 			isa = PBXGroup;
 			children = (
+				631D752B29667A2C00464F33 /* PeopleWithList */,
 				631D7526296661DE00464F33 /* MainMapOption */,
 				2619FE882940D69700D24778 /* CheckPermission */,
 			);
@@ -324,6 +329,23 @@
 				631D7529296661FE00464F33 /* MainMapOptionViewModel.swift */,
 			);
 			path = MainMapOption;
+			sourceTree = "<group>";
+		};
+		631D752B29667A2C00464F33 /* PeopleWithList */ = {
+			isa = PBXGroup;
+			children = (
+				631D753029667E4E00464F33 /* New Group */,
+				631D752C29667A4700464F33 /* PeopleWithListView.swift */,
+				631D752E29667A4D00464F33 /* PeopleWithListViewModel.swift */,
+			);
+			path = PeopleWithList;
+			sourceTree = "<group>";
+		};
+		631D753029667E4E00464F33 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		63209FDB2913C3BF00709227 = {
@@ -814,6 +836,8 @@
 				63F1324B2914A18800B3A9E0 /* Defaults.swift in Sources */,
 				264B70C0291F8E9D00CDAF9F /* C.swift in Sources */,
 				63F132982914A1C000B3A9E0 /* ProgressView.swift in Sources */,
+				631D752F29667A4D00464F33 /* PeopleWithListViewModel.swift in Sources */,
+				631D752D29667A4700464F33 /* PeopleWithListView.swift in Sources */,
 				631D752A296661FE00464F33 /* MainMapOptionViewModel.swift in Sources */,
 				2691D9C7294EE505002825B9 /* BluePrintBottomSheetView.swift in Sources */,
 				263A97BD29458533008A69F5 /* PeopleWithSelectorViewModel.swift in Sources */,
