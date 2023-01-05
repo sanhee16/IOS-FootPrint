@@ -35,6 +35,9 @@
 		26940CAD293C9D0F0091E996 /* ShowImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26940CAC293C9D0F0091E996 /* ShowImageView.swift */; };
 		26940CAF293C9D170091E996 /* ShowImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26940CAE293C9D170091E996 /* ShowImageViewModel.swift */; };
 		26C04F6D2917667F00890A76 /* SwiftUIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */; };
+		631D75242966619B00464F33 /* SToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D75232966619B00464F33 /* SToggleView.swift */; };
+		631D7528296661FA00464F33 /* MainMapOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D7527296661FA00464F33 /* MainMapOptionView.swift */; };
+		631D752A296661FE00464F33 /* MainMapOptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D7529296661FE00464F33 /* MainMapOptionViewModel.swift */; };
 		63209FEC2913C3C000709227 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63209FEB2913C3C000709227 /* Assets.xcassets */; };
 		63209FEF2913C3C000709227 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63209FEE2913C3C000709227 /* Preview Assets.xcassets */; };
 		63B1FAE42914A6D8007E94B6 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 63B1FAE32914A6D8007E94B6 /* Lottie */; };
@@ -123,6 +126,9 @@
 		26940CAE293C9D170091E996 /* ShowImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowImageViewModel.swift; sourceTree = "<group>"; };
 		26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIExtension.swift; sourceTree = "<group>"; };
 		345566BC804EBC9D85B35660 /* Pods_Footprint.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Footprint.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		631D75232966619B00464F33 /* SToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SToggleView.swift; sourceTree = "<group>"; };
+		631D7527296661FA00464F33 /* MainMapOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapOptionView.swift; sourceTree = "<group>"; };
+		631D7529296661FE00464F33 /* MainMapOptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapOptionViewModel.swift; sourceTree = "<group>"; };
 		63209FE42913C3BF00709227 /* Footprint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Footprint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63209FEB2913C3C000709227 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63209FEE2913C3C000709227 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -219,8 +225,8 @@
 		262D2A00293E2B97005984DA /* SettingView */ = {
 			isa = PBXGroup;
 			children = (
+				631D7525296661D300464F33 /* AppSetting */,
 				63C8CCF42941D5F700BB861D /* DevInfo */,
-				2619FE882940D69700D24778 /* CheckPermission */,
 				262D2A01293E2BA4005984DA /* SettingView.swift */,
 				262D2A03293E2BAA005984DA /* SettingViewModel.swift */,
 			);
@@ -300,6 +306,24 @@
 				26940CAE293C9D170091E996 /* ShowImageViewModel.swift */,
 			);
 			path = ShowImage;
+			sourceTree = "<group>";
+		};
+		631D7525296661D300464F33 /* AppSetting */ = {
+			isa = PBXGroup;
+			children = (
+				631D7526296661DE00464F33 /* MainMapOption */,
+				2619FE882940D69700D24778 /* CheckPermission */,
+			);
+			path = AppSetting;
+			sourceTree = "<group>";
+		};
+		631D7526296661DE00464F33 /* MainMapOption */ = {
+			isa = PBXGroup;
+			children = (
+				631D7527296661FA00464F33 /* MainMapOptionView.swift */,
+				631D7529296661FE00464F33 /* MainMapOptionViewModel.swift */,
+			);
+			path = MainMapOption;
 			sourceTree = "<group>";
 		};
 		63209FDB2913C3BF00709227 = {
@@ -530,6 +554,7 @@
 				262D2A05293E310E005984DA /* MailView.swift */,
 				63E2756829502DFA00E4AABC /* PinchZoom.swift */,
 				63C81AB82963D6EF0001A70B /* DragAndDropService.swift */,
+				631D75232966619B00464F33 /* SToggleView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -751,6 +776,7 @@
 				63F1328E2914A1C000B3A9E0 /* SplashViewModel.swift in Sources */,
 				63C81AB72963BD430001A70B /* SelectFootprintsViewModel.swift in Sources */,
 				2691D9C5294EE4B6002825B9 /* FootprintListFilterViewModel.swift in Sources */,
+				631D7528296661FA00464F33 /* MainMapOptionView.swift in Sources */,
 				265924C929445BE1001E7025 /* FootprintListViewModel.swift in Sources */,
 				264B70BC291F8DD900CDAF9F /* ApiResponse.swift in Sources */,
 				63F1328F2914A1C000B3A9E0 /* SplashView.swift in Sources */,
@@ -764,6 +790,7 @@
 				63B1FAFB2914B31E007E94B6 /* MultiSelectGalleryView.swift in Sources */,
 				63B1FAEF2914A861007E94B6 /* AddFootprintViewModel.swift in Sources */,
 				26C04F6D2917667F00890A76 /* SwiftUIExtension.swift in Sources */,
+				631D75242966619B00464F33 /* SToggleView.swift in Sources */,
 				26332176292095E90065AE3A /* ShowFootPrintView.swift in Sources */,
 				63F132972914A1C000B3A9E0 /* EmailSender.swift in Sources */,
 				63F132472914A18800B3A9E0 /* AlertViewModel.swift in Sources */,
@@ -787,6 +814,7 @@
 				63F1324B2914A18800B3A9E0 /* Defaults.swift in Sources */,
 				264B70C0291F8E9D00CDAF9F /* C.swift in Sources */,
 				63F132982914A1C000B3A9E0 /* ProgressView.swift in Sources */,
+				631D752A296661FE00464F33 /* MainMapOptionViewModel.swift in Sources */,
 				2691D9C7294EE505002825B9 /* BluePrintBottomSheetView.swift in Sources */,
 				263A97BD29458533008A69F5 /* PeopleWithSelectorViewModel.swift in Sources */,
 				26332178292095F10065AE3A /* ShowFootPrintViewModel.swift in Sources */,
