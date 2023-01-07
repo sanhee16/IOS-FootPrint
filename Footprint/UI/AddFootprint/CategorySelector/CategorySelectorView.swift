@@ -1,16 +1,16 @@
 //
-//  PeopleWithSelectorView.swift
+//  CategorySelectorView.swift
 //  Footprint
 //
-//  Created by sandy on 2022/12/11.
+//  Created by sandy on 2023/01/07.
 //
 
 import SwiftUI
 
-struct PeopleWithSelectorView: View {
-    typealias VM = PeopleWithSelectorViewModel
-    public static func vc(_ coordinator: AppCoordinator, peopleWith: [PeopleWith], callback: @escaping ([PeopleWith])->(), completion: (()-> Void)? = nil) -> UIViewController {
-        let vm = VM.init(coordinator, peopleWith: peopleWith, callback: callback)
+struct CategorySelectorView: View {
+    typealias VM = CategorySelectorViewModel
+    public static func vc(_ coordinator: AppCoordinator, selectedCategory: Category, callback: @escaping (Category)->(), completion: (()-> Void)? = nil) -> UIViewController {
+        let vm = VM.init(coordinator, selectedCategory: selectedCategory, callback: callback)
         let view = Self.init(vm: vm)
         let vc = BaseViewController.bottomSheet(view, sizes: [.fixed(400.0)])
         return vc
@@ -25,7 +25,6 @@ struct PeopleWithSelectorView: View {
             400 - 50
         }
     }
-    
     
     var body: some View {
         GeometryReader { geometry in
@@ -50,11 +49,11 @@ struct PeopleWithSelectorView: View {
                 VStack(alignment: .center, spacing: 0) {
                     ScrollView(.vertical, showsIndicators: false) {
                         VStack(alignment: .leading, spacing: 4) {
-                            ForEach($vm.peopleWithShowList.wrappedValue.indices, id: \.self) { idx in
-                                let item = $vm.peopleWithShowList.wrappedValue[idx]
-                                peopleWithItem(geometry, item: item)
+                            ForEach($vm.categoryList.wrappedValue.indices, id: \.self) { idx in
+                                let item = $vm.categoryList.wrappedValue[idx]
+                                categoryItem(geometry, item: item)
                             }
-                            addPeopleWithItem(geometry)
+                            addCategoryItem(geometry)
                         }
                         .padding(EdgeInsets(top: 8, leading: 0, bottom: 20, trailing: 0))
                     }
@@ -72,34 +71,17 @@ struct PeopleWithSelectorView: View {
         }
     }
     
-    private func peopleWithItem(_ geometry: GeometryProxy, item: PeopleWith) -> some View {
+    private func categoryItem(_ geometry: GeometryProxy, item: Category) -> some View {
         return HStack(alignment: .center, spacing: 12) {
-            if let image = ImageManager.shared.getSavedImage(named: item.image) {
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(both: imageSize, aligment: .center)
-                    .clipShape(Circle())
-                    .contentShape(Rectangle())
-                    .clipped()
-            } else {
-                Image("person")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(both: imageSize, aligment: .center)
-                    .clipShape(Circle())
-                    .contentShape(Rectangle())
-                    .clipped()
-                    .background(
-                        Circle()
-                            .foregroundColor(.lightGray01)
-                    )
-            }
+            Image(item.pinType.pinType().pinWhite)
+                .resizable()
+                .frame(both: 14.0, aligment: .center)
+                .colorMultiply(Color(hex: item.pinColor.pinColor().pinColorHex))
             Text(item.name)
                 .font(.kr12r)
                 .foregroundColor(.gray100)
             Spacer()
-            if vm.isSelectedPeople(item) {
+            if vm.isSelectedCategory(item) {
                 Image("done_b")
                     .resizable()
                     .frame(both: 20, aligment: .center)
@@ -109,14 +91,15 @@ struct PeopleWithSelectorView: View {
         .frame(width: geometry.size.width - 24, height: 45.0, alignment: .center)
         .background(
             RoundedRectangle(cornerRadius: 8)
-                .foregroundColor(vm.isSelectedPeople(item) ? .greenTint5 : .lightGray03)
+                .foregroundColor(vm.isSelectedCategory(item) ? .greenTint5 : .lightGray03)
         )
         .contentShape(Rectangle())
         .onTapGesture {
-            vm.onClickPeopleItem(item)
+            vm.selectCategory(item)
         }
     }
-    private func addPeopleWithItem(_ geometry: GeometryProxy) -> some View {
+    
+    private func addCategoryItem(_ geometry: GeometryProxy) -> some View {
         return HStack(alignment: .center, spacing: 12) {
             Spacer()
             Text("+")
@@ -131,7 +114,7 @@ struct PeopleWithSelectorView: View {
         )
         .contentShape(Rectangle())
         .onTapGesture {
-            vm.onClickAddPeople()
+            vm.onClickAddCategory()
         }
     }
 }

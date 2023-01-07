@@ -36,7 +36,7 @@ struct AddFootprintView: View, KeyboardReadable {
                             )
                             .contentShape(Rectangle())
                             .padding([.leading, .trailing], 16)
-//                        drawPinSelectArea(geometry)
+
                         drawCategorySelectArea(geometry)
                         drawPeopleWithArea(geometry)
                         drawImageArea(geometry)
@@ -158,7 +158,7 @@ struct AddFootprintView: View, KeyboardReadable {
                             .foregroundColor(.gray100)
                     }
                 }
-                .padding(EdgeInsets(top: 6, leading: 12, bottom: 6, trailing: 12))
+                .padding(EdgeInsets(top: 6, leading: 18, bottom: 6, trailing: 18))
             }
         }
     }
@@ -170,64 +170,28 @@ struct AddFootprintView: View, KeyboardReadable {
                     .font(.kr13b)
                     .foregroundColor(.gray90)
                 Spacer()
-                if $vm.isCategoryEditMode.wrappedValue {
-                    Text("추가")
-                        .font(.kr12r)
-                        .foregroundColor(.gray60)
-                        .onTapGesture {
-                            vm.onClickAddCategory()
-                        }
-                }
-                Text($vm.isCategoryEditMode.wrappedValue ? "편집 종료" : "편집")
+                Text("선택")
                     .font(.kr12r)
                     .foregroundColor(.gray60)
                     .onTapGesture {
-                        vm.onClickEditCategory()
+                        vm.onClickSelectCategory()
                     }
             }
             .padding(EdgeInsets(top: 10, leading: 18, bottom: 6, trailing: 12))
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(alignment: .center, spacing: 12) {
-                    ForEach($vm.categories.wrappedValue, id: \.self) { item in
-                        categoryItem(item, isSelected: $vm.category.wrappedValue?.tag == item.tag)
-                    }
-                }
-                .padding(EdgeInsets(top: 6, leading: 12, bottom: 6, trailing: 12))
-            }
+            categoryItem($vm.category.wrappedValue)
+                .padding(EdgeInsets(top: 6, leading: 18, bottom: 6, trailing: 12))
         }
     }
     
-    private func categoryItem(_ item: Category, isSelected: Bool) -> some View {
+    private func categoryItem(_ item: Category) -> some View {
         return HStack(alignment: .center, spacing: 2) {
             Image(item.pinType.pinType().pinWhite)
                 .resizable()
                 .frame(both: 14.0, aligment: .center)
                 .colorMultiply(Color(hex: item.pinColor.pinColor().pinColorHex))
             Text(item.name)
-                .font(isSelected ? .kr11b : .kr11r)
-                .foregroundColor(isSelected ? Color.gray90 : Color.gray60)
-        }
-        .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
-        .border(isSelected ? .greenTint4 : .clear, lineWidth: 2, cornerRadius: 6)
-//        .border(isSelected || $vm.isCategoryEditMode.wrappedValue ? .greenTint4 : .clear, lineWidth: 2, cornerRadius: 6) // 좀 별로인거 같아서 뺌!
-        .onTapGesture {
-            if $vm.isCategoryEditMode.wrappedValue {
-                vm.editCategory(item)
-            } else {
-                vm.onSelectCategory(item)
-            }
+                .font(.kr11r)
+                .foregroundColor(.gray100)
         }
     }
-//
-//    private func pinItem(_ item: PinType, isSelected: Bool) -> some View {
-//        return Image(item.pinName)
-//            .resizable()
-//            .scaledToFit()
-//            .frame(both: 30)
-//            .padding(10)
-//            .border(isSelected ? .greenTint4 : .clear, lineWidth: 2, cornerRadius: 12)
-//            .onTapGesture {
-//                vm.onSelectPin(item)
-//            }
-//    }
 }

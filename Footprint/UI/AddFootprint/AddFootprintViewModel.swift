@@ -30,7 +30,7 @@ class AddFootprintViewModel: BaseViewModel {
     @Published var title: String = ""
     @Published var content: String = ""
     @Published var images: [UIImage] = []
-    @Published var category: Category? = nil
+    @Published var category: Category
     @Published var isKeyboardVisible = false
     @Published var isCategoryEditMode: Bool = false
     @Published var isPeopleWithEditMode: Bool = false
@@ -58,7 +58,7 @@ class AddFootprintViewModel: BaseViewModel {
         self.type = type
         
         self.categories = []
-        self.category = realm.object(ofType: Category.self, forPrimaryKey: 0) // 시작할 때 기본 카테고리로 설정하기!
+        self.category = realm.object(ofType: Category.self, forPrimaryKey: 0)! // 시작할 때 기본 카테고리로 설정하기!
         
         super.init(coordinator)
         
@@ -153,10 +153,6 @@ class AddFootprintViewModel: BaseViewModel {
     
     func onClickSave() {
         self.isKeyboardVisible = false
-        guard let category = self.category else {
-            self.alert(.ok, description: "카테고리를 골라주세요")
-            return
-        }
 
         if self.title.isEmpty {
             self.alert(.ok, description: "title을 적어주세요")
@@ -188,9 +184,9 @@ class AddFootprintViewModel: BaseViewModel {
                 realm.add(item)
             case .modify(content: _):
                 print("modify")
-                if let id = self.modifyId, let item = self.realm.object(ofType: FootPrint.self, forPrimaryKey: id), let categoryTag = self.category?.tag {
+                if let id = self.modifyId, let item = self.realm.object(ofType: FootPrint.self, forPrimaryKey: id) {
                     item.title = self.title
-                    item.tag = categoryTag
+                    item.tag = self.category.tag
                     item.content = self.content
                     item.images = imageUrls
                     item.peopleWithIds = peopleWithIds
@@ -202,41 +198,9 @@ class AddFootprintViewModel: BaseViewModel {
         }
     }
     
-//    func onSelectPin(_ item: PinType) {
-//        if self.category.tag != -1 {
-//            self.alert(.ok, title: "카테고리의 핀으로 설정되어서 변경할 수 없습니다.", description: "핀 변경을 원하시면 카테고리 선택을 해제하세요.")
-//            return
-//        }
-//        self.isKeyboardVisible = false
-//        self.pinType = item
-//    }
-    
-    func onClickAddCategory() {
-        self.coordinator?.presentAddCategoryView(type: AddCategoryType(type: .create, category: nil), onDismiss: {[weak self] in
-            self?.loadCategories()
-        })
-    }
-    
-    func onClickEditCategory() {
-        self.isCategoryEditMode = !self.isCategoryEditMode
-    }
-    
-    func onSelectCategory(_ item: Category) {
-        self.category = item
-    }
-    
-    func editCategory(_ item: Category) {
-        if item.tag == 0 {
-            self.alert(.ok, title: "기본 카테고리는 편집할 수 없습니다.")
-            return
-        }
-        self.coordinator?.presentAddCategoryView(type: AddCategoryType(type: .update, category: item), onEraseCategory: {[weak self] in
-            if item.tag == self?.category?.tag {
-                self?.category = nil
-                self?.dismiss(animated: true)
-            }
-        }, onDismiss: { [weak self] in
-            self?.loadCategories()
+    func onClickSelectCategory() {
+        self.coordinator?.presentCategorySelectorView(selectedCategory: self.category, callback: { [weak self] category in
+            self?.category = category
         })
     }
     
