@@ -25,7 +25,7 @@ class AddCategoryViewModel: BaseViewModel {
     
     @Published var name: String = ""
     @Published var pinType: PinType = .star
-    @Published var pinColor: PinColor = .pin2
+    @Published var pinColor: PinColor = .pin0
     let pinList: [PinType] = [
         .star,.restaurant,.coffee,.bread,.cake,.wine,.exercise,.heart,
         .multiply,.like,.unlike,.done,.exclamation,.happy,.square
@@ -110,7 +110,12 @@ class AddCategoryViewModel: BaseViewModel {
     
     func onClickDelete() {
         if let category = self.type.category, let filteredData = self.realm.object(ofType: Category.self, forPrimaryKey: category.tag) {
-            self.alert(.yesOrNo, title: "카테고리를 삭제하시겠습니까?", description: "카테고리를 삭제하면 해당 카테고리에 저장된 노트들은 사라집니다.") {[weak self] isDelete in
+            if category.tag == 0 {
+                self.alert(.ok, title: "기본 카테고리는 삭제할 수 없습니다.")
+                return
+            }
+            
+            self.alert(.yesOrNo, title: "카테고리를 삭제하시겠습니까?", description: "카테고리를 삭제하면 해당 카테고리로 설정된 노트들은 모두 삭제됩니다.") {[weak self] isDelete in
                 guard let self = self else { return }
                 let items = self.realm.objects(FootPrint.self)
                     .filter { footPrint in

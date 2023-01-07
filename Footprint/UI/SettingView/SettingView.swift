@@ -44,6 +44,9 @@ struct SettingView: View {
                 drawItem(geometry, title: "함께한 사람 편집하기") {
                     vm.onClickEditPeopleWith()
                 }
+                drawItem(geometry, title: "카테고리 편집하기") {
+                    vm.onClickEditCategory()
+                }
                 drawTitle(geometry, title: "기타")
                 drawItem(geometry, title: "문의하기") {
                     vm.onClickContact()

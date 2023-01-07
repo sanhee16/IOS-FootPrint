@@ -233,10 +233,21 @@
 		2627408D29699B1900B47566 /* CategorySelector */ = {
 			isa = PBXGroup;
 			children = (
+				264EEF552925126200B89624 /* EditCategory */,
 				2627408E29699B2A00B47566 /* CategorySelectorView.swift */,
 				2627409029699B2F00B47566 /* CategorySelectorViewModel.swift */,
 			);
 			path = CategorySelector;
+			sourceTree = "<group>";
+		};
+		262740922969B4F400B47566 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				2627408D29699B1900B47566 /* CategorySelector */,
+				263A97B929458516008A69F5 /* PeopleWithSelector */,
+				63B1FAF92914B312007E94B6 /* Gallery */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		262D2A00293E2B97005984DA /* SettingView */ = {
@@ -278,19 +289,18 @@
 			path = Api;
 			sourceTree = "<group>";
 		};
-		264EEF552925126200B89624 /* AddCategory */ = {
+		264EEF552925126200B89624 /* EditCategory */ = {
 			isa = PBXGroup;
 			children = (
 				264EEF562925128300B89624 /* AddCategoryView.swift */,
 				264EEF582925128A00B89624 /* AddCategoryViewModel.swift */,
 			);
-			path = AddCategory;
+			path = EditCategory;
 			sourceTree = "<group>";
 		};
 		265924C529445BC7001E7025 /* FootprintList */ = {
 			isa = PBXGroup;
 			children = (
-				63E8489F295ABE5D0037D7A3 /* Travel */,
 				2691D9C1294EE49E002825B9 /* FootprintListFilter */,
 				265924C629445BD9001E7025 /* FootprintListView.swift */,
 				265924C829445BE1001E7025 /* FootprintListViewModel.swift */,
@@ -347,18 +357,10 @@
 		631D752B29667A2C00464F33 /* PeopleWithList */ = {
 			isa = PBXGroup;
 			children = (
-				631D753029667E4E00464F33 /* New Group */,
 				631D752C29667A4700464F33 /* PeopleWithListView.swift */,
 				631D752E29667A4D00464F33 /* PeopleWithListViewModel.swift */,
 			);
 			path = PeopleWithList;
-			sourceTree = "<group>";
-		};
-		631D753029667E4E00464F33 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 		63209FDB2913C3BF00709227 = {
@@ -409,10 +411,6 @@
 		63B1FAEB2914A838007E94B6 /* AddFootprint */ = {
 			isa = PBXGroup;
 			children = (
-				2627408D29699B1900B47566 /* CategorySelector */,
-				263A97B929458516008A69F5 /* PeopleWithSelector */,
-				63B1FAF92914B312007E94B6 /* Gallery */,
-				264EEF552925126200B89624 /* AddCategory */,
 				63B1FAEC2914A85B007E94B6 /* AddFootprintView.swift */,
 				63B1FAEE2914A861007E94B6 /* AddFootprintViewModel.swift */,
 			);
@@ -555,13 +553,12 @@
 		63F1325C2914A1C000B3A9E0 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				265924C529445BC7001E7025 /* FootprintList */,
-				262D2A00293E2B97005984DA /* SettingView */,
-				26332174292095CD0065AE3A /* ShowFootPrint */,
-				265EA942291D133200068A5C /* MapView */,
+				262740922969B4F400B47566 /* Common */,
 				63F1325D2914A1C000B3A9E0 /* Splash */,
 				63F132852914A1C000B3A9E0 /* Main */,
-				63B1FAEB2914A838007E94B6 /* AddFootprint */,
+				63E8489F295ABE5D0037D7A3 /* Travel */,
+				265924C529445BC7001E7025 /* FootprintList */,
+				262D2A00293E2B97005984DA /* SettingView */,
 				63F132692914A1C000B3A9E0 /* CustomView */,
 				63F1328B2914A1C000B3A9E0 /* BluePrint */,
 			);
@@ -598,6 +595,9 @@
 		63F132852914A1C000B3A9E0 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				265EA942291D133200068A5C /* MapView */,
+				26332174292095CD0065AE3A /* ShowFootPrint */,
+				63B1FAEB2914A838007E94B6 /* AddFootprint */,
 				63C102B62965305D0099AF6A /* GoogleMapView */,
 				63F132872914A1C000B3A9E0 /* MainView.swift */,
 				63F132862914A1C000B3A9E0 /* MainViewModel.swift */,

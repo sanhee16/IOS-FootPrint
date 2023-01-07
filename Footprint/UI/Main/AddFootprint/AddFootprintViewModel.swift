@@ -199,9 +199,9 @@ class AddFootprintViewModel: BaseViewModel {
     }
     
     func onClickSelectCategory() {
-        self.coordinator?.presentCategorySelectorView(selectedCategory: self.category, callback: { [weak self] category in
+        self.coordinator?.presentCategorySelectorView(type: .select(selectedCategory: self.category, callback: { [weak self] category in
             self?.category = category
-        })
+        }))
     }
     
     func onClickAddPeopleWith() {

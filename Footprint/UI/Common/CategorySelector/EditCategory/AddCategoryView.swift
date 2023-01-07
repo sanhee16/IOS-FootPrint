@@ -13,10 +13,6 @@ struct AddCategoryView: View, KeyboardReadable {
         let vm = VM.init(coordinator, type: type, onEraseCategory: onEraseCategory)
         let view = Self.init(vm: vm)
         let vc = BaseViewController.bottomSheet(view, sizes: [.fixed(400.0)])
-//        let vc = BaseViewController.init(view, completion: completion)
-//        vc.modalPresentationStyle = .overCurrentContext
-//        vc.view.backgroundColor = UIColor.clear
-//        vc.controller.view.backgroundColor = UIColor.dim
         return vc
     }
     @ObservedObject var vm: VM
@@ -104,14 +100,6 @@ struct AddCategoryView: View, KeyboardReadable {
                 }
             }
             .padding(EdgeInsets(top: 6, leading: 12, bottom: 6, trailing: 12))
-//            ScrollView(.horizontal, showsIndicators: false) {
-//                HStack(alignment: .center, spacing: 6) {
-//                    ForEach(vm.pinList, id: \.self) { item in
-//                        pinItem(item, isSelected: $vm.pinType.wrappedValue == item)
-//                    }
-//                }
-//                .padding(EdgeInsets(top: 6, leading: 12, bottom: 6, trailing: 12))
-//            }
         }
     }
     
@@ -134,15 +122,16 @@ struct AddCategoryView: View, KeyboardReadable {
     }
     
     private func pinItem(_ item: PinType, isSelected: Bool) -> some View {
-        return Image(item.pinBlack)
-            .resizable()
-            .scaledToFit()
-            .frame(both: (UIScreen.main.bounds.width - 24 - CGFloat(columnCnt - 1) * 10) / CGFloat(columnCnt))
-            .padding(3)
-            .border(isSelected ? .greenTint4 : .clear, lineWidth: 2, cornerRadius: 10)
-            .onTapGesture {
-                vm.onSelectPin(item)
-            }
+        return Image(item.pinWhite)
+                .resizable()
+                .scaledToFit()
+                .frame(both: (UIScreen.main.bounds.width - 24 - CGFloat(columnCnt - 1) * 10) / CGFloat(columnCnt))
+                .colorMultiply(Color(hex: $vm.pinColor.wrappedValue.pinColorHex))
+                .padding(3)
+                .border(isSelected ? .greenTint4 : .clear, lineWidth: 2, cornerRadius: 10)
+                .onTapGesture {
+                    vm.onSelectPin(item)
+                }
     }
     
     private func pinColorItem(_ item: PinColor, isSelected: Bool) -> some View {

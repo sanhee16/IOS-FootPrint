@@ -7,10 +7,15 @@
 
 import SwiftUI
 
+enum CategorySelectorType {
+    case edit
+    case select(selectedCategory: Category, callback: (Category)->())
+}
+
 struct CategorySelectorView: View {
     typealias VM = CategorySelectorViewModel
-    public static func vc(_ coordinator: AppCoordinator, selectedCategory: Category, callback: @escaping (Category)->(), completion: (()-> Void)? = nil) -> UIViewController {
-        let vm = VM.init(coordinator, selectedCategory: selectedCategory, callback: callback)
+    public static func vc(_ coordinator: AppCoordinator, type: CategorySelectorType, completion: (()-> Void)? = nil) -> UIViewController {
+        let vm = VM.init(coordinator, type: type)
         let view = Self.init(vm: vm)
         let vc = BaseViewController.bottomSheet(view, sizes: [.fixed(400.0)])
         return vc
@@ -81,10 +86,16 @@ struct CategorySelectorView: View {
                 .font(.kr12r)
                 .foregroundColor(.gray100)
             Spacer()
-            if vm.isSelectedCategory(item) {
-                Image("done_b")
-                    .resizable()
-                    .frame(both: 20, aligment: .center)
+            if case .select(_, _) = vm.type {
+                if vm.isSelectedCategory(item) {
+                    Image("done_b")
+                        .resizable()
+                        .frame(both: 20, aligment: .center)
+                }
+            } else if case .edit = vm.type {
+                Text("\(vm.categoryCnt[item.tag] ?? 0)")
+                    .font(.kr12r)
+                    .foregroundColor(.gray90)
             }
         }
         .padding([.leading, .trailing], 14)

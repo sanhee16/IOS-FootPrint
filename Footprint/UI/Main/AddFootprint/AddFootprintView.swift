@@ -184,7 +184,7 @@ struct AddFootprintView: View, KeyboardReadable {
     }
     
     private func categoryItem(_ item: Category) -> some View {
-        return HStack(alignment: .center, spacing: 2) {
+        return HStack(alignment: .center, spacing: 6) {
             Image(item.pinType.pinType().pinWhite)
                 .resizable()
                 .frame(both: 14.0, aligment: .center)

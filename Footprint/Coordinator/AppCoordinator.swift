@@ -141,8 +141,8 @@ class AppCoordinator: Coordinator, Terminatable {
         self.present(vc, animated: true)
     }
     
-    func presentCategorySelectorView(selectedCategory: Category, callback: @escaping (Category) -> ()) {
-        let vc = CategorySelectorView.vc(self, selectedCategory: selectedCategory, callback: callback)
+    func presentCategorySelectorView(type: CategorySelectorType) {
+        let vc = CategorySelectorView.vc(self, type: type)
         self.present(vc, animated: true)
     }
     

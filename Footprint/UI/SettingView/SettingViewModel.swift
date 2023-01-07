@@ -49,4 +49,8 @@ class SettingViewModel: BaseViewModel {
     func onClickEditPeopleWith() {
 //        self.coordinator?.presentPeopleWithEditView()
     }
+    
+    func onClickEditCategory() {
+        self.coordinator?.presentCategorySelectorView(type: .edit)
+    }
 }
