@@ -154,7 +154,7 @@ struct AddFootprintView: View, KeyboardReadable {
                 HStack(alignment: .center, spacing: 12) {
                     ForEach($vm.peopleWith.wrappedValue, id: \.self) { item in
                         Text(item.name)
-                            .font(.kr11b)
+                            .font(.kr11r)
                             .foregroundColor(.gray100)
                     }
                 }

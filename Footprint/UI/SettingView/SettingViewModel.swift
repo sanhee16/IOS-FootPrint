@@ -47,6 +47,6 @@ class SettingViewModel: BaseViewModel {
     }
     
     func onClickEditPeopleWith() {
-        self.coordinator?.presentPeopleWithEditView()
+//        self.coordinator?.presentPeopleWithEditView()
     }
 }

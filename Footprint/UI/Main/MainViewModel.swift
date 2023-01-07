@@ -262,8 +262,10 @@ class MainViewModel: BaseViewModel {
 //            backgroundImage.withTintColor(category.pinColor.pinColor().pinUIColor, renderingMode: .alwaysTemplate)
 //            markerView.backgroundColor = UIColor(patternImage: backgroundImage)
 //        }
+        
         marker.iconView = markerView
         marker.map = self.mapView
+        marker.tracksViewChanges = false
         marker.isTappable = true
         
         return marker

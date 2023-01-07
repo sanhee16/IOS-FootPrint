@@ -22,7 +22,7 @@ struct PeopleWithSelectorView: View {
     private let imageSize: CGFloat = 26.0
     private var scrollViewHeight: CGFloat {
         get {
-            400 - (safeTop + safeBottom + 50 + 34 + 20 + 60)
+            400 - (safeTop + safeBottom + 50)
         }
     }
     
@@ -47,62 +47,19 @@ struct PeopleWithSelectorView: View {
                     .padding([.leading, .trailing], 12)
                 }
                 .frame(width: geometry.size.width, height: 50, alignment: .center)
-                TextField("", text: $vm.serachText)
-                    .font(.kr12r)
-                    .foregroundColor(.gray60)
-                    .padding([.leading, .trailing], 8)
-                    .frame(width: geometry.size.width - 24, height: 34, alignment: .center)
-                    .contentShape(Rectangle())
-                    .background(
-                        RoundedRectangle(cornerRadius: 6)
-                            .foregroundColor(.lightGray03)
-                    )
-                    .onChange(of: $vm.serachText.wrappedValue) { _ in
-                        vm.enterSearchText()
-                    }
-                if $vm.peopleWithShowList.wrappedValue.isEmpty {
-                    VStack(alignment: .center, spacing: 0) {
-                        Spacer()
-                        Text("함께한 사람 목록이 비어있습니다.")
-                            .font(.kr12r)
-                            .foregroundColor(.gray90)
-                        Spacer()
-                    }
-                    .frame(width: geometry.size.width - 24, height: scrollViewHeight, alignment: .center)
-                    .padding([.top, .bottom], 10)
-                } else {
-                    VStack(alignment: .center, spacing: 0) {
-                        Text("항목을 꾹 누르면 편집이 가능합니다.")
-                            .font(.kr12r)
-                            .foregroundColor(.gray90)
-                            .padding([.top, .bottom], 6)
-                        ScrollView(.vertical, showsIndicators: false) {
-                            VStack(alignment: .leading, spacing: 4) {
-                                ForEach($vm.peopleWithShowList.wrappedValue.indices, id: \.self) { idx in
-                                    let item = $vm.peopleWithShowList.wrappedValue[idx]
-                                    peopleWithItem(geometry, item: item)
-                                }
+                VStack(alignment: .center, spacing: 0) {
+                    ScrollView(.vertical, showsIndicators: false) {
+                        VStack(alignment: .leading, spacing: 4) {
+                            ForEach($vm.peopleWithShowList.wrappedValue.indices, id: \.self) { idx in
+                                let item = $vm.peopleWithShowList.wrappedValue[idx]
+                                peopleWithItem(geometry, item: item)
                             }
-                            .padding(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
+                            addPeopleWithItem(geometry)
                         }
+                        .padding(EdgeInsets(top: 8, leading: 0, bottom: 20, trailing: 0))
                     }
-                    .frame(width: geometry.size.width - 24, height: scrollViewHeight, alignment: .leading)
-                    .padding([.top, .bottom], 10)
                 }
-                if !$vm.serachText.wrappedValue.isEmpty && !$vm.isMatching.wrappedValue {
-                    Text("\($vm.serachText.wrappedValue) 추가하기")
-                        .font(.kr16b)
-                        .foregroundColor(.white)
-                        .frame(width: geometry.size.width - 24, height: 50, alignment: .center)
-                        .background(
-                            RoundedRectangle(cornerRadius: 8)
-                                .foregroundColor(!$vm.isMatching.wrappedValue && !$vm.serachText.wrappedValue.isEmpty ? .greenTint1 : .gray30)
-                        )
-                        .onTapGesture {
-                            vm.onClickAddPeople()
-                        }
-                        .padding(.bottom, 10)
-                }
+                .frame(width: geometry.size.width - 24, height: scrollViewHeight, alignment: .leading)
             }
             .padding(EdgeInsets(top: 0, leading: 0, bottom: safeBottom, trailing: 0))
             .ignoresSafeArea(.container, edges: [.top, .bottom])
@@ -126,7 +83,7 @@ struct PeopleWithSelectorView: View {
                     .contentShape(Rectangle())
                     .clipped()
             } else {
-                Image("profile")
+                Image("person")
                     .resizable()
                     .scaledToFit()
                     .frame(both: imageSize, aligment: .center)
@@ -135,7 +92,7 @@ struct PeopleWithSelectorView: View {
                     .clipped()
                     .background(
                         Circle()
-                            .foregroundColor(.gray30)
+                            .foregroundColor(.lightGray01)
                     )
             }
             Text(item.name)
@@ -145,46 +102,36 @@ struct PeopleWithSelectorView: View {
             if vm.isSelectedPeople(item) {
                 Image("done_b")
                     .resizable()
-                    .frame(both: 16, aligment: .center)
+                    .frame(both: 20, aligment: .center)
             }
         }
-        .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
+        .padding([.leading, .trailing], 14)
+        .frame(width: geometry.size.width - 24, height: 45.0, alignment: .center)
         .background(
             RoundedRectangle(cornerRadius: 8)
-                .foregroundColor(vm.isSelectedPeople(item) ? .lightGray03 : .greenTint5)
+                .foregroundColor(vm.isSelectedPeople(item) ? .greenTint5 : .lightGray03)
         )
         .contentShape(Rectangle())
         .onTapGesture {
             vm.onClickPeopleItem(item)
         }
-//        .onLongPressGesture {
-//            vm.onClickEditPeople(item)
-//        }
     }
-    private func addPeopleWithItem(_ geometry: GeometryProxy, item: PeopleWith) -> some View {
+    private func addPeopleWithItem(_ geometry: GeometryProxy) -> some View {
         return HStack(alignment: .center, spacing: 12) {
             Spacer()
-            Text(item.name)
-                .font(.kr12r)
+            Text("+")
+                .font(.kr15r)
                 .foregroundColor(.gray100)
             Spacer()
-            if vm.isSelectedPeople(item) {
-                Image("done_b")
-                    .resizable()
-                    .frame(both: 16, aligment: .center)
-            }
         }
-        .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
+        .frame(width: geometry.size.width - 24, height: 45.0, alignment: .center)
         .background(
             RoundedRectangle(cornerRadius: 8)
-                .foregroundColor(vm.isSelectedPeople(item) ? .lightGray03 : .greenTint5)
+                .foregroundColor(.lightGray03)
         )
         .contentShape(Rectangle())
         .onTapGesture {
-            vm.onClickPeopleItem(item)
+            vm.onClickAddPeople()
         }
-//        .onLongPressGesture {
-//            vm.onClickEditPeople(item)
-//        }
     }
 }

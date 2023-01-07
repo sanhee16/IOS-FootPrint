@@ -144,22 +144,30 @@ struct ShowFootPrintView: View {
     }
     
     private func drawPeopleWith(_ geometry: GeometryProxy, items: [PeopleWith]) -> some View {
-        return HStack(alignment: .center, spacing: 4) {
+        return HStack(alignment: .top, spacing: 4) {
             Image("person")
                 .resizable()
                 .frame(both: 14.0, aligment: .center)
-            HStack(alignment: .center, spacing: 8) {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 70.0), spacing: 8, alignment: .leading)]) {
                 ForEach(items, id: \.self) { item in
                     Text(item.name)
                         .font(.kr11r)
                         .foregroundColor(Color.gray90)
+                        .lineLimit(1)
                 }
             }
+//            HStack(alignment: .center, spacing: 8) {
+//                ForEach(items, id: \.self) { item in
+//                    Text(item.name)
+//                        .font(.kr11r)
+//                        .foregroundColor(Color.gray90)
+//                }
+//            }
         }
         .padding(EdgeInsets(top: 0, leading: 16, bottom: 2, trailing: 0))
     }
     
-
+    
     private func drawCategory(_ geometry: GeometryProxy, item: FootPrint) -> some View {
         return HStack(alignment: .center, spacing: 4) {
             if let category = item.tag.getCategory() {

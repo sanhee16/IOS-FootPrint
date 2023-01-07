@@ -63,7 +63,7 @@ struct PeopleEditView: View {
                         vm.selectImage()
                     }
             } else {
-                Image("profile")
+                Image("person")
                     .resizable()
                     .scaledToFill()
                     .frame(both: imageSize, aligment: .center)
@@ -72,7 +72,7 @@ struct PeopleEditView: View {
                     .clipped()
                     .background(
                         Circle()
-                            .foregroundColor(.gray30)
+                            .foregroundColor(.lightGray01)
                     )
                     .onTapGesture {
                         vm.selectImage()
