@@ -16,6 +16,7 @@ struct SingleSelectGalleryView: View {
         let vm = VM.init(coordinator, onClickItem: onClickItem)
         let view = Self.init(vm: vm)
         let vc = BaseViewController.init(view, completion: completion)
+        vc.modalPresentationStyle = .overCurrentContext
         return vc
     }
     @ObservedObject var vm: VM

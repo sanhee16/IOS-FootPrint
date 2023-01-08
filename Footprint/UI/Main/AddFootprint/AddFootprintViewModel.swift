@@ -211,7 +211,7 @@ class AddFootprintViewModel: BaseViewModel {
         }) {
             list.remove(at: idx)
         }
-        self.coordinator?.presentPeopleWithSelectorView(list) {[weak self] res in
+        self.coordinator?.presentPeopleWithSelectorView(type: .select(peopleWith: list, callback: {[weak self] res in
             guard let self = self else { return }
             self.peopleWith.removeAll()
             if res.isEmpty {
@@ -222,7 +222,19 @@ class AddFootprintViewModel: BaseViewModel {
             } else {
                 self.peopleWith = res
             }
-        }
+        }))
+//        self.coordinator?.presentPeopleWithSelectorView(list) {[weak self] res in
+//            guard let self = self else { return }
+//            self.peopleWith.removeAll()
+//            if res.isEmpty {
+//                let item = self.realm.object(ofType: PeopleWith.self, forPrimaryKey: 0)
+//                if let item = item {
+//                    self.peopleWith.append(item)
+//                }
+//            } else {
+//                self.peopleWith = res
+//            }
+//        }
     }
     
     private func photoPermissionCheck(_ callback: @escaping (Bool)->()) {

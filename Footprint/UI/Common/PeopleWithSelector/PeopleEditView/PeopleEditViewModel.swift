@@ -169,10 +169,4 @@ class PeopleEditViewModel: BaseViewModel {
             self.image = item.image
         })
     }
-    
-    func onClickImage() {
-        self.isChangeImage = true
-        self.isChange = true
-        self.image = nil
-    }
 }

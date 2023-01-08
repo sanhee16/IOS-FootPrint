@@ -11,24 +11,24 @@ import UIKit
 import RealmSwift
 
 class PeopleWithSelectorViewModel: BaseViewModel {
-    //    @Published var serachText: String = ""
-    //    private var peopleWithList: [PeopleWith] = []
     @Published var peopleWithShowList: [PeopleWith] = []
     @Published var peopleWithSelectList: [PeopleWith] = []
-    //    @Published var isMatching: Bool = false
+    let type: PeopleWithEditType
     private let realm: Realm
-    private var originalList: [PeopleWith]
-    private let callback: ([PeopleWith])->()
+    private var originalList: [PeopleWith] = []
     
-    init(_ coordinator: AppCoordinator, peopleWith: [PeopleWith], callback: @escaping ([PeopleWith])->()) {
+    init(_ coordinator: AppCoordinator, type: PeopleWithEditType) {
         self.realm = try! Realm()
-        self.callback = callback
-        self.originalList = peopleWith
+        self.type = type
         super.init(coordinator)
         
-        for item in peopleWith {
+        if case let .select(list, _) = self.type {
+            self.originalList = list
+        }
+        for item in self.originalList {
             self.peopleWithSelectList.append(item)
         }
+        self.objectWillChange.send()
     }
     
     func onAppear() {
@@ -36,9 +36,13 @@ class PeopleWithSelectorViewModel: BaseViewModel {
     }
     
     func onClose() {
-        self.dismiss(animated: false) {[weak self] in
-            guard let self = self else { return }
-            self.callback(self.originalList)
+        if case let .select(_, callback) = type {
+            self.dismiss(animated: false) {[weak self] in
+                guard let self = self else { return }
+                callback(self.originalList)
+            }
+        } else if case .edit = type {
+            self.dismiss(animated: false)
         }
     }
     
@@ -92,30 +96,34 @@ class PeopleWithSelectorViewModel: BaseViewModel {
     }
     
     func onFinishSelect() {
-        self.dismiss(animated: false) {[weak self] in
-            guard let self = self else { return }
-            self.callback(self.peopleWithSelectList)
+        if case let .select(_, callback) = type {
+            self.dismiss(animated: false) {[weak self] in
+                guard let self = self else { return }
+                callback(self.peopleWithSelectList)
+            }
+        } else if case .edit = type {
+            self.dismiss(animated: false)
         }
     }
     
     func onClickPeopleItem(_ item: PeopleWith) {
-        if isSelectedPeople(item) {
-            self.peopleWithSelectList.removeAll { listItem in
-                listItem.id == item.id
+        if case .select(_, _) = type {
+            if isSelectedPeople(item) {
+                self.peopleWithSelectList.removeAll { listItem in
+                    listItem.id == item.id
+                }
+            } else {
+                self.peopleWithSelectList.append(makeCopyPeopleWith(item))
             }
-        } else {
-            self.peopleWithSelectList.append(makeCopyPeopleWith(item))
+        } else if case .edit = type {
+            self.coordinator?.presentPeopleEditView(PeopleEditStruct(.modify, item: item), callback: { [weak self] deleteId in
+                self?.loadAllPeopleList(deleteId)
+            })
         }
     }
     
     func onClickAddPeople() {
         self.coordinator?.presentPeopleEditView(PeopleEditStruct(.new, name: ""), callback: { [weak self] deleteId in
-            self?.loadAllPeopleList(deleteId)
-        })
-    }
-    
-    func onClickEditPeople(_ item: PeopleWith) {
-        self.coordinator?.presentPeopleEditView(PeopleEditStruct(.modify, item: item), callback: { [weak self] deleteId in
             self?.loadAllPeopleList(deleteId)
         })
     }

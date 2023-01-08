@@ -68,7 +68,7 @@ class BaseViewController<Content>: UIViewController, Dismissible, Nameable where
         super.init(nibName: nil, bundle: nil)
         self.modalPresentationStyle = .fullScreen
     }
-    
+        
     required init?(coder: NSCoder) {
         print("\(type(of: self)): init")
         fatalError("init(coder:) has not been implemented")

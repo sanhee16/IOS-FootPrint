@@ -13,10 +13,12 @@ struct PeopleEditView: View {
     public static func vc(_ coordinator: AppCoordinator, peopleEditStruct: PeopleEditStruct, callback: @escaping ((Int?) -> ()), completion: (()-> Void)? = nil) -> UIViewController {
         let vm = VM.init(coordinator, peopleEditStruct: peopleEditStruct, callback: callback)
         let view = Self.init(vm: vm)
-        let vc = BaseViewController.init(view, completion: completion)
-        vc.modalPresentationStyle = .overCurrentContext
-        vc.view.backgroundColor = UIColor.clear
-        vc.controller.view.backgroundColor = UIColor.dim
+//        let vc = BaseViewController.init(view, completion: completion)
+//        vc.modalPresentationStyle = .overCurrentContext
+//        vc.view.backgroundColor = UIColor.clear
+//        vc.controller.view.backgroundColor = UIColor.dim
+//
+        let vc = BaseViewController.bottomSheet(view, sizes: [.fixed(400.0)])
         return vc
     }
     @ObservedObject var vm: VM
@@ -30,22 +32,17 @@ struct PeopleEditView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .center, spacing: 0) {
-                Spacer()
-                VStack(alignment: .center, spacing: 0) {
-                    drawHeader()
-                    drawBody(geometry)
-                }
-                .background(
-                    RoundedRectangle(cornerRadius: 18)
-                        .foregroundColor(Color.white)
-                )
-                .frame(width: width, alignment: .center)
-                .onAppear {
-                    vm.onAppear()
-                }
+                drawHeader()
+                drawBody(geometry)
                 Spacer()
             }
-            .padding([.leading, .trailing], 30)
+            .padding(EdgeInsets(top: 0, leading: 0, bottom: safeBottom, trailing: 0))
+            .ignoresSafeArea(.container, edges: [.top, .bottom])
+            .frame(width: geometry.size.width, alignment: .leading)
+            .background(Color.white)
+        }
+        .onAppear {
+            vm.onAppear()
         }
     }
     
@@ -95,7 +92,6 @@ struct PeopleEditView: View {
                     }
                 }
                 .contentShape(Rectangle())
-                .frame(width: width - 24, alignment: .center)
             
             TextField("설명(최대 10자)", text: $vm.intro)
                 .padding(EdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 8))
@@ -113,15 +109,13 @@ struct PeopleEditView: View {
                     }
                 }
                 .contentShape(Rectangle())
-                .frame(width: width - 24, alignment: .center)
         }
-        .padding(EdgeInsets(top: 10, leading: 12, bottom: 10, trailing: 12))
+        .frame(width: UIScreen.main.bounds.width - 24, alignment: .center)
+        .padding(.top, 10)
     }
     
     private func drawHeader() -> some View {
         return ZStack(alignment: .center) {
-            
-            
             Topbar(vm.type == .new ? "함께한 사람 추가하기" : "함께한 사람 수정하기", type: .close) {
                 vm.onClose()
             }

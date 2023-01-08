@@ -106,8 +106,8 @@ class AppCoordinator: Coordinator, Terminatable {
         self.present(vc, animated: true)
     }
     
-    func presentPeopleWithSelectorView(_ peopleWith: [PeopleWith], callback: @escaping ([PeopleWith])->()) {
-        let vc = PeopleWithSelectorView.vc(self, peopleWith: peopleWith, callback: callback)
+    func presentPeopleWithSelectorView(type: PeopleWithEditType) {
+        let vc = PeopleWithSelectorView.vc(self, type: type)
         self.present(vc, animated: false)
     }
     

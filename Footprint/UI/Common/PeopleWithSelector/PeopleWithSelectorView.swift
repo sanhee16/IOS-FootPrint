@@ -7,10 +7,17 @@
 
 import SwiftUI
 
+
+enum PeopleWithEditType {
+    case edit
+    case select(peopleWith: [PeopleWith], callback: ([PeopleWith])->())
+}
+
+
 struct PeopleWithSelectorView: View {
     typealias VM = PeopleWithSelectorViewModel
-    public static func vc(_ coordinator: AppCoordinator, peopleWith: [PeopleWith], callback: @escaping ([PeopleWith])->(), completion: (()-> Void)? = nil) -> UIViewController {
-        let vm = VM.init(coordinator, peopleWith: peopleWith, callback: callback)
+    public static func vc(_ coordinator: AppCoordinator, type: PeopleWithEditType, completion: (()-> Void)? = nil) -> UIViewController {
+        let vm = VM.init(coordinator, type: type)
         let view = Self.init(vm: vm)
         let vc = BaseViewController.bottomSheet(view, sizes: [.fixed(400.0)])
         return vc
@@ -99,7 +106,7 @@ struct PeopleWithSelectorView: View {
                 .font(.kr12r)
                 .foregroundColor(.gray100)
             Spacer()
-            if vm.isSelectedPeople(item) {
+            if vm.isSelectedPeople(item), case .select(_, _) = vm.type {
                 Image("done_b")
                     .resizable()
                     .frame(both: 20, aligment: .center)
