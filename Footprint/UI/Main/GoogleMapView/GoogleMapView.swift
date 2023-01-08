@@ -35,15 +35,19 @@ struct GoogleMapView: UIViewRepresentable {
         let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: zoom)
         let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         
-        //지도 setting
+        // 지도 setting
+        // https://developers.google.com/maps/documentation/ios-sdk/controls
         mapView.isIndoorEnabled = false
         mapView.isMyLocationEnabled = true
         mapView.isBuildingsEnabled = false
+        mapView.settings.compassButton = true
+        mapView.settings.myLocationButton = true
         
         mapView.delegate = context.coordinator
         
         vm.initMapView(mapView)
         vm.loadAllMarkers()
+        
         
         return mapView
     }
