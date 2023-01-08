@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2606B4CD29437BD10012349A /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 2606B4CC29437BD10012349A /* loading.json */; };
+		260C87CB296AADB900ADCC32 /* ShowTravelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260C87CA296AADB900ADCC32 /* ShowTravelView.swift */; };
+		260C87CD296AADBE00ADCC32 /* ShowTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260C87CC296AADBE00ADCC32 /* ShowTravelViewModel.swift */; };
+		260C87D0296AAF5C00ADCC32 /* FootprintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260C87CF296AAF5C00ADCC32 /* FootprintItem.swift */; };
 		2619FE8A2940D6AC00D24778 /* CheckPermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2619FE892940D6AC00D24778 /* CheckPermissionView.swift */; };
 		2619FE8C2940D6B300D24778 /* CheckPermissionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2619FE8B2940D6B300D24778 /* CheckPermissionViewModel.swift */; };
 		2627408F29699B2A00B47566 /* CategorySelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2627408E29699B2A00B47566 /* CategorySelectorView.swift */; };
@@ -104,6 +107,9 @@
 /* Begin PBXFileReference section */
 		0B7C258CB37306DD73C5B052 /* Pods-Footprint.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Footprint.debug.xcconfig"; path = "Target Support Files/Pods-Footprint/Pods-Footprint.debug.xcconfig"; sourceTree = "<group>"; };
 		2606B4CC29437BD10012349A /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
+		260C87CA296AADB900ADCC32 /* ShowTravelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTravelView.swift; sourceTree = "<group>"; };
+		260C87CC296AADBE00ADCC32 /* ShowTravelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTravelViewModel.swift; sourceTree = "<group>"; };
+		260C87CF296AAF5C00ADCC32 /* FootprintItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootprintItem.swift; sourceTree = "<group>"; };
 		2619FE892940D6AC00D24778 /* CheckPermissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPermissionView.swift; sourceTree = "<group>"; };
 		2619FE8B2940D6B300D24778 /* CheckPermissionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPermissionViewModel.swift; sourceTree = "<group>"; };
 		2627408E29699B2A00B47566 /* CategorySelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectorView.swift; sourceTree = "<group>"; };
@@ -219,6 +225,15 @@
 				ABE65B1C5B31A01C8E2F03B9 /* Pods-Footprint.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		260C87C9296AADAC00ADCC32 /* ShowTravelView */ = {
+			isa = PBXGroup;
+			children = (
+				260C87CA296AADB900ADCC32 /* ShowTravelView.swift */,
+				260C87CC296AADBE00ADCC32 /* ShowTravelViewModel.swift */,
+			);
+			path = ShowTravelView;
 			sourceTree = "<group>";
 		};
 		2619FE882940D69700D24778 /* CheckPermission */ = {
@@ -494,6 +509,7 @@
 		63E848A5295ABEAF0037D7A3 /* TravelList */ = {
 			isa = PBXGroup;
 			children = (
+				260C87C9296AADAC00ADCC32 /* ShowTravelView */,
 				63E848A6295ABEBD0037D7A3 /* TravelListView.swift */,
 				63E848A8295ABEC20037D7A3 /* TravelListViewModel.swift */,
 			);
@@ -588,6 +604,7 @@
 				63E2756829502DFA00E4AABC /* PinchZoom.swift */,
 				63C81AB82963D6EF0001A70B /* DragAndDropService.swift */,
 				631D75232966619B00464F33 /* SToggleView.swift */,
+				260C87CF296AAF5C00ADCC32 /* FootprintItem.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -830,6 +847,7 @@
 				631D75242966619B00464F33 /* SToggleView.swift in Sources */,
 				26332176292095E90065AE3A /* ShowFootPrintView.swift in Sources */,
 				63F132972914A1C000B3A9E0 /* EmailSender.swift in Sources */,
+				260C87D0296AAF5C00ADCC32 /* FootprintItem.swift in Sources */,
 				63F132472914A18800B3A9E0 /* AlertViewModel.swift in Sources */,
 				265924C729445BD9001E7025 /* FootprintListView.swift in Sources */,
 				262D2A06293E310E005984DA /* MailView.swift in Sources */,
@@ -867,6 +885,7 @@
 				63F132492914A18800B3A9E0 /* SwiftExtension.swift in Sources */,
 				2619FE8A2940D6AC00D24778 /* CheckPermissionView.swift in Sources */,
 				63E848A7295ABEBD0037D7A3 /* TravelListView.swift in Sources */,
+				260C87CD296AADBE00ADCC32 /* ShowTravelViewModel.swift in Sources */,
 				63F1324C2914A18800B3A9E0 /* Api.swift in Sources */,
 				63F1329A2914A1C000B3A9E0 /* WebView.swift in Sources */,
 				2691D9C3294EE4B1002825B9 /* FootprintListFilterView.swift in Sources */,
@@ -876,6 +895,7 @@
 				63C81AB92963D6EF0001A70B /* DragAndDropService.swift in Sources */,
 				63B1FAED2914A85B007E94B6 /* AddFootprintView.swift in Sources */,
 				265EA947291D1E1400068A5C /* DataModel.swift in Sources */,
+				260C87CB296AADB900ADCC32 /* ShowTravelView.swift in Sources */,
 				63FA2387294C35CB00D31506 /* PeopleEditView.swift in Sources */,
 				63C102B8296530680099AF6A /* GoogleMapView.swift in Sources */,
 				63F132992914A1C000B3A9E0 /* Topbar.swift in Sources */,

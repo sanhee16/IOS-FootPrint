@@ -35,7 +35,7 @@ class TravelListViewModel: BaseViewModel {
     }
     
     func onClickShowTravel(_ item: Travel) {
-        
+        self.coordinator?.presentShowTravelView(travel: item)
     }
     
     func onClickCreateTravel() {
