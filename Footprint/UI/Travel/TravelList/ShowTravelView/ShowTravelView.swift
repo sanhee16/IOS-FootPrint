@@ -20,7 +20,7 @@ struct ShowTravelView: View {
     
     private var safeTop: CGFloat { get { Util.safeTop() }}
     private var safeBottom: CGFloat { get { Util.safeBottom() }}
-//    private let IMAGE_SIZE: CGFloat = 50.0
+    //    private let IMAGE_SIZE: CGFloat = 50.0
     
     var body: some View {
         GeometryReader { geometry in
@@ -29,8 +29,14 @@ struct ShowTravelView: View {
                     Topbar("Travel", type: .back) {
                         vm.onClose()
                     }
-                    HStack(alignment: .center, spacing: 0) {
+                    HStack(alignment: .center, spacing: 12) {
                         Spacer()
+                        Text("삭제")
+                            .font(.kr12r)
+                            .foregroundColor(.gray90)
+                            .onTapGesture {
+                                vm.onClickDeleteTravel()
+                            }
                         Text("편집")
                             .font(.kr12r)
                             .foregroundColor(.gray90)
@@ -77,7 +83,7 @@ struct ShowTravelView: View {
                 }
                 .padding([.top, .bottom], 16)
             }
-//            .frame(width: geometry.size.width, height: geometry.size.height - 50, alignment: .leading)
+            //            .frame(width: geometry.size.width, height: geometry.size.height - 50, alignment: .leading)
         }
     }
 }

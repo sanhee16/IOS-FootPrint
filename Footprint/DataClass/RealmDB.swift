@@ -58,8 +58,11 @@ class Travel: Object {
     @Persisted var createdAt: Int
     @Persisted var color: String
     
-    convenience init(footprints: List<FootPrint>, title: String, intro: String, color: String) {
+    convenience init(id: ObjectId? = nil, footprints: List<FootPrint>, title: String, intro: String, color: String) {
         self.init()
+        if let id = id {
+            self.id = id
+        }
         self.footprints = footprints
         self.title = title
         self.intro = intro

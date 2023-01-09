@@ -1,5 +1,5 @@
 //
-//  CreateTravelView.swift
+//  EditTravelView.swift
 //  Footprint
 //
 //  Created by Studio-SJ on 2022/12/27.
@@ -8,10 +8,11 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
-struct CreateTravelView: View {
-    typealias VM = CreateTravelViewModel
-    public static func vc(_ coordinator: AppCoordinator, completion: (()-> Void)? = nil) -> UIViewController {
-        let vm = VM.init(coordinator)
+
+struct EditTravelView: View {
+    typealias VM = EditTravelViewModel
+    public static func vc(_ coordinator: AppCoordinator, type: EditTravelType, completion: (()-> Void)? = nil) -> UIViewController {
+        let vm = VM.init(coordinator, type: type)
         let view = Self.init(vm: vm)
         let vc = BaseViewController.init(view, completion: completion)
         return vc
@@ -28,7 +29,7 @@ struct CreateTravelView: View {
                     Topbar("Travel", type: .back) {
                         vm.onClose()
                     }
-                    HStack(alignment: .center, spacing: 0) {
+                    HStack(alignment: .center, spacing: 12) {
                         Spacer()
                         Text("저장")
                             .font(.kr12r)

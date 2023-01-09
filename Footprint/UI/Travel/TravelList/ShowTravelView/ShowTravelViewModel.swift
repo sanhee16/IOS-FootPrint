@@ -15,15 +15,13 @@ class ShowTravelViewModel: BaseViewModel {
     private let realm: Realm
     @Published var footprints: [FootPrint] = []
     @Published var expandedItem: FootPrint? = nil
-    let travel: Travel
+    @Published var travel: Travel
     
     init(_ coordinator: AppCoordinator, travel: Travel) {
         self.realm = try! Realm()
         self.travel = travel
         self.footprints = Array(travel.footprints)
         super.init(coordinator)
-        
-        self.objectWillChange.send()
     }
     
     func onAppear() {
@@ -39,7 +37,34 @@ class ShowTravelViewModel: BaseViewModel {
     }
     
     func onClickEdit() {
-        
+        self.coordinator?.presentEditTravelView(.edit(item: self.travel)) { [weak self] in
+            self?.reloadTravel()
+        }
+    }
+    
+    private func reloadTravel() {
+        guard let travel = self.realm.objects(Travel.self).filter({ item in
+            item.id == self.travel.id
+        }).first else {
+            return
+        }
+        self.startProgress()
+        self.travel = travel
+        self.footprints = Array(self.travel.footprints)
+        self.stopProgress()
+    }
+    
+    func onClickDeleteTravel() {
+        //TODO: 오류남
+        let item = self.realm.objects(Travel.self)
+            .filter({ item in
+                item.id == self.travel.id
+            }).first
+        try! self.realm.write {[weak self] in
+            guard let self = self, let item = item else { return }
+            self.realm.delete(item)
+            self.dismiss(animated: true)
+        }
     }
     
     func onClickItem(_ item: FootPrint) {
@@ -61,7 +86,7 @@ class ShowTravelViewModel: BaseViewModel {
         }
         self.coordinator?.presentShowImageView(idx, images: uiImages)
     }
-
+    
     func getPeopleWiths(_ ids: [Int]) -> [PeopleWith] {
         var list: [PeopleWith] = []
         for id in ids {

@@ -1,5 +1,5 @@
 //
-//  CreateTravelViewModel.swift
+//  EditTravelViewModel.swift
 //  Footprint
 //
 //  Created by Studio-SJ on 2022/12/27.
@@ -16,7 +16,7 @@ enum EditTravelType {
     case edit(item: Travel)
 }
 
-class CreateTravelViewModel: BaseViewModel {
+class EditTravelViewModel: BaseViewModel {
     private let realm: Realm
     @Published var title: String = ""
     @Published var intro: String = ""
@@ -24,11 +24,19 @@ class CreateTravelViewModel: BaseViewModel {
     @Published var allFootprints: [FootPrint] = []
     @Published var color: Color = Color.white
     @Published var draggedItem: FootPrint? = nil
+    let type: EditTravelType
     
-    
-    override init(_ coordinator: AppCoordinator) {
+    init(_ coordinator: AppCoordinator, type: EditTravelType) {
         self.realm = try! Realm()
+        self.type = type
         super.init(coordinator)
+        if case let .edit(travel) = self.type {
+            self.title = travel.title
+            self.intro = travel.intro
+            self.footprints = Array(travel.footprints)
+            self.color = Color(hex: travel.color)
+        }
+        self.objectWillChange.send()
     }
     
     func onAppear() {
@@ -66,18 +74,35 @@ class CreateTravelViewModel: BaseViewModel {
     }
     
     func onClickSave() {
-        try! self.realm.write {[weak self] in
-            guard let self = self else { return }
-            self.startProgress()
-            let saveFootprints: RealmSwift.List<FootPrint> = RealmSwift.List<FootPrint>()
-            for item in self.footprints {
-                saveFootprints.append(item)
-            }
+        if case .create = type {
+            try! self.realm.write {[weak self] in
+                guard let self = self else { return }
+                self.startProgress()
+                let saveFootprints: RealmSwift.List<FootPrint> = RealmSwift.List<FootPrint>()
+                for item in self.footprints {
+                    saveFootprints.append(item)
+                }
 
-            let item: Travel = Travel(footprints: saveFootprints, title: self.title, intro: self.intro, color: color.toHex() ?? "#FFFFFF")
-            self.realm.add(item)
-            self.stopProgress()
-            self.onClose()
+                let item: Travel = Travel(footprints: saveFootprints, title: self.title, intro: self.intro, color: color.toHex() ?? "#FFFFFF")
+                self.realm.add(item)
+                self.stopProgress()
+                self.onClose()
+            }
+        } else if case let .edit(travel) = type {
+            //TODO: 안됨
+            try! self.realm.write {[weak self] in
+                guard let self = self else { return }
+                self.startProgress()
+                let saveFootprints: RealmSwift.List<FootPrint> = RealmSwift.List<FootPrint>()
+                for item in self.footprints {
+                    saveFootprints.append(item)
+                }
+
+                let item: Travel = Travel(id: travel.id, footprints: saveFootprints, title: self.title, intro: self.intro, color: color.toHex() ?? "#FFFFFF")
+                self.realm.add(item, update: .modified)
+                self.stopProgress()
+                self.onClose()
+            }
         }
     }
     

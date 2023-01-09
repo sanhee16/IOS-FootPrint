@@ -31,15 +31,20 @@ class TravelListViewModel: BaseViewModel {
     }
     
     func loadAll() {
+        self.startProgress()
+        self.travels.removeAll()
         self.travels = Array(self.realm.objects(Travel.self))
+        self.stopProgress()
     }
     
     func onClickShowTravel(_ item: Travel) {
-        self.coordinator?.presentShowTravelView(travel: item)
+        self.coordinator?.presentShowTravelView(travel: item) {[weak self] in
+            self?.loadAll()
+        }
     }
     
     func onClickCreateTravel() {
-        self.coordinator?.presentCreateTravelView()
+        self.coordinator?.presentEditTravelView(.create)
     }
 }
 

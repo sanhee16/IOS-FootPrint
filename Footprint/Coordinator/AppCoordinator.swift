@@ -126,9 +126,9 @@ class AppCoordinator: Coordinator, Terminatable {
         self.present(vc, animated: false)
     }
     
-    func presentCreateTravelView() {
-        let vc = CreateTravelView.vc(self)
-        self.present(vc, animated: false)
+    func presentEditTravelView(_ type: EditTravelType, onDismiss: (()->())? = nil) {
+        let vc = EditTravelView.vc(self, type: type)
+        self.present(vc, animated: false, onDismiss: onDismiss)
     }
     
     func presentSelectFootprintsView(selectedList: [FootPrint], callback: @escaping ([FootPrint])->()) {
@@ -146,9 +146,9 @@ class AppCoordinator: Coordinator, Terminatable {
         self.present(vc, animated: true)
     }
     
-    func presentShowTravelView(travel: Travel) {
+    func presentShowTravelView(travel: Travel, onDismiss: @escaping ()->()) {
         let vc = ShowTravelView.vc(self, travel: travel)
-        self.present(vc, animated: true)
+        self.present(vc, animated: true, onDismiss: onDismiss)
     }
     
     //MARK: Change
