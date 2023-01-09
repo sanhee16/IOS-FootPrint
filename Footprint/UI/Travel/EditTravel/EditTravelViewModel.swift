@@ -74,6 +74,11 @@ class EditTravelViewModel: BaseViewModel {
     }
     
     func onClickSave() {
+        if self.title.isEmpty {
+            self.alert(.ok, title: "제목을 입력해주세요.")
+            return
+        }
+        
         if case .create = type {
             try! self.realm.write {[weak self] in
                 guard let self = self else { return }
@@ -89,7 +94,6 @@ class EditTravelViewModel: BaseViewModel {
                 self.onClose()
             }
         } else if case let .edit(travel) = type {
-            //TODO: 안됨
             try! self.realm.write {[weak self] in
                 guard let self = self else { return }
                 self.startProgress()
