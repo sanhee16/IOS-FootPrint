@@ -23,7 +23,7 @@ struct Pin: Identifiable {
 
 class MainViewModel: BaseViewModel {
     private var locationManager: CLLocationManager
-//    @Published var currenLocation: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+    //    @Published var currenLocation: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
     @Published var annotations: [Pin] = []
     
     @Published var myLocation: Location? = nil
@@ -75,10 +75,10 @@ class MainViewModel: BaseViewModel {
             self.locationPermission = true
             getCurrentLocation()
             loadCategories()
-//            if let myLocation = self.myLocation {
-//                let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: myLocation.latitude, lng: myLocation.longitude))
-//                self.mapView.moveCamera(cameraUpdate)
-//            }
+            //            if let myLocation = self.myLocation {
+            //                let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: myLocation.latitude, lng: myLocation.longitude))
+            //                self.mapView.moveCamera(cameraUpdate)
+            //            }
         default:
             self.locationPermission = false
             self.myLocation = Location(latitude: 0.0, longitude: 0.0)
@@ -132,7 +132,7 @@ class MainViewModel: BaseViewModel {
             let latitude = coor.latitude
             let longitude = coor.longitude
             print("위도 :\(latitude), 경도: \(longitude)")
-//            self.currenLocation = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+            //            self.currenLocation = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
             self.myLocation = Location(latitude: latitude, longitude: longitude)
         }
     }
@@ -170,15 +170,11 @@ class MainViewModel: BaseViewModel {
             })
         
         for footPrint in footPrints {
-            if let category = footPrint.tag.getCategory() {
-                markerList.append(
-                    MarkerItem(marker:
-                                drawMarker(
-                                    mapView,
-                                    location: Location(latitude: footPrint.latitude, longitude: footPrint.longitude),
-                                    category: category),
-                               footPrint: footPrint)
-                )
+            if let category = footPrint.tag.getCategory(), let marker = drawMarker(
+                mapView,
+                location: Location(latitude: footPrint.latitude, longitude: footPrint.longitude),
+                category: category) {
+                markerList.append(MarkerItem(marker: marker, footPrint: footPrint))
             }
         }
         self.stopProgress()
@@ -186,7 +182,7 @@ class MainViewModel: BaseViewModel {
     
     
     func removeMarker(_ mapView: GMSMapView, marker: GMSMarker) {
-//        marker.mapView = nil
+        //        marker.mapView = nil
         marker.map = nil
     }
     
@@ -197,7 +193,7 @@ class MainViewModel: BaseViewModel {
     func onTapMarker(_ location: Location) {
         print("on tap marker")
         self.removeCurrentMarker()
-//        drawCurrentMarker(location)
+        //        drawCurrentMarker(location)
         self.coordinator?.presentShowFootPrintView(location, onDismiss: {[weak self] in
             guard let self = self else { return }
             self.removeCurrentMarker()
@@ -217,12 +213,12 @@ class MainViewModel: BaseViewModel {
         marker.map = self.mapView
         self.currentTapMarker = marker
     }
-
+    
     
     func addNewMarker(_ location: Location, name: String? = nil) {
         // 마커 생성하기
         let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
-
+        
         let image: UIImage? = UIImage(named: PinType.star.marker)?.resizeImageTo(size: CGSize(width: 20, height: 20))
         let markerView = UIImageView(image: image!.withRenderingMode(.alwaysTemplate))
         
@@ -248,22 +244,34 @@ class MainViewModel: BaseViewModel {
         }
     }
     
-    func drawMarker(_ mapView: GMSMapView, location: Location, category: Category) -> GMSMarker {
+    func drawMarker(_ mapView: GMSMapView, location: Location, category: Category) -> GMSMarker? {
         // 마커 생성하기
+        // MARK: mix two images!
+        // reference: https://stackoverflow.com/questions/32006128/how-to-merge-two-uiimages
         let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
-
         
-        let image: UIImage? = UIImage(named: category.pinType.pinType().pinBlack)?.resizeImageTo(size: CGSize(width: 22, height: 22))
-        let markerView = UIImageView(image: image!.withRenderingMode(.alwaysTemplate))
+        var backgroundSize = CGSize(width: 130, height: 130)
+        var itemSize = CGSize(width: 100, height: 100)
+        var itemFinalSize = CGSize(width: 22, height: 22)
+        let markerImage: UIImage? = UIImage(named: category.pinType.pinType().pinWhite)?.resizeImageTo(size: itemSize)
+        var backgroundImage: UIImage? = UIImage(named: "mark_background_black")?.resizeImageTo(size: backgroundSize)
+        backgroundImage = backgroundImage?.withTintColor(category.pinColor.pinColor().pinUIColor, renderingMode: .alwaysTemplate)
         
-        markerView.tintColor = category.pinColor.pinColor().pinUIColor
-//        if let backgroundImage = UIImage(named: "mark_background_black")?.resizeImageTo(size: CGSize(width: 22, height: 22)) {
-////            backgroundImage.withTintColor(category.pinColor.pinColor().pinUIColor)
-//            backgroundImage.withTintColor(category.pinColor.pinColor().pinUIColor, renderingMode: .alwaysTemplate)
-//            markerView.backgroundColor = UIColor(patternImage: backgroundImage)
-//        }
+        guard let markerImage = markerImage, let backgroundImage = backgroundImage else { return nil }
         
-        marker.iconView = markerView
+        let backgroundRect = CGRect(x: 0, y: 0, width: backgroundSize.width, height: backgroundSize.height)
+        let itemRect = CGRect(x: (backgroundSize.width - itemSize.width) / 2, y: (backgroundSize.height - itemSize.height) / 2, width: itemSize.width, height: itemSize.height)
+        
+        UIGraphicsBeginImageContext(backgroundSize)
+        backgroundImage.draw(in: backgroundRect, blendMode: .normal, alpha: 1)
+        markerImage.draw(in: itemRect, blendMode: .normal, alpha: 1)
+        
+        var finalMarkerImage: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        guard let finalMarkerImage = finalMarkerImage?.resizeImageTo(size: itemFinalSize) else { return nil }
+        let finalMarkerImageView = UIImageView(image: finalMarkerImage.withRenderingMode(.alwaysOriginal))
+        marker.iconView = finalMarkerImageView
         marker.map = self.mapView
         marker.tracksViewChanges = false
         marker.isTappable = true
@@ -301,8 +309,8 @@ class MainViewModel: BaseViewModel {
     
     func onClickSearchItem(_ item: FootPrint) {
         self.removeCurrentMarker()
-//        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: item.latitude, lng: item.longitude))
-//        mapView.moveCamera(cameraUpdate)
+        //        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: item.latitude, lng: item.longitude))
+        //        mapView.moveCamera(cameraUpdate)
     }
     
     func onClickLocationPermission() {
