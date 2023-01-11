@@ -126,6 +126,7 @@ struct MainView: View {
                 TextField("", text: $vm.serachText)
                     .font(.kr13r)
                     .foregroundColor(.gray90)
+                    .accentColor(.greenTint4)
                     .padding([.leading, .trailing], 8)
                     .frame(width: geometry.size.width - 26 - 60, height: 40, alignment: .center)
                     .contentShape(Rectangle())

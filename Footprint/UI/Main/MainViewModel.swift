@@ -41,6 +41,8 @@ class MainViewModel: BaseViewModel {
     private var allFootprints: [FootPrint] = []
     
     private var mapView: GMSMapView = GMSMapView()
+    private var searchTimer: Timer? = nil
+    private var searchCnt: Int = 0
     private let realm: Realm
     
     override init(_ coordinator: AppCoordinator) {
@@ -299,6 +301,10 @@ class MainViewModel: BaseViewModel {
     func enterSearchText() {
         let text = self.serachText
         print("enter text: \(text)")
+        searchCnt = 0
+        if self.searchTimer == nil {
+            self.startRepeatTimer()
+        }
         //TOOD: here
         // 여기에 하면 너무 api요청이 많아서 검색하고난 후에 해야할것 같음 -> 아니면 delay줘서 해야 할 것 같은데
         // example) 1초~2초 정도 더 입력이 없으면 그때 요청
@@ -313,6 +319,12 @@ class MainViewModel: BaseViewModel {
 //                item.title.contains(text)
 //            }
 //        }
+    }
+    
+    private func timerStopAndTask() {
+        print("timer Stop!")
+        //TODO: 여기는 임시라서 이 메소드 지워야징!
+//        self.placeSearch(self.serachText)
     }
     
     // https://developers.google.com/maps/documentation/places/ios-sdk/autocomplete#get_place_predictions
@@ -369,6 +381,38 @@ class MainViewModel: BaseViewModel {
     private func removeCurrentMarker() {
         if let currentTapMarker = self.currentTapMarker {
             self.removeMarker(self.mapView, marker: currentTapMarker)
+        }
+    }
+    
+    //MARK: Timer
+    // 반복 타이머 시작
+    private func startRepeatTimer() {
+        searchTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(timerTask(timer:)), userInfo: "check permission", repeats: true)
+    }
+    
+    // 반복 타이머 실행, 타이머 돌때 할 작업
+    @objc private func timerTask(timer: Timer) {
+        if timer.userInfo != nil {
+            searchCnt += 1
+            print("timer run : \(searchCnt)")
+            if searchCnt == 5 {
+                stopRepeatTimer()
+            }
+        }
+    }
+    
+    
+    // 반복 타이머 종료
+    private func stopRepeatTimer() {
+        if let timer = searchTimer {
+            if timer.isValid {
+                timer.invalidate()
+            }
+            searchTimer = nil
+            searchCnt = 0
+            // timer 종료되고 할 작업
+//            onStartSplashTimer()
+            self.timerStopAndTask()
         }
     }
 }
