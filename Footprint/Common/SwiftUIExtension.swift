@@ -413,3 +413,9 @@ extension UIImage {
         return resizedImage
     }
 }
+
+extension UIApplication {
+    func hideKeyborad() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}

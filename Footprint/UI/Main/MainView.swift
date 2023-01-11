@@ -121,23 +121,55 @@ struct MainView: View {
     }
     
     private func drawSearchBox(_ geometry: GeometryProxy) -> some View {
-        return VStack(alignment: .leading, spacing: 10) {
-            TextField("", text: $vm.serachText)
-                .font(.kr13r)
-                .foregroundColor(.gray90)
-                .padding([.leading, .trailing], 8)
-                .frame(width: geometry.size.width - 40, height: 40, alignment: .center)
-                .contentShape(Rectangle())
+        return HStack(alignment: .center, spacing: 6) {
+            ZStack(alignment: .trailing) {
+                TextField("", text: $vm.serachText)
+                    .font(.kr13r)
+                    .foregroundColor(.gray90)
+                    .padding([.leading, .trailing], 8)
+                    .frame(width: geometry.size.width - 26 - 60, height: 40, alignment: .center)
+                    .contentShape(Rectangle())
+                    .background(
+                        RoundedRectangle(cornerRadius: 6)
+                            .foregroundColor(Color.white.opacity(0.98))
+                    )
+                    .border(.gray60, lineWidth: 1.2, cornerRadius: 6)
+                    .padding(.leading, 10)
+                    .onChange(of: $vm.serachText.wrappedValue) { _ in
+                        vm.enterSearchText()
+                    }
+                if !$vm.serachText.wrappedValue.isEmpty {
+                    Text("X")
+                        .font(.kr11b)
+                        .foregroundColor(.gray100)
+                        .padding(8)
+                        .background(
+                            Circle()
+                                .foregroundColor(.greenTint5)
+                        )
+                        .contentShape(Rectangle())
+                        .padding(.trailing, 10)
+                        .zIndex(1)
+                        .onTapGesture {
+                            $vm.serachText.wrappedValue.removeAll()
+                        }
+                }
+            }
+            Text("취소")
+                .font(.kr12r)
+                .foregroundColor(.white)
+                .frame(width: 60, height: 40, alignment: .center)
                 .background(
                     RoundedRectangle(cornerRadius: 6)
-                        .foregroundColor(Color.white.opacity(0.98))
+                        .foregroundColor(Color.greenTint1)
                 )
-                .border(.gray60, lineWidth: 1.2, cornerRadius: 6)
-                .padding(EdgeInsets(top: 6, leading: 20, bottom: 0, trailing: 20))
-                .onChange(of: $vm.serachText.wrappedValue) { _ in
-                    vm.enterSearchText()
+                .padding(.trailing, 10)
+                .onTapGesture {
+                    $vm.serachText.wrappedValue.removeAll()
+                    UIApplication.shared.hideKeyborad()
                 }
         }
+        .padding(.top, 8)
     }
     
     
