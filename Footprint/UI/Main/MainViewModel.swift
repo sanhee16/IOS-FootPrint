@@ -298,13 +298,53 @@ class MainViewModel: BaseViewModel {
     
     func enterSearchText() {
         let text = self.serachText
-        if text.isEmpty {
-            self.searchItems = self.allFootprints
-        } else {
-            self.searchItems = self.allFootprints.filter { item in
-                item.title.contains(text)
+        print("enter text: \(text)")
+        //TOOD: here
+        // 여기에 하면 너무 api요청이 많아서 검색하고난 후에 해야할것 같음 -> 아니면 delay줘서 해야 할 것 같은데
+        // example) 1초~2초 정도 더 입력이 없으면 그때 요청
+        // placeSearch(text)
+        
+        
+        
+//        if text.isEmpty {
+//            self.searchItems = self.allFootprints
+//        } else {
+//            self.searchItems = self.allFootprints.filter { item in
+//                item.title.contains(text)
+//            }
+//        }
+    }
+    
+    // https://developers.google.com/maps/documentation/places/ios-sdk/autocomplete#get_place_predictions
+    private func placeSearch(_ text: String) {
+        guard let myLocation = myLocation else { return }
+        /**
+         * Create a new session token. Be sure to use the same token for calling
+         * findAutocompletePredictions, as well as the subsequent place details request.
+         * This ensures that the user's query and selection are billed as a single session.
+         */
+        let token = GMSAutocompleteSessionToken.init()
+
+        // Create a type filter.
+        let filter = GMSAutocompleteFilter()
+//        filter.types = [.address]
+        let searchBound: Double = 3.0
+        let northEastBounds = CLLocationCoordinate2DMake(myLocation.latitude + searchBound, myLocation.longitude + searchBound);
+        let southWestBounds = CLLocationCoordinate2DMake(myLocation.latitude - searchBound, myLocation.longitude - searchBound);
+        filter.locationBias = GMSPlaceRectangularLocationOption(northEastBounds, southWestBounds);
+
+        let placesClient: GMSPlacesClient = GMSPlacesClient()
+        placesClient.findAutocompletePredictions(fromQuery: text, filter: filter, sessionToken: token, callback: { (results, error) in
+            if let error = error {
+              print("Autocomplete error: \(error)")
+              return
             }
-        }
+            if let results = results {
+              for result in results {
+                print("Result \(result.attributedFullText) with placeID \(result.placeID)")
+              }
+            }
+        })
     }
     
     func onClickSearchItem(_ item: FootPrint) {

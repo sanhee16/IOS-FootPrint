@@ -69,10 +69,15 @@ struct MainView: View {
                     .padding([.leading, .trailing], 12)
                 }
                 .frame(width: geometry.size.width, height: 50, alignment: .center)
-                
                 //Google Map
                 if let coordinator = $vm.coordinator.wrappedValue {
-                    GoogleMapView(coordinator, vm: vm)
+                    ZStack(alignment: .topTrailing) {
+                        VStack(alignment: .center, spacing: 0) {
+                            drawSearchBox(geometry)
+                        }
+                        .zIndex(1)
+                        GoogleMapView(coordinator, vm: vm)
+                    }
                 }
                 
                 //Naver Map
@@ -112,6 +117,26 @@ struct MainView: View {
         }
         .onAppear {
             vm.onAppear()
+        }
+    }
+    
+    private func drawSearchBox(_ geometry: GeometryProxy) -> some View {
+        return VStack(alignment: .leading, spacing: 10) {
+            TextField("", text: $vm.serachText)
+                .font(.kr13r)
+                .foregroundColor(.gray90)
+                .padding([.leading, .trailing], 8)
+                .frame(width: geometry.size.width - 40, height: 40, alignment: .center)
+                .contentShape(Rectangle())
+                .background(
+                    RoundedRectangle(cornerRadius: 6)
+                        .foregroundColor(Color.white.opacity(0.98))
+                )
+                .border(.gray60, lineWidth: 1.2, cornerRadius: 6)
+                .padding(EdgeInsets(top: 6, leading: 20, bottom: 0, trailing: 20))
+                .onChange(of: $vm.serachText.wrappedValue) { _ in
+                    vm.enterSearchText()
+                }
         }
     }
     
