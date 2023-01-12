@@ -34,7 +34,7 @@ class MainViewModel: BaseViewModel {
     @Published var categories: [Category] = []
     @Published var showingCategories: [Int] = []
     @Published var searchText: String = ""
-    @Published var searchItems: [FootPrint] = []
+    @Published var searchItems: [SearchItemResponse] = []
     @Published var locationPermission: Bool = false
     
     private var currentTapMarker: GMSMarker? = nil
@@ -284,18 +284,6 @@ class MainViewModel: BaseViewModel {
         return marker
     }
     
-    func onTapSearchPannel() {
-        self.removeCurrentMarker()
-        self.isShowCategoriesPannel = false
-        self.isShowingSearchPannel = !self.isShowingSearchPannel
-        if self.isShowingSearchPannel {
-            loadAllFootprints()
-            self.searchItems = self.allFootprints
-        } else {
-            self.searchItems.removeAll()
-            self.searchText.removeAll()
-        }
-    }
     
     func loadAllFootprints() {
         self.allFootprints = Array(self.realm.objects(FootPrint.self))
@@ -337,82 +325,48 @@ class MainViewModel: BaseViewModel {
     // https://developers.google.com/maps/documentation/places/ios-sdk/autocomplete#get_place_predictions
     private func placeSearch(_ text: String) {
         guard let myLocation = myLocation else { return }
-        /**
-         * Create a new session token. Be sure to use the same token for calling
-         * findAutocompletePredictions, as well as the subsequent place details request.
-         * This ensures that the user's query and selection are billed as a single session.
-         */
-//        let token: GMSAutocompleteSessionToken = GMSAutocompleteSessionToken.init()
-        
-        // Create a type filter.
         let filter = GMSAutocompleteFilter()
-        //        filter.locationBias = LocationBa
-        //        filter.types = [.address]
         let searchBound: Double = 2.0
         let northEastBounds = CLLocationCoordinate2DMake(myLocation.latitude + searchBound, myLocation.longitude + searchBound);
         let southWestBounds = CLLocationCoordinate2DMake(myLocation.latitude - searchBound, myLocation.longitude - searchBound);
         filter.locationBias = GMSPlaceRectangularLocationOption(northEastBounds, southWestBounds);
         
         let placesClient: GMSPlacesClient = GMSPlacesClient()
-        placesClient.findAutocompletePredictions(fromQuery: text, filter: filter, sessionToken: nil, callback: { (results, error) in
+        placesClient.findAutocompletePredictions(fromQuery: text, filter: filter, sessionToken: nil, callback: {[weak self] (results, error) in
+            guard let self = self else { return }
             if let error = error {
                 print("Autocomplete error: \(error)")
+                self.searchItems.removeAll()
                 return
             }
-            var placeId: String? = nil
             if let results = results {
-                placeId = results.first?.placeID
+                self.searchItems.removeAll()
                 for result in results {
-                    /*
-                     attributedFullText: 대한민국 서울특별시 강남구 대치동 {
-                     }빈브라더{
-                         GMSAutocompleteMatch = "<GMSAutocompleteMatchFragment: 0x2836944c0>";
-                     }스{
-                     }
-                     attributedPrimaryText: 빈브라더{
-                         GMSAutocompleteMatch = "<GMSAutocompleteMatchFragment: 0x283694340>";
-                     }스{
-                     }
-                     attributedSecondaryText: Optional(대한민국 서울특별시 강남구 대치동{
-                     })
-                     placeID: ChIJNd4xuz-kfDURNheDT2onnUc
-                     types: ["cafe", "food", "point_of_interest", "establishment"]
-                     */
-                    
-                    /*
-                     Result 대한민국 서울특별시 마포구 합정동 토정로 {
-                     }빈브라더{
-                     GMSAutocompleteMatch = "<GMSAutocompleteMatchFragment: 0x280770dc0>";
-                     }스 합정점{
-                     } with placeID ChIJr8r3XtSYfDURLs-hbLaOdow
-                     */
-                    
-//                    print("Result \(result.attributedFullText) with placeID \(result.placeID)")
-//                    print("attributedFullText: \(result.attributedFullText)")
-//                    print("attributedPrimaryText: \(result.attributedPrimaryText)")
-//                    print("attributedSecondaryText: \(result.attributedSecondaryText)")
-//                    print("placeID: \(result.placeID)")
-//                    print("types: \(result.types)")
-//                    print("-----------------------------")
-                    
+                    self.searchItems.append(
+                        SearchItemResponse(
+                            name: result.attributedPrimaryText.string,
+                            fullAddress: result.attributedFullText.string,
+                            secondaryAddress: result.attributedSecondaryText?.string,
+                            placeId: result.placeID,
+                            types: result.types
+                        )
+                    )
                 }
             }
-            if let placeId = placeId {
-                print("placeId: \(placeId)")
-                self.googleApi.getGeocoding(placeId)
-                    .run(in: &self.subscription) { result in
-                        print("run!")
-                        print(result)
+        })
+    }
+    
+    private func getGeocoding(_ placeId: String) {
+        self.googleApi.getGeocoding(placeId)
+            .run(in: &self.subscription) { result in
+                print("run!")
 //                        print("lat: \(result.geometry.location.lat)")
 //                        print("lng: \(result.geometry.location.lng)")
-                    } err: { err in
-                        print("error: \(err)")
-                    } complete: {
-                        print("complete")
-                    }
-
+            } err: { err in
+                print("error: \(err)")
+            } complete: {
+                print("complete")
             }
-        })
     }
     
     func onClickSearchItem(_ item: FootPrint) {

@@ -204,7 +204,7 @@ struct MainView: View {
                 )
                 .padding([.top, .trailing], 10)
                 .onTapGesture {
-                    vm.onTapSearchPannel()
+                    
                 }
         }
         .contentShape(Rectangle())

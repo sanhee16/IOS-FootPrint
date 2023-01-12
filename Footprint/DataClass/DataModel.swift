@@ -11,6 +11,14 @@ import MapKit
 import NMapsMap
 import GoogleMaps
 
+struct SearchItemResponse {
+    var name: String
+    var fullAddress: String
+    var secondaryAddress: String?
+    var placeId: String
+    var types: [String]
+}
+
 struct MarkerItem {
     var marker: GMSMarker
     var footPrint: FootPrint
