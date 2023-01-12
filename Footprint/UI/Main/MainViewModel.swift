@@ -29,8 +29,8 @@ class MainViewModel: BaseViewModel {
     @Published var myLocation: Location? = nil
     @Published var markerList: [MarkerItem] = []
     
-    @Published var isShowCategoriesPannel: Bool = false
-    @Published var isShowingSearchPannel: Bool = false
+//    @Published var isShowCategoriesPannel: Bool = false
+    @Published var isShowingSearchResults: Bool = false
     @Published var categories: [Category] = []
     @Published var showingCategories: [Int] = []
     @Published var searchText: String = ""
@@ -291,6 +291,15 @@ class MainViewModel: BaseViewModel {
     
     func enterSearchText() {
         let text = self.searchText
+        if text.isEmpty {
+            self.stopRepeatTimer()
+            self.searchText = ""
+            self.lastSearchText = nil
+            return
+        }
+        if !self.isShowingSearchResults {
+            self.isShowingSearchResults = true
+        }
         print("enter text: \(text)")
         searchCnt = 0
         if self.searchTimer == nil {
@@ -312,9 +321,22 @@ class MainViewModel: BaseViewModel {
         //        }
     }
     
+    func onCloseSearchBox() {
+        self.stopRepeatTimer()
+        self.searchText = ""
+        self.lastSearchText = nil
+        self.searchItems = []
+        self.isShowingSearchResults = false
+    }
+    
+    func onClickSearchCancel() {
+        self.stopRepeatTimer()
+        self.searchText = ""
+        self.lastSearchText = nil
+        self.searchItems = []
+    }
+    
     private func timerStopAndTask() {
-        print("timer Stop!")
-        //TODO: 여기는 임시라서 이 메소드 지워야징!
         if let lastSearchText = self.lastSearchText, lastSearchText == self.searchText {
             return
         }
@@ -325,6 +347,7 @@ class MainViewModel: BaseViewModel {
     // https://developers.google.com/maps/documentation/places/ios-sdk/autocomplete#get_place_predictions
     private func placeSearch(_ text: String) {
         guard let myLocation = myLocation else { return }
+        self.startProgress()
         let filter = GMSAutocompleteFilter()
         let searchBound: Double = 2.0
         let northEastBounds = CLLocationCoordinate2DMake(myLocation.latitude + searchBound, myLocation.longitude + searchBound);
@@ -333,10 +356,14 @@ class MainViewModel: BaseViewModel {
         
         let placesClient: GMSPlacesClient = GMSPlacesClient()
         placesClient.findAutocompletePredictions(fromQuery: text, filter: filter, sessionToken: nil, callback: {[weak self] (results, error) in
-            guard let self = self else { return }
+            guard let self = self else {
+                self?.stopProgress()
+                return
+            }
             if let error = error {
                 print("Autocomplete error: \(error)")
                 self.searchItems.removeAll()
+                self.stopProgress()
                 return
             }
             if let results = results {
@@ -353,6 +380,7 @@ class MainViewModel: BaseViewModel {
                     )
                 }
             }
+            self.stopProgress()
         })
     }
     
@@ -407,6 +435,8 @@ class MainViewModel: BaseViewModel {
             print("timer run : \(searchCnt)")
             if searchCnt == 5 {
                 stopRepeatTimer()
+                // timer 종료되고 할 작업
+                self.timerStopAndTask()
             }
         }
     }
@@ -415,14 +445,12 @@ class MainViewModel: BaseViewModel {
     // 반복 타이머 종료
     private func stopRepeatTimer() {
         if let timer = searchTimer {
+            print("timer stop!")
             if timer.isValid {
                 timer.invalidate()
             }
             searchTimer = nil
             searchCnt = 0
-            // timer 종료되고 할 작업
-            //            onStartSplashTimer()
-            self.timerStopAndTask()
         }
     }
 }
