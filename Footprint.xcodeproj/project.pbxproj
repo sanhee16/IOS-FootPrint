@@ -68,6 +68,8 @@
 		63C81AB92963D6EF0001A70B /* DragAndDropService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C81AB82963D6EF0001A70B /* DragAndDropService.swift */; };
 		63C8CCF62941D60400BB861D /* DevInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C8CCF52941D60400BB861D /* DevInfoView.swift */; };
 		63C8CCF82941D60D00BB861D /* DevInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C8CCF72941D60D00BB861D /* DevInfoViewModel.swift */; };
+		63D7EF1D296FBE2500D72F12 /* GoogleApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D7EF1C296FBE2500D72F12 /* GoogleApi.swift */; };
+		63D7EF1F296FC1EF00D72F12 /* SError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D7EF1E296FC1EF00D72F12 /* SError.swift */; };
 		63E2756929502DFA00E4AABC /* PinchZoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E2756829502DFA00E4AABC /* PinchZoom.swift */; };
 		63E848A1295ABE790037D7A3 /* EditTravelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E848A0295ABE790037D7A3 /* EditTravelView.swift */; };
 		63E848A3295ABE7E0037D7A3 /* EditTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E848A2295ABE7E0037D7A3 /* EditTravelViewModel.swift */; };
@@ -78,7 +80,7 @@
 		63F132492914A18800B3A9E0 /* SwiftExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F132432914A18800B3A9E0 /* SwiftExtension.swift */; };
 		63F1324A2914A18800B3A9E0 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F132442914A18800B3A9E0 /* Util.swift */; };
 		63F1324B2914A18800B3A9E0 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F132452914A18800B3A9E0 /* Defaults.swift */; };
-		63F1324C2914A18800B3A9E0 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F132462914A18800B3A9E0 /* Api.swift */; };
+		63F1324C2914A18800B3A9E0 /* CommonApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F132462914A18800B3A9E0 /* CommonApi.swift */; };
 		63F132502914A18F00B3A9E0 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F1324E2914A18F00B3A9E0 /* BaseViewController.swift */; };
 		63F132512914A18F00B3A9E0 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F1324F2914A18F00B3A9E0 /* BaseViewModel.swift */; };
 		63F132552914A19F00B3A9E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F132532914A19F00B3A9E0 /* AppDelegate.swift */; };
@@ -162,6 +164,8 @@
 		63C81AB82963D6EF0001A70B /* DragAndDropService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragAndDropService.swift; sourceTree = "<group>"; };
 		63C8CCF52941D60400BB861D /* DevInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevInfoView.swift; sourceTree = "<group>"; };
 		63C8CCF72941D60D00BB861D /* DevInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevInfoViewModel.swift; sourceTree = "<group>"; };
+		63D7EF1C296FBE2500D72F12 /* GoogleApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleApi.swift; sourceTree = "<group>"; };
+		63D7EF1E296FC1EF00D72F12 /* SError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SError.swift; sourceTree = "<group>"; };
 		63E2756829502DFA00E4AABC /* PinchZoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchZoom.swift; sourceTree = "<group>"; };
 		63E848A0295ABE790037D7A3 /* EditTravelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTravelView.swift; sourceTree = "<group>"; };
 		63E848A2295ABE7E0037D7A3 /* EditTravelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTravelViewModel.swift; sourceTree = "<group>"; };
@@ -172,7 +176,7 @@
 		63F132432914A18800B3A9E0 /* SwiftExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftExtension.swift; sourceTree = "<group>"; };
 		63F132442914A18800B3A9E0 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		63F132452914A18800B3A9E0 /* Defaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
-		63F132462914A18800B3A9E0 /* Api.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
+		63F132462914A18800B3A9E0 /* CommonApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonApi.swift; sourceTree = "<group>"; };
 		63F1324E2914A18F00B3A9E0 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		63F1324F2914A18F00B3A9E0 /* BaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		63F132532914A19F00B3A9E0 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -299,7 +303,8 @@
 			isa = PBXGroup;
 			children = (
 				264B70BB291F8DD900CDAF9F /* ApiResponse.swift */,
-				63F132462914A18800B3A9E0 /* Api.swift */,
+				63F132462914A18800B3A9E0 /* CommonApi.swift */,
+				63D7EF1C296FBE2500D72F12 /* GoogleApi.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -526,6 +531,7 @@
 				26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */,
 				264B70BF291F8E9C00CDAF9F /* C.swift */,
 				2639921E291FEBA60049F047 /* KeyboardReadable.swift */,
+				63D7EF1E296FC1EF00D72F12 /* SError.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -850,6 +856,7 @@
 				260C87D0296AAF5C00ADCC32 /* FootprintItem.swift in Sources */,
 				63F132472914A18800B3A9E0 /* AlertViewModel.swift in Sources */,
 				265924C729445BD9001E7025 /* FootprintListView.swift in Sources */,
+				63D7EF1F296FC1EF00D72F12 /* SError.swift in Sources */,
 				262D2A06293E310E005984DA /* MailView.swift in Sources */,
 				63FA238E294C42C900D31506 /* SingleSelectGalleryView.swift in Sources */,
 				63B1FB032914B381007E94B6 /* RealmDB.swift in Sources */,
@@ -886,7 +893,7 @@
 				2619FE8A2940D6AC00D24778 /* CheckPermissionView.swift in Sources */,
 				63E848A7295ABEBD0037D7A3 /* TravelListView.swift in Sources */,
 				260C87CD296AADBE00ADCC32 /* ShowTravelViewModel.swift in Sources */,
-				63F1324C2914A18800B3A9E0 /* Api.swift in Sources */,
+				63F1324C2914A18800B3A9E0 /* CommonApi.swift in Sources */,
 				63F1329A2914A1C000B3A9E0 /* WebView.swift in Sources */,
 				2691D9C3294EE4B1002825B9 /* FootprintListFilterView.swift in Sources */,
 				63C8CCF82941D60D00BB861D /* DevInfoViewModel.swift in Sources */,
@@ -896,6 +903,7 @@
 				63B1FAED2914A85B007E94B6 /* AddFootprintView.swift in Sources */,
 				265EA947291D1E1400068A5C /* DataModel.swift in Sources */,
 				260C87CB296AADB900ADCC32 /* ShowTravelView.swift in Sources */,
+				63D7EF1D296FBE2500D72F12 /* GoogleApi.swift in Sources */,
 				63FA2387294C35CB00D31506 /* PeopleEditView.swift in Sources */,
 				63C102B8296530680099AF6A /* GoogleMapView.swift in Sources */,
 				63F132992914A1C000B3A9E0 /* Topbar.swift in Sources */,

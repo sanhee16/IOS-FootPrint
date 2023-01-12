@@ -1,43 +1,38 @@
 //
-//  Api.swift
+//  GoogleApi.swift
 //  Footprint
 //
-//  Created by sandy on 2022/10/08.
+//  Created by Studio-SJ on 2023/01/12.
 //
 
-
-import Foundation
 import Combine
 import Alamofire
+import Foundation
+import UIKit
 
-class APIEventLogger: EventMonitor {
+// status code:  https://developers.google.com/maps/documentation/geocoding/requests-geocoding#StatusCodes
+public struct GoogleItemResponse<T: Codable>: Codable {
+    let status: String?
+    let results: T
+}
+
+public class GoogleArrayResponse<T: Codable>: Codable {
+    let status: String?
+    let results: [T]?
     
-    let queue = DispatchQueue(label: "myNetworkLogger")
-    
-    func requestDidFinish(_ request: Request) {
-        print("🛰 NETWORK Reqeust LOG")
-        print(request.description)
-        
-        print(
-            "URL: " + (request.request?.url?.absoluteString ?? "")    + "\n"
-            + "Method: " + (request.request?.httpMethod ?? "") + "\n"
-            + "Headers: " + "\(request.request?.allHTTPHeaderFields ?? [:])" + "\n"
-        )
-        print("Authorization: " + (request.request?.headers["Authorization"] ?? ""))
-    }
-    
-    func request<Value>(_ request: DataRequest, didParseResponse response: DataResponse<Value, AFError>) {
-        print("🛰 NETWORK Response LOG")
-        print(
-            "URL: " + (request.request?.url?.absoluteString ?? "") + "\n"
-            + "Result: " + "\(response.result)" + "\n"
-            + "StatusCode: " + "\(response.response?.statusCode ?? 0)" + "\n"
-        )
+    init() {
+        status = nil
+        results = nil
     }
 }
 
-class Api {
-    public static let instance = Api()
+public class GoogleErrorResponse: Codable {
+    let status: String?
+    let error_message: String?
+}
+
+class GoogleApi {
+    public static let instance = GoogleApi()
     
     private init() {
         
@@ -69,8 +64,12 @@ class Api {
         host: String,
         httpBody: Any? = nil,
         parameters: Parameters? = nil,
-        headers requestHeaders: [String: String]? = nil
+        headers requestHeaders: [String: String]? = nil,
+        file: String = #file,
+        line: Int = #line,
+        function: String = #function
     ) -> AnyPublisher<T, Error> where T: Codable {
+        
         let future: (() -> Deferred) = { () -> Deferred<Future<T, Error>> in
             var headers: HTTPHeaders = HTTPHeaders()
             headers.add(name: "Content-Type", value: "application/json")
@@ -116,9 +115,11 @@ class Api {
                                 //                                print("response: \(response)")
                                 switch response.result {
                                 case .success(let value):
+                                    print("success: \(value)")
                                     promise(.success(value))
                                     break
                                 case .failure(let err):
+                                    print("fail: \(err)")
                                     promise(.failure(err))
                                     break
                                 }
@@ -129,4 +130,27 @@ class Api {
         return future().eraseToAnyPublisher()
     }
     
+    func get<T>(_ url: String, host: String = C.GEOCODING_HOST, parameters: Parameters? = nil, file: String = #file, line: Int = #line, function: String = #function) -> AnyPublisher<T, Error> where T: Codable {
+        return request(url, method: .get, host: host, httpBody: nil, parameters: parameters, file: file, line: line, function: function)
+            .flatMap { (data: GoogleItemResponse<T>) -> AnyPublisher<T, Error> in
+                Just(data.results).setFailureType(to: Error.self).eraseToAnyPublisher()
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    func getArrayUnwrap<T: Codable>(_ url: String, host: String = C.GEOCODING_HOST, parameters: Parameters? = nil, file: String = #file, line: Int = #line, function: String = #function) -> AnyPublisher<[T], Error> {
+        return request(url, method: .get, host: host, httpBody: nil, parameters: parameters, file: file, line: line, function: function)
+            .flatMap { (data: GoogleArrayResponse<T>) -> AnyPublisher<[T], Error> in
+                return data.results.unboxAndPublish()
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    //MARK: Api
+    // https://maps.googleapis.com/maps/api/geocode/json?place_id=\()&key=\(Bundle.main.googleApiKey)
+    func getGeocoding(_ placeId: String) -> AnyPublisher<[GeocodingResponse], Error> {
+        let key = Bundle.main.geocodingApiKey
+        let param = ["language": UserLocale.currentLanguage()] as? Parameters
+        return self.getArrayUnwrap("json?place_id=\(placeId)&key=\(key)", host: C.GEOCODING_HOST, parameters: param)
+    }
 }

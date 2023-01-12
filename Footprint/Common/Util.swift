@@ -132,3 +132,17 @@ class ImageManager {
         return nil
     }
 }
+
+class UserLocale {
+    static func currentLanguage() -> String? {
+        return Locale.current.languageCode
+    }
+    
+    static func currentRegion() -> String? {
+        return Locale.current.regionCode
+    }
+    
+    static func identifier() -> String {
+        return Locale.current.identifier
+    }
+}

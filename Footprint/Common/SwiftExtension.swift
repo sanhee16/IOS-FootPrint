@@ -58,6 +58,15 @@ extension Int {
     }
 }
 
+extension Optional {
+    func unboxAndPublish<T>() -> AnyPublisher<T, Error> {
+        if let data = self as? T {
+            return Just(data).setFailureType(to: Error.self).eraseToAnyPublisher()
+        }
+        return Fail(error: GoogleError.NotFound).eraseToAnyPublisher()
+    }
+}
+
 extension Publisher {
     func run(in set: inout Set<AnyCancellable>, next: ((Self.Output) -> Void)? = nil, err errorListener: ((Error) -> Void)? = nil, complete: (() -> Void)? = nil) {
         self.subscribe(on: DispatchQueue.global(qos: .background))

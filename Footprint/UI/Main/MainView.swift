@@ -123,7 +123,7 @@ struct MainView: View {
     private func drawSearchBox(_ geometry: GeometryProxy) -> some View {
         return HStack(alignment: .center, spacing: 6) {
             ZStack(alignment: .trailing) {
-                TextField("", text: $vm.serachText)
+                TextField("", text: $vm.searchText)
                     .font(.kr13r)
                     .foregroundColor(.gray90)
                     .accentColor(.greenTint4)
@@ -136,10 +136,10 @@ struct MainView: View {
                     )
                     .border(.gray60, lineWidth: 1.2, cornerRadius: 6)
                     .padding(.leading, 10)
-                    .onChange(of: $vm.serachText.wrappedValue) { _ in
+                    .onChange(of: $vm.searchText.wrappedValue) { _ in
                         vm.enterSearchText()
                     }
-                if !$vm.serachText.wrappedValue.isEmpty {
+                if !$vm.searchText.wrappedValue.isEmpty {
                     Text("X")
                         .font(.kr11b)
                         .foregroundColor(.gray100)
@@ -152,7 +152,7 @@ struct MainView: View {
                         .padding(.trailing, 10)
                         .zIndex(1)
                         .onTapGesture {
-                            $vm.serachText.wrappedValue.removeAll()
+                            $vm.searchText.wrappedValue.removeAll()
                         }
                 }
             }
@@ -166,7 +166,7 @@ struct MainView: View {
                 )
                 .padding(.trailing, 10)
                 .onTapGesture {
-                    $vm.serachText.wrappedValue.removeAll()
+                    $vm.searchText.wrappedValue.removeAll()
                     UIApplication.shared.hideKeyborad()
                 }
         }
@@ -178,7 +178,7 @@ struct MainView: View {
         return HStack(alignment: .center, spacing: 0) {
             if $vm.isShowingSearchPannel.wrappedValue {
                 VStack(alignment: .leading, spacing: 10) {
-                    TextField("", text: $vm.serachText)
+                    TextField("", text: $vm.searchText)
                         .font(.kr12r)
                         .foregroundColor(.gray90)
                         .padding([.leading, .trailing], 8)
@@ -189,7 +189,7 @@ struct MainView: View {
                                 .foregroundColor(Color.white.opacity(0.85))
                         )
                         .padding([.leading, .top, .trailing], 10)
-                        .onChange(of: $vm.serachText.wrappedValue) { _ in
+                        .onChange(of: $vm.searchText.wrappedValue) { _ in
                             vm.enterSearchText()
                         }
                 }

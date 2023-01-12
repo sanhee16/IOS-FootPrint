@@ -24,5 +24,20 @@ extension Bundle {
             return value
         }
     }
+    var geocodingApiKey: String {
+        get {
+            // 1
+            guard let filePath = Bundle.main.path(forResource: "ApiInfo", ofType: "plist") else {
+                fatalError("Couldn't find file 'ApiInfo.plist'.")
+            }
+            // 2
+            let plist = NSDictionary(contentsOfFile: filePath)
+            guard let value = plist?.object(forKey: "GEOCODING_API_KEY") as? String else {
+                fatalError("Couldn't find key 'GEOCODING_API_KEY' in 'ApiInfo.plist'.")
+            }
+            return value
+        }
+    }
 
 }
+

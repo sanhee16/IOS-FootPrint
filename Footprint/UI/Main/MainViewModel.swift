@@ -33,7 +33,7 @@ class MainViewModel: BaseViewModel {
     @Published var isShowingSearchPannel: Bool = false
     @Published var categories: [Category] = []
     @Published var showingCategories: [Int] = []
-    @Published var serachText: String = ""
+    @Published var searchText: String = ""
     @Published var searchItems: [FootPrint] = []
     @Published var locationPermission: Bool = false
     
@@ -43,12 +43,15 @@ class MainViewModel: BaseViewModel {
     private var mapView: GMSMapView = GMSMapView()
     private var searchTimer: Timer? = nil
     private var searchCnt: Int = 0
+    private var lastSearchText: String? = nil
     private let realm: Realm
+    private let googleApi: GoogleApi
     
     override init(_ coordinator: AppCoordinator) {
         self.realm = try! Realm()
         self.locationManager = CLLocationManager()
         self.locationManager.allowsBackgroundLocationUpdates = true
+        self.googleApi = GoogleApi.instance
         super.init(coordinator)
     }
     
@@ -290,7 +293,7 @@ class MainViewModel: BaseViewModel {
             self.searchItems = self.allFootprints
         } else {
             self.searchItems.removeAll()
-            self.serachText.removeAll()
+            self.searchText.removeAll()
         }
     }
     
@@ -299,7 +302,7 @@ class MainViewModel: BaseViewModel {
     }
     
     func enterSearchText() {
-        let text = self.serachText
+        let text = self.searchText
         print("enter text: \(text)")
         searchCnt = 0
         if self.searchTimer == nil {
@@ -312,19 +315,23 @@ class MainViewModel: BaseViewModel {
         
         
         
-//        if text.isEmpty {
-//            self.searchItems = self.allFootprints
-//        } else {
-//            self.searchItems = self.allFootprints.filter { item in
-//                item.title.contains(text)
-//            }
-//        }
+        //        if text.isEmpty {
+        //            self.searchItems = self.allFootprints
+        //        } else {
+        //            self.searchItems = self.allFootprints.filter { item in
+        //                item.title.contains(text)
+        //            }
+        //        }
     }
     
     private func timerStopAndTask() {
         print("timer Stop!")
         //TODO: 여기는 임시라서 이 메소드 지워야징!
-//        self.placeSearch(self.serachText)
+        if let lastSearchText = self.lastSearchText, lastSearchText == self.searchText {
+            return
+        }
+        self.lastSearchText = self.searchText
+        self.placeSearch(self.searchText)
     }
     
     // https://developers.google.com/maps/documentation/places/ios-sdk/autocomplete#get_place_predictions
@@ -335,26 +342,75 @@ class MainViewModel: BaseViewModel {
          * findAutocompletePredictions, as well as the subsequent place details request.
          * This ensures that the user's query and selection are billed as a single session.
          */
-        let token = GMSAutocompleteSessionToken.init()
-
+//        let token: GMSAutocompleteSessionToken = GMSAutocompleteSessionToken.init()
+        
         // Create a type filter.
         let filter = GMSAutocompleteFilter()
-//        filter.types = [.address]
-        let searchBound: Double = 3.0
+        //        filter.locationBias = LocationBa
+        //        filter.types = [.address]
+        let searchBound: Double = 2.0
         let northEastBounds = CLLocationCoordinate2DMake(myLocation.latitude + searchBound, myLocation.longitude + searchBound);
         let southWestBounds = CLLocationCoordinate2DMake(myLocation.latitude - searchBound, myLocation.longitude - searchBound);
         filter.locationBias = GMSPlaceRectangularLocationOption(northEastBounds, southWestBounds);
-
+        
         let placesClient: GMSPlacesClient = GMSPlacesClient()
-        placesClient.findAutocompletePredictions(fromQuery: text, filter: filter, sessionToken: token, callback: { (results, error) in
+        placesClient.findAutocompletePredictions(fromQuery: text, filter: filter, sessionToken: nil, callback: { (results, error) in
             if let error = error {
-              print("Autocomplete error: \(error)")
-              return
+                print("Autocomplete error: \(error)")
+                return
             }
+            var placeId: String? = nil
             if let results = results {
-              for result in results {
-                print("Result \(result.attributedFullText) with placeID \(result.placeID)")
-              }
+                placeId = results.first?.placeID
+                for result in results {
+                    /*
+                     attributedFullText: 대한민국 서울특별시 강남구 대치동 {
+                     }빈브라더{
+                         GMSAutocompleteMatch = "<GMSAutocompleteMatchFragment: 0x2836944c0>";
+                     }스{
+                     }
+                     attributedPrimaryText: 빈브라더{
+                         GMSAutocompleteMatch = "<GMSAutocompleteMatchFragment: 0x283694340>";
+                     }스{
+                     }
+                     attributedSecondaryText: Optional(대한민국 서울특별시 강남구 대치동{
+                     })
+                     placeID: ChIJNd4xuz-kfDURNheDT2onnUc
+                     types: ["cafe", "food", "point_of_interest", "establishment"]
+                     */
+                    
+                    /*
+                     Result 대한민국 서울특별시 마포구 합정동 토정로 {
+                     }빈브라더{
+                     GMSAutocompleteMatch = "<GMSAutocompleteMatchFragment: 0x280770dc0>";
+                     }스 합정점{
+                     } with placeID ChIJr8r3XtSYfDURLs-hbLaOdow
+                     */
+                    
+//                    print("Result \(result.attributedFullText) with placeID \(result.placeID)")
+//                    print("attributedFullText: \(result.attributedFullText)")
+//                    print("attributedPrimaryText: \(result.attributedPrimaryText)")
+//                    print("attributedSecondaryText: \(result.attributedSecondaryText)")
+//                    print("placeID: \(result.placeID)")
+//                    print("types: \(result.types)")
+//                    print("-----------------------------")
+                    
+                }
+            }
+            if let placeId = placeId {
+                print("placeId: \(placeId)")
+                self.googleApi.getGeocoding(placeId)
+                    .run(in: &self.subscription) { result in
+                        print("run!")
+                        print(result)
+//                        print("lat: \(result.geometry.location.lat)")
+//                        print("lng: \(result.geometry.location.lng)")
+                    } err: { err in
+                        print("error: \(err)")
+                    } complete: {
+                        print("complete")
+                    }
+
             }
         })
     }
@@ -411,7 +467,7 @@ class MainViewModel: BaseViewModel {
             searchTimer = nil
             searchCnt = 0
             // timer 종료되고 할 작업
-//            onStartSplashTimer()
+            //            onStartSplashTimer()
             self.timerStopAndTask()
         }
     }
