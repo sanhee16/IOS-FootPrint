@@ -24,6 +24,7 @@ class EditTravelViewModel: BaseViewModel {
     @Published var allFootprints: [FootPrint] = []
     @Published var color: Color = Color.white
     @Published var draggedItem: FootPrint? = nil
+    private var originalItem: Travel = Travel(footprints: List(), title: "", intro: "", color: "#FFFFFF")
     let type: EditTravelType
     
     init(_ coordinator: AppCoordinator, type: EditTravelType) {
@@ -31,6 +32,7 @@ class EditTravelViewModel: BaseViewModel {
         self.type = type
         super.init(coordinator)
         if case let .edit(travel) = self.type {
+            self.originalItem = travel
             self.title = travel.title
             self.intro = travel.intro
             self.footprints = Array(travel.footprints)
@@ -44,11 +46,19 @@ class EditTravelViewModel: BaseViewModel {
     }
     
     func onClose() {
-        self.alert(.yesOrNo, title: "저장하지 않고 나가시겠습니까?") {[weak self] isClose in
-            if isClose {
-                self?.dismiss()
+        var isChanged: Bool = true
+        if originalItem.title == self.title, originalItem.color == self.color.toTravelBackground(), originalItem.intro == self.intro, Array(originalItem.footprints) == self.footprints {
+            isChanged = false
+        }
+        if isChanged {
+            self.alert(.yesOrNo, title: "저장하지 않고 나가시겠습니까?") {[weak self] isClose in
+                if isClose {
+                    self?.dismiss()
+                }
+                return
             }
-            return
+        } else {
+            self.dismiss()
         }
     }
     

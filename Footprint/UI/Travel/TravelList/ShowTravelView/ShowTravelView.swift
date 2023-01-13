@@ -66,9 +66,11 @@ struct ShowTravelView: View {
                     Text(vm.travel.title)
                         .font(.kr13b)
                         .foregroundColor(.textColor1)
-                    Text(vm.travel.intro)
-                        .font(.kr13r)
-                        .foregroundColor(.gray90)
+                    if !vm.travel.intro.isEmpty {
+                        Text(vm.travel.intro)
+                            .font(.kr13r)
+                            .foregroundColor(.gray90)
+                    }
                 }
                 Spacer()
                 Circle()
