@@ -126,17 +126,33 @@ struct MainView: View {
     
     private func drawSearchItems(_ geometry: GeometryProxy) -> some View {
         return VStack(alignment: .leading, spacing: 0) {
-            ScrollView(.vertical, showsIndicators: true) {
-                VStack(alignment: .leading, spacing: 8) {
-                    ForEach($vm.searchItems.wrappedValue.indices, id: \.self) { idx in
-                        searchItem(geometry, item: $vm.searchItems.wrappedValue[idx])
+            ZStack(alignment: .center) {
+                if $vm.searchTimer.wrappedValue != nil {
+                    VStack(alignment: .center, spacing: 8) {
+                        Spacer()
+                        HStack(alignment: .center, spacing: 0) {
+                            Spacer()
+                            SandyProgressView(size: 130.0)
+                            Spacer()
+                        }
+                        .frame(width: geometry.size.width - 20, height: geometry.size.height / 5 * 2, alignment: .center)
+                        Spacer()
                     }
+                    .frame(width: geometry.size.width - 20, height: geometry.size.height / 5 * 2, alignment: .center)
+                    .zIndex(1)
                 }
-                .padding([.top, .bottom], 12)
+                ScrollView(.vertical, showsIndicators: true) {
+                    VStack(alignment: .leading, spacing: 8) {
+                        ForEach($vm.searchItems.wrappedValue.indices, id: \.self) { idx in
+                            searchItem(geometry, item: $vm.searchItems.wrappedValue[idx])
+                        }
+                    }
+                    .padding(EdgeInsets(top: 12, leading: 8, bottom: 12, trailing: 6))
+                }
+                .frame(width: geometry.size.width - 20, height: geometry.size.height / 5 * 2, alignment: .leading)
             }
             .frame(width: geometry.size.width - 20, height: geometry.size.height / 5 * 2, alignment: .leading)
         }
-        .padding(EdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 6))
         .background(
             RoundedRectangle(cornerRadius: 6)
                 .foregroundColor(Color.white.opacity(0.90))
@@ -154,6 +170,7 @@ struct MainView: View {
                 .font(.kr11r)
                 .foregroundColor(.gray60)
             Divider()
+                .frame(width: geometry.size.width - 34, alignment: .center)
         }
         .padding([.top, .bottom], 2)
         .frame(width: geometry.size.width - 20, alignment: .leading)

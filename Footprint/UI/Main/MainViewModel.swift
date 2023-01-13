@@ -36,12 +36,12 @@ class MainViewModel: BaseViewModel {
     @Published var searchText: String = ""
     @Published var searchItems: [SearchItemResponse] = []
     @Published var locationPermission: Bool = false
+    @Published var searchTimer: Timer? = nil
     
     private var currentTapMarker: GMSMarker? = nil
     private var allFootprints: [FootPrint] = []
     
     private var mapView: GMSMapView = GMSMapView()
-    private var searchTimer: Timer? = nil
     private var searchCnt: Int = 0
     private var lastSearchText: String? = nil
     private let realm: Realm
@@ -335,7 +335,6 @@ class MainViewModel: BaseViewModel {
     // https://developers.google.com/maps/documentation/places/ios-sdk/autocomplete#get_place_predictions
     private func placeSearch(_ text: String) {
         guard let myLocation = myLocation else { return }
-        self.startProgress()
         let filter = GMSAutocompleteFilter()
         let searchBound: Double = 2.0
         let northEastBounds = CLLocationCoordinate2DMake(myLocation.latitude + searchBound, myLocation.longitude + searchBound);
@@ -345,13 +344,11 @@ class MainViewModel: BaseViewModel {
         let placesClient: GMSPlacesClient = GMSPlacesClient()
         placesClient.findAutocompletePredictions(fromQuery: text, filter: filter, sessionToken: nil, callback: {[weak self] (results, error) in
             guard let self = self else {
-                self?.stopProgress()
                 return
             }
             if let error = error {
                 print("Autocomplete error: \(error)")
                 self.searchItems.removeAll()
-                self.stopProgress()
                 return
             }
             if let results = results {
@@ -368,7 +365,6 @@ class MainViewModel: BaseViewModel {
                     )
                 }
             }
-            self.stopProgress()
         })
     }
     

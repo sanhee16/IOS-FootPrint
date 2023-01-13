@@ -26,8 +26,12 @@ struct SplashView: View {
         GeometryReader { geometry in
             VStack(alignment: .center, spacing: 0) {
                 Spacer()
-                LottieView(filename: "loading")
-                    .frame(both: 150.0)
+                Image("icon_mark")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 70, height: 110, alignment: .center)
+//                LottieView(filename: "loading_bar")
+//                    .frame(both: 180.0)
                 Spacer()
             }
             .padding(EdgeInsets(top: safeTop, leading: 0, bottom: safeBottom, trailing: 0))

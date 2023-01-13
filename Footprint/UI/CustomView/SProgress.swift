@@ -15,14 +15,14 @@ public enum ProgressType {
     func fileName() -> String {
         switch self {
         case .loading:
-            return "loading"
+            return "loading_bar"
         }
     }
     
     func size() -> CGSize {
         switch self {
         case .loading:
-            return CGSize(width: 76, height: 76)
+            return CGSize(width: 140, height: 140)
         }
     }
     

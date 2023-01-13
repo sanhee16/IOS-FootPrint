@@ -35,7 +35,7 @@ struct CustomProgressView: ProgressViewStyle {
         let fractionCompleted = configuration.fractionCompleted ?? 0
 
         return ZStack {
-            LottieView(filename: "loading")
+            LottieView(filename: "loading_bar")
         }
     }
 }
