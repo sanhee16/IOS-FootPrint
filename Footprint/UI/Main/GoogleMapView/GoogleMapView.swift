@@ -71,18 +71,23 @@ struct GoogleMapView: UIViewRepresentable {
             if let newLineIdx = name.firstIndex(of: "\n") {
                 newName.removeSubrange(newLineIdx...)
             }
+            vm.removeCurrentMarker()
+            vm.drawCurrentMarker(Location(latitude: location.latitude, longitude: location.longitude))
             vm.addNewMarker(Location(latitude: location.latitude, longitude: location.longitude), name: newName, placeId: placeID)
         }
         
         func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
             print("[GoogleMapView] on tap marker")
             print("marker info: \(marker)")
+            vm.removeCurrentMarker()
             vm.onTapMarker(Location(latitude: marker.position.latitude, longitude: marker.position.longitude))
             return true
         }
         
         func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
             print("[GoogleMapView] success on tap mapview")
+            vm.removeCurrentMarker()
+            vm.drawCurrentMarker(Location(latitude: coordinate.latitude, longitude: coordinate.longitude))
             vm.addNewMarker(Location(latitude: coordinate.latitude, longitude: coordinate.longitude))
         }
         

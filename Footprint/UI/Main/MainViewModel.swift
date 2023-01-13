@@ -57,6 +57,7 @@ class MainViewModel: BaseViewModel {
     
     func onAppear() {
         print("onAppear")
+        self.removeCurrentMarker()
         switch checkLocationPermission() {
         case .allow:
             self.locationPermission = true
@@ -202,21 +203,6 @@ class MainViewModel: BaseViewModel {
         })
     }
     
-    func drawCurrentMarker(_ location: Location) {
-        // 마커 생성하기
-        self.currentTapMarker = nil
-        let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
-        
-        let image: UIImage? = UIImage(named: "pin0")?.resizeImageTo(size: CGSize(width: 20, height: 20))
-        let markerView = UIImageView(image: image!.withRenderingMode(.alwaysTemplate))
-        markerView.tintColor = .fColor3
-        marker.iconView = markerView
-        
-        marker.map = self.mapView
-        self.currentTapMarker = marker
-    }
-    
-    
     func addNewMarker(_ location: Location, name: String? = nil, placeId: String? = nil, address: String? = nil) {
         // 마커 생성하기
         let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
@@ -240,6 +226,7 @@ class MainViewModel: BaseViewModel {
                     self.loadAllMarkers()
                 }
             } else {
+                self.removeCurrentMarker()
                 print("add New Marker cancel")
                 marker.map = nil
             }
@@ -252,9 +239,9 @@ class MainViewModel: BaseViewModel {
         // reference: https://stackoverflow.com/questions/32006128/how-to-merge-two-uiimages
         let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
         
-        var backgroundSize = CGSize(width: 130, height: 130)
-        var itemSize = CGSize(width: 100, height: 100)
-        var itemFinalSize = CGSize(width: 22, height: 22)
+        let backgroundSize = CGSize(width: 130, height: 130)
+        let itemSize = CGSize(width: 100, height: 100)
+        let itemFinalSize = CGSize(width: 22, height: 22)
         let markerImage: UIImage? = UIImage(named: category.pinType.pinType().pinWhite)?.resizeImageTo(size: itemSize)
         var backgroundImage: UIImage? = UIImage(named: "mark_background_black")?.resizeImageTo(size: backgroundSize)
         backgroundImage = backgroundImage?.withTintColor(category.pinColor.pinColor().pinUIColor, renderingMode: .alwaysTemplate)
@@ -268,7 +255,7 @@ class MainViewModel: BaseViewModel {
         backgroundImage.draw(in: backgroundRect, blendMode: .normal, alpha: 1)
         markerImage.draw(in: itemRect, blendMode: .normal, alpha: 1)
         
-        var finalMarkerImage: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
+        let finalMarkerImage: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
         guard let finalMarkerImage = finalMarkerImage?.resizeImageTo(size: itemFinalSize) else { return nil }
@@ -281,6 +268,24 @@ class MainViewModel: BaseViewModel {
         return marker
     }
     
+    func drawCurrentMarker(_ location: Location) {
+        // 마커 생성하기
+        self.removeCurrentMarker()
+        self.currentTapMarker = nil
+        
+        let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
+        let itemSize = CGSize(width: 20, height: 30)
+        
+        guard let image = UIImage(named: "icon_mark")?.resizeImageTo(size: itemSize) else { return }
+        
+        marker.icon = image
+        marker.map = self.mapView
+        marker.tracksViewChanges = false
+        marker.isTappable = true
+        marker.map = self.mapView
+        
+        self.currentTapMarker = marker
+    }
     
     func loadAllFootprints() {
         self.allFootprints = Array(self.realm.objects(FootPrint.self))
@@ -380,6 +385,8 @@ class MainViewModel: BaseViewModel {
                 let clLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: lat, longitude: lng)
                 self.stopProgress()
                 self.moveCamera(clLocation)
+                // icon_mark
+                self.drawCurrentMarker(Location(latitude: lat, longitude: lng))
                 self.onCloseSearchBox()
             } err: {[weak self] err in
                 print("error: \(err)")
@@ -407,7 +414,7 @@ class MainViewModel: BaseViewModel {
         }
     }
     
-    private func removeCurrentMarker() {
+    func removeCurrentMarker() {
         if let currentTapMarker = self.currentTapMarker {
             self.removeMarker(self.mapView, marker: currentTapMarker)
         }
