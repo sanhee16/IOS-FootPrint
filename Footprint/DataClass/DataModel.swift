@@ -11,6 +11,13 @@ import MapKit
 import NMapsMap
 import GoogleMaps
 
+/*
+ MAX: 8개인데 더 늘릴려면 Defaults.settingFlag 설정해줘야함
+ */
+enum SettingFlag: Int {
+    case IS_ON_SEARCH_BAR
+}
+
 struct SearchItemResponse {
     var name: String
     var fullAddress: String

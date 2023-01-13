@@ -57,4 +57,15 @@ class Defaults {
             UserDefaults.standard.setValue(value, forKey: FILTER_CATEGORY_IDS)
         }
     }
+    
+    //MARK: Setting
+    private static let SETTING_FLAG = "SETTING_FLAG"
+    public static var SettingFlag: Int {
+        get {
+            UserDefaults.standard.integer(forKey: SETTING_FLAG)
+        }
+        set(value) {
+            UserDefaults.standard.setValue(value, forKey: SETTING_FLAG)
+        }
+    }
 }

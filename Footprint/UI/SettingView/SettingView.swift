@@ -47,6 +47,7 @@ struct SettingView: View {
                 drawItem(geometry, title: "카테고리 편집하기") {
                     vm.onClickEditCategory()
                 }
+                drawToggleItem(geometry, title: "검색창 표시", flag:.IS_ON_SEARCH_BAR, isOn: $vm.isOnSearchBar)
                 drawTitle(geometry, title: "기타")
                 drawItem(geometry, title: "문의하기") {
                     vm.onClickContact()
@@ -105,6 +106,34 @@ struct SettingView: View {
                 print("onTap")
                 onTap?()
             }
+            Divider()
+                .padding([.leading, .trailing], 4)
+                .opacity(0.7)
+        }
+        .padding([.top, .bottom], 2)
+    }
+    
+    private func drawToggleItem(_ geometry: GeometryProxy, title: String, description: String? = nil, flag: SettingFlag, isOn: Binding<Bool>) -> some View {
+        return VStack(alignment: .center, spacing: 0) {
+            HStack(alignment: .center, spacing: 0) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(title)
+                        .font(.kr14r)
+                        .foregroundColor(.textColor1)
+                    if let description = description {
+                        Text(description)
+                            .font(.kr11r)
+                            .foregroundColor(.gray60)
+                    }
+                }
+                Spacer()
+                SToggleView(isOn: isOn) {
+                    print("toggle! \(isOn.wrappedValue)")
+                    vm.onToggleSetting(flag, isOn: isOn.wrappedValue)
+                }
+            }
+            .padding(EdgeInsets(top: 14, leading: 12, bottom: 14, trailing: 12))
+            .contentShape(Rectangle())
             Divider()
                 .padding([.leading, .trailing], 4)
                 .opacity(0.7)

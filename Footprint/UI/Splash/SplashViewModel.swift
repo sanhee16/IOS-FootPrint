@@ -31,7 +31,7 @@ class SplashViewModel: BaseViewModel {
         if !Defaults.launchBefore {
             //MARK: 최초실행 Setting
             Defaults.launchBefore = true
-            firstTask()
+            firstLaunchTask()
             locationManager.requestWhenInUseAuthorization()
             self.startRepeatTimer()
         } else {
@@ -39,7 +39,7 @@ class SplashViewModel: BaseViewModel {
         }
     }
     
-    private func firstTask() {
+    private func firstLaunchTask() {
         try! realm.write {[weak self] in
             guard let self = self else { return }
             // 혹시 모르니까 다 지워버릴 것
@@ -57,7 +57,8 @@ class SplashViewModel: BaseViewModel {
                 Category(tag: 6, name: "카페", pinType: .coffee, pinColor: PinColor.pin6)
             ]
             var showingCategories = Defaults.showingCategories
-
+            Defaults.SettingFlag = 0b11111111
+            
             for category in categories {
                 showingCategories.append(category.tag)
                 realm.add(category)

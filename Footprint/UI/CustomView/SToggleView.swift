@@ -45,18 +45,18 @@ public struct SToggleView: View {
                 ZStack(alignment: configuration.isOn ? .trailing : .leading) {
                     RoundedRectangle(cornerRadius: 20)
                         .frame(width: width, height: height)
-                        .foregroundColor(configuration.isOn ? color : .white.opacity(0.5))
+                        .foregroundColor(configuration.isOn ? color : .gray60)
                     
                     Circle()
                         .frame(both: height - 5)
                         .padding(2.5)
-                        .foregroundColor(configuration.isOn ? .white : .gray60)
+                        .foregroundColor(.white)
                         .onTapGesture {
                             withAnimation {
+                                configuration.$isOn.wrappedValue.toggle()
                                 if let onTapGesture = onTapGesture {
                                     onTapGesture()
                                 }
-                                configuration.$isOn.wrappedValue.toggle()
                             }
                         }
                 }
