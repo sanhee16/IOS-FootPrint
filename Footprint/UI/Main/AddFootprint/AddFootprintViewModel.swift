@@ -12,7 +12,7 @@ import Photos
 import RealmSwift
 
 public enum AddFootprintType {
-    case new(name: String?)
+    case new(name: String?, placeId: String?, address: String?)
     case modify(content: FootprintContents)
 }
 
@@ -51,6 +51,8 @@ class AddFootprintViewModel: BaseViewModel {
     private let type: AddFootprintType
     private let location: Location
     private let realm: Realm
+    private var placeId: String? = nil
+    private var address: String? = nil
     
     init(_ coordinator: AppCoordinator, location: Location, type: AddFootprintType) {
         self.realm = try! Realm()
@@ -69,8 +71,10 @@ class AddFootprintViewModel: BaseViewModel {
             self.category = contents.category
             self.peopleWith = contents.peopleWith
             self.modifyId = contents.id
-        } else if case let .new(name) = self.type {
+        } else if case let .new(name, placeId, address) = self.type {
             self.title = name ?? ""
+            self.placeId = placeId
+            self.address = address
             let item = self.realm.object(ofType: PeopleWith.self, forPrimaryKey: 0)
             if let item = item {
                 self.peopleWith.append(item)
@@ -180,7 +184,7 @@ class AddFootprintViewModel: BaseViewModel {
             switch self.type {
             case .new:
                 print("new")
-                let item = FootPrint(title: self.title, content: self.content, images: imageUrls, latitude: self.location.latitude, longitude: self.location.longitude, tag: category.tag, peopleWithIds: peopleWithIds)
+                let item = FootPrint(title: self.title, content: self.content, images: imageUrls, latitude: self.location.latitude, longitude: self.location.longitude, tag: category.tag, peopleWithIds: peopleWithIds, placeId: self.placeId, address: self.address)
                 realm.add(item)
             case .modify(content: _):
                 print("modify")

@@ -217,7 +217,7 @@ class MainViewModel: BaseViewModel {
     }
     
     
-    func addNewMarker(_ location: Location, name: String? = nil) {
+    func addNewMarker(_ location: Location, name: String? = nil, placeId: String? = nil, address: String? = nil) {
         // 마커 생성하기
         let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
         
@@ -235,7 +235,7 @@ class MainViewModel: BaseViewModel {
             if res {
                 print("add New Marker ok")
                 marker.map = nil
-                self.coordinator?.presentAddFootprintView(location: location, type: .new(name: name)) {[weak self] in
+                self.coordinator?.presentAddFootprintView(location: location, type: .new(name: name, placeId: placeId, address: address)) {[weak self] in
                     guard let self = self else { return }
                     self.loadAllMarkers()
                 }
@@ -375,12 +375,6 @@ class MainViewModel: BaseViewModel {
                     self?.stopProgress()
                     return
                 }
-                //TODO: 카메라 안움직임 ㅠㅠ
-                print("run!")
-//                let location = Location(latitude: result.geometry.location.lat, longitude: result.geometry.location.lng)
-                print("lat: \(result.geometry.location.lat)")
-                print("lng: \(result.geometry.location.lng)")
-//                self.onCloseSearchBox()
                 let lat: Double = result.geometry.location.lat
                 let lng: Double = result.geometry.location.lng
                 let clLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: lat, longitude: lng)

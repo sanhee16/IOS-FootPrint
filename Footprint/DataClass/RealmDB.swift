@@ -36,8 +36,10 @@ class FootPrint: Object {
     @Persisted var longitude: Double
     @Persisted var tag: Int // categoryTag
     @Persisted var peopleWithIds: List<Int> = List()
+    @Persisted var placeId: String?
+    @Persisted var address: String?
 
-    convenience init(title: String, content: String, images: List<String>, latitude: Double, longitude: Double, tag: Int, peopleWithIds: List<Int>) {
+    convenience init(title: String, content: String, images: List<String>, latitude: Double, longitude: Double, tag: Int, peopleWithIds: List<Int>, placeId: String? = nil, address: String?) {
         self.init()
         self.title = title
         self.content = content
@@ -47,6 +49,8 @@ class FootPrint: Object {
         self.longitude = longitude
         self.tag = tag
         self.peopleWithIds = peopleWithIds
+        self.placeId = placeId
+        self.address = address
     }
 }
 

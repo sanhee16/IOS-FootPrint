@@ -13,14 +13,12 @@ import RealmSwift
 import SwiftUI
 
 class ShowFootPrintViewModel: BaseViewModel {
-    
     @Published var footPrints: [FootPrint] = []
     @Published var page: Page
     @Published var pageIdx: Int = 0
     private let realm: Realm
     private let location: Location
     private var isLoading: Bool = false
-    
     
     init(_ coordinator: AppCoordinator, location: Location) {
         self.realm = try! Realm()
@@ -56,7 +54,9 @@ class ShowFootPrintViewModel: BaseViewModel {
     }
     
     func onClickAddFootprint() {
-        self.coordinator?.changeAddFootprintView(location: self.location, type: .new(name: nil)) {
+        let placeId: String? = footPrints.first?.placeId
+        let address: String? = footPrints.first?.address
+        self.coordinator?.changeAddFootprintView(location: self.location, type: .new(name: nil, placeId: placeId, address: address)) {
             
         }
     }

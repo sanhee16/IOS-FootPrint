@@ -71,7 +71,7 @@ struct GoogleMapView: UIViewRepresentable {
             if let newLineIdx = name.firstIndex(of: "\n") {
                 newName.removeSubrange(newLineIdx...)
             }
-            vm.addNewMarker(Location(latitude: location.latitude, longitude: location.longitude), name: newName)
+            vm.addNewMarker(Location(latitude: location.latitude, longitude: location.longitude), name: newName, placeId: placeID)
         }
         
         func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
