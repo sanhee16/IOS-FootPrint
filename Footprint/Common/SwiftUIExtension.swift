@@ -155,6 +155,7 @@ extension Color {
     }
     
     public static let inputBoxColor: Color = Color(hex: "#F0F4FF")
+    public static let backgroundColor: Color = Color(hex: "#F9FBFF")
     public static let fColor1: Color = Color(hex: "#4E5158")
     public static let fColor2: Color = Color(hex: "#596EA7")
     public static let fColor3: Color = Color(hex: "#567AF4")
@@ -275,6 +276,7 @@ extension UIColor {
     }
 //    public static let lightblue03: UIColor = UIColor(hex: "#E4F7FF")
     public static let inputBoxColor: UIColor = UIColor(hex: "#F0F4FF")
+    public static let backgroundColor: UIColor = UIColor(hex: "#F9FBFF")
     public static let fColor1: UIColor = UIColor(hex: "#4E5158")
     public static let fColor2: UIColor = UIColor(hex: "#596EA7")
     public static let fColor3: UIColor = UIColor(hex: "#567AF4")

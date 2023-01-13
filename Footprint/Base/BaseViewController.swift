@@ -99,8 +99,8 @@ class BaseViewController<Content>: UIViewController, Dismissible, Nameable where
             controller.view.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             controller.view.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
-        controller.view.backgroundColor = UIColor.fColor5
-        self.view.backgroundColor = UIColor.fColor5
+        controller.view.backgroundColor = UIColor.backgroundColor
+        self.view.backgroundColor = UIColor.backgroundColor
         
         if type(of: self) == BaseViewController<MainView>.self {
             print("MainView type viewDidload!!!")
