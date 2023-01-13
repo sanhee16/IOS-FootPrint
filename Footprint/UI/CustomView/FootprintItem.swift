@@ -34,7 +34,7 @@ public struct FootprintItem: View {
             HStack(alignment: .center, spacing: 0) {
                 Text(item.title)
                     .font(.kr14b)
-                    .foregroundColor(.gray100)
+                    .foregroundColor(.textColor1)
                 Spacer()
                 Image(isExpanded ? "up_arrow" : "down_arrow")
                     .resizable()
@@ -76,7 +76,7 @@ public struct FootprintItem: View {
         .contentShape(Rectangle())
         .background(
             RoundedRectangle(cornerRadius: 12)
-                .foregroundColor(Color.greenTint5)
+                .foregroundColor(Color.fColor4)
         )
         .padding([.leading, .trailing], horizontalPadding)
         .onTapGesture {

@@ -32,7 +32,7 @@ struct AddFootprintView: View, KeyboardReadable {
                             .padding(EdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 8))
                             .background(
                                 RoundedRectangle(cornerRadius: 6)
-                                    .foregroundColor(.greenTint5)
+                                    .foregroundColor(.inputBoxColor)
                             )
                             .contentShape(Rectangle())
                             .padding([.leading, .trailing], 16)
@@ -42,7 +42,7 @@ struct AddFootprintView: View, KeyboardReadable {
                         drawImageArea(geometry)
                         
                         Divider()
-                            .background(Color.greenTint5)
+                            .background(Color.fColor4)
                             .padding(EdgeInsets(top: 4, leading: 16, bottom: 4, trailing: 16))
                         
                         MultilineTextField("enter content", text: $vm.content) {
@@ -53,7 +53,7 @@ struct AddFootprintView: View, KeyboardReadable {
                         .contentShape(Rectangle())
                         .background(
                             RoundedRectangle(cornerRadius: 2)
-                                .foregroundColor(.greenTint5)
+                                .foregroundColor(.inputBoxColor)
                         )
                         .onReceive(keyboardPublisher) { newIsKeyboardVisible in
                             $vm.isKeyboardVisible.wrappedValue = newIsKeyboardVisible
@@ -87,7 +87,7 @@ struct AddFootprintView: View, KeyboardReadable {
                 Spacer()
                 Text("저장")
                     .font(.kr12r)
-                    .foregroundColor(.gray100)
+                    .foregroundColor(.textColor1)
                     .onTapGesture {
                         vm.onClickSave()
                     }
@@ -124,7 +124,7 @@ struct AddFootprintView: View, KeyboardReadable {
                         .frame(both: IMAGE_SIZE, aligment: .center)
                         .background(
                             RoundedRectangle(cornerRadius: 12)
-                                .foregroundColor(.gray30)
+                                .foregroundColor(.textColor3)
                         )
                         .onTapGesture {
                             vm.onClickGallery()
@@ -155,7 +155,7 @@ struct AddFootprintView: View, KeyboardReadable {
                     ForEach($vm.peopleWith.wrappedValue, id: \.self) { item in
                         Text(item.name)
                             .font(.kr11r)
-                            .foregroundColor(.gray100)
+                            .foregroundColor(.textColor1)
                     }
                 }
                 .padding(EdgeInsets(top: 6, leading: 18, bottom: 6, trailing: 18))
@@ -191,7 +191,7 @@ struct AddFootprintView: View, KeyboardReadable {
                 .colorMultiply(Color(hex: item.pinColor.pinColor().pinColorHex))
             Text(item.name)
                 .font(.kr11r)
-                .foregroundColor(.gray100)
+                .foregroundColor(.textColor1)
         }
     }
 }

@@ -16,7 +16,7 @@ public struct SToggleView: View {
     @Binding var isOn: Bool
     
     
-    init(width: CGFloat = 40.0, height: CGFloat = 22.0, color: Color = .mint100, isOn: Binding<Bool>, onTapGesture: (()->())? = nil) {
+    init(width: CGFloat = 40.0, height: CGFloat = 22.0, color: Color = Color.fColor3, isOn: Binding<Bool>, onTapGesture: (()->())? = nil) {
         self.width = width
         self.height = height
         self.color = color

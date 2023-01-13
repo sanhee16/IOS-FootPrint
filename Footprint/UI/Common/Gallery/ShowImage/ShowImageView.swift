@@ -15,7 +15,7 @@ struct ShowImageView: View {
         let vc = BaseViewController.init(view, completion: completion)
         vc.modalPresentationStyle = .overCurrentContext
         vc.view.backgroundColor = UIColor.clear
-        vc.controller.view.backgroundColor = UIColor.gray100
+        vc.controller.view.backgroundColor = UIColor.textColor1
         return vc
     }
     @ObservedObject var vm: VM

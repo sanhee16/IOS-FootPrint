@@ -45,7 +45,7 @@ struct MultiSelectGalleryView: View {
                                     Spacer()
                                     Text("앨범이 비어있습니다.")
                                         .font(.kr14b)
-                                        .foregroundColor(.gray100)
+                                        .foregroundColor(.textColor1)
                                     Spacer()
                                 } else {
                                     let cellSize = geometry.size.width / 3 - 2
@@ -61,7 +61,7 @@ struct MultiSelectGalleryView: View {
                                                             Rectangle()
                                                                 .frame(both: cellSize - 4, aligment: .center)
                                                                 .foregroundColor(.clear)
-                                                                .border(.greenTint1, lineWidth: 4, cornerRadius: 0.0)
+                                                                .border(.fColor2, lineWidth: 4, cornerRadius: 0.0)
                                                                 .zIndex(1)
                                                         }
                                                         Image(uiImage: item.image)
@@ -99,7 +99,7 @@ struct MultiSelectGalleryView: View {
                                 .frame(width: geometry.size.width - 40, height: 50, alignment: .center)
                                 .background(
                                     RoundedRectangle(cornerRadius: 8)
-                                        .foregroundColor($vm.selectedImages.wrappedValue.isEmpty ? .gray30 : .greenTint1)
+                                        .foregroundColor($vm.selectedImages.wrappedValue.isEmpty ? .gray30 : .fColor2)
                                 )
                                 .onTapGesture {
                                     vm.onSelectImage()

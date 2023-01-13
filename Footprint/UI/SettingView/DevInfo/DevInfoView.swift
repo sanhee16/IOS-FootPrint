@@ -33,10 +33,10 @@ struct DevInfoView: View {
                         VStack(alignment: .leading, spacing: 0) {
                             Text("Sandy")
                                 .font(.kr16b)
-                                .foregroundColor(.gray100)
+                                .foregroundColor(.textColor1)
                             Text("ios, aos 모바일 개발자")
                                 .font(.kr13r)
-                                .foregroundColor(.gray100)
+                                .foregroundColor(.textColor1)
                         }
                         Spacer()
                         Image("sandy")
@@ -98,7 +98,7 @@ struct DevInfoView: View {
     private func title(_ title: String) -> some View {
         return Text(title)
             .font(.kr14b)
-            .foregroundColor(.gray100)
+            .foregroundColor(.textColor1)
             .padding(EdgeInsets(top: 24, leading: 8, bottom: 10, trailing: 8))
     }
     private func description(_ description: String) -> some View {

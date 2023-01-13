@@ -56,17 +56,21 @@ struct FootprintListFilterView: View {
                     HStack(alignment: .center, spacing: 20) {
                         Text("Clear")
                             .font(.kr16r)
-                            .foregroundColor(Color.gray60)
-                            .frame(width: (geometry.size.width - horizontalPadding * 2 - 20) / 2, height: 45, alignment: .center)
-                            .border(.gray60, lineWidth: 2, cornerRadius: 12)
+                            .foregroundColor(Color.white)
+                            .frame(width: (geometry.size.width - horizontalPadding * 2 - 20) / 5 * 2, height: 45, alignment: .center)
+//                            .border(.gray60, lineWidth: 2, cornerRadius: 12)
+                            .background(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .foregroundColor(.fColor1)
+                            )
                             .onTapGesture {
                                 vm.onClickClear()
                             }
                         Text("Save")
                             .font(.kr16r)
-                            .foregroundColor(Color.greenTint1)
-                            .frame(width: (geometry.size.width - horizontalPadding * 2 - 20) / 2, height: 45, alignment: .center)
-                            .border(.greenTint1, lineWidth: 2, cornerRadius: 12)
+                            .foregroundColor(Color.fColor1)
+                            .frame(width: (geometry.size.width - horizontalPadding * 2 - 20) / 5 * 3, height: 45, alignment: .center)
+                            .border(.fColor1, lineWidth: 2, cornerRadius: 12)
                             .onTapGesture {
                                 vm.onClickSave()
                             }
@@ -77,7 +81,6 @@ struct FootprintListFilterView: View {
             }
             .ignoresSafeArea(.container, edges: [.top, .bottom])
             .frame(width: geometry.size.width, alignment: .leading)
-            .background(Color.white)
             .padding([.leading, .trailing], horizontalPadding)
         }
         .onAppear {
@@ -88,7 +91,7 @@ struct FootprintListFilterView: View {
     private func drawTitle(_ title: String) -> some View {
         return Text(title)
             .font(.kr13b)
-            .foregroundColor(.gray100)
+            .foregroundColor(.textColor1)
             .padding(EdgeInsets(top: 16, leading: 0, bottom: 12, trailing: 0))
     }
     
@@ -126,11 +129,11 @@ struct FootprintListFilterView: View {
 //            }
             Text(item.name)
                 .font(.kr12r)
-                .foregroundColor(isSelected ? .greenTint2 : .lightGray02)
+                .foregroundColor(isSelected ? .fColor3 : .lightGray02)
         }
         .padding(EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12))
         .border(
-            isSelected ? .greenTint2 : .lightGray02,
+            isSelected ? .fColor3 : .lightGray02,
             lineWidth: 1.6,
             cornerRadius: 8
         )

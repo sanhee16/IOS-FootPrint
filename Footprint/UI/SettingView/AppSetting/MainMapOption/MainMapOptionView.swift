@@ -39,17 +39,17 @@ struct MainMapOptionView: View {
     }
     
     
-    private func drawPermissionItem(_ geometry: GeometryProxy, text: String, isOn: Binding<Bool>) -> some View {
-        return HStack(alignment: .center, spacing: 0) {
-            Text(text)
-                .font(.kr11r)
-                .foregroundColor(.gray100)
-            Spacer()
-            SToggleView(width: 36.0, height: 20.0, color: .greenTint2, isOn: isOn) {
-                // onTapGesture
-                
-            }
-        }
-        .padding([.leading, .trailing], 18)
-    }
+//    private func drawPermissionItem(_ geometry: GeometryProxy, text: String, isOn: Binding<Bool>) -> some View {
+//        return HStack(alignment: .center, spacing: 0) {
+//            Text(text)
+//                .font(.kr11r)
+//                .foregroundColor(.textColor1)
+//            Spacer()
+//            SToggleView(width: 36.0, height: 20.0, color: .greenTint2, isOn: isOn) {
+//                // onTapGesture
+//                
+//            }
+//        }
+//        .padding([.leading, .trailing], 18)
+//    }
 }

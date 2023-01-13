@@ -22,7 +22,7 @@ fileprivate struct UITextViewWrapper: UIViewRepresentable {
 
         textField.isEditable = true
         textField.font = .kr14r
-        textField.textColor = .gray100
+        textField.textColor = .textColor1
         textField.isSelectable = true
         textField.isUserInteractionEnabled = true
         textField.isScrollEnabled = false

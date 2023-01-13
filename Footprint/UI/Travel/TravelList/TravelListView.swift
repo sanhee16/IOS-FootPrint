@@ -90,7 +90,7 @@ struct TravelListView: View {
         .frame(width: geometry.size.width - 24, height: 100, alignment: .center)
         .background(
             RoundedRectangle(cornerRadius: 12)
-                .foregroundColor(.gray60)
+                .foregroundColor(.textColor3)
         )
         .onTapGesture {
             vm.onClickCreateTravel()

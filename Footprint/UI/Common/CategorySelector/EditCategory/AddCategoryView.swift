@@ -55,7 +55,7 @@ struct AddCategoryView: View, KeyboardReadable {
                     .padding(EdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 8))
                     .background(
                         RoundedRectangle(cornerRadius: 6)
-                            .foregroundColor(.greenTint5)
+                            .foregroundColor(.inputBoxColor)
                     )
                     .onChange(of: $vm.name.wrappedValue) { newValue in
                         if $vm.name.wrappedValue == " " {
@@ -128,7 +128,7 @@ struct AddCategoryView: View, KeyboardReadable {
                 .frame(both: (UIScreen.main.bounds.width - 24 - CGFloat(columnCnt - 1) * 10) / CGFloat(columnCnt))
                 .colorMultiply(Color(hex: $vm.pinColor.wrappedValue.pinColorHex))
                 .padding(3)
-                .border(isSelected ? .greenTint4 : .clear, lineWidth: 2, cornerRadius: 10)
+                .border(isSelected ? .fColor2 : .clear, lineWidth: 2, cornerRadius: 10)
                 .onTapGesture {
                     vm.onSelectPin(item)
                 }

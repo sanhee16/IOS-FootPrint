@@ -49,13 +49,13 @@ struct ShowFootPrintView: View {
                     drawCategory(geometry, item: item)
                     Text(item.title)
                         .font(.kr14b)
-                        .foregroundColor(Color.gray100)
+                        .foregroundColor(Color.textColor1)
                         .multilineTextAlignment(.leading)
                         .padding(EdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 8))
                         .frame(width: geometry.size.width - 32, alignment: .leading)
                         .background(
                             RoundedRectangle(cornerRadius: 6)
-                                .foregroundColor(.greenTint5)
+                                .foregroundColor(.inputBoxColor)
                         )
                         .contentShape(Rectangle())
                         .padding([.leading, .trailing], 16)
@@ -68,13 +68,13 @@ struct ShowFootPrintView: View {
                     .padding([.leading, .trailing], 16)
                     drawImageArea(geometry, item: item)
                     Divider()
-                        .background(Color.greenTint5)
+                        .background(Color.inputBoxColor)
                         .padding([.top, .bottom], 4)
                         .padding([.leading, .trailing], 16)
                     
                     Text(item.content)
                         .font(.kr12r)
-                        .foregroundColor(Color.gray100)
+                        .foregroundColor(Color.textColor1)
                         .padding(EdgeInsets(top: 12, leading: 10, bottom: 12, trailing: 10))
                         .frame(width: geometry.size.width - 32, alignment: .topLeading)
                         .contentShape(Rectangle())
@@ -127,13 +127,13 @@ struct ShowFootPrintView: View {
                 Spacer()
                 Text("수정")
                     .font(.kr12r)
-                    .foregroundColor(.gray100)
+                    .foregroundColor(.textColor1)
                     .onTapGesture {
                         vm.onClickModifyFootprint()
                     }
                 Text("추가")
                     .font(.kr12r)
-                    .foregroundColor(.gray100)
+                    .foregroundColor(.textColor1)
                     .onTapGesture {
                         vm.onClickAddFootprint()
                     }
@@ -206,15 +206,15 @@ struct ShowFootPrintView: View {
         }
     }
     
-    private func pinItem(_ item: PinType, isSelected: Bool) -> some View {
-        return Image(item.pinName)
-            .resizable()
-            .scaledToFit()
-            .frame(both: 30)
-            .padding(10)
-            .border(isSelected ? .greenTint4 : .clear, lineWidth: 2, cornerRadius: 12)
-            .onTapGesture {
-                //                vm.onSelectPin(item)
-            }
-    }
+//    private func pinItem(_ item: PinType, isSelected: Bool) -> some View {
+//        return Image(item.pinName)
+//            .resizable()
+//            .scaledToFit()
+//            .frame(both: 30)
+//            .padding(10)
+//            .border(isSelected ? .fColor3 : .clear, lineWidth: 2, cornerRadius: 12)
+//            .onTapGesture {
+//                //                vm.onSelectPin(item)
+//            }
+//    }
 }

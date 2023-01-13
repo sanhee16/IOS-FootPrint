@@ -64,7 +64,7 @@ struct ShowTravelView: View {
             VStack(alignment: .leading, spacing: 10) {
                 Text(vm.travel.title)
                     .font(.kr13b)
-                    .foregroundColor(.gray100)
+                    .foregroundColor(.textColor1)
                 
                 Text(vm.travel.intro)
                     .font(.kr13r)

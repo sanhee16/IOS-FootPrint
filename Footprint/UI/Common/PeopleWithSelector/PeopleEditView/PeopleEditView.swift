@@ -39,7 +39,6 @@ struct PeopleEditView: View {
             .padding(EdgeInsets(top: 0, leading: 0, bottom: safeBottom, trailing: 0))
             .ignoresSafeArea(.container, edges: [.top, .bottom])
             .frame(width: geometry.size.width, alignment: .leading)
-            .background(Color.white)
         }
         .onAppear {
             vm.onAppear()
@@ -69,7 +68,7 @@ struct PeopleEditView: View {
                     .clipped()
                     .background(
                         Circle()
-                            .foregroundColor(.lightGray01)
+                            .foregroundColor(.textColor5)
                     )
                     .onTapGesture {
                         vm.selectImage()
@@ -80,7 +79,7 @@ struct PeopleEditView: View {
                 .padding(EdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 8))
                 .background(
                     RoundedRectangle(cornerRadius: 6)
-                        .foregroundColor(.greenTint5)
+                        .foregroundColor(.inputBoxColor)
                 )
                 .onChange(of: $vm.name.wrappedValue) { newValue in
                     vm.isChange = true
@@ -97,7 +96,7 @@ struct PeopleEditView: View {
                 .padding(EdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 8))
                 .background(
                     RoundedRectangle(cornerRadius: 6)
-                        .foregroundColor(.greenTint5)
+                        .foregroundColor(.inputBoxColor)
                 )
                 .onChange(of: $vm.intro.wrappedValue) { newValue in
                     vm.isChange = true

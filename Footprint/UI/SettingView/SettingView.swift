@@ -71,7 +71,7 @@ struct SettingView: View {
         return VStack(alignment: .center, spacing: 1) {
             Text(title)
                 .font(.kr12b)
-                .foregroundColor(.gray100)
+                .foregroundColor(.textColor1)
             if let description = description {
                 Text(description)
                     .font(.kr9r)
@@ -87,7 +87,7 @@ struct SettingView: View {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(title)
                         .font(.kr14r)
-                        .foregroundColor(.gray100)
+                        .foregroundColor(.textColor1)
                     if let description = description {
                         Text(description)
                             .font(.kr11r)

@@ -31,7 +31,6 @@ struct BluePrintBottomSheetView: View {
             }
             .ignoresSafeArea(.container, edges: [.top, .bottom])
             .frame(width: geometry.size.width, alignment: .leading)
-            .background(Color.white)
             .padding([.leading, .trailing], horizontalPadding)
         }
         .onAppear {

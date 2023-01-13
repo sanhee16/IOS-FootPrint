@@ -68,7 +68,6 @@ struct CategorySelectorView: View {
             .padding(EdgeInsets(top: 0, leading: 0, bottom: safeBottom, trailing: 0))
             .ignoresSafeArea(.container, edges: [.top, .bottom])
             .frame(width: geometry.size.width, alignment: .leading)
-            .background(Color.white)
             .padding([.leading, .trailing], 12)
         }
         .onAppear {
@@ -84,7 +83,7 @@ struct CategorySelectorView: View {
                 .colorMultiply(Color(hex: item.pinColor.pinColor().pinColorHex))
             Text(item.name)
                 .font(.kr12r)
-                .foregroundColor(.gray100)
+                .foregroundColor(.textColor1)
             Spacer()
             if case .select(_, _) = vm.type {
                 if vm.isSelectedCategory(item) {
@@ -102,7 +101,8 @@ struct CategorySelectorView: View {
         .frame(width: geometry.size.width - 24, height: 45.0, alignment: .center)
         .background(
             RoundedRectangle(cornerRadius: 8)
-                .foregroundColor(vm.isSelectedCategory(item) ? .greenTint5 : .lightGray03)
+                .foregroundColor(.fColor4)
+//                .foregroundColor(vm.isSelectedCategory(item) ? .fColor4 : .textColor5)
         )
         .contentShape(Rectangle())
         .onTapGesture {
@@ -115,13 +115,13 @@ struct CategorySelectorView: View {
             Spacer()
             Text("+")
                 .font(.kr15r)
-                .foregroundColor(.gray100)
+                .foregroundColor(.white)
             Spacer()
         }
         .frame(width: geometry.size.width - 24, height: 45.0, alignment: .center)
         .background(
             RoundedRectangle(cornerRadius: 8)
-                .foregroundColor(.lightGray03)
+                .foregroundColor(.fColor1)
         )
         .contentShape(Rectangle())
         .onTapGesture {

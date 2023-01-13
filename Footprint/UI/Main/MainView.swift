@@ -37,13 +37,13 @@ struct MainView: View {
                     HStack(alignment: .center, spacing: 12) {
                         Text("전체보기")
                             .font(.kr12r)
-                            .foregroundColor(.gray100)
+                            .foregroundColor(.textColor1)
                             .onTapGesture {
                                 vm.onClickFootprintList()
                             }
                         Text("travel")
                             .font(.kr12r)
-                            .foregroundColor(.gray100)
+                            .foregroundColor(.textColor1)
                             .onTapGesture {
                                 vm.onClickTravelList()
                             }
@@ -60,7 +60,7 @@ struct MainView: View {
                             }
                         Text("설정")
                             .font(.kr12r)
-                            .foregroundColor(.gray100)
+                            .foregroundColor(.textColor1)
                             .onTapGesture {
                                 vm.onClickSetting()
                             }
@@ -149,7 +149,7 @@ struct MainView: View {
         return VStack(alignment: .leading, spacing: 6) {
             Text(item.name)
                 .font(.kr12r)
-                .foregroundColor(.gray100)
+                .foregroundColor(.textColor1)
             Text(item.fullAddress)
                 .font(.kr11r)
                 .foregroundColor(.gray60)
@@ -169,7 +169,7 @@ struct MainView: View {
                 TextField("", text: $vm.searchText)
                     .font(.kr13r)
                     .foregroundColor(.gray90)
-                    .accentColor(.greenTint4)
+                    .accentColor(.fColor2)
                     .padding([.leading, .trailing], 8)
                     .frame(width: geometry.size.width - 26 - 60, height: 40, alignment: .center)
                     .contentShape(Rectangle())
@@ -177,7 +177,7 @@ struct MainView: View {
                         RoundedRectangle(cornerRadius: 6)
                             .foregroundColor(Color.white.opacity(0.98))
                     )
-                    .border(.gray60, lineWidth: 1.2, cornerRadius: 6)
+                    .border(.fColor2, lineWidth: 1.2, cornerRadius: 6)
                     .padding(.leading, 10)
                     .onChange(of: $vm.searchText.wrappedValue) { _ in
                         vm.enterSearchText()
@@ -186,10 +186,10 @@ struct MainView: View {
                     Image("close")
                         .resizable()
                         .frame(both: 10.0, aligment: .center)
-                        .padding(8)
+                        .padding(6)
                         .background(
                             Circle()
-                                .foregroundColor(.greenTint5)
+                                .foregroundColor(.fColor4)
                         )
                         .contentShape(Rectangle())
                         .padding(.trailing, 10)
@@ -205,7 +205,7 @@ struct MainView: View {
                 .frame(width: 60, height: 40, alignment: .center)
                 .background(
                     RoundedRectangle(cornerRadius: 6)
-                        .foregroundColor(Color.greenTint1)
+                        .foregroundColor(Color.fColor2)
                 )
                 .padding(.trailing, 10)
                 .onTapGesture {

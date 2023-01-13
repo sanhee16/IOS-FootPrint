@@ -33,7 +33,7 @@ struct FootprintListView: View {
                         Spacer()
                         Text("필터")
                             .font(.kr12r)
-                            .foregroundColor(.gray100)
+                            .foregroundColor(.textColor1)
                             .onTapGesture {
                                 vm.onClickFilter()
                             }
@@ -75,9 +75,6 @@ struct FootprintListView: View {
             .edgesIgnoringSafeArea(.all)
             .frame(width: geometry.size.width, alignment: .leading)
         }
-        .background(
-            Color.lightGray01
-        )
         .onAppear {
             vm.onAppear()
         }
@@ -88,7 +85,7 @@ struct FootprintListView: View {
             HStack(alignment: .center, spacing: 0) {
                 Text(item.title)
                     .font(.kr14b)
-                    .foregroundColor(.gray100)
+                    .foregroundColor(.textColor1)
                 Spacer()
                 Image($vm.expandedItem.wrappedValue == item ? "up_arrow" : "down_arrow")
                     .resizable()

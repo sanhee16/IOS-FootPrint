@@ -32,7 +32,7 @@ struct SelectFootprintsView: View {
                         Spacer()
                         Text("완료")
                             .font(.kr12r)
-                            .foregroundColor(.gray100)
+                            .foregroundColor(.textColor1)
                             .onTapGesture {
                                 vm.onClickComplete()
                             }
@@ -58,9 +58,6 @@ struct SelectFootprintsView: View {
             .edgesIgnoringSafeArea(.all)
             .frame(width: geometry.size.width, alignment: .leading)
         }
-        .background(
-            Color.lightGray01
-        )
         .onAppear {
             vm.onAppear()
         }
@@ -71,7 +68,7 @@ struct SelectFootprintsView: View {
             HStack(alignment: .center, spacing: 0) {
                 Text(item.title)
                     .font(.kr14b)
-                    .foregroundColor(.gray100)
+                    .foregroundColor(.textColor1)
                 Spacer()
                 if let idx = vm.selectedIdx(item) {
                     Text("\(idx + 1)")
@@ -80,7 +77,7 @@ struct SelectFootprintsView: View {
                         .padding(4)
                         .background(
                             Circle()
-                                .foregroundColor(.greenTint1)
+                                .foregroundColor(.fColor2)
                         )
                 }
             }
@@ -106,7 +103,7 @@ struct SelectFootprintsView: View {
             RoundedRectangle(cornerRadius: 12)
                 .foregroundColor(Color.white)
         )
-        .border(vm.selectedIdx(item) != nil ? .greenTint1 : .clear, lineWidth: 2, cornerRadius: 12)
+        .border(vm.selectedIdx(item) != nil ? .fColor2 : .clear, lineWidth: 2, cornerRadius: 12)
         .padding([.leading, .trailing], 20)
         .onTapGesture {
             withAnimation {

@@ -71,7 +71,6 @@ struct PeopleWithSelectorView: View {
             .padding(EdgeInsets(top: 0, leading: 0, bottom: safeBottom, trailing: 0))
             .ignoresSafeArea(.container, edges: [.top, .bottom])
             .frame(width: geometry.size.width, alignment: .leading)
-            .background(Color.white)
             .padding([.leading, .trailing], 12)
         }
         .onAppear {
@@ -99,12 +98,12 @@ struct PeopleWithSelectorView: View {
                     .clipped()
                     .background(
                         Circle()
-                            .foregroundColor(.lightGray01)
+                            .foregroundColor(.textColor5)
                     )
             }
             Text(item.name)
                 .font(.kr12r)
-                .foregroundColor(.gray100)
+                .foregroundColor(.textColor1)
             Spacer()
             if vm.isSelectedPeople(item), case .select(_, _) = vm.type {
                 Image("done_b")
@@ -116,7 +115,8 @@ struct PeopleWithSelectorView: View {
         .frame(width: geometry.size.width - 24, height: 45.0, alignment: .center)
         .background(
             RoundedRectangle(cornerRadius: 8)
-                .foregroundColor(vm.isSelectedPeople(item) ? .greenTint5 : .lightGray03)
+                .foregroundColor(.fColor4)
+//                .foregroundColor(vm.isSelectedPeople(item) ? .fColor4 : .textColor5)
         )
         .contentShape(Rectangle())
         .onTapGesture {
@@ -128,13 +128,13 @@ struct PeopleWithSelectorView: View {
             Spacer()
             Text("+")
                 .font(.kr15r)
-                .foregroundColor(.gray100)
+                .foregroundColor(.white)
             Spacer()
         }
         .frame(width: geometry.size.width - 24, height: 45.0, alignment: .center)
         .background(
             RoundedRectangle(cornerRadius: 8)
-                .foregroundColor(.lightGray03)
+                .foregroundColor(.fColor1)
         )
         .contentShape(Rectangle())
         .onTapGesture {

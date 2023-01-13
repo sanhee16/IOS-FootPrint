@@ -64,7 +64,7 @@ struct CheckPermissionView: View {
         return HStack(alignment: .center, spacing: 0) {
             Text(text)
                 .font(.kr11r)
-                .foregroundColor(.gray100)
+                .foregroundColor(.textColor1)
             Spacer()
             if isAllow {
                 Text("ON")

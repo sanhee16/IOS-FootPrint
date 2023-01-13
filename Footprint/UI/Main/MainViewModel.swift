@@ -209,7 +209,7 @@ class MainViewModel: BaseViewModel {
         
         let image: UIImage? = UIImage(named: "pin0")?.resizeImageTo(size: CGSize(width: 20, height: 20))
         let markerView = UIImageView(image: image!.withRenderingMode(.alwaysTemplate))
-        markerView.tintColor = .greenTint2
+        markerView.tintColor = .fColor3
         marker.iconView = markerView
         
         marker.map = self.mapView

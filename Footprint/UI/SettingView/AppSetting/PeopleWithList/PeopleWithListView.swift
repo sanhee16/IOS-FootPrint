@@ -75,13 +75,13 @@ struct PeopleWithListView: View {
             }
             Text(item.name)
                 .font(.kr14r)
-                .foregroundColor(.gray100)
+                .foregroundColor(.textColor1)
             Spacer()
         }
         .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
         .background(
             RoundedRectangle(cornerRadius: 8)
-                .foregroundColor(.greenTint5)
+                .foregroundColor(.fColor4)
         )
         .contentShape(Rectangle())
         .onTapGesture {

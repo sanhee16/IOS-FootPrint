@@ -60,7 +60,7 @@ struct EditTravelView: View {
                 .padding(EdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 8))
                 .background(
                     RoundedRectangle(cornerRadius: 6)
-                        .foregroundColor(.lightGray01)
+                        .foregroundColor(.inputBoxColor)
                 )
                 .contentShape(Rectangle())
             
@@ -69,7 +69,7 @@ struct EditTravelView: View {
                 .padding(EdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 8))
                 .background(
                     RoundedRectangle(cornerRadius: 6)
-                        .foregroundColor(.lightGray02)
+                        .foregroundColor(.inputBoxColor)
                 )
                 .contentShape(Rectangle())
             
@@ -92,7 +92,7 @@ struct EditTravelView: View {
     private func drawTitle(_ title: String) -> some View {
         return Text(title)
             .font(.kr12b)
-            .foregroundColor(.gray100)
+            .foregroundColor(.textColor1)
             .padding(.top, 4)
     }
     
@@ -125,7 +125,7 @@ struct EditTravelView: View {
         )
         .background(
             RoundedRectangle(cornerRadius: 12)
-                .foregroundColor(.lightGray01)
+                .foregroundColor(.fColor4)
         )
         .onDrag {
             $vm.draggedItem.wrappedValue = item
@@ -146,7 +146,7 @@ struct EditTravelView: View {
         .frame(width: geometry.size.width - 32, height: 100, alignment: .center)
         .background(
             RoundedRectangle(cornerRadius: 12)
-                .foregroundColor(.gray60)
+                .foregroundColor(.textColor3)
         )
         .onTapGesture {
             vm.onClickAddFootprints()
