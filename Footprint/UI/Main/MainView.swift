@@ -157,6 +157,10 @@ struct MainView: View {
         }
         .padding([.top, .bottom], 2)
         .frame(width: geometry.size.width - 20, alignment: .leading)
+        .contentShape(Rectangle())
+        .onTapGesture {
+            vm.onClickSearchItem(item)
+        }
     }
     
     private func drawSearchBox(_ geometry: GeometryProxy) -> some View {
@@ -179,9 +183,9 @@ struct MainView: View {
                         vm.enterSearchText()
                     }
                 if !$vm.searchText.wrappedValue.isEmpty {
-                    Text("X")
-                        .font(.kr11b)
-                        .foregroundColor(.gray100)
+                    Image("close")
+                        .resizable()
+                        .frame(both: 10.0, aligment: .center)
                         .padding(8)
                         .background(
                             Circle()
@@ -211,121 +215,4 @@ struct MainView: View {
         }
         .padding(.top, 8)
     }
-    
-    
-//    private func drawSearch(_ geometry: GeometryProxy) -> some View {
-//        return HStack(alignment: .center, spacing: 0) {
-//            if $vm.isShowingSearchPannel.wrappedValue {
-//                VStack(alignment: .leading, spacing: 10) {
-//                    TextField("", text: $vm.searchText)
-//                        .font(.kr12r)
-//                        .foregroundColor(.gray90)
-//                        .padding([.leading, .trailing], 8)
-//                        .frame(width: geometry.size.width - 60 - 30, height: 34, alignment: .center)
-//                        .contentShape(Rectangle())
-//                        .background(
-//                            RoundedRectangle(cornerRadius: 6)
-//                                .foregroundColor(Color.white.opacity(0.85))
-//                        )
-//                        .padding([.leading, .top, .trailing], 10)
-//                        .onChange(of: $vm.searchText.wrappedValue) { _ in
-//                            vm.enterSearchText()
-//                        }
-//                }
-//            }
-//            Text($vm.isShowingSearchPannel.wrappedValue ? "취소" : "검색")
-//                .font(.kr12r)
-//                .foregroundColor(.white)
-//                .frame(width: 60, height: 34, alignment: .center)
-//                .background(
-//                    RoundedRectangle(cornerRadius: 6)
-//                        .foregroundColor($vm.isShowingSearchPannel.wrappedValue ? Color.black.opacity(0.9) : Color.greenTint1)
-//                )
-//                .padding([.top, .trailing], 10)
-//                .onTapGesture {
-//
-//                }
-//        }
-//        .contentShape(Rectangle())
-//        .frame(width: geometry.size.width, alignment: .trailing)
-//    }
-    
-//    private func drawSearchItem(_ geometry: GeometryProxy, item: FootPrint) -> some View {
-//        return HStack(alignment: .center, spacing: 12) {
-//            HStack(alignment: .center, spacing: 6) {
-//                if let category = item.tag.getCategory() {
-//                    Image(category.pinType.pinType().pinWhite)
-//                        .resizable()
-//                        .frame(both: 18.0, aligment: .center)
-//                        .colorMultiply(Color(hex: category.pinColor.pinColor().pinColorHex))
-//                }
-//                Text(item.title)
-//                    .font(.kr12r)
-//                    .foregroundColor(.gray90)
-//                Spacer()
-//            }
-//            .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
-//            .background(
-//                RoundedRectangle(cornerRadius: 6)
-//                //                    .foregroundColor(.white.opacity(0.8))
-//                    .foregroundColor(.greenTint5)
-//            )
-//            .contentShape(Rectangle())
-//            .onTapGesture {
-//                vm.onClickSearchItem(item)
-//            }
-//        }
-//    }
-//
-//    private func drawCategory(_ geometry: GeometryProxy) -> some View {
-//        return HStack(alignment: .center, spacing: 0) {
-//            if !$vm.categories.wrappedValue.isEmpty {
-//                if $vm.isShowCategoriesPannel.wrappedValue {
-//                    ScrollView(.horizontal, showsIndicators: false) {
-//                        HStack(alignment: .center, spacing: 12) {
-//                            ForEach($vm.categories.wrappedValue.indices, id: \.self) { idx in
-//                                let category = $vm.categories.wrappedValue[idx]
-//                                categoryItem(category)
-//                            }
-//                        }
-//                        .padding([.leading, .trailing], 8)
-//                    }
-//                    .contentShape(Rectangle())
-//                    .padding([.leading, .trailing], 8)
-//                    .frame(width: geometry.size.width - 60 - 30, height: 34, alignment: .center)
-//                    .background(
-//                        RoundedRectangle(cornerRadius: 6)
-//                            .foregroundColor(Color.white.opacity(0.85))
-//                    )
-//                    .padding([.leading, .top, .trailing], 10)
-//                }
-//                Text("카테고리")
-//                    .font(.kr12r)
-//                    .foregroundColor(.white)
-//                    .frame(width: 60, height: 34, alignment: .center)
-//                    .background(
-//                        RoundedRectangle(cornerRadius: 6)
-//                            .foregroundColor($vm.isShowCategoriesPannel.wrappedValue ? Color.black.opacity(0.9) : Color.greenTint1)
-//                    )
-//                    .padding([.top, .trailing], 10)
-//                    .onTapGesture {
-//                        $vm.isShowingSearchPannel.wrappedValue = false
-//                        $vm.isShowCategoriesPannel.wrappedValue = !$vm.isShowCategoriesPannel.wrappedValue
-//                    }
-//            }
-//        }
-//        .contentShape(Rectangle())
-//        .frame(width: geometry.size.width, alignment: .trailing)
-//    }
-//
-//    private func categoryItem(_ category: Category) -> some View {
-//        return Text(category.name)
-//            .font(.kr13r)
-//            .foregroundColor($vm.showingCategories.wrappedValue.contains(category.tag) ? .green : .red)
-//            .padding([.top, .bottom], 14)
-//            .contentShape(Rectangle())
-//            .onTapGesture {
-//                vm.onClickCategory(category)
-//            }
-//    }
 }

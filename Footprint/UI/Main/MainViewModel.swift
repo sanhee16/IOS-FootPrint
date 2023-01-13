@@ -57,7 +57,6 @@ class MainViewModel: BaseViewModel {
     
     func onAppear() {
         print("onAppear")
-        //        getSavedData()
         switch checkLocationPermission() {
         case .allow:
             self.locationPermission = true
@@ -68,22 +67,20 @@ class MainViewModel: BaseViewModel {
             self.myLocation = Location(latitude: 0.0, longitude: 0.0)
             break
         }
+        if let myLocation = self.myLocation {
+            self.moveCamera(CLLocationCoordinate2D(latitude: myLocation.latitude, longitude: myLocation.longitude))
+        }
         self.loadAllMarkers()
         self.loadAllFootprints()
     }
     
     func viewDidLoad() {
         print("viewDidLoad")
-        //        getSavedData()
         switch checkLocationPermission() {
         case .allow:
             self.locationPermission = true
             getCurrentLocation()
             loadCategories()
-            //            if let myLocation = self.myLocation {
-            //                let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: myLocation.latitude, lng: myLocation.longitude))
-            //                self.mapView.moveCamera(cameraUpdate)
-            //            }
         default:
             self.locationPermission = false
             self.myLocation = Location(latitude: 0.0, longitude: 0.0)
@@ -305,20 +302,6 @@ class MainViewModel: BaseViewModel {
         if self.searchTimer == nil {
             self.startRepeatTimer()
         }
-        //TOOD: here
-        // 여기에 하면 너무 api요청이 많아서 검색하고난 후에 해야할것 같음 -> 아니면 delay줘서 해야 할 것 같은데
-        // example) 1초~2초 정도 더 입력이 없으면 그때 요청
-        // placeSearch(text)
-        
-        
-        
-        //        if text.isEmpty {
-        //            self.searchItems = self.allFootprints
-        //        } else {
-        //            self.searchItems = self.allFootprints.filter { item in
-        //                item.title.contains(text)
-        //            }
-        //        }
     }
     
     func onCloseSearchBox() {
@@ -384,23 +367,37 @@ class MainViewModel: BaseViewModel {
         })
     }
     
-    private func getGeocoding(_ placeId: String) {
-        self.googleApi.getGeocoding(placeId)
-            .run(in: &self.subscription) { result in
+    func onClickSearchItem(_ item: SearchItemResponse) {
+        self.startProgress()
+        self.googleApi.getGeocoding(item.placeId)
+            .run(in: &self.subscription) {[weak self] results in
+                guard let self = self, let result = results.first else {
+                    self?.stopProgress()
+                    return
+                }
+                //TODO: 카메라 안움직임 ㅠㅠ
                 print("run!")
-//                        print("lat: \(result.geometry.location.lat)")
-//                        print("lng: \(result.geometry.location.lng)")
-            } err: { err in
+//                let location = Location(latitude: result.geometry.location.lat, longitude: result.geometry.location.lng)
+                print("lat: \(result.geometry.location.lat)")
+                print("lng: \(result.geometry.location.lng)")
+//                self.onCloseSearchBox()
+                let lat: Double = result.geometry.location.lat
+                let lng: Double = result.geometry.location.lng
+                let clLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: lat, longitude: lng)
+                self.stopProgress()
+                self.moveCamera(clLocation)
+                self.onCloseSearchBox()
+            } err: {[weak self] err in
                 print("error: \(err)")
+                self?.stopProgress()
+                self?.alert(.ok, title: "정보를 불러올 수 없습니다.")
             } complete: {
                 print("complete")
             }
     }
     
-    func onClickSearchItem(_ item: FootPrint) {
-        self.removeCurrentMarker()
-        //        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: item.latitude, lng: item.longitude))
-        //        mapView.moveCamera(cameraUpdate)
+    private func moveCamera(_ location: CLLocationCoordinate2D) {
+        self.mapView.animate(toLocation: location)
     }
     
     func onClickLocationPermission() {
@@ -433,7 +430,7 @@ class MainViewModel: BaseViewModel {
         if timer.userInfo != nil {
             searchCnt += 1
             print("timer run : \(searchCnt)")
-            if searchCnt == 5 {
+            if searchCnt == 4 {
                 stopRepeatTimer()
                 // timer 종료되고 할 작업
                 self.timerStopAndTask()

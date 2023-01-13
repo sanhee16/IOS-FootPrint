@@ -48,14 +48,11 @@ struct GoogleMapView: UIViewRepresentable {
         vm.initMapView(mapView)
         vm.loadAllMarkers()
         
-        
         return mapView
     }
     
     func updateUIView(_ mapView: GMSMapView, context: Context) {
-        let latitude: Double = $vm.myLocation.wrappedValue?.latitude ?? 35.7532
-        let longitude: Double = $vm.myLocation.wrappedValue?.longitude ?? 127.15
-        mapView.animate(toLocation: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
+        
     }
     
     class Coordinator: NSObject, GMSMapViewDelegate {

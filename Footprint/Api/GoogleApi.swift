@@ -147,8 +147,9 @@ class GoogleApi {
     }
     
     //MARK: Api
-    // https://maps.googleapis.com/maps/api/geocode/json?place_id=\()&key=\(Bundle.main.googleApiKey)
+    // document: https://developers.google.com/maps/documentation/geocoding/requests-geocoding?hl=ko#json
     func getGeocoding(_ placeId: String) -> AnyPublisher<[GeocodingResponse], Error> {
+        // 일반적으로 주소 조회 시 "results" 배열의 한 항목만 반환되지만 주소 쿼리가 모호한 경우 지오코더가 여러 결과를 반환할 수 있습니다.
         let key = Bundle.main.geocodingApiKey
         let param = ["language": UserLocale.currentLanguage()] as? Parameters
         return self.getArrayUnwrap("json?place_id=\(placeId)&key=\(key)", host: C.GEOCODING_HOST, parameters: param)
