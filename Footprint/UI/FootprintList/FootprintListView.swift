@@ -149,17 +149,23 @@ struct FootprintListView: View {
     }
     
     private func drawPeopleWith(_ geometry: GeometryProxy, items: [PeopleWith]) -> some View {
-        return HStack(alignment: .center, spacing: 4) {
+        return HStack(alignment: .top, spacing: 4) {
             Image("person")
                 .resizable()
                 .frame(both: 18.0, aligment: .center)
-            HStack(alignment: .center, spacing: 8) {
-                ForEach(items, id: \.self) { item in
-                    Text(item.name)
-                        .font(.kr11r)
-                        .foregroundColor(Color.gray90)
-                }
-            }
+            
+            Text(Util.makePeopleWithNameString(items))
+                .font(.kr11r)
+                .foregroundColor(Color.gray90)
+                .multilineTextAlignment(.leading)
+                .lineLimit(nil)
+//            HStack(alignment: .center, spacing: 8) {
+//                ForEach(items, id: \.self) { item in
+//                    Text(Util.makePeopleWithNameString(items))
+//                        .font(.kr11r)
+//                        .foregroundColor(Color.gray90)
+//                }
+//            }
         }
     }
 

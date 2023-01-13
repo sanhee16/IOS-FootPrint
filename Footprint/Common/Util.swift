@@ -45,6 +45,20 @@ class Util {
     static func makeCategoryCopy(_ category: Category) -> Category {
         return Category(tag: category.tag, name: category.name, pinType: category.pinType.pinType(), pinColor: category.pinColor.pinColor())
     }
+    
+    static func makePeopleWithNameString(_ items: [PeopleWith]) -> String {
+        let names: [String] = items.map { item in
+            item.name
+        }
+        var result: String = ""
+        for name in names {
+            result += name + "  "
+        }
+        if !result.isEmpty {
+            result.removeLast(2)
+        }
+        return result
+    }
 }
 
 

@@ -148,14 +148,19 @@ struct ShowFootPrintView: View {
             Image("person")
                 .resizable()
                 .frame(both: 14.0, aligment: .center)
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 70.0), spacing: 8, alignment: .leading)]) {
-                ForEach(items, id: \.self) { item in
-                    Text(item.name)
-                        .font(.kr11r)
-                        .foregroundColor(Color.gray90)
-                        .lineLimit(1)
-                }
-            }
+            Text(Util.makePeopleWithNameString(items))
+                .font(.kr11r)
+                .foregroundColor(Color.gray90)
+                .multilineTextAlignment(.leading)
+                .lineLimit(nil)
+//            LazyVGrid(columns: [GridItem(.adaptive(minimum: 70.0), spacing: 8, alignment: .leading)]) {
+//                ForEach(items, id: \.self) { item in
+//                    Text(item.name)
+//                        .font(.kr11r)
+//                        .foregroundColor(Color.gray90)
+//                        .lineLimit(1)
+//                }
+//            }
 //            HStack(alignment: .center, spacing: 8) {
 //                ForEach(items, id: \.self) { item in
 //                    Text(item.name)
