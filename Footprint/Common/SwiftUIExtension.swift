@@ -153,6 +153,21 @@ extension Color {
     var uiColor: UIColor {
         get { UIColor(cgColor: cgColor!) }
     }
+    public static let fColor1: Color = Color(hex: "#4E5158")
+    public static let fColor2: Color = Color(hex: "#596EA7")
+    public static let fColor3: Color = Color(hex: "#567AF4")
+    public static let fColor4: Color = Color(hex: "#E9EFFD")
+    public static let fColor5: Color = Color(hex: "#F7F8FD")
+    public static let fColor6: Color = Color(hex: "#FFFFFF")
+    public static let fColor7: Color = Color(hex: "#E96A6A")
+    public static let textColor1: Color = Color(hex: "#373945")
+    public static let textColor2: Color = Color(hex: "#2D395F")
+    public static let textColor3: Color = Color(hex: "#2D395F")
+    public static let textColor4: Color = Color(hex: "#C0C1C5")
+    public static let textColor5: Color = Color(hex: "#EDEDF0")
+    
+    
+    
     public static let greenTint1: Color = Color(hex: "#4B8A67")
     public static let greenTint2: Color = Color(hex: "#69BC8D")
     public static let greenTint3: Color = Color(hex: "#D5E5DF")
@@ -257,6 +272,18 @@ extension UIColor {
         }
     }
     public static let lightblue03: UIColor = UIColor(hex: "#E4F7FF")
+    public static let fColor1: UIColor = UIColor(hex: "#4E5158")
+    public static let fColor2: UIColor = UIColor(hex: "#596EA7")
+    public static let fColor3: UIColor = UIColor(hex: "#567AF4")
+    public static let fColor4: UIColor = UIColor(hex: "#E9EFFD")
+    public static let fColor5: UIColor = UIColor(hex: "#F7F8FD")
+    public static let fColor6: UIColor = UIColor(hex: "#FFFFFF")
+    public static let fColor7: UIColor = UIColor(hex: "#E96A6A")
+    public static let textColor1: UIColor = UIColor(hex: "#373945")
+    public static let textColor2: UIColor = UIColor(hex: "#2D395F")
+    public static let textColor3: UIColor = UIColor(hex: "#2D395F")
+    public static let textColor4: UIColor = UIColor(hex: "#C0C1C5")
+    public static let textColor5: UIColor = UIColor(hex: "#EDEDF0")
     
     public static let greenTint1: UIColor = UIColor(hex: "#4B8A67")
     public static let greenTint2: UIColor = UIColor(hex: "#69BC8D")
