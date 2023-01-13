@@ -44,7 +44,12 @@ class EditTravelViewModel: BaseViewModel {
     }
     
     func onClose() {
-        self.dismiss()
+        self.alert(.yesOrNo, title: "저장하지 않고 나가시겠습니까?") {[weak self] isClose in
+            if isClose {
+                self?.dismiss()
+            }
+            return
+        }
     }
     
     func loadAllFootprints() {
@@ -57,10 +62,10 @@ class EditTravelViewModel: BaseViewModel {
             guard let self = self else { return }
             let list = RealmSwift.List<FootPrint>()
             list.append(objectsIn: self.footprints)
-            let item = Travel(footprints: list, title: self.title, intro: self.intro, color: color.toHex() ?? "#FFFFFF")
+            let item = Travel(footprints: list, title: self.title, intro: self.intro, color: color.toTravelBackground() ?? "#FFFFFF")
             self.realm.add(item)
             self.stopProgress()
-            self.onClose()
+            self.dismiss()
         }
     }
     
@@ -78,6 +83,10 @@ class EditTravelViewModel: BaseViewModel {
             self.alert(.ok, title: "제목을 입력해주세요.")
             return
         }
+        if self.footprints.isEmpty {
+            self.alert(.ok, title: "노트를 선택해주세요.")
+            return
+        }
         
         if case .create = type {
             try! self.realm.write {[weak self] in
@@ -88,10 +97,10 @@ class EditTravelViewModel: BaseViewModel {
                     saveFootprints.append(item)
                 }
 
-                let item: Travel = Travel(footprints: saveFootprints, title: self.title, intro: self.intro, color: color.toHex() ?? "#FFFFFF")
+                let item: Travel = Travel(footprints: saveFootprints, title: self.title, intro: self.intro, color: color.toTravelBackground() ?? "#FFFFFF")
                 self.realm.add(item)
                 self.stopProgress()
-                self.onClose()
+                self.dismiss()
             }
         } else if case let .edit(travel) = type {
             try! self.realm.write {[weak self] in
@@ -102,10 +111,10 @@ class EditTravelViewModel: BaseViewModel {
                     saveFootprints.append(item)
                 }
 
-                let item: Travel = Travel(id: travel.id, footprints: saveFootprints, title: self.title, intro: self.intro, color: color.toHex() ?? "#FFFFFF")
+                let item: Travel = Travel(id: travel.id, footprints: saveFootprints, title: self.title, intro: self.intro, color: color.toTravelBackground() ?? "#FFFFFF")
                 self.realm.add(item, update: .modified)
                 self.stopProgress()
-                self.onClose()
+                self.dismiss()
             }
         }
     }

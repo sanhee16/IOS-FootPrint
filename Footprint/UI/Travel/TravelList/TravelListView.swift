@@ -34,7 +34,7 @@ struct TravelListView: View {
                         }
                         drawAddNewItem(geometry)
                     }
-                    .padding(EdgeInsets(top: 0, leading: 12, bottom: 30, trailing: 12))
+                    .padding(EdgeInsets(top: 10, leading: 12, bottom: 30, trailing: 20))
                 }
             }
             .padding(EdgeInsets(top: safeTop, leading: 0, bottom: safeBottom, trailing: 0))
@@ -49,8 +49,8 @@ struct TravelListView: View {
     private func drawTravelItem(_ geometry: GeometryProxy, item: Travel) -> some View {
         return VStack(alignment: .leading, spacing: 6) {
             Text(item.title)
-                .font(.kr12b)
-                .foregroundColor(.gray90)
+                .font(.kr13b)
+                .foregroundColor(.textColor1)
             
             Text("일정 : \(item.footprints.count)개")
                 .font(.kr10r)
@@ -63,7 +63,7 @@ struct TravelListView: View {
                 .multilineTextAlignment(.leading)
                 .padding(.top, 2)
         }
-        .padding(EdgeInsets(top: 4, leading: 6, bottom: 4, trailing: 6))
+        .padding(EdgeInsets(top: 6, leading: 8, bottom: 4, trailing: 6))
         .contentShape(Rectangle())
         .frame(
             minWidth:  geometry.size.width - 24, idealWidth:  geometry.size.width - 24, maxWidth: geometry.size.width - 24,
@@ -73,7 +73,6 @@ struct TravelListView: View {
             RoundedRectangle(cornerRadius: 12)
                 .foregroundColor(Color(hex: item.color))
         )
-        .shadow(color: Color.black.opacity(0.3), radius: 2, x: 0.5, y: 0.5)
         .onTapGesture {
             vm.onClickShowTravel(item)
         }

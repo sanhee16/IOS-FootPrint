@@ -181,7 +181,7 @@ struct FootprintListView: View {
                             .frame(both: IMAGE_SIZE)
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                             .contentShape(Rectangle())
-                            .shadow(color: Color.black.opacity(0.6), radius: 3, x: 0.5, y: 2)
+                            .shadow(color: Color.black.opacity(0.3), radius: 2, x: 0.5, y: 0.5)
                             .onTapGesture {
                                 vm.showImage(idx)
                             }

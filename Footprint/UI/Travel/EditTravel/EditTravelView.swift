@@ -31,12 +31,14 @@ struct EditTravelView: View {
                     }
                     HStack(alignment: .center, spacing: 12) {
                         Spacer()
-                        Text("저장")
-                            .font(.kr12r)
-                            .foregroundColor(.gray90)
-                            .onTapGesture {
-                                vm.onClickSave()
-                            }
+                        if !$vm.title.wrappedValue.isEmpty && !$vm.footprints.wrappedValue.isEmpty {
+                            Text("저장")
+                                .font(.kr12r)
+                                .foregroundColor(.gray90)
+                                .onTapGesture {
+                                    vm.onClickSave()
+                                }
+                        }
                     }
                     .padding([.leading, .trailing], 12)
                     .frame(width: geometry.size.width - 24, height: 50, alignment: .center)
@@ -74,8 +76,7 @@ struct EditTravelView: View {
                 .contentShape(Rectangle())
             
             drawTitle("색상 선택")
-            ColorPicker("", selection: $vm.color)
-            
+            ColorPicker("", selection: $vm.color, supportsOpacity: false)
             drawTitle("노트 선택")
             ScrollView(.vertical, showsIndicators: false) {
                 ForEach($vm.footprints.wrappedValue.indices, id: \.self) { idx in

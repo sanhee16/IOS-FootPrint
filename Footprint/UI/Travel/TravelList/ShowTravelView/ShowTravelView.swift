@@ -61,21 +61,26 @@ struct ShowTravelView: View {
     
     private func drawBody(_ geometry: GeometryProxy) -> some View {
         return VStack(alignment: .leading, spacing: 10) {
-            VStack(alignment: .leading, spacing: 10) {
-                Text(vm.travel.title)
-                    .font(.kr13b)
-                    .foregroundColor(.textColor1)
-                
-                Text(vm.travel.intro)
-                    .font(.kr13r)
-                    .foregroundColor(.gray90)
+            HStack(alignment: .center, spacing: 0) {
+                VStack(alignment: .leading, spacing: 10) {
+                    Text(vm.travel.title)
+                        .font(.kr13b)
+                        .foregroundColor(.textColor1)
+                    Text(vm.travel.intro)
+                        .font(.kr13r)
+                        .foregroundColor(.gray90)
+                }
+                Spacer()
+                Circle()
+                    .frame(both: 24.0)
+                    .foregroundColor(Color(hex: vm.travel.color))
             }
             .padding([.leading, .trailing], 16)
             
             ScrollView(.vertical, showsIndicators: false) {
                 ForEach($vm.footprints.wrappedValue.indices, id: \.self) { idx in
                     let item = $vm.footprints.wrappedValue[idx]
-                    FootprintItem(geometry: geometry, horizontalPadding: 0.0, item: item, isExpanded: $vm.expandedItem.wrappedValue == item, peopleWiths: vm.getPeopleWiths(Array(item.peopleWithIds))) { idx in
+                    FootprintItem(geometry: geometry, horizontalPadding: 16.0, item: item, isExpanded: $vm.expandedItem.wrappedValue == item, peopleWiths: vm.getPeopleWiths(Array(item.peopleWithIds))) { idx in
                         vm.showImage(idx)
                     } onClickItem: {
                         vm.onClickItem(item)
