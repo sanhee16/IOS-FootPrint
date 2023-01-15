@@ -73,10 +73,12 @@ struct MainView: View {
                 if let coordinator = $vm.coordinator.wrappedValue {
                     ZStack(alignment: .topTrailing) {
                         VStack(alignment: .center, spacing: 0) {
-                            drawSearchBox(geometry)
-                            if $vm.isShowingSearchResults.wrappedValue == true {
-                                drawSearchItems(geometry)
-                                    .padding(.top, 6)
+                            if Util.getSettingStatus(.IS_ON_SEARCH_BAR) {
+                                drawSearchBox(geometry)
+                                if $vm.isShowingSearchResults.wrappedValue == true {
+                                    drawSearchItems(geometry)
+                                        .padding(.top, 6)
+                                }
                             }
                         }
                         .zIndex(1)
