@@ -51,7 +51,7 @@ struct FootprintListView: View {
                             }
                             .padding([.top, .bottom], 16)
                         }
-                        .frame(width: geometry.size.width, height: geometry.size.height - 50, alignment: .leading)
+                        .frame(width: geometry.size.width, height: geometry.size.height - 50 - 60, alignment: .leading)
                         
                         // TODO: 뺄지 말지 결정하기
                         Image("up_arrow")
@@ -69,6 +69,9 @@ struct FootprintListView: View {
                                 value.scrollTo(0, anchor: .top)
                             }
                     }
+                }
+                MainMenuBar(geometry: geometry, current: .footprints) { type in
+                    vm.onClickMenu(type)
                 }
             }
             .padding(EdgeInsets(top: safeTop, leading: 0, bottom: safeBottom, trailing: 0))

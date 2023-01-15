@@ -115,19 +115,35 @@ class MainViewModel: BaseViewModel {
         self.loadAllMarkers()
     }
     
-    func onClickSetting() {
-        self.removeCurrentMarker()
-        self.coordinator?.presentSettingView()
-    }
+//    func onClickSetting() {
+//        self.removeCurrentMarker()
+//        self.coordinator?.presentSettingView()
+//    }
+//
+//    func onClickFootprintList() {
+//        self.removeCurrentMarker()
+//        self.coordinator?.presentFootprintListView()
+//    }
+//
+//    func onClickTravelList() {
+//        self.removeCurrentMarker()
+//        self.coordinator?.presentTravelListView()
+//    }
     
-    func onClickFootprintList() {
-        self.removeCurrentMarker()
-        self.coordinator?.presentFootprintListView()
-    }
-    
-    func onClickTravelList() {
-        self.removeCurrentMarker()
-        self.coordinator?.presentTravelListView()
+    func onClickMenu(_ type: MainMenuType) {
+        switch type {
+        case .map:
+            break
+        case .footprints:
+            self.removeCurrentMarker()
+            self.coordinator?.presentFootprintListView()
+        case .travel:
+            self.removeCurrentMarker()
+            self.coordinator?.presentTravelListView()
+        case .setting:
+            self.removeCurrentMarker()
+            self.coordinator?.presentSettingView()
+        }
     }
     
     private func getCurrentLocation() {

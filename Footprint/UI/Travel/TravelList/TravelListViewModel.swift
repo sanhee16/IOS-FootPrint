@@ -30,6 +30,19 @@ class TravelListViewModel: BaseViewModel {
         self.dismiss()
     }
     
+    func onClickMenu(_ type: MainMenuType) {
+        switch type {
+        case .map:
+            self.coordinator?.presentMain()
+        case .footprints:
+            self.coordinator?.presentFootprintListView()
+        case .travel:
+            break
+        case .setting:
+            self.coordinator?.presentSettingView()
+        }
+    }
+    
     func loadAll() {
         self.startProgress()
         self.travels.removeAll()

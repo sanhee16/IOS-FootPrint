@@ -31,44 +31,44 @@ struct MainView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .center, spacing: 0) {
-                ZStack(alignment: .leading) {
-                    Topbar("FootPrint", type: .none) {
-                    }
-                    HStack(alignment: .center, spacing: 12) {
-                        Text("전체보기")
-                            .font(.kr12r)
-                            .foregroundColor(.textColor1)
-                            .onTapGesture {
-                                vm.onClickFootprintList()
-                            }
-                        Text("travel")
-                            .font(.kr12r)
-                            .foregroundColor(.textColor1)
-                            .onTapGesture {
-                                vm.onClickTravelList()
-                            }
-                        Spacer()
-                        Image("icon_gps")
-                            .resizable()
-                            .frame(both: 20.0, aligment: .center)
-                            .colorMultiply($vm.locationPermission.wrappedValue ? .green : .red)
-                            .padding(.trailing, 8)
-                            .onTapGesture {
-                                if !$vm.locationPermission.wrappedValue {
-                                    vm.onClickLocationPermission()
-                                }
-                            }
-                        Text("설정")
-                            .font(.kr12r)
-                            .foregroundColor(.textColor1)
-                            .onTapGesture {
-                                vm.onClickSetting()
-                            }
-                    }
-                    .frame(width: geometry.size.width - 24, height: 50, alignment: .center)
-                    .padding([.leading, .trailing], 12)
-                }
-                .frame(width: geometry.size.width, height: 50, alignment: .center)
+//                ZStack(alignment: .leading) {
+//                    Topbar("FootPrint", type: .none) {
+//                    }
+//                    HStack(alignment: .center, spacing: 12) {
+//                        Text("전체보기")
+//                            .font(.kr12r)
+//                            .foregroundColor(.textColor1)
+//                            .onTapGesture {
+//                                vm.onClickFootprintList()
+//                            }
+//                        Text("travel")
+//                            .font(.kr12r)
+//                            .foregroundColor(.textColor1)
+//                            .onTapGesture {
+//                                vm.onClickTravelList()
+//                            }
+//                        Spacer()
+//                        Image("icon_gps")
+//                            .resizable()
+//                            .frame(both: 20.0, aligment: .center)
+//                            .colorMultiply($vm.locationPermission.wrappedValue ? .green : .red)
+//                            .padding(.trailing, 8)
+//                            .onTapGesture {
+//                                if !$vm.locationPermission.wrappedValue {
+//                                    vm.onClickLocationPermission()
+//                                }
+//                            }
+//                        Text("설정")
+//                            .font(.kr12r)
+//                            .foregroundColor(.textColor1)
+//                            .onTapGesture {
+//                                vm.onClickSetting()
+//                            }
+//                    }
+//                    .frame(width: geometry.size.width - 24, height: 50, alignment: .center)
+//                    .padding([.leading, .trailing], 12)
+//                }
+//                .frame(width: geometry.size.width, height: 50, alignment: .center)
                 //Google Map
                 if let coordinator = $vm.coordinator.wrappedValue {
                     ZStack(alignment: .topTrailing) {
@@ -82,6 +82,9 @@ struct MainView: View {
                         .zIndex(1)
                         GoogleMapView(coordinator, vm: vm)
                     }
+                }
+                MainMenuBar(geometry: geometry, current: .map) { type in
+                    vm.onClickMenu(type)
                 }
                 
                 //Naver Map

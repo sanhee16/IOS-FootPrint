@@ -49,6 +49,19 @@ class FootprintListViewModel: BaseViewModel {
             }))
     }
     
+    func onClickMenu(_ type: MainMenuType) {
+        switch type {
+        case .map:
+            self.coordinator?.presentMain()
+        case .footprints:
+            break
+        case .travel:
+            self.coordinator?.presentTravelListView()
+        case .setting:
+            self.coordinator?.presentSettingView()
+        }
+    }
+    
     func onClickItem(_ item: FootPrint) {
         if self.expandedItem == item {
             self.expandedItem = nil

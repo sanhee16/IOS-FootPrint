@@ -36,6 +36,9 @@ struct TravelListView: View {
                     }
                     .padding(EdgeInsets(top: 10, leading: 12, bottom: 30, trailing: 20))
                 }
+                MainMenuBar(geometry: geometry, current: .travel) { type in
+                    vm.onClickMenu(type)
+                }
             }
             .padding(EdgeInsets(top: safeTop, leading: 0, bottom: safeBottom, trailing: 0))
             .edgesIgnoringSafeArea(.all)

@@ -48,7 +48,7 @@ class AppCoordinator: Coordinator, Terminatable {
     //MARK: Present
     func presentMain() {
         let vc = MainView.vc(self)
-        self.present(vc, animated: true)
+        self.present(vc, animated: false)
     }
     
     func presentAddFootprintView(location: Location, type: AddFootprintType, onDismiss: @escaping ()->()) {
@@ -88,7 +88,7 @@ class AppCoordinator: Coordinator, Terminatable {
     
     func presentSettingView() {
         let vc = SettingView.vc(self)
-        self.present(vc, animated: true)
+        self.present(vc, animated: false)
     }
     
     func presentCheckPermission() {
@@ -103,7 +103,7 @@ class AppCoordinator: Coordinator, Terminatable {
     
     func presentFootprintListView() {
         let vc = FootprintListView.vc(self)
-        self.present(vc, animated: true)
+        self.present(vc, animated: false)
     }
     
     func presentPeopleWithSelectorView(type: PeopleWithEditType) {

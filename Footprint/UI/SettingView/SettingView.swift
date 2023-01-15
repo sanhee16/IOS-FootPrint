@@ -37,23 +37,31 @@ struct SettingView: View {
                 Topbar("설정", type: .back) {
                     vm.onClose()
                 }
-                drawTitle(geometry, title: "앱 설정")
-                drawItem(geometry, title: "권한 확인하기") {
-                    vm.onClickCheckPermission()
+                ScrollView(.vertical, showsIndicators: false) {
+                    VStack(alignment: .leading, spacing: 0) {
+                        drawTitle(geometry, title: "앱 설정")
+                        drawItem(geometry, title: "권한 확인하기") {
+                            vm.onClickCheckPermission()
+                        }
+                        drawItem(geometry, title: "함께한 사람 편집하기") {
+                            vm.onClickEditPeopleWith()
+                        }
+                        drawItem(geometry, title: "카테고리 편집하기") {
+                            vm.onClickEditCategory()
+                        }
+                        drawToggleItem(geometry, title: "검색창 표시", flag:.IS_ON_SEARCH_BAR, isOn: $vm.isOnSearchBar)
+                        drawTitle(geometry, title: "기타")
+                        drawItem(geometry, title: "문의하기") {
+                            vm.onClickContact()
+                        }
+                        drawItem(geometry, title: "개발자 정보") {
+                            vm.onClickDevInfo()
+                        }
+                    }
                 }
-                drawItem(geometry, title: "함께한 사람 편집하기") {
-                    vm.onClickEditPeopleWith()
-                }
-                drawItem(geometry, title: "카테고리 편집하기") {
-                    vm.onClickEditCategory()
-                }
-                drawToggleItem(geometry, title: "검색창 표시", flag:.IS_ON_SEARCH_BAR, isOn: $vm.isOnSearchBar)
-                drawTitle(geometry, title: "기타")
-                drawItem(geometry, title: "문의하기") {
-                    vm.onClickContact()
-                }
-                drawItem(geometry, title: "개발자 정보") {
-                    vm.onClickDevInfo()
+                .frame(width: geometry.size.width, height: geometry.size.height - 50 - 60, alignment: .leading)
+                MainMenuBar(geometry: geometry, current: .setting) { type in
+                    vm.onClickMenu(type)
                 }
             }
             .sheet(isPresented: $vm.isShowingMailView) {
