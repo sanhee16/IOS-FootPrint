@@ -39,10 +39,10 @@ struct CheckPermissionView: View {
                         .frame(width: UIScreen.main.bounds.width - 100, alignment: .center)
                         .padding(.bottom, 4)
                     VStack(alignment: .center, spacing: 10) {
-                        drawPermissionItem(geometry, text: "위치사용권한", isAllow: C.permissionLocation)
-                        drawPermissionItem(geometry, text: "카메라사용권한", isAllow: $vm.cameraPermission.wrappedValue)
-                        drawPermissionItem(geometry, text: "사진접근권한", isAllow: $vm.photoPermission.wrappedValue)
-                        drawPermissionItem(geometry, text: "알림허용", isAllow: $vm.notiPermission.wrappedValue)
+                        drawPermissionItem(geometry, type: PermissionType.location, isAllow: C.permissionLocation)
+                        drawPermissionItem(geometry, type: PermissionType.camera, isAllow: $vm.cameraPermission.wrappedValue)
+                        drawPermissionItem(geometry, type: PermissionType.photo, isAllow: $vm.photoPermission.wrappedValue)
+                        drawPermissionItem(geometry, type: PermissionType.notification, isAllow: $vm.notiPermission.wrappedValue)
                     }
                     .padding([.top, .bottom], 10)
                 }
@@ -60,9 +60,9 @@ struct CheckPermissionView: View {
         }
     }
     
-    private func drawPermissionItem(_ geometry: GeometryProxy, text: String, isAllow: Bool) -> some View {
+    private func drawPermissionItem(_ geometry: GeometryProxy, type: PermissionType, isAllow: Bool) -> some View {
         return HStack(alignment: .center, spacing: 0) {
-            Text(text)
+            Text(type.text)
                 .font(.kr11r)
                 .foregroundColor(.textColor1)
             Spacer()

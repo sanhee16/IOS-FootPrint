@@ -14,9 +14,25 @@ import UserNotifications
 import RealmSwift
 import UIKit
 
+enum PermissionType {
+    case location
+    case camera
+    case photo
+    case notification
+    
+    var text: String {
+        switch self {
+        case .location: return "위치사용권한"
+        case .camera: return "카메라사용권한"
+        case .photo: return "사진접근권한"
+        case .notification: return "알림허용"
+        }
+    }
+}
+
 class CheckPermissionViewModel: BaseViewModel {
     @Published var photoPermission: Bool = false
-//    @Published var locationPermission: Bool = false
+    //    @Published var locationPermission: Bool = false
     @Published var cameraPermission: Bool = false
     @Published var notiPermission: Bool = false
     
@@ -29,13 +45,33 @@ class CheckPermissionViewModel: BaseViewModel {
             guard let self = self else { return }
             self.checkCameraPermission()
             self.checkPhotoPermission()
-//            self.checkLocationPermission()
+            //            self.checkLocationPermission()
             self.checkNotiPermission()
         }
     }
     
     func onClose() {
         self.dismiss(animated: false)
+    }
+    
+    func onClickOffPermission(_ type: PermissionType) {
+        switch type {
+        case .location:
+            let locationManager: CLLocationManager = CLLocationManager()
+            locationManager.allowsBackgroundLocationUpdates = true
+            locationManager.requestWhenInUseAuthorization()
+        case .camera:
+            AVCaptureDevice.requestAccess(for: .video) {[weak self] _ in
+                self?.onAppear()
+            }
+        case .photo:
+            PHPhotoLibrary.requestAuthorization {[weak self] status in
+                self?.onAppear()
+            }
+        case .notification:
+            self.openAppSetting()
+        default: self.openAppSetting()
+        }
     }
     
     func openAppSetting() {
@@ -83,16 +119,16 @@ class CheckPermissionViewModel: BaseViewModel {
     }
     
     
-//    private func checkLocationPermission() {
-//        switch CLLocationManager().authorizationStatus {
-//        case .authorizedAlways, .authorizedWhenInUse:
-//            self.locationPermission = true
-//            break
-//        default:
-//            self.locationPermission = false
-//            break
-//        }
-//    }
+    //    private func checkLocationPermission() {
+    //        switch CLLocationManager().authorizationStatus {
+    //        case .authorizedAlways, .authorizedWhenInUse:
+    //            self.locationPermission = true
+    //            break
+    //        default:
+    //            self.locationPermission = false
+    //            break
+    //        }
+    //    }
     
     
     private func checkNotiPermission() {
