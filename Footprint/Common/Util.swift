@@ -61,25 +61,18 @@ class Util {
     }
     
     static func getSettingStatus(_ flag: SettingFlag) -> Bool {
-        let settingFlag: Int = Defaults.SettingFlag
-        let idx: Int = flag.rawValue
-        let res: Int = settingFlag & (0b1 << idx)
-        return res > 0
+        let settingFlag: UInt8 = Defaults.SettingFlag ?? 0b11111111
+        return (settingFlag & flag.option) > 0
     }
     
+    // bit flag: https://boycoding.tistory.com/164
     static func setSettingStatus(_ flag: SettingFlag, isOn: Bool) {
         //TODO: 여기 다시해야함^*^
-        let settingFlag: Int = Defaults.SettingFlag
-        let idx: Int = flag.rawValue
-        let flag: Int = isOn ? 0b1 : 0b0
-        let calc: Int = 0b11111111 & (flag << idx)
-        let res: Int = settingFlag | calc
-        print("settingFlag: \(settingFlag)")
-        print("idx: \(idx)")
-        print("flag: \(flag)")
-        print("calc: \(calc)")
-        print("res: \(res)")
+        let settingFlag: UInt8 = Defaults.SettingFlag ?? 0b11111111
+        let res: UInt8 = isOn ? (settingFlag | flag.option) : (settingFlag & (~flag.option))
+        print("isOn: \(isOn) // res \(res)")
         
+        print("Modified Setting: 0b\(String(res, radix: 2))")
         Defaults.SettingFlag = res
     }
 }

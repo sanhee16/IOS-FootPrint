@@ -59,10 +59,14 @@ class Defaults {
     }
     
     //MARK: Setting
+    /*
+     1: On, 0: Off
+     8자리까지 채울 수 있음!
+     */
     private static let SETTING_FLAG = "SETTING_FLAG"
-    public static var SettingFlag: Int {
+    public static var SettingFlag: UInt8? {
         get {
-            UserDefaults.standard.integer(forKey: SETTING_FLAG)
+            UserDefaults.standard.object(forKey: SETTING_FLAG) as? UInt8
         }
         set(value) {
             UserDefaults.standard.setValue(value, forKey: SETTING_FLAG)
