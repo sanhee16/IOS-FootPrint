@@ -41,7 +41,7 @@ class MainViewModel: BaseViewModel {
     private var currentTapMarker: GMSMarker? = nil
     private var allFootprints: [FootPrint] = []
     
-    private var mapView: GMSMapView = GMSMapView()
+    private var mapView: GMSMapView? = nil
     private var searchCnt: Int = 0
     private var lastSearchText: String? = nil
     private let realm: Realm
@@ -172,15 +172,16 @@ class MainViewModel: BaseViewModel {
     
     // MAP
     func initMapView(_ mapView: GMSMapView) {
+        if self.mapView != nil { return }
         self.mapView = mapView
     }
     
     func loadAllMarkers() {
-        print("load all Markers")
+//        guard let mapView = self.mapView else { return }
         self.startProgress()
         
         for item in self.markerList {
-            removeMarker(self.mapView, marker: item.marker)
+            removeMarker(marker: item.marker)
         }
         self.markerList.removeAll()
         let footPrints = realm.objects(FootPrint.self)
@@ -190,7 +191,6 @@ class MainViewModel: BaseViewModel {
         
         for footPrint in footPrints {
             if let category = footPrint.tag.getCategory(), let marker = drawMarker(
-                mapView,
                 location: Location(latitude: footPrint.latitude, longitude: footPrint.longitude),
                 category: category) {
                 markerList.append(MarkerItem(marker: marker, footPrint: footPrint))
@@ -200,8 +200,7 @@ class MainViewModel: BaseViewModel {
     }
     
     
-    func removeMarker(_ mapView: GMSMapView, marker: GMSMarker) {
-        //        marker.mapView = nil
+    func removeMarker(marker: GMSMarker) {
         marker.map = nil
     }
     
@@ -249,7 +248,7 @@ class MainViewModel: BaseViewModel {
         }
     }
     
-    func drawMarker(_ mapView: GMSMapView, location: Location, category: Category) -> GMSMarker? {
+    func drawMarker(location: Location, category: Category) -> GMSMarker? {
         // 마커 생성하기
         // MARK: mix two images!
         // reference: https://stackoverflow.com/questions/32006128/how-to-merge-two-uiimages
@@ -410,7 +409,7 @@ class MainViewModel: BaseViewModel {
     }
     
     private func moveCamera(_ location: CLLocationCoordinate2D) {
-        self.mapView.animate(toLocation: location)
+        self.mapView?.animate(toLocation: location)
     }
     
     func onClickLocationPermission() {
@@ -428,7 +427,7 @@ class MainViewModel: BaseViewModel {
     
     func removeCurrentMarker() {
         if let currentTapMarker = self.currentTapMarker {
-            self.removeMarker(self.mapView, marker: currentTapMarker)
+            self.removeMarker(marker: currentTapMarker)
         }
     }
     
