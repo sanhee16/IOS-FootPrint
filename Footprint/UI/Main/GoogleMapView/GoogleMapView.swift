@@ -26,7 +26,7 @@ struct GoogleMapView: UIViewRepresentable {
         Coordinator(owner: self, vm: self.vm)
     }
     
-    private let zoom: Float = 17.5
+    private let zoom: Float = 17.8
     
     func makeUIView(context: Self.Context) -> GMSMapView {
         let latitude: Double = $vm.myLocation.wrappedValue?.latitude ?? 35.7532

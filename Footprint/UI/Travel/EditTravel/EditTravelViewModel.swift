@@ -24,7 +24,9 @@ class EditTravelViewModel: BaseViewModel {
     @Published var allFootprints: [FootPrint] = []
     @Published var color: Color = Color.white
     @Published var draggedItem: FootPrint? = nil
-    private var originalItem: Travel = Travel(footprints: List(), title: "", intro: "", color: "#FFFFFF")
+    @Published var fromDate: Date = Date()
+    @Published var toDate: Date = Date()
+    private var originalItem: Travel = Travel(footprints: List(), title: "", intro: "", color: "#FFFFFF", fromDate: Date(), toDate: Date())
     let type: EditTravelType
     
     init(_ coordinator: AppCoordinator, type: EditTravelType) {
@@ -37,6 +39,8 @@ class EditTravelViewModel: BaseViewModel {
             self.intro = travel.intro
             self.footprints = Array(travel.footprints)
             self.color = Color(hex: travel.color)
+            self.fromDate = Date(timeIntervalSince1970: Double(travel.fromDate))
+            self.toDate = Date(timeIntervalSince1970: Double(travel.toDate))
         }
         self.objectWillChange.send()
     }
@@ -66,18 +70,18 @@ class EditTravelViewModel: BaseViewModel {
         self.allFootprints = Array(self.realm.objects(FootPrint.self))
     }
     
-    func onClickAdd() {
-        self.startProgress()
-        try! self.realm.write {[weak self] in
-            guard let self = self else { return }
-            let list = RealmSwift.List<FootPrint>()
-            list.append(objectsIn: self.footprints)
-            let item = Travel(footprints: list, title: self.title, intro: self.intro, color: color.toTravelBackground() ?? "#FFFFFF")
-            self.realm.add(item)
-            self.stopProgress()
-            self.dismiss()
-        }
-    }
+//    func onClickAdd() {
+//        self.startProgress()
+//        try! self.realm.write {[weak self] in
+//            guard let self = self else { return }
+//            let list = RealmSwift.List<FootPrint>()
+//            list.append(objectsIn: self.footprints)
+//            let item = Travel(footprints: list, title: self.title, intro: self.intro, color: color.toTravelBackground() ?? "#FFFFFF", fromDate: self.fromDate, toDate: self.toDate)
+//            self.realm.add(item)
+//            self.stopProgress()
+//            self.dismiss()
+//        }
+//    }
     
     func onClickDeleteFootprint(_ item: FootPrint) {
         guard let idx = self.footprints.firstIndex(where: { listItem in
@@ -107,7 +111,7 @@ class EditTravelViewModel: BaseViewModel {
                     saveFootprints.append(item)
                 }
 
-                let item: Travel = Travel(footprints: saveFootprints, title: self.title, intro: self.intro, color: color.toTravelBackground() ?? "#FFFFFF")
+                let item: Travel = Travel(footprints: saveFootprints, title: self.title, intro: self.intro, color: color.toTravelBackground() ?? "#FFFFFF", fromDate: self.fromDate, toDate: self.toDate)
                 self.realm.add(item)
                 self.stopProgress()
                 self.dismiss()
@@ -121,7 +125,7 @@ class EditTravelViewModel: BaseViewModel {
                     saveFootprints.append(item)
                 }
 
-                let item: Travel = Travel(id: travel.id, footprints: saveFootprints, title: self.title, intro: self.intro, color: color.toTravelBackground() ?? "#FFFFFF")
+                let item: Travel = Travel(id: travel.id, footprints: saveFootprints, title: self.title, intro: self.intro, color: color.toTravelBackground() ?? "#FFFFFF", fromDate: self.fromDate, toDate: self.toDate)
                 self.realm.add(item, update: .modified)
                 self.stopProgress()
                 self.dismiss()

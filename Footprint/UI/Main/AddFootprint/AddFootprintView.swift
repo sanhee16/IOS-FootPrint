@@ -37,10 +37,11 @@ struct AddFootprintView: View, KeyboardReadable {
                             .contentShape(Rectangle())
                             .padding([.leading, .trailing], 16)
                         
+                        drawDateArea(geometry)
                         drawCategorySelectArea(geometry)
                         drawPeopleWithArea(geometry)
                         drawImageArea(geometry)
-                        drawDateArea(geometry)
+                        
                         Divider()
                             .background(Color.fColor4)
                             .padding(EdgeInsets(top: 4, leading: 16, bottom: 4, trailing: 16))
@@ -108,6 +109,7 @@ struct AddFootprintView: View, KeyboardReadable {
                 selection: $vm.createdAt,
                 displayedComponents: [.date]
             )
+            .labelsHidden()
         }
         .padding(EdgeInsets(top: 10, leading: 18, bottom: 6, trailing: 16))
     }

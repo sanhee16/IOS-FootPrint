@@ -75,8 +75,13 @@ struct EditTravelView: View {
                 )
                 .contentShape(Rectangle())
             
+            drawTitle("날짜 선택")
+            drawDateArea(geometry)
+            
             drawTitle("색상 선택")
             ColorPicker("", selection: $vm.color, supportsOpacity: false)
+                .labelsHidden()
+            
             drawTitle("노트 선택")
             ScrollView(.vertical, showsIndicators: false) {
                 ForEach($vm.footprints.wrappedValue.indices, id: \.self) { idx in
@@ -95,6 +100,23 @@ struct EditTravelView: View {
             .font(.kr12b)
             .foregroundColor(.textColor1)
             .padding(.top, 4)
+    }
+    
+    private func drawDateArea(_ geometry: GeometryProxy) -> some View {
+        return HStack(alignment: .center, spacing: 0) {
+            DatePicker(selection: $vm.fromDate, displayedComponents: [.date]) {
+            }
+            .labelsHidden()
+            Spacer()
+            Image("right_arrow")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 40.0, height: 30.0, alignment: .center)
+            Spacer()
+            DatePicker(selection: $vm.toDate, displayedComponents: [.date]) {
+            }
+            .labelsHidden()
+        }
     }
     
     private func drawSelectFootprintBox(_ geometry: GeometryProxy, item: FootPrint) -> some View {

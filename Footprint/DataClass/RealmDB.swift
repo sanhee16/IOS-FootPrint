@@ -61,8 +61,10 @@ class Travel: Object {
     @Persisted var intro: String
     @Persisted var createdAt: Int
     @Persisted var color: String
+    @Persisted var fromDate: Int
+    @Persisted var toDate: Int
     
-    convenience init(id: ObjectId? = nil, footprints: List<FootPrint>, title: String, intro: String, color: String) {
+    convenience init(id: ObjectId? = nil, footprints: List<FootPrint>, title: String, intro: String, color: String, fromDate: Date, toDate: Date) {
         self.init()
         if let id = id {
             self.id = id
@@ -72,6 +74,8 @@ class Travel: Object {
         self.intro = intro
         self.color = color
         self.createdAt = Int(Date().timeIntervalSince1970)
+        self.fromDate = Int(fromDate.timeIntervalSince1970)
+        self.toDate = Int(toDate.timeIntervalSince1970)
     }
 }
 
