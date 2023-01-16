@@ -23,9 +23,7 @@ struct TravelListView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 0) {
-                Topbar("", type: .back) {
-                    vm.onClose()
-                }
+                Topbar("", type: .none)
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 12) {
                         ForEach($vm.travels.wrappedValue.indices, id: \.self) { idx in

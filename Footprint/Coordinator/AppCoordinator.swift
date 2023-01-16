@@ -48,7 +48,7 @@ class AppCoordinator: Coordinator, Terminatable {
     //MARK: Present
     func presentMain() {
         let vc = MainView.vc(self)
-        self.present(vc, animated: false)
+        self.present(vc, animated: true)
     }
     
     func presentAddFootprintView(location: Location, type: AddFootprintType, onDismiss: @escaping ()->()) {
@@ -88,12 +88,12 @@ class AppCoordinator: Coordinator, Terminatable {
     
     func presentSettingView() {
         let vc = SettingView.vc(self)
-        self.present(vc, animated: false)
+        self.present(vc, animated: true)
     }
     
     func presentCheckPermission() {
         let vc = CheckPermissionView.vc(self)
-        self.present(vc, animated: false)
+        self.present(vc, animated: true)
     }
     
     func presentDevInfoView() {
@@ -103,27 +103,27 @@ class AppCoordinator: Coordinator, Terminatable {
     
     func presentFootprintListView() {
         let vc = FootprintListView.vc(self)
-        self.present(vc, animated: false)
+        self.present(vc, animated: true)
     }
     
     func presentPeopleWithSelectorView(type: PeopleWithEditType) {
         let vc = PeopleWithSelectorView.vc(self, type: type)
-        self.present(vc, animated: false)
+        self.present(vc, animated: true)
     }
     
     func presentPeopleEditView(_ peopleEditStruct: PeopleEditStruct, callback: @escaping ((Int?) -> ())) {
         let vc = PeopleEditView.vc(self, peopleEditStruct: peopleEditStruct, callback: callback)
-        self.present(vc, animated: false)
+        self.present(vc, animated: true)
     }
     
     func presentFootprintListFilterView(onDismiss: @escaping ()->()) {
         let vc = FootprintListFilterView.vc(self)
-        self.present(vc, animated: false, onDismiss: onDismiss)
+        self.present(vc, animated: true, onDismiss: onDismiss)
     }
     
     func presentTravelListView() {
         let vc = TravelListView.vc(self)
-        self.present(vc, animated: false)
+        self.present(vc, animated: true)
     }
     
     func presentEditTravelView(_ type: EditTravelType, onDismiss: (()->())? = nil) {
@@ -155,5 +155,20 @@ class AppCoordinator: Coordinator, Terminatable {
     func changeAddFootprintView(location: Location, type: AddFootprintType, onDismiss: @escaping ()->()) {
         let vc = AddFootprintView.vc(self, location: location, type: type)
         self.change(vc, animated: true, onDismiss: onDismiss)
+    }
+    
+    func changeFootprintListView() {
+        let vc = FootprintListView.vc(self)
+        self.change(vc, animated: true)
+    }
+    
+    func changeTravelListView() {
+        let vc = TravelListView.vc(self)
+        self.change(vc, animated: true)
+    }
+    
+    func changeSettingView() {
+        let vc = SettingView.vc(self)
+        self.change(vc, animated: true)
     }
 }

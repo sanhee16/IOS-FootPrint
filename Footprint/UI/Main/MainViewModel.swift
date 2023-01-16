@@ -132,20 +132,9 @@ class MainViewModel: BaseViewModel {
 //        self.coordinator?.presentTravelListView()
 //    }
     
-    func onClickMenu(_ type: MainMenuType) {
-        switch type {
-        case .map:
-            break
-        case .footprints:
-            self.removeCurrentMarker()
-            self.coordinator?.presentFootprintListView()
-        case .travel:
-            self.removeCurrentMarker()
-            self.coordinator?.presentTravelListView()
-        case .setting:
-            self.removeCurrentMarker()
-            self.coordinator?.presentSettingView()
-        }
+    override func onClickMenu(_ type: MainMenuType) {
+        self.removeCurrentMarker()
+        super.onClickMenu(type)
     }
     
     private func getCurrentLocation() {

@@ -26,9 +26,7 @@ struct FootprintListView: View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 0) {
                 ZStack(alignment: .leading) {
-                    Topbar("All FootPrints", type: .close) {
-                        vm.onClose()
-                    }
+                    Topbar("All FootPrints", type: .none)
                     HStack(alignment: .center, spacing: 0) {
                         Spacer()
                         Text("필터")

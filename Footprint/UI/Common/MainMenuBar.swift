@@ -17,6 +17,7 @@ public enum MainMenuType: Int, Equatable {
     case map
     case footprints
     case travel
+    case favorite
     case setting
     
     var onImage: String {
@@ -24,6 +25,7 @@ public enum MainMenuType: Int, Equatable {
         case .map: return "map_on"
         case .footprints: return "list_on"
         case .travel: return "travel_on"
+        case .favorite: return "favorite_on"
         case .setting: return "setting_on"
         }
     }
@@ -33,6 +35,7 @@ public enum MainMenuType: Int, Equatable {
         case .map: return "map_off"
         case .footprints: return "list_off"
         case .travel: return "travel_off"
+        case .favorite: return "favorite_off"
         case .setting: return "setting_off"
         }
     }
@@ -42,7 +45,18 @@ public enum MainMenuType: Int, Equatable {
         case .map: return "지도"
         case .footprints: return "노트"
         case .travel: return "여행"
+        case .favorite: return "즐겨찾기"
         case .setting: return "설정"
+        }
+    }
+    
+    var viewName: String {
+        switch self {
+        case .map: return String(describing: MainView.self)
+        case .footprints: return String(describing: FootprintListView.self)
+        case .travel: return String(describing: TravelListView.self)
+        case .favorite: return String(describing: TravelListView.self)
+        case .setting: return String(describing: SettingView.self)
         }
     }
 }
@@ -87,6 +101,7 @@ public struct MainMenuBar: View {
             case .map: self.onClick?(.map)
             case .footprints: self.onClick?(.footprints)
             case .travel: self.onClick?(.travel)
+            case .favorite: self.onClick?(.favorite)
             case .setting: self.onClick?(.setting)
             }
         }

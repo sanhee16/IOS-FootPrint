@@ -268,6 +268,7 @@
 		262740922969B4F400B47566 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				2613ED4A2973C5AC0060EF23 /* MainMenuBar.swift */,
 				2627408D29699B1900B47566 /* CategorySelector */,
 				263A97B929458516008A69F5 /* PeopleWithSelector */,
 				63B1FAF92914B312007E94B6 /* Gallery */,
@@ -619,7 +620,6 @@
 				63C81AB82963D6EF0001A70B /* DragAndDropService.swift */,
 				631D75232966619B00464F33 /* SToggleView.swift */,
 				260C87CF296AAF5C00ADCC32 /* FootprintItem.swift */,
-				2613ED4A2973C5AC0060EF23 /* MainMenuBar.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";

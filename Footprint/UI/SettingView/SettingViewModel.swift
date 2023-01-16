@@ -31,19 +31,6 @@ class SettingViewModel: BaseViewModel {
         self.dismiss()
     }
     
-    func onClickMenu(_ type: MainMenuType) {
-        switch type {
-        case .map:
-            self.coordinator?.presentMain()
-        case .footprints:
-            self.coordinator?.presentFootprintListView()
-        case .travel:
-            self.coordinator?.presentTravelListView()
-        case .setting:
-            break
-        }
-    }
-    
     //MARK: onClickSettingItem
     func onClickCheckPermission() {
         self.coordinator?.presentCheckPermission()

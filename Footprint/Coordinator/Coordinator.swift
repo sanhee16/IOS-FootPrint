@@ -111,4 +111,23 @@ class Coordinator {
             print("cannot send Email")
         }
     }
+    
+    func isCurrentVC(_ presentName: String) -> Bool {
+        guard let last = self.childViewControllers.last else { return false }
+        
+        let lastType = type(of: last)
+        let lastName = String(describing: lastType.self)
+        
+        return lastName.contains(presentName)
+    }
+    
+    func isMain() -> Bool {
+        guard let last = self.childViewControllers.last else { return false }
+        
+        let lastType = type(of: last)
+        let lastName = String(describing: lastType.self)
+        
+        return lastName.contains(MainMenuType.map.viewName)
+    }
+    
 }

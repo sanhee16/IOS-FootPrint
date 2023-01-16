@@ -34,9 +34,7 @@ struct SettingView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 0) {
-                Topbar("설정", type: .back) {
-                    vm.onClose()
-                }
+                Topbar("설정", type: .none)
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 0) {
                         drawTitle(geometry, title: "앱 설정")

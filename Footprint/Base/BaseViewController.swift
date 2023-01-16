@@ -10,7 +10,8 @@ import FittedSheets
 
 // https://yagom.net/forums/topic/detecting-background-foreground-in-viewcontroller/
 // Content는 generic type
-class BaseViewController<Content>: UIViewController, Dismissible, Nameable where Content: View { // where: 타입에 대한 제약
+class BaseViewController<Content>: UIViewController, Dismissible, Nameable where Content: View {
+    // where: 타입에 대한 제약
 //    private var observer: NSObjectProtocol?
     private var mainObserver: NSObjectProtocol?
     
