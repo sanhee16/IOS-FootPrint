@@ -35,7 +35,7 @@ class Util {
     }
     
     static func makeFootprintCopy(_ footprint: FootPrint) -> FootPrint {
-        return FootPrint(title: footprint.title, content: footprint.content, images: footprint.images, createdAt: Date(timeIntervalSince1970: Double(footprint.createdAt)), latitude: footprint.latitude, longitude: footprint.longitude, tag: footprint.tag, peopleWithIds: footprint.peopleWithIds, placeId: footprint.placeId, address: footprint.address)
+        return FootPrint(title: footprint.title, content: footprint.content, images: footprint.images, createdAt: Date(timeIntervalSince1970: Double(footprint.createdAt)), latitude: footprint.latitude, longitude: footprint.longitude, tag: footprint.tag, peopleWithIds: footprint.peopleWithIds, placeId: footprint.placeId, address: footprint.address, isStar: footprint.isStar)
     }
     
     static func makePeopleWithCopy(_ peopleWith: PeopleWith) -> PeopleWith {

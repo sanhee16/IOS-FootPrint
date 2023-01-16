@@ -24,10 +24,12 @@ public struct FootprintContents {
     var category: Category
     var peopleWith: [PeopleWith]
     var id: ObjectId
+    var isStar: Bool
 }
 
 
 class AddFootprintViewModel: BaseViewModel {
+    @Published var isStar: Bool = false
     @Published var title: String = ""
     @Published var content: String = ""
     @Published var images: [UIImage] = []
@@ -74,6 +76,7 @@ class AddFootprintViewModel: BaseViewModel {
             self.category = contents.category
             self.peopleWith = contents.peopleWith
             self.modifyId = contents.id
+            self.isStar = contents.isStar
         } else if case let .new(name, placeId, address) = self.type {
             self.title = name ?? ""
             self.placeId = placeId
@@ -187,7 +190,7 @@ class AddFootprintViewModel: BaseViewModel {
             switch self.type {
             case .new:
                 print("new")
-                let item = FootPrint(title: self.title, content: self.content, images: imageUrls, createdAt: self.createdAt, latitude: self.location.latitude, longitude: self.location.longitude, tag: category.tag, peopleWithIds: peopleWithIds, placeId: self.placeId, address: self.address)
+                let item = FootPrint(title: self.title, content: self.content, images: imageUrls, createdAt: self.createdAt, latitude: self.location.latitude, longitude: self.location.longitude, tag: category.tag, peopleWithIds: peopleWithIds, placeId: self.placeId, address: self.address, isStar: self.isStar)
                 realm.add(item)
             case .modify(content: _):
                 print("modify")
@@ -198,6 +201,7 @@ class AddFootprintViewModel: BaseViewModel {
                     item.createdAt = Int(self.createdAt.timeIntervalSince1970)
                     item.images = imageUrls
                     item.peopleWithIds = peopleWithIds
+                    item.isStar = self.isStar
                     self.realm.add(item, update: .modified)
                 }
             }

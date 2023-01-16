@@ -84,8 +84,15 @@ struct AddFootprintView: View, KeyboardReadable {
             Topbar("", type: .back) {
                 vm.onClose()
             }
-            HStack(alignment: .center, spacing: 0) {
+            HStack(alignment: .center, spacing: 6) {
                 Spacer()
+                Image($vm.isStar.wrappedValue ? "star_on" : "star_off")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(both: 20.0, aligment: .center)
+                    .onTapGesture {
+                        $vm.isStar.wrappedValue = !$vm.isStar.wrappedValue
+                    }
                 Text("저장")
                     .font(.kr12r)
                     .foregroundColor(.textColor1)

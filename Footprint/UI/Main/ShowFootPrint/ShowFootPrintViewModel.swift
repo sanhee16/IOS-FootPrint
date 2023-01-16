@@ -87,7 +87,7 @@ class ShowFootPrintViewModel: BaseViewModel {
             }
             print("peopleWith: \(peopleWith)")
             
-            self.coordinator?.changeAddFootprintView(location: self.location, type: .modify(content: FootprintContents(title: item.title, content: item.content, createdAt: Date(timeIntervalSince1970: Double(item.createdAt)), images: uiImages, category: category, peopleWith: peopleWith, id: item.id))) {
+            self.coordinator?.changeAddFootprintView(location: self.location, type: .modify(content: FootprintContents(title: item.title, content: item.content, createdAt: Date(timeIntervalSince1970: Double(item.createdAt)), images: uiImages, category: category, peopleWith: peopleWith, id: item.id, isStar: item.isStar))) {
             }
         }
     }

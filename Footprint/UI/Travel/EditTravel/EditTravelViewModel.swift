@@ -18,6 +18,7 @@ enum EditTravelType {
 
 class EditTravelViewModel: BaseViewModel {
     private let realm: Realm
+    @Published var isStar: Bool = false
     @Published var title: String = ""
     @Published var intro: String = ""
     @Published var footprints: [FootPrint] = []
@@ -26,7 +27,7 @@ class EditTravelViewModel: BaseViewModel {
     @Published var draggedItem: FootPrint? = nil
     @Published var fromDate: Date = Date()
     @Published var toDate: Date = Date()
-    private var originalItem: Travel = Travel(footprints: List(), title: "", intro: "", color: "#FFFFFF", fromDate: Date(), toDate: Date())
+    private var originalItem: Travel = Travel(footprints: List(), title: "", intro: "", color: "#FFFFFF", fromDate: Date(), toDate: Date(), isStar: false)
     let type: EditTravelType
     
     init(_ coordinator: AppCoordinator, type: EditTravelType) {
@@ -111,7 +112,7 @@ class EditTravelViewModel: BaseViewModel {
                     saveFootprints.append(item)
                 }
 
-                let item: Travel = Travel(footprints: saveFootprints, title: self.title, intro: self.intro, color: color.toTravelBackground() ?? "#FFFFFF", fromDate: self.fromDate, toDate: self.toDate)
+                let item: Travel = Travel(footprints: saveFootprints, title: self.title, intro: self.intro, color: color.toTravelBackground() ?? "#FFFFFF", fromDate: self.fromDate, toDate: self.toDate, isStar: self.isStar)
                 self.realm.add(item)
                 self.stopProgress()
                 self.dismiss()
@@ -125,7 +126,7 @@ class EditTravelViewModel: BaseViewModel {
                     saveFootprints.append(item)
                 }
 
-                let item: Travel = Travel(id: travel.id, footprints: saveFootprints, title: self.title, intro: self.intro, color: color.toTravelBackground() ?? "#FFFFFF", fromDate: self.fromDate, toDate: self.toDate)
+                let item: Travel = Travel(id: travel.id, footprints: saveFootprints, title: self.title, intro: self.intro, color: color.toTravelBackground() ?? "#FFFFFF", fromDate: self.fromDate, toDate: self.toDate, isStar: self.isStar)
                 self.realm.add(item, update: .modified)
                 self.stopProgress()
                 self.dismiss()
