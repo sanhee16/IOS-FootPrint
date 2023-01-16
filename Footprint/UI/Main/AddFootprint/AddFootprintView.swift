@@ -36,11 +36,11 @@ struct AddFootprintView: View, KeyboardReadable {
                             )
                             .contentShape(Rectangle())
                             .padding([.leading, .trailing], 16)
-
+                        
                         drawCategorySelectArea(geometry)
                         drawPeopleWithArea(geometry)
                         drawImageArea(geometry)
-                        
+                        drawDateArea(geometry)
                         Divider()
                             .background(Color.fColor4)
                             .padding(EdgeInsets(top: 4, leading: 16, bottom: 4, trailing: 16))
@@ -95,6 +95,21 @@ struct AddFootprintView: View, KeyboardReadable {
             .frame(width: geometry.size.width - 32, height: 50, alignment: .center)
         }
         .frame(width: geometry.size.width, height: 50, alignment: .center)
+    }
+    
+    private func drawDateArea(_ geometry: GeometryProxy) -> some View {
+        return HStack(alignment: .center, spacing: 0) {
+            Text("날짜 선택")
+                .font(.kr13b)
+                .foregroundColor(.gray90)
+            Spacer()
+            DatePicker(
+                "",
+                selection: $vm.createdAt,
+                displayedComponents: [.date]
+            )
+        }
+        .padding(EdgeInsets(top: 10, leading: 18, bottom: 6, trailing: 16))
     }
     
     private func drawImageArea(_ geometry: GeometryProxy) -> some View {

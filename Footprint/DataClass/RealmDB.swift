@@ -39,12 +39,12 @@ class FootPrint: Object {
     @Persisted var placeId: String?
     @Persisted var address: String?
 
-    convenience init(title: String, content: String, images: List<String>, latitude: Double, longitude: Double, tag: Int, peopleWithIds: List<Int>, placeId: String? = nil, address: String?) {
+    convenience init(title: String, content: String, images: List<String>, createdAt: Date, latitude: Double, longitude: Double, tag: Int, peopleWithIds: List<Int>, placeId: String? = nil, address: String?) {
         self.init()
         self.title = title
         self.content = content
         self.images = images
-        self.createdAt = Int(Date().timeIntervalSince1970)
+        self.createdAt = Int(createdAt.timeIntervalSince1970)
         self.latitude = latitude
         self.longitude = longitude
         self.tag = tag

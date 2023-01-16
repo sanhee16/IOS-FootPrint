@@ -19,6 +19,7 @@ public enum AddFootprintType {
 public struct FootprintContents {
     var title: String
     var content: String
+    var createdAt: Date
     var images: [UIImage]
     var category: Category
     var peopleWith: [PeopleWith]
@@ -34,6 +35,7 @@ class AddFootprintViewModel: BaseViewModel {
     @Published var isKeyboardVisible = false
     @Published var isCategoryEditMode: Bool = false
     @Published var isPeopleWithEditMode: Bool = false
+    @Published var createdAt: Date = Date()
     
 //    @Published var pinType: PinType = .star
 //    @Published var pinColor: PinColor = .pin2
@@ -65,6 +67,7 @@ class AddFootprintViewModel: BaseViewModel {
         super.init(coordinator)
         
         if case let .modify(contents) = self.type {
+            self.createdAt = contents.createdAt
             self.title = contents.title
             self.content = contents.content
             self.images = contents.images
@@ -184,7 +187,7 @@ class AddFootprintViewModel: BaseViewModel {
             switch self.type {
             case .new:
                 print("new")
-                let item = FootPrint(title: self.title, content: self.content, images: imageUrls, latitude: self.location.latitude, longitude: self.location.longitude, tag: category.tag, peopleWithIds: peopleWithIds, placeId: self.placeId, address: self.address)
+                let item = FootPrint(title: self.title, content: self.content, images: imageUrls, createdAt: self.createdAt, latitude: self.location.latitude, longitude: self.location.longitude, tag: category.tag, peopleWithIds: peopleWithIds, placeId: self.placeId, address: self.address)
                 realm.add(item)
             case .modify(content: _):
                 print("modify")
@@ -192,6 +195,7 @@ class AddFootprintViewModel: BaseViewModel {
                     item.title = self.title
                     item.tag = self.category.tag
                     item.content = self.content
+                    item.createdAt = Int(self.createdAt.timeIntervalSince1970)
                     item.images = imageUrls
                     item.peopleWithIds = peopleWithIds
                     self.realm.add(item, update: .modified)
