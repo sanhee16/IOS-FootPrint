@@ -15,10 +15,10 @@ import GoogleMaps
 
 struct GoogleMapView: UIViewRepresentable {
     
-    typealias VM = MainViewModel
+    typealias VM = MapViewModel
     @ObservedObject var vm: VM
     
-    init(_ coordinator: AppCoordinator, vm: MainViewModel) {
+    init(_ coordinator: AppCoordinator, vm: MapViewModel) {
         self.vm = vm
     }
     
