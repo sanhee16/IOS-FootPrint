@@ -50,21 +50,39 @@ struct TravelListView: View {
     }
     
     private func drawTravelItem(_ geometry: GeometryProxy, item: Travel) -> some View {
-        return VStack(alignment: .leading, spacing: 6) {
-            Text(item.title)
-                .font(.kr13b)
-                .foregroundColor(.textColor1)
+        return VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: 1) {
+                Text(item.title)
+                    .font(.kr14b)
+                    .foregroundColor(.textColor1)
+                
+                if !item.intro.isEmpty {
+                    Text(item.intro)
+                        .font(.kr12r)
+                        .foregroundColor(.gray90)
+                        .lineLimit(3)
+                        .multilineTextAlignment(.leading)
+                }
+            }
+            .padding(.bottom, 4)
             
+            HStack(alignment: .center, spacing: 2) {
+                Text(item.fromDate.getDate())
+                    .font(.kr12r)
+                    .foregroundColor(.gray90)
+                Image("right_arrow_black")
+                    .resizable()
+                    .renderingMode(.template)
+                    .foregroundColor(.gray90)
+                    .scaledToFit()
+                    .frame(width: 20.0, height: 12.0, alignment: .center)
+                Text(item.toDate.getDate())
+                    .font(.kr12r)
+                    .foregroundColor(.gray90)
+            }
             Text("일정 : \(item.footprints.count)개")
-                .font(.kr10r)
+                .font(.kr12r)
                 .foregroundColor(.gray90)
-            
-            Text(item.intro)
-                .font(.kr10r)
-                .foregroundColor(.gray90)
-                .lineLimit(3)
-                .multilineTextAlignment(.leading)
-                .padding(.top, 2)
         }
         .padding(EdgeInsets(top: 6, leading: 8, bottom: 4, trailing: 6))
         .contentShape(Rectangle())

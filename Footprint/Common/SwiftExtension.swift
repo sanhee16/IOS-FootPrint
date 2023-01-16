@@ -51,7 +51,8 @@ extension Int {
         let date = DateFormatter()
         date.locale = Locale(identifier: "ko_kr")
         date.timeZone = TimeZone(abbreviation: "KST") // "2018-03-21 18:07:27"
-        date.dateFormat = "MM월dd일 HH:mm"
+        date.dateFormat = "yyyy/MM/dd"
+//        date.dateFormat = "MM월dd일 HH:mm"
         
         let kr = date.string(from: timeToDate)
         return kr

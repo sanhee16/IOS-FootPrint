@@ -128,7 +128,7 @@ class AppCoordinator: Coordinator, Terminatable {
     
     func presentEditTravelView(_ type: EditTravelType, onDismiss: (()->())? = nil) {
         let vc = EditTravelView.vc(self, type: type)
-        self.present(vc, animated: false, onDismiss: onDismiss)
+        self.present(vc, animated: true, onDismiss: onDismiss)
     }
     
     func presentSelectFootprintsView(selectedList: [FootPrint], callback: @escaping ([FootPrint])->()) {
