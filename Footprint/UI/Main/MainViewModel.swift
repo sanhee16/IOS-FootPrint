@@ -35,10 +35,12 @@ class MainViewModel: BaseViewModel {
     @Published var showingCategories: [Int] = []
     @Published var searchText: String = ""
     @Published var searchItems: [SearchItemResponse] = []
+//    @Published var lastSearchItems: [SearchItemResponse] = []
+//    @Published var lastSearchText: String? = nil
     @Published var locationPermission: Bool = false
     @Published var searchTimer: Timer? = nil
     
-    private var currentTapMarker: GMSMarker? = nil
+    @Published var currentTapMarker: GMSMarker? = nil
     private var allFootprints: [FootPrint] = []
     
     private var mapView: GMSMapView? = nil
@@ -180,6 +182,7 @@ class MainViewModel: BaseViewModel {
 //        guard let mapView = self.mapView else { return }
         self.startProgress()
         
+        self.removeCurrentMarker()
         for item in self.markerList {
             removeMarker(marker: item.marker)
         }
@@ -326,17 +329,28 @@ class MainViewModel: BaseViewModel {
     
     func onCloseSearchBox() {
         self.stopRepeatTimer()
-        self.searchText = ""
-        self.lastSearchText = nil
-        self.searchItems = []
+        self.lastSearchText = self.searchText
+//        self.lastSearchItems = self.searchItems
+        
+//        self.searchText = ""
+//        self.searchItems = []
         self.isShowingSearchResults = false
     }
     
     func onClickSearchCancel() {
         self.stopRepeatTimer()
-        self.searchText = ""
         self.lastSearchText = nil
+//        self.lastSearchItems = []
+        
+        self.searchText = ""
         self.searchItems = []
+    }
+    
+    func onTapSearchBox() {
+        if (isShowingSearchResults == true) || (isShowingSearchResults == false && self.searchItems.isEmpty) {
+            return
+        }
+        isShowingSearchResults = true
     }
     
     private func timerStopAndTask() {

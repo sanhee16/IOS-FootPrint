@@ -77,10 +77,15 @@ struct GoogleMapView: UIViewRepresentable {
         }
         
         func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-            print("[GoogleMapView] on tap marker")
-            print("marker info: \(marker)")
-            vm.removeCurrentMarker()
-            vm.onTapMarker(Location(latitude: marker.position.latitude, longitude: marker.position.longitude))
+//            print("[GoogleMapView] on tap marker")
+//            print("marker info: \(marker)")
+            let location = Location(latitude: marker.position.latitude, longitude: marker.position.longitude)
+            if $vm.currentTapMarker.wrappedValue == marker {
+                vm.addNewMarker(location)
+            } else {
+                vm.removeCurrentMarker()
+                vm.onTapMarker(location)
+            }
             return true
         }
         

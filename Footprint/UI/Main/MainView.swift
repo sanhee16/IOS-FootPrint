@@ -193,16 +193,19 @@ struct MainView: View {
                     .foregroundColor(.gray90)
                     .accentColor(.fColor2)
                     .padding([.leading, .trailing], 8)
-                    .frame(width: geometry.size.width - 26 - 60, height: 40, alignment: .center)
+                    .frame(width: $vm.isShowingSearchResults.wrappedValue ? geometry.size.width - 20 - 60 : geometry.size.width - 20, height: 36, alignment: .center)
                     .contentShape(Rectangle())
                     .background(
                         RoundedRectangle(cornerRadius: 6)
                             .foregroundColor(Color.white.opacity(0.98))
                     )
                     .border(.fColor2, lineWidth: 1.2, cornerRadius: 6)
-                    .padding(.leading, 10)
+                    .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: $vm.isShowingSearchResults.wrappedValue ? 0 : 10))
                     .onChange(of: $vm.searchText.wrappedValue) { _ in
                         vm.enterSearchText()
+                    }
+                    .onTapGesture {
+                        vm.onTapSearchBox()
                     }
                 if !$vm.searchText.wrappedValue.isEmpty {
                     Image("close")
@@ -214,26 +217,28 @@ struct MainView: View {
                                 .foregroundColor(.fColor4)
                         )
                         .contentShape(Rectangle())
-                        .padding(.trailing, 10)
+                        .padding(.trailing, $vm.isShowingSearchResults.wrappedValue ? 8 : 18)
                         .zIndex(1)
                         .onTapGesture {
                             vm.onClickSearchCancel()
                         }
                 }
             }
-            Text("취소")
-                .font(.kr12r)
-                .foregroundColor(.white)
-                .frame(width: 60, height: 40, alignment: .center)
-                .background(
-                    RoundedRectangle(cornerRadius: 6)
-                        .foregroundColor(Color.fColor2)
-                )
-                .padding(.trailing, 10)
-                .onTapGesture {
-                    vm.onCloseSearchBox()
-                    UIApplication.shared.hideKeyborad()
-                }
+            if $vm.isShowingSearchResults.wrappedValue {
+                Text("닫기")
+                    .font(.kr13r)
+                    .foregroundColor(.white)
+                    .frame(width: 60, height: 36, alignment: .center)
+                    .background(
+                        RoundedRectangle(cornerRadius: 6)
+                            .foregroundColor(Color.fColor2)
+                    )
+                    .padding(.trailing, 10)
+                    .onTapGesture {
+                        vm.onCloseSearchBox()
+                        UIApplication.shared.hideKeyborad()
+                    }
+            }
         }
         .padding(.top, 8)
     }
