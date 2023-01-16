@@ -18,7 +18,7 @@ class SettingViewModel: BaseViewModel {
     @Published var isOnSearchBar: Bool
     
     override init(_ coordinator: AppCoordinator) {
-        self.isOnSearchBar = Util.getSettingStatus(.IS_ON_SEARCH_BAR)
+        self.isOnSearchBar = Util.getSettingStatus(.SEARCH_BAR)
         super.init(coordinator)
         print("init \(self.isOnSearchBar)")
     }

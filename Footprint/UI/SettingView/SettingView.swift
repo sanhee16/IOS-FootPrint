@@ -49,7 +49,7 @@ struct SettingView: View {
                         drawItem(geometry, title: "카테고리 편집하기") {
                             vm.onClickEditCategory()
                         }
-                        drawToggleItem(geometry, title: "검색창 표시", flag:.IS_ON_SEARCH_BAR, isOn: $vm.isOnSearchBar)
+                        drawToggleItem(geometry, title: "검색창 표시", flag:.SEARCH_BAR, isOn: $vm.isOnSearchBar)
                         drawTitle(geometry, title: "기타")
                         drawItem(geometry, title: "문의하기") {
                             vm.onClickContact()

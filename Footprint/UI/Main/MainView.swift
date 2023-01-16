@@ -4,7 +4,18 @@
 //
 //  Created by Studio-SJ on 2022/10/05.
 //
-
+/*
+ TODO: todo list
+ - 날짜기능 추가
+    1. 캘린더 추가
+    2. 노트나 여행에 기록(노트는 하루 선택, default는 기록 당시 날짜, 여행은 from-to 형식)
+ - 즐겨찾기 추가
+    1. 탭에 추가하기
+    2. 노트에만 추가
+ - 필터기능 추가
+     1. 여행 -> 1개씩만 선택
+     2. 노트 -> 카테고리 || 함께한 사람 (or 연산)
+ */
 
 import SwiftUI
 import MapKit
@@ -26,6 +37,8 @@ struct MainView: View {
     
     private var safeTop: CGFloat { get { Util.safeTop() }}
     private var safeBottom: CGFloat { get { Util.safeBottom() }}
+    private let optionHeight: CGFloat = 36.0
+    private let optionVerticalPadding: CGFloat = 8.0
     
     
     var body: some View {
@@ -72,8 +85,8 @@ struct MainView: View {
                 //Google Map
                 if let coordinator = $vm.coordinator.wrappedValue {
                     ZStack(alignment: .topTrailing) {
-                        VStack(alignment: .center, spacing: 0) {
-                            if Util.getSettingStatus(.IS_ON_SEARCH_BAR) {
+                        VStack(alignment: .center, spacing: self.optionVerticalPadding) {
+                            if Util.getSettingStatus(.SEARCH_BAR) {
                                 drawSearchBox(geometry)
                                 if $vm.isShowingSearchResults.wrappedValue == true {
                                     drawSearchItems(geometry)
@@ -193,7 +206,7 @@ struct MainView: View {
                     .foregroundColor(.gray90)
                     .accentColor(.fColor2)
                     .padding([.leading, .trailing], 8)
-                    .frame(width: $vm.isShowingSearchResults.wrappedValue ? geometry.size.width - 20 - 60 : geometry.size.width - 20, height: 36, alignment: .center)
+                    .frame(width: $vm.isShowingSearchResults.wrappedValue ? geometry.size.width - 20 - 60 : geometry.size.width - 20, height: self.optionHeight, alignment: .center)
                     .contentShape(Rectangle())
                     .background(
                         RoundedRectangle(cornerRadius: 6)
@@ -228,7 +241,7 @@ struct MainView: View {
                 Text("닫기")
                     .font(.kr13r)
                     .foregroundColor(.white)
-                    .frame(width: 60, height: 36, alignment: .center)
+                    .frame(width: 60, height: self.optionHeight, alignment: .center)
                     .background(
                         RoundedRectangle(cornerRadius: 6)
                             .foregroundColor(Color.fColor2)

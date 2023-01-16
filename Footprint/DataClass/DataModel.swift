@@ -15,14 +15,11 @@ import GoogleMaps
  MAX: 8개인데 더 늘릴려면 Defaults.settingFlag 설정해줘야함
  */
 enum SettingFlag: Int {
-    case IS_ON_SEARCH_BAR = 0
+    case SEARCH_BAR = 0
+    case FILTER = 1
     
     var option: UInt8 {
-        get {
-            switch self {
-            case .IS_ON_SEARCH_BAR: return 0b1 << self.rawValue
-            }
-        }
+        0b1 << self.rawValue
     }
 }
 
