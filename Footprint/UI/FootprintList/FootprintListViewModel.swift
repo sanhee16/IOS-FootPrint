@@ -25,7 +25,7 @@ class FootprintListViewModel: BaseViewModel {
     }
     
     func onAppear() {
-        
+        self.loadAllItems()
     }
     
     func onClose() {

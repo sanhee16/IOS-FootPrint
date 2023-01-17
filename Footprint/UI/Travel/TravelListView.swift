@@ -79,7 +79,7 @@ struct TravelListView: View {
                 .font(.kr12r)
                 .foregroundColor(.gray90)
         }
-        .padding(EdgeInsets(top: 6, leading: 8, bottom: 4, trailing: 6))
+        .padding(EdgeInsets(top: 16, leading: 12, bottom: 16, trailing: 12))
         .contentShape(Rectangle())
         .frame(
             minWidth:  geometry.size.width - 24, idealWidth:  geometry.size.width - 24, maxWidth: geometry.size.width - 24,

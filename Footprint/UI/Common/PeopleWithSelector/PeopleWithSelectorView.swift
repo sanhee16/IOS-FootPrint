@@ -115,7 +115,7 @@ struct PeopleWithSelectorView: View {
         .frame(width: geometry.size.width - 24, height: 45.0, alignment: .center)
         .background(
             RoundedRectangle(cornerRadius: 8)
-                .foregroundColor(.fColor4)
+                .foregroundColor(.white)
 //                .foregroundColor(vm.isSelectedPeople(item) ? .fColor4 : .textColor5)
         )
         .contentShape(Rectangle())

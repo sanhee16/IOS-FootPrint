@@ -107,7 +107,7 @@ struct FootprintListFilterView: View {
         }
         .padding(EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12))
         .border(
-            isSelected ? Color(hex: item.pinColor.pinColor().pinColorHex) : .lightGray02,
+            isSelected ? Color(hex: item.pinColor.pinColor().pinColorHex) : .gray30,
             lineWidth: 1.6,
             cornerRadius: 8
         )
@@ -129,11 +129,11 @@ struct FootprintListFilterView: View {
 //            }
             Text(item.name)
                 .font(.kr12r)
-                .foregroundColor(isSelected ? .fColor3 : .lightGray02)
+                .foregroundColor(isSelected ? .fColor3 : .gray30)
         }
         .padding(EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12))
         .border(
-            isSelected ? .fColor3 : .lightGray02,
+            isSelected ? .fColor3 : .gray30,
             lineWidth: 1.6,
             cornerRadius: 8
         )

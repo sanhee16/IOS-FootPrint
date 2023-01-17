@@ -76,7 +76,7 @@ public struct FootprintItem: View {
         .contentShape(Rectangle())
         .background(
             RoundedRectangle(cornerRadius: 12)
-                .foregroundColor(Color.fColor4)
+                .foregroundColor(Color.white)
         )
         .padding([.leading, .trailing], horizontalPadding)
         .onTapGesture {

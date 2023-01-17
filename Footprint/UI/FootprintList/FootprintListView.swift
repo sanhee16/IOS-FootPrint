@@ -121,13 +121,13 @@ struct FootprintListView: View {
             }
         }
         .padding([.top, .bottom], 16)
-        .frame(width: geometry.size.width - 40, alignment: .leading)
+        .frame(width: geometry.size.width - 24, alignment: .leading)
         .contentShape(Rectangle())
         .background(
             RoundedRectangle(cornerRadius: 12)
                 .foregroundColor(Color.white)
         )
-        .padding([.leading, .trailing], 20)
+        .padding([.leading, .trailing], 12)
         .onTapGesture {
             withAnimation {
                 vm.onClickItem(item)

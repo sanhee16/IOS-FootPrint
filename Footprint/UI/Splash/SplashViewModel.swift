@@ -117,7 +117,7 @@ class SplashViewModel: BaseViewModel {
             if let deleteDate = Calendar.current.date(byAdding: .day, value: Defaults.deleteDays, to: Date(timeIntervalSince1970: Double(item.deleteTime))) {
                 let deleteTime = Int(deleteDate.timeIntervalSince1970)
                 print("deleteTime: \(deleteTime) / todayTime: \(todayTime)")
-                return (deleteTime > 0) && (deleteTime < todayTime)
+                return (item.deleteTime > 0) && (deleteTime < todayTime)
             }
             return false
         }
@@ -125,7 +125,7 @@ class SplashViewModel: BaseViewModel {
             if let deleteDate = Calendar.current.date(byAdding: .day, value: Defaults.deleteDays, to: Date(timeIntervalSince1970: Double(item.deleteTime))) {
                 let deleteTime = Int(deleteDate.timeIntervalSince1970)
                 print("deleteTime: \(deleteTime) / todayTime: \(todayTime)")
-                return (deleteTime > 0) && (deleteTime < todayTime)
+                return (item.deleteTime > 0) && (deleteTime < todayTime)
             }
             return false
         }
