@@ -48,9 +48,6 @@ struct MapView: View {
                         GoogleMapView(coordinator, vm: vm)
                     }
                 }
-//                MainMenuBar(geometry: geometry, current: .map) { type in
-//                    vm.onClickMenu(type)
-//                }
             }
             .frame(width: geometry.size.width, alignment: .center)
         }

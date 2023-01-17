@@ -494,15 +494,6 @@
 			path = DevInfo;
 			sourceTree = "<group>";
 		};
-		63E5C82A297535FF00D32FD2 /* MapView */ = {
-			isa = PBXGroup;
-			children = (
-				63E5C82C2975361C00D32FD2 /* MapView.swift */,
-				63E5C82E2975362300D32FD2 /* MapViewModel.swift */,
-			);
-			path = MapView;
-			sourceTree = "<group>";
-		};
 		63E8489F295ABE5D0037D7A3 /* Travel */ = {
 			isa = PBXGroup;
 			children = (
@@ -589,6 +580,7 @@
 				262740922969B4F400B47566 /* Common */,
 				63F1325D2914A1C000B3A9E0 /* Splash */,
 				63F132852914A1C000B3A9E0 /* Main */,
+				63F292AF2976392C00D42D0E /* MapView */,
 				63E8489F295ABE5D0037D7A3 /* Travel */,
 				265924C529445BC7001E7025 /* FootprintList */,
 				262D2A00293E2B97005984DA /* SettingView */,
@@ -629,10 +621,6 @@
 		63F132852914A1C000B3A9E0 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				63E5C82A297535FF00D32FD2 /* MapView */,
-				26332174292095CD0065AE3A /* ShowFootPrint */,
-				63B1FAEB2914A838007E94B6 /* AddFootprint */,
-				63C102B62965305D0099AF6A /* GoogleMapView */,
 				63F132872914A1C000B3A9E0 /* MainView.swift */,
 				63F132862914A1C000B3A9E0 /* MainViewModel.swift */,
 				63E5C8302975367200D32FD2 /* Dump.swift */,
@@ -648,6 +636,18 @@
 				2691D9C6294EE505002825B9 /* BluePrintBottomSheetView.swift */,
 			);
 			path = BluePrint;
+			sourceTree = "<group>";
+		};
+		63F292AF2976392C00D42D0E /* MapView */ = {
+			isa = PBXGroup;
+			children = (
+				63E5C82C2975361C00D32FD2 /* MapView.swift */,
+				63E5C82E2975362300D32FD2 /* MapViewModel.swift */,
+				26332174292095CD0065AE3A /* ShowFootPrint */,
+				63B1FAEB2914A838007E94B6 /* AddFootprint */,
+				63C102B62965305D0099AF6A /* GoogleMapView */,
+			);
+			path = MapView;
 			sourceTree = "<group>";
 		};
 		63FA2385294C35BA00D31506 /* PeopleEditView */ = {

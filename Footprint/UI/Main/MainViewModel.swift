@@ -9,6 +9,8 @@ import Foundation
 import Combine
 
 class MainViewModel: BaseViewModel {
+    @Published var currentTab: MainMenuType = .footprints
+    
     override init(_ coordinator: AppCoordinator) {
         super.init(coordinator)
     }
@@ -19,5 +21,9 @@ class MainViewModel: BaseViewModel {
     
     func viewDidLoad() {
         
+    }
+    
+    func onClickTab(_ tab: MainMenuType) {
+        self.currentTab = tab
     }
 }

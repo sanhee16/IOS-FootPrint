@@ -58,9 +58,6 @@ struct SettingView: View {
                     }
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height - 50 - 60, alignment: .leading)
-                MainMenuBar(geometry: geometry, current: .setting) { type in
-                    vm.onClickMenu(type)
-                }
             }
             .sheet(isPresented: $vm.isShowingMailView) {
                 MailView(isShowing: $vm.isShowingMailView, result: $vm.result)

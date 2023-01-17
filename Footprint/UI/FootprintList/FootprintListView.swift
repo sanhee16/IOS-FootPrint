@@ -68,9 +68,6 @@ struct FootprintListView: View {
                             }
                     }
                 }
-                MainMenuBar(geometry: geometry, current: .footprints) { type in
-                    vm.onClickMenu(type)
-                }
             }
             .padding(EdgeInsets(top: safeTop, leading: 0, bottom: safeBottom, trailing: 0))
             .edgesIgnoringSafeArea(.all)

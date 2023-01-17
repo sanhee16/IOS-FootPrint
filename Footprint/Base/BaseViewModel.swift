@@ -51,37 +51,5 @@ class BaseViewModel: ObservableObject {
     public func alert(_ type: AlertType, title: String? = nil, description: String? = nil, callback: ((Bool) -> ())? = nil) {
         self.coordinator?.presentAlertView(type, title: title, description: description, callback: callback)
     }
-    
-    public func onClickMenu(_ type: MainMenuType) {
-        guard let coordinator = self.coordinator else { return }
-        if coordinator.isCurrentVC(type.viewName) {
-            print("onClickMenu: isCurrentType")
-            return
-        }
-        switch type {
-        case .map:
-            self.dismiss()
-        case .footprints:
-            if coordinator.isMain() {
-                coordinator.presentFootprintListView()
-            } else {
-                coordinator.changeFootprintListView()
-            }
-        case .travel:
-            if coordinator.isMain() {
-                coordinator.presentTravelListView()
-            } else {
-                coordinator.changeTravelListView()
-            }
-        case .favorite:
-            break
-        case .setting:
-            if coordinator.isMain() {
-                coordinator.presentSettingView()
-            } else {
-                coordinator.changeSettingView()
-            }
-        }
-    }
 }
 

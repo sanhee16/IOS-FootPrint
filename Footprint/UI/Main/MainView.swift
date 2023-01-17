@@ -7,17 +7,17 @@
 /*
  TODO: todo list
  - ✅ 날짜기능 추가
-    1. 캘린더 추가
-    2. 노트나 여행에 기록(노트는 하루 선택, default는 기록 당시 날짜, 여행은 from-to 형식)
+ 1. 캘린더 추가
+ 2. 노트나 여행에 기록(노트는 하루 선택, default는 기록 당시 날짜, 여행은 from-to 형식)
  - 즐겨찾기 추가
-    1. 탭에 추가하기
-    2. ✅ 노트에만 추가
+ 1. 탭에 추가하기
+ 2. ✅ 노트에만 추가
  - 필터기능 추가
-     1. 여행 -> 1개씩만 선택
-     2. 노트 -> 카테고리 || 함께한 사람 (or 연산)
+ 1. 여행 -> 1개씩만 선택
+ 2. 노트 -> 카테고리 || 함께한 사람 (or 연산)
  - 자동저장 기능 추가
-    1. 완료/저장 안눌러도 자동으로 바로바로 저장되게??
-    2. 이거 setting에 flag로 할까 말까
+ 1. 완료/저장 안눌러도 자동으로 바로바로 저장되게??
+ 2. 이거 setting에 flag로 할까 말까
  */
 
 import SwiftUI
@@ -56,44 +56,27 @@ struct MainView: View {
     private let ITEM_WIDTH: CGFloat = UIScreen.main.bounds.width / 4
     private let ITEM_HEIGHT: CGFloat = 60.0
     
+    
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .center, spacing: 0) {
-                TabView(selection:$index) {
+                
+                switch($vm.currentTab.wrappedValue) {
+                case .map:
                     MapView(vm: self.mapVm)
-                        .tabItem {
-                            //TODO: 이미지 사이즈 조절이 안됨 ㅠㅠㅠㅠ
-                            VStack(alignment: .center, spacing: 0) {
-//                                Image(index == 0 ? .map..onImage : item.offImage)
-//                                    .resizable()
-//                                    .scaledToFit()
-//                                    .frame(both: ICON_SIZE, aligment: .center)
-//                                Text(item.text)
-//                                    .font(index == 0 ? .kr10b : .kr10r)
-//                                    .foregroundColor(index == 0 ? .fColor3 : .textColor1)
-                            }
-                        }
-                        .tag(0)
+                case .footprints:
                     FootprintListView(vm: self.listVm)
-                        .tabItem {
-                            VStack(alignment: .center, spacing: 0) {
-                                Text("aaa")
-                                    .font(.kr20r)
-                            }
-                        }.tag(1)
+                case .travel:
                     TravelListView(vm: self.travelVm)
-                        .tabItem {
-                            VStack(alignment: .center, spacing: 0) {
-                                Text("aaa")
-                                    .font(.kr11r)
-                            }
-                        }.tag(2)
+                case .setting:
                     SettingView(vm: self.settingVm)
-                        .tabItem {
-                            
-                        }.tag(3)
+                default:
+                    SettingView(vm: self.settingVm)
                 }
-                .accentColor(.fColor3)
+                
+                MainMenuBar(geometry: geometry, current: $vm.currentTab.wrappedValue) { type in
+                    vm.onClickTab(type)
+                }
             }
             .frame(width: geometry.size.width, alignment: .center)
         }
@@ -101,4 +84,5 @@ struct MainView: View {
             vm.onAppear()
         }
     }
+    
 }
