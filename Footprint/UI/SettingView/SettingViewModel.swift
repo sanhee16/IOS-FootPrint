@@ -32,6 +32,10 @@ class SettingViewModel: BaseViewModel {
     }
     
     //MARK: onClickSettingItem
+    func onClickTrash() {
+        self.coordinator?.presentTrashView()
+    }
+    
     func onClickCheckPermission() {
         self.coordinator?.presentCheckPermission()
     }

@@ -38,6 +38,9 @@ struct SettingView: View {
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 0) {
                         drawTitle(geometry, title: "앱 설정")
+                        drawItem(geometry, title: "휴지통") {
+                            vm.onClickTrash()
+                        }
                         drawItem(geometry, title: "권한 확인하기") {
                             vm.onClickCheckPermission()
                         }

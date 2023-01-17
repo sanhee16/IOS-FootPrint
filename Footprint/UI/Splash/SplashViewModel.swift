@@ -116,14 +116,16 @@ class SplashViewModel: BaseViewModel {
         let deleteTravels = self.realm.objects(Travel.self).filter { item in
             if let deleteDate = Calendar.current.date(byAdding: .day, value: Defaults.deleteDays, to: Date(timeIntervalSince1970: Double(item.deleteTime))) {
                 let deleteTime = Int(deleteDate.timeIntervalSince1970)
-                return deleteTime > todayTime
+                print("deleteTime: \(deleteTime) / todayTime: \(todayTime)")
+                return (deleteTime > 0) && (deleteTime < todayTime)
             }
             return false
         }
         let deleteFootprints = self.realm.objects(FootPrint.self).filter { item in
             if let deleteDate = Calendar.current.date(byAdding: .day, value: Defaults.deleteDays, to: Date(timeIntervalSince1970: Double(item.deleteTime))) {
                 let deleteTime = Int(deleteDate.timeIntervalSince1970)
-                return deleteTime > todayTime
+                print("deleteTime: \(deleteTime) / todayTime: \(todayTime)")
+                return (deleteTime > 0) && (deleteTime < todayTime)
             }
             return false
         }
@@ -140,7 +142,6 @@ class SplashViewModel: BaseViewModel {
             }
         }
     }
-    
     
     // 반복 타이머 시작
     func startRepeatTimer() {
