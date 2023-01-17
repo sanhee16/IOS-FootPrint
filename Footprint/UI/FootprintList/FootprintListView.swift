@@ -49,7 +49,7 @@ struct FootprintListView: View {
                             }
                             .padding([.top, .bottom], 16)
                         }
-                        .frame(width: geometry.size.width, height: geometry.size.height - 50 - 60, alignment: .leading)
+                        .frame(width: geometry.size.width, height: geometry.size.height - 50, alignment: .leading)
                         
                         // TODO: 뺄지 말지 결정하기
                         Image("up_arrow")

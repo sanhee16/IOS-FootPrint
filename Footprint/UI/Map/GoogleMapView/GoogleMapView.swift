@@ -19,6 +19,7 @@ struct GoogleMapView: UIViewRepresentable {
     @ObservedObject var vm: VM
     
     init(_ coordinator: AppCoordinator, vm: MapViewModel) {
+        print("[MAP VIEW] google map init")
         self.vm = vm
     }
     
@@ -29,29 +30,38 @@ struct GoogleMapView: UIViewRepresentable {
     private let zoom: Float = 17.8
     
     func makeUIView(context: Self.Context) -> GMSMapView {
-        let latitude: Double = $vm.myLocation.wrappedValue?.latitude ?? 35.7532
-        let longitude: Double = $vm.myLocation.wrappedValue?.longitude ?? 127.15
-        print("longitude: \(longitude) / latitude: \(latitude)")
-        let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: zoom)
-        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
-        
-        // 지도 setting
-        // https://developers.google.com/maps/documentation/ios-sdk/controls
-        mapView.isIndoorEnabled = false
-        mapView.isMyLocationEnabled = true
-        mapView.isBuildingsEnabled = false
-        mapView.settings.compassButton = true
-        mapView.settings.myLocationButton = true
-        
+        print("[MAP VIEW] makeUIView")
+        guard let mapView = C.mapView else {
+            let mapView = vm.createMapView()
+            C.mapView = mapView
+            vm.loadAllMarkers()
+            return mapView
+        }
+//        let latitude: Double = $vm.myLocation.wrappedValue?.latitude ?? 35.7532
+//        let longitude: Double = $vm.myLocation.wrappedValue?.longitude ?? 127.15
+//        print("longitude: \(longitude) / latitude: \(latitude)")
+//        let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: zoom)
+//        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
+//
+//        // 지도 setting
+//        // https://developers.google.com/maps/documentation/ios-sdk/controls
+//        mapView.isIndoorEnabled = false
+//        mapView.isMyLocationEnabled = true
+//        mapView.isBuildingsEnabled = false
+//        mapView.settings.compassButton = true
+//        mapView.settings.myLocationButton = true
+
+//        let mapView = C.mapView
         mapView.delegate = context.coordinator
         
-        vm.initMapView(mapView)
+//        vm.initMapView(mapView)
         vm.loadAllMarkers()
         
         return mapView
     }
     
     func updateUIView(_ mapView: GMSMapView, context: Context) {
+        print("[MAP VIEW] updateUIView")
         
     }
     
@@ -60,6 +70,7 @@ struct GoogleMapView: UIViewRepresentable {
         let owner: GoogleMapView
         
         init(owner: GoogleMapView, vm: VM) {
+            print("[MAP VIEW] Coordinator init")
             self.owner = owner
             self.vm = vm
         }

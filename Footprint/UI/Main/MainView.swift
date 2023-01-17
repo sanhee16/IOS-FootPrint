@@ -50,12 +50,6 @@ struct MainView: View {
     private var safeBottom: CGFloat { get { Util.safeBottom() }}
     private let optionHeight: CGFloat = 36.0
     private let optionVerticalPadding: CGFloat = 8.0
-    @State var index = 0
-    
-    private let ICON_SIZE: CGFloat = 38.0
-    private let ITEM_WIDTH: CGFloat = UIScreen.main.bounds.width / 4
-    private let ITEM_HEIGHT: CGFloat = 60.0
-    
     
     var body: some View {
         GeometryReader { geometry in

@@ -57,7 +57,7 @@ struct SettingView: View {
                         }
                     }
                 }
-                .frame(width: geometry.size.width, height: geometry.size.height - 50 - 60, alignment: .leading)
+                .frame(width: geometry.size.width, height: geometry.size.height - 50, alignment: .leading)
             }
             .sheet(isPresented: $vm.isShowingMailView) {
                 MailView(isShowing: $vm.isShowingMailView, result: $vm.result)

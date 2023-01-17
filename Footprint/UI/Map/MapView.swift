@@ -33,19 +33,21 @@ struct MapView: View {
         GeometryReader { geometry in
             VStack(alignment: .center, spacing: 0) {
                 //Google Map
-                if let coordinator = $vm.coordinator.wrappedValue {
-                    ZStack(alignment: .topTrailing) {
-                        VStack(alignment: .center, spacing: self.optionVerticalPadding) {
-                            if Util.getSettingStatus(.SEARCH_BAR) {
-                                drawSearchBox(geometry)
-                                if $vm.isShowingSearchResults.wrappedValue == true {
-                                    drawSearchItems(geometry)
-                                        .padding(.top, 6)
+                if !$vm.isGettingLocation.wrappedValue {
+                    if let coordinator = $vm.coordinator.wrappedValue {
+                        ZStack(alignment: .topTrailing) {
+                            VStack(alignment: .center, spacing: self.optionVerticalPadding) {
+                                if Util.getSettingStatus(.SEARCH_BAR) {
+                                    drawSearchBox(geometry)
+                                    if $vm.isShowingSearchResults.wrappedValue == true {
+                                        drawSearchItems(geometry)
+                                            .padding(.top, 6)
+                                    }
                                 }
                             }
+                            .zIndex(1)
+                            GoogleMapView(coordinator, vm: vm)
                         }
-                        .zIndex(1)
-                        GoogleMapView(coordinator, vm: vm)
                     }
                 }
             }
@@ -120,7 +122,7 @@ struct MapView: View {
                     .foregroundColor(.gray90)
                     .accentColor(.fColor2)
                     .padding([.leading, .trailing], 8)
-                    .frame(width: $vm.isShowingSearchResults.wrappedValue ? geometry.size.width - 20 - 60 : geometry.size.width - 20, height: self.optionHeight, alignment: .center)
+                    .frame(width: $vm.isShowingSearchResults.wrappedValue ? geometry.size.width - 20 : geometry.size.width - 20, height: self.optionHeight, alignment: .center)
                     .contentShape(Rectangle())
                     .background(
                         RoundedRectangle(cornerRadius: 6)

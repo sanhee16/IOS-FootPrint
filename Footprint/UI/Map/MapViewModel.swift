@@ -32,17 +32,20 @@ class MapViewModel: BaseViewModel {
     @Published var searchItems: [SearchItemResponse] = []
     @Published var locationPermission: Bool = false
     @Published var searchTimer: Timer? = nil
+    @Published var isGettingLocation: Bool = true
     
     @Published var currentTapMarker: GMSMarker? = nil
     private var allFootprints: [FootPrint] = []
     
-    private var mapView: GMSMapView? = nil
+//    private var mapView: GMSMapView? = nil
     private var searchCnt: Int = 0
     private var lastSearchText: String? = nil
     private let realm: Realm
     private let googleApi: GoogleApi
     
+    
     override init(_ coordinator: AppCoordinator) {
+        print("[MAP VIEW] init")
         self.realm = try! Realm()
         self.locationManager = CLLocationManager()
         self.locationManager.allowsBackgroundLocationUpdates = true
@@ -51,7 +54,7 @@ class MapViewModel: BaseViewModel {
     }
     
     func onAppear() {
-        print("onAppear")
+        print("[MAP VIEW] onAppear")
         self.removeCurrentMarker()
         switch checkLocationPermission() {
         case .allow:
@@ -71,7 +74,7 @@ class MapViewModel: BaseViewModel {
     }
     
     func viewDidLoad() {
-        print("viewDidLoad")
+        print("[MAP VIEW] viewDidLoad")
         switch checkLocationPermission() {
         case .allow:
             self.locationPermission = true
@@ -87,7 +90,6 @@ class MapViewModel: BaseViewModel {
     }
     
     private func loadCategories() {
-        print("sandy loadCategories")
         // 객체 초기화
         self.categories = []
         
@@ -109,19 +111,22 @@ class MapViewModel: BaseViewModel {
         Defaults.showingCategories = self.showingCategories
         self.loadAllMarkers()
     }
-
-    override func onClickMenu(_ type: MainMenuType) {
-        self.removeCurrentMarker()
-        super.onClickMenu(type)
-    }
+    
+//    override func onClickMenu(_ type: MainMenuType) {
+//        self.removeCurrentMarker()
+//        super.onClickMenu(type)
+//    }
     
     private func getCurrentLocation() {
+        self.isGettingLocation = true
         if let coor = locationManager.location?.coordinate {
             let latitude = coor.latitude
             let longitude = coor.longitude
             print("위도 :\(latitude), 경도: \(longitude)")
             //            self.currenLocation = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
             self.myLocation = Location(latitude: latitude, longitude: longitude)
+            C.mapView = self.createMapView()
+            self.isGettingLocation = false
         }
     }
     
@@ -140,9 +145,27 @@ class MapViewModel: BaseViewModel {
     }
     
     // MAP
-    func initMapView(_ mapView: GMSMapView) {
-        if self.mapView != nil { return }
-        self.mapView = mapView
+    func createMapView() -> GMSMapView {
+        if let mapView = C.mapView {
+            return mapView
+        }
+        let zoom: Float = 17.8
+        print("[MAP VIEW] createMapView")
+        let latitude: Double = self.myLocation?.latitude ?? 35.7532
+        let longitude: Double = self.myLocation?.longitude ?? 127.15
+        
+        let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: zoom)
+        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
+        
+        // 지도 setting
+        // https://developers.google.com/maps/documentation/ios-sdk/controls
+        mapView.isIndoorEnabled = false
+        mapView.isMyLocationEnabled = true
+        mapView.isBuildingsEnabled = false
+        mapView.settings.compassButton = true
+        mapView.settings.myLocationButton = true
+        
+        return mapView
     }
     
     func loadAllMarkers() {
@@ -246,7 +269,7 @@ class MapViewModel: BaseViewModel {
         guard let finalMarkerImage = finalMarkerImage?.resizeImageTo(size: itemFinalSize) else { return nil }
         let finalMarkerImageView = UIImageView(image: finalMarkerImage.withRenderingMode(.alwaysOriginal))
         marker.iconView = finalMarkerImageView
-        marker.map = self.mapView
+        marker.map = C.mapView
         marker.tracksViewChanges = false
         marker.isTappable = true
         
@@ -264,10 +287,10 @@ class MapViewModel: BaseViewModel {
         guard let image = UIImage(named: "icon_mark")?.resizeImageTo(size: itemSize) else { return }
         
         marker.icon = image
-        marker.map = self.mapView
+        marker.map = C.mapView
         marker.tracksViewChanges = false
         marker.isTappable = true
-        marker.map = self.mapView
+        marker.map = C.mapView
         
         self.currentTapMarker = marker
     }
@@ -390,7 +413,7 @@ class MapViewModel: BaseViewModel {
     }
     
     private func moveCamera(_ location: CLLocationCoordinate2D) {
-        self.mapView?.animate(toLocation: location)
+        C.mapView?.animate(toLocation: location)
     }
     
     func onClickLocationPermission() {

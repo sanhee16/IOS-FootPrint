@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 class MainViewModel: BaseViewModel {
-    @Published var currentTab: MainMenuType = .footprints
+    @Published var currentTab: MainMenuType = .map
     
     override init(_ coordinator: AppCoordinator) {
         super.init(coordinator)

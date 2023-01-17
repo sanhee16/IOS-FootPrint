@@ -330,9 +330,9 @@
 		265924C529445BC7001E7025 /* FootprintList */ = {
 			isa = PBXGroup;
 			children = (
-				2691D9C1294EE49E002825B9 /* FootprintListFilter */,
 				265924C629445BD9001E7025 /* FootprintListView.swift */,
 				265924C829445BE1001E7025 /* FootprintListViewModel.swift */,
+				2691D9C1294EE49E002825B9 /* FootprintListFilter */,
 			);
 			path = FootprintList;
 			sourceTree = "<group>";
@@ -497,8 +497,10 @@
 		63E8489F295ABE5D0037D7A3 /* Travel */ = {
 			isa = PBXGroup;
 			children = (
+				63E848A6295ABEBD0037D7A3 /* TravelListView.swift */,
+				63E848A8295ABEC20037D7A3 /* TravelListViewModel.swift */,
 				63C81AB32963BD280001A70B /* SelectFootprints */,
-				63E848A5295ABEAF0037D7A3 /* TravelList */,
+				260C87C9296AADAC00ADCC32 /* ShowTravelView */,
 				63E848A4295ABEA40037D7A3 /* EditTravel */,
 			);
 			path = Travel;
@@ -511,16 +513,6 @@
 				63E848A2295ABE7E0037D7A3 /* EditTravelViewModel.swift */,
 			);
 			path = EditTravel;
-			sourceTree = "<group>";
-		};
-		63E848A5295ABEAF0037D7A3 /* TravelList */ = {
-			isa = PBXGroup;
-			children = (
-				260C87C9296AADAC00ADCC32 /* ShowTravelView */,
-				63E848A6295ABEBD0037D7A3 /* TravelListView.swift */,
-				63E848A8295ABEC20037D7A3 /* TravelListViewModel.swift */,
-			);
-			path = TravelList;
 			sourceTree = "<group>";
 		};
 		63F1323F2914A18800B3A9E0 /* Common */ = {
@@ -580,7 +572,7 @@
 				262740922969B4F400B47566 /* Common */,
 				63F1325D2914A1C000B3A9E0 /* Splash */,
 				63F132852914A1C000B3A9E0 /* Main */,
-				63F292AF2976392C00D42D0E /* MapView */,
+				63F292AF2976392C00D42D0E /* Map */,
 				63E8489F295ABE5D0037D7A3 /* Travel */,
 				265924C529445BC7001E7025 /* FootprintList */,
 				262D2A00293E2B97005984DA /* SettingView */,
@@ -638,7 +630,7 @@
 			path = BluePrint;
 			sourceTree = "<group>";
 		};
-		63F292AF2976392C00D42D0E /* MapView */ = {
+		63F292AF2976392C00D42D0E /* Map */ = {
 			isa = PBXGroup;
 			children = (
 				63E5C82C2975361C00D32FD2 /* MapView.swift */,
@@ -647,7 +639,7 @@
 				63B1FAEB2914A838007E94B6 /* AddFootprint */,
 				63C102B62965305D0099AF6A /* GoogleMapView */,
 			);
-			path = MapView;
+			path = Map;
 			sourceTree = "<group>";
 		};
 		63FA2385294C35BA00D31506 /* PeopleEditView */ = {
