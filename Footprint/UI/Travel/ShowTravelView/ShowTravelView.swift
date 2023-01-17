@@ -26,7 +26,7 @@ struct ShowTravelView: View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 0) {
                 ZStack(alignment: .center) {
-                    Topbar($vm.title.wrappedValue, type: .back) {
+                    Topbar($vm.travel.wrappedValue.title, type: .back) {
                         vm.onClose()
                     }
                     HStack(alignment: .center, spacing: 16) {
