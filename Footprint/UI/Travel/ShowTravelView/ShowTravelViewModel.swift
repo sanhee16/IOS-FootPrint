@@ -58,14 +58,16 @@ class ShowTravelViewModel: BaseViewModel {
         self.alert(.yesOrNo, title: "삭제하시겠습니까?") {[weak self] isDelete in
             guard let self = self else { return }
             if isDelete {
-                let item = self.realm.objects(Travel.self)
-                    .filter({ item in
-                        item.id == self.travel.id
-                    }).first
+                guard let item = self.realm.object(ofType: Travel.self, forPrimaryKey: self.travel.id) else {
+                    self.alert(.ok, title: "실패했습니다.")
+                    return
+                }
                 try! self.realm.write {[weak self] in
-                    guard let self = self, let item = item else { return }
-                    self.realm.delete(item)
-                    self.dismiss(animated: true)
+                    guard let self = self else { return }
+                    item.deleteTime = Int(Date().timeIntervalSince1970)
+                    self.realm.add(item, update: .modified)
+                    self.stopProgress()
+                    self.dismiss()
                 }
             } else {
                 return

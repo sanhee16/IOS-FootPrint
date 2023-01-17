@@ -206,7 +206,7 @@ class AddFootprintViewModel: BaseViewModel {
                 }
             }
             self.stopProgress()
-            self.dismiss(animated: true)
+            self.dismiss()
         }
     }
     

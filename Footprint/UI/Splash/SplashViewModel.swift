@@ -35,6 +35,7 @@ class SplashViewModel: BaseViewModel {
             locationManager.requestWhenInUseAuthorization()
             self.startRepeatTimer()
         } else {
+            deleteTask()
             self.onStartSplashTimer()
         }
     }
@@ -56,8 +57,10 @@ class SplashViewModel: BaseViewModel {
                 Category(tag: 5, name: "운동", pinType: .exercise, pinColor: PinColor.pin5),
                 Category(tag: 6, name: "카페", pinType: .coffee, pinColor: PinColor.pin6)
             ]
+            
             var showingCategories = Defaults.showingCategories
-            Defaults.SettingFlag = 0b11111111
+            Defaults.settingFlag = 0b11111111
+            Defaults.deleteDays = 30
             
             for category in categories {
                 showingCategories.append(category.tag)
@@ -103,6 +106,38 @@ class SplashViewModel: BaseViewModel {
         //TODO: 2초로 변경하기!!
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
             self?.coordinator?.presentMain()
+        }
+    }
+    
+    private func deleteTask() {
+        let today = Date()
+        let todayTime = Int(today.timeIntervalSince1970)
+        
+        let deleteTravels = self.realm.objects(Travel.self).filter { item in
+            if let deleteDate = Calendar.current.date(byAdding: .day, value: Defaults.deleteDays, to: Date(timeIntervalSince1970: Double(item.deleteTime))) {
+                let deleteTime = Int(deleteDate.timeIntervalSince1970)
+                return deleteTime > todayTime
+            }
+            return false
+        }
+        let deleteFootprints = self.realm.objects(FootPrint.self).filter { item in
+            if let deleteDate = Calendar.current.date(byAdding: .day, value: Defaults.deleteDays, to: Date(timeIntervalSince1970: Double(item.deleteTime))) {
+                let deleteTime = Int(deleteDate.timeIntervalSince1970)
+                return deleteTime > todayTime
+            }
+            return false
+        }
+        
+        try! self.realm.write {[weak self] in
+            guard let self = self else { return }
+            for i in deleteTravels {
+                print("delete travel: \(i.title)")
+                self.realm.delete(i)
+            }
+            for i in deleteFootprints {
+                print("delete footprint: \(i.title)")
+                self.realm.delete(i)
+            }
         }
     }
     

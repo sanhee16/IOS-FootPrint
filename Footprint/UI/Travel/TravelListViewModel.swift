@@ -33,7 +33,9 @@ class TravelListViewModel: BaseViewModel {
     func loadAll() {
         self.startProgress()
         self.travels.removeAll()
-        self.travels = Array(self.realm.objects(Travel.self))
+        self.travels = Array(self.realm.objects(Travel.self)).filter({ item in
+            item.deleteTime == 0
+        })
         self.stopProgress()
     }
     

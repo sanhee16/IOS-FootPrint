@@ -103,6 +103,8 @@
 		63F132AE2914A1C000B3A9E0 /* BluePrintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F1328C2914A1C000B3A9E0 /* BluePrintView.swift */; };
 		63F132AF2914A1C000B3A9E0 /* BluePrintViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F1328D2914A1C000B3A9E0 /* BluePrintViewModel.swift */; };
 		63F132B62914A56300B3A9E0 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F132B52914A56300B3A9E0 /* LottieView.swift */; };
+		63F292B2297656D700D42D0E /* TrashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F292B1297656D700D42D0E /* TrashView.swift */; };
+		63F292B4297656DF00D42D0E /* TrashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F292B3297656DF00D42D0E /* TrashViewModel.swift */; };
 		63FA2387294C35CB00D31506 /* PeopleEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FA2386294C35CB00D31506 /* PeopleEditView.swift */; };
 		63FA2389294C35E300D31506 /* PeopleEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FA2388294C35E300D31506 /* PeopleEditViewModel.swift */; };
 		63FA238E294C42C900D31506 /* SingleSelectGalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FA238D294C42C900D31506 /* SingleSelectGalleryView.swift */; };
@@ -203,6 +205,8 @@
 		63F1328C2914A1C000B3A9E0 /* BluePrintView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluePrintView.swift; sourceTree = "<group>"; };
 		63F1328D2914A1C000B3A9E0 /* BluePrintViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluePrintViewModel.swift; sourceTree = "<group>"; };
 		63F132B52914A56300B3A9E0 /* LottieView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		63F292B1297656D700D42D0E /* TrashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashView.swift; sourceTree = "<group>"; };
+		63F292B3297656DF00D42D0E /* TrashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashViewModel.swift; sourceTree = "<group>"; };
 		63FA2386294C35CB00D31506 /* PeopleEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleEditView.swift; sourceTree = "<group>"; };
 		63FA2388294C35E300D31506 /* PeopleEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleEditViewModel.swift; sourceTree = "<group>"; };
 		63FA238D294C42C900D31506 /* SingleSelectGalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSelectGalleryView.swift; sourceTree = "<group>"; };
@@ -358,6 +362,7 @@
 		631D7525296661D300464F33 /* AppSetting */ = {
 			isa = PBXGroup;
 			children = (
+				63F292B0297656C900D42D0E /* Trash */,
 				631D752B29667A2C00464F33 /* PeopleWithList */,
 				631D7526296661DE00464F33 /* MainMapOption */,
 				2619FE882940D69700D24778 /* CheckPermission */,
@@ -642,6 +647,15 @@
 			path = Map;
 			sourceTree = "<group>";
 		};
+		63F292B0297656C900D42D0E /* Trash */ = {
+			isa = PBXGroup;
+			children = (
+				63F292B1297656D700D42D0E /* TrashView.swift */,
+				63F292B3297656DF00D42D0E /* TrashViewModel.swift */,
+			);
+			path = Trash;
+			sourceTree = "<group>";
+		};
 		63FA2385294C35BA00D31506 /* PeopleEditView */ = {
 			isa = PBXGroup;
 			children = (
@@ -862,11 +876,13 @@
 				63F132972914A1C000B3A9E0 /* EmailSender.swift in Sources */,
 				260C87D0296AAF5C00ADCC32 /* FootprintItem.swift in Sources */,
 				2613ED4B2973C5AC0060EF23 /* MainMenuBar.swift in Sources */,
+				63F292B2297656D700D42D0E /* TrashView.swift in Sources */,
 				63F132472914A18800B3A9E0 /* AlertViewModel.swift in Sources */,
 				265924C729445BD9001E7025 /* FootprintListView.swift in Sources */,
 				63D7EF1F296FC1EF00D72F12 /* SError.swift in Sources */,
 				262D2A06293E310E005984DA /* MailView.swift in Sources */,
 				63FA238E294C42C900D31506 /* SingleSelectGalleryView.swift in Sources */,
+				63F292B4297656DF00D42D0E /* TrashViewModel.swift in Sources */,
 				63B1FB032914B381007E94B6 /* RealmDB.swift in Sources */,
 				63F132AA2914A1C000B3A9E0 /* MainViewModel.swift in Sources */,
 				26940CAD293C9D0F0091E996 /* ShowImageView.swift in Sources */,

@@ -64,7 +64,7 @@ class Defaults {
      8자리까지 채울 수 있음!
      */
     private static let SETTING_FLAG = "SETTING_FLAG"
-    public static var SettingFlag: UInt8? {
+    public static var settingFlag: UInt8? {
         get {
             UserDefaults.standard.object(forKey: SETTING_FLAG) as? UInt8
         }
@@ -72,4 +72,15 @@ class Defaults {
             UserDefaults.standard.setValue(value, forKey: SETTING_FLAG)
         }
     }
+    
+    
+   private static let DELETE_DAYS = "DELETE_DAYS"
+   public static var deleteDays: Int {
+       get {
+           UserDefaults.standard.integer(forKey: DELETE_DAYS)
+       }
+       set(value) {
+           UserDefaults.standard.setValue(value, forKey: DELETE_DAYS)
+       }
+   }
 }

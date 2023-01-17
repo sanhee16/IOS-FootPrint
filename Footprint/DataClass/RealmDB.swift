@@ -39,8 +39,9 @@ class FootPrint: Object {
     @Persisted var placeId: String?
     @Persisted var address: String?
     @Persisted var isStar: Bool
+    @Persisted var deleteTime: Int
 
-    convenience init(title: String, content: String, images: List<String>, createdAt: Date, latitude: Double, longitude: Double, tag: Int, peopleWithIds: List<Int>, placeId: String? = nil, address: String?, isStar: Bool) {
+    convenience init(title: String, content: String, images: List<String>, createdAt: Date, latitude: Double, longitude: Double, tag: Int, peopleWithIds: List<Int>, placeId: String? = nil, address: String?, isStar: Bool, deleteTime: Int = 0) {
         self.init()
         self.title = title
         self.content = content
@@ -53,6 +54,7 @@ class FootPrint: Object {
         self.placeId = placeId
         self.address = address
         self.isStar = isStar
+        self.deleteTime = deleteTime
     }
 }
 
@@ -66,8 +68,9 @@ class Travel: Object {
     @Persisted var fromDate: Int
     @Persisted var toDate: Int
     @Persisted var isStar: Bool
+    @Persisted var deleteTime: Int
     
-    convenience init(id: ObjectId? = nil, footprints: List<FootPrint>, title: String, intro: String, color: String, fromDate: Date, toDate: Date, isStar: Bool) {
+    convenience init(id: ObjectId? = nil, footprints: List<FootPrint>, title: String, intro: String, color: String, fromDate: Date, toDate: Date, isStar: Bool, deleteTime: Int = 0) {
         self.init()
         if let id = id {
             self.id = id
@@ -80,6 +83,7 @@ class Travel: Object {
         self.fromDate = Int(fromDate.timeIntervalSince1970)
         self.toDate = Int(toDate.timeIntervalSince1970)
         self.isStar = isStar
+        self.deleteTime = deleteTime
     }
 }
 
