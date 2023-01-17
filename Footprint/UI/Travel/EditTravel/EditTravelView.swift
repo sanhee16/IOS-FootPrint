@@ -26,20 +26,20 @@ struct EditTravelView: View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 0) {
                 ZStack(alignment: .center) {
-                    Topbar("Travel", type: .back) {
-                        vm.onClose()
+                    Topbar($vm.title.wrappedValue, type: .back) {
+                        vm.onClickSave()
                     }
-                    HStack(alignment: .center, spacing: 12) {
-                        Spacer()
-                        if !$vm.title.wrappedValue.isEmpty && !$vm.footprints.wrappedValue.isEmpty {
-                            Text("저장")
-                                .font(.kr12r)
-                                .foregroundColor(.gray90)
-                                .onTapGesture {
-                                    vm.onClickSave()
-                                }
-                        }
-                    }
+//                    HStack(alignment: .center, spacing: 12) {
+//                        Spacer()
+//                        if !$vm.title.wrappedValue.isEmpty && !$vm.footprints.wrappedValue.isEmpty {
+//                            Text("저장")
+//                                .font(.kr12r)
+//                                .foregroundColor(.gray90)
+//                                .onTapGesture {
+//                                    vm.onClickSave()
+//                                }
+//                        }
+//                    }
                     .padding([.leading, .trailing], 12)
                     .frame(width: geometry.size.width - 24, height: 50, alignment: .center)
                     

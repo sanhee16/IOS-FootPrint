@@ -82,7 +82,7 @@ struct AddFootprintView: View, KeyboardReadable {
     private func drawHeader(_ geometry: GeometryProxy) -> some View {
         return ZStack(alignment: .leading) {
             Topbar("", type: .back) {
-                vm.onClose()
+                vm.onClickSave()
             }
             HStack(alignment: .center, spacing: 6) {
                 Spacer()
@@ -93,14 +93,14 @@ struct AddFootprintView: View, KeyboardReadable {
                     .onTapGesture {
                         $vm.isStar.wrappedValue = !$vm.isStar.wrappedValue
                     }
-                Text("저장")
-                    .font(.kr12r)
-                    .foregroundColor(.textColor1)
-                    .onTapGesture {
-                        vm.onClickSave()
-                    }
+//                Text("저장")
+//                    .font(.kr12r)
+//                    .foregroundColor(.textColor1)
+//                    .onTapGesture {
+//                        vm.onClickSave()
+//                    }
             }
-            .frame(width: geometry.size.width - 32, height: 50, alignment: .center)
+            .frame(width: geometry.size.width - 24, height: 50, alignment: .center)
         }
         .frame(width: geometry.size.width, height: 50, alignment: .center)
     }

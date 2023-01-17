@@ -26,10 +26,10 @@ struct ShowTravelView: View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 0) {
                 ZStack(alignment: .center) {
-                    Topbar("Travel", type: .back) {
+                    Topbar($vm.title.wrappedValue, type: .back) {
                         vm.onClose()
                     }
-                    HStack(alignment: .center, spacing: 12) {
+                    HStack(alignment: .center, spacing: 16) {
                         Spacer()
                         Text("삭제")
                             .font(.kr12r)

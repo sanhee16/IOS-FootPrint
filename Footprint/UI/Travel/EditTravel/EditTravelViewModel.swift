@@ -94,14 +94,14 @@ class EditTravelViewModel: BaseViewModel {
     }
     
     func onClickSave() {
-        if self.title.isEmpty {
-            self.alert(.ok, title: "제목을 입력해주세요.")
-            return
-        }
-        if self.footprints.isEmpty {
-            self.alert(.ok, title: "노트를 선택해주세요.")
-            return
-        }
+//        if self.title.isEmpty {
+//            self.alert(.ok, title: "제목을 입력해주세요.")
+//            return
+//        }
+//        if self.footprints.isEmpty {
+//            self.alert(.ok, title: "노트를 선택해주세요.")
+//            return
+//        }
         
         if case .create = type {
             try! self.realm.write {[weak self] in

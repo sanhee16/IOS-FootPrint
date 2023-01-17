@@ -55,15 +55,21 @@ class ShowTravelViewModel: BaseViewModel {
     }
     
     func onClickDeleteTravel() {
-        //TODO: 오류남
-        let item = self.realm.objects(Travel.self)
-            .filter({ item in
-                item.id == self.travel.id
-            }).first
-        try! self.realm.write {[weak self] in
-            guard let self = self, let item = item else { return }
-            self.realm.delete(item)
-            self.dismiss(animated: true)
+        self.alert(.yesOrNo, title: "삭제하시겠습니까?") {[weak self] isDelete in
+            guard let self = self else { return }
+            if isDelete {
+                let item = self.realm.objects(Travel.self)
+                    .filter({ item in
+                        item.id == self.travel.id
+                    }).first
+                try! self.realm.write {[weak self] in
+                    guard let self = self, let item = item else { return }
+                    self.realm.delete(item)
+                    self.dismiss(animated: true)
+                }
+            } else {
+                return
+            }
         }
     }
     
