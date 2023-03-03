@@ -55,7 +55,7 @@ class ShowTravelViewModel: BaseViewModel {
     }
     
     func onClickDeleteTravel() {
-        self.alert(.yesOrNo, title: "삭제하시겠습니까?") {[weak self] isDelete in
+        self.alert(.yesOrNo, title: "삭제하시겠습니까?", description: "삭제된 노트는 설정 > 휴지통에 30일간 보관됩니다.") {[weak self] isDelete in
             guard let self = self else { return }
             if isDelete {
                 guard let item = self.realm.object(ofType: Travel.self, forPrimaryKey: self.travel.id) else {

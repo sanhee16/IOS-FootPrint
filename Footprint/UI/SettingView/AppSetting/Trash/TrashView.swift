@@ -65,39 +65,42 @@ struct TrashView: View {
             Topbar("휴지통", type: .back) {
                 vm.onClose()
             }
-            HStack(alignment: .center, spacing: 16) {
-                Spacer()
-                switch $vm.trashStatus.wrappedValue {
-                case .none:
-                    Text("복원")
-                        .font(.kr12r)
-                        .foregroundColor(.gray90)
-                        .onTapGesture {
-                            $vm.trashStatus.wrappedValue = .recovering
-                        }
-                    Text("비우기")
-                        .font(.kr12r)
-                        .foregroundColor(.gray90)
-                        .onTapGesture {
-                            vm.deleteAll()
-                        }
-                case .recovering:
-                    Text("취소")
-                        .font(.kr12r)
-                        .foregroundColor(.gray90)
-                        .onTapGesture {
-                            vm.cancel()
-                        }
-                    Text("복원")
-                        .font(.kr12r)
-                        .foregroundColor(.gray90)
-                        .onTapGesture {
-                            vm.recoveryItems()
-                        }
+            if !$vm.footprintItems.wrappedValue.isEmpty || !$vm.travelItems.wrappedValue.isEmpty {
+                
+                HStack(alignment: .center, spacing: 16) {
+                    Spacer()
+                    switch $vm.trashStatus.wrappedValue {
+                    case .none:
+                        Text("복원")
+                            .font(.kr12r)
+                            .foregroundColor(.gray90)
+                            .onTapGesture {
+                                $vm.trashStatus.wrappedValue = .recovering
+                            }
+                        Text("비우기")
+                            .font(.kr12r)
+                            .foregroundColor(.gray90)
+                            .onTapGesture {
+                                vm.deleteAll()
+                            }
+                    case .recovering:
+                        Text("취소")
+                            .font(.kr12r)
+                            .foregroundColor(.gray90)
+                            .onTapGesture {
+                                vm.cancel()
+                            }
+                        Text("복원")
+                            .font(.kr12r)
+                            .foregroundColor(.gray90)
+                            .onTapGesture {
+                                vm.recoveryItems()
+                            }
+                    }
                 }
+                .padding([.leading, .trailing], 12)
+                .frame(width: geometry.size.width - 24, height: 50, alignment: .center)
             }
-            .padding([.leading, .trailing], 12)
-            .frame(width: geometry.size.width - 24, height: 50, alignment: .center)
         }
     }
     

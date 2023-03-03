@@ -178,8 +178,8 @@ class MapViewModel: BaseViewModel {
         }
         self.markerList.removeAll()
         let footPrints = realm.objects(FootPrint.self)
-            .filter({[weak self] category in
-                self?.showingCategories.firstIndex(of: category.tag) != nil
+            .filter({[weak self] footprint in
+                self?.showingCategories.firstIndex(of: footprint.tag) != nil && footprint.deleteTime == 0
             })
         
         for footPrint in footPrints {
@@ -296,7 +296,11 @@ class MapViewModel: BaseViewModel {
     }
     
     func loadAllFootprints() {
+        self.allFootprints.removeAll()
         self.allFootprints = Array(self.realm.objects(FootPrint.self))
+            .filter({footprint in
+                footprint.deleteTime == 0
+            })
     }
     
     func enterSearchText() {
