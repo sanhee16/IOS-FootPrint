@@ -55,7 +55,7 @@ struct TrashView: View {
     
     private func drawTitle(_ title: String) -> some View {
         return Text(title)
-            .font(.kr11b)
+            .font(.kr12b)
             .foregroundColor(.textColor1)
             .padding(2)
     }
@@ -133,7 +133,7 @@ struct TrashView: View {
         }
         .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
         .background(
-            RoundedRectangle(cornerRadius: 12)
+            RoundedRectangle(cornerRadius: 10)
                 .foregroundColor(.white)
         )
         .contentShape(Rectangle())
@@ -160,7 +160,7 @@ struct TrashView: View {
         }
         .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
         .background(
-            RoundedRectangle(cornerRadius: 12)
+            RoundedRectangle(cornerRadius: 10)
                 .foregroundColor(.white)
         )
         .contentShape(Rectangle())
