@@ -1,5 +1,5 @@
 //
-//  AddFootprintView.swift
+//  EditFootprintView.swift
 //  Footprint
 //
 //  Created by Studio-SJ on 2022/11/04.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct AddFootprintView: View, KeyboardReadable {
-    typealias VM = AddFootprintViewModel
-    public static func vc(_ coordinator: AppCoordinator, location: Location, type: AddFootprintType, completion: (()-> Void)? = nil) -> UIViewController {
+struct EditFootprintView: View, KeyboardReadable {
+    typealias VM = EditFootprintViewModel
+    public static func vc(_ coordinator: AppCoordinator, location: Location, type: EditFootprintType, completion: (()-> Void)? = nil) -> UIViewController {
         let vm = VM.init(coordinator, location: location, type: type)
         let view = Self.init(vm: vm)
         let vc = BaseViewController(view, completion: completion)
@@ -84,7 +84,7 @@ struct AddFootprintView: View, KeyboardReadable {
             Topbar("", type: .back) {
                 vm.onClickSave()
             }
-            HStack(alignment: .center, spacing: 6) {
+            HStack(alignment: .center, spacing: 10) {
                 Spacer()
                 Image($vm.isStar.wrappedValue ? "star_on" : "star_off")
                     .resizable()
@@ -93,12 +93,14 @@ struct AddFootprintView: View, KeyboardReadable {
                     .onTapGesture {
                         $vm.isStar.wrappedValue = !$vm.isStar.wrappedValue
                     }
-//                Text("저장")
-//                    .font(.kr12r)
-//                    .foregroundColor(.textColor1)
-//                    .onTapGesture {
-//                        vm.onClickSave()
-//                    }
+                if case let .modify(item) = vm.type {
+                    Text("삭제")
+                        .font(.kr12r)
+                        .foregroundColor(.textColor1)
+                        .onTapGesture {
+                            vm.onClickDelete(item.id)
+                        }
+                }
             }
             .frame(width: geometry.size.width - 24, height: 50, alignment: .center)
         }

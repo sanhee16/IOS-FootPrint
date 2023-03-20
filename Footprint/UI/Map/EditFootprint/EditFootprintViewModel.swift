@@ -1,5 +1,5 @@
 //
-//  AddFootprintViewModel.swift
+//  EditFootprintViewModel.swift
 //  Footprint
 //
 //  Created by Studio-SJ on 2022/11/04.
@@ -11,7 +11,7 @@ import UIKit
 import Photos
 import RealmSwift
 
-public enum AddFootprintType {
+public enum EditFootprintType {
     case new(name: String?, placeId: String?, address: String?)
     case modify(content: FootprintContents)
 }
@@ -28,7 +28,7 @@ public struct FootprintContents {
 }
 
 
-class AddFootprintViewModel: BaseViewModel {
+class EditFootprintViewModel: BaseViewModel {
     @Published var isStar: Bool = false
     @Published var title: String = ""
     @Published var content: String = ""
@@ -49,16 +49,16 @@ class AddFootprintViewModel: BaseViewModel {
     
     @Published var categories: [Category] = []
     @Published var peopleWith: [PeopleWith] = []
+    @Published var type: EditFootprintType
     
 //    private var peopleWithIds: [Int] = []
     private var modifyId: ObjectId? = nil
-    private let type: AddFootprintType
     private let location: Location
     private let realm: Realm
     private var placeId: String? = nil
     private var address: String? = nil
     
-    init(_ coordinator: AppCoordinator, location: Location, type: AddFootprintType) {
+    init(_ coordinator: AppCoordinator, location: Location, type: EditFootprintType) {
         self.realm = try! Realm()
         self.location = location
         self.type = type
@@ -157,6 +157,27 @@ class AddFootprintViewModel: BaseViewModel {
                         break
                     }
                 }
+            }
+        }
+    }
+    
+    func onClickDelete(_ id: ObjectId) {
+        self.alert(.yesOrNo, title: "삭제하시겠습니까?", description: "삭제된 노트는 설정 > 휴지통에 30일간 보관됩니다.") {[weak self] isDelete in
+            guard let self = self else { return }
+            if isDelete {
+                guard let item = self.realm.object(ofType: FootPrint.self, forPrimaryKey: id) else {
+                    self.alert(.ok, title: "실패했습니다.")
+                    return
+                }
+                try! self.realm.write {[weak self] in
+                    guard let self = self else { return }
+                    item.deleteTime = Int(Date().timeIntervalSince1970)
+                    self.realm.add(item, update: .modified)
+                    self.stopProgress()
+                    self.dismiss()
+                }
+            } else {
+                return
             }
         }
     }

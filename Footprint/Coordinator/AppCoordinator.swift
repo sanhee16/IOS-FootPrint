@@ -56,8 +56,8 @@ class AppCoordinator: Coordinator, Terminatable {
         self.present(vc, animated: true)
     }
     
-    func presentAddFootprintView(location: Location, type: AddFootprintType, onDismiss: @escaping ()->()) {
-        let vc = AddFootprintView.vc(self, location: location, type: type)
+    func presentAddFootprintView(location: Location, type: EditFootprintType, onDismiss: @escaping ()->()) {
+        let vc = EditFootprintView.vc(self, location: location, type: type)
         self.present(vc, animated: true, onDismiss: onDismiss)
     }
     
@@ -162,8 +162,8 @@ class AppCoordinator: Coordinator, Terminatable {
     }
     
     //MARK: Change
-    func changeAddFootprintView(location: Location, type: AddFootprintType, onDismiss: @escaping ()->()) {
-        let vc = AddFootprintView.vc(self, location: location, type: type)
+    func changeAddFootprintView(location: Location, type: EditFootprintType, onDismiss: @escaping ()->()) {
+        let vc = EditFootprintView.vc(self, location: location, type: type)
         self.change(vc, animated: true, onDismiss: onDismiss)
     }
     

@@ -52,8 +52,8 @@
 		63B1FAE42914A6D8007E94B6 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 63B1FAE32914A6D8007E94B6 /* Lottie */; };
 		63B1FAE72914A6FE007E94B6 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 63B1FAE62914A6FE007E94B6 /* Alamofire */; };
 		63B1FAEA2914A718007E94B6 /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = 63B1FAE92914A718007E94B6 /* SwiftUIPager */; };
-		63B1FAED2914A85B007E94B6 /* AddFootprintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B1FAEC2914A85B007E94B6 /* AddFootprintView.swift */; };
-		63B1FAEF2914A861007E94B6 /* AddFootprintViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B1FAEE2914A861007E94B6 /* AddFootprintViewModel.swift */; };
+		63B1FAED2914A85B007E94B6 /* EditFootprintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B1FAEC2914A85B007E94B6 /* EditFootprintView.swift */; };
+		63B1FAEF2914A861007E94B6 /* EditFootprintViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B1FAEE2914A861007E94B6 /* EditFootprintViewModel.swift */; };
 		63B1FAF22914A91F007E94B6 /* FittedSheets in Frameworks */ = {isa = PBXBuildFile; productRef = 63B1FAF12914A91F007E94B6 /* FittedSheets */; };
 		63B1FAF52914B148007E94B6 /* SProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B1FAF42914B148007E94B6 /* SProgress.swift */; };
 		63B1FAF82914B2B0007E94B6 /* walking_dog.json in Resources */ = {isa = PBXBuildFile; fileRef = 63B1FAF72914B2B0007E94B6 /* walking_dog.json */; };
@@ -157,8 +157,8 @@
 		63209FF52913C67E00709227 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6374539829714A73000A61D5 /* loading_bar.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading_bar.json; sourceTree = "<group>"; };
 		6374539929714A73000A61D5 /* loading_circular.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading_circular.json; sourceTree = "<group>"; };
-		63B1FAEC2914A85B007E94B6 /* AddFootprintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFootprintView.swift; sourceTree = "<group>"; };
-		63B1FAEE2914A861007E94B6 /* AddFootprintViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFootprintViewModel.swift; sourceTree = "<group>"; };
+		63B1FAEC2914A85B007E94B6 /* EditFootprintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFootprintView.swift; sourceTree = "<group>"; };
+		63B1FAEE2914A861007E94B6 /* EditFootprintViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFootprintViewModel.swift; sourceTree = "<group>"; };
 		63B1FAF42914B148007E94B6 /* SProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SProgress.swift; sourceTree = "<group>"; };
 		63B1FAF72914B2B0007E94B6 /* walking_dog.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = walking_dog.json; sourceTree = "<group>"; };
 		63B1FAFA2914B31E007E94B6 /* MultiSelectGalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelectGalleryView.swift; sourceTree = "<group>"; };
@@ -433,13 +433,13 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		63B1FAEB2914A838007E94B6 /* AddFootprint */ = {
+		63B1FAEB2914A838007E94B6 /* EditFootprint */ = {
 			isa = PBXGroup;
 			children = (
-				63B1FAEC2914A85B007E94B6 /* AddFootprintView.swift */,
-				63B1FAEE2914A861007E94B6 /* AddFootprintViewModel.swift */,
+				63B1FAEC2914A85B007E94B6 /* EditFootprintView.swift */,
+				63B1FAEE2914A861007E94B6 /* EditFootprintViewModel.swift */,
 			);
-			path = AddFootprint;
+			path = EditFootprint;
 			sourceTree = "<group>";
 		};
 		63B1FAF62914B29A007E94B6 /* Resource */ = {
@@ -641,7 +641,7 @@
 				63E5C82C2975361C00D32FD2 /* MapView.swift */,
 				63E5C82E2975362300D32FD2 /* MapViewModel.swift */,
 				26332174292095CD0065AE3A /* ShowFootPrint */,
-				63B1FAEB2914A838007E94B6 /* AddFootprint */,
+				63B1FAEB2914A838007E94B6 /* EditFootprint */,
 				63C102B62965305D0099AF6A /* GoogleMapView */,
 			);
 			path = Map;
@@ -748,13 +748,13 @@
 			);
 			mainGroup = 63209FDB2913C3BF00709227;
 			packageReferences = (
-				63B1FAE22914A6D8007E94B6 /* XCRemoteSwiftPackageReference "lottie-ios.git" */,
-				63B1FAE52914A6FE007E94B6 /* XCRemoteSwiftPackageReference "Alamofire.git" */,
-				63B1FAE82914A718007E94B6 /* XCRemoteSwiftPackageReference "SwiftUIPager.git" */,
-				63B1FAF02914A91F007E94B6 /* XCRemoteSwiftPackageReference "FittedSheets.git" */,
+				63B1FAE22914A6D8007E94B6 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				63B1FAE52914A6FE007E94B6 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				63B1FAE82914A718007E94B6 /* XCRemoteSwiftPackageReference "SwiftUIPager" */,
+				63B1FAF02914A91F007E94B6 /* XCRemoteSwiftPackageReference "FittedSheets" */,
 				63B1FAFE2914B347007E94B6 /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				63B1FB042914B5CB007E94B6 /* XCRemoteSwiftPackageReference "swiftui-pull-to-refresh.git" */,
-				265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift.git" */,
+				63B1FB042914B5CB007E94B6 /* XCRemoteSwiftPackageReference "swiftui-pull-to-refresh" */,
+				265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 63209FE52913C3BF00709227 /* Products */;
 			projectDirPath = "";
@@ -851,7 +851,7 @@
 				63F132552914A19F00B3A9E0 /* AppDelegate.swift in Sources */,
 				63E848A1295ABE790037D7A3 /* EditTravelView.swift in Sources */,
 				63B1FAFB2914B31E007E94B6 /* MultiSelectGalleryView.swift in Sources */,
-				63B1FAEF2914A861007E94B6 /* AddFootprintViewModel.swift in Sources */,
+				63B1FAEF2914A861007E94B6 /* EditFootprintViewModel.swift in Sources */,
 				26C04F6D2917667F00890A76 /* SwiftUIExtension.swift in Sources */,
 				631D75242966619B00464F33 /* SToggleView.swift in Sources */,
 				26332176292095E90065AE3A /* ShowFootPrintView.swift in Sources */,
@@ -906,7 +906,7 @@
 				63C81AB52963BD3D0001A70B /* SelectFootprintsView.swift in Sources */,
 				63F132562914A19F00B3A9E0 /* SceneDelegate.swift in Sources */,
 				63C81AB92963D6EF0001A70B /* DragAndDropService.swift in Sources */,
-				63B1FAED2914A85B007E94B6 /* AddFootprintView.swift in Sources */,
+				63B1FAED2914A85B007E94B6 /* EditFootprintView.swift in Sources */,
 				265EA947291D1E1400068A5C /* DataModel.swift in Sources */,
 				260C87CB296AADB900ADCC32 /* ShowTravelView.swift in Sources */,
 				63D7EF1D296FBE2500D72F12 /* GoogleApi.swift in Sources */,
@@ -1122,7 +1122,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift.git" */ = {
+		265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
 			requirement = {
@@ -1130,7 +1130,7 @@
 				kind = branch;
 			};
 		};
-		63B1FAE22914A6D8007E94B6 /* XCRemoteSwiftPackageReference "lottie-ios.git" */ = {
+		63B1FAE22914A6D8007E94B6 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
 			requirement = {
@@ -1138,7 +1138,7 @@
 				minimumVersion = 3.0.0;
 			};
 		};
-		63B1FAE52914A6FE007E94B6 /* XCRemoteSwiftPackageReference "Alamofire.git" */ = {
+		63B1FAE52914A6FE007E94B6 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
@@ -1146,7 +1146,7 @@
 				kind = branch;
 			};
 		};
-		63B1FAE82914A718007E94B6 /* XCRemoteSwiftPackageReference "SwiftUIPager.git" */ = {
+		63B1FAE82914A718007E94B6 /* XCRemoteSwiftPackageReference "SwiftUIPager" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/fermoya/SwiftUIPager.git";
 			requirement = {
@@ -1154,7 +1154,7 @@
 				kind = branch;
 			};
 		};
-		63B1FAF02914A91F007E94B6 /* XCRemoteSwiftPackageReference "FittedSheets.git" */ = {
+		63B1FAF02914A91F007E94B6 /* XCRemoteSwiftPackageReference "FittedSheets" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/gordontucker/FittedSheets.git";
 			requirement = {
@@ -1170,7 +1170,7 @@
 				kind = branch;
 			};
 		};
-		63B1FB042914B5CB007E94B6 /* XCRemoteSwiftPackageReference "swiftui-pull-to-refresh.git" */ = {
+		63B1FB042914B5CB007E94B6 /* XCRemoteSwiftPackageReference "swiftui-pull-to-refresh" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/globulus/swiftui-pull-to-refresh.git";
 			requirement = {
@@ -1183,32 +1183,32 @@
 /* Begin XCSwiftPackageProductDependency section */
 		265A0A0B2916297E00027829 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift.git" */;
+			package = 265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = Realm;
 		};
 		265A0A0D2916297E00027829 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift.git" */;
+			package = 265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
 		};
 		63B1FAE32914A6D8007E94B6 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 63B1FAE22914A6D8007E94B6 /* XCRemoteSwiftPackageReference "lottie-ios.git" */;
+			package = 63B1FAE22914A6D8007E94B6 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
 		};
 		63B1FAE62914A6FE007E94B6 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 63B1FAE52914A6FE007E94B6 /* XCRemoteSwiftPackageReference "Alamofire.git" */;
+			package = 63B1FAE52914A6FE007E94B6 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
 		};
 		63B1FAE92914A718007E94B6 /* SwiftUIPager */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 63B1FAE82914A718007E94B6 /* XCRemoteSwiftPackageReference "SwiftUIPager.git" */;
+			package = 63B1FAE82914A718007E94B6 /* XCRemoteSwiftPackageReference "SwiftUIPager" */;
 			productName = SwiftUIPager;
 		};
 		63B1FAF12914A91F007E94B6 /* FittedSheets */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 63B1FAF02914A91F007E94B6 /* XCRemoteSwiftPackageReference "FittedSheets.git" */;
+			package = 63B1FAF02914A91F007E94B6 /* XCRemoteSwiftPackageReference "FittedSheets" */;
 			productName = FittedSheets;
 		};
 		63B1FAFF2914B347007E94B6 /* Kingfisher */ = {
@@ -1218,7 +1218,7 @@
 		};
 		63B1FB052914B5CB007E94B6 /* SwiftUIPullToRefresh */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 63B1FB042914B5CB007E94B6 /* XCRemoteSwiftPackageReference "swiftui-pull-to-refresh.git" */;
+			package = 63B1FB042914B5CB007E94B6 /* XCRemoteSwiftPackageReference "swiftui-pull-to-refresh" */;
 			productName = SwiftUIPullToRefresh;
 		};
 /* End XCSwiftPackageProductDependency section */
