@@ -27,7 +27,7 @@ struct FootprintListView: View {
             VStack(alignment: .leading, spacing: 0) {
                 ZStack(alignment: .leading) {
                     Topbar("All FootPrints", type: .none)
-                    HStack(alignment: .center, spacing: 0) {
+                    HStack(alignment: .center, spacing: 10) {
                         Spacer()
                         Text("필터")
                             .font(.kr12r)
@@ -35,8 +35,15 @@ struct FootprintListView: View {
                             .onTapGesture {
                                 vm.onClickFilter()
                             }
+                        Image($vm.isShowStarOnly.wrappedValue ? "star_on" : "star_off")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(both: 20.0, aligment: .center)
+                            .onTapGesture {
+                                vm.onClickShowStarOnly()
+                            }
                     }
-                    .padding([.leading, .trailing], 12)
+                    .padding([.leading, .trailing], 8)
                     .frame(width: geometry.size.width - 24, height: 50, alignment: .center)
                 }
                 .frame(width: geometry.size.width, height: 50, alignment: .center)

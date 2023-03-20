@@ -15,11 +15,13 @@ class FootprintListViewModel: BaseViewModel {
     
     @Published var list: [FootPrint] = []
     @Published var expandedItem: FootPrint? = nil
+    @Published var isShowStarOnly: Bool
     private let realm: Realm
     
     
     override init(_ coordinator: AppCoordinator) {
         self.realm = try! Realm()
+        self.isShowStarOnly = Defaults.isShowStarOnly
         super.init(coordinator)
         self.loadAllItems()
     }
@@ -43,10 +45,17 @@ class FootprintListViewModel: BaseViewModel {
         let filterCategoryIds: [Int] = Defaults.filterCategoryIds
         print("filterPeopleWithIds: \(filterPeopleWithIds), filterCategoryIds: \(filterCategoryIds)")
         
-        self.list = Array(self.realm.objects(FootPrint.self)
-            .filter({footprint in
-                self.isContain(items: footprint.peopleWithIds, filter: filterPeopleWithIds) && self.isContain(itemId: footprint.tag, filter: filterCategoryIds)
-            }))
+        if self.isShowStarOnly {
+            self.list = Array(self.realm.objects(FootPrint.self)
+                .filter({footprint in
+                    footprint.isStar
+                }))
+        } else {
+            self.list = Array(self.realm.objects(FootPrint.self)
+                .filter({footprint in
+                    self.isContain(items: footprint.peopleWithIds, filter: filterPeopleWithIds) && self.isContain(itemId: footprint.tag, filter: filterCategoryIds)
+                }))
+        }
     }
     
     func onClickItem(_ item: FootPrint) {
@@ -77,6 +86,14 @@ class FootprintListViewModel: BaseViewModel {
             }
         }
         return list
+    }
+    
+    func onClickShowStarOnly() {
+        let change = !self.isShowStarOnly
+        Defaults.isShowStarOnly = change
+        self.isShowStarOnly = change
+        
+        self.loadAllItems()
     }
     
     private func isContain(items: List<Int>, filter: [Int]) -> Bool {

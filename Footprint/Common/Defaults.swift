@@ -7,80 +7,49 @@
 
 import Foundation
 
+@propertyWrapper struct UserDefault<T> {
+    private let key: String
+    private let defaultValue: T
+    
+    var wrappedValue: T {
+        get { (UserDefaults.standard.object(forKey: self.key) as? T) ?? self.defaultValue }
+        set { UserDefaults.standard.setValue(newValue, forKey: key) }
+    }
+    
+    init(key: String, defaultValue: T) {
+        self.key = key
+        self.defaultValue = defaultValue
+    }
+}
+
 class Defaults {
-    private static let LAUNCH_BEFORE = "LAUNCH_BEFORE"
-    public static var launchBefore: Bool {
-        get {
-            UserDefaults.standard.bool(forKey: LAUNCH_BEFORE)
-        }
-        set(value) {
-            UserDefaults.standard.setValue(value, forKey: LAUNCH_BEFORE)
-        }
-    }
+    @UserDefault<Bool>(key: "LAUNCH_BEFORE", defaultValue: false)
+    public static var launchBefore
     
-    private static let SHOWING_CATEGORIES = "SHOWING_CATEGORIES"
-    public static var showingCategories: [Int] {
-        get {
-            (UserDefaults.standard.array(forKey: SHOWING_CATEGORIES) as? [Int]) ?? [-1]
-        }
-        set(value) {
-            UserDefaults.standard.setValue(value, forKey: SHOWING_CATEGORIES)
-        }
-    }
+    @UserDefault<[Int]>(key: "SHOWING_CATEGORIES", defaultValue: [-1])
+    public static var showingCategories
     
-    private static let IS_SET_FILTER = "IS_SET_FILTER"
-    public static var isSetFilter: Bool {
-        get {
-            UserDefaults.standard.bool(forKey: IS_SET_FILTER)
-        }
-        set(value) {
-            UserDefaults.standard.setValue(value, forKey: IS_SET_FILTER)
-        }
-    }
+    @UserDefault<Bool>(key: "IS_SET_FILTER", defaultValue: false)
+    public static var isSetFilter
     
-    private static let FILTER_PEOPLE_IDS = "FILTER_PEOPLE_IDS"
-    public static var filterPeopleIds: [Int] {
-        get {
-            (UserDefaults.standard.array(forKey: FILTER_PEOPLE_IDS) as? [Int]) ?? []
-        }
-        set(value) {
-            UserDefaults.standard.setValue(value, forKey: FILTER_PEOPLE_IDS)
-        }
-    }
+    @UserDefault<[Int]>(key: "FILTER_PEOPLE_IDS", defaultValue: [])
+    public static var filterPeopleIds
     
-    private static let FILTER_CATEGORY_IDS = "FILTER_CATEGORY_IDS"
-    public static var filterCategoryIds: [Int] {
-        get {
-            (UserDefaults.standard.array(forKey: FILTER_CATEGORY_IDS) as? [Int]) ?? []
-        }
-        set(value) {
-            UserDefaults.standard.setValue(value, forKey: FILTER_CATEGORY_IDS)
-        }
-    }
+    @UserDefault<[Int]>(key: "FILTER_CATEGORY_IDS", defaultValue: [])
+    public static var filterCategoryIds
+    
+    @UserDefault<Int>(key: "DELETE_DAYS", defaultValue: 0)
+    public static var deleteDays
+    
+    @UserDefault<Bool>(key: "IS_SHOW_STAR_ONLY", defaultValue: false)
+    public static var isShowStarOnly
     
     //MARK: Setting
     /*
      1: On, 0: Off
      8자리까지 채울 수 있음!
      */
-    private static let SETTING_FLAG = "SETTING_FLAG"
-    public static var settingFlag: UInt8? {
-        get {
-            UserDefaults.standard.object(forKey: SETTING_FLAG) as? UInt8
-        }
-        set(value) {
-            UserDefaults.standard.setValue(value, forKey: SETTING_FLAG)
-        }
-    }
+    @UserDefault<UInt8>(key: "SETTING_FLAG", defaultValue: 0)
+    public static var settingFlag
     
-    
-   private static let DELETE_DAYS = "DELETE_DAYS"
-   public static var deleteDays: Int {
-       get {
-           UserDefaults.standard.integer(forKey: DELETE_DAYS)
-       }
-       set(value) {
-           UserDefaults.standard.setValue(value, forKey: DELETE_DAYS)
-       }
-   }
 }
