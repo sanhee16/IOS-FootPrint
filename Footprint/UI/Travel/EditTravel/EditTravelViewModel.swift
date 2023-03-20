@@ -42,6 +42,8 @@ class EditTravelViewModel: BaseViewModel {
             self.color = Color(hex: travel.color)
             self.fromDate = Date(timeIntervalSince1970: Double(travel.fromDate))
             self.toDate = Date(timeIntervalSince1970: Double(travel.toDate))
+        } else if case .create = self.type {
+            self.color = self.randomColor()
         }
         self.objectWillChange.send()
     }
@@ -70,6 +72,16 @@ class EditTravelViewModel: BaseViewModel {
     func loadAllFootprints() {
         self.allFootprints = Array(self.realm.objects(FootPrint.self))
     }
+    
+    private func randomColor() -> Color {
+        Color(
+            red: .random(in: 0...1),
+            green: .random(in: 0...1),
+            blue: .random(in: 0...1),
+            opacity: 0.5
+        )
+    }
+
     
 //    func onClickAdd() {
 //        self.startProgress()
