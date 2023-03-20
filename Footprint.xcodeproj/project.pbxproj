@@ -702,7 +702,6 @@
 				63209FE02913C3BF00709227 /* Sources */,
 				63209FE12913C3BF00709227 /* Frameworks */,
 				63209FE22913C3BF00709227 /* Resources */,
-				1438933A45BECBC4F88C1AB2 /* [CP] Embed Pods Frameworks */,
 				7B65BB9D939F49EEDFC77258 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -749,13 +748,13 @@
 			);
 			mainGroup = 63209FDB2913C3BF00709227;
 			packageReferences = (
-				63B1FAE22914A6D8007E94B6 /* XCRemoteSwiftPackageReference "lottie-ios" */,
-				63B1FAE52914A6FE007E94B6 /* XCRemoteSwiftPackageReference "Alamofire" */,
-				63B1FAE82914A718007E94B6 /* XCRemoteSwiftPackageReference "SwiftUIPager" */,
-				63B1FAF02914A91F007E94B6 /* XCRemoteSwiftPackageReference "FittedSheets" */,
+				63B1FAE22914A6D8007E94B6 /* XCRemoteSwiftPackageReference "lottie-ios.git" */,
+				63B1FAE52914A6FE007E94B6 /* XCRemoteSwiftPackageReference "Alamofire.git" */,
+				63B1FAE82914A718007E94B6 /* XCRemoteSwiftPackageReference "SwiftUIPager.git" */,
+				63B1FAF02914A91F007E94B6 /* XCRemoteSwiftPackageReference "FittedSheets.git" */,
 				63B1FAFE2914B347007E94B6 /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				63B1FB042914B5CB007E94B6 /* XCRemoteSwiftPackageReference "swiftui-pull-to-refresh" */,
-				265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				63B1FB042914B5CB007E94B6 /* XCRemoteSwiftPackageReference "swiftui-pull-to-refresh.git" */,
+				265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift.git" */,
 			);
 			productRefGroup = 63209FE52913C3BF00709227 /* Products */;
 			projectDirPath = "";
@@ -784,23 +783,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1438933A45BECBC4F88C1AB2 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Footprint/Pods-Footprint-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Footprint/Pods-Footprint-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Footprint/Pods-Footprint-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		7B65BB9D939F49EEDFC77258 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1140,7 +1122,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+		265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
 			requirement = {
@@ -1148,7 +1130,7 @@
 				kind = branch;
 			};
 		};
-		63B1FAE22914A6D8007E94B6 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+		63B1FAE22914A6D8007E94B6 /* XCRemoteSwiftPackageReference "lottie-ios.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
 			requirement = {
@@ -1156,7 +1138,7 @@
 				minimumVersion = 3.0.0;
 			};
 		};
-		63B1FAE52914A6FE007E94B6 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+		63B1FAE52914A6FE007E94B6 /* XCRemoteSwiftPackageReference "Alamofire.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
@@ -1164,7 +1146,7 @@
 				kind = branch;
 			};
 		};
-		63B1FAE82914A718007E94B6 /* XCRemoteSwiftPackageReference "SwiftUIPager" */ = {
+		63B1FAE82914A718007E94B6 /* XCRemoteSwiftPackageReference "SwiftUIPager.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/fermoya/SwiftUIPager.git";
 			requirement = {
@@ -1172,7 +1154,7 @@
 				kind = branch;
 			};
 		};
-		63B1FAF02914A91F007E94B6 /* XCRemoteSwiftPackageReference "FittedSheets" */ = {
+		63B1FAF02914A91F007E94B6 /* XCRemoteSwiftPackageReference "FittedSheets.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/gordontucker/FittedSheets.git";
 			requirement = {
@@ -1188,7 +1170,7 @@
 				kind = branch;
 			};
 		};
-		63B1FB042914B5CB007E94B6 /* XCRemoteSwiftPackageReference "swiftui-pull-to-refresh" */ = {
+		63B1FB042914B5CB007E94B6 /* XCRemoteSwiftPackageReference "swiftui-pull-to-refresh.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/globulus/swiftui-pull-to-refresh.git";
 			requirement = {
@@ -1201,32 +1183,32 @@
 /* Begin XCSwiftPackageProductDependency section */
 		265A0A0B2916297E00027829 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			package = 265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift.git" */;
 			productName = Realm;
 		};
 		265A0A0D2916297E00027829 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			package = 265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift.git" */;
 			productName = RealmSwift;
 		};
 		63B1FAE32914A6D8007E94B6 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 63B1FAE22914A6D8007E94B6 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			package = 63B1FAE22914A6D8007E94B6 /* XCRemoteSwiftPackageReference "lottie-ios.git" */;
 			productName = Lottie;
 		};
 		63B1FAE62914A6FE007E94B6 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 63B1FAE52914A6FE007E94B6 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			package = 63B1FAE52914A6FE007E94B6 /* XCRemoteSwiftPackageReference "Alamofire.git" */;
 			productName = Alamofire;
 		};
 		63B1FAE92914A718007E94B6 /* SwiftUIPager */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 63B1FAE82914A718007E94B6 /* XCRemoteSwiftPackageReference "SwiftUIPager" */;
+			package = 63B1FAE82914A718007E94B6 /* XCRemoteSwiftPackageReference "SwiftUIPager.git" */;
 			productName = SwiftUIPager;
 		};
 		63B1FAF12914A91F007E94B6 /* FittedSheets */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 63B1FAF02914A91F007E94B6 /* XCRemoteSwiftPackageReference "FittedSheets" */;
+			package = 63B1FAF02914A91F007E94B6 /* XCRemoteSwiftPackageReference "FittedSheets.git" */;
 			productName = FittedSheets;
 		};
 		63B1FAFF2914B347007E94B6 /* Kingfisher */ = {
@@ -1236,7 +1218,7 @@
 		};
 		63B1FB052914B5CB007E94B6 /* SwiftUIPullToRefresh */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 63B1FB042914B5CB007E94B6 /* XCRemoteSwiftPackageReference "swiftui-pull-to-refresh" */;
+			package = 63B1FB042914B5CB007E94B6 /* XCRemoteSwiftPackageReference "swiftui-pull-to-refresh.git" */;
 			productName = SwiftUIPullToRefresh;
 		};
 /* End XCSwiftPackageProductDependency section */

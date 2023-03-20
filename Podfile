@@ -6,7 +6,7 @@ target 'Footprint' do
 use_frameworks!
 
 # Pods for Footprint
-pod 'NMapsMap'
+# pod 'NMapsMap'
 pod 'GoogleMaps', '7.2.0'
 pod 'GooglePlaces', '7.2.0'
 
