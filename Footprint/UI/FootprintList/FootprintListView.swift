@@ -87,10 +87,17 @@ struct FootprintListView: View {
     
     private func drawFootprintItem(_ geometry: GeometryProxy, item: FootPrint) -> some View {
         return VStack(alignment: .leading, spacing: 8) {
-            HStack(alignment: .center, spacing: 0) {
+            HStack(alignment: .center, spacing: 6) {
                 Text(item.title)
                     .font(.kr14b)
                     .foregroundColor(.textColor1)
+                if item.isStar {
+                    Image("star_on")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(both: 12.0, aligment: .center)
+                }
+
                 Spacer()
                 Image($vm.expandedItem.wrappedValue == item ? "up_arrow" : "down_arrow")
                     .resizable()

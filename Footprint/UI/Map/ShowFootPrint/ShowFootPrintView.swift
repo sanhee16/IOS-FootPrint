@@ -47,18 +47,27 @@ struct ShowFootPrintView: View {
                         drawPeopleWith(geometry, items: vm.getPeopleWith(Array(item.peopleWithIds)))
                     }
                     drawCategory(geometry, item: item)
-                    Text(item.title)
-                        .font(.kr14b)
-                        .foregroundColor(Color.textColor1)
-                        .multilineTextAlignment(.leading)
-                        .padding(EdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 8))
-                        .frame(width: geometry.size.width - 32, alignment: .leading)
-                        .background(
-                            RoundedRectangle(cornerRadius: 6)
-                                .foregroundColor(.inputBoxColor)
-                        )
-                        .contentShape(Rectangle())
-                        .padding([.leading, .trailing], 16)
+                    HStack(alignment: .center, spacing: 6) {
+                        Text(item.title)
+                            .font(.kr15b)
+                            .foregroundColor(Color.textColor1)
+                            .multilineTextAlignment(.leading)
+                        if item.isStar {
+                            Image("star_on")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(both: 12.0, aligment: .center)
+                        }
+                    }
+                    .padding(EdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 8))
+                    .frame(width: geometry.size.width - 32, alignment: .leading)
+//                    .background(
+//                        RoundedRectangle(cornerRadius: 6)
+//                            .foregroundColor(.inputBoxColor)
+//                    )
+                    .contentShape(Rectangle())
+                    .padding([.leading, .trailing], 16)
+                    
                     HStack(alignment: .center, spacing: 0) {
                         Spacer()
                         Text(item.createdAt.getDate())
