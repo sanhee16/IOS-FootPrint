@@ -115,6 +115,7 @@ struct MapView: View {
     }
     
     private func drawSearchBox(_ geometry: GeometryProxy) -> some View {
+        let searchBoxWidth: CGFloat = 60.0
         return HStack(alignment: .center, spacing: 6) {
             ZStack(alignment: .trailing) {
                 TextField("", text: $vm.searchText)
@@ -122,8 +123,15 @@ struct MapView: View {
                     .foregroundColor(.gray90)
                     .accentColor(.fColor2)
                     .padding([.leading, .trailing], 8)
-                    .frame(width: $vm.isShowingSearchResults.wrappedValue ? geometry.size.width - 20 : geometry.size.width - 20, height: self.optionHeight, alignment: .center)
-                    .contentShape(Rectangle())
+                    .frame(
+                        width: $vm.isShowingSearchResults.wrappedValue
+                        ? geometry.size.width - 20 - searchBoxWidth - 10
+                        : geometry.size.width - 20,
+                        height: self.optionHeight,
+                        alignment: .center
+                    )
+                    .contentShape(Rectangle()
+                    )
                     .background(
                         RoundedRectangle(cornerRadius: 6)
                             .foregroundColor(Color.white.opacity(0.98))
@@ -139,7 +147,7 @@ struct MapView: View {
                 if !$vm.searchText.wrappedValue.isEmpty {
                     Image("close")
                         .resizable()
-                        .frame(both: 10.0, aligment: .center)
+                        .frame(both: 12.0, aligment: .center)
                         .padding(6)
                         .background(
                             Circle()
@@ -154,10 +162,10 @@ struct MapView: View {
                 }
             }
             if $vm.isShowingSearchResults.wrappedValue {
-                Text("닫기")
+                Text("취소")
                     .font(.kr13r)
                     .foregroundColor(.white)
-                    .frame(width: 60, height: self.optionHeight, alignment: .center)
+                    .frame(width: searchBoxWidth, height: self.optionHeight, alignment: .center)
                     .background(
                         RoundedRectangle(cornerRadius: 6)
                             .foregroundColor(Color.fColor2)
