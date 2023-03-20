@@ -32,8 +32,9 @@ struct TrashView: View {
                             let item = $vm.footprintItems.wrappedValue[idx]
                             drawTrashFootprint(geometry, item: item)
                         }
+                        Divider()
+                            .padding([.top, .bottom], 12)
                         drawTitle("Travels")
-                            .padding(.top, 2)
                         ForEach($vm.travelItems.wrappedValue.indices, id: \.self) { idx in
                             let item = $vm.travelItems.wrappedValue[idx]
                             drawTrashTravel(geometry, item: item)
@@ -55,9 +56,9 @@ struct TrashView: View {
     
     private func drawTitle(_ title: String) -> some View {
         return Text(title)
-            .font(.kr12b)
+            .font(.kr14b)
             .foregroundColor(.textColor1)
-            .padding(2)
+            .padding(EdgeInsets(top: 0, leading: 2, bottom: 4, trailing: 0))
     }
     
     private func drawHeader(_ geometry: GeometryProxy) -> some View {
@@ -114,17 +115,17 @@ struct TrashView: View {
                 Text(item.item.createdAt.getDate())
                     .font(.kr10r)
                     .foregroundColor(.gray90)
-                if let category = item.item.tag.getCategory() {
-                    HStack(alignment: .center, spacing: 6) {
-                        Image(category.pinType.pinType().pinWhite)
-                            .resizable()
-                            .frame(both: 18.0, aligment: .center)
-                            .colorMultiply(Color(hex: category.pinColor.pinColor().pinColorHex))
-                        Text(category.name)
-                            .font(.kr12r)
-                            .foregroundColor(Color(hex: category.pinColor.pinColor().pinColorHex))
-                    }
-                }
+//                if let category = item.item.tag.getCategory() {
+//                    HStack(alignment: .center, spacing: 6) {
+//                        Image(category.pinType.pinType().pinWhite)
+//                            .resizable()
+//                            .frame(both: 18.0, aligment: .center)
+//                            .colorMultiply(Color(hex: category.pinColor.pinColor().pinColorHex))
+//                        Text(category.name)
+//                            .font(.kr12r)
+//                            .foregroundColor(Color(hex: category.pinColor.pinColor().pinColorHex))
+//                    }
+//                }
             }
             Spacer()
             if $vm.trashStatus.wrappedValue == .recovering {
@@ -171,6 +172,9 @@ struct TrashView: View {
     
     private func CheckBox(_ isSelected: Bool) -> some View {
         return Image(systemName: isSelected ? "checkmark.square.fill" : "square")
+            .resizable()
+            .frame(both: 16.0, aligment: .center)
             .foregroundColor(isSelected ? .fColor3 : .gray60)
+            .padding(.trailing, 10)
     }
 }
