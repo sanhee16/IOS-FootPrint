@@ -73,27 +73,23 @@ struct TrashView: View {
                     switch $vm.trashStatus.wrappedValue {
                     case .none:
                         Text("복원")
-                            .font(.kr12r)
-                            .foregroundColor(.gray90)
+                            .menuText()
                             .onTapGesture {
                                 $vm.trashStatus.wrappedValue = .recovering
                             }
                         Text("비우기")
-                            .font(.kr12r)
-                            .foregroundColor(.gray90)
+                            .menuText()
                             .onTapGesture {
                                 vm.deleteAll()
                             }
                     case .recovering:
                         Text("취소")
-                            .font(.kr12r)
-                            .foregroundColor(.gray90)
+                            .menuText()
                             .onTapGesture {
                                 vm.cancel()
                             }
                         Text("복원")
-                            .font(.kr12r)
-                            .foregroundColor(.gray90)
+                            .menuText()
                             .onTapGesture {
                                 vm.recoveryItems()
                             }

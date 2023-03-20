@@ -69,6 +69,7 @@
 		63C81AB92963D6EF0001A70B /* DragAndDropService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C81AB82963D6EF0001A70B /* DragAndDropService.swift */; };
 		63C8CCF62941D60400BB861D /* DevInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C8CCF52941D60400BB861D /* DevInfoView.swift */; };
 		63C8CCF82941D60D00BB861D /* DevInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C8CCF72941D60D00BB861D /* DevInfoViewModel.swift */; };
+		63D5EF6A29C861BB000ACBC2 /* SwiftUIViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D5EF6929C861BB000ACBC2 /* SwiftUIViewModifier.swift */; };
 		63D7EF1D296FBE2500D72F12 /* GoogleApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D7EF1C296FBE2500D72F12 /* GoogleApi.swift */; };
 		63D7EF1F296FC1EF00D72F12 /* SError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D7EF1E296FC1EF00D72F12 /* SError.swift */; };
 		63E2756929502DFA00E4AABC /* PinchZoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E2756829502DFA00E4AABC /* PinchZoom.swift */; };
@@ -171,6 +172,7 @@
 		63C81AB82963D6EF0001A70B /* DragAndDropService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragAndDropService.swift; sourceTree = "<group>"; };
 		63C8CCF52941D60400BB861D /* DevInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevInfoView.swift; sourceTree = "<group>"; };
 		63C8CCF72941D60D00BB861D /* DevInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevInfoViewModel.swift; sourceTree = "<group>"; };
+		63D5EF6929C861BB000ACBC2 /* SwiftUIViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIViewModifier.swift; sourceTree = "<group>"; };
 		63D7EF1C296FBE2500D72F12 /* GoogleApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleApi.swift; sourceTree = "<group>"; };
 		63D7EF1E296FC1EF00D72F12 /* SError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SError.swift; sourceTree = "<group>"; };
 		63E2756829502DFA00E4AABC /* PinchZoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchZoom.swift; sourceTree = "<group>"; };
@@ -531,6 +533,7 @@
 				264B70BF291F8E9C00CDAF9F /* C.swift */,
 				2639921E291FEBA60049F047 /* KeyboardReadable.swift */,
 				63D7EF1E296FC1EF00D72F12 /* SError.swift */,
+				63D5EF6929C861BB000ACBC2 /* SwiftUIViewModifier.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -854,6 +857,7 @@
 				63B1FAEF2914A861007E94B6 /* EditFootprintViewModel.swift in Sources */,
 				26C04F6D2917667F00890A76 /* SwiftUIExtension.swift in Sources */,
 				631D75242966619B00464F33 /* SToggleView.swift in Sources */,
+				63D5EF6A29C861BB000ACBC2 /* SwiftUIViewModifier.swift in Sources */,
 				26332176292095E90065AE3A /* ShowFootPrintView.swift in Sources */,
 				63F132972914A1C000B3A9E0 /* EmailSender.swift in Sources */,
 				260C87D0296AAF5C00ADCC32 /* FootprintItem.swift in Sources */,
