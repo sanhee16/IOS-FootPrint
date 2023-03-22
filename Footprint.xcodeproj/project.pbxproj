@@ -69,6 +69,9 @@
 		63C81AB92963D6EF0001A70B /* DragAndDropService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C81AB82963D6EF0001A70B /* DragAndDropService.swift */; };
 		63C8CCF62941D60400BB861D /* DevInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C8CCF52941D60400BB861D /* DevInfoView.swift */; };
 		63C8CCF82941D60D00BB861D /* DevInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C8CCF72941D60D00BB861D /* DevInfoViewModel.swift */; };
+		63D32FBF29CA8EBE0049F567 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 63D32FBE29CA8EBE0049F567 /* FirebaseFirestore */; };
+		63D32FC129CA8EBE0049F567 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 63D32FC029CA8EBE0049F567 /* FirebaseFirestoreSwift */; };
+		63D32FC329CA8ED20049F567 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63D32FC229CA8ED20049F567 /* GoogleService-Info.plist */; };
 		63D5EF6A29C861BB000ACBC2 /* SwiftUIViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D5EF6929C861BB000ACBC2 /* SwiftUIViewModifier.swift */; };
 		63D7EF1D296FBE2500D72F12 /* GoogleApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D7EF1C296FBE2500D72F12 /* GoogleApi.swift */; };
 		63D7EF1F296FC1EF00D72F12 /* SError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D7EF1E296FC1EF00D72F12 /* SError.swift */; };
@@ -172,6 +175,7 @@
 		63C81AB82963D6EF0001A70B /* DragAndDropService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragAndDropService.swift; sourceTree = "<group>"; };
 		63C8CCF52941D60400BB861D /* DevInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevInfoView.swift; sourceTree = "<group>"; };
 		63C8CCF72941D60D00BB861D /* DevInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevInfoViewModel.swift; sourceTree = "<group>"; };
+		63D32FC229CA8ED20049F567 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		63D5EF6929C861BB000ACBC2 /* SwiftUIViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIViewModifier.swift; sourceTree = "<group>"; };
 		63D7EF1C296FBE2500D72F12 /* GoogleApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleApi.swift; sourceTree = "<group>"; };
 		63D7EF1E296FC1EF00D72F12 /* SError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SError.swift; sourceTree = "<group>"; };
@@ -224,7 +228,9 @@
 				265A0A0E2916297E00027829 /* RealmSwift in Frameworks */,
 				265A0A0C2916297E00027829 /* Realm in Frameworks */,
 				63B1FAF22914A91F007E94B6 /* FittedSheets in Frameworks */,
+				63D32FBF29CA8EBE0049F567 /* FirebaseFirestore in Frameworks */,
 				63B1FAE42914A6D8007E94B6 /* Lottie in Frameworks */,
+				63D32FC129CA8EBE0049F567 /* FirebaseFirestoreSwift in Frameworks */,
 				63B1FB062914B5CB007E94B6 /* SwiftUIPullToRefresh in Frameworks */,
 				63B1FAE72914A6FE007E94B6 /* Alamofire in Frameworks */,
 				63B1FAEA2914A718007E94B6 /* SwiftUIPager in Frameworks */,
@@ -449,6 +455,7 @@
 			children = (
 				63209FEB2913C3C000709227 /* Assets.xcassets */,
 				6374539829714A73000A61D5 /* loading_bar.json */,
+				63D32FC229CA8ED20049F567 /* GoogleService-Info.plist */,
 				6374539929714A73000A61D5 /* loading_circular.json */,
 				2606B4CC29437BD10012349A /* loading.json */,
 				63B1FAF72914B2B0007E94B6 /* walking_dog.json */,
@@ -721,6 +728,8 @@
 				63B1FB052914B5CB007E94B6 /* SwiftUIPullToRefresh */,
 				265A0A0B2916297E00027829 /* Realm */,
 				265A0A0D2916297E00027829 /* RealmSwift */,
+				63D32FBE29CA8EBE0049F567 /* FirebaseFirestore */,
+				63D32FC029CA8EBE0049F567 /* FirebaseFirestoreSwift */,
 			);
 			productName = Footprint;
 			productReference = 63209FE42913C3BF00709227 /* Footprint.app */;
@@ -758,6 +767,7 @@
 				63B1FAFE2914B347007E94B6 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				63B1FB042914B5CB007E94B6 /* XCRemoteSwiftPackageReference "swiftui-pull-to-refresh" */,
 				265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				63D32FBD29CA8EBE0049F567 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 63209FE52913C3BF00709227 /* Products */;
 			projectDirPath = "";
@@ -774,6 +784,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6374539A29714A73000A61D5 /* loading_bar.json in Resources */,
+				63D32FC329CA8ED20049F567 /* GoogleService-Info.plist in Resources */,
 				63209FEF2913C3C000709227 /* Preview Assets.xcassets in Resources */,
 				63209FEC2913C3C000709227 /* Assets.xcassets in Resources */,
 				26BD8FCB29694CE5005F7E5C /* ApiInfo.plist in Resources */,
@@ -1182,6 +1193,14 @@
 				kind = branch;
 			};
 		};
+		63D32FBD29CA8EBE0049F567 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1224,6 +1243,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 63B1FB042914B5CB007E94B6 /* XCRemoteSwiftPackageReference "swiftui-pull-to-refresh" */;
 			productName = SwiftUIPullToRefresh;
+		};
+		63D32FBE29CA8EBE0049F567 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 63D32FBD29CA8EBE0049F567 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		63D32FC029CA8EBE0049F567 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 63D32FBD29CA8EBE0049F567 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
