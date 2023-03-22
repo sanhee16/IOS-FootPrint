@@ -72,6 +72,8 @@
 		63D32FBF29CA8EBE0049F567 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 63D32FBE29CA8EBE0049F567 /* FirebaseFirestore */; };
 		63D32FC129CA8EBE0049F567 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 63D32FC029CA8EBE0049F567 /* FirebaseFirestoreSwift */; };
 		63D32FC329CA8ED20049F567 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63D32FC229CA8ED20049F567 /* GoogleService-Info.plist */; };
+		63D32FC629CA92B60049F567 /* PremiumCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D32FC529CA92B60049F567 /* PremiumCodeView.swift */; };
+		63D32FC829CA92BF0049F567 /* PremiumCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D32FC729CA92BF0049F567 /* PremiumCodeViewModel.swift */; };
 		63D5EF6A29C861BB000ACBC2 /* SwiftUIViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D5EF6929C861BB000ACBC2 /* SwiftUIViewModifier.swift */; };
 		63D7EF1D296FBE2500D72F12 /* GoogleApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D7EF1C296FBE2500D72F12 /* GoogleApi.swift */; };
 		63D7EF1F296FC1EF00D72F12 /* SError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D7EF1E296FC1EF00D72F12 /* SError.swift */; };
@@ -176,6 +178,8 @@
 		63C8CCF52941D60400BB861D /* DevInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevInfoView.swift; sourceTree = "<group>"; };
 		63C8CCF72941D60D00BB861D /* DevInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevInfoViewModel.swift; sourceTree = "<group>"; };
 		63D32FC229CA8ED20049F567 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		63D32FC529CA92B60049F567 /* PremiumCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumCodeView.swift; sourceTree = "<group>"; };
+		63D32FC729CA92BF0049F567 /* PremiumCodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumCodeViewModel.swift; sourceTree = "<group>"; };
 		63D5EF6929C861BB000ACBC2 /* SwiftUIViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIViewModifier.swift; sourceTree = "<group>"; };
 		63D7EF1C296FBE2500D72F12 /* GoogleApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleApi.swift; sourceTree = "<group>"; };
 		63D7EF1E296FC1EF00D72F12 /* SError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SError.swift; sourceTree = "<group>"; };
@@ -295,6 +299,7 @@
 			children = (
 				631D7525296661D300464F33 /* AppSetting */,
 				63C8CCF42941D5F700BB861D /* DevInfo */,
+				63D32FC429CA92A10049F567 /* PremiumCode */,
 				262D2A01293E2BA4005984DA /* SettingView.swift */,
 				262D2A03293E2BAA005984DA /* SettingViewModel.swift */,
 			);
@@ -506,6 +511,15 @@
 				63C8CCF72941D60D00BB861D /* DevInfoViewModel.swift */,
 			);
 			path = DevInfo;
+			sourceTree = "<group>";
+		};
+		63D32FC429CA92A10049F567 /* PremiumCode */ = {
+			isa = PBXGroup;
+			children = (
+				63D32FC529CA92B60049F567 /* PremiumCodeView.swift */,
+				63D32FC729CA92BF0049F567 /* PremiumCodeViewModel.swift */,
+			);
+			path = PremiumCode;
 			sourceTree = "<group>";
 		};
 		63E8489F295ABE5D0037D7A3 /* Travel */ = {
@@ -894,6 +908,7 @@
 				63C8CCF62941D60400BB861D /* DevInfoView.swift in Sources */,
 				2619FE8C2940D6B300D24778 /* CheckPermissionViewModel.swift in Sources */,
 				63F1324B2914A18800B3A9E0 /* Defaults.swift in Sources */,
+				63D32FC829CA92BF0049F567 /* PremiumCodeViewModel.swift in Sources */,
 				264B70C0291F8E9D00CDAF9F /* C.swift in Sources */,
 				63F132982914A1C000B3A9E0 /* ProgressView.swift in Sources */,
 				631D752F29667A4D00464F33 /* PeopleWithListViewModel.swift in Sources */,
@@ -910,6 +925,7 @@
 				63F132AB2914A1C000B3A9E0 /* MainView.swift in Sources */,
 				2627408F29699B2A00B47566 /* CategorySelectorView.swift in Sources */,
 				63F132502914A18F00B3A9E0 /* BaseViewController.swift in Sources */,
+				63D32FC629CA92B60049F567 /* PremiumCodeView.swift in Sources */,
 				63F132492914A18800B3A9E0 /* SwiftExtension.swift in Sources */,
 				2619FE8A2940D6AC00D24778 /* CheckPermissionView.swift in Sources */,
 				63E848A7295ABEBD0037D7A3 /* TravelListView.swift in Sources */,

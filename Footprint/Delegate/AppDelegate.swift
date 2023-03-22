@@ -9,6 +9,8 @@
 import UIKit
 import GoogleMaps
 import GooglePlaces
+import FirebaseCore
+import FirebaseFirestore
 
 //@UIApplicationDelegateAdaptor(AppDelegate.self) var delegate ??
 @main
@@ -56,6 +58,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerUserNotificationSettings(setting) // 생성된 정보 애플리케이션에 등록
         }
         
+        // FireStore (firebase)
+        FirebaseApp.configure()
         return true
     }
     

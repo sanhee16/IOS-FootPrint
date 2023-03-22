@@ -9,14 +9,15 @@
 
 import Foundation
 import Combine
-import UIKit
 import MessageUI
+import SwiftUI
 
 class SettingViewModel: BaseViewModel {
     @Published var isShowingMailView = false
     @Published var result: Result<MFMailComposeResult, Error>? = nil
     @Published var isOnSearchBar: Bool
     
+    @Published var tapCnt: Int = 0
     override init(_ coordinator: AppCoordinator) {
         self.isOnSearchBar = Util.getSettingStatus(.SEARCH_BAR)
         super.init(coordinator)
@@ -24,7 +25,8 @@ class SettingViewModel: BaseViewModel {
     }
     
     func onAppear() {
-        
+        self.tapCnt = 0
+        C.isDebugMode = false
     }
     
     func onClose() {
@@ -64,5 +66,18 @@ class SettingViewModel: BaseViewModel {
     func onToggleSetting(_ flag: SettingFlag, isOn: Bool) {
         print("isOn? \(isOn)")
         Util.setSettingStatus(flag, isOn: isOn)
+    }
+    
+    func onClickTitle() {
+        self.tapCnt += 1
+        if self.tapCnt > 30 {
+            withAnimation {
+                C.isDebugMode = true
+            }
+        }
+    }
+    
+    func onClickEnterPremiumCode() {
+        self.coordinator?.presentPremiumCodeView()
     }
 }

@@ -35,6 +35,9 @@ struct SettingView: View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 0) {
                 Topbar("설정", type: .none)
+                    .onTapGesture {
+                        vm.onClickTitle()
+                    }
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 0) {
                         drawTitle(geometry, title: "앱 설정")
@@ -57,6 +60,12 @@ struct SettingView: View {
                         }
                         drawItem(geometry, title: "개발자 정보") {
                             vm.onClickDevInfo()
+                        }
+                        if C.isDebugMode {
+                            drawTitle(geometry, title: "관리자 모드")
+                            drawItem(geometry, title: "프리미엄 코드 입력하기") {
+                                vm.onClickEnterPremiumCode()
+                            }
                         }
                     }
                 }
