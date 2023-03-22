@@ -95,3 +95,9 @@ extension FootPrint {
         return self.tag.getCategory()?.image()
     }
 }
+
+extension String {
+    func localized(_ args: CVarArg...) -> String {
+        return String(format: NSLocalizedString(self, comment: ""), arguments: args)
+    }
+}
