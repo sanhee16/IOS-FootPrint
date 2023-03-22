@@ -74,6 +74,9 @@
 		63D32FC329CA8ED20049F567 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63D32FC229CA8ED20049F567 /* GoogleService-Info.plist */; };
 		63D32FC629CA92B60049F567 /* PremiumCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D32FC529CA92B60049F567 /* PremiumCodeView.swift */; };
 		63D32FC829CA92BF0049F567 /* PremiumCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D32FC729CA92BF0049F567 /* PremiumCodeViewModel.swift */; };
+		63D32FCC29CA9E390049F567 /* FirestoreExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D32FCB29CA9E390049F567 /* FirestoreExtension.swift */; };
+		63D32FCE29CA9E570049F567 /* FirestoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D32FCD29CA9E570049F567 /* FirestoreModel.swift */; };
+		63D32FD229CAB61E0049F567 /* FirestoreApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D32FD129CAB61E0049F567 /* FirestoreApi.swift */; };
 		63D5EF6A29C861BB000ACBC2 /* SwiftUIViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D5EF6929C861BB000ACBC2 /* SwiftUIViewModifier.swift */; };
 		63D7EF1D296FBE2500D72F12 /* GoogleApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D7EF1C296FBE2500D72F12 /* GoogleApi.swift */; };
 		63D7EF1F296FC1EF00D72F12 /* SError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D7EF1E296FC1EF00D72F12 /* SError.swift */; };
@@ -180,6 +183,9 @@
 		63D32FC229CA8ED20049F567 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		63D32FC529CA92B60049F567 /* PremiumCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumCodeView.swift; sourceTree = "<group>"; };
 		63D32FC729CA92BF0049F567 /* PremiumCodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumCodeViewModel.swift; sourceTree = "<group>"; };
+		63D32FCB29CA9E390049F567 /* FirestoreExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreExtension.swift; sourceTree = "<group>"; };
+		63D32FCD29CA9E570049F567 /* FirestoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreModel.swift; sourceTree = "<group>"; };
+		63D32FD129CAB61E0049F567 /* FirestoreApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreApi.swift; sourceTree = "<group>"; };
 		63D5EF6929C861BB000ACBC2 /* SwiftUIViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIViewModifier.swift; sourceTree = "<group>"; };
 		63D7EF1C296FBE2500D72F12 /* GoogleApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleApi.swift; sourceTree = "<group>"; };
 		63D7EF1E296FC1EF00D72F12 /* SError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SError.swift; sourceTree = "<group>"; };
@@ -331,6 +337,7 @@
 				264B70BB291F8DD900CDAF9F /* ApiResponse.swift */,
 				63F132462914A18800B3A9E0 /* CommonApi.swift */,
 				63D7EF1C296FBE2500D72F12 /* GoogleApi.swift */,
+				63D32FD129CAB61E0049F567 /* FirestoreApi.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -483,6 +490,7 @@
 			children = (
 				63B1FB022914B381007E94B6 /* RealmDB.swift */,
 				265EA946291D1E1400068A5C /* DataModel.swift */,
+				63D32FCD29CA9E570049F567 /* FirestoreModel.swift */,
 			);
 			path = DataClass;
 			sourceTree = "<group>";
@@ -555,6 +563,7 @@
 				2639921E291FEBA60049F047 /* KeyboardReadable.swift */,
 				63D7EF1E296FC1EF00D72F12 /* SError.swift */,
 				63D5EF6929C861BB000ACBC2 /* SwiftUIViewModifier.swift */,
+				63D32FCB29CA9E390049F567 /* FirestoreExtension.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -892,6 +901,7 @@
 				265924C729445BD9001E7025 /* FootprintListView.swift in Sources */,
 				63D7EF1F296FC1EF00D72F12 /* SError.swift in Sources */,
 				262D2A06293E310E005984DA /* MailView.swift in Sources */,
+				63D32FCE29CA9E570049F567 /* FirestoreModel.swift in Sources */,
 				63FA238E294C42C900D31506 /* SingleSelectGalleryView.swift in Sources */,
 				63F292B4297656DF00D42D0E /* TrashViewModel.swift in Sources */,
 				63B1FB032914B381007E94B6 /* RealmDB.swift in Sources */,
@@ -914,6 +924,7 @@
 				631D752F29667A4D00464F33 /* PeopleWithListViewModel.swift in Sources */,
 				631D752D29667A4700464F33 /* PeopleWithListView.swift in Sources */,
 				631D752A296661FE00464F33 /* MainMapOptionViewModel.swift in Sources */,
+				63D32FCC29CA9E390049F567 /* FirestoreExtension.swift in Sources */,
 				2691D9C7294EE505002825B9 /* BluePrintBottomSheetView.swift in Sources */,
 				63E5C82D2975361C00D32FD2 /* MapView.swift in Sources */,
 				263A97BD29458533008A69F5 /* PeopleWithSelectorViewModel.swift in Sources */,
@@ -925,6 +936,7 @@
 				63F132AB2914A1C000B3A9E0 /* MainView.swift in Sources */,
 				2627408F29699B2A00B47566 /* CategorySelectorView.swift in Sources */,
 				63F132502914A18F00B3A9E0 /* BaseViewController.swift in Sources */,
+				63D32FD229CAB61E0049F567 /* FirestoreApi.swift in Sources */,
 				63D32FC629CA92B60049F567 /* PremiumCodeView.swift in Sources */,
 				63F132492914A18800B3A9E0 /* SwiftExtension.swift in Sources */,
 				2619FE8A2940D6AC00D24778 /* CheckPermissionView.swift in Sources */,

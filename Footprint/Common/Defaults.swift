@@ -44,6 +44,9 @@ class Defaults {
     @UserDefault<Bool>(key: "IS_SHOW_STAR_ONLY", defaultValue: false)
     public static var isShowStarOnly
     
+    @UserDefault<String?>(key: "PREMIUM_CODE", defaultValue: nil)
+    public static var premiumCode
+    
     //MARK: Setting
     /*
      1: On, 0: Off

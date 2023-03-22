@@ -8,12 +8,13 @@
 
 import Foundation
 import UIKit
-
+import FirebaseCore
+import FirebaseFirestore
 
 class PremiumCodeViewModel: BaseViewModel {
     @Published var name: String = ""
     @Published var code: String = ""
-    
+    private let firestoreApi = FirestoreApi.shared
     override init(_ coordinator: AppCoordinator) {
         super.init(coordinator)
     }
@@ -34,10 +35,31 @@ class PremiumCodeViewModel: BaseViewModel {
             self.alert(.ok, title: "코드를 입력해주세요")
             return
         }
-        //TODO: firestore 연결하고 userDefaults에 저장
         
-        self.alert(.ok, title: "프리미엄 등록이 완료되었습니다.") {[weak self] _ in
-            self?.dismiss()
+        print("onClickSubmit")
+        firestoreApi.getPremiumTier(documentID: self.code) {[weak self] item in
+            guard let self = self, let item = item else {
+                self?.alert(.ok, title: "잘못된 코드입니다.")
+                return
+            }
+            if item.isUsing {
+                self.alert(.ok, title: "이미 사용중인 코드입니다.")
+                return
+            }
+            var updateItem = item
+            updateItem.isUsing = true
+            updateItem.name = self.name
+            self.firestoreApi.updatePremiumTier(documentID: self.code, originalPersonRequest: updateItem) {[weak self] item in
+                guard let self = self, let item = item else {
+                    self?.alert(.ok, title: "오류가 발생했습니다.")
+                    return
+                }
+                
+                Defaults.premiumCode = self.code
+                self.alert(.ok, title: "프리미엄 등록이 완료되었습니다.") {[weak self] _ in
+                    self?.dismiss()
+                }
+            }
         }
     }
     
