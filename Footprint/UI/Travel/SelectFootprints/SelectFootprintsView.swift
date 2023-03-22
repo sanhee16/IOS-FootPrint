@@ -25,20 +25,18 @@ struct SelectFootprintsView: View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 0) {
                 ZStack(alignment: .leading) {
-                    Topbar("All FootPrints", type: .close) {
+                    Topbar("footprints".lowercased(), type: .close) {
                         vm.onClose()
                     }
                     HStack(alignment: .center, spacing: 0) {
                         Spacer()
                         Text("완료")
-                            .font(.kr12r)
-                            .foregroundColor(.textColor1)
+                            .menuText()
                             .onTapGesture {
                                 vm.onClickComplete()
                             }
                     }
-                    .padding([.leading, .trailing], 12)
-                    .frame(width: geometry.size.width - 24, height: 50, alignment: .center)
+                    .menuView()
                 }
                 .frame(width: geometry.size.width, height: 50, alignment: .center)
                 ScrollViewReader { value in

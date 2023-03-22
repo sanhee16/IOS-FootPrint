@@ -32,20 +32,17 @@ struct ShowTravelView: View {
                     HStack(alignment: .center, spacing: 16) {
                         Spacer()
                         Text("삭제")
-                            .font(.kr12r)
-                            .foregroundColor(.gray90)
+                            .menuText()
                             .onTapGesture {
                                 vm.onClickDeleteTravel()
                             }
                         Text("편집")
-                            .font(.kr12r)
-                            .foregroundColor(.gray90)
+                            .menuText()
                             .onTapGesture {
                                 vm.onClickEdit()
                             }
                     }
-                    .padding([.leading, .trailing], 12)
-                    .frame(width: geometry.size.width - 24, height: 50, alignment: .center)
+                    .menuView()
                     
                 }
                 drawBody(geometry)

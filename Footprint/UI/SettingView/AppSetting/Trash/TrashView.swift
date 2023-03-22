@@ -99,8 +99,7 @@ struct TrashView: View {
                             }
                     }
                 }
-                .padding([.leading, .trailing], 12)
-                .frame(width: geometry.size.width - 24, height: 50, alignment: .center)
+                .menuView()
             }
         }
     }
