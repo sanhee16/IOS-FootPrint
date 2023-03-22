@@ -40,13 +40,15 @@ struct CategorySelectorView: View {
                     }
                     HStack(alignment: .center, spacing: 0) {
                         Spacer()
-                        Text("완료")
-                            .font(.kr12r)
-                            .foregroundColor(.gray90)
-                            .padding(.trailing, 12)
-                            .onTapGesture {
-                                vm.onFinishSelect()
-                            }
+                        if case .select(selectedCategory: _, callback: _) = vm.type {
+                            Text("완료")
+                                .font(.kr12r)
+                                .foregroundColor(.gray90)
+                                .padding(.trailing, 12)
+                                .onTapGesture {
+                                    vm.onFinishSelect()
+                                }
+                        }
                     }
                     .padding([.leading, .trailing], 12)
                 }
