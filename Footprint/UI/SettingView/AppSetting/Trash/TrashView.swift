@@ -25,6 +25,11 @@ struct TrashView: View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 0) {
                 drawHeader(geometry)
+                Text("휴지통에 있는 항목들은 \(Defaults.deleteDays)일이 지나면 완전 삭제됩니다.")
+                    .font(.kr11r)
+                    .foregroundColor(.textColor1)
+                    .padding(EdgeInsets(top: 0, leading: 20, bottom: 8, trailing: 20))
+                
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 4) {
                         drawTitle("Footprints")
@@ -67,7 +72,6 @@ struct TrashView: View {
                 vm.onClose()
             }
             if !$vm.footprintItems.wrappedValue.isEmpty || !$vm.travelItems.wrappedValue.isEmpty {
-                
                 HStack(alignment: .center, spacing: 16) {
                     Spacer()
                     switch $vm.trashStatus.wrappedValue {
@@ -104,10 +108,20 @@ struct TrashView: View {
     private func drawTrashFootprint(_ geometry: GeometryProxy, item: TrashFootprint) -> some View {
         return HStack(alignment: .center, spacing: 0) {
             VStack(alignment: .leading, spacing: 2) {
-                Text(item.item.title)
-                    .font(.kr12b)
-                    .foregroundColor(.textColor1)
-                    .padding(.bottom, 2)
+                HStack(alignment: .center, spacing: 4) {
+                    Text("\(item.leftDays)일 남음")
+                        .font(.kr9r)
+                        .foregroundColor(.white)
+                        .padding(EdgeInsets(top: 3, leading: 5, bottom: 3, trailing: 5))
+                        .background(
+                            RoundedRectangle(cornerRadius: 8)
+                                .foregroundColor(.gray90)
+                        )
+                    Text(item.item.title)
+                        .font(.kr12b)
+                        .foregroundColor(.textColor1)
+                }
+                .padding(.bottom, 2)
                 Text(item.item.createdAt.getDate())
                     .font(.kr10r)
                     .foregroundColor(.gray90)
@@ -142,10 +156,20 @@ struct TrashView: View {
     private func drawTrashTravel(_ geometry: GeometryProxy, item: TrashTravel) -> some View {
         return HStack(alignment: .center, spacing: 0) {
             VStack(alignment: .leading, spacing: 2) {
-                Text(item.item.title)
-                    .font(.kr12b)
-                    .foregroundColor(.textColor1)
-                    .padding(.bottom, 2)
+                HStack(alignment: .center, spacing: 4) {
+                    Text("\(item.leftDays)일 남음")
+                        .font(.kr9r)
+                        .foregroundColor(.white)
+                        .padding(EdgeInsets(top: 3, leading: 5, bottom: 3, trailing: 5))
+                        .background(
+                            RoundedRectangle(cornerRadius: 8)
+                                .foregroundColor(.gray90)
+                        )
+                    Text(item.item.title)
+                        .font(.kr12b)
+                        .foregroundColor(.textColor1)
+                }
+                .padding(.bottom, 2)
                 Text(item.item.createdAt.getDate())
                     .font(.kr10r)
                     .foregroundColor(.gray90)

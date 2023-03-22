@@ -16,8 +16,8 @@ enum TrashStatus {
     case recovering
 //    case deleting
 }
-typealias TrashFootprint = (item: FootPrint, isSelected: Bool)
-typealias TrashTravel = (item: Travel, isSelected: Bool)
+typealias TrashFootprint = (item: FootPrint, isSelected: Bool, leftDays: Int)
+typealias TrashTravel = (item: Travel, isSelected: Bool, leftDays: Int)
 class TrashViewModel: BaseViewModel {
     @Published var trashStatus: TrashStatus = .none
     @Published var footprintItems: [TrashFootprint] = []
@@ -44,11 +44,26 @@ class TrashViewModel: BaseViewModel {
         }
         self.footprintItems.removeAll()
         self.travelItems.removeAll()
+        let today = Date()
+        let todayTime = Int(today.timeIntervalSince1970)
+        
         for i in travelList {
-            self.travelItems.append((item: i, isSelected: false))
+            var leftDays: Int = 0
+            if let deleteDate = Calendar.current.date(byAdding: .day, value: Defaults.deleteDays, to: Date(timeIntervalSince1970: Double(i.deleteTime))) {
+                let limit = Int(deleteDate.timeIntervalSince1970)
+                leftDays = (limit - todayTime) / 60 / 60 / 24
+            }
+
+            self.travelItems.append((item: i, isSelected: false, leftDays: leftDays))
         }
         for i in footprintList {
-            self.footprintItems.append((item: i, isSelected: false))
+            var leftDays: Int = 0
+            if let deleteDate = Calendar.current.date(byAdding: .day, value: Defaults.deleteDays, to: Date(timeIntervalSince1970: Double(i.deleteTime))) {
+                let limit = Int(deleteDate.timeIntervalSince1970)
+                leftDays = (limit - todayTime) / 60 / 60 / 24
+            }
+            
+            self.footprintItems.append((item: i, isSelected: false, leftDays: leftDays))
         }
     }
     
