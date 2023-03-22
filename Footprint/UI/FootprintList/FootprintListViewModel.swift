@@ -27,7 +27,9 @@ class FootprintListViewModel: BaseViewModel {
     }
     
     func onAppear() {
-        self.loadAllItems()
+        checkNetworkConnect {[weak self] in
+            self?.loadAllItems()
+        }
     }
     
     func onClose() {

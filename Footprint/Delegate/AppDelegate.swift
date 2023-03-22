@@ -65,6 +65,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //admob
         GADMobileAds.sharedInstance().start(completionHandler: nil)
 
+        // network connection
+        NetworkMonitor.shared.startMonitoring()
+
         return true
     }
     

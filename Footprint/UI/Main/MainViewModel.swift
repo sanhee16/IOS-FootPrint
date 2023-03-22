@@ -16,7 +16,7 @@ class MainViewModel: BaseViewModel {
     }
     
     func onAppear() {
-        
+        checkNetworkConnect()
     }
     
     func viewDidLoad() {

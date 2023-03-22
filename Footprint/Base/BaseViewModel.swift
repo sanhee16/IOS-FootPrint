@@ -9,6 +9,8 @@
 import Foundation
 import SwiftUI
 import Combine
+import UIKit
+
 
 class BaseViewModel: ObservableObject {
     weak var coordinator: AppCoordinator? = nil
@@ -26,6 +28,20 @@ class BaseViewModel: ObservableObject {
     
     deinit {
         subscription.removeAll()
+    }
+    
+    public func checkNetworkConnect(_ callback: (()->())? = nil) {
+        if NetworkMonitor.shared.isConnected {
+            callback?()
+            return
+        } else {
+            self.alert(.ok, title: "인터넷이 연결되지 않았습니다.", description: "원활한 사용을 위해 인터넷 연결이 필요합니다.\n앱을 종료합니다.") { _ in
+                UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                    exit(0)
+                }
+            }
+        }
     }
     
     public func startProgress(_ animation: ProgressType = .loading) {

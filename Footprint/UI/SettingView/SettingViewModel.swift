@@ -25,8 +25,11 @@ class SettingViewModel: BaseViewModel {
     }
     
     func onAppear() {
-        self.tapCnt = 0
-        C.isDebugMode = false
+        checkNetworkConnect {[weak self] in
+            guard let self = self else { return }
+            self.tapCnt = 0
+            C.isDebugMode = false
+        }
     }
     
     func onClose() {

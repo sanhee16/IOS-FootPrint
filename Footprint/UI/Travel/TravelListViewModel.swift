@@ -15,14 +15,17 @@ class TravelListViewModel: BaseViewModel {
     @Published var travels: [Travel] = []
     
     override init(_ coordinator: AppCoordinator) {
-        self.realm = try! Realm()        
+        self.realm = try! Realm()
         super.init(coordinator)
     }
     
     func onAppear() {
-        self.startProgress()
-        self.loadAll()
-        self.stopProgress()
+        checkNetworkConnect {[weak self] in
+            guard let self = self else { return }
+            self.startProgress()
+            self.loadAll()
+            self.stopProgress()
+        }
     }
     
     func onClose() {

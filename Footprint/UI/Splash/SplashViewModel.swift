@@ -13,6 +13,7 @@ import Photos
 import CoreLocation
 import UserNotifications
 import RealmSwift
+import UIKit
 
 
 class SplashViewModel: BaseViewModel {
@@ -28,15 +29,17 @@ class SplashViewModel: BaseViewModel {
     }
     
     func onAppear() {
-        if !Defaults.launchBefore {
-            //MARK: 최초실행 Setting
-            Defaults.launchBefore = true
-            firstLaunchTask()
-            locationManager.requestWhenInUseAuthorization()
-            self.startRepeatTimer()
-        } else {
-            deleteTask()
-            self.onStartSplashTimer()
+        checkNetworkConnect() {[weak self] in
+            guard let self = self else { return }
+            if !Defaults.launchBefore {
+                Defaults.launchBefore = true
+                self.firstLaunchTask()
+                self.locationManager.requestWhenInUseAuthorization()
+                self.startRepeatTimer()
+            } else {
+                self.deleteTask()
+                self.onStartSplashTimer()
+            }
         }
     }
     

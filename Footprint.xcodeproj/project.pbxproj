@@ -79,6 +79,7 @@
 		63D32FD229CAB61E0049F567 /* FirestoreApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D32FD129CAB61E0049F567 /* FirestoreApi.swift */; };
 		63D32FD529CAC7CB0049F567 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 63D32FD429CAC7CB0049F567 /* GoogleMobileAds */; };
 		63D32FD729CACEAC0049F567 /* AdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D32FD629CACEAC0049F567 /* AdView.swift */; };
+		63D32FDB29CAEA4C0049F567 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D32FDA29CAEA4C0049F567 /* NetworkMonitor.swift */; };
 		63D5EF6A29C861BB000ACBC2 /* SwiftUIViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D5EF6929C861BB000ACBC2 /* SwiftUIViewModifier.swift */; };
 		63D7EF1D296FBE2500D72F12 /* GoogleApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D7EF1C296FBE2500D72F12 /* GoogleApi.swift */; };
 		63D7EF1F296FC1EF00D72F12 /* SError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D7EF1E296FC1EF00D72F12 /* SError.swift */; };
@@ -189,6 +190,7 @@
 		63D32FCD29CA9E570049F567 /* FirestoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreModel.swift; sourceTree = "<group>"; };
 		63D32FD129CAB61E0049F567 /* FirestoreApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreApi.swift; sourceTree = "<group>"; };
 		63D32FD629CACEAC0049F567 /* AdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdView.swift; sourceTree = "<group>"; };
+		63D32FDA29CAEA4C0049F567 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		63D5EF6929C861BB000ACBC2 /* SwiftUIViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIViewModifier.swift; sourceTree = "<group>"; };
 		63D7EF1C296FBE2500D72F12 /* GoogleApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleApi.swift; sourceTree = "<group>"; };
 		63D7EF1E296FC1EF00D72F12 /* SError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SError.swift; sourceTree = "<group>"; };
@@ -568,6 +570,7 @@
 				63D7EF1E296FC1EF00D72F12 /* SError.swift */,
 				63D5EF6929C861BB000ACBC2 /* SwiftUIViewModifier.swift */,
 				63D32FCB29CA9E390049F567 /* FirestoreExtension.swift */,
+				63D32FDA29CAEA4C0049F567 /* NetworkMonitor.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -965,6 +968,7 @@
 				63F132992914A1C000B3A9E0 /* Topbar.swift in Sources */,
 				63D32FD729CACEAC0049F567 /* AdView.swift in Sources */,
 				63F132B62914A56300B3A9E0 /* LottieView.swift in Sources */,
+				63D32FDB29CAEA4C0049F567 /* NetworkMonitor.swift in Sources */,
 				63FA2390294C42CE00D31506 /* SingleSelectGalleryViewModel.swift in Sources */,
 				63C102B329651E690099AF6A /* Footprint++Bundle.swift in Sources */,
 			);
