@@ -17,7 +17,8 @@ struct FootprintListView: View {
         return vc
     }
     @ObservedObject var vm: VM
-    
+    @Namespace private var topID
+
     private var safeTop: CGFloat { get { Util.safeTop() }}
     private var safeBottom: CGFloat { get { Util.safeBottom() }}
     private let IMAGE_SIZE: CGFloat = 50.0
@@ -47,18 +48,20 @@ struct FootprintListView: View {
                     .frame(width: geometry.size.width - 24, height: 50, alignment: .center)
                 }
                 .frame(width: geometry.size.width, height: 50, alignment: .center)
-                ScrollViewReader { value in
+                ScrollViewReader { scrollProxy in
                     ZStack(alignment: .bottomTrailing) {
                         ScrollView(.vertical, showsIndicators: false) {
-                            ForEach($vm.list.wrappedValue.indices, id: \.self) { idx in
-                                let item = $vm.list.wrappedValue[idx]
-                                drawFootprintItem(geometry, item: item)
+                            VStack(alignment: .leading, spacing: 12) {
+                                HStack{}.id(topID)
+                                ForEach($vm.list.wrappedValue.indices, id: \.self) { idx in
+                                    let item = $vm.list.wrappedValue[idx]
+                                    drawFootprintItem(geometry, item: item)
+                                }
                             }
-                            .padding([.top, .bottom], 16)
+                            .padding(.bottom, 10)
                         }
                         .frame(width: geometry.size.width, height: geometry.size.height - 50, alignment: .leading)
                         
-                        // TODO: 뺄지 말지 결정하기
                         Image("up_arrow")
                             .resizable()
                             .scaledToFit()
@@ -71,7 +74,9 @@ struct FootprintListView: View {
                             .padding(EdgeInsets(top: 0, leading: 0, bottom: 24, trailing: 24))
                             .zIndex(1)
                             .onTapGesture {
-                                value.scrollTo(0, anchor: .top)
+                                withAnimation {
+                                    scrollProxy.scrollTo(topID, anchor: .top)
+                                }
                             }
                     }
                 }

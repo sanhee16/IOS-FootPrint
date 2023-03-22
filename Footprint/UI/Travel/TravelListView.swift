@@ -16,6 +16,7 @@ struct TravelListView: View {
         return vc
     }
     @ObservedObject var vm: VM
+    @Namespace private var topID
     
     private var safeTop: CGFloat { get { Util.safeTop() }}
     private var safeBottom: CGFloat { get { Util.safeBottom() }}
@@ -23,17 +24,50 @@ struct TravelListView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 0) {
-                Topbar("", type: .none)
-                ScrollView(.vertical, showsIndicators: false) {
-                    VStack(alignment: .leading, spacing: 12) {
-                        ForEach($vm.travels.wrappedValue.indices, id: \.self) { idx in
-                            let item = $vm.travels.wrappedValue[idx]
-                            drawTravelItem(geometry, item: item)
+                Topbar("여행 목록", type: .none)
+                ScrollViewReader { scrollProxy in
+                    ZStack(alignment: .bottomTrailing) {
+                        ScrollView(.vertical, showsIndicators: false) {
+                            VStack(alignment: .leading, spacing: 12) {
+                                HStack{}.id(topID)
+                                ForEach($vm.travels.wrappedValue.indices, id: \.self) { idx in
+                                    let item = $vm.travels.wrappedValue[idx]
+                                    drawTravelItem(geometry, item: item)
+                                }
+                                drawAddNewItem(geometry)
+                            }
+                            .padding(EdgeInsets(top: 0, leading: 12, bottom: 30, trailing: 20))
                         }
-                        drawAddNewItem(geometry)
+                        .frame(width: geometry.size.width, height: geometry.size.height - 50, alignment: .leading)
+                        
+                        Image("up_arrow")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(both: 24.0, aligment: .center)
+                            .padding(10)
+                            .background(
+                                Circle()
+                                    .foregroundColor(.gray30)
+                            )
+                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 24, trailing: 24))
+                            .zIndex(1)
+                            .onTapGesture {
+                                withAnimation {
+                                    scrollProxy.scrollTo(topID, anchor: .top)
+                                }
+                            }
                     }
-                    .padding(EdgeInsets(top: 10, leading: 12, bottom: 30, trailing: 20))
                 }
+//                ScrollView(.vertical, showsIndicators: false) {
+//                    VStack(alignment: .leading, spacing: 12) {
+//                        ForEach($vm.travels.wrappedValue.indices, id: \.self) { idx in
+//                            let item = $vm.travels.wrappedValue[idx]
+//                            drawTravelItem(geometry, item: item)
+//                        }
+//                        drawAddNewItem(geometry)
+//                    }
+//                    .padding(EdgeInsets(top: 10, leading: 12, bottom: 30, trailing: 20))
+//                }
             }
             .padding(EdgeInsets(top: safeTop, leading: 0, bottom: safeBottom, trailing: 0))
             .edgesIgnoringSafeArea(.all)
