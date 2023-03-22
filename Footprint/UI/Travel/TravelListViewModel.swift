@@ -14,9 +14,8 @@ class TravelListViewModel: BaseViewModel {
     private let realm: Realm
     @Published var travels: [Travel] = []
     
-    
     override init(_ coordinator: AppCoordinator) {
-        self.realm = try! Realm()
+        self.realm = try! Realm()        
         super.init(coordinator)
     }
     

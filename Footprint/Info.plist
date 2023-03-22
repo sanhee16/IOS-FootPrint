@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>GADIsAdManagerApp</key>
+	<true/>
+	<key>GADApplicationIdentifier</key>
+	<string>${GAD_APPLICATION_IDENTIFIER}</string>
 	<key>NMFClientId</key>
 	<string>$(NAVER_MAP_CLIENT_KEY)</string>
 	<key>UIBackgroundModes</key>

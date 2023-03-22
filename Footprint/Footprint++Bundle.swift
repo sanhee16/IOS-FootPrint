@@ -38,6 +38,20 @@ extension Bundle {
             return value
         }
     }
-
+    
+    var gadBannerId: String {
+        get {
+            // 1
+            guard let filePath = Bundle.main.path(forResource: "ApiInfo", ofType: "plist") else {
+                fatalError("Couldn't find file 'ApiInfo.plist'.")
+            }
+            // 2
+            let plist = NSDictionary(contentsOfFile: filePath)
+            guard let value = plist?.object(forKey: "GADBannerID") as? String else {
+                fatalError("Couldn't find key 'GADBannerID' in 'ApiInfo.plist'.")
+            }
+            return value
+        }
+    }
 }
 

@@ -25,6 +25,7 @@
 
 import SwiftUI
 import Foundation
+import GoogleMobileAds
 
 struct MainView: View {
     typealias VM = MainViewModel
@@ -70,7 +71,10 @@ struct MainView: View {
                 default:
                     SettingView(vm: self.settingVm)
                 }
-                
+                if Defaults.premiumCode == nil {
+                    GADBanner().frame(width: GADAdSizeBanner.size.width, height: GADAdSizeBanner.size.height)
+                }
+
                 MainMenuBar(geometry: geometry, current: $vm.currentTab.wrappedValue) { type in
                     vm.onClickTab(type)
                 }

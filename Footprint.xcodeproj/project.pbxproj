@@ -77,6 +77,8 @@
 		63D32FCC29CA9E390049F567 /* FirestoreExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D32FCB29CA9E390049F567 /* FirestoreExtension.swift */; };
 		63D32FCE29CA9E570049F567 /* FirestoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D32FCD29CA9E570049F567 /* FirestoreModel.swift */; };
 		63D32FD229CAB61E0049F567 /* FirestoreApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D32FD129CAB61E0049F567 /* FirestoreApi.swift */; };
+		63D32FD529CAC7CB0049F567 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 63D32FD429CAC7CB0049F567 /* GoogleMobileAds */; };
+		63D32FD729CACEAC0049F567 /* AdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D32FD629CACEAC0049F567 /* AdView.swift */; };
 		63D5EF6A29C861BB000ACBC2 /* SwiftUIViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D5EF6929C861BB000ACBC2 /* SwiftUIViewModifier.swift */; };
 		63D7EF1D296FBE2500D72F12 /* GoogleApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D7EF1C296FBE2500D72F12 /* GoogleApi.swift */; };
 		63D7EF1F296FC1EF00D72F12 /* SError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D7EF1E296FC1EF00D72F12 /* SError.swift */; };
@@ -186,6 +188,7 @@
 		63D32FCB29CA9E390049F567 /* FirestoreExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreExtension.swift; sourceTree = "<group>"; };
 		63D32FCD29CA9E570049F567 /* FirestoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreModel.swift; sourceTree = "<group>"; };
 		63D32FD129CAB61E0049F567 /* FirestoreApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreApi.swift; sourceTree = "<group>"; };
+		63D32FD629CACEAC0049F567 /* AdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdView.swift; sourceTree = "<group>"; };
 		63D5EF6929C861BB000ACBC2 /* SwiftUIViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIViewModifier.swift; sourceTree = "<group>"; };
 		63D7EF1C296FBE2500D72F12 /* GoogleApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleApi.swift; sourceTree = "<group>"; };
 		63D7EF1E296FC1EF00D72F12 /* SError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SError.swift; sourceTree = "<group>"; };
@@ -235,6 +238,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63D32FD529CAC7CB0049F567 /* GoogleMobileAds in Frameworks */,
 				265A0A0E2916297E00027829 /* RealmSwift in Frameworks */,
 				265A0A0C2916297E00027829 /* Realm in Frameworks */,
 				63B1FAF22914A91F007E94B6 /* FittedSheets in Frameworks */,
@@ -644,6 +648,7 @@
 				63C81AB82963D6EF0001A70B /* DragAndDropService.swift */,
 				631D75232966619B00464F33 /* SToggleView.swift */,
 				260C87CF296AAF5C00ADCC32 /* FootprintItem.swift */,
+				63D32FD629CACEAC0049F567 /* AdView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -753,6 +758,7 @@
 				265A0A0D2916297E00027829 /* RealmSwift */,
 				63D32FBE29CA8EBE0049F567 /* FirebaseFirestore */,
 				63D32FC029CA8EBE0049F567 /* FirebaseFirestoreSwift */,
+				63D32FD429CAC7CB0049F567 /* GoogleMobileAds */,
 			);
 			productName = Footprint;
 			productReference = 63209FE42913C3BF00709227 /* Footprint.app */;
@@ -791,6 +797,7 @@
 				63B1FB042914B5CB007E94B6 /* XCRemoteSwiftPackageReference "swiftui-pull-to-refresh" */,
 				265A0A0A2916297E00027829 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				63D32FBD29CA8EBE0049F567 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				63D32FD329CAC7CA0049F567 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 			);
 			productRefGroup = 63209FE52913C3BF00709227 /* Products */;
 			projectDirPath = "";
@@ -956,6 +963,7 @@
 				63FA2387294C35CB00D31506 /* PeopleEditView.swift in Sources */,
 				63C102B8296530680099AF6A /* GoogleMapView.swift in Sources */,
 				63F132992914A1C000B3A9E0 /* Topbar.swift in Sources */,
+				63D32FD729CACEAC0049F567 /* AdView.swift in Sources */,
 				63F132B62914A56300B3A9E0 /* LottieView.swift in Sources */,
 				63FA2390294C42CE00D31506 /* SingleSelectGalleryViewModel.swift in Sources */,
 				63C102B329651E690099AF6A /* Footprint++Bundle.swift in Sources */,
@@ -1229,6 +1237,14 @@
 				kind = branch;
 			};
 		};
+		63D32FD329CAC7CA0049F567 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1281,6 +1297,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 63D32FBD29CA8EBE0049F567 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
+		};
+		63D32FD429CAC7CB0049F567 /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 63D32FD329CAC7CA0049F567 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

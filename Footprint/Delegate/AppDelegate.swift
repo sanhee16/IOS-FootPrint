@@ -11,6 +11,7 @@ import GoogleMaps
 import GooglePlaces
 import FirebaseCore
 import FirebaseFirestore
+import GoogleMobileAds
 
 //@UIApplicationDelegateAdaptor(AppDelegate.self) var delegate ??
 @main
@@ -60,6 +61,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // FireStore (firebase)
         FirebaseApp.configure()
+
+        //admob
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
+
         return true
     }
     
