@@ -68,6 +68,7 @@ struct ShowFootPrintView: View {
                     .contentShape(Rectangle())
                     .padding([.leading, .trailing], 16)
                     
+                    drawImageArea(geometry, item: item)
                     HStack(alignment: .center, spacing: 0) {
                         Spacer()
                         Text(item.createdAt.getDate())
@@ -75,7 +76,6 @@ struct ShowFootPrintView: View {
                             .foregroundColor(Color.gray60)
                     }
                     .padding([.leading, .trailing], 16)
-                    drawImageArea(geometry, item: item)
                     Divider()
                         .background(Color.inputBoxColor)
                         .padding([.top, .bottom], 4)

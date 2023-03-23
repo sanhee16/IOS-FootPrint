@@ -184,6 +184,10 @@ class EditFootprintViewModel: BaseViewModel {
     
     func onClickSave() {
         self.isKeyboardVisible = false
+        if self.title.isEmpty, self.content.isEmpty {
+            self.dismiss()
+            return
+        }
         if self.title.isEmpty {
             self.title = "no_title".localized();
         }

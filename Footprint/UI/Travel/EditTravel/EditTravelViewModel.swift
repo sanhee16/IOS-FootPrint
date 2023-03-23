@@ -77,6 +77,10 @@ class EditTravelViewModel: BaseViewModel {
     }
     
     func onClickSave() {
+        if self.title.isEmpty, self.intro.isEmpty, self.footprints.isEmpty {
+            self.dismiss()
+            return
+        }
         if self.title.isEmpty {
             self.title = "no_title".localized();
         }
