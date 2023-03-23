@@ -129,7 +129,7 @@ struct EditTravelView: View {
         .contentShape(Rectangle())
         .frame(
             minWidth:  geometry.size.width - 32, idealWidth:  geometry.size.width - 32, maxWidth: geometry.size.width - 32,
-            minHeight: 40, idealHeight: nil, maxHeight: nil, alignment: .leading
+            minHeight: 50, idealHeight: nil, maxHeight: nil, alignment: .leading
         )
         .background(
             RoundedRectangle(cornerRadius: 12)
@@ -149,12 +149,8 @@ struct EditTravelView: View {
                 .foregroundColor(.white)
         }
         .padding(EdgeInsets(top: 4, leading: 6, bottom: 4, trailing: 6))
-        .contentShape(Rectangle())
-        .frame(width: geometry.size.width - 32, height: 100, alignment: .center)
-        .background(
-            RoundedRectangle(cornerRadius: 12)
-                .foregroundColor(.textColor3)
-        )
+        .frame(width: geometry.size.width - 32, height: 50, alignment: .center)
+        .addItemBackground()
         .onTapGesture {
             vm.onClickAddFootprints()
         }

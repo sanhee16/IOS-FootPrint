@@ -16,6 +16,10 @@ extension View {
     func menuView(_ height: CGFloat? = 50.0) -> some View {
         modifier(MenuView(height: height))
     }
+    
+    func addItemBackground(_ cornerRadius: CGFloat = 12.0) -> some View {
+        modifier(AddItemBackground(cornerRadius: cornerRadius))
+    }
 }
 
 struct MenuText: ViewModifier {
@@ -33,5 +37,18 @@ struct MenuView: ViewModifier {
         content
             .padding([.leading, .trailing], padding)
             .frame(width: UIScreen.main.bounds.width - padding * 2, height: 50, alignment: .center)
+    }
+}
+
+
+struct AddItemBackground: ViewModifier {
+    let cornerRadius: CGFloat
+    func body(content: Content) -> some View {
+        content
+            .contentShape(Rectangle())
+            .background(
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .foregroundColor(.textColor3)
+            )
     }
 }

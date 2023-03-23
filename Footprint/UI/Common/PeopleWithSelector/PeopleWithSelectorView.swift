@@ -134,11 +134,7 @@ struct PeopleWithSelectorView: View {
             Spacer()
         }
         .frame(width: geometry.size.width - 24, height: 45.0, alignment: .center)
-        .background(
-            RoundedRectangle(cornerRadius: 8)
-                .foregroundColor(.fColor1)
-        )
-        .contentShape(Rectangle())
+        .addItemBackground(8)
         .onTapGesture {
             vm.onClickAddPeople()
         }

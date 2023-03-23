@@ -125,12 +125,8 @@ struct TravelListView: View {
                 .foregroundColor(.white)
         }
         .padding(EdgeInsets(top: 4, leading: 6, bottom: 4, trailing: 6))
-        .contentShape(Rectangle())
         .frame(width: geometry.size.width - 24, height: 100, alignment: .center)
-        .background(
-            RoundedRectangle(cornerRadius: 12)
-                .foregroundColor(.textColor3)
-        )
+        .addItemBackground()
         .onTapGesture {
             vm.onClickCreateTravel()
         }
