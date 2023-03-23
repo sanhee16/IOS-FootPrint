@@ -52,22 +52,6 @@ class EditTravelViewModel: BaseViewModel {
         
     }
     
-    func onClose() {
-        var isChanged: Bool = true
-        if originalItem.title == self.title, originalItem.color == self.color.toTravelBackground(), originalItem.intro == self.intro, Array(originalItem.footprints) == self.footprints {
-            isChanged = false
-        }
-        if isChanged {
-            self.alert(.yesOrNo, title: "alert_out_without_save".localized()) {[weak self] isClose in
-                if isClose {
-                    self?.dismiss()
-                }
-                return
-            }
-        } else {
-            self.dismiss()
-        }
-    }
     
     func loadAllFootprints() {
         self.allFootprints = Array(self.realm.objects(FootPrint.self))
@@ -93,6 +77,9 @@ class EditTravelViewModel: BaseViewModel {
     }
     
     func onClickSave() {
+        if self.title.isEmpty {
+            self.title = "no_title".localized();
+        }
         if case .create = type {
             try! self.realm.write {[weak self] in
                 guard let self = self else { return }

@@ -59,6 +59,7 @@
 "premium_name"="이름";
 "enter_premium_code"="프리미엄 코드 입력하기";
 "confirm"="확인";
+"travel_title"="제목(최대 10자)";
 
 "setting"="설정";
 "app_setting"="앱 설정";
@@ -92,6 +93,9 @@
 "alert_cannot_load_information"="정보를 불러올 수 없습니다.";
 "alert_request_permission_location"="원활한 사용을 위해 위치권한이 필요합니다.";
 "alert_request_permission_location_description"="OK를 누르면 권한설정으로 이동합니다.";
+
+"alert_enter_title"="제목을 입력해주세요.";
+"no_title"="제목없음";
 
 "map"="지도";
 "favorite"="즐겨찾기";

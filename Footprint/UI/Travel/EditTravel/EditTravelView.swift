@@ -29,9 +29,6 @@ struct EditTravelView: View {
                     Topbar($vm.title.wrappedValue, type: .back) {
                         vm.onClickSave()
                     }
-                    .padding([.leading, .trailing], 12)
-                    .frame(width: geometry.size.width - 24, height: 50, alignment: .center)
-                    
                 }
                 drawInputBox(geometry)
             }
@@ -46,13 +43,21 @@ struct EditTravelView: View {
     
     private func drawInputBox(_ geometry: GeometryProxy) -> some View {
         return VStack(alignment: .leading, spacing: 10) {
-            drawTitle("title".localized())
-            TextField("title".localized(), text: $vm.title)
+            drawTitle("title".localized() + " *")
+            TextField("travel_title".localized(), text: $vm.title)
                 .padding(EdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 8))
                 .background(
                     RoundedRectangle(cornerRadius: 6)
                         .foregroundColor(.inputBoxColor)
                 )
+                .onChange(of: $vm.title.wrappedValue) { newValue in
+                    if $vm.title.wrappedValue == " " {
+                        $vm.title.wrappedValue = ""
+                    }
+                    if newValue.count > 10 {
+                        $vm.title.wrappedValue.removeLast()
+                    }
+                }
                 .contentShape(Rectangle())
             
             drawTitle("introduction".localized())
@@ -115,25 +120,16 @@ struct EditTravelView: View {
                     .font(.kr12b)
                     .foregroundColor(.gray90)
                 Spacer()
-                Image("close")
+                Image("drag_drop")
                     .resizable()
-                    .frame(both: 10.0, aligment: .center)
-                    .padding(6)
-                    .background(
-                        Circle()
-                            .foregroundColor(.white)
-                    )
-                    .onTapGesture {
-                        vm.onClickDeleteFootprint(item)
-                    }
+                    .frame(both: 20.0, aligment: .center)
             }
-            Spacer()
         }
         .padding(EdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 8))
         .contentShape(Rectangle())
         .frame(
             minWidth:  geometry.size.width - 32, idealWidth:  geometry.size.width - 32, maxWidth: geometry.size.width - 32,
-            minHeight: 100, idealHeight: nil, maxHeight: nil, alignment: .leading
+            minHeight: 40, idealHeight: nil, maxHeight: nil, alignment: .leading
         )
         .background(
             RoundedRectangle(cornerRadius: 12)
@@ -143,8 +139,7 @@ struct EditTravelView: View {
             $vm.draggedItem.wrappedValue = item
             return NSItemProvider(item: nil, typeIdentifier: item.title)
         }
-        .onDrop(of: [UTType.text], delegate: DragAndDropService<FootPrint>(currentItem: item, items: $vm.footprints, draggedItem: $vm.draggedItem)
-        )
+        .onDrop(of: [UTType.text], delegate: DragAndDropService<FootPrint>(currentItem: item, items: $vm.footprints, draggedItem: $vm.draggedItem))
     }
     
     private func drawAddNewItem(_ geometry: GeometryProxy) -> some View {

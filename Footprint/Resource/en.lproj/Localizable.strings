@@ -34,7 +34,7 @@
 "color"="color";
 "complete"="complete";
 "people_name"="name(up to 10)";
-"people_description"="설명(최대 10자)";
+"people_description"="description(up to 10)";
 "add_people_with"="add people with";
 "edit_people_with"="edit people with";
 "edit_category"="edit category";
@@ -59,6 +59,7 @@
 "premium_name"="name";
 "enter_premium_code"="enter premium code";
 "confirm"="confirm";
+"travel_title"="title(up to 10)";
 
 "setting"="setting";
 "app_setting"="app setting";
@@ -92,6 +93,9 @@
 "alert_cannot_load_information"="Unable to load information.";
 "alert_request_permission_location"="Location permission is required for smooth usage.";
 "alert_request_permission_location_description"="Press OK to go to permission settings.";
+
+"alert_enter_title"="Please enter a title.";
+"no_title"="no title";
 
 "map"="map";
 "favorite"="favorite";
