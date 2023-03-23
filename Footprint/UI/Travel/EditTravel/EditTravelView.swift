@@ -43,7 +43,7 @@ struct EditTravelView: View {
     
     private func drawInputBox(_ geometry: GeometryProxy) -> some View {
         return VStack(alignment: .leading, spacing: 10) {
-            drawTitle("title".localized() + " *")
+            drawTitle("title".localized())
             TextField("travel_title".localized(), text: $vm.title)
                 .padding(EdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 8))
                 .background(

@@ -184,11 +184,9 @@ class EditFootprintViewModel: BaseViewModel {
     
     func onClickSave() {
         self.isKeyboardVisible = false
-
-//        if self.title.isEmpty {
-//            self.alert(.ok, description: "title을 적어주세요")
-//            return
-//        }
+        if self.title.isEmpty {
+            self.title = "no_title".localized();
+        }
         // image save
         self.startProgress()
         let imageUrls: List<String> = List<String>()
