@@ -23,7 +23,7 @@ struct MainMapOptionView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 0) {
-                Topbar("지도 옵션 선택하기", type: .back) {
+                Topbar("select_map_option".localized(), type: .back) {
                     vm.onClose()
                 }
                 
@@ -37,19 +37,4 @@ struct MainMapOptionView: View {
             vm.onAppear()
         }
     }
-    
-    
-//    private func drawPermissionItem(_ geometry: GeometryProxy, text: String, isOn: Binding<Bool>) -> some View {
-//        return HStack(alignment: .center, spacing: 0) {
-//            Text(text)
-//                .font(.kr11r)
-//                .foregroundColor(.textColor1)
-//            Spacer()
-//            SToggleView(width: 36.0, height: 20.0, color: .greenTint2, isOn: isOn) {
-//                // onTapGesture
-//                
-//            }
-//        }
-//        .padding([.leading, .trailing], 18)
-//    }
 }

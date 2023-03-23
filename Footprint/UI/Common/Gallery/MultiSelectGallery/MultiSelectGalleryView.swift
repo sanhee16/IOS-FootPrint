@@ -43,7 +43,7 @@ struct MultiSelectGalleryView: View {
                             VStack(alignment: .center, spacing: 0) {
                                 if $vm.items.wrappedValue.isEmpty {
                                     Spacer()
-                                    Text("앨범이 비어있습니다.")
+                                    Text("empty_album".localized())
                                         .font(.kr14b)
                                         .foregroundColor(.textColor1)
                                     Spacer()
@@ -93,7 +93,7 @@ struct MultiSelectGalleryView: View {
                             }
                             .frame(width: geometry.size.width, height: geometry.size.height - 50, alignment: .center)
                             
-                            Text("선택하기")
+                            Text("select".localized())
                                 .font(.kr16b)
                                 .foregroundColor(.white)
                                 .frame(width: geometry.size.width - 40, height: 50, alignment: .center)

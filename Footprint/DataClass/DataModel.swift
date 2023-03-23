@@ -50,7 +50,7 @@ enum PinColor: Int {
     
     var pinColorHex: String {
         switch self {
-        case .pin0: return "#000000"
+        case .pin0: return "#373945"
         case .pin1: return "#FC1961"
         case .pin2: return "#FA5252"
         case .pin3: return "#8D5DE8"

@@ -75,7 +75,7 @@ struct PeopleEditView: View {
                     }
             }
             
-            TextField("이름(최대 10자)", text: $vm.name)
+            TextField("people_name".localized(), text: $vm.name)
                 .padding(EdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 8))
                 .background(
                     RoundedRectangle(cornerRadius: 6)
@@ -92,7 +92,7 @@ struct PeopleEditView: View {
                 }
                 .contentShape(Rectangle())
             
-            TextField("설명(최대 10자)", text: $vm.intro)
+            TextField("people_description".localized(), text: $vm.intro)
                 .padding(EdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 8))
                 .background(
                     RoundedRectangle(cornerRadius: 6)
@@ -115,26 +115,26 @@ struct PeopleEditView: View {
     
     private func drawHeader() -> some View {
         return ZStack(alignment: .center) {
-            Topbar(vm.type == .new ? "함께한 사람 추가하기" : "함께한 사람 수정하기", type: .close) {
+            Topbar(vm.type == .new ? "add_people_with".localized() : "edit_people_with".localized(), type: .close) {
                 vm.onClose()
             }
             HStack(alignment: .center, spacing: 8) {
                 Spacer()
                 if vm.type == .new {
-                    Text("추가")
+                    Text("add".localized())
                         .font(.kr12r)
                         .foregroundColor(.gray90)
                         .onTapGesture {
                             vm.addItem()
                         }
                 } else {
-                    Text("삭제")
+                    Text("delete".localized())
                         .font(.kr12r)
                         .foregroundColor(.gray90)
                         .onTapGesture {
                             vm.deleteItem()
                         }
-                    Text("저장")
+                    Text("save".localized())
                         .font(.kr12r)
                         .foregroundColor(.gray90)
                         .onTapGesture {

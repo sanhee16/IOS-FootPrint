@@ -49,7 +49,7 @@ class SettingViewModel: BaseViewModel {
         if MFMailComposeViewController.canSendMail() {
             self.isShowingMailView = true
         } else {
-            self.alert(.ok, description: "이메일을 보낼 수 있는 설정이 되어있지 않습니다.\n메일 앱에서 계정 연결 후, 메일 사용을 허용해 주세요.")
+            self.alert(.ok, description: "alert_no_email".localized())
         }
     }
     

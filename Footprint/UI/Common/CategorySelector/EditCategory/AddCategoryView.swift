@@ -24,14 +24,14 @@ struct AddCategoryView: View, KeyboardReadable {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             ZStack(alignment: .trailing) {
-                Topbar($vm.type.type.wrappedValue == .create ? "카테고리 추가" : "카테고리 편집", type: .close) {
+                Topbar($vm.type.type.wrappedValue == .create ? "add".localized() : "edit".localized(), type: .close) {
                     vm.onClose()
                 }
                 //TODO: 삭제 버튼 만들고 로직 추가
                 HStack(alignment: .center, spacing: 0) {
                     Spacer()
                     if $vm.type.wrappedValue.type == .update {
-                        Text("삭제")
+                        Text("delete".localized())
                             .font(.kr12r)
                             .foregroundColor(.gray90)
                             .padding(.trailing, 12)
@@ -40,7 +40,7 @@ struct AddCategoryView: View, KeyboardReadable {
                             }
                     }
                     if $vm.isAvailableSave.wrappedValue {
-                        Text($vm.type.wrappedValue.type == .update ? "저장" : "추가")
+                        Text($vm.type.wrappedValue.type == .update ? "save".localized() : "add".localized())
                             .font(.kr12r)
                             .foregroundColor(.gray90)
                             .padding(.trailing, 12)
@@ -51,7 +51,7 @@ struct AddCategoryView: View, KeyboardReadable {
                 }
             }
             VStack(alignment: .center, spacing: 12) {
-                TextField("카테고리 이름(최대 10자)", text: $vm.name)
+                TextField("category_name".localized(), text: $vm.name)
                     .padding(EdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 8))
                     .background(
                         RoundedRectangle(cornerRadius: 6)
@@ -89,7 +89,7 @@ struct AddCategoryView: View, KeyboardReadable {
     
     private func drawPinSelectArea() -> some View {
         return VStack(alignment: .leading, spacing: 4) {
-            Text("pin 선택")
+            Text("marker".localized())
                 .font(.kr11b)
                 .foregroundColor(.gray90)
                 .padding(EdgeInsets(top: 10, leading: 18, bottom: 6, trailing: 12))
@@ -105,7 +105,7 @@ struct AddCategoryView: View, KeyboardReadable {
     
     private func drawPinColorSelectArea() -> some View {
         return VStack(alignment: .leading, spacing: 4) {
-            Text("pin 색상 선택")
+            Text("marker_color".localized())
                 .font(.kr11b)
                 .foregroundColor(.gray90)
                 .padding(EdgeInsets(top: 10, leading: 18, bottom: 6, trailing: 12))

@@ -28,14 +28,8 @@ struct FootprintListView: View {
             VStack(alignment: .leading, spacing: 0) {
                 ZStack(alignment: .leading) {
                     Topbar("footprints".localized(), type: .none)
-                    HStack(alignment: .center, spacing: 10) {
+                    HStack(alignment: .center, spacing: 12) {
                         Spacer()
-                        Text("필터")
-                            .font(.kr12r)
-                            .foregroundColor(.textColor1)
-                            .onTapGesture {
-                                vm.onClickFilter()
-                            }
                         Image($vm.isShowStarOnly.wrappedValue ? "star_on" : "star_off")
                             .resizable()
                             .scaledToFit()
@@ -43,9 +37,13 @@ struct FootprintListView: View {
                             .onTapGesture {
                                 vm.onClickShowStarOnly()
                             }
+                        Text("filter".localized())
+                            .menuText()
+                            .onTapGesture {
+                                vm.onClickFilter()
+                            }
                     }
-                    .padding([.leading, .trailing], 8)
-                    .frame(width: geometry.size.width - 24, height: 50, alignment: .center)
+                    .menuView()
                 }
                 .frame(width: geometry.size.width, height: 50, alignment: .center)
                 ScrollViewReader { scrollProxy in
@@ -176,13 +174,6 @@ struct FootprintListView: View {
                 .foregroundColor(Color.gray90)
                 .multilineTextAlignment(.leading)
                 .lineLimit(nil)
-//            HStack(alignment: .center, spacing: 8) {
-//                ForEach(items, id: \.self) { item in
-//                    Text(Util.makePeopleWithNameString(items))
-//                        .font(.kr11r)
-//                        .foregroundColor(Color.gray90)
-//                }
-//            }
         }
     }
 

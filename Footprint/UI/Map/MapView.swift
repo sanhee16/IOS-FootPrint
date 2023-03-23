@@ -162,7 +162,7 @@ struct MapView: View {
                 }
             }
             if $vm.isShowingSearchResults.wrappedValue {
-                Text("취소")
+                Text("cancel".localized())
                     .font(.kr13r)
                     .foregroundColor(.white)
                     .frame(width: searchBoxWidth, height: self.optionHeight, alignment: .center)

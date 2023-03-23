@@ -58,7 +58,7 @@ class EditTravelViewModel: BaseViewModel {
             isChanged = false
         }
         if isChanged {
-            self.alert(.yesOrNo, title: "저장하지 않고 나가시겠습니까?") {[weak self] isClose in
+            self.alert(.yesOrNo, title: "alert_out_without_save".localized()) {[weak self] isClose in
                 if isClose {
                     self?.dismiss()
                 }
@@ -83,19 +83,6 @@ class EditTravelViewModel: BaseViewModel {
     }
 
     
-//    func onClickAdd() {
-//        self.startProgress()
-//        try! self.realm.write {[weak self] in
-//            guard let self = self else { return }
-//            let list = RealmSwift.List<FootPrint>()
-//            list.append(objectsIn: self.footprints)
-//            let item = Travel(footprints: list, title: self.title, intro: self.intro, color: color.toTravelBackground() ?? "#FFFFFF", fromDate: self.fromDate, toDate: self.toDate)
-//            self.realm.add(item)
-//            self.stopProgress()
-//            self.dismiss()
-//        }
-//    }
-    
     func onClickDeleteFootprint(_ item: FootPrint) {
         guard let idx = self.footprints.firstIndex(where: { listItem in
             listItem.id == item.id
@@ -106,15 +93,6 @@ class EditTravelViewModel: BaseViewModel {
     }
     
     func onClickSave() {
-//        if self.title.isEmpty {
-//            self.alert(.ok, title: "제목을 입력해주세요.")
-//            return
-//        }
-//        if self.footprints.isEmpty {
-//            self.alert(.ok, title: "노트를 선택해주세요.")
-//            return
-//        }
-        
         if case .create = type {
             try! self.realm.write {[weak self] in
                 guard let self = self else { return }

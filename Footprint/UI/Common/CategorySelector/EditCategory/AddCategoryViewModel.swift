@@ -70,7 +70,7 @@ class AddCategoryViewModel: BaseViewModel {
     func onClickSave() {
         self.isKeyboardVisible = false
         if name.isEmpty {
-            self.alert(.ok, description: "카테고리명을 적어주세요")
+            self.alert(.ok, description: "alert_enter_category_name".localized())
             return
         }
         switch self.type.type {
@@ -111,11 +111,11 @@ class AddCategoryViewModel: BaseViewModel {
     func onClickDelete() {
         if let category = self.type.category, let filteredData = self.realm.object(ofType: Category.self, forPrimaryKey: category.tag) {
             if category.tag == 0 {
-                self.alert(.ok, title: "기본 카테고리는 삭제할 수 없습니다.")
+                self.alert(.ok, title: "alert_cannot_delete_basic_category".localized())
                 return
             }
             
-            self.alert(.yesOrNo, title: "카테고리를 삭제하시겠습니까?", description: "카테고리를 삭제하면 해당 카테고리로 설정된 노트들은 모두 삭제됩니다.") {[weak self] isDelete in
+            self.alert(.yesOrNo, title: "alert_delete_category".localized(), description: "alert_detete_category_description".localized()) {[weak self] isDelete in
                 guard let self = self else { return }
                 let items = self.realm.objects(FootPrint.self)
                     .filter { footPrint in
@@ -137,7 +137,7 @@ class AddCategoryViewModel: BaseViewModel {
                 }
             }
         } else {
-            self.alert(.ok, title: "오류가 발생했습니다.", description: "잠시 후 다시 시도해 주세요.")
+            self.alert(.ok, title: "alert_error".localized(), description: "alert_error_try_again".localized())
         }
     }
 }

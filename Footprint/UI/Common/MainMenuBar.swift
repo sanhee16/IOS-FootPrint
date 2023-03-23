@@ -42,11 +42,11 @@ public enum MainMenuType: Int, Equatable {
     
     var text: String {
         switch self {
-        case .map: return "지도"
-        case .footprints: return "노트"
-        case .travel: return "여행"
-        case .favorite: return "즐겨찾기"
-        case .setting: return "설정"
+        case .map: return "map".localized()
+        case .footprints: return "footprints".localized()
+        case .travel: return "travel".localized()
+        case .favorite: return "favorite".localized()
+        case .setting: return "setting".localized()
         }
     }
     

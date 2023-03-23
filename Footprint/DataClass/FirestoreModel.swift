@@ -26,16 +26,4 @@ struct PremiumModel: Codable {
         case isUsing
     }
     
-//    init(id: String, name: String, isUsing: Bool) {
-//        self.id = id
-//        self.name = name
-//        self.isUsing = isUsing
-//    }
-//
-//    init(from decoder: Decoder) throws {
-//        let values = try decoder.container(keyedBy: CodingKeys.self)
-//        id = try values.decode(String.self, forKey: .id)
-//        name = try values.decode(String.self, forKey: .name)
-//        isUsing = try values.decode(Bool.self, forKey: .isUsing)
-//    }
 }

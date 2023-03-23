@@ -134,20 +134,18 @@ struct ShowFootPrintView: View {
             
             HStack(alignment: .center, spacing: 12) {
                 Spacer()
-                Text("수정")
-                    .font(.kr12r)
-                    .foregroundColor(.textColor1)
+                Text("edit".localized())
+                    .menuText()
                     .onTapGesture {
                         vm.onClickModifyFootprint()
                     }
-                Text("추가")
-                    .font(.kr12r)
-                    .foregroundColor(.textColor1)
+                Text("add".localized())
+                    .menuText()
                     .onTapGesture {
                         vm.onClickAddFootprint()
                     }
             }
-            .frame(width: geometry.size.width - 24, height: 50, alignment: .center)
+            .menuView()
         }
         .frame(width: geometry.size.width, height: 50, alignment: .center)
     }
@@ -162,21 +160,6 @@ struct ShowFootPrintView: View {
                 .foregroundColor(Color.gray90)
                 .multilineTextAlignment(.leading)
                 .lineLimit(nil)
-//            LazyVGrid(columns: [GridItem(.adaptive(minimum: 70.0), spacing: 8, alignment: .leading)]) {
-//                ForEach(items, id: \.self) { item in
-//                    Text(item.name)
-//                        .font(.kr11r)
-//                        .foregroundColor(Color.gray90)
-//                        .lineLimit(1)
-//                }
-//            }
-//            HStack(alignment: .center, spacing: 8) {
-//                ForEach(items, id: \.self) { item in
-//                    Text(item.name)
-//                        .font(.kr11r)
-//                        .foregroundColor(Color.gray90)
-//                }
-//            }
         }
         .padding(EdgeInsets(top: 0, leading: 16, bottom: 2, trailing: 0))
     }
@@ -219,16 +202,4 @@ struct ShowFootPrintView: View {
             .padding(EdgeInsets(top: 3, leading: 16, bottom: 8, trailing: 16))
         }
     }
-    
-//    private func pinItem(_ item: PinType, isSelected: Bool) -> some View {
-//        return Image(item.pinName)
-//            .resizable()
-//            .scaledToFit()
-//            .frame(both: 30)
-//            .padding(10)
-//            .border(isSelected ? .fColor3 : .clear, lineWidth: 2, cornerRadius: 12)
-//            .onTapGesture {
-//                //                vm.onSelectPin(item)
-//            }
-//    }
 }

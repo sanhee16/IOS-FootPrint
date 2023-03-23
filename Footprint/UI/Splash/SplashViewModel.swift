@@ -49,16 +49,16 @@ class SplashViewModel: BaseViewModel {
             // 혹시 모르니까 다 지워버릴 것
             self.realm.deleteAll()
             
-            self.realm.add(PeopleWith(id: 0, name: "없음", image: "", intro: ""))
+            self.realm.add(PeopleWith(id: 0, name: "nobody".localized(), image: "", intro: ""))
             
             let categories: [Category] = [
-                Category(tag: 0, name: "기본", pinType: .star, pinColor: PinColor.pin0),
-                Category(tag: 1, name: "맛집", pinType: .restaurant, pinColor: PinColor.pin1),
-                Category(tag: 2, name: "술집", pinType: .wine, pinColor: PinColor.pin2),
-                Category(tag: 3, name: "빵집", pinType: .bread, pinColor: PinColor.pin3),
-                Category(tag: 4, name: "디저트", pinType: .cake, pinColor: PinColor.pin4),
-                Category(tag: 5, name: "운동", pinType: .exercise, pinColor: PinColor.pin5),
-                Category(tag: 6, name: "카페", pinType: .coffee, pinColor: PinColor.pin6)
+                Category(tag: 0, name: "basic".localized(), pinType: .star, pinColor: PinColor.pin0),
+                Category(tag: 1, name: "restaurant".localized(), pinType: .restaurant, pinColor: PinColor.pin1),
+                Category(tag: 2, name: "bar".localized(), pinType: .wine, pinColor: PinColor.pin2),
+                Category(tag: 3, name: "bakery".localized(), pinType: .bread, pinColor: PinColor.pin3),
+                Category(tag: 4, name: "dessert".localized(), pinType: .cake, pinColor: PinColor.pin4),
+                Category(tag: 5, name: "work_out".localized(), pinType: .exercise, pinColor: PinColor.pin5),
+                Category(tag: 6, name: "cafe".localized(), pinType: .coffee, pinColor: PinColor.pin6)
             ]
             
             var showingCategories = Defaults.showingCategories

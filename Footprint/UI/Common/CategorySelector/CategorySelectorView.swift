@@ -41,7 +41,7 @@ struct CategorySelectorView: View {
                     HStack(alignment: .center, spacing: 0) {
                         Spacer()
                         if case .select(selectedCategory: _, callback: _) = vm.type {
-                            Text("완료")
+                            Text("complete".localized())
                                 .font(.kr12r)
                                 .foregroundColor(.gray90)
                                 .padding(.trailing, 12)

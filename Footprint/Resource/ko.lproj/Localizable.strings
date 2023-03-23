@@ -6,4 +6,96 @@
   
 */
 
+"basic"="기본";
+"restaurant"="맛집";
+"bar"="술집";
+"bakery"="빵집";
+"dessert"="디저트";
+"work_out"="운동";
+"cafe"="카페";
+
 "footprints"="노트";
+"cancel"="취소";
+"delete"="삭제";
+"edit"="편집";
+"title"="제목";
+"introduction"="간단 소개";
+"content"="내용";
+"date"="날짜";
+"image"="이미지";
+"people_with"="함께한 사람";
+"add"="추가";
+"category"="카테고리";
+"select"="선택";
+"save"="저장";
+"category_name"="카테고리 이름(최대 10자)";
+"marker"="마커";
+"marker_color"="마커 색상";
+"color"="색상";
+"complete"="완료";
+"people_name"="이름(최대 10자)";
+"people_description"="설명(최대 10자)";
+"add_people_with"="함께한 사람 추가하기";
+"edit_people_with"="함께한 사람 편집하기";
+"edit_category"="카테고리 편집하기";
+"empty_album"="앨범이 비어있습니다.";
+"detail_image"="사진 상세보기";
+"travel_list"="여행 목록";
+"schedule_count"="일정: %@개";
+"filter"="필터";
+"revert"="되돌리기";
+"restore"="복원";
+"empty"="비우기";
+"trash"="휴지통";
+"trash_left"="%@일 남음";
+"select_map_option"="지도 옵션 선택하기";
+"check_permission"="권한 확인하기";
+"check_permission_description"="원활한 사용을 위해 모든 권한허용을 추천합니다.\n권한 허용 후 사용되는 정보들은 수집되지 않습니다.";
+"permission_location"="위치사용권한";
+"permission_camera"="카메라사용권한";
+"permission_photo"="사진접근권한";
+"permission_notification"="알림허용";
+"premium_code"="프리미엄 코드";
+"premium_name"="이름";
+"enter_premium_code"="프리미엄 코드 입력하기";
+"confirm"="확인";
+
+"setting"="설정";
+"app_setting"="앱 설정";
+"display_search_bar"="검색창 표시";
+"other_setting"="기타";
+"contact_us"="문의하기";
+"developer_info"="개발자 정보";
+"admin_mode"="관리자 모드";
+
+"trash_description"="휴지통에 있는 항목들은 %@일이 지나면 완전 삭제됩니다.";
+
+"alert_enter_category_name"="카테고리명을 적어주세요";
+"alert_cannot_delete_basic_category"="기본 카테고리는 삭제할 수 없습니다.";
+"alert_cannot_edit_basic_category"="기본 카테고리는 삭제할 수 없습니다.";
+"alert_delete_category"="카테고리를 삭제하시겠습니까?";
+"alert_detete_category_description"="카테고리를 삭제하면 해당 카테고리로 설정된 노트들은 모두 삭제됩니다.";
+"alert_error"="오류가 발생했습니다.";
+"alert_error_try_again"="잠시 후 다시 시도해 주세요.";
+"alert_out_without_save"="저장하지 않고 나가시겠습니까?";
+"alert_delete"="삭제하시겠습니까?";
+"alert_delete_people_with_description"="기존 노트는 유지됩니다.";
+"alert_delete_item"="삭제된 노트는 설정 > 휴지통에 %@일간 보관됩니다.";
+"alert_fail"="실패했습니다.";
+"alert_permission_album"="사진권한을 허용해야 사용할 수 있습니다.";
+"alert_empty_trash"="휴지통을 비우시겠습니까?";
+"alert_empty_trash_description"="휴지통을 비우면 복원할 수 없습니다.";
+"alert_no_email"="이메일을 보낼 수 있는 설정이 되어있지 않습니다.\n메일 앱에서 계정 연결 후, 메일 사용을 허용해 주세요.";
+
+"alert_add_marker_location"="해당 위치에 마커를 추가하시겠습니까?";
+"alert_add_marker_name"="%@에 마커를 추가하시겠습니까?";
+"alert_cannot_load_information"="정보를 불러올 수 없습니다.";
+"alert_request_permission_location"="원활한 사용을 위해 위치권한이 필요합니다.";
+"alert_request_permission_location_description"="OK를 누르면 권한설정으로 이동합니다.";
+
+"map"="지도";
+"favorite"="즐겨찾기";
+"travel"="여행";
+"nobody"="없음";
+
+

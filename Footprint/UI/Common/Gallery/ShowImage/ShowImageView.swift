@@ -26,7 +26,7 @@ struct ShowImageView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .center, spacing: 0) {
-                Topbar("사진 상세보기", type: .closeWhite, textColor: .white) {
+                Topbar("detail_image".localized(), type: .closeWhite, textColor: .white) {
                     vm.onClose()
                 }
                 Pager(page: $vm.page.wrappedValue, data: $vm.images.wrappedValue.indices, id: \.self) { idx in

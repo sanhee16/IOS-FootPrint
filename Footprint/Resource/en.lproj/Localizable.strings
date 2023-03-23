@@ -6,4 +6,95 @@
   
 */
 
+"basic"="basic";
+"restaurant"="restaurant";
+"bar"="bar";
+"bakery"="bakery";
+"dessert"="dessert";
+"work_out"="work_out";
+"cafe"="cafe";
+
 "footprints"="footprints";
+"cancel"="cancel";
+"delete"="delete";
+"edit"="edit";
+"title"="title";
+"introduction"="introduction";
+"content"="content";
+"date"="date";
+"image"="image";
+"people_with"="people with";
+"add"="add";
+"category"="category";
+"select"="select";
+"save"="save";
+"category_name"="category name(up to 10)";
+"marker"="marker";
+"marker_color"="marker color";
+"color"="color";
+"complete"="complete";
+"people_name"="name(up to 10)";
+"people_description"="설명(최대 10자)";
+"add_people_with"="add people with";
+"edit_people_with"="edit people with";
+"edit_category"="edit category";
+"empty_album"="empty album.";
+"detail_image"="photo detail";
+"travel_list"="travel list";
+"schedule_count"="schedule: %@";
+"filter"="filter";
+"revert"="revert";
+"restore"="restore";
+"empty"="empty";
+"trash"="trash";
+"trash_left"="%@days left";
+"select_map_option"="select map option";
+"check_permission"="check permission";
+"check_permission_description"="To ensure smooth usage, we recommend allowing all permissions.\nThe information used after granting permission will not be collected";
+"permission_location"="location permission";
+"permission_camera"="camera permission";
+"permission_photo"="photo permission";
+"permission_notification"="notification permission";
+"premium_code"="premium code";
+"premium_name"="name";
+"enter_premium_code"="enter premium code";
+"confirm"="confirm";
+
+"setting"="setting";
+"app_setting"="app setting";
+"display_search_bar"="display search bar";
+"other_setting"="other setting";
+"contact_us"="contact us";
+"developer_info"="developer info";
+"admin_mode"="admin mode";
+
+"trash_description"="Items in the trash will be permanently deleted after %@ days.";
+
+"alert_enter_category_name"="Please enter a category name.";
+"alert_cannot_delete_basic_category"="Cannot delete the default category.";
+"alert_cannot_edit_basic_category"="Cannot edit the default category.";
+"alert_delete_category"="Do you want to delete this category?";
+"alert_detete_category_description"="Deleting this category will delete all notes set to this category.";
+"alert_error"="An error has occurred.";
+"alert_error_try_again"="Please try again later.";
+"alert_out_without_save"="Do you want to exit without saving?";
+"alert_delete"="Do you want to delete?";
+"alert_delete_people_with_description"="Existing notes will be preserved.";
+"alert_delete_item"="The deleted note will be kept in the Trash for %@ days.";
+"alert_fail"="Failed.";
+"alert_permission_album"="You need to allow photo permission to use this feature.";
+"alert_empty_trash"="Do you want to empty the trash?";
+"alert_empty_trash_description"="You will not be able to restore the items in the trash once you empty it.";
+"alert_no_email"="You have not set up your email account. Please connect your account in the Mail app and allow access to use email.";
+
+"alert_add_marker_location"="Do you want to add a marker at this location?";
+"alert_add_marker_name"="Do you want to add a marker at %@?";
+"alert_cannot_load_information"="Unable to load information.";
+"alert_request_permission_location"="Location permission is required for smooth usage.";
+"alert_request_permission_location_description"="Press OK to go to permission settings.";
+
+"map"="map";
+"favorite"="favorite";
+"travel"="travel";
+"nobody"="nobody";
+

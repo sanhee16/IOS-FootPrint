@@ -24,7 +24,7 @@ struct PeopleWithListView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 0) {
-                Topbar("함께한 친구 편집하기", type: .back) {
+                Topbar("edit_people_with".localized(), type: .back) {
                     vm.onClose()
                 }
                 VStack(alignment: .center, spacing: 0) {

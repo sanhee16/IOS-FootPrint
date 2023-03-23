@@ -64,11 +64,11 @@ class ShowFootPrintViewModel: BaseViewModel {
     func onClickDeleteFootprint() {
         let deleteId = self.footPrints[pageIdx].id
         
-        self.alert(.yesOrNo, title: "삭제하시겠습니까?", description: "삭제된 노트는 설정 > 휴지통에 30일간 보관됩니다.") {[weak self] isDelete in
+        self.alert(.yesOrNo, title: "alert_delete".localized(), description: "alert_delete_item".localized("\(Defaults.deleteDays)")) {[weak self] isDelete in
             guard let self = self else { return }
             if isDelete {
                 guard let item = self.realm.object(ofType: FootPrint.self, forPrimaryKey: deleteId) else {
-                    self.alert(.ok, title: "실패했습니다.")
+                    self.alert(.ok, title: "alert_fail".localized())
                     return
                 }
                 try! self.realm.write {[weak self] in

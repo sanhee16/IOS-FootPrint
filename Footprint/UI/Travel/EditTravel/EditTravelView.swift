@@ -29,17 +29,6 @@ struct EditTravelView: View {
                     Topbar($vm.title.wrappedValue, type: .back) {
                         vm.onClickSave()
                     }
-//                    HStack(alignment: .center, spacing: 12) {
-//                        Spacer()
-//                        if !$vm.title.wrappedValue.isEmpty && !$vm.footprints.wrappedValue.isEmpty {
-//                            Text("저장")
-//                                .font(.kr12r)
-//                                .foregroundColor(.gray90)
-//                                .onTapGesture {
-//                                    vm.onClickSave()
-//                                }
-//                        }
-//                    }
                     .padding([.leading, .trailing], 12)
                     .frame(width: geometry.size.width - 24, height: 50, alignment: .center)
                     
@@ -57,8 +46,8 @@ struct EditTravelView: View {
     
     private func drawInputBox(_ geometry: GeometryProxy) -> some View {
         return VStack(alignment: .leading, spacing: 10) {
-            drawTitle("여행 제목")
-            TextField("enter title", text: $vm.title)
+            drawTitle("title".localized())
+            TextField("title".localized(), text: $vm.title)
                 .padding(EdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 8))
                 .background(
                     RoundedRectangle(cornerRadius: 6)
@@ -66,8 +55,8 @@ struct EditTravelView: View {
                 )
                 .contentShape(Rectangle())
             
-            drawTitle("간단 소개글")
-            TextField("enter intro", text: $vm.intro)
+            drawTitle("introduction".localized())
+            TextField("introduction".localized(), text: $vm.intro)
                 .padding(EdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 8))
                 .background(
                     RoundedRectangle(cornerRadius: 6)
@@ -75,14 +64,14 @@ struct EditTravelView: View {
                 )
                 .contentShape(Rectangle())
             
-            drawTitle("날짜 선택")
+            drawTitle("date".localized())
             drawDateArea(geometry)
             
-            drawTitle("색상 선택")
+            drawTitle("color".localized())
             ColorPicker("", selection: $vm.color, supportsOpacity: false)
                 .labelsHidden()
             
-            drawTitle("노트 선택")
+            drawTitle("footprints".localized())
             ScrollView(.vertical, showsIndicators: false) {
                 ForEach($vm.footprints.wrappedValue.indices, id: \.self) { idx in
                     let item = $vm.footprints.wrappedValue[idx]

@@ -31,19 +31,18 @@ struct ShowTravelView: View {
                     }
                     HStack(alignment: .center, spacing: 16) {
                         Spacer()
-                        Text("삭제")
+                        Text("delete".localized())
                             .menuText()
                             .onTapGesture {
                                 vm.onClickDeleteTravel()
                             }
-                        Text("편집")
+                        Text("edit".localized())
                             .menuText()
                             .onTapGesture {
                                 vm.onClickEdit()
                             }
                     }
                     .menuView()
-                    
                 }
                 drawBody(geometry)
             }

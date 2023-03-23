@@ -29,10 +29,10 @@ struct CheckPermissionView: View {
             VStack(alignment: .center, spacing: 0) {
                 Spacer()
                 VStack(alignment: .center, spacing: 0) {
-                    Topbar("권한 확인하기", type: .close) {
+                    Topbar("check_permission".localized(), type: .close) {
                         vm.onClose()
                     }
-                    Text("원활한 사용을 위해 모든 권한허용을 추천합니다.\n권한 허용 후 사용되는 정보들은 수집되지 않습니다.")
+                    Text("check_permission_description".localized())
                         .font(.kr9r)
                         .foregroundColor(.gray60)
                         .multilineTextAlignment(.center)

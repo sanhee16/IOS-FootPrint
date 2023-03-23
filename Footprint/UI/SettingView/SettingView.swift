@@ -34,36 +34,36 @@ struct SettingView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 0) {
-                Topbar("설정", type: .none)
+                Topbar("setting".localized(), type: .none)
                     .onTapGesture {
                         vm.onClickTitle()
                     }
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 0) {
-                        drawTitle(geometry, title: "앱 설정")
-                        drawItem(geometry, title: "휴지통") {
+                        drawTitle(geometry, title: "app_setting".localized())
+                        drawItem(geometry, title: "trash".localized()) {
                             vm.onClickTrash()
                         }
-                        drawItem(geometry, title: "권한 확인하기") {
+                        drawItem(geometry, title: "check_permission".localized()) {
                             vm.onClickCheckPermission()
                         }
-                        drawItem(geometry, title: "함께한 사람 편집하기") {
+                        drawItem(geometry, title: "edit_people_with".localized()) {
                             vm.onClickEditPeopleWith()
                         }
-                        drawItem(geometry, title: "카테고리 편집하기") {
+                        drawItem(geometry, title: "edit_category".localized()) {
                             vm.onClickEditCategory()
                         }
-                        drawToggleItem(geometry, title: "검색창 표시", flag:.SEARCH_BAR, isOn: $vm.isOnSearchBar)
-                        drawTitle(geometry, title: "기타")
-                        drawItem(geometry, title: "문의하기") {
+                        drawToggleItem(geometry, title: "display_search_bar".localized(), flag:.SEARCH_BAR, isOn: $vm.isOnSearchBar)
+                        drawTitle(geometry, title: "other_setting".localized())
+                        drawItem(geometry, title: "contact_us".localized()) {
                             vm.onClickContact()
                         }
-                        drawItem(geometry, title: "개발자 정보") {
+                        drawItem(geometry, title: "developer_info".localized()) {
                             vm.onClickDevInfo()
                         }
                         if C.isDebugMode {
-                            drawTitle(geometry, title: "관리자 모드")
-                            drawItem(geometry, title: "프리미엄 코드 입력하기") {
+                            drawTitle(geometry, title: "admin_mode".localized())
+                            drawItem(geometry, title: "enter_premium_code".localized()) {
                                 vm.onClickEnterPremiumCode()
                             }
                         }
@@ -143,7 +143,6 @@ struct SettingView: View {
                 }
                 Spacer()
                 SToggleView(isOn: isOn) {
-                    print("toggle! \(isOn.wrappedValue)")
                     vm.onToggleSetting(flag, isOn: isOn.wrappedValue)
                 }
             }

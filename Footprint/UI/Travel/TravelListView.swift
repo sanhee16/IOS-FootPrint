@@ -24,7 +24,7 @@ struct TravelListView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 0) {
-                Topbar("여행 목록", type: .none)
+                Topbar("travel_list".localized(), type: .none)
                 ScrollViewReader { scrollProxy in
                     ZStack(alignment: .bottomTrailing) {
                         ScrollView(.vertical, showsIndicators: false) {
@@ -58,16 +58,6 @@ struct TravelListView: View {
                             }
                     }
                 }
-//                ScrollView(.vertical, showsIndicators: false) {
-//                    VStack(alignment: .leading, spacing: 12) {
-//                        ForEach($vm.travels.wrappedValue.indices, id: \.self) { idx in
-//                            let item = $vm.travels.wrappedValue[idx]
-//                            drawTravelItem(geometry, item: item)
-//                        }
-//                        drawAddNewItem(geometry)
-//                    }
-//                    .padding(EdgeInsets(top: 10, leading: 12, bottom: 30, trailing: 20))
-//                }
             }
             .padding(EdgeInsets(top: safeTop, leading: 0, bottom: safeBottom, trailing: 0))
             .edgesIgnoringSafeArea(.all)
@@ -109,7 +99,7 @@ struct TravelListView: View {
                     .font(.kr12r)
                     .foregroundColor(.gray90)
             }
-            Text("일정 : \(item.footprints.count)개")
+            Text("schedule_count".localized("\(item.footprints.count)"))
                 .font(.kr12r)
                 .foregroundColor(.gray90)
         }

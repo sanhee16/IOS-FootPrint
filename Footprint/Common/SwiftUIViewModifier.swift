@@ -13,7 +13,7 @@ extension View {
         modifier(MenuText())
     }
     
-    func menuView(_ height: CGFloat = 50.0) -> some View {
+    func menuView(_ height: CGFloat? = 50.0) -> some View {
         modifier(MenuView(height: height))
     }
 }
@@ -27,10 +27,11 @@ struct MenuText: ViewModifier {
 }
 
 struct MenuView: ViewModifier {
-    let height: CGFloat
+    let height: CGFloat?
+    let padding: CGFloat = 6.0
     func body(content: Content) -> some View {
         content
-            .padding([.leading, .trailing], 12)
-            .frame(width: UIScreen.main.bounds.width - 24, height: 50, alignment: .center)
+            .padding([.leading, .trailing], padding)
+            .frame(width: UIScreen.main.bounds.width - padding * 2, height: 50, alignment: .center)
     }
 }

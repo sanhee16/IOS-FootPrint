@@ -30,7 +30,7 @@ struct SelectFootprintsView: View {
                     }
                     HStack(alignment: .center, spacing: 0) {
                         Spacer()
-                        Text("완료")
+                        Text("complete".localized())
                             .menuText()
                             .onTapGesture {
                                 vm.onClickComplete()

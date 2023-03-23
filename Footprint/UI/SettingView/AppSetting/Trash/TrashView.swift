@@ -25,21 +25,21 @@ struct TrashView: View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 0) {
                 drawHeader(geometry)
-                Text("휴지통에 있는 항목들은 \(Defaults.deleteDays)일이 지나면 완전 삭제됩니다.")
+                Text("trash_description".localized("\(Defaults.deleteDays)"))
                     .font(.kr11r)
                     .foregroundColor(.textColor1)
                     .padding(EdgeInsets(top: 0, leading: 20, bottom: 8, trailing: 20))
                 
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 4) {
-                        drawTitle("Footprints")
+                        drawTitle("footprints".localized())
                         ForEach($vm.footprintItems.wrappedValue.indices, id: \.self) { idx in
                             let item = $vm.footprintItems.wrappedValue[idx]
                             drawTrashFootprint(geometry, item: item)
                         }
                         Divider()
                             .padding([.top, .bottom], 12)
-                        drawTitle("Travels")
+                        drawTitle("travel".localized())
                         ForEach($vm.travelItems.wrappedValue.indices, id: \.self) { idx in
                             let item = $vm.travelItems.wrappedValue[idx]
                             drawTrashTravel(geometry, item: item)
@@ -68,7 +68,7 @@ struct TrashView: View {
     
     private func drawHeader(_ geometry: GeometryProxy) -> some View {
         return ZStack(alignment: .center) {
-            Topbar("휴지통", type: .back) {
+            Topbar("trash".localized(), type: .back) {
                 vm.onClose()
             }
             if !$vm.footprintItems.wrappedValue.isEmpty || !$vm.travelItems.wrappedValue.isEmpty {
@@ -76,23 +76,23 @@ struct TrashView: View {
                     Spacer()
                     switch $vm.trashStatus.wrappedValue {
                     case .none:
-                        Text("복원")
+                        Text("restore".localized())
                             .menuText()
                             .onTapGesture {
                                 $vm.trashStatus.wrappedValue = .recovering
                             }
-                        Text("비우기")
+                        Text("empty".localized())
                             .menuText()
                             .onTapGesture {
                                 vm.deleteAll()
                             }
                     case .recovering:
-                        Text("취소")
+                        Text("cancel".localized())
                             .menuText()
                             .onTapGesture {
                                 vm.cancel()
                             }
-                        Text("복원")
+                        Text("restore".localized())
                             .menuText()
                             .onTapGesture {
                                 vm.recoveryItems()
@@ -108,7 +108,7 @@ struct TrashView: View {
         return HStack(alignment: .center, spacing: 0) {
             VStack(alignment: .leading, spacing: 2) {
                 HStack(alignment: .center, spacing: 4) {
-                    Text("\(item.leftDays)일 남음")
+                    Text("trash_left".localized("\(item.leftDays)"))
                         .font(.kr9r)
                         .foregroundColor(.white)
                         .padding(EdgeInsets(top: 3, leading: 5, bottom: 3, trailing: 5))
@@ -124,17 +124,6 @@ struct TrashView: View {
                 Text(item.item.createdAt.getDate())
                     .font(.kr10r)
                     .foregroundColor(.gray90)
-//                if let category = item.item.tag.getCategory() {
-//                    HStack(alignment: .center, spacing: 6) {
-//                        Image(category.pinType.pinType().pinWhite)
-//                            .resizable()
-//                            .frame(both: 18.0, aligment: .center)
-//                            .colorMultiply(Color(hex: category.pinColor.pinColor().pinColorHex))
-//                        Text(category.name)
-//                            .font(.kr12r)
-//                            .foregroundColor(Color(hex: category.pinColor.pinColor().pinColorHex))
-//                    }
-//                }
             }
             Spacer()
             if $vm.trashStatus.wrappedValue == .recovering {
@@ -156,7 +145,7 @@ struct TrashView: View {
         return HStack(alignment: .center, spacing: 0) {
             VStack(alignment: .leading, spacing: 2) {
                 HStack(alignment: .center, spacing: 4) {
-                    Text("\(item.leftDays)일 남음")
+                    Text("trash_left".localized("\(item.leftDays)"))
                         .font(.kr9r)
                         .foregroundColor(.white)
                         .padding(EdgeInsets(top: 3, leading: 5, bottom: 3, trailing: 5))

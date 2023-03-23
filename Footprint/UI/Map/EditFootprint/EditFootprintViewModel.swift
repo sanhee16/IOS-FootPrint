@@ -119,7 +119,7 @@ class EditFootprintViewModel: BaseViewModel {
     
     func onClose() {
         self.isKeyboardVisible = false
-        self.alert(.yesOrNo, title: nil, description: "저장하지 않고 나가시겠습니까?") {[weak self] isClose in
+        self.alert(.yesOrNo, title: nil, description: "alert_out_without_save".localized()) {[weak self] isClose in
             guard let self = self else { return }
             if isClose {
                 self.dismiss()
@@ -141,14 +141,14 @@ class EditFootprintViewModel: BaseViewModel {
                     }
                 })
             } else {
-                self.alert(.ok, title: nil, description: "사진권한을 허용해야 사용할 수 있습니다.")
+                self.alert(.ok, title: nil, description: "alert_permission_album".localized())
             }
         }
     }
     
     func removeImage(_ item: UIImage) {
         self.isKeyboardVisible = false
-        self.alert(.yesOrNo, title: nil, description: "삭제하시겠습니까?") {[weak self] allowRemove in
+        self.alert(.yesOrNo, title: nil, description: "alert_delete".localized()) {[weak self] allowRemove in
             guard let self = self else { return }
             if allowRemove {
                 for idx in self.images.indices {
@@ -162,11 +162,11 @@ class EditFootprintViewModel: BaseViewModel {
     }
     
     func onClickDelete(_ id: ObjectId) {
-        self.alert(.yesOrNo, title: "삭제하시겠습니까?", description: "삭제된 노트는 설정 > 휴지통에 30일간 보관됩니다.") {[weak self] isDelete in
+        self.alert(.yesOrNo, title: "alert_delete".localized(), description: "alert_delete_item".localized("\(Defaults.deleteDays)")) {[weak self] isDelete in
             guard let self = self else { return }
             if isDelete {
                 guard let item = self.realm.object(ofType: FootPrint.self, forPrimaryKey: id) else {
-                    self.alert(.ok, title: "실패했습니다.")
+                    self.alert(.ok, title: "alert_fail".localized())
                     return
                 }
                 try! self.realm.write {[weak self] in
@@ -256,18 +256,6 @@ class EditFootprintViewModel: BaseViewModel {
                 self.peopleWith = res
             }
         }))
-//        self.coordinator?.presentPeopleWithSelectorView(list) {[weak self] res in
-//            guard let self = self else { return }
-//            self.peopleWith.removeAll()
-//            if res.isEmpty {
-//                let item = self.realm.object(ofType: PeopleWith.self, forPrimaryKey: 0)
-//                if let item = item {
-//                    self.peopleWith.append(item)
-//                }
-//            } else {
-//                self.peopleWith = res
-//            }
-//        }
     }
     
     private func photoPermissionCheck(_ callback: @escaping (Bool)->()) {

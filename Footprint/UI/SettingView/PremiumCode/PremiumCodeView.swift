@@ -30,12 +30,12 @@ struct PremiumCodeView: View {
             VStack(alignment: .center, spacing: 0) {
                 Spacer()
                 VStack(alignment: .center, spacing: 0) {
-                    Topbar("프리미엄 코드 입력하기", type: .close) {
+                    Topbar("enter_premium_code".localized(), type: .close) {
                         vm.onClose()
                     }
                     
                     VStack(alignment: .leading, spacing: 8) {
-                        TextField("이름", text: $vm.name)
+                        TextField("premium_name".localized(), text: $vm.name)
                             .font(.kr10r)
                             .padding()
                             .frame(width: itemWidth, height: 28, alignment: .center)
@@ -43,7 +43,7 @@ struct PremiumCodeView: View {
                                 RoundedRectangle(cornerRadius: 6)
                                     .foregroundColor(.inputBoxColor)
                             )
-                        TextField("코드", text: $vm.code)
+                        TextField("premium_code".localized(), text: $vm.code)
                             .font(.kr10r)
                             .padding()
                             .frame(width: itemWidth, height: 28, alignment: .center)
@@ -54,7 +54,7 @@ struct PremiumCodeView: View {
                     }
                     .padding([.top, .bottom], 10)
                     
-                    Text("확인")
+                    Text("confirm".localized())
                         .font(.kr12r)
                         .foregroundColor(.white)
                         .frame(width: itemWidth, height: 30, alignment: .center)

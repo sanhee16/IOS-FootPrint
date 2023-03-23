@@ -68,7 +68,7 @@ class CategorySelectorViewModel: BaseViewModel {
             self.selectedCategory = item
         } else if case .edit = type {
             if item.tag == 0 {
-                self.alert(.ok, title: "기본 카테고리는 편집할 수 없습니다.")
+                self.alert(.ok, title: "alert_cannot_edit_basic_category".localized())
                 return
             }
             self.coordinator?.presentAddCategoryView(type: AddCategoryType(type: .update, category: item), onEraseCategory: { [weak self] in

@@ -28,7 +28,7 @@ struct EditFootprintView: View, KeyboardReadable {
                 drawHeader(geometry)
                 ScrollView(showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 10) {
-                        TextField("enter title", text: $vm.title)
+                        TextField("title".localized(), text: $vm.title)
                             .padding(EdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 8))
                             .background(
                                 RoundedRectangle(cornerRadius: 6)
@@ -46,7 +46,7 @@ struct EditFootprintView: View, KeyboardReadable {
                             .background(Color.fColor4)
                             .padding(EdgeInsets(top: 4, leading: 16, bottom: 4, trailing: 16))
                         
-                        MultilineTextField("enter content", text: $vm.content) {
+                        MultilineTextField("content".localized(), text: $vm.content) {
                             
                         }
                         .frame(minHeight: 300.0, alignment: .topLeading)
@@ -84,7 +84,7 @@ struct EditFootprintView: View, KeyboardReadable {
             Topbar("", type: .back) {
                 vm.onClickSave()
             }
-            HStack(alignment: .center, spacing: 10) {
+            HStack(alignment: .center, spacing: 12) {
                 Spacer()
                 Image($vm.isStar.wrappedValue ? "star_on" : "star_off")
                     .resizable()
@@ -94,22 +94,21 @@ struct EditFootprintView: View, KeyboardReadable {
                         $vm.isStar.wrappedValue = !$vm.isStar.wrappedValue
                     }
                 if case let .modify(item) = vm.type {
-                    Text("삭제")
-                        .font(.kr12r)
-                        .foregroundColor(.textColor1)
+                    Text("delete".localized())
+                        .menuText()
                         .onTapGesture {
                             vm.onClickDelete(item.id)
                         }
                 }
             }
-            .frame(width: geometry.size.width - 24, height: 50, alignment: .center)
+            .menuView()
         }
         .frame(width: geometry.size.width, height: 50, alignment: .center)
     }
     
     private func drawDateArea(_ geometry: GeometryProxy) -> some View {
         return HStack(alignment: .center, spacing: 0) {
-            Text("날짜 선택")
+            Text("date".localized())
                 .font(.kr13b)
                 .foregroundColor(.gray90)
             Spacer()
@@ -125,7 +124,7 @@ struct EditFootprintView: View, KeyboardReadable {
     
     private func drawImageArea(_ geometry: GeometryProxy) -> some View {
         return VStack(alignment: .leading, spacing: 4) {
-            Text("이미지 선택")
+            Text("image".localized())
                 .font(.kr13b)
                 .foregroundColor(.gray90)
                 .padding(EdgeInsets(top: 10, leading: 18, bottom: 6, trailing: 12))
@@ -164,11 +163,11 @@ struct EditFootprintView: View, KeyboardReadable {
     private func drawPeopleWithArea(_ geometry: GeometryProxy) -> some View {
         return VStack(alignment: .leading, spacing: 4) {
             HStack(alignment: .center, spacing: 10) {
-                Text("함께한 사람")
+                Text("people_with".localized())
                     .font(.kr13b)
                     .foregroundColor(.gray90)
                 Spacer()
-                Text("추가")
+                Text("add".localized())
                     .font(.kr12r)
                     .foregroundColor(.gray60)
                     .onTapGesture {
@@ -192,11 +191,11 @@ struct EditFootprintView: View, KeyboardReadable {
     private func drawCategorySelectArea(_ geometry: GeometryProxy) -> some View {
         return VStack(alignment: .leading, spacing: 4) {
             HStack(alignment: .center, spacing: 10) {
-                Text("카테고리")
+                Text("category".localized())
                     .font(.kr13b)
                     .foregroundColor(.gray90)
                 Spacer()
-                Text("선택")
+                Text("select".localized())
                     .font(.kr12r)
                     .foregroundColor(.gray60)
                     .onTapGesture {

@@ -86,7 +86,7 @@ class TrashViewModel: BaseViewModel {
     }
     
     func deleteAll() {
-        self.alert(.yesOrNo, title: "휴지통을 비우시겠습니까?", description: "휴지통을 비우면 복원할 수 없습니다.") {[weak self] isDelete in
+        self.alert(.yesOrNo, title: "alert_empty_trash".localized(), description: "alert_empty_trash_description".localized()) {[weak self] isDelete in
             guard let self = self else { return }
             if isDelete {
                 var deleteTravels: [Travel] = []

@@ -72,7 +72,7 @@ class PeopleEditViewModel: BaseViewModel {
             self.dismiss()
             return
         }
-        self.alert(.yesOrNo, title: "저장하지 않고 나가시겠습니까?") {[weak self] res in
+        self.alert(.yesOrNo, title: "alert_out_without_save".localized()) {[weak self] res in
             guard let self = self else { return }
             if res {
                 self.dismiss()
@@ -86,7 +86,7 @@ class PeopleEditViewModel: BaseViewModel {
         if type == .new {
             return
         }
-        self.alert(.yesOrNo, title: "삭제하시겠습니까?", description: "기존 노트는 유지됩니다.") {[weak self] res in
+        self.alert(.yesOrNo, title: "alert_delete".localized(), description: "alert_delete_people_with_description".localized()) {[weak self] res in
             guard let self = self else { return }
             if !res {
                 return

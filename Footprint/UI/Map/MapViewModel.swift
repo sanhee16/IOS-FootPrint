@@ -220,9 +220,9 @@ class MapViewModel: BaseViewModel {
         
         markerView.tintColor = PinColor.pin0.pinUIColor
         marker.iconView = markerView
-        var message: String = "해당 위치에 마커를 추가하시겠습니까?"
+        var message: String = "alert_add_marker_location".localized()
         if let name = name {
-            message = "\(name)에 마커를 추가하시겠습니까?"
+            message = "alert_add_marker_name".localized("\(name)")
         }
         self.alert(.yesOrNo, title: message) {[weak self] res in
             guard let self = self else { return }
@@ -410,7 +410,7 @@ class MapViewModel: BaseViewModel {
             } err: {[weak self] err in
                 print("error: \(err)")
                 self?.stopProgress()
-                self?.alert(.ok, title: "정보를 불러올 수 없습니다.")
+                self?.alert(.ok, title: "alert_cannot_load_information".localized())
             } complete: {
                 print("complete")
             }
@@ -422,7 +422,7 @@ class MapViewModel: BaseViewModel {
     
     func onClickLocationPermission() {
         self.removeCurrentMarker()
-        self.alert(.yesOrNo, title: "원활한 사용을 위해 위치권한이 필요합니다.", description: "OK를 누르면 권한설정으로 이동합니다.") { isAllow in
+        self.alert(.yesOrNo, title: "alert_request_permission_location".localized(), description: "alert_request_permission_location_description".localized()) { isAllow in
             if isAllow {
                 guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
                 

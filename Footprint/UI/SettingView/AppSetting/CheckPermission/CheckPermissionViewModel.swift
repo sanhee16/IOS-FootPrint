@@ -22,10 +22,10 @@ enum PermissionType {
     
     var text: String {
         switch self {
-        case .location: return "위치사용권한"
-        case .camera: return "카메라사용권한"
-        case .photo: return "사진접근권한"
-        case .notification: return "알림허용"
+        case .location: return "permission_location".localized()
+        case .camera: return "permission_camera".localized()
+        case .photo: return "permission_photo".localized()
+        case .notification: return "permission_notification".localized()
         }
     }
 }
@@ -117,19 +117,6 @@ class CheckPermissionViewModel: BaseViewModel {
             break
         }
     }
-    
-    
-    //    private func checkLocationPermission() {
-    //        switch CLLocationManager().authorizationStatus {
-    //        case .authorizedAlways, .authorizedWhenInUse:
-    //            self.locationPermission = true
-    //            break
-    //        default:
-    //            self.locationPermission = false
-    //            break
-    //        }
-    //    }
-    
     
     private func checkNotiPermission() {
         let currentNotification = UNUserNotificationCenter.current()

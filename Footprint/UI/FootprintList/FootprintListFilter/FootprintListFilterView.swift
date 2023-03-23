@@ -30,7 +30,7 @@ struct FootprintListFilterView: View {
                     vm.onClose()
                 }
                 VStack(alignment: .leading, spacing: 0) {
-                    drawTitle("함께한 사람")
+                    drawTitle("people_with".localized())
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(alignment: .center, spacing: 10.0) {
                             ForEach($vm.peopleWithList.wrappedValue.indices, id: \.self) { idx in
@@ -41,7 +41,7 @@ struct FootprintListFilterView: View {
                         }
                         .padding(EdgeInsets(top: 2, leading: 12, bottom: 2, trailing: 12))
                     }
-                    drawTitle("카테고리")
+                    drawTitle("category".localized())
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(alignment: .center, spacing: 10.0) {
                             ForEach($vm.categoryList.wrappedValue.indices, id: \.self) { idx in
@@ -54,7 +54,7 @@ struct FootprintListFilterView: View {
                     }
                     Spacer()
                     HStack(alignment: .center, spacing: 20) {
-                        Text("Clear")
+                        Text("revert".localized())
                             .font(.kr16r)
                             .foregroundColor(Color.white)
                             .frame(width: (geometry.size.width - horizontalPadding * 2 - 20) / 5 * 2, height: 45, alignment: .center)
@@ -66,7 +66,7 @@ struct FootprintListFilterView: View {
                             .onTapGesture {
                                 vm.onClickClear()
                             }
-                        Text("Save")
+                        Text("save".localized())
                             .font(.kr16r)
                             .foregroundColor(Color.fColor1)
                             .frame(width: (geometry.size.width - horizontalPadding * 2 - 20) / 5 * 3, height: 45, alignment: .center)
@@ -118,15 +118,6 @@ struct FootprintListFilterView: View {
     
     private func drawPeopleWith(_ item: PeopleWith, isSelected: Bool) -> some View {
         return HStack(alignment: .center, spacing: 6) {
-//            if let uiImage = ImageManager.shared.getSavedImage(named: item.image) {
-//                Image(uiImage: uiImage)
-//                    .resizable()
-//                    .scaledToFit()
-//                    .frame(both: 8.0, aligment: .center)
-//                    .clipShape(Circle())
-//                    .contentShape(Rectangle())
-//                    .clipped()
-//            }
             Text(item.name)
                 .font(.kr12r)
                 .foregroundColor(isSelected ? .fColor3 : .gray30)
