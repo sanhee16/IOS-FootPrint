@@ -50,12 +50,12 @@ class FootprintListViewModel: BaseViewModel {
         if self.isShowStarOnly {
             self.list = Array(self.realm.objects(FootPrint.self)
                 .filter({footprint in
-                    footprint.isStar
+                    footprint.isStar && footprint.deleteTime > 0
                 }))
         } else {
             self.list = Array(self.realm.objects(FootPrint.self)
                 .filter({footprint in
-                    self.isContain(items: footprint.peopleWithIds, filter: filterPeopleWithIds) && self.isContain(itemId: footprint.tag, filter: filterCategoryIds)
+                    self.isContain(items: footprint.peopleWithIds, filter: filterPeopleWithIds) && self.isContain(itemId: footprint.tag, filter: filterCategoryIds) && footprint.deleteTime == 0
                 }))
         }
     }

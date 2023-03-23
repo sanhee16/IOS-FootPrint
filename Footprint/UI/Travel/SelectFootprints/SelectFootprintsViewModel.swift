@@ -41,11 +41,10 @@ class SelectFootprintsViewModel: BaseViewModel {
     }
     
     func loadAllItems() {
-        let filterPeopleWithIds: [Int] = Defaults.filterPeopleIds
-        let filterCategoryIds: [Int] = Defaults.filterCategoryIds
-        print("filterPeopleWithIds: \(filterPeopleWithIds), filterCategoryIds: \(filterCategoryIds)")
-        
-        self.list = Array(self.realm.objects(FootPrint.self))
+        self.list = self.realm.objects(FootPrint.self)
+            .filter { item in
+                item.deleteTime == 0
+            }
     }
     
     func onClickItem(_ item: FootPrint) {
