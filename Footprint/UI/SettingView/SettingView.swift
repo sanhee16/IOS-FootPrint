@@ -58,9 +58,9 @@ struct SettingView: View {
                         drawItem(geometry, title: "contact_us".localized()) {
                             vm.onClickContact()
                         }
-                        drawItem(geometry, title: "developer_info".localized()) {
-                            vm.onClickDevInfo()
-                        }
+//                        drawItem(geometry, title: "developer_info".localized()) {
+//                            vm.onClickDevInfo()
+//                        }
                         if C.isDebugMode {
                             drawTitle(geometry, title: "admin_mode".localized())
                             drawItem(geometry, title: "enter_premium_code".localized()) {
