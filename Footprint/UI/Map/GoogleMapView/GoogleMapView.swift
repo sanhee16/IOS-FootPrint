@@ -37,21 +37,7 @@ struct GoogleMapView: UIViewRepresentable {
             vm.loadAllMarkers()
             return mapView
         }
-//        let latitude: Double = $vm.myLocation.wrappedValue?.latitude ?? 35.7532
-//        let longitude: Double = $vm.myLocation.wrappedValue?.longitude ?? 127.15
-//        print("longitude: \(longitude) / latitude: \(latitude)")
-//        let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: zoom)
-//        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
-//
-//        // 지도 setting
-//        // https://developers.google.com/maps/documentation/ios-sdk/controls
-//        mapView.isIndoorEnabled = false
-//        mapView.isMyLocationEnabled = true
-//        mapView.isBuildingsEnabled = false
-//        mapView.settings.compassButton = true
-//        mapView.settings.myLocationButton = true
-
-//        let mapView = C.mapView
+        
         mapView.delegate = context.coordinator
         
 //        vm.initMapView(mapView)
@@ -88,8 +74,6 @@ struct GoogleMapView: UIViewRepresentable {
         }
         
         func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-//            print("[GoogleMapView] on tap marker")
-//            print("marker info: \(marker)")
             let location = Location(latitude: marker.position.latitude, longitude: marker.position.longitude)
             if $vm.currentTapMarker.wrappedValue == marker {
                 vm.addNewMarker(location)
@@ -101,18 +85,17 @@ struct GoogleMapView: UIViewRepresentable {
         }
         
         func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
-            print("[GoogleMapView] success on tap mapview")
             vm.removeCurrentMarker()
             vm.drawCurrentMarker(Location(latitude: coordinate.latitude, longitude: coordinate.longitude))
             vm.addNewMarker(Location(latitude: coordinate.latitude, longitude: coordinate.longitude))
         }
         
         func mapView(_ mapView: GMSMapView, didTapMyLocation location: CLLocationCoordinate2D) {
-            //            print("[GoogleMapView] tap my loacation")
+
         }
         
         func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
-            //            print("[GoogleMapView] willMove")
+
         }
     }
 }

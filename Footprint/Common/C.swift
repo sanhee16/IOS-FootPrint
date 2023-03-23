@@ -21,6 +21,8 @@ public class C {
     static var permissionLocation: Bool = false
     static var mapView: GMSMapView? = nil
     static var isDebugMode: Bool = false
+    static var isFirstAppStart: Bool = true
+    
     
     static var devMode: DevMode = .develop
 }

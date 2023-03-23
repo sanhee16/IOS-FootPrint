@@ -54,7 +54,7 @@ class MapViewModel: BaseViewModel {
     }
     
     func onAppear() {
-        print("[MAP VIEW] onAppear")
+        print("[MAP VIEW] onAppear: \(C.isFirstAppStart)")
         self.removeCurrentMarker()
         switch checkLocationPermission() {
         case .allow:
@@ -66,7 +66,8 @@ class MapViewModel: BaseViewModel {
             self.myLocation = Location(latitude: 0.0, longitude: 0.0)
             break
         }
-        if let myLocation = self.myLocation {
+        if let myLocation = self.myLocation, C.isFirstAppStart {
+            C.isFirstAppStart = false
             self.moveCamera(CLLocationCoordinate2D(latitude: myLocation.latitude, longitude: myLocation.longitude))
         }
         self.loadAllMarkers()
