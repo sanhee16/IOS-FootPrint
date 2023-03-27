@@ -19,7 +19,7 @@ extension Int {
     }
     
     func getPeopleWith() -> PeopleWith? {
-        let realm = try! Realm()
+        let realm = R.realm
         let getPeopleWith = realm.objects(PeopleWith.self)
             .filter { peopleWith in
                 peopleWith.id == self
@@ -32,7 +32,7 @@ extension Int {
     }
     
     func getCategory() -> Category? {
-        let realm = try! Realm()
+        let realm = R.realm
         // 모든 객체 얻기
         let getCategory = realm.objects(Category.self)
             .sorted(byKeyPath: "tag", ascending: true)

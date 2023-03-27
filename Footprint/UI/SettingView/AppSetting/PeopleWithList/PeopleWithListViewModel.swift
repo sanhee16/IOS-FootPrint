@@ -15,7 +15,7 @@ class PeopleWithListViewModel: BaseViewModel {
     private let realm: Realm
     
     override init(_ coordinator: AppCoordinator) {
-        self.realm = try! Realm()
+        self.realm = R.realm
         super.init(coordinator)
     }
     

@@ -31,7 +31,7 @@ class EditTravelViewModel: BaseViewModel {
     let type: EditTravelType
     
     init(_ coordinator: AppCoordinator, type: EditTravelType) {
-        self.realm = try! Realm()
+        self.realm = R.realm
         self.type = type
         super.init(coordinator)
         if case let .edit(travel) = self.type {

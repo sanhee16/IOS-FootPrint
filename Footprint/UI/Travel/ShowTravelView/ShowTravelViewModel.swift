@@ -18,7 +18,7 @@ class ShowTravelViewModel: BaseViewModel {
     @Published var travel: Travel
     
     init(_ coordinator: AppCoordinator, travel: Travel) {
-        self.realm = try! Realm()
+        self.realm = R.realm
         self.travel = travel
         self.footprints = Array(travel.footprints)
         super.init(coordinator)

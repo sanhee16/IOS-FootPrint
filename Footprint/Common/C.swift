@@ -23,7 +23,6 @@ public class C {
     static var isDebugMode: Bool = false
     static var isFirstAppStart: Bool = true
     
-    
     static var devMode: DevMode = .develop
 }
 

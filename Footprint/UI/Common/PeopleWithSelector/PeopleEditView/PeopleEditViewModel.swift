@@ -45,7 +45,7 @@ class PeopleEditViewModel: BaseViewModel {
     init(_ coordinator: AppCoordinator, peopleEditStruct: PeopleEditStruct, callback: @escaping ((Int?) -> ())) {
         self.peopleEditStruct = peopleEditStruct
         self.type = peopleEditStruct.type
-        self.realm = try! Realm()
+        self.realm = R.realm
         self.callback = callback
         super.init(coordinator)
         

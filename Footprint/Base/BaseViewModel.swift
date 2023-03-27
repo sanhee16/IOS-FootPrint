@@ -10,6 +10,7 @@ import Foundation
 import SwiftUI
 import Combine
 import UIKit
+import RealmSwift
 
 
 class BaseViewModel: ObservableObject {

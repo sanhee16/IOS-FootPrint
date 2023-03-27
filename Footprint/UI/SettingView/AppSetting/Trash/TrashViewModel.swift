@@ -27,7 +27,7 @@ class TrashViewModel: BaseViewModel {
     
     
     override init(_ coordinator: AppCoordinator) {
-        self.realm = try! Realm()
+        self.realm = R.realm
         super.init(coordinator)
     }
     

@@ -21,7 +21,7 @@ class CategorySelectorViewModel: BaseViewModel {
     
     
     init(_ coordinator: AppCoordinator, type: CategorySelectorType) {
-        self.realm = try! Realm()
+        self.realm = R.realm
         self.type = type
         if case let .select(selectedCategory, _) = type {
             self.selectedCategory = selectedCategory

@@ -21,7 +21,7 @@ class ShowFootPrintViewModel: BaseViewModel {
     private var isLoading: Bool = false
     
     init(_ coordinator: AppCoordinator, location: Location) {
-        self.realm = try! Realm()
+        self.realm = R.realm
         self.location = location
         self.page = .withIndex(0)
         self.pageIdx = 0

@@ -46,7 +46,7 @@ class MapViewModel: BaseViewModel {
     
     override init(_ coordinator: AppCoordinator) {
         print("[MAP VIEW] init")
-        self.realm = try! Realm()
+        self.realm = R.realm
         self.locationManager = CLLocationManager()
         self.locationManager.allowsBackgroundLocationUpdates = true
         self.googleApi = GoogleApi.instance

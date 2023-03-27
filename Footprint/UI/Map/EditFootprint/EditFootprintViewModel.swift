@@ -59,7 +59,7 @@ class EditFootprintViewModel: BaseViewModel {
     private var address: String? = nil
     
     init(_ coordinator: AppCoordinator, location: Location, type: EditFootprintType) {
-        self.realm = try! Realm()
+        self.realm = R.realm
         self.location = location
         self.type = type
         

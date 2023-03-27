@@ -20,7 +20,7 @@ class FootprintListFilterViewModel: BaseViewModel {
     private var realm: Realm
     
     override init(_ coordinator: AppCoordinator) {
-        self.realm = try! Realm()
+        self.realm = R.realm
         super.init(coordinator)
         loadFiltersInfo()
     }

@@ -11,6 +11,9 @@ import Photos
 import RealmSwift
 import Realm
 
+class R {
+    static let realm: Realm = try! Realm()
+}
 
 struct GalleryItem: Equatable {
     public static func == (lhs: GalleryItem, rhs: GalleryItem) -> Bool {
