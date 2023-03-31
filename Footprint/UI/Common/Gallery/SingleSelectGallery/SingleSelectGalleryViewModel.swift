@@ -11,6 +11,7 @@ import Kingfisher
 import Photos
 import SwiftUI
 
+
 class SingleSelectGalleryViewModel: BaseViewModel {
     private var images: PHFetchResult<PHAsset>? = nil
     private let PAGE_SIZE = 30

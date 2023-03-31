@@ -10,19 +10,28 @@ import Kingfisher
 import Photos
 import SwiftUI
 
-class MultiSelectGalleryViewModel: BaseViewModel {
+enum GalleryType {
+    case single
+    case multi
+}
+
+class GalleryViewModel: BaseViewModel {
     private var images: PHFetchResult<PHAsset>? = nil
-    private let PAGE_SIZE = 30
-    var items: [GalleryItem] = []
-    var hasNextPage: Bool = true
-    var isFirstLoading = false
+    private let PAGE_SIZE = 50
+    @Published var items: [GalleryItem] = []
+    @Published var hasNextPage: Bool = true
+//    @Published var isFirstLoading = false
     var isLoading: Bool = false
     var onClickItem: (([GalleryItem])->())?
 //    @Published var item: GalleryItem? = nil
     @Published var selectedImages: [GalleryItem] = []
-    
-    init(_ coordinator: AppCoordinator, onClickItem: (([GalleryItem])->())?) {
+    @Published var selectedImage: GalleryItem? = nil
+    @Published var type: GalleryType
+    @Published var isAvailableSelect: Bool = false
+
+    init(_ coordinator: AppCoordinator, type: GalleryType, onClickItem: (([GalleryItem])->())?) {
         self.onClickItem = onClickItem
+        self.type = type
         super.init(coordinator)
         loadAllImages()
     }
@@ -35,34 +44,39 @@ class MultiSelectGalleryViewModel: BaseViewModel {
         self.dismiss()
     }
     
+    // https://rhammer.tistory.com/229
     func loadAllImages(_ done: (() -> Void)? = nil) {
+        if self.isLoading {
+            done?()
+            return
+        }
+        self.isLoading = true
         let options = PHFetchOptions()
         
         options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        // 모든 사진의 정보(PHFetchResult<PHAsset>)를 불러온다
         let allImages = PHAsset.fetchAssets(with: .image, options: options)
         if allImages.count <= 0 { // 사진 없음
             self.images = nil
             isLoading = false
             hasNextPage = false
-            isFirstLoading = false
             items.removeAll()
-            self.objectWillChange.send()
             return
         }
         self.images = allImages
+        items.removeAll()
         isLoading = false
         hasNextPage = true
-        isFirstLoading = true
-        items.removeAll()
-        self.objectWillChange.send()
         loadNextImage(done)
     }
     
     func loadNextImage(_ done: (() -> Void)? = nil) {
+        print("loadNextImage: \(isLoading)")
         guard !isLoading, hasNextPage, let images = self.images else {
             done?()
             return
         }
+        self.isLoading = true
         
         let startAt = self.items.count
         var endAt = startAt + self.PAGE_SIZE
@@ -73,16 +87,17 @@ class MultiSelectGalleryViewModel: BaseViewModel {
         }
         if startAt == endAt {
             self.hasNextPage = false
-            self.objectWillChange.send()
             done?()
             return
         }
         
+        print("startAt~endAt: \(startAt)~\(endAt)")
         let indexSet = IndexSet(startAt..<endAt)
+        
         DispatchQueue.global(qos: .background).async {
             images.enumerateObjects(at: indexSet, options: []) { [weak self] (asset, index, stop) in
                 guard let self = self else { return }
-                let imageSize = UIScreen.main.bounds.size.width
+                let imageSize = UIScreen.main.bounds.size.width / 3
                 let options = PHImageRequestOptions()
                 options.isSynchronous = true
                 options.resizeMode = .fast
@@ -97,17 +112,13 @@ class MultiSelectGalleryViewModel: BaseViewModel {
                     guard let image = image else { return }
                     DispatchQueue.main.async {
                         self.items.append(GalleryItem(image: image, asset: asset, isSelected: false))
-                    }
-                }
-                if self.items.count == endAt {
-                    self.isLoading = false
-                    
-                    if self.isFirstLoading {
-                        self.isFirstLoading = false
-                    }
-                    DispatchQueue.main.async {
-                        done?()
-                        self.objectWillChange.send()
+                        print("append item: \(self.items.count)")
+                        if self.items.count == endAt {
+                            self.isLoading = false
+                            DispatchQueue.main.async {
+                                done?()
+                            }
+                        }
                     }
                 }
             }
@@ -115,25 +126,57 @@ class MultiSelectGalleryViewModel: BaseViewModel {
     }
     
     func onSelectImage() {
-        if self.selectedImages.isEmpty {
-            return
-        }
-        self.coordinator?.dismiss {[weak self] in
-            guard let self = self else { return }
-            self.onClickItem?(self.selectedImages)
+        switch self.type {
+        case .multi:
+            if self.selectedImages.isEmpty {
+                return
+            }
+            self.coordinator?.dismiss {[weak self] in
+                guard let self = self else { return }
+                self.onClickItem?(self.selectedImages)
+            }
+        case .single:
+            guard let selectedImage = self.selectedImage else { return }
+            self.coordinator?.dismiss {[weak self] in
+                guard let self = self else { return }
+                self.onClickItem?([selectedImage])
+            }
         }
     }
     
     func onClickItem(_ item: GalleryItem) {
-        if let i = self.items.firstIndex(of: item) {
-            if let idx = self.selectedImages.firstIndex(of: item) {
-                self.items[i].isSelected = false
-                self.selectedImages.remove(at: idx)
-            } else {
+        switch self.type {
+        case .single:
+            if let i = self.items.firstIndex(of: item) {
+                if let selectedImage = self.selectedImage {
+                    self.selectedImage = nil
+                    if selectedImage == item {
+                        self.items[i].isSelected = false
+                        self.isAvailableSelect = false
+                        break
+                    } else {
+                        if let j = self.items.firstIndex(of: selectedImage) {
+                            self.items[j].isSelected = false
+                        }
+                    }
+                }
                 self.items[i].isSelected = true
-                self.selectedImages.append(item)
+                self.selectedImage = item
+                self.isAvailableSelect = true
+            }
+        case .multi:
+            if let i = self.items.firstIndex(of: item) {
+                if let idx = self.selectedImages.firstIndex(of: item) {
+                    self.items[i].isSelected = false
+                    self.selectedImages.remove(at: idx)
+                } else {
+                    self.items[i].isSelected = true
+                    self.selectedImages.append(item)
+                }
+                self.isAvailableSelect = !self.selectedImages.isEmpty
             }
         }
+        
     }
     
     private func photoPermissionCheck() {

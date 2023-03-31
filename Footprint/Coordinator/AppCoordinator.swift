@@ -61,13 +61,8 @@ class AppCoordinator: Coordinator, Terminatable {
         self.present(vc, animated: true, onDismiss: onDismiss)
     }
     
-    func presentMultiSelectGalleryView(onClickItem: (([GalleryItem]) -> ())?) {
-        let vc = MultiSelectGalleryView.vc(self, onClickItem: onClickItem)
-        self.present(vc, animated: true)
-    }
-    
-    func presentSingleSelectGalleryView(onClickItem: ((GalleryItem) -> ())?) {
-        let vc = SingleSelectGalleryView.vc(self, onClickItem: onClickItem)
+    func presentGalleryView(type: GalleryType, onClickItem: (([GalleryItem]) -> ())?) {
+        let vc = GalleryView.vc(self, type: type, onClickItem: onClickItem)
         self.present(vc, animated: true)
     }
     

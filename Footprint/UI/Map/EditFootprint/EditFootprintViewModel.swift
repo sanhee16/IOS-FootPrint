@@ -132,7 +132,7 @@ class EditFootprintViewModel: BaseViewModel {
         self.photoPermissionCheck {[weak self] isAllow in
             guard let self = self else { return }
             if isAllow {
-                self.coordinator?.presentMultiSelectGalleryView(onClickItem: { [weak self] (items: [GalleryItem]) in
+                self.coordinator?.presentGalleryView(type: .multi, onClickItem: { [weak self] (items: [GalleryItem]) in
                     guard let self = self else { return }
                     for item in items {
                         if !self.images.contains(item.image) {

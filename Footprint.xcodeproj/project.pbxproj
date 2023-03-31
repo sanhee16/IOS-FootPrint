@@ -57,8 +57,8 @@
 		63B1FAF22914A91F007E94B6 /* FittedSheets in Frameworks */ = {isa = PBXBuildFile; productRef = 63B1FAF12914A91F007E94B6 /* FittedSheets */; };
 		63B1FAF52914B148007E94B6 /* SProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B1FAF42914B148007E94B6 /* SProgress.swift */; };
 		63B1FAF82914B2B0007E94B6 /* walking_dog.json in Resources */ = {isa = PBXBuildFile; fileRef = 63B1FAF72914B2B0007E94B6 /* walking_dog.json */; };
-		63B1FAFB2914B31E007E94B6 /* MultiSelectGalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B1FAFA2914B31E007E94B6 /* MultiSelectGalleryView.swift */; };
-		63B1FAFD2914B324007E94B6 /* MultiSelectGalleryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B1FAFC2914B324007E94B6 /* MultiSelectGalleryViewModel.swift */; };
+		63B1FAFB2914B31E007E94B6 /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B1FAFA2914B31E007E94B6 /* GalleryView.swift */; };
+		63B1FAFD2914B324007E94B6 /* GalleryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B1FAFC2914B324007E94B6 /* GalleryViewModel.swift */; };
 		63B1FB002914B347007E94B6 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 63B1FAFF2914B347007E94B6 /* Kingfisher */; };
 		63B1FB032914B381007E94B6 /* RealmDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B1FB022914B381007E94B6 /* RealmDB.swift */; };
 		63B1FB062914B5CB007E94B6 /* SwiftUIPullToRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 63B1FB052914B5CB007E94B6 /* SwiftUIPullToRefresh */; };
@@ -174,8 +174,8 @@
 		63B1FAEE2914A861007E94B6 /* EditFootprintViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFootprintViewModel.swift; sourceTree = "<group>"; };
 		63B1FAF42914B148007E94B6 /* SProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SProgress.swift; sourceTree = "<group>"; };
 		63B1FAF72914B2B0007E94B6 /* walking_dog.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = walking_dog.json; sourceTree = "<group>"; };
-		63B1FAFA2914B31E007E94B6 /* MultiSelectGalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelectGalleryView.swift; sourceTree = "<group>"; };
-		63B1FAFC2914B324007E94B6 /* MultiSelectGalleryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelectGalleryViewModel.swift; sourceTree = "<group>"; };
+		63B1FAFA2914B31E007E94B6 /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
+		63B1FAFC2914B324007E94B6 /* GalleryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewModel.swift; sourceTree = "<group>"; };
 		63B1FB022914B381007E94B6 /* RealmDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDB.swift; sourceTree = "<group>"; };
 		63C102B229651E690099AF6A /* Footprint++Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Footprint++Bundle.swift"; sourceTree = "<group>"; };
 		63C102B7296530680099AF6A /* GoogleMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapView.swift; sourceTree = "<group>"; };
@@ -722,8 +722,8 @@
 		63FA238C294C423700D31506 /* MultiSelectGallery */ = {
 			isa = PBXGroup;
 			children = (
-				63B1FAFA2914B31E007E94B6 /* MultiSelectGalleryView.swift */,
-				63B1FAFC2914B324007E94B6 /* MultiSelectGalleryViewModel.swift */,
+				63B1FAFA2914B31E007E94B6 /* GalleryView.swift */,
+				63B1FAFC2914B324007E94B6 /* GalleryViewModel.swift */,
 			);
 			path = MultiSelectGallery;
 			sourceTree = "<group>";
@@ -883,7 +883,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63E5C8312975367200D32FD2 /* Dump.swift in Sources */,
-				63B1FAFD2914B324007E94B6 /* MultiSelectGalleryViewModel.swift in Sources */,
+				63B1FAFD2914B324007E94B6 /* GalleryViewModel.swift in Sources */,
 				264EEF592925128A00B89624 /* AddCategoryViewModel.swift in Sources */,
 				63E2756929502DFA00E4AABC /* PinchZoom.swift in Sources */,
 				63E848A3295ABE7E0037D7A3 /* EditTravelViewModel.swift in Sources */,
@@ -903,7 +903,7 @@
 				63FA2389294C35E300D31506 /* PeopleEditViewModel.swift in Sources */,
 				63F132552914A19F00B3A9E0 /* AppDelegate.swift in Sources */,
 				63E848A1295ABE790037D7A3 /* EditTravelView.swift in Sources */,
-				63B1FAFB2914B31E007E94B6 /* MultiSelectGalleryView.swift in Sources */,
+				63B1FAFB2914B31E007E94B6 /* GalleryView.swift in Sources */,
 				63B1FAEF2914A861007E94B6 /* EditFootprintViewModel.swift in Sources */,
 				26C04F6D2917667F00890A76 /* SwiftUIExtension.swift in Sources */,
 				631D75242966619B00464F33 /* SToggleView.swift in Sources */,

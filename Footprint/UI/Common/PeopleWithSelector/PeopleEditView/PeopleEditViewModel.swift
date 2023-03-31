@@ -164,9 +164,9 @@ class PeopleEditViewModel: BaseViewModel {
     func selectImage() {
         self.isChangeImage = true
         self.isChange = true
-        self.coordinator?.presentSingleSelectGalleryView(onClickItem: {[weak self] item in
+        self.coordinator?.presentGalleryView(type: .single, onClickItem: {[weak self] items in
             guard let self = self else { return }
-            self.image = item.image
+            self.image = items[0].image
         })
     }
 }
