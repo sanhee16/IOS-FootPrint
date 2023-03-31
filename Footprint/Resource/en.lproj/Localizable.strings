@@ -102,3 +102,6 @@
 "travel"="travel";
 "nobody"="nobody";
 
+
+"no_network"="The internet is not connected.";
+"no_network_description"="To ensure smooth usage, internet connection is required. \nThe app will be closed.";

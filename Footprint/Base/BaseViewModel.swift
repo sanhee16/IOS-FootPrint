@@ -36,7 +36,7 @@ class BaseViewModel: ObservableObject {
             callback?()
             return
         } else {
-            self.alert(.ok, title: "인터넷이 연결되지 않았습니다.", description: "원활한 사용을 위해 인터넷 연결이 필요합니다.\n앱을 종료합니다.") { _ in
+            self.alert(.ok, title: "no_network".localized(), description: "no_network_description".localized()) { _ in
                 UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
                     exit(0)
