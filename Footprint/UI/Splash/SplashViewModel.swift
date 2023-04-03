@@ -29,12 +29,11 @@ class SplashViewModel: BaseViewModel {
     }
     
     func onAppear() {
-        Defaults.premiumCode = "exist"
         checkNetworkConnect() {[weak self] in
             guard let self = self else { return }
             if !Defaults.launchBefore {
                 Defaults.launchBefore = true
-                Defaults.premiumCode = "exist"
+                Defaults.premiumCode = ""
                 self.firstLaunchTask()
                 self.locationManager.requestWhenInUseAuthorization()
                 self.startRepeatTimer()

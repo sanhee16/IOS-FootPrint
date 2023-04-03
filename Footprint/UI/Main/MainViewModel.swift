@@ -10,8 +10,10 @@ import Combine
 
 class MainViewModel: BaseViewModel {
     @Published var currentTab: MainMenuType = .map
+    @Published var isShowAds: Bool = false
     
     override init(_ coordinator: AppCoordinator) {
+        self.isShowAds = Remote.init().isShowAds()
         super.init(coordinator)
     }
     
