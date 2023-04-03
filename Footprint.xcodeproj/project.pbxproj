@@ -44,6 +44,7 @@
 		63004AFC29DA6A4C000CDBB4 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 63004AFB29DA6A4C000CDBB4 /* FirebaseRemoteConfig */; };
 		63004AFE29DA6A4C000CDBB4 /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 63004AFD29DA6A4C000CDBB4 /* FirebaseRemoteConfigSwift */; };
 		63004B0029DA6B1D000CDBB4 /* RemoteConfigValue.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63004AFF29DA6B1D000CDBB4 /* RemoteConfigValue.plist */; };
+		63004B0529DA9630000CDBB4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63004B0429DA962F000CDBB4 /* GoogleService-Info.plist */; };
 		631D75242966619B00464F33 /* SToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D75232966619B00464F33 /* SToggleView.swift */; };
 		631D7528296661FA00464F33 /* MainMapOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D7527296661FA00464F33 /* MainMapOptionView.swift */; };
 		631D752A296661FE00464F33 /* MainMapOptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D7529296661FE00464F33 /* MainMapOptionViewModel.swift */; };
@@ -75,7 +76,6 @@
 		63C8CCF82941D60D00BB861D /* DevInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C8CCF72941D60D00BB861D /* DevInfoViewModel.swift */; };
 		63D32FBF29CA8EBE0049F567 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 63D32FBE29CA8EBE0049F567 /* FirebaseFirestore */; };
 		63D32FC129CA8EBE0049F567 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 63D32FC029CA8EBE0049F567 /* FirebaseFirestoreSwift */; };
-		63D32FC329CA8ED20049F567 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63D32FC229CA8ED20049F567 /* GoogleService-Info.plist */; };
 		63D32FC629CA92B60049F567 /* PremiumCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D32FC529CA92B60049F567 /* PremiumCodeView.swift */; };
 		63D32FC829CA92BF0049F567 /* PremiumCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D32FC729CA92BF0049F567 /* PremiumCodeViewModel.swift */; };
 		63D32FCC29CA9E390049F567 /* FirestoreExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D32FCB29CA9E390049F567 /* FirestoreExtension.swift */; };
@@ -165,6 +165,7 @@
 		345566BC804EBC9D85B35660 /* Pods_Footprint.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Footprint.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63004AF929DA63D2000CDBB4 /* RemoteConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfig.swift; sourceTree = "<group>"; };
 		63004AFF29DA6B1D000CDBB4 /* RemoteConfigValue.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RemoteConfigValue.plist; sourceTree = "<group>"; };
+		63004B0429DA962F000CDBB4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		631D75232966619B00464F33 /* SToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SToggleView.swift; sourceTree = "<group>"; };
 		631D7527296661FA00464F33 /* MainMapOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapOptionView.swift; sourceTree = "<group>"; };
 		631D7529296661FE00464F33 /* MainMapOptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapOptionViewModel.swift; sourceTree = "<group>"; };
@@ -190,7 +191,6 @@
 		63C81AB82963D6EF0001A70B /* DragAndDropService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragAndDropService.swift; sourceTree = "<group>"; };
 		63C8CCF52941D60400BB861D /* DevInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevInfoView.swift; sourceTree = "<group>"; };
 		63C8CCF72941D60D00BB861D /* DevInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevInfoViewModel.swift; sourceTree = "<group>"; };
-		63D32FC229CA8ED20049F567 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		63D32FC529CA92B60049F567 /* PremiumCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumCodeView.swift; sourceTree = "<group>"; };
 		63D32FC729CA92BF0049F567 /* PremiumCodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumCodeViewModel.swift; sourceTree = "<group>"; };
 		63D32FCB29CA9E390049F567 /* FirestoreExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreExtension.swift; sourceTree = "<group>"; };
@@ -483,9 +483,9 @@
 		63B1FAF62914B29A007E94B6 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				63004B0429DA962F000CDBB4 /* GoogleService-Info.plist */,
 				63209FEB2913C3C000709227 /* Assets.xcassets */,
 				6374539829714A73000A61D5 /* loading_bar.json */,
-				63D32FC229CA8ED20049F567 /* GoogleService-Info.plist */,
 				6374539929714A73000A61D5 /* loading_circular.json */,
 				2606B4CC29437BD10012349A /* loading.json */,
 				63B1FAF72914B2B0007E94B6 /* walking_dog.json */,
@@ -834,13 +834,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				6374539A29714A73000A61D5 /* loading_bar.json in Resources */,
-				63D32FC329CA8ED20049F567 /* GoogleService-Info.plist in Resources */,
 				63004B0029DA6B1D000CDBB4 /* RemoteConfigValue.plist in Resources */,
 				63209FEF2913C3C000709227 /* Preview Assets.xcassets in Resources */,
 				63209FEC2913C3C000709227 /* Assets.xcassets in Resources */,
 				63D32FE829CAFF8A0049F567 /* Localizable.strings in Resources */,
 				26BD8FCB29694CE5005F7E5C /* ApiInfo.plist in Resources */,
 				2606B4CD29437BD10012349A /* loading.json in Resources */,
+				63004B0529DA9630000CDBB4 /* GoogleService-Info.plist in Resources */,
 				6374539B29714A73000A61D5 /* loading_circular.json in Resources */,
 				63B1FAF82914B2B0007E94B6 /* walking_dog.json in Resources */,
 			);
@@ -1134,10 +1134,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Footprint/Preview Content\"";
-				DEVELOPMENT_TEAM = 5F78R7RAY4;
+				DEVELOPMENT_TEAM = 3RZRY2TK85;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Footprint/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera Permission";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "loacation usage";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "loacation usage";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Photo permission";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -1148,7 +1152,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sandy.Footprint;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sandy.footprints;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1165,10 +1169,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Footprint/Preview Content\"";
-				DEVELOPMENT_TEAM = 5F78R7RAY4;
+				DEVELOPMENT_TEAM = 3RZRY2TK85;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Footprint/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera Permission";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "loacation usage";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "loacation usage";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Photo permission";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -1179,7 +1187,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sandy.Footprint;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sandy.footprints;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
