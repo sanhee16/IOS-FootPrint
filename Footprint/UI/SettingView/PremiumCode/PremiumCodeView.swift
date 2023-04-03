@@ -36,7 +36,7 @@ struct PremiumCodeView: View {
                     
                     VStack(alignment: .leading, spacing: 8) {
                         TextField("premium_name".localized(), text: $vm.name)
-                            .font(.kr10r)
+                            .font(.kr12r)
                             .padding()
                             .frame(width: itemWidth, height: 28, alignment: .center)
                             .background(
@@ -44,7 +44,7 @@ struct PremiumCodeView: View {
                                     .foregroundColor(.inputBoxColor)
                             )
                         TextField("premium_code".localized(), text: $vm.code)
-                            .font(.kr10r)
+                            .font(.kr12r)
                             .padding()
                             .frame(width: itemWidth, height: 28, alignment: .center)
                             .background(
@@ -55,7 +55,7 @@ struct PremiumCodeView: View {
                     .padding([.top, .bottom], 10)
                     
                     Text("confirm".localized())
-                        .font(.kr12r)
+                        .font(.kr13r)
                         .foregroundColor(.white)
                         .frame(width: itemWidth, height: 30, alignment: .center)
                         .background(

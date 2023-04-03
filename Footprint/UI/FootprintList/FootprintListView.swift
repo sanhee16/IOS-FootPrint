@@ -46,36 +46,50 @@ struct FootprintListView: View {
                     .menuView()
                 }
                 .frame(width: geometry.size.width, height: 50, alignment: .center)
-                ScrollViewReader { scrollProxy in
-                    ZStack(alignment: .bottomTrailing) {
-                        ScrollView(.vertical, showsIndicators: false) {
-                            VStack(alignment: .leading, spacing: 12) {
-                                HStack{}.id(topID)
-                                ForEach($vm.list.wrappedValue.indices, id: \.self) { idx in
-                                    let item = $vm.list.wrappedValue[idx]
-                                    drawFootprintItem(geometry, item: item)
+                
+                if $vm.list.wrappedValue.isEmpty {
+                    VStack(alignment: .center, spacing: 0) {
+                        Spacer()
+                        Text("empty_footprints".localized())
+                            .font(.kr12r)
+                            .foregroundColor(.textColor2)
+                            .multilineTextAlignment(.center)
+                            .lineLimit(nil)
+                            .padding([.leading, .trailing], 12)
+                        Spacer()
+                    }
+                } else {
+                    ScrollViewReader { scrollProxy in
+                        ZStack(alignment: .bottomTrailing) {
+                            ScrollView(.vertical, showsIndicators: false) {
+                                VStack(alignment: .leading, spacing: 12) {
+                                    HStack{}.id(topID)
+                                    ForEach($vm.list.wrappedValue.indices, id: \.self) { idx in
+                                        let item = $vm.list.wrappedValue[idx]
+                                        drawFootprintItem(geometry, item: item)
+                                    }
                                 }
+                                .padding(.bottom, 10)
                             }
-                            .padding(.bottom, 10)
+                            .frame(width: geometry.size.width, height: geometry.size.height - 50, alignment: .leading)
+                            
+                            Image("up_arrow")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(both: 24.0, aligment: .center)
+                                .padding(10)
+                                .background(
+                                    Circle()
+                                        .foregroundColor(.gray30)
+                                )
+                                .padding(EdgeInsets(top: 0, leading: 0, bottom: 24, trailing: 24))
+                                .zIndex(1)
+                                .onTapGesture {
+                                    withAnimation {
+                                        scrollProxy.scrollTo(topID, anchor: .top)
+                                    }
+                                }
                         }
-                        .frame(width: geometry.size.width, height: geometry.size.height - 50, alignment: .leading)
-                        
-                        Image("up_arrow")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(both: 24.0, aligment: .center)
-                            .padding(10)
-                            .background(
-                                Circle()
-                                    .foregroundColor(.gray30)
-                            )
-                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 24, trailing: 24))
-                            .zIndex(1)
-                            .onTapGesture {
-                                withAnimation {
-                                    scrollProxy.scrollTo(topID, anchor: .top)
-                                }
-                            }
                     }
                 }
             }
