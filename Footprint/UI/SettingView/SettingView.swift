@@ -58,6 +58,9 @@ struct SettingView: View {
                         drawItem(geometry, title: "contact_us".localized()) {
                             vm.onClickContact()
                         }
+                        drawItem(geometry, title: "privacy_policy".localized()) {
+                            vm.onClickPrivacyPolicy()
+                        }
 //                        drawItem(geometry, title: "developer_info".localized()) {
 //                            vm.onClickDevInfo()
 //                        }

@@ -106,3 +106,4 @@
 "no_network"="The internet is not connected.";
 "no_network_description"="To ensure smooth usage, internet connection is required. \nThe app will be closed.";
 "empty_footprints"="You haven't created any notes yet.\nClick on the place you want to record on the map and try adding a note!";
+"privacy_policy"="Privacy Policy";

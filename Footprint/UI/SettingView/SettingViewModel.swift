@@ -83,4 +83,19 @@ class SettingViewModel: BaseViewModel {
     func onClickEnterPremiumCode() {
         self.coordinator?.presentPremiumCodeView()
     }
+    
+    func onClickPrivacyPolicy() {
+        guard let lan = UserLocale.currentLanguage() else { return }
+        let urlAdr: String = lan == "ko" ? "https://sanhee16.github.io/footprint-policy/ko/privacy.html" : "https://sanhee16.github.io/footprint-policy/en/privacy.html"
+        if let url = URL(string: urlAdr) {
+            let options: [UIApplication.OpenExternalURLOptionsKey: Any] = [:]
+            UIApplication.shared.open(url, options: options) { success in
+                if success {
+                    print("Link opened successfully")
+                } else {
+                    print("Error: Failed to open link")
+                }
+            }
+        }
+    }
 }
