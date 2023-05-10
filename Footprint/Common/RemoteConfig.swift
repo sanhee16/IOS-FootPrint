@@ -18,10 +18,27 @@ class Remote {
         settings.minimumFetchInterval = 0
         
         self.remoteConfig.configSettings = settings
-        self.remoteConfig.setDefaults(fromPlist: "RemoteConfigValue")
+//        self.remoteConfig.setDefaults(fromPlist: "RemoteConfigValue")
     }
     
-    func isShowAds() -> Bool {
-        return self.remoteConfig["isShowAds"].boolValue
+    func getRemoteBoolValue(_ key: String, callback: @escaping (Bool)->()) {
+        self.remoteConfig.fetch() { (status, error) -> Void in
+            if status == .success {
+                self.remoteConfig.activate() { (changed, error) in
+                    let value = self.remoteConfig[key].boolValue
+                    callback(value)
+                    print("resultValue=", value)
+                }
+            } else {
+                print("Error: \(error?.localizedDescription ?? "No error available.")")
+                callback(false)
+            }
+        }
+    }
+    
+    func getIsShowAds(_ callback: @escaping (Bool)->()) {
+        getRemoteBoolValue("isShowAds") { value in
+            callback(value)
+        }
     }
 }
