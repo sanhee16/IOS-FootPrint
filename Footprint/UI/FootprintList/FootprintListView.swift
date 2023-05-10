@@ -58,6 +58,7 @@ struct FootprintListView: View {
                             .padding([.leading, .trailing], 12)
                         Spacer()
                     }
+                    .frame(width: geometry.size.width)
                 } else {
                     ScrollViewReader { scrollProxy in
                         ZStack(alignment: .bottomTrailing) {
