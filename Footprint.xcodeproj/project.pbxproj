@@ -44,7 +44,6 @@
 		63004AFC29DA6A4C000CDBB4 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 63004AFB29DA6A4C000CDBB4 /* FirebaseRemoteConfig */; };
 		63004AFE29DA6A4C000CDBB4 /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 63004AFD29DA6A4C000CDBB4 /* FirebaseRemoteConfigSwift */; };
 		63004B0029DA6B1D000CDBB4 /* RemoteConfigValue.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63004AFF29DA6B1D000CDBB4 /* RemoteConfigValue.plist */; };
-		63004B0529DA9630000CDBB4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63004B0429DA962F000CDBB4 /* GoogleService-Info.plist */; };
 		631D75242966619B00464F33 /* SToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D75232966619B00464F33 /* SToggleView.swift */; };
 		631D7528296661FA00464F33 /* MainMapOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D7527296661FA00464F33 /* MainMapOptionView.swift */; };
 		631D752A296661FE00464F33 /* MainMapOptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D7529296661FE00464F33 /* MainMapOptionViewModel.swift */; };
@@ -52,8 +51,10 @@
 		631D752F29667A4D00464F33 /* PeopleWithListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D752E29667A4D00464F33 /* PeopleWithListViewModel.swift */; };
 		63209FEC2913C3C000709227 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63209FEB2913C3C000709227 /* Assets.xcassets */; };
 		63209FEF2913C3C000709227 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63209FEE2913C3C000709227 /* Preview Assets.xcassets */; };
+		6328C2952A0B713C00C6AACA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6328C2972A0B713C00C6AACA /* InfoPlist.strings */; };
 		6374539A29714A73000A61D5 /* loading_bar.json in Resources */ = {isa = PBXBuildFile; fileRef = 6374539829714A73000A61D5 /* loading_bar.json */; };
 		6374539B29714A73000A61D5 /* loading_circular.json in Resources */ = {isa = PBXBuildFile; fileRef = 6374539929714A73000A61D5 /* loading_circular.json */; };
+		637B1E482A08E77400036E35 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 637B1E472A08E77400036E35 /* GoogleService-Info.plist */; };
 		63B1FAE42914A6D8007E94B6 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 63B1FAE32914A6D8007E94B6 /* Lottie */; };
 		63B1FAE72914A6FE007E94B6 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 63B1FAE62914A6FE007E94B6 /* Alamofire */; };
 		63B1FAEA2914A718007E94B6 /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = 63B1FAE92914A718007E94B6 /* SwiftUIPager */; };
@@ -165,7 +166,6 @@
 		345566BC804EBC9D85B35660 /* Pods_Footprint.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Footprint.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63004AF929DA63D2000CDBB4 /* RemoteConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfig.swift; sourceTree = "<group>"; };
 		63004AFF29DA6B1D000CDBB4 /* RemoteConfigValue.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RemoteConfigValue.plist; sourceTree = "<group>"; };
-		63004B0429DA962F000CDBB4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		631D75232966619B00464F33 /* SToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SToggleView.swift; sourceTree = "<group>"; };
 		631D7527296661FA00464F33 /* MainMapOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapOptionView.swift; sourceTree = "<group>"; };
 		631D7529296661FE00464F33 /* MainMapOptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapOptionViewModel.swift; sourceTree = "<group>"; };
@@ -175,8 +175,11 @@
 		63209FEB2913C3C000709227 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63209FEE2913C3C000709227 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		63209FF52913C67E00709227 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		6328C2962A0B713C00C6AACA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6328C2982A0B713D00C6AACA /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6374539829714A73000A61D5 /* loading_bar.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading_bar.json; sourceTree = "<group>"; };
 		6374539929714A73000A61D5 /* loading_circular.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading_circular.json; sourceTree = "<group>"; };
+		637B1E472A08E77400036E35 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		63B1FAEC2914A85B007E94B6 /* EditFootprintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFootprintView.swift; sourceTree = "<group>"; };
 		63B1FAEE2914A861007E94B6 /* EditFootprintViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFootprintViewModel.swift; sourceTree = "<group>"; };
 		63B1FAF42914B148007E94B6 /* SProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SProgress.swift; sourceTree = "<group>"; };
@@ -483,13 +486,14 @@
 		63B1FAF62914B29A007E94B6 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				63004B0429DA962F000CDBB4 /* GoogleService-Info.plist */,
+				637B1E472A08E77400036E35 /* GoogleService-Info.plist */,
 				63209FEB2913C3C000709227 /* Assets.xcassets */,
 				6374539829714A73000A61D5 /* loading_bar.json */,
 				6374539929714A73000A61D5 /* loading_circular.json */,
 				2606B4CC29437BD10012349A /* loading.json */,
 				63B1FAF72914B2B0007E94B6 /* walking_dog.json */,
 				63D32FEA29CAFF8A0049F567 /* Localizable.strings */,
+				6328C2972A0B713C00C6AACA /* InfoPlist.strings */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -840,8 +844,9 @@
 				63D32FE829CAFF8A0049F567 /* Localizable.strings in Resources */,
 				26BD8FCB29694CE5005F7E5C /* ApiInfo.plist in Resources */,
 				2606B4CD29437BD10012349A /* loading.json in Resources */,
-				63004B0529DA9630000CDBB4 /* GoogleService-Info.plist in Resources */,
 				6374539B29714A73000A61D5 /* loading_circular.json in Resources */,
+				637B1E482A08E77400036E35 /* GoogleService-Info.plist in Resources */,
+				6328C2952A0B713C00C6AACA /* InfoPlist.strings in Resources */,
 				63B1FAF82914B2B0007E94B6 /* walking_dog.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -997,6 +1002,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		6328C2972A0B713C00C6AACA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6328C2962A0B713C00C6AACA /* en */,
+				6328C2982A0B713D00C6AACA /* ko */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		63D32FEA29CAFF8A0049F567 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1060,6 +1074,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 14;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -1115,6 +1131,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 14;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -1138,7 +1156,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Footprint/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "Camera Permission";
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "loacation usage";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "loacation usage";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Photo permission";
@@ -1152,7 +1170,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sandy.footprints;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sandy.Footprint;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1173,7 +1191,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Footprint/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "Camera Permission";
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "loacation usage";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "loacation usage";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Photo permission";
@@ -1187,7 +1205,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sandy.footprints;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sandy.Footprint;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

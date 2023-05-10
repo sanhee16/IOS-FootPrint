@@ -1,0 +1,16 @@
+/* 
+  InfoPlist.strings
+  Footprint
+
+  Created by Studio-SJ on 2023/05/10.
+  
+*/
+
+"CFBundleDisplayName" = "발자국";
+"CFBundleName" = "발자국";
+
+"NSCameraUsageDescription" = "사진 촬영을 위한 카메라 접근을 허용해 주세요.";
+"NSLocationAlwaysUsageDescription" = "편리한 사용을 위해 위치 사용을 허용해 주세요.";
+"NSLocationWhenInUseUsageDescription" = "편리한 사용을 위해 위치 사용을 허용해 주세요.";
+"NSPhotoLibraryUsageDescription" = "사진 업로드를 위해 사진 접근을 허용해 주세요.";
+

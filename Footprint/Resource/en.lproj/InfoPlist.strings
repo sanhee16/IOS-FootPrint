@@ -1,0 +1,19 @@
+/* 
+  InfoPlist.strings
+  Footprint
+
+  Created by Studio-SJ on 2023/05/10.
+  
+*/
+
+"CFBundleDisplayName" = "Footprint";
+"CFBundleName" = "Footprint";
+
+"NSCameraUsageDescription" = "Please allow access to the camera for photo shooting.";
+"NSLocationAlwaysUsageDescription" = "Please allow access to location for convenient use.";
+"NSLocationWhenInUseUsageDescription" = "Please allow access to location for convenient use.";
+"NSPhotoLibraryUsageDescription" = "Please allow access to photos for photo uploading.";
+
+
+
+
