@@ -1,3 +1,16 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:c83c86305839dc4061bb4d5db6c7d6af11465eba24d89ff7c14a04189884b03a
-size 320
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#else
+#ifndef FOUNDATION_EXPORT
+#if defined(__cplusplus)
+#define FOUNDATION_EXPORT extern "C"
+#else
+#define FOUNDATION_EXPORT extern
+#endif
+#endif
+#endif
+
+
+FOUNDATION_EXPORT double Pods_FootprintVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_FootprintVersionString[];
+
