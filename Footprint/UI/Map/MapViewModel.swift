@@ -60,12 +60,16 @@ class MapViewModel: BaseViewModel {
         case .allow:
             self.locationPermission = true
             getCurrentLocation()
-            loadCategories()
         default:
+            self.isGettingLocation = false
             self.locationPermission = false
-            self.myLocation = Location(latitude: 0.0, longitude: 0.0)
+            self.myLocation = Location(latitude: 37.574187, longitude: 126.976882)
             break
         }
+        
+        loadCategories()
+        C.mapView = self.createMapView()
+        
         if let myLocation = self.myLocation, C.isFirstAppStart {
             C.isFirstAppStart = false
             self.moveCamera(CLLocationCoordinate2D(latitude: myLocation.latitude, longitude: myLocation.longitude))
@@ -82,6 +86,7 @@ class MapViewModel: BaseViewModel {
             getCurrentLocation()
             loadCategories()
         default:
+            self.isGettingLocation = false
             self.locationPermission = false
             self.myLocation = Location(latitude: 0.0, longitude: 0.0)
             break
@@ -124,9 +129,8 @@ class MapViewModel: BaseViewModel {
             let latitude = coor.latitude
             let longitude = coor.longitude
             print("위도 :\(latitude), 경도: \(longitude)")
-            //            self.currenLocation = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
             self.myLocation = Location(latitude: latitude, longitude: longitude)
-            C.mapView = self.createMapView()
+//            C.mapView = self.createMapView()
             self.isGettingLocation = false
         }
     }
@@ -152,8 +156,8 @@ class MapViewModel: BaseViewModel {
         }
         let zoom: Float = 17.8
         print("[MAP VIEW] createMapView")
-        let latitude: Double = self.myLocation?.latitude ?? 35.7532
-        let longitude: Double = self.myLocation?.longitude ?? 127.15
+        let latitude: Double = self.myLocation?.latitude ?? 37.574187
+        let longitude: Double = self.myLocation?.longitude ?? 126.976882
         
         let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: zoom)
         let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
