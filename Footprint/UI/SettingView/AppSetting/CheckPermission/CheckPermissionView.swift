@@ -40,7 +40,8 @@ struct CheckPermissionView: View {
                         .padding(.bottom, 4)
                     VStack(alignment: .center, spacing: 10) {
                         drawPermissionItem(geometry, type: PermissionType.location, isAllow: C.permissionLocation)
-                        drawPermissionItem(geometry, type: PermissionType.camera, isAllow: $vm.cameraPermission.wrappedValue)
+                        drawPermissionItem(geometry, type: PermissionType.tracking, isAllow: $vm.trackingPermission.wrappedValue)
+//                        drawPermissionItem(geometry, type: PermissionType.camera, isAllow: $vm.cameraPermission.wrappedValue)
                         drawPermissionItem(geometry, type: PermissionType.photo, isAllow: $vm.photoPermission.wrappedValue)
                         drawPermissionItem(geometry, type: PermissionType.notification, isAllow: $vm.notiPermission.wrappedValue)
                     }

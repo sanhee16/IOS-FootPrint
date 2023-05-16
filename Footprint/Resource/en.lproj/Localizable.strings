@@ -53,6 +53,7 @@
 "check_permission_description"="To ensure smooth usage, we recommend allowing all permissions.\nThe information used after granting permission will not be collected";
 "permission_location"="location permission";
 "permission_camera"="camera permission";
+"permission_tracking"="tracking permission";
 "permission_photo"="photo permission";
 "permission_notification"="notification permission";
 "premium_code"="premium code";

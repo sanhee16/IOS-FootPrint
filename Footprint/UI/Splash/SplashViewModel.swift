@@ -14,6 +14,9 @@ import CoreLocation
 import UserNotifications
 import RealmSwift
 import UIKit
+import AppTrackingTransparency
+import AdSupport
+
 
 
 class SplashViewModel: BaseViewModel {
@@ -75,36 +78,29 @@ class SplashViewModel: BaseViewModel {
     }
     
     
-    private func photoPermissionCheck() {
+    private func photoPermissionCheck(_ nextTask: @escaping ()->()) {
         PHPhotoLibrary.requestAuthorization() { status in
             switch status {
             case .denied:
                 print("거부됨")
-                self.stopRepeatTimer()
+                nextTask()
                 break
             case .authorized:
                 print("승인됨")
-                self.stopRepeatTimer()
+                nextTask()
                 break
             default:
-                self.stopRepeatTimer()
+                nextTask()
                 break
             }
         }
     }
     
-    private func checkCameraPermission() {
-       AVCaptureDevice.requestAccess(for: .video, completionHandler: {[weak self] (granted: Bool) in
-           if granted {
-               print("Camera: 권한 허용")
-               self?.photoPermissionCheck()
-           } else {
-               print("Camera: 권한 거부")
-               self?.photoPermissionCheck()
-           }
-       })
+    private func checkTrackingPermission(_ nextTask: @escaping ()->()) {
+        ATTrackingManager.requestTrackingAuthorization { status in
+            nextTask()
+        }
     }
-    
     
     func onStartSplashTimer() {
         //TODO: 2초로 변경하기!!
@@ -166,7 +162,11 @@ class SplashViewModel: BaseViewModel {
                     switch status.authorizationStatus {
                     case .notDetermined: break
                     default:
-                        self?.checkCameraPermission()
+                        self?.checkTrackingPermission({[weak self] in
+                            self?.photoPermissionCheck({[weak self] in
+                                self?.stopRepeatTimer()
+                            })
+                        })
                     }
                 }
             }

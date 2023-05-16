@@ -9,11 +9,11 @@
 "CFBundleDisplayName" = "Footprint";
 "CFBundleName" = "Footprint";
 
-"NSCameraUsageDescription" = "Please allow access to the camera for photo shooting.";
-"NSLocationAlwaysUsageDescription" = "Please allow access to location for convenient use.";
-"NSLocationWhenInUseUsageDescription" = "Please allow access to location for convenient use.";
-"NSPhotoLibraryUsageDescription" = "Please allow access to photos for photo uploading.";
-
+"NSLocationAlwaysUsageDescription" = "We intend to obtain location information in order to display the user's current location on the map.";
+"NSLocationWhenInUseUsageDescription" = "We intend to obtain location information in order to display the user's current location on the map.";
+//"NSCameraUsageDescription" = "Please allow access to the camera for photo shooting.";
+"NSPhotoLibraryUsageDescription" = "We need access to photos in order to upload pictures from the gallery to the note.";
+"NSUserTrackingUsageDescription" = "We would like to collect information in order to provide personalized advertisements to users.";
 
 
 

@@ -50,10 +50,11 @@
 "select_map_option"="지도 옵션 선택하기";
 "check_permission"="권한 확인하기";
 "check_permission_description"="원활한 사용을 위해 모든 권한허용을 추천합니다.\n권한 허용 후 사용되는 정보들은 수집되지 않습니다.";
-"permission_location"="위치사용권한";
-"permission_camera"="카메라사용권한";
-"permission_photo"="사진접근권한";
-"permission_notification"="알림허용";
+"permission_location"="위치 사용 권한";
+"permission_camera"="카메라 사용 권한";
+"permission_tracking"="추적 권한";
+"permission_photo"="사진 접근 권한";
+"permission_notification"="알림 허용";
 "premium_code"="프리미엄 코드";
 "premium_name"="이름";
 "enter_premium_code"="프리미엄 코드 입력하기";

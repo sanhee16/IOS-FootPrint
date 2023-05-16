@@ -13,17 +13,22 @@ import CoreLocation
 import UserNotifications
 import RealmSwift
 import UIKit
+import AppTrackingTransparency
+import AdSupport
+
 
 enum PermissionType {
     case location
-    case camera
+//    case camera
+    case tracking
     case photo
     case notification
     
     var text: String {
         switch self {
         case .location: return "permission_location".localized()
-        case .camera: return "permission_camera".localized()
+//        case .camera: return "permission_camera".localized()
+        case .tracking: return "permission_tracking".localized()
         case .photo: return "permission_photo".localized()
         case .notification: return "permission_notification".localized()
         }
@@ -32,8 +37,9 @@ enum PermissionType {
 
 class CheckPermissionViewModel: BaseViewModel {
     @Published var photoPermission: Bool = false
-    //    @Published var locationPermission: Bool = false
-    @Published var cameraPermission: Bool = false
+    @Published var locationPermission: Bool = false
+    @Published var trackingPermission: Bool = false
+//    @Published var cameraPermission: Bool = false
     @Published var notiPermission: Bool = false
     
     override init(_ coordinator: AppCoordinator) {
@@ -43,8 +49,9 @@ class CheckPermissionViewModel: BaseViewModel {
     func onAppear() {
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
-            self.checkCameraPermission()
+//            self.checkCameraPermission()
             self.checkPhotoPermission()
+            self.checkTrackingPermission()
             //            self.checkLocationPermission()
             self.checkNotiPermission()
         }
@@ -60,10 +67,8 @@ class CheckPermissionViewModel: BaseViewModel {
             let locationManager: CLLocationManager = CLLocationManager()
             locationManager.allowsBackgroundLocationUpdates = true
             locationManager.requestWhenInUseAuthorization()
-        case .camera:
-            AVCaptureDevice.requestAccess(for: .video) {[weak self] _ in
-                self?.onAppear()
-            }
+        case .tracking:
+            checkTrackingPermission()
         case .photo:
             PHPhotoLibrary.requestAuthorization {[weak self] status in
                 self?.onAppear()
@@ -82,29 +87,23 @@ class CheckPermissionViewModel: BaseViewModel {
         }
     }
     
-    private func checkCameraPermission() {
-        switch AVCaptureDevice.authorizationStatus(for: AVMediaType.video) {
-        case .notDetermined:
-            print("권한 요청 전 상태")
-            self.cameraPermission = false
-            break
-        case .authorized:
-            print("권한 허용 상태")
-            self.cameraPermission = true
-            break
-        case .denied:
-            print("권한 거부 상태")
-            self.cameraPermission = false
-            break
-        case .restricted:
-            print("액세스 불가 상태")
-            self.cameraPermission = false
-            break
-        @unknown default:
-            print("unknown default")
-            self.cameraPermission = false
-            break
+    private func checkTrackingPermission() {
+        ATTrackingManager.requestTrackingAuthorization {[weak self] status in
+            switch status {
+            case .authorized:
+                self?.trackingPermission = true
+                print(ASIdentifierManager.shared().advertisingIdentifier)
+            case .denied:
+                self?.trackingPermission = false
+            case .notDetermined:
+                self?.trackingPermission = false
+            case .restricted:
+                self?.trackingPermission = false
+            @unknown default:
+                self?.trackingPermission = false
+            }
         }
+
     }
     
     private func checkPhotoPermission() {
