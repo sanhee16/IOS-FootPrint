@@ -15,7 +15,6 @@
 			dependencies = (
 			);
 			name = GooglePlaces;
-			productName = GooglePlaces;
 		};
 		E5B4BBC6DD552AC8943C7E22772FC1D3 /* GoogleMaps */ = {
 			isa = PBXAggregateTarget;
@@ -25,7 +24,6 @@
 			dependencies = (
 			);
 			name = GoogleMaps;
-			productName = GoogleMaps;
 		};
 /* End PBXAggregateTarget section */
 
@@ -60,12 +58,12 @@
 		4E256CB72E069B4C851E32F3924687B3 /* GooglePlaces.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GooglePlaces.bundle; path = Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle; sourceTree = "<group>"; };
 		510DAD9B34D5E1498F84B9BBBD821709 /* Pods-Footprint.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Footprint.debug.xcconfig"; sourceTree = "<group>"; };
 		51929E60CC7904761A3195CC4D9AED56 /* Pods-Footprint-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Footprint-umbrella.h"; sourceTree = "<group>"; };
-		647E3907FB56F9C6E50D55E2A4B399F2 /* Pods_Footprint.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Footprint.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		647E3907FB56F9C6E50D55E2A4B399F2 /* Pods-Footprint */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-Footprint"; path = Pods_Footprint.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		8704E7734F2D03B8EF86CFC319C943BC /* GooglePlaces.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GooglePlaces.framework; path = Frameworks/GooglePlaces.framework; sourceTree = "<group>"; };
 		8EBF4D65DD3B0EDCC39AF1C317B7FF1D /* GoogleMapsBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMapsBase.framework; path = Base/Frameworks/GoogleMapsBase.framework; sourceTree = "<group>"; };
 		9C729F3714998C7C3F3D788777A06264 /* GooglePlaces.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GooglePlaces.debug.xcconfig; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9E830DD9530F13E283DEC78352A2F03D /* GoogleMaps.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GoogleMaps.release.xcconfig; sourceTree = "<group>"; };
 		A4658982FD89F2A77A672D9AFC716B28 /* GooglePlaces.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GooglePlaces.release.xcconfig; sourceTree = "<group>"; };
 		A5650A9FC2C333B2201D01FBE7BD004C /* Pods-Footprint.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Footprint.modulemap"; sourceTree = "<group>"; };
@@ -104,6 +102,7 @@
 				A38D68C78C032F2CEEEEED36818D37F0 /* Maps */,
 				6C8EBDD6FEE473D639E9FF7A802869C0 /* Support Files */,
 			);
+			name = GoogleMaps;
 			path = GoogleMaps;
 			sourceTree = "<group>";
 		};
@@ -132,6 +131,7 @@
 				7DDA47E3D8C82ADCB64F7C6FC9641D65 /* Resources */,
 				3582EF5F85D78C1DB07F01BC0BFA167E /* Support Files */,
 			);
+			name = GooglePlaces;
 			path = GooglePlaces;
 			sourceTree = "<group>";
 		};
@@ -172,7 +172,7 @@
 		86631F90FBCE2E573AA2F89CDEA4905A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				647E3907FB56F9C6E50D55E2A4B399F2 /* Pods_Footprint.framework */,
+				647E3907FB56F9C6E50D55E2A4B399F2 /* Pods-Footprint */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -287,7 +287,7 @@
 			);
 			name = "Pods-Footprint";
 			productName = Pods_Footprint;
-			productReference = 647E3907FB56F9C6E50D55E2A4B399F2 /* Pods_Footprint.framework */;
+			productReference = 647E3907FB56F9C6E50D55E2A4B399F2 /* Pods-Footprint */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
