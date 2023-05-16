@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>NSUserTrackingUsageDescription</key>
-	<string></string>
+	<string>We would like to collect information in order to provide personalized advertisements to users</string>
 	<key>SKAdNetworkIdentifier</key>
 	<string>1234</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
