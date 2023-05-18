@@ -48,7 +48,7 @@ class MapViewModel: BaseViewModel {
         print("[MAP VIEW] init")
         self.realm = R.realm
         self.locationManager = CLLocationManager()
-        self.locationManager.allowsBackgroundLocationUpdates = true
+        self.locationManager.allowsBackgroundLocationUpdates = false
         self.googleApi = GoogleApi.instance
         super.init(coordinator)
     }

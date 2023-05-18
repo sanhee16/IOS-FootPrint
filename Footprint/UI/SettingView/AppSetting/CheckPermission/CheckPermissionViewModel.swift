@@ -65,7 +65,7 @@ class CheckPermissionViewModel: BaseViewModel {
         switch type {
         case .location:
             let locationManager: CLLocationManager = CLLocationManager()
-            locationManager.allowsBackgroundLocationUpdates = true
+            locationManager.allowsBackgroundLocationUpdates = false
             locationManager.requestWhenInUseAuthorization()
         case .tracking:
             checkTrackingPermission()

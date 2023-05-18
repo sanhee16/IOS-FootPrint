@@ -26,7 +26,7 @@ class SplashViewModel: BaseViewModel {
     
     override init(_ coordinator: AppCoordinator) {
         self.locationManager = CLLocationManager()
-        self.locationManager.allowsBackgroundLocationUpdates = true
+//        self.locationManager.allowsBackgroundLocationUpdates = false
         self.realm = R.realm
         super.init(coordinator)
     }
