@@ -15,10 +15,12 @@ class FirestoreApi {
     
     private let fs: Firestore
     private let premiumTierRef: CollectionReference
+    private let reviewRef: CollectionReference
     
     init() {
         self.fs = Firestore.firestore()
         self.premiumTierRef = self.fs.collection("FreeTier")
+        self.reviewRef = self.fs.collection("Review")
     }
     
     
@@ -69,6 +71,18 @@ class FirestoreApi {
         } catch {
             print("Firestore>> Error from updatePost-setData: ", error)
             completionHandler(nil)
+        }
+    }
+    
+    func postReview(_ data: ReviewModel, completionHandler: @escaping (() -> ())) {
+        print("updateReview")
+        do {
+            try reviewRef.addDocument(from: data) { err in
+                completionHandler()
+            }
+        } catch {
+            print("Firestore>> Error from updatePost-setData: ", error)
+            completionHandler()
         }
     }
 

@@ -16,6 +16,7 @@ import GoogleMaps
 enum SettingFlag: Int {
     case SEARCH_BAR = 0
     case FILTER = 1
+    case REVIEW = 2
     
     var option: UInt8 {
         0b1 << self.rawValue

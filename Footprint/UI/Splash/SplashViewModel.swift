@@ -29,6 +29,10 @@ class SplashViewModel: BaseViewModel {
 //        self.locationManager.allowsBackgroundLocationUpdates = false
         self.realm = R.realm
         super.init(coordinator)
+        print("- splash settingStatus : \(Defaults.settingFlag)")
+        print("- splash settingStatus FILTER: \(Util.getSettingStatus(.FILTER))")
+        print("- splash settingStatus SEARCH_BAR: \(Util.getSettingStatus(.SEARCH_BAR))")
+        print("- splash settingStatus REVIEW: \(Util.getSettingStatus(.REVIEW))")
     }
     
     func onAppear() {

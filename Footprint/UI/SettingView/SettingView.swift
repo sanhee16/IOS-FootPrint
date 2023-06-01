@@ -40,26 +40,31 @@ struct SettingView: View {
                     }
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 0) {
-                        drawTitle(geometry, title: "app_setting".localized())
-                        drawItem(geometry, title: "trash".localized()) {
-                            vm.onClickTrash()
+                        Group {
+                            drawTitle(geometry, title: "app_setting".localized())
+                            drawItem(geometry, title: "trash".localized()) {
+                                vm.onClickTrash()
+                            }
+                            drawItem(geometry, title: "check_permission".localized()) {
+                                vm.onClickCheckPermission()
+                            }
+                            drawItem(geometry, title: "edit_people_with".localized()) {
+                                vm.onClickEditPeopleWith()
+                            }
+                            drawItem(geometry, title: "edit_category".localized()) {
+                                vm.onClickEditCategory()
+                            }
+                            drawToggleItem(geometry, title: "display_search_bar".localized(), flag:.SEARCH_BAR, isOn: $vm.isOnSearchBar)
                         }
-                        drawItem(geometry, title: "check_permission".localized()) {
-                            vm.onClickCheckPermission()
-                        }
-                        drawItem(geometry, title: "edit_people_with".localized()) {
-                            vm.onClickEditPeopleWith()
-                        }
-                        drawItem(geometry, title: "edit_category".localized()) {
-                            vm.onClickEditCategory()
-                        }
-                        drawToggleItem(geometry, title: "display_search_bar".localized(), flag:.SEARCH_BAR, isOn: $vm.isOnSearchBar)
-                        drawTitle(geometry, title: "other_setting".localized())
-                        drawItem(geometry, title: "contact_us".localized()) {
-                            vm.onClickContact()
-                        }
-                        drawItem(geometry, title: "privacy_policy".localized()) {
-                            vm.onClickPrivacyPolicy()
+                        Group {
+                            drawTitle(geometry, title: "other_setting".localized())
+                            feedbackItem(geometry)
+                            drawItem(geometry, title: "contact_us".localized()) {
+                                vm.onClickContact()
+                            }
+                            drawItem(geometry, title: "privacy_policy".localized()) {
+                                vm.onClickPrivacyPolicy()
+                            }
                         }
 //                        drawItem(geometry, title: "developer_info".localized()) {
 //                            vm.onClickDevInfo()
@@ -98,6 +103,41 @@ struct SettingView: View {
             }
         }
         .padding(EdgeInsets(top: 10, leading: 10, bottom: 0, trailing: 10))
+    }
+    
+    private func feedbackItem(_ geometry: GeometryProxy) -> some View {
+        return VStack(alignment: .center, spacing: 0) {
+            HStack(alignment: .center, spacing: 0) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("review_title".localized())
+                        .font(.kr14r)
+                        .foregroundColor(.textColor1)
+                        .onTapGesture {
+                            //TODO: erase
+                            vm.resetSettingStatus()
+                        }
+                }
+                Spacer()
+                HStack(alignment: .center, spacing: 10) {
+                    ForEach(0..<5, id: \.self) { idx in
+                        Image(idx < $vm.starCnt.wrappedValue ? "star_on" : "star_off")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(both: 20.0, aligment: .center)
+                            .onTapGesture {
+                                vm.onEnterStar(idx)
+                            }
+                    }
+                }
+            }
+            .padding(EdgeInsets(top: 14, leading: 12, bottom: 14, trailing: 12))
+            .contentShape(Rectangle())
+            
+            Divider()
+                .padding([.leading, .trailing], 4)
+                .opacity(0.7)
+        }
+        .padding([.top, .bottom], 2)
     }
     
     private func drawItem(_ geometry: GeometryProxy, title: String, description: String? = nil, onTap: (()->())? = nil) -> some View {

@@ -27,3 +27,20 @@ struct PremiumModel: Codable {
     }
     
 }
+
+struct ReviewModel: Codable {
+    @DocumentID var documentID: String?
+    var content: String
+    var star: Int
+    
+    static func == (lhs: ReviewModel, rhs: ReviewModel) -> Bool {
+        return lhs.documentID == rhs.documentID
+    }
+    
+    private enum CodingKeys: String, CodingKey {
+        case documentID = "document_id"
+        case content
+        case star
+    }
+    
+}
