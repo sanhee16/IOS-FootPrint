@@ -34,9 +34,8 @@ struct FootprintListFilterView: View {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(alignment: .center, spacing: 10.0) {
                             ForEach($vm.peopleWithList.wrappedValue.indices, id: \.self) { idx in
-                                if let item = $vm.peopleWithList.wrappedValue[idx] {
-                                    drawPeopleWith(item.item, isSelected: item.isSelected)
-                                }
+                                let item = $vm.peopleWithList.wrappedValue[idx]
+                                drawPeopleWith(item.item, isSelected: item.isSelected)
                             }
                         }
                         .padding(EdgeInsets(top: 2, leading: 12, bottom: 2, trailing: 12))
@@ -45,9 +44,8 @@ struct FootprintListFilterView: View {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(alignment: .center, spacing: 10.0) {
                             ForEach($vm.categoryList.wrappedValue.indices, id: \.self) { idx in
-                                if let item = $vm.categoryList.wrappedValue[idx] {
-                                    drawCategoryItem(item.item, isSelected: item.isSelected)
-                                }
+                                let item = $vm.categoryList.wrappedValue[idx]
+                                drawCategoryItem(item.item, isSelected: item.isSelected)
                             }
                         }
                         .padding(EdgeInsets(top: 2, leading: 12, bottom: 2, trailing: 12))
