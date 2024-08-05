@@ -10,6 +10,7 @@ import Foundation
 import Photos
 import RealmSwift
 import Realm
+import UIKit
 
 class R {
     static let realm: Realm = try! Realm()

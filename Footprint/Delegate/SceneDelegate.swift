@@ -24,12 +24,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
      */
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
+        print("scene")
         
         // 새로운 UIWindow 생성
         // 여기서 window는 사용자가 보는 window가 아니라 app이 작동하는 viewport를 나타냄
         window = UIWindow(windowScene: windowScene)
         guard let window = self.window else { return }
-        print("scene")
         
         if #available(iOS 13.0, *) {
             window.overrideUserInterfaceStyle = .light

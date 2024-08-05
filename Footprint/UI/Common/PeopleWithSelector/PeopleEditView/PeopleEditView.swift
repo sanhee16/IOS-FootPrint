@@ -13,12 +13,9 @@ struct PeopleEditView: View {
     public static func vc(_ coordinator: AppCoordinator, peopleEditStruct: PeopleEditStruct, callback: @escaping ((Int?) -> ()), completion: (()-> Void)? = nil) -> UIViewController {
         let vm = VM.init(coordinator, peopleEditStruct: peopleEditStruct, callback: callback)
         let view = Self.init(vm: vm)
-//        let vc = BaseViewController.init(view, completion: completion)
-//        vc.modalPresentationStyle = .overCurrentContext
-//        vc.view.backgroundColor = UIColor.clear
-//        vc.controller.view.backgroundColor = UIColor.dim
-//
-        let vc = BaseViewController.bottomSheet(view, sizes: [.fixed(400.0)])
+        let vc = BaseViewController.init(view, completion: completion) {
+
+        }
         return vc
     }
     @ObservedObject var vm: VM

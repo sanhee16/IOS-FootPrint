@@ -16,6 +16,8 @@
 	<string>$(NAVER_MAP_CLIENT_KEY)</string>
 	<key>SKAdNetworkIdentifier</key>
 	<string>1234</string>
+    <key>GADApplicationIdentifier</key>
+    <string>ca-app-pub-6824209004972578~1692239434</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>

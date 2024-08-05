@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import FittedSheets
 
 // https://yagom.net/forums/topic/detecting-background-foreground-in-viewcontroller/
 // Content는 generic type
@@ -14,30 +13,6 @@ class BaseViewController<Content>: UIViewController, Dismissible, Nameable where
     // where: 타입에 대한 제약
 //    private var observer: NSObjectProtocol?
     private var mainObserver: NSObjectProtocol?
-    
-    static func bottomSheet(_ rootView: Content, sizes: [SheetSize]) -> SheetViewController {
-        let options = SheetOptions(
-            pullBarHeight: 0,
-            shrinkPresentingViewController: false
-        )
-        let vc = BaseViewController(rootView, completion: nil)
-        let sheetController = SheetViewController(controller: vc, sizes: sizes, options: options)
-        sheetController.allowPullingPastMaxHeight = false
-        sheetController.gripColor = nil
-        
-        print(("\(type(of: self)): init BottomSheet, \(String(describing: Content.self))"))
-        return sheetController
-    }
-    
-    static func bottomSheet(_ rootView: Content, sizes: [SheetSize], options: SheetOptions) -> SheetViewController {
-        let vc = BaseViewController(rootView, completion: nil)
-        let sheetController = SheetViewController(controller: vc, sizes: sizes, options: options)
-        sheetController.allowPullingPastMaxHeight = false
-        sheetController.gripColor = nil
-        
-        print(("\(type(of: self)): init BottomSheet, \(String(describing: Content.self))"))
-        return sheetController
-    }
     
     let rootView: Content
     let controller: UIHostingController<Content>

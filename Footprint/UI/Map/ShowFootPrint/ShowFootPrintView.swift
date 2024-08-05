@@ -7,14 +7,15 @@
 
 import SwiftUI
 import SwiftUIPager
-import FittedSheets
 
 struct ShowFootPrintView: View {
     typealias VM = ShowFootPrintViewModel
     public static func vc(_ coordinator: AppCoordinator, location: Location, completion: (()-> Void)? = nil) -> UIViewController {
         let vm = VM.init(coordinator, location: location)
         let view = Self.init(vm: vm)
-        let vc = BaseViewController.bottomSheet(view, sizes: [.fixed(500)])
+        let vc = BaseViewController.init(view, completion: completion) {
+
+        }
         return vc
     }
     @ObservedObject var vm: VM

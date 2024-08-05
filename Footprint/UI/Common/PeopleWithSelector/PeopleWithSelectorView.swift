@@ -19,7 +19,9 @@ struct PeopleWithSelectorView: View {
     public static func vc(_ coordinator: AppCoordinator, type: PeopleWithEditType, completion: (()-> Void)? = nil) -> UIViewController {
         let vm = VM.init(coordinator, type: type)
         let view = Self.init(vm: vm)
-        let vc = BaseViewController.bottomSheet(view, sizes: [.fixed(400.0)])
+        let vc = BaseViewController.init(view, completion: completion) {
+
+        }
         return vc
     }
     @ObservedObject var vm: VM

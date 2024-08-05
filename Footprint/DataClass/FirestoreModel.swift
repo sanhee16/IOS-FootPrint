@@ -8,7 +8,6 @@
 import Foundation
 import FirebaseCore
 import FirebaseFirestore
-import FirebaseFirestoreSwift
 
 
 struct PremiumModel: Codable {
