@@ -35,6 +35,7 @@
 		265924C729445BD9001E7025 /* FootprintListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265924C629445BD9001E7025 /* FootprintListView.swift */; };
 		265924C929445BE1001E7025 /* FootprintListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265924C829445BE1001E7025 /* FootprintListViewModel.swift */; };
 		265EA947291D1E1400068A5C /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265EA946291D1E1400068A5C /* DataModel.swift */; };
+		266EDDD12C64EA16006CF09B /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 266EDDD02C64EA16006CF09B /* Factory */; };
 		26823C092A13B93000BF41EA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26823C0B2A13B93000BF41EA /* InfoPlist.strings */; };
 		2682622A2C60E2EA0069134C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 268262292C60E2EA0069134C /* RealmSwift */; settings = {ATTRIBUTES = (Required, ); }; };
 		268546E82A28DB1200BDA2EA /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268546E72A28DB1200BDA2EA /* ReviewView.swift */; };
@@ -277,6 +278,7 @@
 				263ED44E2C60E54E00FAC148 /* FirebaseFirestore in Frameworks */,
 				63B1FAEA2914A718007E94B6 /* SwiftUIPager in Frameworks */,
 				EA8F1CE5AADA34D35AD14494 /* Pods_Footprint.framework in Frameworks */,
+				266EDDD12C64EA16006CF09B /* Factory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -800,6 +802,7 @@
 				263ED44D2C60E54E00FAC148 /* FirebaseFirestore */,
 				263ED44F2C60E54E00FAC148 /* FirebaseRemoteConfig */,
 				263ED4512C60E54E00FAC148 /* FirebaseStorage */,
+				266EDDD02C64EA16006CF09B /* Factory */,
 			);
 			productName = Footprint;
 			productReference = 63209FE42913C3BF00709227 /* Footprint.app */;
@@ -838,6 +841,7 @@
 				26BFFD922C5F8C400001B02B /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				268262282C60E2EA0069134C /* XCRemoteSwiftPackageReference "realm-swift" */,
 				263ED44C2C60E54E00FAC148 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				266EDDCF2C64EA16006CF09B /* XCRemoteSwiftPackageReference "Factory" */,
 			);
 			productRefGroup = 63209FE52913C3BF00709227 /* Products */;
 			projectDirPath = "";
@@ -1261,6 +1265,14 @@
 				minimumVersion = 11.0.0;
 			};
 		};
+		266EDDCF2C64EA16006CF09B /* XCRemoteSwiftPackageReference "Factory" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Factory.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.3.2;
+			};
+		};
 		268262282C60E2EA0069134C /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
@@ -1326,6 +1338,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 263ED44C2C60E54E00FAC148 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		266EDDD02C64EA16006CF09B /* Factory */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 266EDDCF2C64EA16006CF09B /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = Factory;
 		};
 		268262292C60E2EA0069134C /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
