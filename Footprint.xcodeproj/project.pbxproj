@@ -394,6 +394,27 @@
 			path = FootprintList;
 			sourceTree = "<group>";
 		};
+		266EDDD22C64EA40006CF09B /* V2 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = V2;
+			sourceTree = "<group>";
+		};
+		266EDDD32C64EA56006CF09B /* V1 */ = {
+			isa = PBXGroup;
+			children = (
+				264B70BA291F8DD000CDAF9F /* Api */,
+				63B1FB012914B378007E94B6 /* DataClass */,
+				63F1325C2914A1C000B3A9E0 /* UI */,
+				63F1323F2914A18800B3A9E0 /* Common */,
+				63F132572914A1A300B3A9E0 /* Coordinator */,
+				63F1324D2914A18F00B3A9E0 /* Base */,
+				63F132522914A19F00B3A9E0 /* Delegate */,
+			);
+			path = V1;
+			sourceTree = "<group>";
+		};
 		268546E62A28DB0300BDA2EA /* Review */ = {
 			isa = PBXGroup;
 			children = (
@@ -472,17 +493,12 @@
 		63209FE62913C3BF00709227 /* Footprint */ = {
 			isa = PBXGroup;
 			children = (
-				264B70BA291F8DD000CDAF9F /* Api */,
 				63209FF52913C67E00709227 /* Info.plist */,
 				26BD8FCA29694CE5005F7E5C /* ApiInfo.plist */,
 				63004AFF29DA6B1D000CDBB4 /* RemoteConfigValue.plist */,
 				63C102B229651E690099AF6A /* Footprint++Bundle.swift */,
-				63B1FB012914B378007E94B6 /* DataClass */,
-				63F1325C2914A1C000B3A9E0 /* UI */,
-				63F1323F2914A18800B3A9E0 /* Common */,
-				63F132572914A1A300B3A9E0 /* Coordinator */,
-				63F1324D2914A18F00B3A9E0 /* Base */,
-				63F132522914A19F00B3A9E0 /* Delegate */,
+				266EDDD32C64EA56006CF09B /* V1 */,
+				266EDDD22C64EA40006CF09B /* V2 */,
 				63B1FAF62914B29A007E94B6 /* Resource */,
 				63209FED2913C3C000709227 /* Preview Content */,
 			);
