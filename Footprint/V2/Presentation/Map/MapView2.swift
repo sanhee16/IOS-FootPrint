@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SDSwiftUIPack
+import GoogleMobileAds
 import MapKit
 import GoogleMaps
 import GooglePlaces
@@ -22,7 +23,7 @@ struct MapView2: View {
     private var safeBottom: CGFloat { get { Util.safeBottom() }}
     private let optionHeight: CGFloat = 36.0
     private let optionVerticalPadding: CGFloat = 8.0
-    
+    @State private var isShowSearchBar: Bool = false
     
     init(output: Output) {
         self.output = output
@@ -34,13 +35,41 @@ struct MapView2: View {
                 //Google Map
                 ZStack(alignment: .topLeading) {
                     VStack(alignment: .center, spacing: self.optionVerticalPadding) {
-                        if Util.getSettingStatus(.SEARCH_BAR) {
-                            drawSearchBox(geometry)
-                            if $vm.isShowingSearchResults.wrappedValue == true {
-                                drawSearchItems(geometry)
-                                    .padding(.top, 6)
-                            }
+                        if Defaults.premiumCode.isEmpty && $vm.isShowAds.wrappedValue {
+                            GADBanner().frame(width: GADAdSizeBanner.size.width, height: GADAdSizeBanner.size.height)
                         }
+                        HStack(alignment: .center, spacing: 0, content: {
+                            Spacer()
+                            
+                            if isShowSearchBar {
+                                VStack(alignment: .leading, spacing: 9, content: {
+                                    drawSearchBox(geometry)
+                                        .sdPadding(top: 8, leading: 16, bottom: 0, trailing: 16)
+                                        .onTapGesture { }
+                                    if !$vm.searchItems.wrappedValue.isEmpty {
+                                        drawSearchList(geometry)
+                                            .padding(.top, 6)
+                                    }
+                                })
+                            } else {
+                                mapMenuButton("search")
+                                    .sdPadding(top: 8, leading: 0, bottom: 0, trailing: 16)
+                                    .onTapGesture {
+                                        withAnimation {
+                                            self.isShowSearchBar = true
+                                        }
+                                    }
+                            }
+                        })
+                        
+                        HStack(alignment: .center, spacing: 0, content: {
+                            Spacer()
+                            mapMenuButton("paw-foot")
+                                .sdPadding(top: 8, leading: 0, bottom: 0, trailing: 16)
+                                .onTapGesture {
+                                    
+                                }
+                        })
                     }
                     .zIndex(1)
                     
@@ -50,25 +79,14 @@ struct MapView2: View {
                     
                     VStack(alignment: .leading, spacing: 0, content: {
                         Spacer()
-                        Image("location-target")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 20)
-                            .padding(10)
-                            .background(
-                                Circle()
-                                    .foregroundStyle(Color.white)
-                                    .border(Color(hex: "E2E8F0"), lineWidth: 0.7, cornerRadius: 100)
-                            )
-                            .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: 2)
-                            .contentShape(Rectangle())
+                        mapMenuButton("location-target")
                             .sdPadding(top: 0, leading: 16, bottom: 18, trailing: 0)
                             .onTapGesture {
                                 vm.didTapMyLocationButton()
                             }
                         
                         FPButton(text: "발자국 남기기", location: .leading(name: "paw-foot-white"), status: .press, size: .large, type: .solid) {
-
+                            
                         }
                         .sdPadding(top: 0, leading: 16, bottom: 8, trailing: 16)
                     })
@@ -91,7 +109,23 @@ struct MapView2: View {
         }
     }
     
-    private func drawSearchItems(_ geometry: GeometryProxy) -> some View {
+    
+    private func mapMenuButton(_ image: String) -> some View {
+        Image(image)
+            .resizable()
+            .scaledToFit()
+            .frame(width: 20)
+            .padding(10)
+            .background(
+                Circle()
+                    .foregroundStyle(Color.white)
+                    .border(Color(hex: "E2E8F0"), lineWidth: 0.7, cornerRadius: 100)
+            )
+            .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: 2)
+            .contentShape(Rectangle())
+    }
+    
+    private func drawSearchList(_ geometry: GeometryProxy) -> some View {
         return VStack(alignment: .leading, spacing: 0) {
             ZStack(alignment: .center) {
                 if $vm.searchTimer.wrappedValue != nil {
@@ -108,6 +142,7 @@ struct MapView2: View {
                     .frame(width: geometry.size.width - 20, height: geometry.size.height / 5 * 2, alignment: .center)
                     .zIndex(1)
                 }
+                
                 ScrollView(.vertical, showsIndicators: true) {
                     VStack(alignment: .leading, spacing: 8) {
                         ForEach($vm.searchItems.wrappedValue.indices, id: \.self) { idx in
@@ -124,8 +159,8 @@ struct MapView2: View {
             RoundedRectangle(cornerRadius: 6)
                 .foregroundColor(Color.white.opacity(0.90))
         )
-        .frame(width: geometry.size.width - 20, height: geometry.size.height / 5 * 2, alignment: .leading)
-        .padding([.leading, .trailing], 10)
+        .frame(width: geometry.size.width - 32, height: geometry.size.height / 5 * 2, alignment: .leading)
+        .padding([.leading, .trailing], 16)
     }
     
     private func searchItem(_ geometry: GeometryProxy, item: SearchItemResponse) -> some View {
@@ -148,69 +183,52 @@ struct MapView2: View {
     }
     
     private func drawSearchBox(_ geometry: GeometryProxy) -> some View {
-        let searchBoxWidth: CGFloat = 60.0
-        return HStack(alignment: .center, spacing: 6) {
-            ZStack(alignment: .trailing) {
-                TextField("", text: $vm.searchText)
-                    .font(.kr13r)
-                    .foregroundColor(.gray90)
-                    .accentColor(.fColor2)
-                    .padding([.leading, .trailing], 8)
-                    .frame(
-                        width: $vm.isShowingSearchResults.wrappedValue
-                        ? geometry.size.width - 20 - searchBoxWidth - 10
-                        : geometry.size.width - 20,
-                        height: self.optionHeight,
-                        alignment: .center
-                    )
-                    .contentShape(Rectangle()
-                    )
-                    .background(
-                        RoundedRectangle(cornerRadius: 6)
-                            .foregroundColor(Color.white.opacity(0.98))
-                    )
-                    .border(.fColor2, lineWidth: 1.2, cornerRadius: 6)
-                    .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: $vm.isShowingSearchResults.wrappedValue ? 0 : 10))
-                    .onChange(of: $vm.searchText.wrappedValue) { _ in
-                        vm.enterSearchText()
-                    }
-                    .onTapGesture {
-                        vm.onTapSearchBox()
-                    }
-                if !$vm.searchText.wrappedValue.isEmpty {
-                    Image("close")
-                        .resizable()
-                        .frame(both: 12.0, alignment: .center)
-                        .padding(6)
-                        .background(
-                            Circle()
-                                .foregroundColor(.fColor4)
-                        )
-                        .contentShape(Rectangle())
-                        .padding(.trailing, $vm.isShowingSearchResults.wrappedValue ? 8 : 18)
-                        .zIndex(1)
-                        .onTapGesture {
-                            vm.onClickSearchCancel()
-                        }
+        return HStack(alignment: .center) {
+            Image("search")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 20)
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    self.isShowSearchBar = false
                 }
-            }
-            if $vm.isShowingSearchResults.wrappedValue {
-                Text("cancel".localized())
-                    .font(.kr13r)
-                    .foregroundColor(.white)
-                    .frame(width: searchBoxWidth, height: self.optionHeight, alignment: .center)
+                .sdPaddingLeading(8)
+            
+            TextField("", text: $vm.searchText)
+                .font(.body1)
+                .foregroundColor(.gray90)
+                .accentColor(.fColor2)
+                .sdPaddingHorizontal(8)
+                .layoutPriority(.greatestFiniteMagnitude)
+                .onChange(of: $vm.searchText.wrappedValue) { _ in
+                    vm.enterSearchText()
+                }
+            
+            if !$vm.searchText.wrappedValue.isEmpty {
+                Image("close")
+                    .resizable()
+                    .frame(both: 10.0, alignment: .center)
+                    .sdPaddingTrailing(8)
                     .background(
-                        RoundedRectangle(cornerRadius: 6)
-                            .foregroundColor(Color.fColor2)
+                        Circle()
+                            .foregroundColor(.fColor4)
                     )
-                    .padding(.trailing, 10)
+                    .contentShape(Rectangle())
+                    .sdPaddingTrailing(8)
                     .onTapGesture {
-                        vm.onCloseSearchBox()
-                        UIApplication.shared.hideKeyborad()
+                        $vm.searchText.wrappedValue.removeAll()
+                        $vm.searchItems.wrappedValue.removeAll()
                     }
             }
         }
-        .padding(.top, 8)
+        .sdPaddingVertical(10)
+        .background(
+            RoundedRectangle(cornerRadius: 8)
+                .foregroundColor(Color(hex: "#FAFAFA"))
+                .border(Color(hex: "#E4E4E7"), lineWidth: 0.75, cornerRadius: 8)
+        )
+        .contentShape(Rectangle())
+        .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: 2)
     }
 }
 

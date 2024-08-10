@@ -20,6 +20,7 @@ struct Pin: Identifiable {
 
 class MapVM2: BaseViewModel {
     private var locationManager: CLLocationManager
+    @Published var isShowAds: Bool = false
     @Published var annotations: [Pin] = []
     
     @Published var myLocation: Location? = nil
@@ -50,6 +51,13 @@ class MapVM2: BaseViewModel {
         self.locationManager.allowsBackgroundLocationUpdates = false
         self.googleApi = GoogleApi.instance
         super.init()
+        
+        Remote.init().getIsShowAds({[weak self] value in
+            DispatchQueue.main.async {
+                self?.isShowAds = value
+                print("isShowAds: \(String(describing: self?.isShowAds))")
+            }
+        })
         
         self.getCurrentLocation()
     }
