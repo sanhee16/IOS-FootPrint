@@ -45,48 +45,54 @@ struct GoogleMapView2: UIViewRepresentable {
     
     class Coordinator: NSObject, GMSMapViewDelegate {
         var vm: MapVM2
-
+        
         init(vm: MapVM2) {
             print("[SD] Coordinator init")
             self.vm = vm
         }
         
+        // 구글 마커 클릭
         func mapView(_ mapView: GMSMapView, didTapPOIWithPlaceID placeID: String, name: String, location: CLLocationCoordinate2D) {
             print("[SD] didTapPOIWithPlaceID")
             // 클릭하면 장소의 이름과 placeId가 나옴!
-            var newName = name
-            if let newLineIdx = name.firstIndex(of: "\n") {
-                newName.removeSubrange(newLineIdx...)
-            }
-            vm.removeCurrentMarker()
-            vm.drawCurrentMarker(Location(latitude: location.latitude, longitude: location.longitude))
-            vm.addNewMarker(Location(latitude: location.latitude, longitude: location.longitude), name: newName, placeId: placeID)
+//            var newName = name
+//            if let newLineIdx = name.firstIndex(of: "\n") {
+//                newName.removeSubrange(newLineIdx...)
+//            }
+//            vm.removeSelectedMarker()
+//            vm.drawSelectedMarker(Location(latitude: location.latitude, longitude: location.longitude))
+            //            vm.addNewMarker(Location(latitude: location.latitude, longitude: location.longitude), name: newName, placeId: placeID)
         }
         
+        
+        // 구글 마커 외에 아무데나 클릭
         func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-            print("[SD] didTap")
-            let location = Location(latitude: marker.position.latitude, longitude: marker.position.longitude)
-            if vm.currentTapMarker == marker {
-                vm.addNewMarker(location)
-            } else {
-                vm.removeCurrentMarker()
-                vm.onTapMarker(location)
-            }
+//            let location = Location(latitude: marker.position.latitude, longitude: marker.position.longitude)
+//            if vm.selectedMarker == marker {
+//                vm.addNewMarker(location)
+//            } else {
+//                vm.removeSelectedMarker()
+//                vm.onTapMarker(location)
+//            }
             return true
         }
         
         func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
-            vm.removeCurrentMarker()
-            vm.drawCurrentMarker(Location(latitude: coordinate.latitude, longitude: coordinate.longitude))
-            vm.addNewMarker(Location(latitude: coordinate.latitude, longitude: coordinate.longitude))
+//            vm.removeSelectedMarker()
+//            vm.drawSelectedMarker(Location(latitude: coordinate.latitude, longitude: coordinate.longitude))
+            //            vm.addNewMarker(Location(latitude: coordinate.latitude, longitude: coordinate.longitude))
         }
         
         func mapView(_ mapView: GMSMapView, didTapMyLocation location: CLLocationCoordinate2D) {
-            print("[SD] didTapMyLocation: - \(location)")
+            
         }
         
         func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
+            vm.changeStateSelectedMarker(true, target: nil)
+        }
 
+        func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
+            vm.changeStateSelectedMarker(false, target: position.target)
         }
     }
 }

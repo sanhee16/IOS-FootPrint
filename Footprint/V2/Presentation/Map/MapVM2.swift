@@ -11,11 +11,35 @@ import RealmSwift
 import GoogleMaps
 import GooglePlaces
 import CoreLocation
+import Contacts
 
 struct Pin: Identifiable {
     let id = UUID()
     let footPrint: FootPrint
     let coordinate: CLLocationCoordinate2D
+}
+
+enum MarkerStatus {
+    case stable
+    case move
+    
+    var image: String {
+        switch self {
+        case .stable:
+            return "State=able"
+        case .move:
+            return "State=move"
+        }
+    }
+    
+    var size: CGSize {
+        switch self {
+        case .stable:
+            return CGSize(width: 46, height: 54)
+        case .move:
+            return CGSize(width: 46, height: 72)
+        }
+    }
 }
 
 class MapVM2: BaseViewModel {
@@ -35,7 +59,11 @@ class MapVM2: BaseViewModel {
     @Published var searchTimer: Timer? = nil
     @Published var isGettingLocation: Bool = true
     
-    @Published var currentTapMarker: GMSMarker? = nil
+    @Published var selectedMarker: GMSMarker? = nil
+    @Published var centerMarkerStatus: MarkerStatus = .stable
+    @Published var centerAddress: String = ""
+    
+    var centerPosition: CLLocationCoordinate2D? = nil
     private var allFootprints: [FootPrint] = []
     
     private var searchCnt: Int = 0
@@ -64,7 +92,7 @@ class MapVM2: BaseViewModel {
     
     func onAppear() {
         print("[SD] onAppear: \(C.isFirstAppStart)")
-        self.removeCurrentMarker()
+        self.removeSelectedMarker()
         switch checkLocationPermission() {
         case .allow:
             self.locationPermission = true
@@ -121,7 +149,7 @@ class MapVM2: BaseViewModel {
     }
     
     func onClickCategory(_ category: Category) {
-        self.removeCurrentMarker()
+        self.removeSelectedMarker()
         if let idx = self.showingCategories.firstIndex(of: category.tag) {
             self.showingCategories.remove(at: idx)
         } else {
@@ -184,7 +212,7 @@ class MapVM2: BaseViewModel {
     
     func loadAllMarkers() {
         print("[SD] loadAllMarkers")
-        self.removeCurrentMarker()
+        self.removeSelectedMarker()
         for item in self.markerList {
             removeMarker(marker: item.marker)
         }
@@ -210,7 +238,7 @@ class MapVM2: BaseViewModel {
     
     func onTapMarker(_ location: Location) {
         print("[SD] on tap marker")
-        self.removeCurrentMarker()
+        self.removeSelectedMarker()
         
         // TODO: presentShowFootPrintView
 //        self.coordinator?.presentShowFootPrintView(location, onDismiss: {[weak self] in
@@ -288,15 +316,14 @@ class MapVM2: BaseViewModel {
         return marker
     }
     
-    func drawCurrentMarker(_ location: Location) {
+    func drawSelectedMarker(_ location: Location) {
         // 마커 생성하기
-        self.removeCurrentMarker()
-        self.currentTapMarker = nil
-        
+        self.removeSelectedMarker()
+        self.selectedMarker = nil
+
         let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
-        let itemSize = CGSize(width: 20, height: 30)
-        
-        guard let image = UIImage(named: "icon_mark")?.resizeImageTo(size: itemSize) else { return }
+        let itemSize = CGSize(width: 46, height: 54)
+        guard let image = UIImage(named: "State=able")?.resizeImageTo(size: itemSize) else { return }
         
         marker.icon = image
         marker.map = C.mapView
@@ -304,7 +331,40 @@ class MapVM2: BaseViewModel {
         marker.isTappable = true
         marker.map = C.mapView
         
-        self.currentTapMarker = marker
+        self.selectedMarker = marker
+    }
+    
+    func changeStateSelectedMarker(_ isDrag: Bool, target: CLLocationCoordinate2D?) {
+//        let itemSize = isDrag ? CGSize(width: 46, height: 72) : CGSize(width: 46, height: 54)
+//        guard let image = UIImage(named: isDrag ? "State=move" : "State=able")?.resizeImageTo(size: itemSize) else { return }
+//        self.selectedMarker?.icon = image
+        self.centerMarkerStatus = isDrag ? .move : .stable
+        self.centerPosition = target
+        
+        guard let target = target else { return }
+        let location = CLLocation(latitude: target.latitude, longitude: target.longitude)
+        let geocoder = CLGeocoder()
+        let locale = Locale(identifier: "Ko-kr")
+        
+        geocoder.reverseGeocodeLocation(location, preferredLocale: locale) { [weak self] placemarks, _ in
+            guard let placemarks = placemarks,
+                  let address = placemarks.last
+            else { return }
+            
+            if let postalAddress = address.postalAddress {
+                let formatter = CNPostalAddressFormatter()
+                let addressString = formatter.string(from: postalAddress)
+                
+                print("addressString: \(addressString)")
+                var result: String = ""
+                addressString.split(separator: "\n").forEach { value in
+                    result.append(contentsOf: "\(value) ")
+                }
+                self?.centerAddress = result
+                print("result: \(result)")
+            }
+        }
+
     }
     
     func loadAllFootprints() {
@@ -404,7 +464,6 @@ class MapVM2: BaseViewModel {
     }
     
     func onClickSearchItem(_ item: SearchItemResponse) {
-        
         //TODO: GetGeocoding
 //        self.googleApi.getGeocoding(item.placeId)
 //            .run(in: &self.subscription) {[weak self] results in
@@ -432,7 +491,7 @@ class MapVM2: BaseViewModel {
     }
     
     func onClickLocationPermission() {
-        self.removeCurrentMarker()
+        self.removeSelectedMarker()
         //TODO: Alert
 //        self.alert(.yesOrNo, title: "alert_request_permission_location".localized(), description: "alert_request_permission_location_description".localized()) { isAllow in
 //            if isAllow {
@@ -445,8 +504,8 @@ class MapVM2: BaseViewModel {
 //        }
     }
     
-    func removeCurrentMarker() {
-        if let currentTapMarker = self.currentTapMarker {
+    func removeSelectedMarker() {
+        if let currentTapMarker = self.selectedMarker {
             self.removeMarker(marker: currentTapMarker)
         }
     }

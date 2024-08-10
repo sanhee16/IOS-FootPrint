@@ -10,7 +10,7 @@ import SDSwiftUIPack
 import UIKit
 
 enum TopbarType: String {
-    case back = "back"
+    case back = "Type=Flat, Direction=◀ Left"
     case close = "close"
     case closeWhite = "close_white"
     case none = ""
@@ -36,7 +36,7 @@ struct Topbar: View {
                     Image(type.rawValue)
                         .resizable()
                         .scaledToFit()
-                        .frame(both: 16)
+                        .frame(both: 24)
                         .padding(.leading, 10)
                         .onTapGesture {
                             callback?()
@@ -48,6 +48,7 @@ struct Topbar: View {
                 .font(.kr16b)
                 .foregroundColor(textColor)
         }
-        .frame(height: 50, alignment: .center)
+        .frame(height: 55, alignment: .center)
+        .background(Color(hex: "#F1F5F9"))
     }
 }

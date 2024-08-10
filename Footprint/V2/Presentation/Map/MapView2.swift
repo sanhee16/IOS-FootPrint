@@ -19,11 +19,21 @@ struct MapView2: View {
     
     @StateObject var vm: MapVM2 = MapVM2()
     private var output: Output
+
+
+    enum MapStatus {
+        case normal
+        case adding
+    }
+
+
     private var safeTop: CGFloat { get { Util.safeTop() }}
     private var safeBottom: CGFloat { get { Util.safeBottom() }}
     private let optionHeight: CGFloat = 36.0
     private let optionVerticalPadding: CGFloat = 8.0
     @State private var isShowSearchBar: Bool = false
+    @State private var mapStatus: MapStatus = .normal
+    @State private var centerPos: CGRect = .zero
     
     init(output: Output) {
         self.output = output
@@ -34,42 +44,67 @@ struct MapView2: View {
             VStack(alignment: .center, spacing: 0) {
                 //Google Map
                 ZStack(alignment: .topLeading) {
-                    VStack(alignment: .center, spacing: self.optionVerticalPadding) {
-                        if Defaults.premiumCode.isEmpty && $vm.isShowAds.wrappedValue {
-                            GADBanner().frame(width: GADAdSizeBanner.size.width, height: GADAdSizeBanner.size.height)
-                        }
-                        HStack(alignment: .center, spacing: 0, content: {
-                            Spacer()
+                    VStack(alignment: .center) {
+                        switch self.mapStatus {
+                        case .normal:
+                            if Defaults.premiumCode.isEmpty && $vm.isShowAds.wrappedValue {
+                                GADBanner().frame(width: GADAdSizeBanner.size.width, height: GADAdSizeBanner.size.height)
+                            }
+                            HStack(alignment: .center, spacing: 0, content: {
+                                Spacer()
+                                if isShowSearchBar {
+                                    VStack(alignment: .leading, spacing: 9, content: {
+                                        drawSearchBox(geometry)
+                                            .sdPadding(top: 8, leading: 16, bottom: 0, trailing: 16)
+                                            .onTapGesture { }
+                                        if !$vm.searchItems.wrappedValue.isEmpty {
+                                            drawSearchList(geometry)
+                                                .padding(.top, 6)
+                                        }
+                                    })
+                                } else {
+                                    mapMenuButton("search") {
+                                        withAnimation {
+                                            self.isShowSearchBar = true
+                                        }
+                                    }
+                                    .sdPadding(top: 8, leading: 0, bottom: 0, trailing: 16)
+                                }
+                            })
                             
-                            if isShowSearchBar {
-                                VStack(alignment: .leading, spacing: 9, content: {
-                                    drawSearchBox(geometry)
-                                        .sdPadding(top: 8, leading: 16, bottom: 0, trailing: 16)
-                                        .onTapGesture { }
-                                    if !$vm.searchItems.wrappedValue.isEmpty {
-                                        drawSearchList(geometry)
-                                            .padding(.top, 6)
-                                    }
-                                })
-                            } else {
-                                mapMenuButton("search") {
-                                    withAnimation {
-                                        self.isShowSearchBar = true
-                                    }
+                            HStack(alignment: .center, spacing: 0, content: {
+                                Spacer()
+                                mapMenuButton("paw-foot") {
+                                    
                                 }
                                 .sdPadding(top: 8, leading: 0, bottom: 0, trailing: 16)
-                            }
-                        })
-                        
-                        HStack(alignment: .center, spacing: 0, content: {
-                            Spacer()
-                            mapMenuButton("paw-foot") {
+                            })
+                        case .adding:
+                            VStack(alignment: .leading, spacing: 0, content: {
+                                Topbar("위치 선택", type: .back) {
+                                    self.mapStatus = .normal
+                                }
+                                Text("지도를 움직여 위치를 설정하세요.")
+                                    .font(.body2)
+                                    .foregroundStyle(Color.white)
+                                    .sdPaddingVertical(16)
+                                    .frame(width: geometry.size.width)
+                                    .background(Color.black.opacity(0.7))
                                 
-                            }
-                            .sdPadding(top: 8, leading: 0, bottom: 0, trailing: 16)
-                        })
+                            })
+                        }
                     }
                     .zIndex(1)
+                    
+                    if self.mapStatus == .adding {
+                        Image($vm.centerMarkerStatus.wrappedValue.image)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 46)
+                            .zIndex(2)
+                            .rectReader($centerPos, in: .global)
+                            .offset(x: geometry.size.width / 2 - $centerPos.wrappedValue.width / 2, y: geometry.size.height / 2 - $centerPos.wrappedValue.height / 2)
+                    }
                     
                     GoogleMapView2(vm: self.vm)
                     
@@ -79,11 +114,24 @@ struct MapView2: View {
                             vm.didTapMyLocationButton()
                         }
                         .sdPadding(top: 0, leading: 16, bottom: 18, trailing: 0)
-                        
-                        FPButton(text: "발자국 남기기", location: .leading(name: "paw-foot-white"), status: .press, size: .large, type: .solid) {
-                            
+                        switch self.mapStatus {
+                        case .normal:
+                            FPButton(text: "발자국 남기기", location: .leading(name: "paw-foot-white"), status: .press, size: .large, type: .solid) {
+                                self.mapStatus = .adding
+                            }
+                            .sdPadding(top: 0, leading: 16, bottom: 8, trailing: 16)
+                        case .adding:
+                            VStack(alignment: .leading, spacing: 24, content: {
+                                Text($vm.centerAddress.wrappedValue)
+                                    
+                                
+                                FPButton(text: "여기에 발자국 남기기", status: .press, size: .large, type: .solid) {
+                                    
+                                }
+                            })
+                            .sdPadding(top: 16, leading: 16, bottom: 8, trailing: 16)
+                            .background(Color(hex: "#F1F5F9"))
                         }
-                        .sdPadding(top: 0, leading: 16, bottom: 8, trailing: 16)
                     })
                 }
             }
