@@ -1,8 +1,8 @@
 //
-//  ShowFootPrintViewModel.swift
+//  FootprintVM.swift
 //  Footprint
 //
-//  Created by sandy on 2022/11/13.
+//  Created by sandy on 8/10/24.
 //
 
 import Foundation
@@ -15,20 +15,20 @@ import RealmSwift
 import SwiftUI
 import SDSwiftUIPack
 
-class ShowFootPrintViewModel: BaseViewModelV1 {
+class FootprintVM: BaseViewModel {
     @Published var footPrints: [FootPrint] = []
     @Published var page: Page
     @Published var pageIdx: Int = 0
     private let realm: Realm
-    private let location: Location
+    private var location: Location?
     private var isLoading: Bool = false
     
-    init(_ coordinator: AppCoordinatorV1, location: Location) {
+    override init() {
         self.realm = R.realm
-        self.location = location
+        self.location = nil
         self.page = .withIndex(0)
         self.pageIdx = 0
-        super.init(coordinator)
+        super.init()
         self.page.update(.new(index: 0))
     }
     
@@ -36,11 +36,16 @@ class ShowFootPrintViewModel: BaseViewModelV1 {
         self.loadAll()
     }
     
+    func updateLocation(_ location: Location) {
+        self.location = location
+    }
+    
     func loadAll() {
+        guard let location = self.location else { return }
         if isLoading {
             return
         }
-        self.startProgress()
+        
         self.isLoading = true
         print("loadAll")
         self.footPrints.removeAll()
@@ -52,38 +57,37 @@ class ShowFootPrintViewModel: BaseViewModelV1 {
         for i in items {
             self.footPrints.append(i)
         }
-        self.stopProgress()
+        
         self.isLoading = false
     }
     
     func onClickAddFootprint() {
         let placeId: String? = footPrints.first?.placeId
         let address: String? = footPrints.first?.address
-        self.coordinator?.changeAddFootprintView(location: self.location, type: .new(name: nil, placeId: placeId, address: address)) {
-            
-        }
+//        self.coordinator?.changeAddFootprintView(location: self.location, type: .new(name: nil, placeId: placeId, address: address)) {
+//        }
     }
     
     func onClickDeleteFootprint() {
         let deleteId = self.footPrints[pageIdx].id
         
-        self.alert(.yesOrNo, title: "alert_delete".localized(), description: "alert_delete_item".localized("\(Defaults.deleteDays)")) {[weak self] isDelete in
-            guard let self = self else { return }
-            if isDelete {
-                guard let item = self.realm.object(ofType: FootPrint.self, forPrimaryKey: deleteId) else {
-                    self.alert(.ok, title: "alert_fail".localized())
-                    return
-                }
-                try! self.realm.write {[weak self] in
-                    guard let self = self else { return }
-                    item.deleteTime = Int(Date().timeIntervalSince1970)
-                    self.realm.add(item, update: .modified)
-                    self.dismiss()
-                }
-            } else {
-                return
-            }
-        }
+//        self.alert(.yesOrNo, title: "alert_delete".localized(), description: "alert_delete_item".localized("\(Defaults.deleteDays)")) {[weak self] isDelete in
+//            guard let self = self else { return }
+//            if isDelete {
+//                guard let item = self.realm.object(ofType: FootPrint.self, forPrimaryKey: deleteId) else {
+//                    self.alert(.ok, title: "alert_fail".localized())
+//                    return
+//                }
+//                try! self.realm.write {[weak self] in
+//                    guard let self = self else { return }
+//                    item.deleteTime = Int(Date().timeIntervalSince1970)
+//                    self.realm.add(item, update: .modified)
+//                    self.dismiss()
+//                }
+//            } else {
+//                return
+//            }
+//        }
     }
     
     func onClickModifyFootprint() {
@@ -112,13 +116,13 @@ class ShowFootPrintViewModel: BaseViewModelV1 {
             }
             print("peopleWith: \(peopleWith)")
             
-            self.coordinator?.changeAddFootprintView(location: self.location, type: .modify(content: FootprintContents(title: item.title, content: item.content, createdAt: Date(timeIntervalSince1970: Double(item.createdAt)), images: uiImages, category: category, peopleWith: peopleWith, id: item.id, isStar: item.isStar))) {
-            }
+//            self.coordinator?.changeAddFootprintView(location: self.location, type: .modify(content: FootprintContents(title: item.title, content: item.content, createdAt: Date(timeIntervalSince1970: Double(item.createdAt)), images: uiImages, category: category, peopleWith: peopleWith, id: item.id, isStar: item.isStar))) {
+//            }
         }
     }
     
     func onClose() {
-        self.dismiss()
+//        self.dismiss()
     }
     
     func moveNext() {
@@ -151,7 +155,7 @@ class ShowFootPrintViewModel: BaseViewModelV1 {
                 uiImages.append(uiImage)
             }
         }
-        self.coordinator?.presentShowImageView(idx, images: uiImages)
+//        self.coordinator?.presentShowImageView(idx, images: uiImages)
     }
     
     func getPeopleWith(_ list: [Int]) -> [PeopleWith] {

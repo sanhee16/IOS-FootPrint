@@ -21,7 +21,7 @@ class SettingViewModel: BaseViewModelV1 {
     @Published var tapCnt: Int = 0
     @Published var starCnt: Int = 0
     
-    override init(_ coordinator: AppCoordinator) {
+    override init(_ coordinator: AppCoordinatorV1) {
         self.isOnSearchBar = Util.getSettingStatus(.SEARCH_BAR)
         super.init(coordinator)
     }

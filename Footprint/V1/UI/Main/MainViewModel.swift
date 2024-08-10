@@ -12,7 +12,7 @@ class MainViewModel: BaseViewModelV1 {
     @Published var currentTab: MainMenuType = .map
     @Published var isShowAds: Bool = false
     
-    override init(_ coordinator: AppCoordinator) {
+    override init(_ coordinator: AppCoordinatorV1) {
         super.init(coordinator)
         Remote.init().getIsShowAds({[weak self] value in
             DispatchQueue.main.async {

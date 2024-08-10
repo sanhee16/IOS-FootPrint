@@ -12,7 +12,7 @@ import UIKit
 
 class DevInfoViewModel: BaseViewModelV1 {
     @Published var git: String = "https://github.com/sanhee16"
-    override init(_ coordinator: AppCoordinator) {
+    override init(_ coordinator: AppCoordinatorV1) {
         super.init(coordinator)
         
     }

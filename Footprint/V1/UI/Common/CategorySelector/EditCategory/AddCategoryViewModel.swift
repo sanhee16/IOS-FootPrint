@@ -35,7 +35,7 @@ class AddCategoryViewModel: BaseViewModelV1 {
     @Published var type: AddCategoryType
     private var onEraseCategory: (()->())?
     
-    init(_ coordinator: AppCoordinator, type: AddCategoryType, onEraseCategory: (()->())?) {
+    init(_ coordinator: AppCoordinatorV1, type: AddCategoryType, onEraseCategory: (()->())?) {
         self.type = type
         self.realm = R.realm
         self.isAvailableSave = type.type == .update

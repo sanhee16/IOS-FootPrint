@@ -43,6 +43,15 @@
 		266EDDE42C64EB40006CF09B /* MainView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266EDDE32C64EB40006CF09B /* MainView2.swift */; };
 		266EDDE62C64EB46006CF09B /* MainVM2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266EDDE52C64EB46006CF09B /* MainVM2.swift */; };
 		266EDDE82C64EB88006CF09B /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266EDDE72C64EB88006CF09B /* BaseViewModel.swift */; };
+		267CC1772C66F27000D6015E /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC1762C66F27000D6015E /* BaseCoordinator.swift */; };
+		267CC1792C66F28300D6015E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC1782C66F28300D6015E /* Coordinator.swift */; };
+		267CC17B2C66F28E00D6015E /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC17A2C66F28E00D6015E /* Destination.swift */; };
+		267CC17E2C66F2BC00D6015E /* MapView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC17D2C66F2BC00D6015E /* MapView2.swift */; };
+		267CC1802C66F2C700D6015E /* MapVM2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC17F2C66F2C700D6015E /* MapVM2.swift */; };
+		267CC1822C66FA1200D6015E /* GoogleMapView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC1812C66FA1200D6015E /* GoogleMapView2.swift */; };
+		267CC1842C66FE6400D6015E /* GoogleMapVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC1832C66FE6400D6015E /* GoogleMapVM.swift */; };
+		267CC1872C6704B400D6015E /* FootprintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC1862C6704B400D6015E /* FootprintView.swift */; };
+		267CC1892C6704B900D6015E /* FootprintVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC1882C6704B900D6015E /* FootprintVM.swift */; };
 		26823C092A13B93000BF41EA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26823C0B2A13B93000BF41EA /* InfoPlist.strings */; };
 		2682622A2C60E2EA0069134C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 268262292C60E2EA0069134C /* RealmSwift */; settings = {ATTRIBUTES = (Required, ); }; };
 		268546E82A28DB1200BDA2EA /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268546E72A28DB1200BDA2EA /* ReviewView.swift */; };
@@ -114,8 +123,8 @@
 		63F132512914A18F00B3A9E0 /* BaseViewModelV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F1324F2914A18F00B3A9E0 /* BaseViewModelV1.swift */; };
 		63F132552914A19F00B3A9E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F132532914A19F00B3A9E0 /* AppDelegate.swift */; };
 		63F132562914A19F00B3A9E0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F132542914A19F00B3A9E0 /* SceneDelegate.swift */; };
-		63F1325A2914A1A300B3A9E0 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F132582914A1A300B3A9E0 /* AppCoordinator.swift */; };
-		63F1325B2914A1A300B3A9E0 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F132592914A1A300B3A9E0 /* Coordinator.swift */; };
+		63F1325A2914A1A300B3A9E0 /* AppCoordinatorV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F132582914A1A300B3A9E0 /* AppCoordinatorV1.swift */; };
+		63F1325B2914A1A300B3A9E0 /* CoordinatorV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F132592914A1A300B3A9E0 /* CoordinatorV1.swift */; };
 		63F1328E2914A1C000B3A9E0 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F1325E2914A1C000B3A9E0 /* SplashViewModel.swift */; };
 		63F1328F2914A1C000B3A9E0 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F1325F2914A1C000B3A9E0 /* SplashView.swift */; };
 		63F132962914A1C000B3A9E0 /* MultilineTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F1326A2914A1C000B3A9E0 /* MultilineTextView.swift */; };
@@ -183,6 +192,15 @@
 		266EDDE32C64EB40006CF09B /* MainView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView2.swift; sourceTree = "<group>"; };
 		266EDDE52C64EB46006CF09B /* MainVM2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVM2.swift; sourceTree = "<group>"; };
 		266EDDE72C64EB88006CF09B /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		267CC1762C66F27000D6015E /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
+		267CC1782C66F28300D6015E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		267CC17A2C66F28E00D6015E /* Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
+		267CC17D2C66F2BC00D6015E /* MapView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView2.swift; sourceTree = "<group>"; };
+		267CC17F2C66F2C700D6015E /* MapVM2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVM2.swift; sourceTree = "<group>"; };
+		267CC1812C66FA1200D6015E /* GoogleMapView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapView2.swift; sourceTree = "<group>"; };
+		267CC1832C66FE6400D6015E /* GoogleMapVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapVM.swift; sourceTree = "<group>"; };
+		267CC1862C6704B400D6015E /* FootprintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootprintView.swift; sourceTree = "<group>"; };
+		267CC1882C6704B900D6015E /* FootprintVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootprintVM.swift; sourceTree = "<group>"; };
 		26823C0A2A13B93000BF41EA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		26823C0C2A13B93300BF41EA /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		268546E72A28DB1200BDA2EA /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
@@ -253,8 +271,8 @@
 		63F1324F2914A18F00B3A9E0 /* BaseViewModelV1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewModelV1.swift; sourceTree = "<group>"; };
 		63F132532914A19F00B3A9E0 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F132542914A19F00B3A9E0 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		63F132582914A1A300B3A9E0 /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		63F132592914A1A300B3A9E0 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		63F132582914A1A300B3A9E0 /* AppCoordinatorV1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinatorV1.swift; sourceTree = "<group>"; };
+		63F132592914A1A300B3A9E0 /* CoordinatorV1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoordinatorV1.swift; sourceTree = "<group>"; };
 		63F1325E2914A1C000B3A9E0 /* SplashViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
 		63F1325F2914A1C000B3A9E0 /* SplashView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		63F1326A2914A1C000B3A9E0 /* MultilineTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultilineTextView.swift; sourceTree = "<group>"; };
@@ -437,6 +455,7 @@
 		266EDDD42C64EA87006CF09B /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				267CC1752C66F26400D6015E /* Coordinator */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -444,6 +463,7 @@
 		266EDDD52C64EA90006CF09B /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				267CC17C2C66F2B500D6015E /* Map */,
 				266EDDE22C64EB3B006CF09B /* Main */,
 				266EDDDA2C64EAC3006CF09B /* Splash */,
 				266EDDE72C64EB88006CF09B /* BaseViewModel.swift */,
@@ -481,6 +501,37 @@
 				266EDDE52C64EB46006CF09B /* MainVM2.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		267CC1752C66F26400D6015E /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				267CC1762C66F27000D6015E /* BaseCoordinator.swift */,
+				267CC1782C66F28300D6015E /* Coordinator.swift */,
+				267CC17A2C66F28E00D6015E /* Destination.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		267CC17C2C66F2B500D6015E /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				267CC1852C67049E00D6015E /* Footprint */,
+				267CC17D2C66F2BC00D6015E /* MapView2.swift */,
+				267CC17F2C66F2C700D6015E /* MapVM2.swift */,
+				267CC1812C66FA1200D6015E /* GoogleMapView2.swift */,
+				267CC1832C66FE6400D6015E /* GoogleMapVM.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		267CC1852C67049E00D6015E /* Footprint */ = {
+			isa = PBXGroup;
+			children = (
+				267CC1862C6704B400D6015E /* FootprintView.swift */,
+				267CC1882C6704B900D6015E /* FootprintVM.swift */,
+			);
+			path = Footprint;
 			sourceTree = "<group>";
 		};
 		268546E62A28DB0300BDA2EA /* Review */ = {
@@ -730,8 +781,8 @@
 		63F132572914A1A300B3A9E0 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
-				63F132582914A1A300B3A9E0 /* AppCoordinator.swift */,
-				63F132592914A1A300B3A9E0 /* Coordinator.swift */,
+				63F132582914A1A300B3A9E0 /* AppCoordinatorV1.swift */,
+				63F132592914A1A300B3A9E0 /* CoordinatorV1.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -1011,6 +1062,7 @@
 				264EEF592925128A00B89624 /* AddCategoryViewModel.swift in Sources */,
 				266EDDD92C64EAA9006CF09B /* FootprintApp.swift in Sources */,
 				63E2756929502DFA00E4AABC /* PinchZoom.swift in Sources */,
+				267CC1822C66FA1200D6015E /* GoogleMapView2.swift in Sources */,
 				63E848A3295ABE7E0037D7A3 /* EditTravelViewModel.swift in Sources */,
 				63F1328E2914A1C000B3A9E0 /* SplashViewModel.swift in Sources */,
 				63C81AB72963BD430001A70B /* SelectFootprintsViewModel.swift in Sources */,
@@ -1031,11 +1083,13 @@
 				63B1FAFB2914B31E007E94B6 /* GalleryView.swift in Sources */,
 				266EDDDC2C64EACF006CF09B /* SplashView2.swift in Sources */,
 				63B1FAEF2914A861007E94B6 /* EditFootprintViewModel.swift in Sources */,
+				267CC1772C66F27000D6015E /* BaseCoordinator.swift in Sources */,
 				26C04F6D2917667F00890A76 /* SwiftUIExtension.swift in Sources */,
 				631D75242966619B00464F33 /* SToggleView.swift in Sources */,
 				63D5EF6A29C861BB000ACBC2 /* SwiftUIViewModifier.swift in Sources */,
 				26332176292095E90065AE3A /* ShowFootPrintView.swift in Sources */,
 				63F132972914A1C000B3A9E0 /* EmailSender.swift in Sources */,
+				267CC17B2C66F28E00D6015E /* Destination.swift in Sources */,
 				260C87D0296AAF5C00ADCC32 /* FootprintItem.swift in Sources */,
 				2613ED4B2973C5AC0060EF23 /* MainMenuBar.swift in Sources */,
 				63F292B2297656D700D42D0E /* TrashView.swift in Sources */,
@@ -1052,7 +1106,7 @@
 				26940CAD293C9D0F0091E996 /* ShowImageView.swift in Sources */,
 				264EEF572925128300B89624 /* AddCategoryView.swift in Sources */,
 				262D2A02293E2BA4005984DA /* SettingView.swift in Sources */,
-				63F1325A2914A1A300B3A9E0 /* AppCoordinator.swift in Sources */,
+				63F1325A2914A1A300B3A9E0 /* AppCoordinatorV1.swift in Sources */,
 				26940CAF293C9D170091E996 /* ShowImageViewModel.swift in Sources */,
 				263A97BB2945852E008A69F5 /* PeopleWithSelectorView.swift in Sources */,
 				262D2A04293E2BAA005984DA /* SettingViewModel.swift in Sources */,
@@ -1065,6 +1119,8 @@
 				264B70C0291F8E9D00CDAF9F /* C.swift in Sources */,
 				266EDDE42C64EB40006CF09B /* MainView2.swift in Sources */,
 				63F132982914A1C000B3A9E0 /* ProgressView.swift in Sources */,
+				267CC1872C6704B400D6015E /* FootprintView.swift in Sources */,
+				267CC17E2C66F2BC00D6015E /* MapView2.swift in Sources */,
 				631D752F29667A4D00464F33 /* PeopleWithListViewModel.swift in Sources */,
 				631D752D29667A4700464F33 /* PeopleWithListView.swift in Sources */,
 				631D752A296661FE00464F33 /* MainMapOptionViewModel.swift in Sources */,
@@ -1075,7 +1131,7 @@
 				263A97BD29458533008A69F5 /* PeopleWithSelectorViewModel.swift in Sources */,
 				26332178292095F10065AE3A /* ShowFootPrintViewModel.swift in Sources */,
 				63F1324A2914A18800B3A9E0 /* Util.swift in Sources */,
-				63F1325B2914A1A300B3A9E0 /* Coordinator.swift in Sources */,
+				63F1325B2914A1A300B3A9E0 /* CoordinatorV1.swift in Sources */,
 				63F132482914A18800B3A9E0 /* AlertView.swift in Sources */,
 				2639921F291FEBA60049F047 /* KeyboardReadable.swift in Sources */,
 				266EDDE82C64EB88006CF09B /* BaseViewModel.swift in Sources */,
@@ -1087,6 +1143,7 @@
 				63D32FC629CA92B60049F567 /* PremiumCodeView.swift in Sources */,
 				63F132492914A18800B3A9E0 /* SwiftExtension.swift in Sources */,
 				2619FE8A2940D6AC00D24778 /* CheckPermissionView.swift in Sources */,
+				267CC1792C66F28300D6015E /* Coordinator.swift in Sources */,
 				63E848A7295ABEBD0037D7A3 /* TravelListView.swift in Sources */,
 				260C87CD296AADBE00ADCC32 /* ShowTravelViewModel.swift in Sources */,
 				266EDDDE2C64EAD9006CF09B /* SplashVM2.swift in Sources */,
@@ -1106,9 +1163,12 @@
 				63C102B8296530680099AF6A /* GoogleMapView.swift in Sources */,
 				63F132992914A1C000B3A9E0 /* Topbar.swift in Sources */,
 				63D32FD729CACEAC0049F567 /* AdView.swift in Sources */,
+				267CC1802C66F2C700D6015E /* MapVM2.swift in Sources */,
 				63F132B62914A56300B3A9E0 /* LottieView.swift in Sources */,
 				63D32FDB29CAEA4C0049F567 /* NetworkMonitor.swift in Sources */,
 				63FA2390294C42CE00D31506 /* SingleSelectGalleryViewModel.swift in Sources */,
+				267CC1842C66FE6400D6015E /* GoogleMapVM.swift in Sources */,
+				267CC1892C6704B900D6015E /* FootprintVM.swift in Sources */,
 				63C102B329651E690099AF6A /* Footprint++Bundle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

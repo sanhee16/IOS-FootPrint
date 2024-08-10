@@ -15,7 +15,7 @@ import RealmSwift
 
 
 class BaseViewModelV1: ObservableObject {
-    weak var coordinator: AppCoordinator? = nil
+    weak var coordinator: AppCoordinatorV1? = nil
     var subscription = Set<AnyCancellable>()
     
     init() {
@@ -23,7 +23,7 @@ class BaseViewModelV1: ObservableObject {
         self.coordinator = nil
     }
     
-    init(_ coordinator: AppCoordinator) {
+    init(_ coordinator: AppCoordinatorV1) {
         print("init \(type(of: self))")
         self.coordinator = coordinator
     }

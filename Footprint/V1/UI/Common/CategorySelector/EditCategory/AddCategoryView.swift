@@ -10,7 +10,7 @@ import SDSwiftUIPack
 
 struct AddCategoryView: View, KeyboardReadable {
     typealias VM = AddCategoryViewModel
-    public static func vc(_ coordinator: AppCoordinator, type: AddCategoryType, onEraseCategory: (()->())?, completion: (()-> Void)?) -> UIViewController {
+    public static func vc(_ coordinator: AppCoordinatorV1, type: AddCategoryType, onEraseCategory: (()->())?, completion: (()-> Void)?) -> UIViewController {
         let vm = VM.init(coordinator, type: type, onEraseCategory: onEraseCategory)
         let view = Self.init(vm: vm)
         let vc = BaseViewController.init(view, completion: completion) {

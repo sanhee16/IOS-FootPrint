@@ -42,7 +42,7 @@ class CheckPermissionViewModel: BaseViewModelV1 {
 //    @Published var cameraPermission: Bool = false
     @Published var notiPermission: Bool = false
     
-    override init(_ coordinator: AppCoordinator) {
+    override init(_ coordinator: AppCoordinatorV1) {
         super.init(coordinator)
     }
     

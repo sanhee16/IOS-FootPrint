@@ -72,7 +72,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // application이 새로운 scene/window를 제공하려고 할 때 불리는 메소드
     func application(_ application: UIApplication, configurationForConnecting connectionSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        print("application : configurationForConnecting")
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectionSceneSession.role)
     }
     

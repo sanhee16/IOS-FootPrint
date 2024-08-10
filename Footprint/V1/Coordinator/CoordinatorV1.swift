@@ -1,5 +1,5 @@
 //
-//  Coordinator.swift
+//  CoordinatorV1.swift
 //  Footprint
 //
 //  Created by Studio-SJ on 2022/10/05.
@@ -14,7 +14,7 @@ protocol Terminatable {
     func appTerminate()
 }
 
-class Coordinator {
+class CoordinatorV1 {
     var navigationController = UIViewController()
     var childViewControllers = [UIViewController]()
     var presentViewController: UIViewController {

@@ -10,7 +10,7 @@ import SDSwiftUIPack
 
 struct SelectFootprintsView: View {
     typealias VM = SelectFootprintsViewModel
-    public static func vc(_ coordinator: AppCoordinator, selectedList: [FootPrint], callback: @escaping ([FootPrint])->(), completion: (()-> Void)? = nil) -> UIViewController {
+    public static func vc(_ coordinator: AppCoordinatorV1, selectedList: [FootPrint], callback: @escaping ([FootPrint])->(), completion: (()-> Void)? = nil) -> UIViewController {
         let vm = VM.init(coordinator, selectedList: selectedList, callback: callback)
         let view = Self.init(vm: vm)
         let vc = BaseViewController.init(view, completion: completion)

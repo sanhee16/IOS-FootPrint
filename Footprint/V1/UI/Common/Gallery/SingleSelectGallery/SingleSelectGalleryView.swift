@@ -14,7 +14,7 @@ import Kingfisher
 
 struct SingleSelectGalleryView: View {
     typealias VM = SingleSelectGalleryViewModel
-    public static func vc(_ coordinator: AppCoordinator, onClickItem: ((GalleryItem)->())?, completion: (()-> Void)? = nil) -> UIViewController {
+    public static func vc(_ coordinator: AppCoordinatorV1, onClickItem: ((GalleryItem)->())?, completion: (()-> Void)? = nil) -> UIViewController {
         let vm = VM.init(coordinator, onClickItem: onClickItem)
         let view = Self.init(vm: vm)
         let vc = BaseViewController.init(view, completion: completion)

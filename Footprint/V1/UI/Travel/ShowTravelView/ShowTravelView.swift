@@ -11,7 +11,7 @@ import UniformTypeIdentifiers
 
 struct ShowTravelView: View {
     typealias VM = ShowTravelViewModel
-    public static func vc(_ coordinator: AppCoordinator, travel: Travel, completion: (()-> Void)? = nil) -> UIViewController {
+    public static func vc(_ coordinator: AppCoordinatorV1, travel: Travel, completion: (()-> Void)? = nil) -> UIViewController {
         let vm = VM.init(coordinator, travel: travel)
         let view = Self.init(vm: vm)
         let vc = BaseViewController.init(view, completion: completion)

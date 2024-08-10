@@ -18,7 +18,7 @@ class ShowTravelViewModel: BaseViewModelV1 {
     @Published var expandedItem: FootPrint? = nil
     @Published var travel: Travel
     
-    init(_ coordinator: AppCoordinator, travel: Travel) {
+    init(_ coordinator: AppCoordinatorV1, travel: Travel) {
         self.realm = R.realm
         self.travel = travel
         self.footprints = Array(travel.footprints)

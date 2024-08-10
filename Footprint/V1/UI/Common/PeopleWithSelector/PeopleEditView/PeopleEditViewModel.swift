@@ -42,7 +42,7 @@ class PeopleEditViewModel: BaseViewModelV1 {
     var isChangeImage: Bool = false
     private let callback: ((Int?) -> ())
     
-    init(_ coordinator: AppCoordinator, peopleEditStruct: PeopleEditStruct, callback: @escaping ((Int?) -> ())) {
+    init(_ coordinator: AppCoordinatorV1, peopleEditStruct: PeopleEditStruct, callback: @escaping ((Int?) -> ())) {
         self.peopleEditStruct = peopleEditStruct
         self.type = peopleEditStruct.type
         self.realm = R.realm

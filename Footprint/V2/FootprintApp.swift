@@ -10,6 +10,7 @@ import SDSwiftUIPack
 
 @main
 struct FootprintApp: App {
+    @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
     @State private var isShowSplash = true
     
     var body: some Scene {

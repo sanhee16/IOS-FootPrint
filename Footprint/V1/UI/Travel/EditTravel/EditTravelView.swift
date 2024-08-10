@@ -12,7 +12,7 @@ import SDSwiftUIPack
 
 struct EditTravelView: View {
     typealias VM = EditTravelViewModel
-    public static func vc(_ coordinator: AppCoordinator, type: EditTravelType, completion: (()-> Void)? = nil) -> UIViewController {
+    public static func vc(_ coordinator: AppCoordinatorV1, type: EditTravelType, completion: (()-> Void)? = nil) -> UIViewController {
         let vm = VM.init(coordinator, type: type)
         let view = Self.init(vm: vm)
         let vc = BaseViewController.init(view, completion: completion)

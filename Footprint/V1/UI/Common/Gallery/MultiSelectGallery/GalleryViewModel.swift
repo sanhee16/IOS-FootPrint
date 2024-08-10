@@ -30,7 +30,7 @@ class GalleryViewModel: BaseViewModelV1 {
     @Published var type: GalleryType
     @Published var isAvailableSelect: Bool = false
 
-    init(_ coordinator: AppCoordinator, type: GalleryType, onClickItem: (([GalleryItem])->())?) {
+    init(_ coordinator: AppCoordinatorV1, type: GalleryType, onClickItem: (([GalleryItem])->())?) {
         self.onClickItem = onClickItem
         self.type = type
         super.init(coordinator)

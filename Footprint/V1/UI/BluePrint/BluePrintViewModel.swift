@@ -11,7 +11,7 @@ import Combine
 import UIKit
 
 class BluePrintViewModel: BaseViewModelV1 {
-    override init(_ coordinator: AppCoordinator) {
+    override init(_ coordinator: AppCoordinatorV1) {
         super.init(coordinator)
         
     }

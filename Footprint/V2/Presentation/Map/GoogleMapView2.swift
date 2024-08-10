@@ -1,39 +1,32 @@
 //
-//  GoogleMapView.swift
+//  GoogleMapView2.swift
 //  Footprint
 //
-//  Created by Studio-SJ on 2023/01/04.
+//  Created by sandy on 8/10/24.
 //
 
 import SwiftUI
 import SDSwiftUIPack
 import MapKit
 import GoogleMaps
-/*
- 지도: https://developers.google.com/maps/documentation/ios-sdk/configure-map?hl=ko
- places: https://developers.google.com/maps/documentation/places/ios-sdk/current-place?hl=ko
- */
 
-struct GoogleMapView: UIViewRepresentable {
+struct GoogleMapView2: UIViewRepresentable {
+    var vm: MapVM2
     
-    typealias VM = MapViewModel
-    @ObservedObject var vm: VM
-    
-    init(_ coordinator: AppCoordinatorV1, vm: MapViewModel) {
-        print("[MAP VIEW] google map init")
+    init(vm: MapVM2) {
         self.vm = vm
     }
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(owner: self, vm: self.vm)
+        return Coordinator(vm: self.vm)
     }
     
     private let zoom: Float = 17.8
     
     func makeUIView(context: Self.Context) -> GMSMapView {
-        print("[MAP VIEW] makeUIView")
         guard let mapView = C.mapView else {
             let mapView = vm.createMapView()
+            mapView.delegate = context.coordinator
             C.mapView = mapView
             vm.loadAllMarkers()
             return mapView
@@ -41,29 +34,25 @@ struct GoogleMapView: UIViewRepresentable {
         
         mapView.delegate = context.coordinator
         
-//        vm.initMapView(mapView)
         vm.loadAllMarkers()
         
         return mapView
     }
     
     func updateUIView(_ mapView: GMSMapView, context: Context) {
-        print("[MAP VIEW] updateUIView")
         
     }
     
     class Coordinator: NSObject, GMSMapViewDelegate {
-        @ObservedObject var vm: VM
-        let owner: GoogleMapView
-        
-        init(owner: GoogleMapView, vm: VM) {
-            print("[MAP VIEW] Coordinator init")
-            self.owner = owner
+        var vm: MapVM2
+
+        init(vm: MapVM2) {
+            print("[SD] Coordinator init")
             self.vm = vm
         }
         
         func mapView(_ mapView: GMSMapView, didTapPOIWithPlaceID placeID: String, name: String, location: CLLocationCoordinate2D) {
-            print("[GoogleMapView] onTapPlace placeId: \(placeID), name: \(name)")
+            print("[SD] didTapPOIWithPlaceID")
             // 클릭하면 장소의 이름과 placeId가 나옴!
             var newName = name
             if let newLineIdx = name.firstIndex(of: "\n") {
@@ -75,8 +64,9 @@ struct GoogleMapView: UIViewRepresentable {
         }
         
         func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+            print("[SD] didTap")
             let location = Location(latitude: marker.position.latitude, longitude: marker.position.longitude)
-            if $vm.currentTapMarker.wrappedValue == marker {
+            if vm.currentTapMarker == marker {
                 vm.addNewMarker(location)
             } else {
                 vm.removeCurrentMarker()
@@ -92,7 +82,7 @@ struct GoogleMapView: UIViewRepresentable {
         }
         
         func mapView(_ mapView: GMSMapView, didTapMyLocation location: CLLocationCoordinate2D) {
-
+            print("[SD] didTapMyLocation: - \(location)")
         }
         
         func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {

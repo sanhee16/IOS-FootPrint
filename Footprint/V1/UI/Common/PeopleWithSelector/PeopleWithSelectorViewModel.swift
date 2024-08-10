@@ -17,7 +17,7 @@ class PeopleWithSelectorViewModel: BaseViewModelV1 {
     private let realm: Realm
     private var originalList: [PeopleWith] = []
     
-    init(_ coordinator: AppCoordinator, type: PeopleWithEditType) {
+    init(_ coordinator: AppCoordinatorV1, type: PeopleWithEditType) {
         self.realm = R.realm
         self.type = type
         super.init(coordinator)

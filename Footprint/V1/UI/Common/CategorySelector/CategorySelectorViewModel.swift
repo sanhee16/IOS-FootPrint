@@ -20,7 +20,7 @@ class CategorySelectorViewModel: BaseViewModelV1 {
     private let realm: Realm
     
     
-    init(_ coordinator: AppCoordinator, type: CategorySelectorType) {
+    init(_ coordinator: AppCoordinatorV1, type: CategorySelectorType) {
         self.realm = R.realm
         self.type = type
         if case let .select(selectedCategory, _) = type {

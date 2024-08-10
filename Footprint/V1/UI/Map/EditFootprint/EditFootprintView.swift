@@ -10,7 +10,7 @@ import SDSwiftUIPack
 
 struct EditFootprintView: View, KeyboardReadable {
     typealias VM = EditFootprintViewModel
-    public static func vc(_ coordinator: AppCoordinator, location: Location, type: EditFootprintType, completion: (()-> Void)? = nil) -> UIViewController {
+    public static func vc(_ coordinator: AppCoordinatorV1, location: Location, type: EditFootprintType, completion: (()-> Void)? = nil) -> UIViewController {
         let vm = VM.init(coordinator, location: location, type: type)
         let view = Self.init(vm: vm)
         let vc = BaseViewController(view, completion: completion)

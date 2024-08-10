@@ -10,7 +10,7 @@ import SDSwiftUIPack
 
 struct ReviewView: View {
     typealias VM = ReviewViewModel
-    public static func vc(_ coordinator: AppCoordinator, star: Int, completion: (()-> Void)? = nil) -> UIViewController {
+    public static func vc(_ coordinator: AppCoordinatorV1, star: Int, completion: (()-> Void)? = nil) -> UIViewController {
         let vm = VM.init(coordinator, star: star)
         let view = Self.init(vm: vm)
         let vc = BaseViewController.init(view, completion: completion)

@@ -1,8 +1,8 @@
 //
-//  MapView.swift
+//  MapView2.swift
 //  Footprint
 //
-//  Created by Studio-SJ on 2023/01/16.
+//  Created by sandy on 8/10/24.
 //
 
 import SwiftUI
@@ -11,50 +11,63 @@ import MapKit
 import GoogleMaps
 import GooglePlaces
 
-struct MapView: View {
-    typealias VM = MapViewModel
-    public static func vc(_ coordinator: AppCoordinatorV1, completion: (()-> Void)? = nil) -> UIViewController {
-        let vm = VM.init(coordinator)
-        let view = Self.init(vm: vm)
-        let vc = BaseViewController.init(view, completion: completion) {
-            vm.viewDidLoad()
-        }
-        return vc
+struct MapView2: View {
+    struct Output {
+        var goToFootprintView: (Location) -> ()
     }
-    @ObservedObject var vm: VM
+    
+    @StateObject private var coordinator: Coordinator = Coordinator()
+    private var output: Output {
+        return self.coordinator.mapOutput
+    }
+    
+    
+    @StateObject var vm: MapVM2 = MapVM2()
     
     private var safeTop: CGFloat { get { Util.safeTop() }}
     private var safeBottom: CGFloat { get { Util.safeBottom() }}
     private let optionHeight: CGFloat = 36.0
     private let optionVerticalPadding: CGFloat = 8.0
     
-    
     var body: some View {
-        GeometryReader { geometry in
-            VStack(alignment: .center, spacing: 0) {
-                //Google Map
-                if !$vm.isGettingLocation.wrappedValue {
-                    if let coordinator = $vm.coordinator.wrappedValue {
-                        ZStack(alignment: .topTrailing) {
-                            VStack(alignment: .center, spacing: self.optionVerticalPadding) {
-                                if Util.getSettingStatus(.SEARCH_BAR) {
-                                    drawSearchBox(geometry)
-                                    if $vm.isShowingSearchResults.wrappedValue == true {
-                                        drawSearchItems(geometry)
-                                            .padding(.top, 6)
-                                    }
+        NavigationStack(path: $coordinator.paths) {
+            GeometryReader { geometry in
+                VStack(alignment: .center, spacing: 0) {
+                    //Google Map
+                    ZStack(alignment: .topTrailing) {
+                        VStack(alignment: .center, spacing: self.optionVerticalPadding) {
+                            if Util.getSettingStatus(.SEARCH_BAR) {
+                                drawSearchBox(geometry)
+                                if $vm.isShowingSearchResults.wrappedValue == true {
+                                    drawSearchItems(geometry)
+                                        .padding(.top, 6)
                                 }
                             }
-                            .zIndex(1)
-                            GoogleMapView(coordinator, vm: vm)
                         }
+                        .zIndex(1)
+                        
+                        GoogleMapView2(vm: self.vm)
                     }
                 }
+                .frame(width: geometry.size.width, alignment: .center)
             }
-            .frame(width: geometry.size.width, alignment: .center)
-        }
-        .onAppear {
-            vm.onAppear()
+            .onChange(of: $vm.viewEvent.wrappedValue, perform: { value in
+                switch value {
+                case .goToFootprintView(let location):
+                    print("[SD] goToFootprintView")
+                    self.output.goToFootprintView(location)
+                default:
+                    break
+                }
+                $vm.viewEvent.wrappedValue = .none
+            })
+            .onAppear {
+                vm.onAppear()
+            }
+            .navigationBarBackButtonHidden()
+            .navigationDestination(for: Destination.self) { destination in
+                coordinator.moveToDestination(destination: destination)
+            }
         }
     }
     

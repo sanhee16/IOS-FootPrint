@@ -1,26 +1,21 @@
 //
-//  ShowFootPrintView.swift
+//  FootprintView.swift
 //  Footprint
 //
-//  Created by sandy on 2022/11/13.
+//  Created by sandy on 8/10/24.
 //
 
-import SwiftUI
-import SDSwiftUIPack
+import Foundation
 import SwiftUI
 import SwiftUIPager
-import SwiftUIPullToRefresh
+import SDSwiftUIPack
 
-struct ShowFootPrintView: View {
-    typealias VM = ShowFootPrintViewModel
-    public static func vc(_ coordinator: AppCoordinatorV1, location: Location, completion: (()-> Void)? = nil) -> UIViewController {
-        let vm = VM.init(coordinator, location: location)
-        let view = Self.init(vm: vm)
-        let vc = BaseViewController.init(view, completion: completion) {
-        }
-        return vc
+struct FootprintView: View {
+    @StateObject var vm: FootprintVM = FootprintVM()
+    
+    init(location: Location) {
+        self.vm.updateLocation(location)
     }
-    @ObservedObject var vm: VM
     
     private var safeTop: CGFloat { get { Util.safeTop() }}
     private var safeBottom: CGFloat { get { Util.safeBottom() }}

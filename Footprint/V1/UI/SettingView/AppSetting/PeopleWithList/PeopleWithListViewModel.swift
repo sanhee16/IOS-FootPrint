@@ -14,7 +14,7 @@ class PeopleWithListViewModel: BaseViewModelV1 {
     @Published var peopleWithList: [PeopleWith] = []
     private let realm: Realm
     
-    override init(_ coordinator: AppCoordinator) {
+    override init(_ coordinator: AppCoordinatorV1) {
         self.realm = R.realm
         super.init(coordinator)
     }

@@ -15,7 +15,7 @@ class PremiumCodeViewModel: BaseViewModelV1 {
     @Published var name: String = ""
     @Published var code: String = ""
     private let firestoreApi = FirestoreApi.shared
-    override init(_ coordinator: AppCoordinator) {
+    override init(_ coordinator: AppCoordinatorV1) {
         super.init(coordinator)
     }
     

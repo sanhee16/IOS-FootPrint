@@ -24,7 +24,7 @@ class SingleSelectGalleryViewModel: BaseViewModelV1 {
 //    @Published var item: GalleryItem? = nil
     @Published var selectedImage: GalleryItem? = nil
     
-    init(_ coordinator: AppCoordinator, onClickItem: ((GalleryItem)->())?) {
+    init(_ coordinator: AppCoordinatorV1, onClickItem: ((GalleryItem)->())?) {
         self.onClickItem = onClickItem
         super.init(coordinator)
         loadAllImages()

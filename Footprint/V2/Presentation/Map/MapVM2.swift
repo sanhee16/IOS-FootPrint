@@ -1,8 +1,8 @@
 //
-//  MapViewModel.swift
+//  MapVM2.swift
 //  Footprint
 //
-//  Created by Studio-SJ on 2023/01/16.
+//  Created by sandy on 8/10/24.
 //
 
 import Foundation
@@ -12,8 +12,34 @@ import GoogleMaps
 import GooglePlaces
 import CoreLocation
 
-class MapViewModel: BaseViewModelV1 {
+enum ViewEvent: Equatable {
+    static func == (lhs: ViewEvent, rhs: ViewEvent) -> Bool {
+        lhs.event == rhs.event
+    }
+    
+    case goToFootprintView(location: Location)
+    case none
+    
+    var event: String {
+        switch self {
+        case .goToFootprintView(let location):
+            return "goToFootprintView"
+        case .none:
+            return "none"
+        }
+    }
+}
+
+
+struct Pin: Identifiable {
+    let id = UUID()
+    let footPrint: FootPrint
+    let coordinate: CLLocationCoordinate2D
+}
+
+class MapVM2: BaseViewModel {
     private var locationManager: CLLocationManager
+    @Published var viewEvent: ViewEvent = .none
     @Published var annotations: [Pin] = []
     
     @Published var myLocation: Location? = nil
@@ -31,29 +57,30 @@ class MapViewModel: BaseViewModelV1 {
     @Published var currentTapMarker: GMSMarker? = nil
     private var allFootprints: [FootPrint] = []
     
-//    private var mapView: GMSMapView? = nil
     private var searchCnt: Int = 0
     private var lastSearchText: String? = nil
     private let realm: Realm
     private let googleApi: GoogleApi
     
     
-    override init(_ coordinator: AppCoordinatorV1) {
-        print("[MAP VIEW] init")
+    override init() {
+        print("[SD] init")
         self.realm = R.realm
         self.locationManager = CLLocationManager()
         self.locationManager.allowsBackgroundLocationUpdates = false
         self.googleApi = GoogleApi.instance
-        super.init(coordinator)
+        super.init()
+        
+        self.getCurrentLocation()
     }
     
     func onAppear() {
-        print("[MAP VIEW] onAppear: \(C.isFirstAppStart)")
+        print("[SD] onAppear: \(C.isFirstAppStart)")
         self.removeCurrentMarker()
         switch checkLocationPermission() {
         case .allow:
             self.locationPermission = true
-            getCurrentLocation()
+//            getCurrentLocation()
         default:
             self.isGettingLocation = false
             self.locationPermission = false
@@ -72,22 +99,22 @@ class MapViewModel: BaseViewModelV1 {
         self.loadAllFootprints()
     }
     
-    func viewDidLoad() {
-        print("[MAP VIEW] viewDidLoad")
-        switch checkLocationPermission() {
-        case .allow:
-            self.locationPermission = true
-            getCurrentLocation()
-            loadCategories()
-        default:
-            self.isGettingLocation = false
-            self.locationPermission = false
-            self.myLocation = Location(latitude: 0.0, longitude: 0.0)
-            break
-        }
-        self.loadAllMarkers()
-        self.loadAllFootprints()
-    }
+//    func viewDidLoad() {
+//        print("[SD] viewDidLoad")
+//        switch checkLocationPermission() {
+//        case .allow:
+//            self.locationPermission = true
+//            getCurrentLocation()
+//            loadCategories()
+//        default:
+//            self.isGettingLocation = false
+//            self.locationPermission = false
+//            self.myLocation = Location(latitude: 0.0, longitude: 0.0)
+//            break
+//        }
+//        self.loadAllMarkers()
+//        self.loadAllFootprints()
+//    }
     
     private func loadCategories() {
         // 객체 초기화
@@ -118,14 +145,11 @@ class MapViewModel: BaseViewModelV1 {
 //    }
     
     private func getCurrentLocation() {
-        self.isGettingLocation = true
         if let coor = locationManager.location?.coordinate {
             let latitude = coor.latitude
             let longitude = coor.longitude
             print("위도 :\(latitude), 경도: \(longitude)")
             self.myLocation = Location(latitude: latitude, longitude: longitude)
-//            C.mapView = self.createMapView()
-            self.isGettingLocation = false
         }
     }
     
@@ -143,7 +167,7 @@ class MapViewModel: BaseViewModelV1 {
         print("onClickAnnotation: \(item)")
     }
     
-    // MAP
+    //MARK: MAP
     func createMapView() -> GMSMapView {
         if let mapView = C.mapView {
             return mapView
@@ -168,9 +192,7 @@ class MapViewModel: BaseViewModelV1 {
     }
     
     func loadAllMarkers() {
-//        guard let mapView = self.mapView else { return }
-        self.startProgress()
-        
+        print("[SD] loadAllMarkers")
         self.removeCurrentMarker()
         for item in self.markerList {
             removeMarker(marker: item.marker)
@@ -188,7 +210,6 @@ class MapViewModel: BaseViewModelV1 {
                 markerList.append(MarkerItem(marker: marker, footPrint: footPrint))
             }
         }
-        self.stopProgress()
     }
     
     
@@ -196,21 +217,19 @@ class MapViewModel: BaseViewModelV1 {
         marker.map = nil
     }
     
-    func onClose() {
-        self.dismiss()
-    }
-    
     func onTapMarker(_ location: Location) {
-        print("on tap marker")
+        print("[SD] on tap marker")
         self.removeCurrentMarker()
-        //        drawCurrentMarker(location)
-        self.coordinator?.presentShowFootPrintView(location, onDismiss: {[weak self] in
-            guard let self = self else { return }
-            self.removeCurrentMarker()
-        })
+        
+        // TODO: presentShowFootPrintView
+//        self.coordinator?.presentShowFootPrintView(location, onDismiss: {[weak self] in
+//            guard let self = self else { return }
+//            self.removeCurrentMarker()
+//        })
     }
     
     func addNewMarker(_ location: Location, name: String? = nil, placeId: String? = nil, address: String? = nil) {
+        print("[SD] addNewMarker")
         // 마커 생성하기
         let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
         
@@ -223,21 +242,27 @@ class MapViewModel: BaseViewModelV1 {
         if let name = name {
             message = "alert_add_marker_name".localized("\(name)")
         }
-        self.alert(.yesOrNo, title: message) {[weak self] res in
-            guard let self = self else { return }
-            if res {
-                print("add New Marker ok")
-                marker.map = nil
-                self.coordinator?.presentAddFootprintView(location: location, type: .new(name: name, placeId: placeId, address: address)) {[weak self] in
-                    guard let self = self else { return }
-                    self.loadAllMarkers()
-                }
-            } else {
-                self.removeCurrentMarker()
-                print("add New Marker cancel")
-                marker.map = nil
-            }
-        }
+        print("[SD] addNewMarker1")
+
+        
+        // TODO: alert
+        self.viewEvent = .goToFootprintView(location: location)
+        
+//        self.alert(.yesOrNo, title: message) {[weak self] res in
+//            guard let self = self else { return }
+//            if res {
+//                print("add New Marker ok")
+//                marker.map = nil
+//                self.coordinator?.presentAddFootprintView(location: location, type: .new(name: name, placeId: placeId, address: address)) {[weak self] in
+//                    guard let self = self else { return }
+//                    self.loadAllMarkers()
+//                }
+//            } else {
+//                self.removeCurrentMarker()
+//                print("add New Marker cancel")
+//                marker.map = nil
+//            }
+//        }
     }
     
     func drawMarker(location: Location, category: Category) -> GMSMarker? {
@@ -391,28 +416,27 @@ class MapViewModel: BaseViewModelV1 {
     }
     
     func onClickSearchItem(_ item: SearchItemResponse) {
-        self.startProgress()
-        self.googleApi.getGeocoding(item.placeId)
-            .run(in: &self.subscription) {[weak self] results in
-                guard let self = self, let result = results.first else {
-                    self?.stopProgress()
-                    return
-                }
-                let lat: Double = result.geometry.location.lat
-                let lng: Double = result.geometry.location.lng
-                let clLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: lat, longitude: lng)
-                self.stopProgress()
-                self.moveCamera(clLocation)
-                // icon_mark
-                self.drawCurrentMarker(Location(latitude: lat, longitude: lng))
-                self.onCloseSearchBox()
-            } err: {[weak self] err in
-                print("error: \(err)")
-                self?.stopProgress()
-                self?.alert(.ok, title: "alert_cannot_load_information".localized())
-            } complete: {
-                print("complete")
-            }
+        
+        //TODO: GetGeocoding
+//        self.googleApi.getGeocoding(item.placeId)
+//            .run(in: &self.subscription) {[weak self] results in
+//                guard let self = self, let result = results.first else {
+//                    return
+//                }
+//                let lat: Double = result.geometry.location.lat
+//                let lng: Double = result.geometry.location.lng
+//                let clLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: lat, longitude: lng)
+//                self.moveCamera(clLocation)
+//                // icon_mark
+//                self.drawCurrentMarker(Location(latitude: lat, longitude: lng))
+//                self.onCloseSearchBox()
+//            } err: {[weak self] err in
+//                print("error: \(err)")
+//                //TODO: Alert
+////                self?.alert(.ok, title: "alert_cannot_load_information".localized())
+//            } complete: {
+//                print("complete")
+//            }
     }
     
     private func moveCamera(_ location: CLLocationCoordinate2D) {
@@ -421,15 +445,16 @@ class MapViewModel: BaseViewModelV1 {
     
     func onClickLocationPermission() {
         self.removeCurrentMarker()
-        self.alert(.yesOrNo, title: "alert_request_permission_location".localized(), description: "alert_request_permission_location_description".localized()) { isAllow in
-            if isAllow {
-                guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
-                
-                if UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.open(url)
-                }
-            }
-        }
+        //TODO: Alert
+//        self.alert(.yesOrNo, title: "alert_request_permission_location".localized(), description: "alert_request_permission_location_description".localized()) { isAllow in
+//            if isAllow {
+//                guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+//                
+//                if UIApplication.shared.canOpenURL(url) {
+//                    UIApplication.shared.open(url)
+//                }
+//            }
+//        }
     }
     
     func removeCurrentMarker() {

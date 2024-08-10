@@ -30,7 +30,7 @@ import GoogleMobileAds
 
 struct MainView: View {
     typealias VM = MainViewModel
-    public static func vc(_ coordinator: AppCoordinator, completion: (()-> Void)? = nil) -> UIViewController {
+    public static func vc(_ coordinator: AppCoordinatorV1, completion: (()-> Void)? = nil) -> UIViewController {
         let vm = VM.init(coordinator)
         let mapVm = MapViewModel.init(coordinator)
         let listVm = FootprintListViewModel.init(coordinator)

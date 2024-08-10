@@ -11,7 +11,7 @@ import SDSwiftUIPack
 
 struct PeopleEditView: View {
     typealias VM = PeopleEditViewModel
-    public static func vc(_ coordinator: AppCoordinator, peopleEditStruct: PeopleEditStruct, callback: @escaping ((Int?) -> ()), completion: (()-> Void)? = nil) -> UIViewController {
+    public static func vc(_ coordinator: AppCoordinatorV1, peopleEditStruct: PeopleEditStruct, callback: @escaping ((Int?) -> ()), completion: (()-> Void)? = nil) -> UIViewController {
         let vm = VM.init(coordinator, peopleEditStruct: peopleEditStruct, callback: callback)
         let view = Self.init(vm: vm)
         let vc = BaseViewController.init(view, completion: completion) {

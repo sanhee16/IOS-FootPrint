@@ -19,7 +19,7 @@ class AlertViewModel: BaseViewModelV1 {
     @Published var description: String?
     private var callback: ((Bool) -> Void)?
     
-    init(_ coordinator: AppCoordinator, type: AlertType, title: String?, description: String?, callback: ((Bool) -> Void)?) {
+    init(_ coordinator: AppCoordinatorV1, type: AlertType, title: String?, description: String?, callback: ((Bool) -> Void)?) {
         self.type = type
         self.title = title
         self.description = description

@@ -10,7 +10,7 @@ import SDSwiftUIPack
 
 struct BluePrintBottomSheetView: View {
     typealias VM = BluePrintViewModel
-    public static func vc(_ coordinator: AppCoordinator, completion: (()-> Void)? = nil) -> UIViewController {
+    public static func vc(_ coordinator: AppCoordinatorV1, completion: (()-> Void)? = nil) -> UIViewController {
         let vm = VM.init(coordinator)
         let view = Self.init(vm: vm)
         let vc = BaseViewController.init(view, completion: completion) {

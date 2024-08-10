@@ -1,5 +1,5 @@
 //
-//  AppCoordinator.swift
+//  AppCoordinatorV1.swift
 //  Footprint
 //
 //  Created by Studio-SJ on 2022/10/05.
@@ -9,7 +9,7 @@
 import SwiftUI
 import SDSwiftUIPack
 
-class AppCoordinator: Coordinator, Terminatable {
+class AppCoordinatorV1: CoordinatorV1, Terminatable {
     // UIWindow = 화면에 나타나는 View를 묶고, UI의 배경을 제공하고, 이벤트 처리행동을 제공하는 객체 = View들을 담는 컨테이너
     let window: UIWindow
     
@@ -27,6 +27,9 @@ class AppCoordinator: Coordinator, Terminatable {
         window.makeKeyAndVisible()
     }
     
+    override init() {
+        self.window = UIWindow()
+    }
     // Terminatable
     func appTerminate() {
         print("app Terminate")

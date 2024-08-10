@@ -12,7 +12,7 @@ import SwiftUIPager
 
 struct ShowImageView: View {
     typealias VM = ShowImageViewModel
-    public static func vc(_ coordinator: AppCoordinator, imageIdx: Int, images: [UIImage] ,completion: (()-> Void)? = nil) -> UIViewController {
+    public static func vc(_ coordinator: AppCoordinatorV1, imageIdx: Int, images: [UIImage] ,completion: (()-> Void)? = nil) -> UIViewController {
         let vm = VM.init(coordinator, imageIdx: imageIdx, images: images)
         let view = Self.init(vm: vm)
         let vc = BaseViewController.init(view, completion: completion)

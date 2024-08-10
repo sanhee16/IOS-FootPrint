@@ -20,25 +20,16 @@ struct MainView2: View {
 
             }
             Color.red.opacity(0.7)
-//            VStack {
-//                TabView(selection: $selectedIndex) {
-//                    TabAView()
-//                        .tabItem {
-//                            Image(systemName: "house")
-//                            Text("Tab A")
-//                        }
-//                        .tag(0)
-//
-//                    TabBView()
-//                        .tabItem {
-//                            Image(systemName: "magnifyingglass")
-//                            Text("Tab B")
-//                        }
-//                        .badge("!")
-//                        .tag(1)
-//                }
-//                .accentColor(.black)
-//            }
+            VStack {
+                TabView(selection: $selectedIndex) {
+                    MapView2()
+                        .tabItem {
+                            Image(systemName: "house")
+                        }
+                        .tag(0)
+                }
+                .accentColor(.black)
+            }
         })
         .navigationBarBackButtonHidden()
     }

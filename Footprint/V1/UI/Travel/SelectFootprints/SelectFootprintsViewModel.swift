@@ -17,7 +17,7 @@ class SelectFootprintsViewModel: BaseViewModelV1 {
     private let realm: Realm
     private let callback: ([FootPrint])->()
     
-    init(_ coordinator: AppCoordinator, selectedList: [FootPrint], callback: @escaping ([FootPrint])->()) {
+    init(_ coordinator: AppCoordinatorV1, selectedList: [FootPrint], callback: @escaping ([FootPrint])->()) {
         self.realm = R.realm
         self.selectedList = selectedList
         self.callback = callback

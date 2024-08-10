@@ -58,7 +58,7 @@ class EditFootprintViewModel: BaseViewModelV1 {
     private var placeId: String? = nil
     private var address: String? = nil
     
-    init(_ coordinator: AppCoordinator, location: Location, type: EditFootprintType) {
+    init(_ coordinator: AppCoordinatorV1, location: Location, type: EditFootprintType) {
         self.realm = R.realm
         self.location = location
         self.type = type

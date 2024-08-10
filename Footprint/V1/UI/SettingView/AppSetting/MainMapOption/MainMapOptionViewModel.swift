@@ -13,7 +13,7 @@ class MainMapOptionViewModel: BaseViewModelV1 {
     @Published var isOnFilter: Bool = true
     @Published var isOnCategory: Bool = true
     
-    override init(_ coordinator: AppCoordinator) {
+    override init(_ coordinator: AppCoordinatorV1) {
         super.init(coordinator)
         
     }

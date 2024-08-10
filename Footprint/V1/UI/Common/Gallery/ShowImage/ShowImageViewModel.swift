@@ -18,7 +18,7 @@ class ShowImageViewModel: BaseViewModelV1 {
     @Published var images: [UIImage]
     
     
-    init(_ coordinator: AppCoordinator, imageIdx: Int, images: [UIImage]) {
+    init(_ coordinator: AppCoordinatorV1, imageIdx: Int, images: [UIImage]) {
         self.images = images
         self.page = .withIndex(imageIdx)
         super.init(coordinator)

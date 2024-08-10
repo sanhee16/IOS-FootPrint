@@ -15,7 +15,7 @@ enum CategorySelectorType {
 
 struct CategorySelectorView: View {
     typealias VM = CategorySelectorViewModel
-    public static func vc(_ coordinator: AppCoordinator, type: CategorySelectorType, completion: (()-> Void)? = nil) -> UIViewController {
+    public static func vc(_ coordinator: AppCoordinatorV1, type: CategorySelectorType, completion: (()-> Void)? = nil) -> UIViewController {
         let vm = VM.init(coordinator, type: type)
         let view = Self.init(vm: vm)
         let vc = BaseViewController.init(view, completion: completion) {

@@ -19,7 +19,7 @@ class FootprintListViewModel: BaseViewModelV1 {
     private let realm: Realm
     
     
-    override init(_ coordinator: AppCoordinator) {
+    override init(_ coordinator: AppCoordinatorV1) {
         self.realm = R.realm
         self.isShowStarOnly = Defaults.isShowStarOnly
         super.init(coordinator)

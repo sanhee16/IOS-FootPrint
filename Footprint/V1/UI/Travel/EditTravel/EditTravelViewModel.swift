@@ -31,7 +31,7 @@ class EditTravelViewModel: BaseViewModelV1 {
     private var originalItem: Travel = Travel(footprints: List(), title: "", intro: "", color: "#FFFFFF", fromDate: Date(), toDate: Date(), isStar: false)
     let type: EditTravelType
     
-    init(_ coordinator: AppCoordinator, type: EditTravelType) {
+    init(_ coordinator: AppCoordinatorV1, type: EditTravelType) {
         self.realm = R.realm
         self.type = type
         super.init(coordinator)

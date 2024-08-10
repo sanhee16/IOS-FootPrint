@@ -13,7 +13,7 @@ import CoreLocation
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
-    var appCoordinator: AppCoordinator?
+    var appCoordinator: AppCoordinatorV1?
     var subscription = Set<AnyCancellable>()
     let userNotificationCenter = UNUserNotificationCenter.current()
     private var api: CommonApi = CommonApi.instance
@@ -37,7 +37,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         //MARK: Splash Start -> 첫 content view 생성
-        appCoordinator = AppCoordinator(window: window)
+        appCoordinator = AppCoordinatorV1(window: window)
         appCoordinator?.startSplash()
         
         (UIApplication.shared.delegate as? AppDelegate)?.appTerminate = {
