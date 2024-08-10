@@ -32,7 +32,7 @@ struct MapView2: View {
         GeometryReader { geometry in
             VStack(alignment: .center, spacing: 0) {
                 //Google Map
-                ZStack(alignment: .topTrailing) {
+                ZStack(alignment: .topLeading) {
                     VStack(alignment: .center, spacing: self.optionVerticalPadding) {
                         if Util.getSettingStatus(.SEARCH_BAR) {
                             drawSearchBox(geometry)
@@ -45,8 +45,34 @@ struct MapView2: View {
                     .zIndex(1)
                     
                     GoogleMapView2(vm: self.vm)
+                    
+                    
+                    
+                    VStack(alignment: .leading, spacing: 0, content: {
+                        Spacer()
+                        Image("location-target")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20)
+                            .padding(10)
+                            .background(
+                                Circle()
+                                    .foregroundStyle(Color.white)
+                                    .border(Color(hex: "E2E8F0"), lineWidth: 0.7, cornerRadius: 100)
+                            )
+                            .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: 2)
+                            .contentShape(Rectangle())
+                            .sdPadding(top: 0, leading: 16, bottom: 18, trailing: 0)
+                            .onTapGesture {
+                                vm.didTapMyLocationButton()
+                            }
+                        
+                        FPButton(text: "발자국 남기기", location: .leading(name: "paw-foot-white"), status: .press, size: .large, type: .solid) {
+
+                        }
+                        .sdPadding(top: 0, leading: 16, bottom: 8, trailing: 16)
+                    })
                 }
-                .navigationBarBackButtonHidden()
             }
             .frame(width: geometry.size.width, alignment: .center)
         }
@@ -63,7 +89,6 @@ struct MapView2: View {
         .onAppear {
             vm.onAppear()
         }
-        
     }
     
     private func drawSearchItems(_ geometry: GeometryProxy) -> some View {

@@ -19,12 +19,11 @@ struct MainView2: View {
     var body: some View {
         NavigationStack(path: $coordinator.paths) {
             ZStack(content: {
-                Color.red.opacity(0.7)
                 VStack(alignment: .leading, spacing: 20) {
                     MapView2(output: coordinator.mapOutput)
                     
                     MainMenuBar(current: $currentTab.wrappedValue) { type in
-
+                        
                     }
                 }
             })

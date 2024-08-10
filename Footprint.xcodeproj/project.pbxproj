@@ -53,6 +53,9 @@
 		267CC1872C6704B400D6015E /* FootprintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC1862C6704B400D6015E /* FootprintView.swift */; };
 		267CC1892C6704B900D6015E /* FootprintVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC1882C6704B900D6015E /* FootprintVM.swift */; };
 		267CC18C2C6710DF00D6015E /* UINavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC18B2C6710DF00D6015E /* UINavigationController+Extension.swift */; };
+		267CC18E2C6719CA00D6015E /* Font+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC18D2C6719CA00D6015E /* Font+Extension.swift */; };
+		267CC1912C67362500D6015E /* FPButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC1902C67362500D6015E /* FPButton.swift */; };
+		267CC1932C67385900D6015E /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC1922C67385900D6015E /* Color+Extension.swift */; };
 		26823C092A13B93000BF41EA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26823C0B2A13B93000BF41EA /* InfoPlist.strings */; };
 		2682622A2C60E2EA0069134C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 268262292C60E2EA0069134C /* RealmSwift */; settings = {ATTRIBUTES = (Required, ); }; };
 		268546E82A28DB1200BDA2EA /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268546E72A28DB1200BDA2EA /* ReviewView.swift */; };
@@ -203,6 +206,9 @@
 		267CC1862C6704B400D6015E /* FootprintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootprintView.swift; sourceTree = "<group>"; };
 		267CC1882C6704B900D6015E /* FootprintVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootprintVM.swift; sourceTree = "<group>"; };
 		267CC18B2C6710DF00D6015E /* UINavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extension.swift"; sourceTree = "<group>"; };
+		267CC18D2C6719CA00D6015E /* Font+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extension.swift"; sourceTree = "<group>"; };
+		267CC1902C67362500D6015E /* FPButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPButton.swift; sourceTree = "<group>"; };
+		267CC1922C67385900D6015E /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		26823C0A2A13B93000BF41EA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		26823C0C2A13B93300BF41EA /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		268546E72A28DB1200BDA2EA /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
@@ -466,6 +472,7 @@
 		266EDDD52C64EA90006CF09B /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				267CC18F2C67361E00D6015E /* CustomView */,
 				267CC17C2C66F2B500D6015E /* Map */,
 				266EDDE22C64EB3B006CF09B /* Main */,
 				266EDDDA2C64EAC3006CF09B /* Splash */,
@@ -541,8 +548,18 @@
 			isa = PBXGroup;
 			children = (
 				267CC18B2C6710DF00D6015E /* UINavigationController+Extension.swift */,
+				267CC18D2C6719CA00D6015E /* Font+Extension.swift */,
+				267CC1922C67385900D6015E /* Color+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		267CC18F2C67361E00D6015E /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				267CC1902C67362500D6015E /* FPButton.swift */,
+			);
+			path = CustomView;
 			sourceTree = "<group>";
 		};
 		268546E62A28DB0300BDA2EA /* Review */ = {
@@ -1132,6 +1149,7 @@
 				266EDDE42C64EB40006CF09B /* MainView2.swift in Sources */,
 				63F132982914A1C000B3A9E0 /* ProgressView.swift in Sources */,
 				267CC1872C6704B400D6015E /* FootprintView.swift in Sources */,
+				267CC1932C67385900D6015E /* Color+Extension.swift in Sources */,
 				267CC17E2C66F2BC00D6015E /* MapView2.swift in Sources */,
 				631D752F29667A4D00464F33 /* PeopleWithListViewModel.swift in Sources */,
 				631D752D29667A4700464F33 /* PeopleWithListView.swift in Sources */,
@@ -1151,6 +1169,7 @@
 				2627408F29699B2A00B47566 /* CategorySelectorView.swift in Sources */,
 				63F132502914A18F00B3A9E0 /* BaseViewController.swift in Sources */,
 				63D32FD229CAB61E0049F567 /* FirestoreApi.swift in Sources */,
+				267CC1912C67362500D6015E /* FPButton.swift in Sources */,
 				268546EA2A28DB1800BDA2EA /* ReviewViewModel.swift in Sources */,
 				63D32FC629CA92B60049F567 /* PremiumCodeView.swift in Sources */,
 				63F132492914A18800B3A9E0 /* SwiftExtension.swift in Sources */,
@@ -1164,6 +1183,7 @@
 				2691D9C3294EE4B1002825B9 /* FootprintListFilterView.swift in Sources */,
 				63004AFA29DA63D2000CDBB4 /* RemoteConfig.swift in Sources */,
 				63C8CCF82941D60D00BB861D /* DevInfoViewModel.swift in Sources */,
+				267CC18E2C6719CA00D6015E /* Font+Extension.swift in Sources */,
 				63C81AB52963BD3D0001A70B /* SelectFootprintsView.swift in Sources */,
 				63F132562914A19F00B3A9E0 /* SceneDelegate.swift in Sources */,
 				63C81AB92963D6EF0001A70B /* DragAndDropService.swift in Sources */,

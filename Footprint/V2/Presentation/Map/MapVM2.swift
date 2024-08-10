@@ -95,7 +95,11 @@ class MapVM2: BaseViewModel {
 //        self.loadAllMarkers()
 //        self.loadAllFootprints()
 //    }
-    
+    func didTapMyLocationButton() {
+        guard let myLocation = self.myLocation else { return }
+        self.moveCamera(CLLocationCoordinate2D(latitude: myLocation.latitude, longitude: myLocation.longitude))
+    }
+
     private func loadCategories() {
         // 객체 초기화
         self.categories = []
@@ -166,7 +170,6 @@ class MapVM2: BaseViewModel {
         mapView.isMyLocationEnabled = true
         mapView.isBuildingsEnabled = false
         mapView.settings.compassButton = true
-        mapView.settings.myLocationButton = true
         
         return mapView
     }
