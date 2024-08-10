@@ -65,14 +65,12 @@ public enum MainMenuType: Int, Equatable {
 public struct MainMenuBar: View {
     private var current: MainMenuType
     private var onClick: ((MainMenuType)->())?
-    private let geometry: GeometryProxy
     private let ICON_SIZE: CGFloat = 38.0
     private let ITEM_WIDTH: CGFloat = UIScreen.main.bounds.width / 4
     private let ITEM_HEIGHT: CGFloat = 60.0
     private let list: [MainMenuType] = [.map, .footprints, .travel, .setting]
     
-    init(geometry: GeometryProxy, current: MainMenuType, onClick: ((MainMenuType)->())?) {
-        self.geometry = geometry
+    init(current: MainMenuType, onClick: ((MainMenuType)->())?) {
         self.current = current
         self.onClick = onClick
     }

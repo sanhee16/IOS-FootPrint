@@ -76,7 +76,7 @@ struct MainView: View {
                     GADBanner().frame(width: GADAdSizeBanner.size.width, height: GADAdSizeBanner.size.height)
                 }
 
-                MainMenuBar(geometry: geometry, current: $vm.currentTab.wrappedValue) { type in
+                MainMenuBar(current: $vm.currentTab.wrappedValue) { type in
                     vm.onClickTab(type)
                 }
             }

@@ -16,59 +16,54 @@ struct MapView2: View {
         var goToFootprintView: (Location) -> ()
     }
     
-    @StateObject private var coordinator: Coordinator = Coordinator()
-    private var output: Output {
-        return self.coordinator.mapOutput
-    }
-    
-    
     @StateObject var vm: MapVM2 = MapVM2()
-    
+    private var output: Output
     private var safeTop: CGFloat { get { Util.safeTop() }}
     private var safeBottom: CGFloat { get { Util.safeBottom() }}
     private let optionHeight: CGFloat = 36.0
     private let optionVerticalPadding: CGFloat = 8.0
     
+    
+    init(output: Output) {
+        self.output = output
+    }
+    
     var body: some View {
-        NavigationStack(path: $coordinator.paths) {
-            GeometryReader { geometry in
-                VStack(alignment: .center, spacing: 0) {
-                    //Google Map
-                    ZStack(alignment: .topTrailing) {
-                        VStack(alignment: .center, spacing: self.optionVerticalPadding) {
-                            if Util.getSettingStatus(.SEARCH_BAR) {
-                                drawSearchBox(geometry)
-                                if $vm.isShowingSearchResults.wrappedValue == true {
-                                    drawSearchItems(geometry)
-                                        .padding(.top, 6)
-                                }
+        GeometryReader { geometry in
+            VStack(alignment: .center, spacing: 0) {
+                //Google Map
+                ZStack(alignment: .topTrailing) {
+                    VStack(alignment: .center, spacing: self.optionVerticalPadding) {
+                        if Util.getSettingStatus(.SEARCH_BAR) {
+                            drawSearchBox(geometry)
+                            if $vm.isShowingSearchResults.wrappedValue == true {
+                                drawSearchItems(geometry)
+                                    .padding(.top, 6)
                             }
                         }
-                        .zIndex(1)
-                        
-                        GoogleMapView2(vm: self.vm)
                     }
+                    .zIndex(1)
+                    
+                    GoogleMapView2(vm: self.vm)
                 }
-                .frame(width: geometry.size.width, alignment: .center)
+                .navigationBarBackButtonHidden()
             }
-            .onChange(of: $vm.viewEvent.wrappedValue, perform: { value in
-                switch value {
-                case .goToFootprintView(let location):
-                    print("[SD] goToFootprintView")
-                    self.output.goToFootprintView(location)
-                default:
-                    break
-                }
-                $vm.viewEvent.wrappedValue = .none
-            })
-            .onAppear {
-                vm.onAppear()
-            }
-            .navigationBarBackButtonHidden()
-            .navigationDestination(for: Destination.self) { destination in
-                coordinator.moveToDestination(destination: destination)
-            }
+            .frame(width: geometry.size.width, alignment: .center)
         }
+        .onChange(of: $vm.viewEvent.wrappedValue, perform: { value in
+            switch value {
+            case .goToFootprintView(let location):
+                print("[SD] goToFootprintView")
+                self.output.goToFootprintView(location)
+            default:
+                break
+            }
+            $vm.viewEvent.wrappedValue = .none
+        })
+        .onAppear {
+            vm.onAppear()
+        }
+        
     }
     
     private func drawSearchItems(_ geometry: GeometryProxy) -> some View {

@@ -28,13 +28,14 @@ struct FootprintView: View {
                 drawHeader(geometry)
                 drawBody(geometry)
             }
-            .padding(EdgeInsets(top: 0, leading: 0, bottom: safeBottom, trailing: 0))
+            .padding(EdgeInsets(top: safeTop, leading: 0, bottom: safeBottom, trailing: 0))
             .edgesIgnoringSafeArea(.all)
             .frame(width: geometry.size.width, alignment: .leading)
         }
         .onAppear {
             vm.onAppear()
         }
+        .navigationBarBackButtonHidden()
     }
     
     private func drawBody(_ geometry: GeometryProxy) -> some View {

@@ -12,25 +12,6 @@ import GoogleMaps
 import GooglePlaces
 import CoreLocation
 
-enum ViewEvent: Equatable {
-    static func == (lhs: ViewEvent, rhs: ViewEvent) -> Bool {
-        lhs.event == rhs.event
-    }
-    
-    case goToFootprintView(location: Location)
-    case none
-    
-    var event: String {
-        switch self {
-        case .goToFootprintView(let location):
-            return "goToFootprintView"
-        case .none:
-            return "none"
-        }
-    }
-}
-
-
 struct Pin: Identifiable {
     let id = UUID()
     let footPrint: FootPrint
@@ -39,7 +20,6 @@ struct Pin: Identifiable {
 
 class MapVM2: BaseViewModel {
     private var locationManager: CLLocationManager
-    @Published var viewEvent: ViewEvent = .none
     @Published var annotations: [Pin] = []
     
     @Published var myLocation: Location? = nil
@@ -229,7 +209,6 @@ class MapVM2: BaseViewModel {
     }
     
     func addNewMarker(_ location: Location, name: String? = nil, placeId: String? = nil, address: String? = nil) {
-        print("[SD] addNewMarker")
         // 마커 생성하기
         let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
         
@@ -242,8 +221,6 @@ class MapVM2: BaseViewModel {
         if let name = name {
             message = "alert_add_marker_name".localized("\(name)")
         }
-        print("[SD] addNewMarker1")
-
         
         // TODO: alert
         self.viewEvent = .goToFootprintView(location: location)

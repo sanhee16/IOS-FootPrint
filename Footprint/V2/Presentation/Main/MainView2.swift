@@ -11,26 +11,27 @@ import Kingfisher
 import Factory
 
 struct MainView2: View {
+    @StateObject private var coordinator: Coordinator = Coordinator()
     @StateObject private var vm: MainVM2 = MainVM2()
     @State private var selectedIndex: Int = 0
+    @State private var currentTab: MainMenuType = .map
     
     var body: some View {
-        ZStack(content: {
-            VStack(alignment: .leading, spacing: 20) {
+        NavigationStack(path: $coordinator.paths) {
+            ZStack(content: {
+                Color.red.opacity(0.7)
+                VStack(alignment: .leading, spacing: 20) {
+                    MapView2(output: coordinator.mapOutput)
+                    
+                    MainMenuBar(current: $currentTab.wrappedValue) { type in
 
-            }
-            Color.red.opacity(0.7)
-            VStack {
-                TabView(selection: $selectedIndex) {
-                    MapView2()
-                        .tabItem {
-                            Image(systemName: "house")
-                        }
-                        .tag(0)
+                    }
                 }
-                .accentColor(.black)
+            })
+            .navigationBarBackButtonHidden()
+            .navigationDestination(for: Destination.self) { destination in
+                coordinator.moveToDestination(destination: destination)
             }
-        })
-        .navigationBarBackButtonHidden()
+        }
     }
 }

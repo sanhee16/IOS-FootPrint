@@ -33,11 +33,12 @@ class FootprintVM: BaseViewModel {
     }
     
     func onAppear() {
-        self.loadAll()
+        
     }
     
     func updateLocation(_ location: Location) {
         self.location = location
+        self.loadAll()
     }
     
     func loadAll() {
