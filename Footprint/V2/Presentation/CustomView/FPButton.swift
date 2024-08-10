@@ -53,36 +53,37 @@ struct FPButton: View {
     }
     
     var body: some View {
-        HStack(alignment: .center, spacing: 8, content: {
-            if case let .leading(name) = location {
-                Image(name)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 24, alignment: .center)
-            }
-            
-            Text(text)
-                .sdFont(.btn1, color: self.textColor)
-            
-            if case let .trailing(name) = location {
-                Image(name)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 24, alignment: .center)
-            }
-        })
-        .sdPaddingVertical(self.verticalPadding)
-        .sdPaddingHorizontal(self.horizontalPadding ?? 0.0)
-        .frame(maxWidth: self.horizontalPadding == nil ? .infinity : nil)
-        .contentShape(Rectangle())
-        .background(
-            RoundedRectangle(cornerRadius: 12)
-                .foregroundStyle(self.backgroundColor)
-                .border(self.borderColor, lineWidth: 1.5, cornerRadius: 12)
-        )
-        .onTapGesture {
+        Button(action: {
             self.onTap()
-        }
+        }, label: {
+            HStack(alignment: .center, spacing: 8, content: {
+                if case let .leading(name) = location {
+                    Image(name)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 24, alignment: .center)
+                }
+                
+                Text(text)
+                    .sdFont(.btn1, color: self.textColor)
+                
+                if case let .trailing(name) = location {
+                    Image(name)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 24, alignment: .center)
+                }
+            })
+            .sdPaddingVertical(self.verticalPadding)
+            .sdPaddingHorizontal(self.horizontalPadding ?? 0.0)
+            .frame(maxWidth: self.horizontalPadding == nil ? .infinity : nil)
+            .contentShape(Rectangle())
+            .background(
+                RoundedRectangle(cornerRadius: 12)
+                    .foregroundStyle(self.backgroundColor)
+                    .border(self.borderColor, lineWidth: 1.5, cornerRadius: 12)
+            )
+        })
     }
 }
 

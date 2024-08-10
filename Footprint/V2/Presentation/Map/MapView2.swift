@@ -52,38 +52,33 @@ struct MapView2: View {
                                     }
                                 })
                             } else {
-                                mapMenuButton("search")
-                                    .sdPadding(top: 8, leading: 0, bottom: 0, trailing: 16)
-                                    .onTapGesture {
-                                        withAnimation {
-                                            self.isShowSearchBar = true
-                                        }
+                                mapMenuButton("search") {
+                                    withAnimation {
+                                        self.isShowSearchBar = true
                                     }
+                                }
+                                .sdPadding(top: 8, leading: 0, bottom: 0, trailing: 16)
                             }
                         })
                         
                         HStack(alignment: .center, spacing: 0, content: {
                             Spacer()
-                            mapMenuButton("paw-foot")
-                                .sdPadding(top: 8, leading: 0, bottom: 0, trailing: 16)
-                                .onTapGesture {
-                                    
-                                }
+                            mapMenuButton("paw-foot") {
+                                
+                            }
+                            .sdPadding(top: 8, leading: 0, bottom: 0, trailing: 16)
                         })
                     }
                     .zIndex(1)
                     
                     GoogleMapView2(vm: self.vm)
                     
-                    
-                    
                     VStack(alignment: .leading, spacing: 0, content: {
                         Spacer()
-                        mapMenuButton("location-target")
-                            .sdPadding(top: 0, leading: 16, bottom: 18, trailing: 0)
-                            .onTapGesture {
-                                vm.didTapMyLocationButton()
-                            }
+                        mapMenuButton("location-target") {
+                            vm.didTapMyLocationButton()
+                        }
+                        .sdPadding(top: 0, leading: 16, bottom: 18, trailing: 0)
                         
                         FPButton(text: "발자국 남기기", location: .leading(name: "paw-foot-white"), status: .press, size: .large, type: .solid) {
                             
@@ -110,19 +105,23 @@ struct MapView2: View {
     }
     
     
-    private func mapMenuButton(_ image: String) -> some View {
-        Image(image)
-            .resizable()
-            .scaledToFit()
-            .frame(width: 20)
-            .padding(10)
-            .background(
-                Circle()
-                    .foregroundStyle(Color.white)
-                    .border(Color(hex: "E2E8F0"), lineWidth: 0.7, cornerRadius: 100)
-            )
-            .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: 2)
-            .contentShape(Rectangle())
+    private func mapMenuButton(_ image: String, onTap: @escaping ()->()) -> some View {
+        Button(action: {
+            onTap()
+        }, label: {
+            Image(image)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 20)
+                .padding(10)
+                .background(
+                    Circle()
+                        .foregroundStyle(Color.white)
+                        .border(Color(hex: "E2E8F0"), lineWidth: 0.7, cornerRadius: 100)
+                )
+                .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: 2)
+                .contentShape(Rectangle())
+        })
     }
     
     private func drawSearchList(_ geometry: GeometryProxy) -> some View {
