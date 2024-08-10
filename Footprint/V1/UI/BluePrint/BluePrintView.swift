@@ -7,6 +7,7 @@
 
 
 import SwiftUI
+import SDSwiftUIPack
 
 struct BluePrintView: View {
     typealias VM = BluePrintViewModel

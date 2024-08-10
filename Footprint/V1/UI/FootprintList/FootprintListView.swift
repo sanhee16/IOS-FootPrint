@@ -7,6 +7,7 @@
 
 
 import SwiftUI
+import SDSwiftUIPack
 
 struct FootprintListView: View {
     typealias VM = FootprintListViewModel
@@ -33,7 +34,7 @@ struct FootprintListView: View {
                         Image($vm.isShowStarOnly.wrappedValue ? "star_on" : "star_off")
                             .resizable()
                             .scaledToFit()
-                            .frame(both: 20.0, aligment: .center)
+                            .frame(both: 20.0, alignment: .center)
                             .onTapGesture {
                                 vm.onClickShowStarOnly()
                             }
@@ -77,7 +78,7 @@ struct FootprintListView: View {
                             Image("up_arrow")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(both: 24.0, aligment: .center)
+                                .frame(both: 24.0, alignment: .center)
                                 .padding(10)
                                 .background(
                                     Circle()
@@ -113,14 +114,14 @@ struct FootprintListView: View {
                     Image("star_on")
                         .resizable()
                         .scaledToFit()
-                        .frame(both: 12.0, aligment: .center)
+                        .frame(both: 12.0, alignment: .center)
                 }
 
                 Spacer()
                 Image($vm.expandedItem.wrappedValue == item ? "up_arrow" : "down_arrow")
                     .resizable()
                     .scaledToFit()
-                    .frame(both: 16.0, aligment: .center)
+                    .frame(both: 16.0, alignment: .center)
             }
             .padding([.leading, .trailing], 12)
             
@@ -128,7 +129,7 @@ struct FootprintListView: View {
                 HStack(alignment: .center, spacing: 6) {
                     Image(category.pinType.pinType().pinWhite)
                         .resizable()
-                        .frame(both: 18.0, aligment: .center)
+                        .frame(both: 18.0, alignment: .center)
                         .colorMultiply(Color(hex: category.pinColor.pinColor().pinColorHex))
                     Text(category.name)
                         .font(.kr12r)
@@ -171,7 +172,7 @@ struct FootprintListView: View {
         return HStack(alignment: .center, spacing: 4) {
             Image("calendar")
                 .resizable()
-                .frame(both: 18.0, aligment: .center)
+                .frame(both: 18.0, alignment: .center)
             Text(item.createdAt.getDate())
                 .font(.kr11r)
                 .foregroundColor(Color.gray90)
@@ -182,7 +183,7 @@ struct FootprintListView: View {
         return HStack(alignment: .top, spacing: 4) {
             Image("person")
                 .resizable()
-                .frame(both: 18.0, aligment: .center)
+                .frame(both: 18.0, alignment: .center)
             
             Text(Util.makePeopleWithNameString(items))
                 .font(.kr11r)

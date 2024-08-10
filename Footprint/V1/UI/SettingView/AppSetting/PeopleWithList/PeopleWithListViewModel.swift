@@ -10,7 +10,7 @@ import RealmSwift
 import Combine
 import UIKit
 
-class PeopleWithListViewModel: BaseViewModel {
+class PeopleWithListViewModel: BaseViewModelV1 {
     @Published var peopleWithList: [PeopleWith] = []
     private let realm: Realm
     

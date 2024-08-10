@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDSwiftUIPack
 
 struct ReviewView: View {
     typealias VM = ReviewViewModel
@@ -38,7 +39,7 @@ struct ReviewView: View {
                             Image(idx < $vm.starCnt.wrappedValue ? "star_on" : "star_off")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(both: 18.0, aligment: .center)
+                                .frame(both: 18.0, alignment: .center)
                                 .onTapGesture {
                                     $vm.starCnt.wrappedValue = idx + 1
                                 }

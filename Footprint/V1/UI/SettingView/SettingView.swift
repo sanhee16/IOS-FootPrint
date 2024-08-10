@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDSwiftUIPack
 
 /*
  TODO: 설정에 들어갈 것
@@ -123,7 +124,7 @@ struct SettingView: View {
                         Image(idx < $vm.starCnt.wrappedValue ? "star_on" : "star_off")
                             .resizable()
                             .scaledToFit()
-                            .frame(both: 20.0, aligment: .center)
+                            .frame(both: 20.0, alignment: .center)
                             .onTapGesture {
                                 vm.onEnterStar(idx)
                             }
@@ -156,7 +157,7 @@ struct SettingView: View {
                 Spacer()
                 Image("forward")
                     .resizable()
-                    .frame(both: 20.0, aligment: .center)
+                    .frame(both: 20.0, alignment: .center)
             }
             .padding(EdgeInsets(top: 14, leading: 12, bottom: 14, trailing: 12))
             .contentShape(Rectangle())

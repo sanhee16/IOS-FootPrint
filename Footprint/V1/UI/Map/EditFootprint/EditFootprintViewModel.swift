@@ -28,7 +28,7 @@ public struct FootprintContents {
 }
 
 
-class EditFootprintViewModel: BaseViewModel {
+class EditFootprintViewModel: BaseViewModelV1 {
     @Published var isStar: Bool = false
     @Published var title: String = ""
     @Published var content: String = ""

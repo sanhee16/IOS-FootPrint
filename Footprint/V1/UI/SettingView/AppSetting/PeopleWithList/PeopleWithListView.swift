@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDSwiftUIPack
 
 struct PeopleWithListView: View {
     typealias VM = PeopleWithListViewModel
@@ -56,7 +57,7 @@ struct PeopleWithListView: View {
                 Image(uiImage: image)
                     .resizable()
                     .scaledToFill()
-                    .frame(both: imageSize, aligment: .center)
+                    .frame(both: imageSize, alignment: .center)
                     .clipShape(Circle())
                     .contentShape(Rectangle())
                     .clipped()
@@ -64,7 +65,7 @@ struct PeopleWithListView: View {
                 Image("profile")
                     .resizable()
                     .scaledToFit()
-                    .frame(both: imageSize, aligment: .center)
+                    .frame(both: imageSize, alignment: .center)
                     .clipShape(Circle())
                     .contentShape(Rectangle())
                     .clipped()

@@ -7,6 +7,7 @@
 
 
 import SwiftUI
+import SDSwiftUIPack
 
 struct FootprintListFilterView: View {
     typealias VM = FootprintListFilterViewModel
@@ -99,7 +100,7 @@ struct FootprintListFilterView: View {
         return HStack(alignment: .center, spacing: 6) {
             Image(item.pinType.pinType().pinWhite)
                 .resizable()
-                .frame(both: 14.0, aligment: .center)
+                .frame(both: 14.0, alignment: .center)
                 .colorMultiply(isSelected ? Color(hex: item.pinColor.pinColor().pinColorHex) : .lightGray02)
             Text(item.name)
                 .font(.kr12r)

@@ -6,7 +6,10 @@
 //
 
 import SwiftUI
+import SDSwiftUIPack
+import SwiftUI
 import SwiftUIPager
+import SwiftUIPullToRefresh
 
 struct ShowFootPrintView: View {
     typealias VM = ShowFootPrintViewModel
@@ -57,7 +60,7 @@ struct ShowFootPrintView: View {
                             Image("star_on")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(both: 12.0, aligment: .center)
+                                .frame(both: 12.0, alignment: .center)
                         }
                     }
                     .padding(EdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 8))
@@ -111,7 +114,7 @@ struct ShowFootPrintView: View {
                 if $vm.footPrints.wrappedValue.count > 1 {
                     Image("before")
                         .resizable()
-                        .frame(both: 16, aligment: .center)
+                        .frame(both: 16, alignment: .center)
                         .padding(3)
                         .contentShape(Rectangle())
                         .onTapGesture {
@@ -124,7 +127,7 @@ struct ShowFootPrintView: View {
                 if $vm.footPrints.wrappedValue.count > 1 {
                     Image("forward")
                         .resizable()
-                        .frame(both: 16, aligment: .center)
+                        .frame(both: 16, alignment: .center)
                         .padding(3)
                         .contentShape(Rectangle())
                         .onTapGesture {
@@ -155,7 +158,7 @@ struct ShowFootPrintView: View {
         return HStack(alignment: .top, spacing: 4) {
             Image("person")
                 .resizable()
-                .frame(both: 14.0, aligment: .center)
+                .frame(both: 14.0, alignment: .center)
             Text(Util.makePeopleWithNameString(items))
                 .font(.kr11r)
                 .foregroundColor(Color.gray90)
@@ -171,7 +174,7 @@ struct ShowFootPrintView: View {
             if let category = item.tag.getCategory() {
                 Image(category.pinType.pinType().pinWhite)
                     .resizable()
-                    .frame(both: 14.0, aligment: .center)
+                    .frame(both: 14.0, alignment: .center)
                     .colorMultiply(Color(hex: category.pinColor.pinColor().pinColorHex))
                 Text(category.name)
                     .font(.kr11r)

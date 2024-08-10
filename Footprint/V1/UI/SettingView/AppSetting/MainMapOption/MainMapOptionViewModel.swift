@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import UIKit
 
-class MainMapOptionViewModel: BaseViewModel {
+class MainMapOptionViewModel: BaseViewModelV1 {
     @Published var isOnFilter: Bool = true
     @Published var isOnCategory: Bool = true
     

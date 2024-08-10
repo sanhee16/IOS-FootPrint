@@ -10,7 +10,7 @@ import Foundation
 import Combine
 import UIKit
 
-class DevInfoViewModel: BaseViewModel {
+class DevInfoViewModel: BaseViewModelV1 {
     @Published var git: String = "https://github.com/sanhee16"
     override init(_ coordinator: AppCoordinator) {
         super.init(coordinator)

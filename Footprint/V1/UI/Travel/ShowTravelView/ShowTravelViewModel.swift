@@ -10,8 +10,9 @@ import Combine
 import UIKit
 import RealmSwift
 import SwiftUI
+import SDSwiftUIPack
 
-class ShowTravelViewModel: BaseViewModel {
+class ShowTravelViewModel: BaseViewModelV1 {
     private let realm: Realm
     @Published var footprints: [FootPrint] = []
     @Published var expandedItem: FootPrint? = nil

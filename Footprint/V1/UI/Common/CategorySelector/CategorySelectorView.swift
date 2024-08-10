@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDSwiftUIPack
 
 enum CategorySelectorType {
     case edit
@@ -83,7 +84,7 @@ struct CategorySelectorView: View {
         return HStack(alignment: .center, spacing: 12) {
             Image(item.pinType.pinType().pinWhite)
                 .resizable()
-                .frame(both: 14.0, aligment: .center)
+                .frame(both: 14.0, alignment: .center)
                 .colorMultiply(Color(hex: item.pinColor.pinColor().pinColorHex))
             Text(item.name)
                 .font(.kr12r)
@@ -93,7 +94,7 @@ struct CategorySelectorView: View {
                 if vm.isSelectedCategory(item) {
                     Image("done_b")
                         .resizable()
-                        .frame(both: 20, aligment: .center)
+                        .frame(both: 20, alignment: .center)
                 }
             } else if case .edit = vm.type {
                 Text("\(vm.categoryCnt[item.tag] ?? 0)")

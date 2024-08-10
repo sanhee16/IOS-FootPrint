@@ -30,7 +30,7 @@ public struct PeopleEditStruct {
     }
 }
 
-class PeopleEditViewModel: BaseViewModel {
+class PeopleEditViewModel: BaseViewModelV1 {
     let peopleEditStruct: PeopleEditStruct
     let type: PeopleEditType
     @Published var name: String = ""

@@ -7,6 +7,7 @@
 
 
 import SwiftUI
+import SDSwiftUIPack
 
 struct TrashView: View {
     typealias VM = TrashViewModel
@@ -181,7 +182,7 @@ struct TrashView: View {
     private func CheckBox(_ isSelected: Bool) -> some View {
         return Image(systemName: isSelected ? "checkmark.square.fill" : "square")
             .resizable()
-            .frame(both: 16.0, aligment: .center)
+            .frame(both: 16.0, alignment: .center)
             .foregroundColor(isSelected ? .fColor3 : .gray60)
             .padding(.trailing, 10)
     }

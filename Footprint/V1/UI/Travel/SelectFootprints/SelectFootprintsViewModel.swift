@@ -11,7 +11,7 @@ import Combine
 import UIKit
 import RealmSwift
 
-class SelectFootprintsViewModel: BaseViewModel {
+class SelectFootprintsViewModel: BaseViewModelV1 {
     @Published var selectedList: [FootPrint] = []
     @Published var list: [FootPrint] = []
     private let realm: Realm

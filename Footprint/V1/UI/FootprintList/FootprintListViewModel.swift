@@ -11,7 +11,7 @@ import Combine
 import UIKit
 import RealmSwift
 
-class FootprintListViewModel: BaseViewModel {
+class FootprintListViewModel: BaseViewModelV1 {
     
     @Published var list: [FootPrint] = []
     @Published var expandedItem: FootPrint? = nil

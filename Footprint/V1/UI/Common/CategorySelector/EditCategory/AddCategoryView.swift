@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDSwiftUIPack
 
 struct AddCategoryView: View, KeyboardReadable {
     typealias VM = AddCategoryViewModel
@@ -139,11 +140,11 @@ struct AddCategoryView: View, KeyboardReadable {
     private func pinColorItem(_ item: PinColor, isSelected: Bool) -> some View {
         return ZStack(alignment: .center) {
             Circle()
-                .frame(both: 18.0, aligment: .center)
+                .frame(both: 18.0, alignment: .center)
                 .foregroundColor(Color(hex: item.pinColorHex))
             if isSelected {
                 Circle()
-                    .frame(both: 13.0, aligment: .center)
+                    .frame(both: 13.0, alignment: .center)
                     .foregroundColor(Color(hex: item.pinColorHex))
                     .overlay(
                         Circle()

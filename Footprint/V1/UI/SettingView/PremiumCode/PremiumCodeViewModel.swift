@@ -11,7 +11,7 @@ import UIKit
 import FirebaseCore
 import FirebaseFirestore
 
-class PremiumCodeViewModel: BaseViewModel {
+class PremiumCodeViewModel: BaseViewModelV1 {
     @Published var name: String = ""
     @Published var code: String = ""
     private let firestoreApi = FirestoreApi.shared

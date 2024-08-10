@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SDSwiftUIPack
 
 public struct MainMenuElements {
     var current: MainMenuType
@@ -90,7 +91,7 @@ public struct MainMenuBar: View {
             Image(isSelected ? item.onImage : item.offImage)
                 .resizable()
                 .scaledToFit()
-                .frame(both: ICON_SIZE, aligment: .center)
+                .frame(both: ICON_SIZE, alignment: .center)
             Text(item.text)
                 .font(isSelected ? .kr10b : .kr10r)
                 .foregroundColor(isSelected ? .fColor3 : .textColor1)

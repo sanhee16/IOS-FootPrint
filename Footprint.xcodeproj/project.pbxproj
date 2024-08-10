@@ -36,6 +36,13 @@
 		265924C929445BE1001E7025 /* FootprintListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265924C829445BE1001E7025 /* FootprintListViewModel.swift */; };
 		265EA947291D1E1400068A5C /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265EA946291D1E1400068A5C /* DataModel.swift */; };
 		266EDDD12C64EA16006CF09B /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 266EDDD02C64EA16006CF09B /* Factory */; };
+		266EDDD92C64EAA9006CF09B /* FootprintApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266EDDD82C64EAA9006CF09B /* FootprintApp.swift */; };
+		266EDDDC2C64EACF006CF09B /* SplashView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266EDDDB2C64EACF006CF09B /* SplashView2.swift */; };
+		266EDDDE2C64EAD9006CF09B /* SplashVM2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266EDDDD2C64EAD9006CF09B /* SplashVM2.swift */; };
+		266EDDE12C64EB1F006CF09B /* SDSwiftUIPack in Frameworks */ = {isa = PBXBuildFile; productRef = 266EDDE02C64EB1F006CF09B /* SDSwiftUIPack */; };
+		266EDDE42C64EB40006CF09B /* MainView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266EDDE32C64EB40006CF09B /* MainView2.swift */; };
+		266EDDE62C64EB46006CF09B /* MainVM2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266EDDE52C64EB46006CF09B /* MainVM2.swift */; };
+		266EDDE82C64EB88006CF09B /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266EDDE72C64EB88006CF09B /* BaseViewModel.swift */; };
 		26823C092A13B93000BF41EA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26823C0B2A13B93000BF41EA /* InfoPlist.strings */; };
 		2682622A2C60E2EA0069134C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 268262292C60E2EA0069134C /* RealmSwift */; settings = {ATTRIBUTES = (Required, ); }; };
 		268546E82A28DB1200BDA2EA /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268546E72A28DB1200BDA2EA /* ReviewView.swift */; };
@@ -104,7 +111,7 @@
 		63F1324B2914A18800B3A9E0 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F132452914A18800B3A9E0 /* Defaults.swift */; };
 		63F1324C2914A18800B3A9E0 /* CommonApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F132462914A18800B3A9E0 /* CommonApi.swift */; };
 		63F132502914A18F00B3A9E0 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F1324E2914A18F00B3A9E0 /* BaseViewController.swift */; };
-		63F132512914A18F00B3A9E0 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F1324F2914A18F00B3A9E0 /* BaseViewModel.swift */; };
+		63F132512914A18F00B3A9E0 /* BaseViewModelV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F1324F2914A18F00B3A9E0 /* BaseViewModelV1.swift */; };
 		63F132552914A19F00B3A9E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F132532914A19F00B3A9E0 /* AppDelegate.swift */; };
 		63F132562914A19F00B3A9E0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F132542914A19F00B3A9E0 /* SceneDelegate.swift */; };
 		63F1325A2914A1A300B3A9E0 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F132582914A1A300B3A9E0 /* AppCoordinator.swift */; };
@@ -170,6 +177,12 @@
 		265924C629445BD9001E7025 /* FootprintListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootprintListView.swift; sourceTree = "<group>"; };
 		265924C829445BE1001E7025 /* FootprintListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootprintListViewModel.swift; sourceTree = "<group>"; };
 		265EA946291D1E1400068A5C /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		266EDDD82C64EAA9006CF09B /* FootprintApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootprintApp.swift; sourceTree = "<group>"; };
+		266EDDDB2C64EACF006CF09B /* SplashView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView2.swift; sourceTree = "<group>"; };
+		266EDDDD2C64EAD9006CF09B /* SplashVM2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVM2.swift; sourceTree = "<group>"; };
+		266EDDE32C64EB40006CF09B /* MainView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView2.swift; sourceTree = "<group>"; };
+		266EDDE52C64EB46006CF09B /* MainVM2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVM2.swift; sourceTree = "<group>"; };
+		266EDDE72C64EB88006CF09B /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		26823C0A2A13B93000BF41EA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		26823C0C2A13B93300BF41EA /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		268546E72A28DB1200BDA2EA /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
@@ -237,7 +250,7 @@
 		63F132452914A18800B3A9E0 /* Defaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		63F132462914A18800B3A9E0 /* CommonApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonApi.swift; sourceTree = "<group>"; };
 		63F1324E2914A18F00B3A9E0 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		63F1324F2914A18F00B3A9E0 /* BaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		63F1324F2914A18F00B3A9E0 /* BaseViewModelV1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewModelV1.swift; sourceTree = "<group>"; };
 		63F132532914A19F00B3A9E0 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63F132542914A19F00B3A9E0 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		63F132582914A1A300B3A9E0 /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -278,6 +291,7 @@
 				263ED44E2C60E54E00FAC148 /* FirebaseFirestore in Frameworks */,
 				63B1FAEA2914A718007E94B6 /* SwiftUIPager in Frameworks */,
 				EA8F1CE5AADA34D35AD14494 /* Pods_Footprint.framework in Frameworks */,
+				266EDDE12C64EB1F006CF09B /* SDSwiftUIPack in Frameworks */,
 				266EDDD12C64EA16006CF09B /* Factory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -397,6 +411,11 @@
 		266EDDD22C64EA40006CF09B /* V2 */ = {
 			isa = PBXGroup;
 			children = (
+				266EDDD82C64EAA9006CF09B /* FootprintApp.swift */,
+				266EDDD72C64EA9A006CF09B /* Data */,
+				266EDDD62C64EA95006CF09B /* Domain */,
+				266EDDD52C64EA90006CF09B /* Presentation */,
+				266EDDD42C64EA87006CF09B /* Application */,
 			);
 			path = V2;
 			sourceTree = "<group>";
@@ -413,6 +432,55 @@
 				63F132522914A19F00B3A9E0 /* Delegate */,
 			);
 			path = V1;
+			sourceTree = "<group>";
+		};
+		266EDDD42C64EA87006CF09B /* Application */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		266EDDD52C64EA90006CF09B /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				266EDDE22C64EB3B006CF09B /* Main */,
+				266EDDDA2C64EAC3006CF09B /* Splash */,
+				266EDDE72C64EB88006CF09B /* BaseViewModel.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		266EDDD62C64EA95006CF09B /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		266EDDD72C64EA9A006CF09B /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		266EDDDA2C64EAC3006CF09B /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				266EDDDB2C64EACF006CF09B /* SplashView2.swift */,
+				266EDDDD2C64EAD9006CF09B /* SplashVM2.swift */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		266EDDE22C64EB3B006CF09B /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				266EDDE32C64EB40006CF09B /* MainView2.swift */,
+				266EDDE52C64EB46006CF09B /* MainVM2.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		268546E62A28DB0300BDA2EA /* Review */ = {
@@ -645,7 +713,7 @@
 			isa = PBXGroup;
 			children = (
 				63F1324E2914A18F00B3A9E0 /* BaseViewController.swift */,
-				63F1324F2914A18F00B3A9E0 /* BaseViewModel.swift */,
+				63F1324F2914A18F00B3A9E0 /* BaseViewModelV1.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -819,6 +887,7 @@
 				263ED44F2C60E54E00FAC148 /* FirebaseRemoteConfig */,
 				263ED4512C60E54E00FAC148 /* FirebaseStorage */,
 				266EDDD02C64EA16006CF09B /* Factory */,
+				266EDDE02C64EB1F006CF09B /* SDSwiftUIPack */,
 			);
 			productName = Footprint;
 			productReference = 63209FE42913C3BF00709227 /* Footprint.app */;
@@ -858,6 +927,7 @@
 				268262282C60E2EA0069134C /* XCRemoteSwiftPackageReference "realm-swift" */,
 				263ED44C2C60E54E00FAC148 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				266EDDCF2C64EA16006CF09B /* XCRemoteSwiftPackageReference "Factory" */,
+				266EDDDF2C64EB1E006CF09B /* XCRemoteSwiftPackageReference "SDSwiftUIPack" */,
 			);
 			productRefGroup = 63209FE52913C3BF00709227 /* Products */;
 			projectDirPath = "";
@@ -939,6 +1009,7 @@
 				63E5C8312975367200D32FD2 /* Dump.swift in Sources */,
 				63B1FAFD2914B324007E94B6 /* GalleryViewModel.swift in Sources */,
 				264EEF592925128A00B89624 /* AddCategoryViewModel.swift in Sources */,
+				266EDDD92C64EAA9006CF09B /* FootprintApp.swift in Sources */,
 				63E2756929502DFA00E4AABC /* PinchZoom.swift in Sources */,
 				63E848A3295ABE7E0037D7A3 /* EditTravelViewModel.swift in Sources */,
 				63F1328E2914A1C000B3A9E0 /* SplashViewModel.swift in Sources */,
@@ -958,6 +1029,7 @@
 				63F132552914A19F00B3A9E0 /* AppDelegate.swift in Sources */,
 				63E848A1295ABE790037D7A3 /* EditTravelView.swift in Sources */,
 				63B1FAFB2914B31E007E94B6 /* GalleryView.swift in Sources */,
+				266EDDDC2C64EACF006CF09B /* SplashView2.swift in Sources */,
 				63B1FAEF2914A861007E94B6 /* EditFootprintViewModel.swift in Sources */,
 				26C04F6D2917667F00890A76 /* SwiftUIExtension.swift in Sources */,
 				631D75242966619B00464F33 /* SToggleView.swift in Sources */,
@@ -968,6 +1040,7 @@
 				2613ED4B2973C5AC0060EF23 /* MainMenuBar.swift in Sources */,
 				63F292B2297656D700D42D0E /* TrashView.swift in Sources */,
 				63F132472914A18800B3A9E0 /* AlertViewModel.swift in Sources */,
+				266EDDE62C64EB46006CF09B /* MainVM2.swift in Sources */,
 				265924C729445BD9001E7025 /* FootprintListView.swift in Sources */,
 				63D7EF1F296FC1EF00D72F12 /* SError.swift in Sources */,
 				262D2A06293E310E005984DA /* MailView.swift in Sources */,
@@ -984,12 +1057,13 @@
 				263A97BB2945852E008A69F5 /* PeopleWithSelectorView.swift in Sources */,
 				262D2A04293E2BAA005984DA /* SettingViewModel.swift in Sources */,
 				63E848A9295ABEC20037D7A3 /* TravelListViewModel.swift in Sources */,
-				63F132512914A18F00B3A9E0 /* BaseViewModel.swift in Sources */,
+				63F132512914A18F00B3A9E0 /* BaseViewModelV1.swift in Sources */,
 				63C8CCF62941D60400BB861D /* DevInfoView.swift in Sources */,
 				2619FE8C2940D6B300D24778 /* CheckPermissionViewModel.swift in Sources */,
 				63F1324B2914A18800B3A9E0 /* Defaults.swift in Sources */,
 				63D32FC829CA92BF0049F567 /* PremiumCodeViewModel.swift in Sources */,
 				264B70C0291F8E9D00CDAF9F /* C.swift in Sources */,
+				266EDDE42C64EB40006CF09B /* MainView2.swift in Sources */,
 				63F132982914A1C000B3A9E0 /* ProgressView.swift in Sources */,
 				631D752F29667A4D00464F33 /* PeopleWithListViewModel.swift in Sources */,
 				631D752D29667A4700464F33 /* PeopleWithListView.swift in Sources */,
@@ -1004,6 +1078,7 @@
 				63F1325B2914A1A300B3A9E0 /* Coordinator.swift in Sources */,
 				63F132482914A18800B3A9E0 /* AlertView.swift in Sources */,
 				2639921F291FEBA60049F047 /* KeyboardReadable.swift in Sources */,
+				266EDDE82C64EB88006CF09B /* BaseViewModel.swift in Sources */,
 				63F132AB2914A1C000B3A9E0 /* MainView.swift in Sources */,
 				2627408F29699B2A00B47566 /* CategorySelectorView.swift in Sources */,
 				63F132502914A18F00B3A9E0 /* BaseViewController.swift in Sources */,
@@ -1014,6 +1089,7 @@
 				2619FE8A2940D6AC00D24778 /* CheckPermissionView.swift in Sources */,
 				63E848A7295ABEBD0037D7A3 /* TravelListView.swift in Sources */,
 				260C87CD296AADBE00ADCC32 /* ShowTravelViewModel.swift in Sources */,
+				266EDDDE2C64EAD9006CF09B /* SplashVM2.swift in Sources */,
 				63F1324C2914A18800B3A9E0 /* CommonApi.swift in Sources */,
 				63F1329A2914A1C000B3A9E0 /* WebView.swift in Sources */,
 				2691D9C3294EE4B1002825B9 /* FootprintListFilterView.swift in Sources */,
@@ -1289,6 +1365,14 @@
 				minimumVersion = 2.3.2;
 			};
 		};
+		266EDDDF2C64EB1E006CF09B /* XCRemoteSwiftPackageReference "SDSwiftUIPack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sanhee16/SDSwiftUIPack.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.2;
+			};
+		};
 		268262282C60E2EA0069134C /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
@@ -1359,6 +1443,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 266EDDCF2C64EA16006CF09B /* XCRemoteSwiftPackageReference "Factory" */;
 			productName = Factory;
+		};
+		266EDDE02C64EB1F006CF09B /* SDSwiftUIPack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 266EDDDF2C64EB1E006CF09B /* XCRemoteSwiftPackageReference "SDSwiftUIPack" */;
+			productName = SDSwiftUIPack;
 		};
 		268262292C60E2EA0069134C /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -7,6 +7,7 @@
 
 
 import SwiftUI
+import SDSwiftUIPack
 
 struct DevInfoView: View {
     typealias VM = DevInfoViewModel

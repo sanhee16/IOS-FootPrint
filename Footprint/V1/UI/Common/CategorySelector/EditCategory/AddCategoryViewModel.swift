@@ -19,7 +19,7 @@ struct AddCategoryType {
     var category: Category?
 }
 
-class AddCategoryViewModel: BaseViewModel {
+class AddCategoryViewModel: BaseViewModelV1 {
     private let realm: Realm
     @Published var isAvailableSave: Bool
     

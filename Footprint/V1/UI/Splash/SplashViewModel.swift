@@ -19,7 +19,7 @@ import AdSupport
 
 
 
-class SplashViewModel: BaseViewModel {
+class SplashViewModel: BaseViewModelV1 {
     private var timerRepeat: Timer?
     private var locationManager: CLLocationManager
     private let realm: Realm

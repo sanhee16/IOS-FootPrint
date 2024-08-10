@@ -8,11 +8,14 @@
 import Foundation
 import Combine
 import UIKit
+import SwiftUI
+import SwiftUIPullToRefresh
 import SwiftUIPager
 import RealmSwift
 import SwiftUI
+import SDSwiftUIPack
 
-class ShowFootPrintViewModel: BaseViewModel {
+class ShowFootPrintViewModel: BaseViewModelV1 {
     @Published var footPrints: [FootPrint] = []
     @Published var page: Page
     @Published var pageIdx: Int = 0

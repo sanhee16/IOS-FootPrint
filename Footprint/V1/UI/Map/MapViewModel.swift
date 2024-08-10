@@ -18,7 +18,7 @@ struct Pin: Identifiable {
     let coordinate: CLLocationCoordinate2D
 }
 
-class MapViewModel: BaseViewModel {
+class MapViewModel: BaseViewModelV1 {
     private var locationManager: CLLocationManager
     @Published var annotations: [Pin] = []
     

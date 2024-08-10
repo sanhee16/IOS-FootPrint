@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SDSwiftUIPack
 
 struct PeopleEditView: View {
     typealias VM = PeopleEditViewModel
@@ -48,7 +49,7 @@ struct PeopleEditView: View {
                 Image(uiImage: uiImage)
                     .resizable()
                     .scaledToFill()
-                    .frame(both: imageSize, aligment: .center)
+                    .frame(both: imageSize, alignment: .center)
                     .clipShape(Circle())
                     .contentShape(Rectangle())
                     .clipped()
@@ -59,7 +60,7 @@ struct PeopleEditView: View {
                 Image("person")
                     .resizable()
                     .scaledToFill()
-                    .frame(both: imageSize, aligment: .center)
+                    .frame(both: imageSize, alignment: .center)
                     .clipShape(Circle())
                     .contentShape(Rectangle())
                     .clipped()

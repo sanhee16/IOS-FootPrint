@@ -7,6 +7,7 @@
 
 import Lottie
 import SwiftUI
+import SDSwiftUIPack
 import UIKit
 
 struct LottieView: UIViewRepresentable {

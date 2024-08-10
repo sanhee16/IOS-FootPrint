@@ -10,13 +10,14 @@ import Combine
 import UIKit
 import RealmSwift
 import SwiftUI
+import SDSwiftUIPack
 
 enum EditTravelType {
     case create
     case edit(item: Travel)
 }
 
-class EditTravelViewModel: BaseViewModel {
+class EditTravelViewModel: BaseViewModelV1 {
     private let realm: Realm
     @Published var isStar: Bool = false
     @Published var title: String = ""

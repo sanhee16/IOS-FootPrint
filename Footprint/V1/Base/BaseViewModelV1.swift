@@ -1,5 +1,5 @@
 //
-//  BaseViewModel.swift
+//  BaseViewModelV1.swift
 //  Footprint
 //
 //  Created by Studio-SJ on 2022/10/05.
@@ -8,12 +8,13 @@
 
 import Foundation
 import SwiftUI
+import SDSwiftUIPack
 import Combine
 import UIKit
 import RealmSwift
 
 
-class BaseViewModel: ObservableObject {
+class BaseViewModelV1: ObservableObject {
     weak var coordinator: AppCoordinator? = nil
     var subscription = Set<AnyCancellable>()
     

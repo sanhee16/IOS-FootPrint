@@ -13,7 +13,7 @@ import UIKit
 typealias peopleWithItem = (item: PeopleWith, isSelected: Bool)
 typealias categoryItem = (item: Category, isSelected: Bool)
 
-class FootprintListFilterViewModel: BaseViewModel {
+class FootprintListFilterViewModel: BaseViewModelV1 {
     @Published var peopleWithList: [peopleWithItem] = []
     @Published var categoryList: [categoryItem] = []
 

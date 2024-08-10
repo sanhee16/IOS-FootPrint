@@ -8,10 +8,12 @@
 
 import Foundation
 import Combine
+import SwiftUI
+import SwiftUIPullToRefresh
 import SwiftUIPager
 import UIKit
 
-class ShowImageViewModel: BaseViewModel {
+class ShowImageViewModel: BaseViewModelV1 {
     @Published var page: Page
     @Published var images: [UIImage]
     

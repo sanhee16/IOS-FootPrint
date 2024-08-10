@@ -6,30 +6,9 @@
 //
 
 import SwiftUI
+import SDSwiftUIPack
 import Combine
 
-extension View {
-    public func border(_ color: Color, lineWidth: CGFloat, cornerRadius: CGFloat) -> some View {
-        return self
-            .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
-            .overlay(RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: lineWidth).foregroundColor(color))
-    }
-    
-    public func frame(both: CGFloat, aligment: Alignment = .center) -> some View {
-        return self
-            .frame(width: both, height: both, alignment: aligment)
-    }
-    
-    func rectReader(_ binding: Binding<CGRect>, in space: CoordinateSpace) -> some View {
-        self.background(GeometryReader { (geometry) -> AnyView in
-            let rect = geometry.frame(in: space)
-            DispatchQueue.main.async {
-                binding.wrappedValue = rect
-            }
-            return AnyView(Rectangle().fill(Color.clear))
-        })
-    }
-}
 
 extension Color {
     init(hex string: String, opacity: CGFloat? = nil) {

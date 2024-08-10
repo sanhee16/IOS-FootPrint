@@ -10,7 +10,7 @@ import Combine
 import UIKit
 import RealmSwift
 
-class PeopleWithSelectorViewModel: BaseViewModel {
+class PeopleWithSelectorViewModel: BaseViewModelV1 {
     @Published var peopleWithShowList: [PeopleWith] = []
     @Published var peopleWithSelectList: [PeopleWith] = []
     let type: PeopleWithEditType

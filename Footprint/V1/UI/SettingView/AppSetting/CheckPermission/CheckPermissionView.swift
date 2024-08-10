@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDSwiftUIPack
 
 struct CheckPermissionView: View {
     typealias VM = CheckPermissionViewModel

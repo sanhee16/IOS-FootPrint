@@ -7,6 +7,8 @@
 
 
 import SwiftUI
+import SDSwiftUIPack
+import SwiftUI
 import SwiftUIPullToRefresh
 import Kingfisher
 
@@ -60,7 +62,7 @@ struct SingleSelectGalleryView: View {
                                                     ZStack(alignment: .center) {
                                                         if item == $vm.selectedImage.wrappedValue {
                                                             Rectangle()
-                                                                .frame(both: cellSize - 4, aligment: .center)
+                                                                .frame(both: cellSize - 4, alignment: .center)
                                                                 .foregroundColor(.clear)
                                                                 .border(.fColor2, lineWidth: 4, cornerRadius: 0.0)
                                                                 .zIndex(1)

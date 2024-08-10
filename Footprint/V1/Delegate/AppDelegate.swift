@@ -14,7 +14,6 @@ import FirebaseFirestore
 import GoogleMobileAds
 
 //@UIApplicationDelegateAdaptor(AppDelegate.self) var delegate ??
-@main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     /*
      UISceneSession 객체 = scene의 고유의 런타임 인스턴스를 관리함

@@ -2,12 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>NSUserTrackingUsageDescription</key>
-    <string>We would like to collect information in order to provide personalized advertisements to users</string>
-    <key>CFBundleDisplayName</key>
-    <string></string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>We would like to collect information in order to provide personalized advertisements to users</string>
+	<key>CFBundleDisplayName</key>
+	<string></string>
 	<key>GADApplicationIdentifier</key>
-	<string>${GAD_APPLICATION_IDENTIFIER}</string>
+	<string>ca-app-pub-6824209004972578~1692239434</string>
 	<key>GADIsAdManagerApp</key>
 	<true/>
 	<key>ITSAppUsesNonExemptEncryption</key>
@@ -16,8 +16,6 @@
 	<string>$(NAVER_MAP_CLIENT_KEY)</string>
 	<key>SKAdNetworkIdentifier</key>
 	<string>1234</string>
-    <key>GADApplicationIdentifier</key>
-    <string>ca-app-pub-6824209004972578~1692239434</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>
@@ -225,20 +223,6 @@
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
 		<true/>
-		<key>UISceneConfigurations</key>
-		<dict>
-			<key>UIWindowSceneSessionRoleApplication</key>
-			<array>
-				<dict>
-					<key>UISceneClassName</key>
-					<string></string>
-					<key>UISceneConfigurationName</key>
-					<string>Default Configuration</string>
-					<key>UISceneDelegateClassName</key>
-					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
-				</dict>
-			</array>
-		</dict>
 	</dict>
 	<key>UIBackgroundModes</key>
 	<array/>

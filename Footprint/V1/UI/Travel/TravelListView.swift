@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDSwiftUIPack
 
 struct TravelListView: View {
     typealias VM = TravelListViewModel
@@ -43,7 +44,7 @@ struct TravelListView: View {
                         Image("up_arrow")
                             .resizable()
                             .scaledToFit()
-                            .frame(both: 24.0, aligment: .center)
+                            .frame(both: 24.0, alignment: .center)
                             .padding(10)
                             .background(
                                 Circle()

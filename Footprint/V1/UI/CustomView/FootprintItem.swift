@@ -6,7 +6,9 @@
 //
 
 import Foundation
+import SDSwiftUIPack
 import SwiftUI
+import SDSwiftUIPack
 
 public struct FootprintItem: View {
     private let IMAGE_SIZE: CGFloat = 50.0
@@ -39,7 +41,7 @@ public struct FootprintItem: View {
                 Image(isExpanded ? "up_arrow" : "down_arrow")
                     .resizable()
                     .scaledToFit()
-                    .frame(both: 16.0, aligment: .center)
+                    .frame(both: 16.0, alignment: .center)
             }
             .padding([.leading, .trailing], 12)
 
@@ -47,7 +49,7 @@ public struct FootprintItem: View {
                 HStack(alignment: .center, spacing: 6) {
                     Image(category.pinType.pinType().pinWhite)
                         .resizable()
-                        .frame(both: 18.0, aligment: .center)
+                        .frame(both: 18.0, alignment: .center)
                         .colorMultiply(Color(hex: category.pinColor.pinColor().pinColorHex))
                     Text(category.name)
                         .font(.kr12r)
@@ -92,7 +94,7 @@ public struct FootprintItem: View {
         return HStack(alignment: .center, spacing: 4) {
             Image("calendar")
                 .resizable()
-                .frame(both: 18.0, aligment: .center)
+                .frame(both: 18.0, alignment: .center)
             Text(item.createdAt.getDate())
                 .font(.kr11r)
                 .foregroundColor(Color.gray90)
@@ -103,7 +105,7 @@ public struct FootprintItem: View {
         return HStack(alignment: .center, spacing: 4) {
             Image("person")
                 .resizable()
-                .frame(both: 18.0, aligment: .center)
+                .frame(both: 18.0, alignment: .center)
             HStack(alignment: .center, spacing: 8) {
                 ForEach(items, id: \.self) { item in
                     Text(item.name)

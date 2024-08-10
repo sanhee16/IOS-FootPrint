@@ -11,8 +11,9 @@ import Foundation
 import Combine
 import MessageUI
 import SwiftUI
+import SDSwiftUIPack
 
-class SettingViewModel: BaseViewModel {
+class SettingViewModel: BaseViewModelV1 {
     @Published var isShowingMailView = false
     @Published var result: Result<MFMailComposeResult, Error>? = nil
     @Published var isOnSearchBar: Bool

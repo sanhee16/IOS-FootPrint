@@ -12,7 +12,7 @@ import RealmSwift
 
 typealias CategoryTag = Int
 
-class CategorySelectorViewModel: BaseViewModel {
+class CategorySelectorViewModel: BaseViewModelV1 {
     @Published var categoryList: [Category] = []
     @Published var selectedCategory: Category? = nil
     @Published var categoryCnt: [CategoryTag: Int] = [:]

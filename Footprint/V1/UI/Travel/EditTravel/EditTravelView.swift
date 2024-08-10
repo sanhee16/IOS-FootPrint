@@ -6,8 +6,9 @@
 //
 
 import SwiftUI
+import SDSwiftUIPack
 import UniformTypeIdentifiers
-
+import SDSwiftUIPack
 
 struct EditTravelView: View {
     typealias VM = EditTravelViewModel
@@ -122,7 +123,7 @@ struct EditTravelView: View {
                 Spacer()
                 Image("drag_drop")
                     .resizable()
-                    .frame(both: 20.0, aligment: .center)
+                    .frame(both: 20.0, alignment: .center)
             }
         }
         .padding(EdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 8))

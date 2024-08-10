@@ -10,9 +10,10 @@ import Combine
 import Kingfisher
 import Photos
 import SwiftUI
+import SDSwiftUIPack
 
 
-class SingleSelectGalleryViewModel: BaseViewModel {
+class SingleSelectGalleryViewModel: BaseViewModelV1 {
     private var images: PHFetchResult<PHAsset>? = nil
     private let PAGE_SIZE = 30
     var items: [GalleryItem] = []

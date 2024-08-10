@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDSwiftUIPack
 
 // https://yagom.net/forums/topic/detecting-background-foreground-in-viewcontroller/
 // Content는 generic type
@@ -95,7 +96,7 @@ class BaseViewController<Content>: UIViewController, Dismissible, Nameable where
         self.completion = completion
     }
     
-    func attachViewModel(_ vm: BaseViewModel) {
+    func attachViewModel(_ vm: BaseViewModelV1) {
         
     }
     

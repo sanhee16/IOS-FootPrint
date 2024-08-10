@@ -35,7 +35,7 @@ enum PermissionType {
     }
 }
 
-class CheckPermissionViewModel: BaseViewModel {
+class CheckPermissionViewModel: BaseViewModelV1 {
     @Published var photoPermission: Bool = false
     @Published var locationPermission: Bool = false
     @Published var trackingPermission: Bool = false

@@ -10,7 +10,7 @@ import Combine
 import UIKit
 import RealmSwift
 
-class TravelListViewModel: BaseViewModel {
+class TravelListViewModel: BaseViewModelV1 {
     private let realm: Realm
     @Published var travels: [Travel] = []
     

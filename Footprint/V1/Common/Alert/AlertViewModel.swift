@@ -13,7 +13,7 @@ enum AlertType {
     case yesOrNo
 }
 
-class AlertViewModel: BaseViewModel {
+class AlertViewModel: BaseViewModelV1 {
     @Published var type: AlertType
     @Published var title: String?
     @Published var description: String?

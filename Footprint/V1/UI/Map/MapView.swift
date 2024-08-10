@@ -6,10 +6,10 @@
 //
 
 import SwiftUI
+import SDSwiftUIPack
 import MapKit
 import GoogleMaps
 import GooglePlaces
-
 
 struct MapView: View {
     typealias VM = MapViewModel
@@ -147,7 +147,7 @@ struct MapView: View {
                 if !$vm.searchText.wrappedValue.isEmpty {
                     Image("close")
                         .resizable()
-                        .frame(both: 12.0, aligment: .center)
+                        .frame(both: 12.0, alignment: .center)
                         .padding(6)
                         .background(
                             Circle()

@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class MainViewModel: BaseViewModel {
+class MainViewModel: BaseViewModelV1 {
     @Published var currentTab: MainMenuType = .map
     @Published var isShowAds: Bool = false
     

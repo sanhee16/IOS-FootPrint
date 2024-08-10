@@ -21,6 +21,7 @@
 // */
 //
 //import SwiftUI
+import SDSwiftUIPack
 //import MapKit
 //import GoogleMaps
 //import GooglePlaces
@@ -66,7 +67,7 @@
 ////                        Spacer()
 ////                        Image("icon_gps")
 ////                            .resizable()
-////                            .frame(both: 20.0, aligment: .center)
+////                            .frame(both: 20.0, alignment: .center)
 ////                            .colorMultiply($vm.locationPermission.wrappedValue ? .green : .red)
 ////                            .padding(.trailing, 8)
 ////                            .onTapGesture {
@@ -226,7 +227,7 @@
 //                if !$vm.searchText.wrappedValue.isEmpty {
 //                    Image("close")
 //                        .resizable()
-//                        .frame(both: 10.0, aligment: .center)
+//                        .frame(both: 10.0, alignment: .center)
 //                        .padding(6)
 //                        .background(
 //                            Circle()
@@ -286,7 +287,7 @@
 //    let coordinate: CLLocationCoordinate2D
 //}
 //
-//class MainViewModel: BaseViewModel {
+//class MainViewModel: BaseViewModelV1 {
 //    private var locationManager: CLLocationManager
 //    //    @Published var currenLocation: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
 //    @Published var annotations: [Pin] = []

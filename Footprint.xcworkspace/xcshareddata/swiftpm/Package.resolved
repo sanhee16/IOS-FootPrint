@@ -1,5 +1,5 @@
 {
-  "originHash" : "3a99a59bac3a63d24d844016540aefeb156bd9433d325079dcceb7b7b98e28f7",
+  "originHash" : "e0166dba0b9da1f1062124bb12822197393f7d40b1b405a7643966f60c656816",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -16,7 +16,7 @@
       "location" : "https://github.com/Alamofire/Alamofire.git",
       "state" : {
         "branch" : "master",
-        "revision" : "6b3296bd3e975fb3e04cdf22761ddf44df7157a5"
+        "revision" : "9b5bd5be3c2d451006ca16b286cf1ed30f434b9c"
       }
     },
     {
@@ -161,6 +161,15 @@
       "state" : {
         "branch" : "master",
         "revision" : "76d79455a3d736ec01d4ef1864aa62cc5f0fc2cb"
+      }
+    },
+    {
+      "identity" : "sdswiftuipack",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sanhee16/SDSwiftUIPack.git",
+      "state" : {
+        "revision" : "9019f177cc49ff139a69cfdfa7c15e72e4b259ff",
+        "version" : "1.2.4"
       }
     },
     {

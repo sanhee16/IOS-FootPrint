@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SDSwiftUIPack
 
 public struct SToggleView: View {
     private let width: CGFloat

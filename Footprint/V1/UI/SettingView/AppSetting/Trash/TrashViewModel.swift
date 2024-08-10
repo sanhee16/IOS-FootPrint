@@ -18,7 +18,7 @@ enum TrashStatus {
 }
 typealias TrashFootprint = (item: FootPrint, isSelected: Bool, leftDays: Int)
 typealias TrashTravel = (item: Travel, isSelected: Bool, leftDays: Int)
-class TrashViewModel: BaseViewModel {
+class TrashViewModel: BaseViewModelV1 {
     @Published var trashStatus: TrashStatus = .none
     @Published var footprintItems: [TrashFootprint] = []
     @Published var travelItems: [TrashTravel] = []

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDSwiftUIPack
 
 struct SelectFootprintsView: View {
     typealias VM = SelectFootprintsViewModel
@@ -85,7 +86,7 @@ struct SelectFootprintsView: View {
                 HStack(alignment: .center, spacing: 6) {
                     Image(category.pinType.pinType().pinWhite)
                         .resizable()
-                        .frame(both: 18.0, aligment: .center)
+                        .frame(both: 18.0, alignment: .center)
                         .colorMultiply(Color(hex: category.pinColor.pinColor().pinColorHex))
                     Text(category.name)
                         .font(.kr12r)
@@ -114,7 +115,7 @@ struct SelectFootprintsView: View {
         return HStack(alignment: .center, spacing: 4) {
             Image("calendar")
                 .resizable()
-                .frame(both: 18.0, aligment: .center)
+                .frame(both: 18.0, alignment: .center)
             Text(item.createdAt.getDate())
                 .font(.kr11r)
                 .foregroundColor(Color.gray90)
@@ -125,7 +126,7 @@ struct SelectFootprintsView: View {
         return HStack(alignment: .center, spacing: 4) {
             Image("person")
                 .resizable()
-                .frame(both: 18.0, aligment: .center)
+                .frame(both: 18.0, alignment: .center)
             HStack(alignment: .center, spacing: 8) {
                 ForEach(items, id: \.self) { item in
                     Text(item.name)

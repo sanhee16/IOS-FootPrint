@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDSwiftUIPack
 
 struct EditFootprintView: View, KeyboardReadable {
     typealias VM = EditFootprintViewModel
@@ -89,7 +90,7 @@ struct EditFootprintView: View, KeyboardReadable {
                 Image($vm.isStar.wrappedValue ? "star_on" : "star_off")
                     .resizable()
                     .scaledToFit()
-                    .frame(both: 20.0, aligment: .center)
+                    .frame(both: 20.0, alignment: .center)
                     .onTapGesture {
                         $vm.isStar.wrappedValue = !$vm.isStar.wrappedValue
                     }
@@ -146,7 +147,7 @@ struct EditFootprintView: View, KeyboardReadable {
                     Text("+")
                         .font(.kr16b)
                         .foregroundColor(.white)
-                        .frame(both: IMAGE_SIZE, aligment: .center)
+                        .frame(both: IMAGE_SIZE, alignment: .center)
                         .background(
                             RoundedRectangle(cornerRadius: 12)
                                 .foregroundColor(.textColor3)
@@ -212,7 +213,7 @@ struct EditFootprintView: View, KeyboardReadable {
         return HStack(alignment: .center, spacing: 6) {
             Image(item.pinType.pinType().pinWhite)
                 .resizable()
-                .frame(both: 14.0, aligment: .center)
+                .frame(both: 14.0, alignment: .center)
                 .colorMultiply(Color(hex: item.pinColor.pinColor().pinColorHex))
             Text(item.name)
                 .font(.kr11r)

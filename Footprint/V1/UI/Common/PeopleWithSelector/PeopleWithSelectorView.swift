@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDSwiftUIPack
 
 
 enum PeopleWithEditType {
@@ -88,7 +89,7 @@ struct PeopleWithSelectorView: View {
                 Image(uiImage: image)
                     .resizable()
                     .scaledToFill()
-                    .frame(both: imageSize, aligment: .center)
+                    .frame(both: imageSize, alignment: .center)
                     .clipShape(Circle())
                     .contentShape(Rectangle())
                     .clipped()
@@ -96,7 +97,7 @@ struct PeopleWithSelectorView: View {
                 Image("person")
                     .resizable()
                     .scaledToFit()
-                    .frame(both: imageSize, aligment: .center)
+                    .frame(both: imageSize, alignment: .center)
                     .clipShape(Circle())
                     .contentShape(Rectangle())
                     .clipped()
@@ -112,7 +113,7 @@ struct PeopleWithSelectorView: View {
             if vm.isSelectedPeople(item), case .select(_, _) = vm.type {
                 Image("done_b")
                     .resizable()
-                    .frame(both: 20, aligment: .center)
+                    .frame(both: 20, alignment: .center)
             }
         }
         .padding([.leading, .trailing], 14)

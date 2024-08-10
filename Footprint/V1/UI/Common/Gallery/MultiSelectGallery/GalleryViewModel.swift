@@ -9,13 +9,14 @@ import Combine
 import Kingfisher
 import Photos
 import SwiftUI
+import SDSwiftUIPack
 
 enum GalleryType {
     case single
     case multi
 }
 
-class GalleryViewModel: BaseViewModel {
+class GalleryViewModel: BaseViewModelV1 {
     private var images: PHFetchResult<PHAsset>? = nil
     private let PAGE_SIZE = 50
     @Published var items: [GalleryItem] = []

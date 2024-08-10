@@ -20,7 +20,7 @@ import FirebaseFirestore
 
 
 
-class ReviewViewModel: BaseViewModel {
+class ReviewViewModel: BaseViewModelV1 {
     @Published var content: String = ""
     @Published var starCnt: Int = 0
     
