@@ -13,19 +13,18 @@ import GoogleMaps
 import GooglePlaces
 
 struct MapView2: View {
-    struct Output {
-        var goToFootprintView: (Location) -> ()
-    }
-    
-    @StateObject var vm: MapVM2 = MapVM2()
-    private var output: Output
-
-
     enum MapStatus {
         case normal
         case adding
     }
-
+    
+    struct Output {
+        var goToFootprintView: (Location) -> ()
+        var goToEditNote: (Location, EditFootprintType) -> ()
+    }
+    private var output: Output
+    
+    @StateObject var vm: MapVM2 = MapVM2()
 
     private var safeTop: CGFloat { get { Util.safeTop() }}
     private var safeBottom: CGFloat { get { Util.safeBottom() }}
@@ -90,7 +89,6 @@ struct MapView2: View {
                                     .sdPaddingVertical(16)
                                     .frame(width: geometry.size.width)
                                     .background(Color.black.opacity(0.7))
-                                
                             })
                         }
                     }
@@ -123,10 +121,14 @@ struct MapView2: View {
                         case .adding:
                             VStack(alignment: .leading, spacing: 24, content: {
                                 Text($vm.centerAddress.wrappedValue)
-                                    
                                 
                                 FPButton(text: "여기에 발자국 남기기", status: .press, size: .large, type: .solid) {
-                                    
+                                    if let location = $vm.centerPosition.wrappedValue {
+                                        output.goToEditNote(
+                                            Location(latitude: location.latitude, longitude: location.longitude),
+                                            .new(name: nil, placeId: nil, address: $vm.centerAddress.wrappedValue)
+                                        )
+                                    }
                                 }
                             })
                             .sdPadding(top: 16, leading: 16, bottom: 8, trailing: 16)
@@ -140,7 +142,6 @@ struct MapView2: View {
         .onChange(of: $vm.viewEvent.wrappedValue, perform: { value in
             switch value {
             case .goToFootprintView(let location):
-                print("[SD] goToFootprintView")
                 self.output.goToFootprintView(location)
             default:
                 break

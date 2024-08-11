@@ -43,6 +43,7 @@
 		266EDDE42C64EB40006CF09B /* MainView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266EDDE32C64EB40006CF09B /* MainView2.swift */; };
 		266EDDE62C64EB46006CF09B /* MainVM2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266EDDE52C64EB46006CF09B /* MainVM2.swift */; };
 		266EDDE82C64EB88006CF09B /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266EDDE72C64EB88006CF09B /* BaseViewModel.swift */; };
+		2679D2B32C6830B90073297F /* FPTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2679D2B22C6830B90073297F /* FPTextField.swift */; };
 		267CC1772C66F27000D6015E /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC1762C66F27000D6015E /* BaseCoordinator.swift */; };
 		267CC1792C66F28300D6015E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC1782C66F28300D6015E /* Coordinator.swift */; };
 		267CC17B2C66F28E00D6015E /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC17A2C66F28E00D6015E /* Destination.swift */; };
@@ -56,6 +57,8 @@
 		267CC18E2C6719CA00D6015E /* Font+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC18D2C6719CA00D6015E /* Font+Extension.swift */; };
 		267CC1912C67362500D6015E /* FPButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC1902C67362500D6015E /* FPButton.swift */; };
 		267CC1932C67385900D6015E /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC1922C67385900D6015E /* Color+Extension.swift */; };
+		267CC1962C67823E00D6015E /* EditNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC1952C67823E00D6015E /* EditNoteView.swift */; };
+		267CC1982C67824200D6015E /* EditNoteVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC1972C67824200D6015E /* EditNoteVM.swift */; };
 		26823C092A13B93000BF41EA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26823C0B2A13B93000BF41EA /* InfoPlist.strings */; };
 		2682622A2C60E2EA0069134C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 268262292C60E2EA0069134C /* RealmSwift */; settings = {ATTRIBUTES = (Required, ); }; };
 		268546E82A28DB1200BDA2EA /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268546E72A28DB1200BDA2EA /* ReviewView.swift */; };
@@ -196,6 +199,7 @@
 		266EDDE32C64EB40006CF09B /* MainView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView2.swift; sourceTree = "<group>"; };
 		266EDDE52C64EB46006CF09B /* MainVM2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVM2.swift; sourceTree = "<group>"; };
 		266EDDE72C64EB88006CF09B /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		2679D2B22C6830B90073297F /* FPTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPTextField.swift; sourceTree = "<group>"; };
 		267CC1762C66F27000D6015E /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		267CC1782C66F28300D6015E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		267CC17A2C66F28E00D6015E /* Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
@@ -209,6 +213,8 @@
 		267CC18D2C6719CA00D6015E /* Font+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extension.swift"; sourceTree = "<group>"; };
 		267CC1902C67362500D6015E /* FPButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPButton.swift; sourceTree = "<group>"; };
 		267CC1922C67385900D6015E /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
+		267CC1952C67823E00D6015E /* EditNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteView.swift; sourceTree = "<group>"; };
+		267CC1972C67824200D6015E /* EditNoteVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteVM.swift; sourceTree = "<group>"; };
 		26823C0A2A13B93000BF41EA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		26823C0C2A13B93300BF41EA /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		268546E72A28DB1200BDA2EA /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
@@ -526,6 +532,7 @@
 		267CC17C2C66F2B500D6015E /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				267CC1942C67822F00D6015E /* CreateNote */,
 				267CC1852C67049E00D6015E /* Footprint */,
 				267CC17D2C66F2BC00D6015E /* MapView2.swift */,
 				267CC17F2C66F2C700D6015E /* MapVM2.swift */,
@@ -558,8 +565,18 @@
 			isa = PBXGroup;
 			children = (
 				267CC1902C67362500D6015E /* FPButton.swift */,
+				2679D2B22C6830B90073297F /* FPTextField.swift */,
 			);
 			path = CustomView;
+			sourceTree = "<group>";
+		};
+		267CC1942C67822F00D6015E /* CreateNote */ = {
+			isa = PBXGroup;
+			children = (
+				267CC1952C67823E00D6015E /* EditNoteView.swift */,
+				267CC1972C67824200D6015E /* EditNoteVM.swift */,
+			);
+			path = CreateNote;
 			sourceTree = "<group>";
 		};
 		268546E62A28DB0300BDA2EA /* Review */ = {
@@ -1164,6 +1181,7 @@
 				63F1325B2914A1A300B3A9E0 /* CoordinatorV1.swift in Sources */,
 				63F132482914A18800B3A9E0 /* AlertView.swift in Sources */,
 				2639921F291FEBA60049F047 /* KeyboardReadable.swift in Sources */,
+				2679D2B32C6830B90073297F /* FPTextField.swift in Sources */,
 				266EDDE82C64EB88006CF09B /* BaseViewModel.swift in Sources */,
 				63F132AB2914A1C000B3A9E0 /* MainView.swift in Sources */,
 				2627408F29699B2A00B47566 /* CategorySelectorView.swift in Sources */,
@@ -1175,7 +1193,9 @@
 				63F132492914A18800B3A9E0 /* SwiftExtension.swift in Sources */,
 				2619FE8A2940D6AC00D24778 /* CheckPermissionView.swift in Sources */,
 				267CC1792C66F28300D6015E /* Coordinator.swift in Sources */,
+				267CC1962C67823E00D6015E /* EditNoteView.swift in Sources */,
 				63E848A7295ABEBD0037D7A3 /* TravelListView.swift in Sources */,
+				267CC1982C67824200D6015E /* EditNoteVM.swift in Sources */,
 				260C87CD296AADBE00ADCC32 /* ShowTravelViewModel.swift in Sources */,
 				266EDDDE2C64EAD9006CF09B /* SplashVM2.swift in Sources */,
 				63F1324C2914A18800B3A9E0 /* CommonApi.swift in Sources */,

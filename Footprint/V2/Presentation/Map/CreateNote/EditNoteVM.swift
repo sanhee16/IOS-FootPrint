@@ -1,8 +1,8 @@
 //
-//  EditFootprintViewModel.swift
+//  EditNoteVM.swift
 //  Footprint
 //
-//  Created by Studio-SJ on 2022/11/04.
+//  Created by sandy on 8/10/24.
 //
 
 import Foundation
@@ -11,24 +11,24 @@ import UIKit
 import Photos
 import RealmSwift
 
-//public enum EditFootprintType {
-//    case new(name: String?, placeId: String?, address: String?)
-//    case modify(content: FootprintContents)
-//}
-//
-//public struct FootprintContents {
-//    var title: String
-//    var content: String
-//    var createdAt: Date
-//    var images: [UIImage]
-//    var category: Category
-//    var peopleWith: [PeopleWith]
-//    var id: ObjectId
-//    var isStar: Bool
-//}
+public enum EditFootprintType {
+    case new(name: String?, placeId: String?, address: String?)
+    case modify(content: FootprintContents)
+}
+
+public struct FootprintContents {
+    var title: String
+    var content: String
+    var createdAt: Date
+    var images: [UIImage]
+    var category: Category
+    var peopleWith: [PeopleWith]
+    var id: ObjectId
+    var isStar: Bool
+}
 
 
-class EditFootprintViewModel: BaseViewModelV1 {
+class EditNoteVM: BaseViewModel {
     @Published var isStar: Bool = false
     @Published var title: String = ""
     @Published var content: String = ""
@@ -39,34 +39,30 @@ class EditFootprintViewModel: BaseViewModelV1 {
     @Published var isPeopleWithEditMode: Bool = false
     @Published var createdAt: Date = Date()
     
-//    @Published var pinType: PinType = .star
-//    @Published var pinColor: PinColor = .pin2
-//    let pinList: [PinType] = [
-//        .star,.restaurant,.coffee,.bread,.cake,.wine,.exercise,.heart,
-//        .multiply,.like,.unlike,.done,.exclamation,.happy,.square
-//    ]
-//    let pinColorList: [PinColor] = [.pin0,.pin1,.pin2,.pin3,.pin4,.pin5,.pin6,.pin7,.pin8,.pin9]
-    
     @Published var categories: [Category] = []
     @Published var peopleWith: [PeopleWith] = []
-    @Published var type: EditFootprintType
+    @Published var type: EditFootprintType? = nil
+    @Published var address: String = ""
     
-//    private var peopleWithIds: [Int] = []
     private var modifyId: ObjectId? = nil
-    private let location: Location
+    private var location: Location? = nil
     private let realm: Realm
     private var placeId: String? = nil
-    private var address: String? = nil
     
-    init(_ coordinator: AppCoordinatorV1, location: Location, type: EditFootprintType) {
+    override init() {
         self.realm = R.realm
-        self.location = location
-        self.type = type
         
         self.categories = []
-        self.category = realm.object(ofType: Category.self, forPrimaryKey: 0)! // 시작할 때 기본 카테고리로 설정하기!
+        self.category = realm.object(ofType: Category.self, forPrimaryKey: 0)!
+        super.init()
         
-        super.init(coordinator)
+        self.loadCategories()
+        print("[SD] EditNoteVM init - \(UUID().uuidString)")
+    }
+    
+    func setValue(location: Location, type: EditFootprintType) {
+        self.location = location
+        self.type = type
         
         if case let .modify(contents) = self.type {
             self.createdAt = contents.createdAt
@@ -80,7 +76,8 @@ class EditFootprintViewModel: BaseViewModelV1 {
         } else if case let .new(name, placeId, address) = self.type {
             self.title = name ?? ""
             self.placeId = placeId
-            self.address = address
+            self.address = address ?? ""
+            
             let item = self.realm.object(ofType: PeopleWith.self, forPrimaryKey: 0)
             if let item = item {
                 self.peopleWith.append(item)
@@ -91,8 +88,6 @@ class EditFootprintViewModel: BaseViewModelV1 {
                 self.peopleWith.append(item)
             }
         }
-        
-        self.loadCategories()
     }
     
     
@@ -119,12 +114,12 @@ class EditFootprintViewModel: BaseViewModelV1 {
     
     func onClose() {
         self.isKeyboardVisible = false
-        self.alert(.yesOrNo, title: nil, description: "alert_out_without_save".localized()) {[weak self] isClose in
-            guard let self = self else { return }
-            if isClose {
-                self.dismiss()
-            }
-        }
+//        self.alert(.yesOrNo, title: nil, description: "alert_out_without_save".localized()) {[weak self] isClose in
+//            guard let self = self else { return }
+//            if isClose {
+//                self.dismiss()
+//            }
+//        }
     }
     
     func onClickGallery() {
@@ -132,67 +127,69 @@ class EditFootprintViewModel: BaseViewModelV1 {
         self.photoPermissionCheck {[weak self] isAllow in
             guard let self = self else { return }
             if isAllow {
-                self.coordinator?.presentGalleryView(type: .multi, onClickItem: { [weak self] (items: [GalleryItem]) in
-                    guard let self = self else { return }
-                    for item in items {
-                        if !self.images.contains(item.image) {
-                            self.images.append(item.image)
-                        }
-                    }
-                })
+//                self.coordinator?.presentGalleryView(type: .multi, onClickItem: { [weak self] (items: [GalleryItem]) in
+//                    guard let self = self else { return }
+//                    for item in items {
+//                        if !self.images.contains(item.image) {
+//                            self.images.append(item.image)
+//                        }
+//                    }
+//                })
             } else {
-                self.alert(.ok, title: nil, description: "alert_permission_album".localized())
+//                self.alert(.ok, title: nil, description: "alert_permission_album".localized())
             }
         }
     }
     
     func removeImage(_ item: UIImage) {
         self.isKeyboardVisible = false
-        self.alert(.yesOrNo, title: nil, description: "alert_delete".localized()) {[weak self] allowRemove in
-            guard let self = self else { return }
-            if allowRemove {
-                for idx in self.images.indices {
-                    if self.images[idx] == item {
-                        self.images.remove(at: idx)
-                        break
-                    }
-                }
-            }
-        }
+//        self.alert(.yesOrNo, title: nil, description: "alert_delete".localized()) {[weak self] allowRemove in
+//            guard let self = self else { return }
+//            if allowRemove {
+//                for idx in self.images.indices {
+//                    if self.images[idx] == item {
+//                        self.images.remove(at: idx)
+//                        break
+//                    }
+//                }
+//            }
+//        }
     }
     
     func onClickDelete(_ id: ObjectId) {
-        self.alert(.yesOrNo, title: "alert_delete".localized(), description: "alert_delete_item".localized("\(Defaults.deleteDays)")) {[weak self] isDelete in
-            guard let self = self else { return }
-            if isDelete {
-                guard let item = self.realm.object(ofType: FootPrint.self, forPrimaryKey: id) else {
-                    self.alert(.ok, title: "alert_fail".localized())
-                    return
-                }
-                try! self.realm.write {[weak self] in
-                    guard let self = self else { return }
-                    item.deleteTime = Int(Date().timeIntervalSince1970)
-                    self.realm.add(item, update: .modified)
-                    self.stopProgress()
-                    self.dismiss()
-                }
-            } else {
-                return
-            }
-        }
+//        self.alert(.yesOrNo, title: "alert_delete".localized(), description: "alert_delete_item".localized("\(Defaults.deleteDays)")) {[weak self] isDelete in
+//            guard let self = self else { return }
+//            if isDelete {
+//                guard let item = self.realm.object(ofType: FootPrint.self, forPrimaryKey: id) else {
+//                    self.alert(.ok, title: "alert_fail".localized())
+//                    return
+//                }
+//                try! self.realm.write {[weak self] in
+//                    guard let self = self else { return }
+//                    item.deleteTime = Int(Date().timeIntervalSince1970)
+//                    self.realm.add(item, update: .modified)
+//                    self.stopProgress()
+//                    self.dismiss()
+//                }
+//            } else {
+//                return
+//            }
+//        }
     }
     
     func onClickSave() {
         self.isKeyboardVisible = false
         if self.title.isEmpty, self.content.isEmpty {
-            self.dismiss()
+//            self.dismiss()
             return
         }
         if self.title.isEmpty {
             self.title = "no_title".localized();
         }
+        
+        guard let location = self.location, let type = self.type else { return }
         // image save
-        self.startProgress()
+//        self.startProgress()
         let imageUrls: List<String> = List<String>()
         let currentTimeStamp = Int(Date().timeIntervalSince1970)
         for idx in self.images.indices {
@@ -210,10 +207,10 @@ class EditFootprintViewModel: BaseViewModelV1 {
         
         try! realm.write {[weak self] in
             guard let self = self else { return }
-            switch self.type {
+            switch type {
             case .new:
                 print("new")
-                let item = FootPrint(title: self.title, content: self.content, images: imageUrls, createdAt: self.createdAt, latitude: self.location.latitude, longitude: self.location.longitude, tag: category.tag, peopleWithIds: peopleWithIds, placeId: self.placeId, address: self.address, isStar: self.isStar)
+                let item = FootPrint(title: self.title, content: self.content, images: imageUrls, createdAt: self.createdAt, latitude: location.latitude, longitude: location.longitude, tag: category.tag, peopleWithIds: peopleWithIds, placeId: self.placeId, address: self.address, isStar: self.isStar)
                 realm.add(item)
             case .modify(content: _):
                 print("modify")
@@ -228,15 +225,15 @@ class EditFootprintViewModel: BaseViewModelV1 {
                     self.realm.add(item, update: .modified)
                 }
             }
-            self.stopProgress()
-            self.dismiss()
+//            self.stopProgress()
+//            self.dismiss()
         }
     }
     
     func onClickSelectCategory() {
-        self.coordinator?.presentCategorySelectorView(type: .select(selectedCategory: self.category, callback: { [weak self] category in
-            self?.category = category
-        }))
+//        self.coordinator?.presentCategorySelectorView(type: .select(selectedCategory: self.category, callback: { [weak self] category in
+//            self?.category = category
+//        }))
     }
     
     func onClickAddPeopleWith() {
@@ -246,18 +243,18 @@ class EditFootprintViewModel: BaseViewModelV1 {
         }) {
             list.remove(at: idx)
         }
-        self.coordinator?.presentPeopleWithSelectorView(type: .select(peopleWith: list, callback: {[weak self] res in
-            guard let self = self else { return }
-            self.peopleWith.removeAll()
-            if res.isEmpty {
-                let item = self.realm.object(ofType: PeopleWith.self, forPrimaryKey: 0)
-                if let item = item {
-                    self.peopleWith.append(item)
-                }
-            } else {
-                self.peopleWith = res
-            }
-        }))
+//        self.coordinator?.presentPeopleWithSelectorView(type: .select(peopleWith: list, callback: {[weak self] res in
+//            guard let self = self else { return }
+//            self.peopleWith.removeAll()
+//            if res.isEmpty {
+//                let item = self.realm.object(ofType: PeopleWith.self, forPrimaryKey: 0)
+//                if let item = item {
+//                    self.peopleWith.append(item)
+//                }
+//            } else {
+//                self.peopleWith = res
+//            }
+//        }))
     }
     
     private func photoPermissionCheck(_ callback: @escaping (Bool)->()) {

@@ -10,11 +10,14 @@ import SwiftUI
 
 enum Destination: Hashable {
     case footprint(location: Location)
+    case editNote(output: EditNoteView.Output, location: Location, type: EditFootprintType)
     
     var viewName: String {
         switch self {
         case .footprint:
             return "footprint"
+        case .editNote:
+            return "editNote"
         }
     }
     
@@ -23,6 +26,8 @@ enum Destination: Hashable {
         switch self {
         case .footprint(let location):
             FootprintView(location: location)
+        case .editNote(let output, let location, let type):
+            EditNoteView(output: output, location: location, type: type)
         }
     }
 }
