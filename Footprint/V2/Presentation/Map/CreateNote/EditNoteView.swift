@@ -44,7 +44,7 @@ struct EditNoteView: View {
                         
                         drawTitle("내용", isEssential: false)
                             .sdPaddingTop(24)
-                        FPTextField(placeHolder: "content".localized(), text: $vm.content, fieldStyle: .box, lineStyle: .single(limit: nil))
+                        FPTextField(placeHolder: "content".localized(), text: $vm.content, fieldStyle: .line, lineStyle: .multi(limit: nil))
                         
                         drawTitle("위치", isEssential: true)
                             .sdPaddingTop(24)
