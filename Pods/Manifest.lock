@@ -1,3 +1,32 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:42e8f6e6f3f9b0cac42ca703dc475e477257718ce5d2ba7cf6c57896ac4e9ab4
-size 824
+PODS:
+  - Google-Mobile-Ads-SDK (11.7.0):
+    - GoogleUserMessagingPlatform (>= 1.1)
+  - GoogleMaps (9.0.0):
+    - GoogleMaps/Maps (= 9.0.0)
+  - GoogleMaps/Base (9.0.0)
+  - GoogleMaps/Maps (9.0.0):
+    - GoogleMaps/Base
+  - GooglePlaces (9.0.0)
+  - GoogleUserMessagingPlatform (2.5.0)
+
+DEPENDENCIES:
+  - Google-Mobile-Ads-SDK
+  - GoogleMaps
+  - GooglePlaces
+
+SPEC REPOS:
+  trunk:
+    - Google-Mobile-Ads-SDK
+    - GoogleMaps
+    - GooglePlaces
+    - GoogleUserMessagingPlatform
+
+SPEC CHECKSUMS:
+  Google-Mobile-Ads-SDK: 204b517c9765169144cf39763c7f5d23c57a9db0
+  GoogleMaps: 4907d0d42bf8cd58f56743e31f91d23c10682745
+  GooglePlaces: cf1f5b61297da7ac64bcb147cfa7b435d74ed6d9
+  GoogleUserMessagingPlatform: 6b4f48a370e77ce121d034c908cc6ee4fdafaf13
+
+PODFILE CHECKSUM: c34b613a4073552f1129496dbc37ebbaa3f74c6d
+
+COCOAPODS: 1.15.2
