@@ -46,7 +46,7 @@ struct FPTextField: View {
             switch self.lineStyle {
             case .single(let limit):
                 TextField(placeHolder, text: text)
-                    .padding(EdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 8))
+                    .sdPaddingVertical(10)
                     .focused($isFocused)
                     .background(
                         fieldStyleView()
@@ -59,7 +59,7 @@ struct FPTextField: View {
                 
             case .multi(let limit):
                 TextField(placeHolder, text: text, axis: .vertical)
-                    .padding(EdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 8))
+                    .sdPaddingVertical(10)
                     .focused($isFocused)
                     .background(
                         fieldStyleView()
@@ -90,12 +90,12 @@ struct FPTextField: View {
                 Spacer()
                 Rectangle()
                     .frame(height: 1.2, alignment: .center)
-                    .foregroundStyle(isFocused ? .black : .inputBoxColor)
+                    .foregroundStyle(isFocused ? Color.BASIC_Text_Icon_Gray_Default : Color.BASIC_Text_Icon_Gray_Low_emphasis)
             }
         case .box:
             RoundedRectangle(cornerRadius: 4)
                 .foregroundStyle(Color.white)
-                .border(isFocused ? .black : .inputBoxColor, lineWidth: 1.2, cornerRadius: 4)
+                .border(isFocused ? Color.BASIC_Text_Icon_Gray_Default : Color.BASIC_Text_Icon_Gray_Low_emphasis, lineWidth: 1.2, cornerRadius: 4)
         default:
             EmptyView()
         }

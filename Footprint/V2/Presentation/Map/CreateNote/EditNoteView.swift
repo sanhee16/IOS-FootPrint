@@ -30,67 +30,155 @@ struct EditNoteView: View {
     private var safeBottom: CGFloat { get { Util.safeBottom() }}
     private let IMAGE_SIZE: CGFloat = 70.0
     
+    @State private var isPresentCategoryList: Bool = false
+    @State private var isPresentCalendar: Bool = false
+    
+    private let CALENDAR_ID: String = "CALENDAR_ID"
+    private let LOCATION_ID: String = "LOCATION_ID"
+    
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 0) {
                 drawHeader(geometry)
-                ScrollView(showsIndicators: false) {
-                    VStack(alignment: .leading, spacing: 10) {
-                        drawTitle("제목", isEssential: true)
-                            .onTapGesture {
-                                $vm.address.wrappedValue = "Random - \(Int.random(in: 0..<100))"
-                            }
-                        FPTextField(placeHolder: "title".localized(), text: $vm.title, fieldStyle: .line, lineStyle: .single(limit: nil))
-                        
-                        drawTitle("내용", isEssential: false)
-                            .sdPaddingTop(24)
-                        FPTextField(placeHolder: "content".localized(), text: $vm.content, fieldStyle: .box, lineStyle: .single(limit: nil))
-                        
-                        drawTitle("위치", isEssential: true)
-                            .sdPaddingTop(24)
-                        FPTextField(placeHolder: "".localized(), text: $vm.address, fieldStyle: .none, lineStyle: .multi(limit: nil), isDisabled: true)
-                        
-                        drawDateArea(geometry)
-                        drawCategorySelectArea(geometry)
-                        drawPeopleWithArea(geometry)
-                        drawImageArea(geometry)
-                        
-                        Divider()
-                            .background(Color.fColor4)
-                            .padding(EdgeInsets(top: 4, leading: 16, bottom: 4, trailing: 16))
-                        
-                        MultilineTextField("content".localized(), text: $vm.content) {
+                ScrollViewReader { scrollProxy in
+                    ScrollView(showsIndicators: false) {
+                        VStack(alignment: .leading, spacing: 10) {
+                            drawTitle("제목", isEssential: true)
+                                .onTapGesture {
+                                    $vm.address.wrappedValue = "Random - \(Int.random(in: 0..<100))"
+                                }
+                            FPTextField(placeHolder: "title".localized(), text: $vm.title, fieldStyle: .line, lineStyle: .single(limit: nil))
                             
-                        }
-                        .frame(minHeight: 300.0, alignment: .topLeading)
-                        .padding(EdgeInsets(top: 12, leading: 10, bottom: 12, trailing: 10))
-                        .contentShape(Rectangle())
-                        .background(
-                            RoundedRectangle(cornerRadius: 2)
-                                .foregroundColor(.inputBoxColor)
-                        )
-                        .onChange(of: $vm.content.wrappedValue) { value in
-                            if value == " " {
-                                $vm.content.wrappedValue = ""
+                            drawTitle("내용", isEssential: false)
+                                .sdPaddingTop(24)
+                            FPTextField(placeHolder: "content".localized(), text: $vm.content, fieldStyle: .line, lineStyle: .multi(limit: nil))
+                            
+                            drawTitle("위치", isEssential: true)
+                                .sdPaddingTop(24)
+                            FPTextField(placeHolder: "".localized(), text: $vm.address, fieldStyle: .none, lineStyle: .multi(limit: nil), isDisabled: true)
+                            
+                            FPButton(text: "발자국 위치 확인하기", status: .able, size: .large, type: .lightSolid) {
+                                
                             }
+                            .sdPaddingVertical(8)
+                            .id(LOCATION_ID)
+                            
+                            //                        drawDateArea(geometry)
+                            //                        drawCategorySelectArea(geometry)
+                            //                        drawPeopleWithArea(geometry)
+                            //                        drawImageArea(geometry)
+                            
+                            Divider()
+                                .background(Color.BASIC_Dim_Low_emphasis)
+                                .sdPaddingVertical(8)
+                            
+                            
+                            HStack(alignment: .center, spacing: 0, content: {
+                                drawTitle("날짜", isEssential: true)
+                                    .frame(width: 100, height: 40, alignment: .leading)
+                                Text("\($vm.createdAt.wrappedValue)")
+                            })
+                            .id(CALENDAR_ID)
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                scrollProxy.scrollTo(LOCATION_ID, anchor: .top)
+                                isPresentCalendar.toggle()
+                            }
+                            .sheet(isPresented: $isPresentCalendar, onDismiss: {
+                                scrollProxy.scrollTo(CALENDAR_ID, anchor: .center)
+                            }, content: {
+                                VStack(alignment: .leading, spacing: 0) {
+                                    HStack(alignment: .center, spacing: 0) {
+                                        Text("날짜")
+                                        Spacer()
+                                        FPButton(text: "오늘", status: .able, size: .small, type: .textGray) {
+                                            $vm.createdAt.wrappedValue = Date()
+                                        }
+                                        FPButton(text: "완료", status: .able, size: .small, type: .textGray) {
+                                            $isPresentCalendar.wrappedValue = false
+                                        }
+                                    }
+                                    .sdPaddingHorizontal(24)
+                                    .sdPaddingVertical(26)
+                                    DatePicker(
+                                        "",
+                                        selection: $vm.createdAt,
+                                        displayedComponents: [.date]
+                                    )
+                                    .padding()
+                                    .datePickerStyle(.graphical)
+                                    .labelsHidden()
+                                    .frame(height: 400)
+                                }
+                                .presentationDetents([.height(470), .large])
+                                .presentationDragIndicator(.visible)
+                            })
+                            
+                            HStack(alignment: .center, spacing: 0, content: {
+                                drawTitle("카테고리", isEssential: true)
+                                    .frame(width: 100, height: 40, alignment: .leading)
+                                
+                            })
+                            HStack(alignment: .center, spacing: 30) {
+                                Image("Button-Icon1")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(both: 20.0, alignment: .center)
+                                    .colorMultiply(Color(hex: "#8E5CE6"))
+                                
+                                Image("Button-Icon2")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(both: 20.0, alignment: .center)
+                                    .colorMultiply(Color(hex: "#8E5CE6"))
+                                
+                                Image("Type=Flat")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(both: 20.0, alignment: .center)
+                                    .colorMultiply(Color.BASIC_Etc_Yellow)
+                            }
+                            
+                            
+                            
+                            //                        MultilineTextField("content".localized(), text: $vm.content) {
+                            //
+                            //                        }
+                            //                        .frame(minHeight: 300.0, alignment: .topLeading)
+                            //                        .padding(EdgeInsets(top: 12, leading: 10, bottom: 12, trailing: 10))
+                            //                        .contentShape(Rectangle())
+                            //                        .background(
+                            //                            RoundedRectangle(cornerRadius: 2)
+                            //                                .foregroundColor(.inputBoxColor)
+                            //                        )
+                            //                        .onChange(of: $vm.content.wrappedValue) { value in
+                            //                            if value == " " {
+                            //                                $vm.content.wrappedValue = ""
+                            //                            }
+                            //                        }
                         }
+                        .sdPaddingHorizontal(16)
+                        .sdPaddingVertical(14)
                     }
-                    .sdPaddingHorizontal(16)
-                    .sdPaddingVertical(14)
+                    
                 }
-                Spacer()
-            }
-            .onChange(of: $vm.address.wrappedValue, perform: { value in
-                print("[SD] \(value)")
-            })
-            .padding(EdgeInsets(top: safeTop, leading: 0, bottom: $vm.isKeyboardVisible.wrappedValue ? 0 : safeBottom, trailing: 0))
-            .ignoresSafeArea(.container, edges: [.top, .bottom])
-            .frame(width: geometry.size.width, alignment: .leading)
-            .toolbar {
-                ToolbarItemGroup(placement: .keyboard) {
-                    Spacer() // Spacer to push button to the right
-                    Button("Done") {
-                        UIApplication.shared.hideKeyborad()
+                .sheet(isPresented: $isPresentCategoryList, onDismiss: {
+                    
+                }, content: {
+                    
+                })
+                .onChange(of: $vm.address.wrappedValue, perform: { value in
+                    print("[SD] \(value)")
+                })
+                .padding(EdgeInsets(top: safeTop, leading: 0, bottom: $vm.isKeyboardVisible.wrappedValue ? 0 : safeBottom, trailing: 0))
+                .ignoresSafeArea(.container, edges: [.top, .bottom])
+                .frame(width: geometry.size.width, alignment: .leading)
+                .toolbar {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        Spacer() // Spacer to push button to the right
+                        Button("Done") {
+                            UIApplication.shared.hideKeyborad()
+                        }
                     }
                 }
             }
