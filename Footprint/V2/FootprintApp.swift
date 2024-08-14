@@ -11,14 +11,14 @@ import SDSwiftUIPack
 @main
 struct FootprintApp: App {
     @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
-    @State private var isShowSplash = true
+    @State private var isShowMain = false
     
     var body: some Scene {
         WindowGroup {
-            if isShowSplash {
-                SplashView2(isShowSplash: $isShowSplash)
-            } else {
+            if isShowMain {
                 MainView2()
+            } else {
+                SplashView2(isShowMain: $isShowMain)
             }
         }
     }

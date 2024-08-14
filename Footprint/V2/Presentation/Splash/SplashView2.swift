@@ -11,8 +11,8 @@ import Factory
 import SDSwiftUIPack
 
 struct SplashView2: View {
-    @Binding var isShowSplash: Bool
-    @StateObject private var vm: SplashVM2 = SplashVM2()
+    @Binding var isShowMain: Bool
+    @StateObject var vm = SplashVM2()
     
     var body: some View {
         VStack {
@@ -22,13 +22,8 @@ struct SplashView2: View {
             Text("Hello, SplashView!")
                 .sdFont(.sys30b, color: .green)
         }
-        .onAppear(perform: {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                withAnimation {
-                    isShowSplash = false
-                }
-            }
+        .onChange(of: vm.isShowMain, perform: { value in
+            self.isShowMain = value
         })
-        .padding()
     }
 }
