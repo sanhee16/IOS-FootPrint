@@ -14,10 +14,9 @@ class Coordinator: BaseCoordinator<Destination> {
     var mapOutput: MapView2.Output {
         MapView2.Output { location in
             self.pushFootprintView(location)
-        } goToEditNote: { location, type in
-            self.pushEditNote(self.editNoteOutput, location: location, type: type)
+        } goToSelectLocation: { location in
+            self.pushSelectLocationView(self.selectLocationOutput, location: location)
         }
-
     }
     
     var editNoteOutput: EditNoteView.Output {
@@ -26,10 +25,24 @@ class Coordinator: BaseCoordinator<Destination> {
         })
     }
     
+    var selectLocationOutput: SelectLocationView.Output {
+        SelectLocationView.Output {
+            self.pop()
+        } goToEditNote: { location, type in
+            self.pushEditNote(self.editNoteOutput, location: location, type: type)
+        }
+
+    }
+    
     
     
     private func pushFootprintView(_ location: Location) {
         self.push(.footprint(location: location))
+    }
+    
+    
+    private func pushSelectLocationView(_ output: SelectLocationView.Output, location: Location) {
+        self.push(.selectLocation(output: output, location: location))
     }
     
     private func pushEditNote(_ output: EditNoteView.Output, location: Location, type: EditFootprintType) {

@@ -19,29 +19,6 @@ struct Pin: Identifiable {
     let coordinate: CLLocationCoordinate2D
 }
 
-enum MarkerStatus {
-    case stable
-    case move
-    
-    var image: String {
-        switch self {
-        case .stable:
-            return "State=able"
-        case .move:
-            return "State=move"
-        }
-    }
-    
-    var size: CGSize {
-        switch self {
-        case .stable:
-            return CGSize(width: 46, height: 54)
-        case .move:
-            return CGSize(width: 46, height: 72)
-        }
-    }
-}
-
 class MapVM2: BaseViewModel {
     private var locationManager: CLLocationManager
     @Published var isShowAds: Bool = false
@@ -91,28 +68,27 @@ class MapVM2: BaseViewModel {
     }
     
     func onAppear() {
-        print("[SD] onAppear: \(C.isFirstAppStart)")
-        self.removeSelectedMarker()
-        switch checkLocationPermission() {
-        case .allow:
-            self.locationPermission = true
-//            getCurrentLocation()
-        default:
-            self.isGettingLocation = false
-            self.locationPermission = false
-            self.myLocation = Location(latitude: 37.574187, longitude: 126.976882)
-            break
-        }
-        
-        loadCategories()
-        C.mapView = self.createMapView()
-        
-        if let myLocation = self.myLocation, C.isFirstAppStart {
-            C.isFirstAppStart = false
-            self.moveCamera(CLLocationCoordinate2D(latitude: myLocation.latitude, longitude: myLocation.longitude))
-        }
-        self.loadAllMarkers()
-        self.loadAllFootprints()
+//        print("[SD] onAppear: \(C.isFirstAppStart)")
+//        self.removeSelectedMarker()
+//        switch checkLocationPermission() {
+//        case .allow:
+//            self.locationPermission = true
+//        default:
+//            self.isGettingLocation = false
+//            self.locationPermission = false
+//            self.myLocation = Location(latitude: 37.574187, longitude: 126.976882)
+//            break
+//        }
+//        
+//        loadCategories()
+////        C.mapView = self.createMapView()
+//        
+//        if let myLocation = self.myLocation, C.isFirstAppStart {
+//            C.isFirstAppStart = false
+//            self.moveCamera(CLLocationCoordinate2D(latitude: myLocation.latitude, longitude: myLocation.longitude))
+//        }
+//        self.loadAllMarkers()
+//        self.loadAllFootprints()
     }
     
 //    func viewDidLoad() {

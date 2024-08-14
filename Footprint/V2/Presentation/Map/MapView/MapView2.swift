@@ -20,7 +20,7 @@ struct MapView2: View {
     
     struct Output {
         var goToFootprintView: (Location) -> ()
-        var goToEditNote: (Location, EditFootprintType) -> ()
+        var goToSelectLocation: (Location) -> ()
     }
     private var output: Output
     
@@ -34,6 +34,9 @@ struct MapView2: View {
     @State private var mapStatus: MapStatus = .normal
     @State private var centerPos: CGRect = .zero
     
+    @Environment(\.centerLocation) var centerLocation
+
+
     init(output: Output) {
         self.output = output
     }
@@ -103,8 +106,9 @@ struct MapView2: View {
                             .rectReader($centerPos, in: .global)
                             .offset(x: geometry.size.width / 2 - $centerPos.wrappedValue.width / 2, y: geometry.size.height / 2 - $centerPos.wrappedValue.height / 2)
                     }
-                    
-                    GoogleMapView2(vm: self.vm)
+                    if let map = C.mapView {
+                        MainMapView(mapView: map, changeStateSelectedMarker: vm.changeStateSelectedMarker(_:target:))
+                    }
                     
                     VStack(alignment: .leading, spacing: 0, content: {
                         Spacer()
@@ -115,7 +119,11 @@ struct MapView2: View {
                         switch self.mapStatus {
                         case .normal:
                             FPButton(text: "발자국 남기기", location: .leading(name: "paw-foot-white"), status: .press, size: .large, type: .solid) {
-                                self.mapStatus = .adding
+                                if let location = $vm.centerPosition.wrappedValue {
+                                    output.goToSelectLocation(
+                                        Location(latitude: location.latitude, longitude: location.longitude)
+                                    )
+                                }
                             }
                             .sdPadding(top: 0, leading: 16, bottom: 8, trailing: 16)
                         case .adding:
@@ -124,9 +132,8 @@ struct MapView2: View {
                                 
                                 FPButton(text: "여기에 발자국 남기기", status: .press, size: .large, type: .solid) {
                                     if let location = $vm.centerPosition.wrappedValue {
-                                        output.goToEditNote(
-                                            Location(latitude: location.latitude, longitude: location.longitude),
-                                            .new(name: nil, placeId: nil, address: $vm.centerAddress.wrappedValue)
+                                        output.goToSelectLocation(
+                                            Location(latitude: location.latitude, longitude: location.longitude)
                                         )
                                     }
                                 }
@@ -280,3 +287,46 @@ struct MapView2: View {
     }
 }
 
+
+struct MainMapView: UIViewRepresentable {
+    let mapView: GMSMapView
+    let changeStateSelectedMarker: (Bool, CLLocationCoordinate2D?) -> ()
+    
+    init(mapView: GMSMapView, changeStateSelectedMarker: @escaping (Bool, CLLocationCoordinate2D?) -> ()) {
+        self.mapView = mapView
+        self.changeStateSelectedMarker = changeStateSelectedMarker
+    }
+    
+    func makeCoordinator() -> Coordinator {
+        return Coordinator(mapView: mapView, changeStateSelectedMarker: changeStateSelectedMarker)
+    }
+    
+    private let zoom: Float = 17.8
+    
+    func makeUIView(context: Self.Context) -> GMSMapView {
+        self.mapView.delegate = context.coordinator
+        return mapView
+    }
+    
+    func updateUIView(_ mapView: GMSMapView, context: Context) {
+        
+    }
+    
+    class Coordinator: NSObject, GMSMapViewDelegate {
+        let mapView: GMSMapView
+        let changeStateSelectedMarker: (Bool, CLLocationCoordinate2D?) -> ()
+
+        init(mapView: GMSMapView, changeStateSelectedMarker: @escaping (Bool, CLLocationCoordinate2D?) -> ()) {
+            self.mapView = mapView
+            self.changeStateSelectedMarker = changeStateSelectedMarker
+        }
+        
+        func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
+            self.changeStateSelectedMarker(true, nil)
+        }
+
+        func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
+            self.changeStateSelectedMarker(false, position.target)
+        }
+    }
+}
