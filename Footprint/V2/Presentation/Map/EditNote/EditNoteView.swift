@@ -32,7 +32,6 @@ struct EditNoteView: View {
     
     @State private var isPresentCategoryList: Bool = false
     @State private var isPresentCalendar: Bool = false
-    @ObservedObject var mapManager: FPMapManager = FPMapManager.shared
     
     private let CALENDAR_ID: String = "CALENDAR_ID"
     private let LOCATION_ID: String = "LOCATION_ID"
@@ -44,10 +43,6 @@ struct EditNoteView: View {
                 ScrollViewReader { scrollProxy in
                     ScrollView(showsIndicators: false) {
                         VStack(alignment: .leading, spacing: 10) {
-                            FPMapView(mapView: $mapManager.mapView.wrappedValue)
-                                .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
-                                .edgesIgnoringSafeArea(.all)
-                            
                             drawTitle("제목", isEssential: true)
                                 .onTapGesture {
                                     $vm.address.wrappedValue = "Random - \(Int.random(in: 0..<100))"
@@ -81,7 +76,7 @@ struct EditNoteView: View {
                             HStack(alignment: .center, spacing: 0, content: {
                                 drawTitle("날짜", isEssential: true)
                                     .frame(width: 100, height: 40, alignment: .leading)
-                                Text("\($vm.createdAt.wrappedValue)")
+                                Text("\($vm.createdAt.wrappedValue.toEditNoteDate)")
                             })
                             .id(CALENDAR_ID)
                             .contentShape(Rectangle())
@@ -104,7 +99,8 @@ struct EditNoteView: View {
                                         }
                                     }
                                     .sdPaddingHorizontal(24)
-                                    .sdPaddingVertical(26)
+                                    .sdPaddingTop(26)
+                                    
                                     DatePicker(
                                         "",
                                         selection: $vm.createdAt,
@@ -114,6 +110,8 @@ struct EditNoteView: View {
                                     .datePickerStyle(.graphical)
                                     .labelsHidden()
                                     .frame(height: 400)
+                                    
+                                    Spacer()
                                 }
                                 .presentationDetents([.height(470), .large])
                                 .presentationDragIndicator(.visible)
@@ -124,6 +122,7 @@ struct EditNoteView: View {
                                     .frame(width: 100, height: 40, alignment: .leading)
                                 
                             })
+                            
                             HStack(alignment: .center, spacing: 30) {
                                 Image("Button-Icon1")
                                     .resizable()
@@ -143,8 +142,6 @@ struct EditNoteView: View {
                                     .frame(both: 20.0, alignment: .center)
                                     .colorMultiply(Color.BASIC_Etc_Yellow)
                             }
-                            
-                            
                             
                             //                        MultilineTextField("content".localized(), text: $vm.content) {
                             //
