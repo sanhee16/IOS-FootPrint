@@ -32,6 +32,7 @@ struct EditNoteView: View {
     
     @State private var isPresentCategoryList: Bool = false
     @State private var isPresentCalendar: Bool = false
+    @ObservedObject var mapManager: FPMapManager = FPMapManager.shared
     
     private let CALENDAR_ID: String = "CALENDAR_ID"
     private let LOCATION_ID: String = "LOCATION_ID"
@@ -43,6 +44,10 @@ struct EditNoteView: View {
                 ScrollViewReader { scrollProxy in
                     ScrollView(showsIndicators: false) {
                         VStack(alignment: .leading, spacing: 10) {
+                            FPMapView(mapView: $mapManager.mapView.wrappedValue)
+                                .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
+                                .edgesIgnoringSafeArea(.all)
+                            
                             drawTitle("제목", isEssential: true)
                                 .onTapGesture {
                                     $vm.address.wrappedValue = "Random - \(Int.random(in: 0..<100))"

@@ -21,19 +21,19 @@ struct SelectLocationView: View {
     private var output: Output
     
     @StateObject var vm: SelectLocationVM = SelectLocationVM()
-
+    @ObservedObject var mapManager: FPMapManager = FPMapManager.shared
+    
     private var safeTop: CGFloat { get { Util.safeTop() }}
     private var safeBottom: CGFloat { get { Util.safeBottom() }}
     private let optionHeight: CGFloat = 36.0
     private let optionVerticalPadding: CGFloat = 8.0
-    private let location: Location
+//    private let location: Location
     @State private var centerPos: CGRect = .zero
     
     @Environment(\.centerLocation) var centerLocation
 
-    init(output: Output, location: Location) {
+    init(output: Output) {
         self.output = output
-        self.location = location
     }
     
     var body: some View {
@@ -54,14 +54,18 @@ struct SelectLocationView: View {
                     })
                     .zIndex(1)
                     
-                    Image($vm.centerMarkerStatus.wrappedValue.image)
+                    Image($mapManager.centerMarkerStatus.wrappedValue.image)
                         .resizable()
                         .scaledToFit()
                         .frame(width: 46)
                         .zIndex(2)
                         .rectReader($centerPos, in: .global)
                         .offset(x: geometry.size.width / 2 - $centerPos.wrappedValue.width / 2, y: geometry.size.height / 2 - $centerPos.wrappedValue.height / 2)
-                    SelectLocationMap(mapView: vm.createMapView(), changeStateSelectedMarker: vm.changeStateSelectedMarker(_:target:))
+                    
+                    if !$vm.isLoading.wrappedValue {
+                        FPMapView(mapView: $mapManager.mapView.wrappedValue)
+                            .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
+                    }
                     
                     VStack(alignment: .leading, spacing: 0, content: {
                         Spacer()
@@ -70,7 +74,7 @@ struct SelectLocationView: View {
                             Text($vm.centerAddress.wrappedValue)
                             
                             FPButton(text: "여기에 발자국 남기기", status: .press, size: .large, type: .solid) {
-                                if let location = $vm.centerPosition.wrappedValue {
+                                if let location = $mapManager.centerPosition.wrappedValue {
                                     output.goToEditNote(
                                         Location(latitude: location.latitude, longitude: location.longitude),
                                         .new(name: nil, placeId: nil, address: $vm.centerAddress.wrappedValue)
@@ -83,11 +87,11 @@ struct SelectLocationView: View {
                     })
                 }
             }
-            .frame(width: geometry.size.width, alignment: .center)
+            .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
         }
         .onAppear {
             vm.onAppear()
-            vm.setLocation(location: self.location)
+//            vm.setLocation(location: self.location)
         }
         .navigationBarBackButtonHidden()
     }

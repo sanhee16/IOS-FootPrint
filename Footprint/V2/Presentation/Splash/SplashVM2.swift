@@ -15,12 +15,17 @@ class SplashVM2: BaseViewModel {
     
     override init() {
         super.init()
-        
+    
         Task {
-            await self.createMapView()
+            await self.moveToMain()
         }
     }
 
+    @MainActor
+    private func moveToMain() {
+        self.isShowMain = true
+    }
+    
     @MainActor
     private func createMapView() {
         self.getCurrentLocation()

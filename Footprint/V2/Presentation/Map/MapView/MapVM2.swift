@@ -40,6 +40,8 @@ class MapVM2: BaseViewModel {
     @Published var centerMarkerStatus: MarkerStatus = .stable
     @Published var centerAddress: String = ""
     
+    @Published var isLoading: Bool = false
+    
     var centerPosition: CLLocationCoordinate2D? = nil
     private var allFootprints: [FootPrint] = []
     
@@ -68,45 +70,12 @@ class MapVM2: BaseViewModel {
     }
     
     func onAppear() {
-//        print("[SD] onAppear: \(C.isFirstAppStart)")
-//        self.removeSelectedMarker()
-//        switch checkLocationPermission() {
-//        case .allow:
-//            self.locationPermission = true
-//        default:
-//            self.isGettingLocation = false
-//            self.locationPermission = false
-//            self.myLocation = Location(latitude: 37.574187, longitude: 126.976882)
-//            break
-//        }
-//        
-//        loadCategories()
-////        C.mapView = self.createMapView()
-//        
-//        if let myLocation = self.myLocation, C.isFirstAppStart {
-//            C.isFirstAppStart = false
-//            self.moveCamera(CLLocationCoordinate2D(latitude: myLocation.latitude, longitude: myLocation.longitude))
-//        }
-//        self.loadAllMarkers()
-//        self.loadAllFootprints()
+        self.isLoading = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.001, execute: {
+            self.isLoading = false
+        })
     }
     
-//    func viewDidLoad() {
-//        print("[SD] viewDidLoad")
-//        switch checkLocationPermission() {
-//        case .allow:
-//            self.locationPermission = true
-//            getCurrentLocation()
-//            loadCategories()
-//        default:
-//            self.isGettingLocation = false
-//            self.locationPermission = false
-//            self.myLocation = Location(latitude: 0.0, longitude: 0.0)
-//            break
-//        }
-//        self.loadAllMarkers()
-//        self.loadAllFootprints()
-//    }
     func didTapMyLocationButton() {
         guard let myLocation = self.myLocation else { return }
         self.moveCamera(CLLocationCoordinate2D(latitude: myLocation.latitude, longitude: myLocation.longitude))

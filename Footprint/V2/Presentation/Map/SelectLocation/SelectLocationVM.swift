@@ -42,6 +42,7 @@ class SelectLocationVM: BaseViewModel {
     @Published var selectedMarker: GMSMarker? = nil
     @Published var centerMarkerStatus: MarkerStatus = .stable
     @Published var centerAddress: String = ""
+    @Published var isLoading: Bool = false
     var myLocation: Location? = nil
     
     var centerPosition: CLLocationCoordinate2D?
@@ -56,7 +57,10 @@ class SelectLocationVM: BaseViewModel {
     }
     
     func onAppear() {
-        
+        self.isLoading = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.001, execute: {
+            self.isLoading = false
+        })
     }
     
     func setLocation(location: Location) {
