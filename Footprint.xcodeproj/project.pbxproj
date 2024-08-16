@@ -8,12 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		2606B4CD29437BD10012349A /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 2606B4CC29437BD10012349A /* loading.json */; };
+		260BF1BF2C6ED34900442CCC /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = 260BF1BE2C6ED34900442CCC /* GoogleMaps */; };
+		260BF1C22C6ED35E00442CCC /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 260BF1C12C6ED35E00442CCC /* GoogleMobileAds */; };
 		260C87CB296AADB900ADCC32 /* ShowTravelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260C87CA296AADB900ADCC32 /* ShowTravelView.swift */; };
 		260C87CD296AADBE00ADCC32 /* ShowTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260C87CC296AADBE00ADCC32 /* ShowTravelViewModel.swift */; };
 		260C87D0296AAF5C00ADCC32 /* FootprintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260C87CF296AAF5C00ADCC32 /* FootprintItem.swift */; };
 		2613ED4B2973C5AC0060EF23 /* MainMenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2613ED4A2973C5AC0060EF23 /* MainMenuBar.swift */; };
 		2619FE8A2940D6AC00D24778 /* CheckPermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2619FE892940D6AC00D24778 /* CheckPermissionView.swift */; };
 		2619FE8C2940D6B300D24778 /* CheckPermissionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2619FE8B2940D6B300D24778 /* CheckPermissionViewModel.swift */; };
+		26205C812C6ED65D00AB8325 /* GooglePlaces in Frameworks */ = {isa = PBXBuildFile; productRef = 26205C802C6ED65D00AB8325 /* GooglePlaces */; };
 		2627408F29699B2A00B47566 /* CategorySelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2627408E29699B2A00B47566 /* CategorySelectorView.swift */; };
 		2627409129699B2F00B47566 /* CategorySelectorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2627409029699B2F00B47566 /* CategorySelectorViewModel.swift */; };
 		262D2A02293E2BA4005984DA /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262D2A01293E2BA4005984DA /* SettingView.swift */; };
@@ -156,7 +159,6 @@
 		63FA2389294C35E300D31506 /* PeopleEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FA2388294C35E300D31506 /* PeopleEditViewModel.swift */; };
 		63FA238E294C42C900D31506 /* SingleSelectGalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FA238D294C42C900D31506 /* SingleSelectGalleryView.swift */; };
 		63FA2390294C42CE00D31506 /* SingleSelectGalleryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FA238F294C42CE00D31506 /* SingleSelectGalleryViewModel.swift */; };
-		EA8F1CE5AADA34D35AD14494 /* Pods_Footprint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 345566BC804EBC9D85B35660 /* Pods_Footprint.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -174,7 +176,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0B7C258CB37306DD73C5B052 /* Pods-Footprint.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Footprint.debug.xcconfig"; path = "Target Support Files/Pods-Footprint/Pods-Footprint.debug.xcconfig"; sourceTree = "<group>"; };
 		2606B4CC29437BD10012349A /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		260C87CA296AADB900ADCC32 /* ShowTravelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTravelView.swift; sourceTree = "<group>"; };
 		260C87CC296AADBE00ADCC32 /* ShowTravelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTravelViewModel.swift; sourceTree = "<group>"; };
@@ -239,7 +240,6 @@
 		26FAB54C2C6B4091006304AE /* SelectLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationView.swift; sourceTree = "<group>"; };
 		26FAB54E2C6B4095006304AE /* SelectLocationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationVM.swift; sourceTree = "<group>"; };
 		26FAB5502C6B576F006304AE /* EnvironmentValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentValues.swift; sourceTree = "<group>"; };
-		345566BC804EBC9D85B35660 /* Pods_Footprint.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Footprint.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63004AF929DA63D2000CDBB4 /* RemoteConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfig.swift; sourceTree = "<group>"; };
 		63004AFF29DA6B1D000CDBB4 /* RemoteConfigValue.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RemoteConfigValue.plist; sourceTree = "<group>"; };
 		631D75232966619B00464F33 /* SToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SToggleView.swift; sourceTree = "<group>"; };
@@ -317,7 +317,6 @@
 		63FA2388294C35E300D31506 /* PeopleEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleEditViewModel.swift; sourceTree = "<group>"; };
 		63FA238D294C42C900D31506 /* SingleSelectGalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSelectGalleryView.swift; sourceTree = "<group>"; };
 		63FA238F294C42CE00D31506 /* SingleSelectGalleryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSelectGalleryViewModel.swift; sourceTree = "<group>"; };
-		ABE65B1C5B31A01C8E2F03B9 /* Pods-Footprint.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Footprint.release.xcconfig"; path = "Target Support Files/Pods-Footprint/Pods-Footprint.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -331,10 +330,12 @@
 				263ED4522C60E54E00FAC148 /* FirebaseStorage in Frameworks */,
 				63B1FAE42914A6D8007E94B6 /* Lottie in Frameworks */,
 				63B1FB062914B5CB007E94B6 /* SwiftUIPullToRefresh in Frameworks */,
+				260BF1C22C6ED35E00442CCC /* GoogleMobileAds in Frameworks */,
 				63B1FAE72914A6FE007E94B6 /* Alamofire in Frameworks */,
 				263ED44E2C60E54E00FAC148 /* FirebaseFirestore in Frameworks */,
+				26205C812C6ED65D00AB8325 /* GooglePlaces in Frameworks */,
+				260BF1BF2C6ED34900442CCC /* GoogleMaps in Frameworks */,
 				63B1FAEA2914A718007E94B6 /* SwiftUIPager in Frameworks */,
-				EA8F1CE5AADA34D35AD14494 /* Pods_Footprint.framework in Frameworks */,
 				266EDDE12C64EB1F006CF09B /* SDSwiftUIPack in Frameworks */,
 				266EDDD12C64EA16006CF09B /* Factory in Frameworks */,
 			);
@@ -343,15 +344,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1522B1A1B0EADD34D7FC0D99 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				0B7C258CB37306DD73C5B052 /* Pods-Footprint.debug.xcconfig */,
-				ABE65B1C5B31A01C8E2F03B9 /* Pods-Footprint.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		260C3CD62C6CA53D004A9206 /* MapView */ = {
 			isa = PBXGroup;
 			children = (
@@ -683,8 +675,6 @@
 			children = (
 				63209FE62913C3BF00709227 /* Footprint */,
 				63209FE52913C3BF00709227 /* Products */,
-				1522B1A1B0EADD34D7FC0D99 /* Pods */,
-				CEDBEC64F26317C4867AA0E2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -987,14 +977,6 @@
 			path = MultiSelectGallery;
 			sourceTree = "<group>";
 		};
-		CEDBEC64F26317C4867AA0E2 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				345566BC804EBC9D85B35660 /* Pods_Footprint.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1002,11 +984,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 63209FF22913C3C000709227 /* Build configuration list for PBXNativeTarget "Footprint" */;
 			buildPhases = (
-				E7012FB84BBCA6F2EECF37B6 /* [CP] Check Pods Manifest.lock */,
 				63209FE02913C3BF00709227 /* Sources */,
 				63209FE12913C3BF00709227 /* Frameworks */,
 				63209FE22913C3BF00709227 /* Resources */,
-				7B65BB9D939F49EEDFC77258 /* [CP] Copy Pods Resources */,
 				263ED4542C60F05700FAC148 /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -1026,6 +1006,9 @@
 				263ED4512C60E54E00FAC148 /* FirebaseStorage */,
 				266EDDD02C64EA16006CF09B /* Factory */,
 				266EDDE02C64EB1F006CF09B /* SDSwiftUIPack */,
+				260BF1BE2C6ED34900442CCC /* GoogleMaps */,
+				260BF1C12C6ED35E00442CCC /* GoogleMobileAds */,
+				26205C802C6ED65D00AB8325 /* GooglePlaces */,
 			);
 			productName = Footprint;
 			productReference = 63209FE42913C3BF00709227 /* Footprint.app */;
@@ -1066,6 +1049,9 @@
 				263ED44C2C60E54E00FAC148 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				266EDDCF2C64EA16006CF09B /* XCRemoteSwiftPackageReference "Factory" */,
 				266EDDDF2C64EB1E006CF09B /* XCRemoteSwiftPackageReference "SDSwiftUIPack" */,
+				260BF1BD2C6ED34900442CCC /* XCRemoteSwiftPackageReference "ios-maps-sdk" */,
+				260BF1C02C6ED35E00442CCC /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				26205C7F2C6ED65D00AB8325 /* XCRemoteSwiftPackageReference "ios-places-sdk" */,
 			);
 			productRefGroup = 63209FE52913C3BF00709227 /* Products */;
 			projectDirPath = "";
@@ -1096,48 +1082,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		7B65BB9D939F49EEDFC77258 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Footprint/Pods-Footprint-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Footprint/Pods-Footprint-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Footprint/Pods-Footprint-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E7012FB84BBCA6F2EECF37B6 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Footprint-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		63209FE02913C3BF00709227 /* Sources */ = {
@@ -1417,7 +1361,6 @@
 		};
 		63209FF32913C3C000709227 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0B7C258CB37306DD73C5B052 /* Pods-Footprint.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1452,7 +1395,6 @@
 		};
 		63209FF42913C3C000709227 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ABE65B1C5B31A01C8E2F03B9 /* Pods-Footprint.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1509,6 +1451,30 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		260BF1BD2C6ED34900442CCC /* XCRemoteSwiftPackageReference "ios-maps-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googlemaps/ios-maps-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.1.0;
+			};
+		};
+		260BF1C02C6ED35E00442CCC /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.8.0;
+			};
+		};
+		26205C7F2C6ED65D00AB8325 /* XCRemoteSwiftPackageReference "ios-places-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googlemaps/ios-places-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 		263ED44C2C60E54E00FAC148 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1584,6 +1550,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		260BF1BE2C6ED34900442CCC /* GoogleMaps */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 260BF1BD2C6ED34900442CCC /* XCRemoteSwiftPackageReference "ios-maps-sdk" */;
+			productName = GoogleMaps;
+		};
+		260BF1C12C6ED35E00442CCC /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 260BF1C02C6ED35E00442CCC /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
+		};
+		26205C802C6ED65D00AB8325 /* GooglePlaces */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 26205C7F2C6ED65D00AB8325 /* XCRemoteSwiftPackageReference "ios-places-sdk" */;
+			productName = GooglePlaces;
+		};
 		263ED44D2C60E54E00FAC148 /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 263ED44C2C60E54E00FAC148 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

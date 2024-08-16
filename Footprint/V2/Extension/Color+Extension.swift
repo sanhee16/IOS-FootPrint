@@ -10,8 +10,6 @@ import SwiftUI
 
 extension Color {
     static let error50: Color = Color(hex: "")
-    
-    //MARK: #1 원색
     static let BlueGray100: Color = Color(hex: "#f1f5f9")
     static let BlueGray200: Color = Color(hex: "#e2e8f0")
     static let BlueGray300: Color = Color(hex: "#cbd5e1")
