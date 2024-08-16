@@ -90,12 +90,12 @@ struct FPTextField: View {
                 Spacer()
                 Rectangle()
                     .frame(height: 1.2, alignment: .center)
-                    .foregroundStyle(isFocused ? Color.BASIC_Text_Icon_Gray_Default : Color.BASIC_Text_Icon_Gray_Low_emphasis)
+                    .foregroundStyle(isFocused ? Color.cont_gray_default : Color.dim_black_low)
             }
         case .box:
             RoundedRectangle(cornerRadius: 4)
                 .foregroundStyle(Color.white)
-                .border(isFocused ? Color.BASIC_Text_Icon_Gray_Default : Color.BASIC_Text_Icon_Gray_Low_emphasis, lineWidth: 1.2, cornerRadius: 4)
+                .border(isFocused ? Color.cont_gray_default : Color.dim_black_low, lineWidth: 1.2, cornerRadius: 4)
         default:
             EmptyView()
         }

@@ -69,7 +69,7 @@ struct EditNoteView: View {
                             //                        drawImageArea(geometry)
                             
                             Divider()
-                                .background(Color.BASIC_Dim_Low_emphasis)
+                                .background(Color.dim_black_low)
                                 .sdPaddingVertical(8)
                             
                             
@@ -122,26 +122,6 @@ struct EditNoteView: View {
                                     .frame(width: 100, height: 40, alignment: .leading)
                                 
                             })
-                            
-                            HStack(alignment: .center, spacing: 30) {
-                                Image("Button-Icon1")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(both: 20.0, alignment: .center)
-                                    .colorMultiply(Color(hex: "#8E5CE6"))
-                                
-                                Image("Button-Icon2")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(both: 20.0, alignment: .center)
-                                    .colorMultiply(Color(hex: "#8E5CE6"))
-                                
-                                Image("Type=Flat")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(both: 20.0, alignment: .center)
-                                    .colorMultiply(Color.BASIC_Etc_Yellow)
-                            }
                             
                             //                        MultilineTextField("content".localized(), text: $vm.content) {
                             //
