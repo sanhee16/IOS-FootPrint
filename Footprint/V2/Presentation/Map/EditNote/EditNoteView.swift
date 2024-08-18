@@ -152,7 +152,7 @@ struct EditNoteView: View {
                 .onChange(of: $vm.address.wrappedValue, perform: { value in
                     print("[SD] \(value)")
                 })
-                .padding(EdgeInsets(top: safeTop, leading: 0, bottom: $vm.isKeyboardVisible.wrappedValue ? 0 : safeBottom, trailing: 0))
+                .padding(EdgeInsets(top: safeTop, leading: 0, bottom: 0, trailing: 0))
                 .ignoresSafeArea(.container, edges: [.top, .bottom])
                 .frame(width: geometry.size.width, alignment: .leading)
                 .toolbar {
@@ -163,8 +163,45 @@ struct EditNoteView: View {
                         }
                     }
                 }
+                
+                HStack(alignment: .center, spacing: 8, content: {
+                    HStack(alignment: .center, spacing: 8, content: {
+                        Image("picture")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(both: 16, alignment: .center)
+                        Text("사진")
+                            .sdFont(.btn3, color: .btn_lightSolid_cont_default)
+                    })
+                    .padding(8)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        
+                    }
+                    
+                    HStack(alignment: .center, spacing: 8, content: {
+                        Image("user-add")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(both: 16, alignment: .center)
+                        Text("함께한 사람")
+                            .sdFont(.btn3, color: .btn_lightSolid_cont_default)
+                    })
+                    .padding(8)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        
+                    }
+                    Spacer()
+                })
+                .sdPaddingVertical(4)
+                .sdPaddingHorizontal(16)
+                .frame(width: UIScreen.main.bounds.width)
+                .background(Color.bg_bgb)
             }
+            .background(Color.white)
         }
+        .background(Color.bg_bgb)
         .navigationBarBackButtonHidden()
         .onAppear {
             vm.setValue(location: self.location, type: self.type)
