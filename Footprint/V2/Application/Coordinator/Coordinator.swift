@@ -31,10 +31,7 @@ class Coordinator: BaseCoordinator<Destination> {
         } goToEditNote: { location, type in
             self.pushEditNote(self.editNoteOutput, location: location, type: type)
         }
-
     }
-    
-    
     
     private func pushFootprintView(_ location: Location) {
         self.push(.footprint(location: location))

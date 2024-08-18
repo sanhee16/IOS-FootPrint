@@ -26,7 +26,8 @@ struct MapView2: View {
     
     @StateObject var vm: MapVM2 = MapVM2()
     @ObservedObject var mapManager: FPMapManager = FPMapManager.shared
-
+    @EnvironmentObject private var tabBarService: TabBarService
+    
     private var safeTop: CGFloat { get { Util.safeTop() }}
     private var safeBottom: CGFloat { get { Util.safeBottom() }}
     private let optionHeight: CGFloat = 36.0
@@ -37,7 +38,6 @@ struct MapView2: View {
     
     @Environment(\.centerLocation) var centerLocation
 
-
     init(output: Output) {
         self.output = output
     }
@@ -45,6 +45,15 @@ struct MapView2: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .topLeading) {
+                if self.mapStatus == .adding {
+                    Image($mapManager.centerMarkerStatus.wrappedValue.image)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 46)
+                        .zIndex(2)
+                        .rectReader($centerPos, in: .global)
+                        .offset(x: geometry.size.width / 2 - $centerPos.wrappedValue.width / 2, y: geometry.size.height / 2 - $centerPos.wrappedValue.height / 2)
+                }
                 
                 if !$vm.isLoading.wrappedValue {
                     FPMapView(mapView: $mapManager.mapView.wrappedValue)
@@ -53,39 +62,55 @@ struct MapView2: View {
                 }
                 
                 VStack(alignment: .center, spacing: 0, content: {
-                    if Defaults.premiumCode.isEmpty && $vm.isShowAds.wrappedValue {
-                        GADBanner().frame(width: GADAdSizeBanner.size.width, height: GADAdSizeBanner.size.height)
-                    }
-                    
-                    HStack(alignment: .center, spacing: 0, content: {
-                        Spacer()
-                        if isShowSearchBar {
-                            VStack(alignment: .leading, spacing: 9, content: {
-                                drawSearchBox(geometry)
-                                    .sdPadding(top: 8, leading: 16, bottom: 0, trailing: 16)
-                                    .onTapGesture { }
-                                if !$vm.searchItems.wrappedValue.isEmpty {
-                                    drawSearchList(geometry)
-                                        .padding(.top, 6)
+                    switch self.mapStatus {
+                    case .normal:
+                        if Defaults.premiumCode.isEmpty && $vm.isShowAds.wrappedValue {
+                            GADBanner().frame(width: GADAdSizeBanner.size.width, height: GADAdSizeBanner.size.height)
+                        }
+                        HStack(alignment: .center, spacing: 0, content: {
+                            Spacer()
+                            if isShowSearchBar {
+                                VStack(alignment: .leading, spacing: 9, content: {
+                                    drawSearchBox(geometry)
+                                        .sdPadding(top: 8, leading: 16, bottom: 0, trailing: 16)
+                                        .onTapGesture { }
+                                    if !$vm.searchItems.wrappedValue.isEmpty {
+                                        drawSearchList(geometry)
+                                            .padding(.top, 6)
+                                    }
+                                })
+                            } else {
+                                mapMenuButton("search") {
+                                    withAnimation {
+                                        self.isShowSearchBar = true
+                                    }
                                 }
-                            })
-                        } else {
-                            mapMenuButton("search") {
-                                withAnimation {
-                                    self.isShowSearchBar = true
-                                }
+                                .sdPadding(top: 8, leading: 0, bottom: 0, trailing: 16)
+                            }
+                        })
+                        
+                        HStack(alignment: .center, spacing: 0, content: {
+                            Spacer()
+                            mapMenuButton("paw-foot") {
+                                
                             }
                             .sdPadding(top: 8, leading: 0, bottom: 0, trailing: 16)
-                        }
-                    })
-                    
-                    HStack(alignment: .center, spacing: 0, content: {
-                        Spacer()
-                        mapMenuButton("paw-foot") {
-                            
-                        }
-                        .sdPadding(top: 8, leading: 0, bottom: 0, trailing: 16)
-                    })
+                        })
+                    case .adding:
+                        VStack(alignment: .leading, spacing: 0, content: {
+                            Topbar("위치 선택", type: .back) {
+                                self.mapStatus = .normal
+                                tabBarService.toggleTabBar()
+                            }
+                            Text("지도를 움직여 위치를 설정하세요.")
+                                .font(.body2)
+                                .foregroundStyle(Color.white)
+                                .sdPaddingVertical(16)
+                                .frame(width: geometry.size.width)
+                                .background(Color.black.opacity(0.7))
+                        })
+                        .zIndex(1)
+                    }
                     
                     Spacer()
                     HStack(alignment: .center, spacing: 0, content: {
@@ -96,10 +121,33 @@ struct MapView2: View {
                         Spacer()
                     })
                     
-                    FPButton(text: "발자국 남기기", location: .leading(name: "paw-foot-white"), status: .press, size: .large, type: .solid) {
-                        output.goToSelectLocation()
+                    switch self.mapStatus {
+                    case .normal:
+                        FPButton(text: "발자국 남기기", location: .leading(name: "paw-foot-white"), status: .press, size: .large, type: .solid) {
+    //                        output.goToSelectLocation()
+                            withAnimation(.smooth) {
+                                self.mapStatus = .adding
+                                tabBarService.toggleTabBar()
+                            }
+                        }
+                        .sdPadding(top: 0, leading: 16, bottom: 8, trailing: 16)
+                    case .adding:
+                        VStack(alignment: .leading, spacing: 24, content: {
+                            Text($mapManager.centerAddress.wrappedValue)
+                            
+                            FPButton(text: "여기에 발자국 남기기", status: .press, size: .large, type: .solid) {
+//                                if let location = $mapManager.centerPosition.wrappedValue {
+//                                    output.goToEditNote(
+//                                        Location(latitude: location.latitude, longitude: location.longitude),
+//                                        .new(name: nil, placeId: nil, address: $vm.centerAddress.wrappedValue)
+//                                    )
+//                                }
+                            }
+                        })
+                        .sdPadding(top: 16, leading: 16, bottom: 8, trailing: 16)
+                        .background(Color(hex: "#F1F5F9"))
                     }
-                    .sdPadding(top: 0, leading: 16, bottom: 8, trailing: 16)
+                    
                 })
                 .zIndex(2)
             }
