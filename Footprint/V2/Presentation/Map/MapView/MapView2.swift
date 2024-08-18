@@ -20,7 +20,7 @@ struct MapView2: View {
     
     struct Output {
         var goToFootprintView: (Location) -> ()
-        var goToSelectLocation: () -> ()
+        var goToEditNote: (Location, EditFootprintType) -> ()
     }
     private var output: Output
     
@@ -136,12 +136,12 @@ struct MapView2: View {
                             Text($mapManager.centerAddress.wrappedValue)
                             
                             FPButton(text: "여기에 발자국 남기기", status: .press, size: .large, type: .solid) {
-//                                if let location = $mapManager.centerPosition.wrappedValue {
-//                                    output.goToEditNote(
-//                                        Location(latitude: location.latitude, longitude: location.longitude),
-//                                        .new(name: nil, placeId: nil, address: $vm.centerAddress.wrappedValue)
-//                                    )
-//                                }
+                                if let location = $mapManager.centerPosition.wrappedValue {
+                                    output.goToEditNote(
+                                        Location(latitude: location.latitude, longitude: location.longitude),
+                                        .new(name: nil, placeId: nil, address: $mapManager.centerAddress.wrappedValue)
+                                    )
+                                }
                             }
                         })
                         .sdPadding(top: 16, leading: 16, bottom: 8, trailing: 16)

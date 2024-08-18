@@ -14,8 +14,8 @@ class Coordinator: BaseCoordinator<Destination> {
     var mapOutput: MapView2.Output {
         MapView2.Output { location in
             self.pushFootprintView(location)
-        } goToSelectLocation: {
-            self.pushSelectLocationView(self.selectLocationOutput)
+        } goToEditNote: { location, type in
+            self.pushEditNote(self.editNoteOutput, location: location, type: type)
         }
     }
     
