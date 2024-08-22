@@ -75,6 +75,11 @@
 		2691D9C7294EE505002825B9 /* BluePrintBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2691D9C6294EE505002825B9 /* BluePrintBottomSheetView.swift */; };
 		26940CAD293C9D0F0091E996 /* ShowImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26940CAC293C9D0F0091E996 /* ShowImageView.swift */; };
 		26940CAF293C9D170091E996 /* ShowImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26940CAE293C9D170091E996 /* ShowImageViewModel.swift */; };
+		2696F4E12C7753A000F56E73 /* RealNoteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2696F4E02C7753A000F56E73 /* RealNoteRepository.swift */; };
+		2696F4E42C7753C400F56E73 /* NoteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2696F4E32C7753C400F56E73 /* NoteRepository.swift */; };
+		2696F4E82C77540800F56E73 /* NoteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2696F4E72C77540800F56E73 /* NoteData.swift */; };
+		2696F4EC2C77556800F56E73 /* SaveNoteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2696F4EB2C77556800F56E73 /* SaveNoteUseCase.swift */; };
+		2696F4EF2C7757F300F56E73 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2696F4EE2C7757F300F56E73 /* DIContainer.swift */; };
 		26A238FA2A13743700D7CF49 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26A238F92A13743700D7CF49 /* GoogleService-Info.plist */; };
 		26BD8FCB29694CE5005F7E5C /* ApiInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26BD8FCA29694CE5005F7E5C /* ApiInfo.plist */; };
 		26BFFD942C5F8C400001B02B /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 26BFFD932C5F8C400001B02B /* Kingfisher */; };
@@ -236,6 +241,11 @@
 		2691D9C6294EE505002825B9 /* BluePrintBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluePrintBottomSheetView.swift; sourceTree = "<group>"; };
 		26940CAC293C9D0F0091E996 /* ShowImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowImageView.swift; sourceTree = "<group>"; };
 		26940CAE293C9D170091E996 /* ShowImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowImageViewModel.swift; sourceTree = "<group>"; };
+		2696F4E02C7753A000F56E73 /* RealNoteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealNoteRepository.swift; sourceTree = "<group>"; };
+		2696F4E32C7753C400F56E73 /* NoteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRepository.swift; sourceTree = "<group>"; };
+		2696F4E72C77540800F56E73 /* NoteData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteData.swift; sourceTree = "<group>"; };
+		2696F4EB2C77556800F56E73 /* SaveNoteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNoteUseCase.swift; sourceTree = "<group>"; };
+		2696F4EE2C7757F300F56E73 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
 		26A238F92A13743700D7CF49 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		26BD8FCA29694CE5005F7E5C /* ApiInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiInfo.plist; sourceTree = "<group>"; };
 		26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIExtension.swift; sourceTree = "<group>"; };
@@ -485,6 +495,7 @@
 		266EDDD42C64EA87006CF09B /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				2696F4ED2C7757DE00F56E73 /* Injected */,
 				267CC1752C66F26400D6015E /* Coordinator */,
 				26FAB5502C6B576F006304AE /* EnvironmentValues.swift */,
 			);
@@ -506,6 +517,9 @@
 		266EDDD62C64EA95006CF09B /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				2696F4E92C77555000F56E73 /* UseCases */,
+				2696F4E62C7753E900F56E73 /* Entities */,
+				2696F4E22C7753AC00F56E73 /* RepositoryProtocols */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -513,6 +527,8 @@
 		266EDDD72C64EA9A006CF09B /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				2696F4E52C7753E100F56E73 /* Entities */,
+				2696F4DF2C77538B00F56E73 /* Repositories */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -632,6 +648,61 @@
 				26940CAE293C9D170091E996 /* ShowImageViewModel.swift */,
 			);
 			path = ShowImage;
+			sourceTree = "<group>";
+		};
+		2696F4DF2C77538B00F56E73 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				2696F4E02C7753A000F56E73 /* RealNoteRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		2696F4E22C7753AC00F56E73 /* RepositoryProtocols */ = {
+			isa = PBXGroup;
+			children = (
+				2696F4E32C7753C400F56E73 /* NoteRepository.swift */,
+			);
+			path = RepositoryProtocols;
+			sourceTree = "<group>";
+		};
+		2696F4E52C7753E100F56E73 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				2696F4E72C77540800F56E73 /* NoteData.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		2696F4E62C7753E900F56E73 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		2696F4E92C77555000F56E73 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				2696F4EA2C77555D00F56E73 /* NoteUseCases */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		2696F4EA2C77555D00F56E73 /* NoteUseCases */ = {
+			isa = PBXGroup;
+			children = (
+				2696F4EB2C77556800F56E73 /* SaveNoteUseCase.swift */,
+			);
+			path = NoteUseCases;
+			sourceTree = "<group>";
+		};
+		2696F4ED2C7757DE00F56E73 /* Injected */ = {
+			isa = PBXGroup;
+			children = (
+				2696F4EE2C7757F300F56E73 /* DIContainer.swift */,
+			);
+			path = Injected;
 			sourceTree = "<group>";
 		};
 		26FAB54B2C6B408C006304AE /* SelectLocation */ = {
@@ -1154,12 +1225,14 @@
 				2619FE8C2940D6B300D24778 /* CheckPermissionViewModel.swift in Sources */,
 				63F1324B2914A18800B3A9E0 /* Defaults.swift in Sources */,
 				63D32FC829CA92BF0049F567 /* PremiumCodeViewModel.swift in Sources */,
+				2696F4E42C7753C400F56E73 /* NoteRepository.swift in Sources */,
 				267CC18C2C6710DF00D6015E /* UINavigationController+Extension.swift in Sources */,
 				264B70C0291F8E9D00CDAF9F /* C.swift in Sources */,
 				266EDDE42C64EB40006CF09B /* MainView2.swift in Sources */,
 				63F132982914A1C000B3A9E0 /* ProgressView.swift in Sources */,
 				267CC1872C6704B400D6015E /* FootprintView.swift in Sources */,
 				267CC1932C67385900D6015E /* Color+Extension.swift in Sources */,
+				2696F4E12C7753A000F56E73 /* RealNoteRepository.swift in Sources */,
 				267CC17E2C66F2BC00D6015E /* MapView2.swift in Sources */,
 				631D752F29667A4D00464F33 /* PeopleWithListViewModel.swift in Sources */,
 				631D752D29667A4700464F33 /* PeopleWithListView.swift in Sources */,
@@ -1189,6 +1262,7 @@
 				267CC1792C66F28300D6015E /* Coordinator.swift in Sources */,
 				267CC1962C67823E00D6015E /* EditNoteView.swift in Sources */,
 				63E848A7295ABEBD0037D7A3 /* TravelListView.swift in Sources */,
+				2696F4EF2C7757F300F56E73 /* DIContainer.swift in Sources */,
 				267CC1982C67824200D6015E /* EditNoteVM.swift in Sources */,
 				260C87CD296AADBE00ADCC32 /* ShowTravelViewModel.swift in Sources */,
 				266EDDDE2C64EAD9006CF09B /* SplashVM2.swift in Sources */,
@@ -1200,12 +1274,14 @@
 				267CC18E2C6719CA00D6015E /* Font+Extension.swift in Sources */,
 				63C81AB52963BD3D0001A70B /* SelectFootprintsView.swift in Sources */,
 				63F132562914A19F00B3A9E0 /* SceneDelegate.swift in Sources */,
+				2696F4EC2C77556800F56E73 /* SaveNoteUseCase.swift in Sources */,
 				63C81AB92963D6EF0001A70B /* DragAndDropService.swift in Sources */,
 				63B1FAED2914A85B007E94B6 /* EditFootprintView.swift in Sources */,
 				265EA947291D1E1400068A5C /* DataModel.swift in Sources */,
 				260C87CB296AADB900ADCC32 /* ShowTravelView.swift in Sources */,
 				63D7EF1D296FBE2500D72F12 /* GoogleApi.swift in Sources */,
 				63FA2387294C35CB00D31506 /* PeopleEditView.swift in Sources */,
+				2696F4E82C77540800F56E73 /* NoteData.swift in Sources */,
 				63C102B8296530680099AF6A /* GoogleMapView.swift in Sources */,
 				63F132992914A1C000B3A9E0 /* Topbar.swift in Sources */,
 				63D32FD729CACEAC0049F567 /* AdView.swift in Sources */,

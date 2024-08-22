@@ -12,6 +12,11 @@ struct EditNoteView: View {
     struct Output {
         var pop: () -> ()
     }
+    
+    enum ViewEventTrigger {
+        case pop
+    }
+    
     private var output: Output
     
     private let location: Location
@@ -20,7 +25,6 @@ struct EditNoteView: View {
     @StateObject var vm: EditNoteVM = EditNoteVM()
     
     init(output: Output, location: Location, type: EditFootprintType) {
-        print("[SD] EditNoteView init: \(location), \(type)")
         self.output = output
         self.location = location
         self.type = type
@@ -204,7 +208,12 @@ struct EditNoteView: View {
         .background(Color.bg_bgb)
         .navigationBarBackButtonHidden()
         .onAppear {
-            vm.setValue(location: self.location, type: self.type)
+            vm.setValue(location: self.location, type: self.type) { eventTrigger in
+                switch eventTrigger {
+                case .pop:
+                    self.output.pop()
+                }
+            }
             vm.onAppear()
         }
     }
@@ -223,13 +232,16 @@ struct EditNoteView: View {
                     .onTapGesture {
                         $vm.isStar.wrappedValue = !$vm.isStar.wrappedValue
                     }
-                if case let .modify(item) = vm.type {
-                    Text("delete".localized())
-                        .menuText()
-                        .onTapGesture {
-                            vm.onClickDelete(item.id)
-                        }
+                FPButton(text: "완료", status: .disable, size: .small, type: .textPrimary) {
+                    vm.saveNote()
                 }
+//                if case let .modify(item) = vm.type {
+//                    Text("delete".localized())
+//                        .menuText()
+//                        .onTapGesture {
+//                            vm.onClickDelete(item.id)
+//                        }
+//                }
             }
             .menuView()
         }

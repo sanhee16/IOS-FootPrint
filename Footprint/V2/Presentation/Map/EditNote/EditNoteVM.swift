@@ -10,6 +10,8 @@ import Combine
 import UIKit
 import Photos
 import RealmSwift
+import Factory
+
 
 public enum EditFootprintType {
     case new(name: String?, placeId: String?, address: String?)
@@ -29,6 +31,8 @@ public struct FootprintContents {
 
 
 class EditNoteVM: BaseViewModel {
+    @Injected(\.saveNoteUseCase) var saveNoteUseCase
+    
     @Published var isStar: Bool = false
     @Published var title: String = ""
     @Published var content: String = ""
@@ -49,6 +53,8 @@ class EditNoteVM: BaseViewModel {
     private let realm: Realm
     private var placeId: String? = nil
     
+    var viewEventTrigger: ((EditNoteView.ViewEventTrigger) -> ())? = nil
+    
     override init() {
         self.realm = R.realm
         
@@ -60,7 +66,40 @@ class EditNoteVM: BaseViewModel {
         print("[SD] EditNoteVM init - \(UUID().uuidString)")
     }
     
-    func setValue(location: Location, type: EditFootprintType) {
+    func saveNote() {
+        guard let location = location else { return }
+        
+        
+        
+        
+        
+        
+        saveNoteUseCase.execute(
+            NoteData(
+                title: self.title,
+                content: self.content,
+                images: List<String>(),
+                latitude: location.latitude,
+                longitude: location.longitude,
+                tag: 0,
+                peopleWithIds: List<Int>(),
+                isStar: self.isStar
+            ))
+        viewEventTrigger?(.pop)
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    func setValue(location: Location, type: EditFootprintType, viewEventTrigger: @escaping ((EditNoteView.ViewEventTrigger) -> ())) {
         self.location = location
         self.type = type
         
@@ -88,6 +127,8 @@ class EditNoteVM: BaseViewModel {
                 self.peopleWith.append(item)
             }
         }
+        
+        self.viewEventTrigger = viewEventTrigger
     }
     
     
