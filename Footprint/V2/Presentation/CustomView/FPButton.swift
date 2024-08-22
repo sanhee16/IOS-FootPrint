@@ -112,7 +112,7 @@ extension FPButton {
         case .medium:
             return 17
         case .small:
-            return 14
+            return 12
         }
     }
     
@@ -131,33 +131,33 @@ extension FPButton {
         switch self.type {
         case .solid:
             switch self.status {
-            case .able: return Color(hex: "#FAFAFA")
-            case .press: return Color(hex: "#FAFAFA")
-            case .disable: return Color(hex: "#FAFAFA")
+            case .able: return Color.btn_solid_cont_default
+            case .press: return Color.btn_solid_cont_press
+            case .disable: return Color.btn_solid_cont_disable
             }
         case .lightSolid:
             switch self.status {
-            case .able: return Color(hex: "#64748B")
-            case .press: return Color(hex: "#64748B")
-            case .disable: return Color(hex: "#64748B")
+            case .able: return Color.btn_lightSolid_cont_default
+            case .press: return Color.btn_lightSolid_cont_press
+            case .disable: return Color.btn_lightSolid_cont_disable
             }
         case .outline:
             switch self.status {
-            case .able: return Color(hex: "#2955EA")
-            case .press: return Color(hex: "#2955EA")
-            case .disable: return Color(hex: "#2955EA")
+            case .able: return Color.btn_outline_cont_default
+            case .press: return Color.btn_outline_cont_press
+            case .disable: return Color.btn_outline_cont_disable
             }
         case .textPrimary:
             switch self.status {
-            case .able: return Color(hex: "#2955EA")
-            case .press: return Color(hex: "#2955EA")
-            case .disable: return Color(hex: "#2955EA")
+            case .able: return Color.btn_outline_cont_default
+            case .press: return Color.btn_outline_cont_press
+            case .disable: return Color.btn_outline_cont_disable
             }
         case .textGray:
             switch self.status {
-            case .able: return Color(hex: "#64748B")
-            case .press: return Color(hex: "#64748B")
-            case .disable: return Color(hex: "#64748B")
+            case .able: return Color.btn_text_gray_default
+            case .press: return Color.btn_text_gray_press
+            case .disable: return Color.btn_lightSolid_cont_disable
             }
         }
     }
@@ -166,21 +166,21 @@ extension FPButton {
         switch self.type {
         case .solid:
             switch self.status {
-            case .able: return Color(hex: "#2955EA")
-            case .press: return Color(hex: "#678AFF")
-            case .disable: return Color(hex: "#13276C")
+            case .able: return Color.btn_solid_bg_default
+            case .press: return Color.btn_solid_bg_press
+            case .disable: return Color.btn_solid_bg_disable
             }
         case .lightSolid:
             switch self.status {
-            case .able: return Color(hex: "#E2E8F0")
-            case .press: return Color(hex: "#F8FAFC")
-            case .disable: return Color(hex: "#CBD5E1")
+            case .able: return Color.btn_lightSolid_bg_default
+            case .press: return Color.btn_lightSolid_bg_press
+            case .disable: return Color.btn_lightSolid_bg_disable
             }
         case .outline:
             switch self.status {
-            case .able: return Color(hex: "#F8FAFC")
-            case .press: return Color(hex: "#F8FAFC")
-            case .disable: return Color(hex: "#E2E8F0")
+            case .able: return Color.btn_outline_bg_default
+            case .press: return Color.btn_outline_bg_press
+            case .disable: return Color.btn_outline_bg_disable
             }
         case .textPrimary, .textGray:
             return .clear
@@ -191,9 +191,9 @@ extension FPButton {
         switch self.type {
         case .outline:
             switch self.status {
-            case .able: return Color(hex: "#2955EA")
-            case .press: return Color(hex: "#678AFF")
-            case .disable: return Color(hex: "#94A3B8")
+            case .able: return Color.btn_outline_stroke_default
+            case .press: return Color.btn_outline_stroke_press
+            case .disable: return Color.btn_outline_stroke_disable
             }
         default: return .clear
         }
