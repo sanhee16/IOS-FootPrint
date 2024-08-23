@@ -38,6 +38,7 @@ struct EditNoteView: View {
     @State private var isPresentCalendar: Bool = false
     
     private let CALENDAR_ID: String = "CALENDAR_ID"
+    private let CATEGORY_ID: String = "CATEGORY_ID"
     private let LOCATION_ID: String = "LOCATION_ID"
     
     var body: some View {
@@ -78,67 +79,15 @@ struct EditNoteView: View {
                                 .background(Color.dim_black_low)
                                 .sdPaddingVertical(8)
                             
+                            drawDate(scrollProxy: scrollProxy)
+                            drawCategory(scrollProxy: scrollProxy)
                             
-                            HStack(alignment: .center, spacing: 0, content: {
-                                drawTitle("날짜", isEssential: true)
-                                    .frame(width: 100, height: 40, alignment: .leading)
-                                Text("\($vm.createdAt.wrappedValue.toEditNoteDate)")
-                            })
-                            .id(CALENDAR_ID)
-                            .contentShape(Rectangle())
-                            .onTapGesture {
-                                scrollProxy.scrollTo(LOCATION_ID, anchor: .top)
-                                isPresentCalendar.toggle()
-                            }
-                            .sheet(isPresented: $isPresentCalendar, onDismiss: {
-                                scrollProxy.scrollTo(CALENDAR_ID, anchor: .center)
-                            }, content: {
-                                VStack(alignment: .leading, spacing: 0) {
-                                    HStack(alignment: .center, spacing: 0) {
-                                        Text("날짜")
-                                        Spacer()
-                                        FPButton(text: "오늘", status: .able, size: .small, type: .textGray) {
-                                            $vm.createdAt.wrappedValue = Date()
-                                        }
-                                        FPButton(text: "완료", status: .able, size: .small, type: .textGray) {
-                                            $isPresentCalendar.wrappedValue = false
-                                        }
-                                    }
-                                    .sdPaddingHorizontal(24)
-                                    .sdPaddingTop(26)
-                                    
-                                    DatePicker(
-                                        "",
-                                        selection: $vm.createdAt,
-                                        displayedComponents: [.date]
-                                    )
-                                    .padding()
-                                    .datePickerStyle(.graphical)
-                                    .labelsHidden()
-                                    .frame(height: 400)
-                                    
-                                    Spacer()
-                                }
-                                .presentationDetents([.height(470), .large])
-                                .presentationDragIndicator(.visible)
-                            })
-                            
-                            HStack(alignment: .center, spacing: 0, content: {
-                                drawTitle("카테고리", isEssential: true)
-                                    .frame(width: 100, height: 40, alignment: .leading)
-                                
-                            })
                         }
                         .sdPaddingHorizontal(16)
                         .sdPaddingVertical(14)
                     }
                     
                 }
-                .sheet(isPresented: $isPresentCategoryList, onDismiss: {
-                    
-                }, content: {
-                    
-                })
                 .onChange(of: $vm.address.wrappedValue, perform: { value in
                     print("[SD] \(value)")
                 })
@@ -200,8 +149,110 @@ struct EditNoteView: View {
                     self.output.pop()
                 }
             }
-            vm.onAppear()
         }
+    }
+    
+    private func drawCategory(scrollProxy: ScrollViewProxy) -> some View {
+        HStack(alignment: .center, spacing: 0, content: {
+            drawTitle("카테고리", isEssential: true)
+                .frame(width: 100, height: 40, alignment: .leading)
+            if let selectedCategory = $vm.category.wrappedValue {
+                categoryItem(selectedCategory)
+            }
+            
+            Spacer()
+        })
+        .id(CATEGORY_ID)
+        .onTapGesture {
+            scrollProxy.scrollTo(LOCATION_ID, anchor: .top)
+            $isPresentCategoryList.wrappedValue = true
+        }
+        .sheet(isPresented: $isPresentCategoryList, onDismiss: {
+            scrollProxy.scrollTo(CALENDAR_ID, anchor: .center)
+        }, content: {
+            VStack(alignment: .leading, spacing: 0, content: {
+                HStack(alignment: .center, spacing: 0) {
+                    Text("카테고리")
+                    Spacer()
+                    FPButton(text: "편집", status: .able, size: .small, type: .textGray) {
+                        
+                    }
+                    FPButton(text: "완료", status: .able, size: .small, type: .textGray) {
+                        $isPresentCategoryList.wrappedValue = false
+                    }
+                }
+                .sdPaddingHorizontal(24)
+                .sdPaddingTop(26)
+                
+                ScrollView(.vertical, showsIndicators: false, content: {
+                    ForEach($vm.categories.wrappedValue, id: \.self) { item in
+                        HStack(alignment: .center, spacing: 0, content: {
+                            categoryItem(item)
+                            Spacer()
+                            if let selectedCategory = $vm.category.wrappedValue, selectedCategory == item {
+                                Image("SelectButton")
+                                    .resizable()
+                                    .frame(width: 16.0, height: 16.0, alignment: .center)
+                            }
+                        })
+                        .padding(16)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            $vm.category.wrappedValue = item
+                        }
+                    }
+                    .sdPaddingBottom(20)
+                })
+            })
+            .presentationDetents([.medium, .large])
+        })
+    }
+    
+    private func drawDate(scrollProxy: ScrollViewProxy) -> some View {
+        HStack(alignment: .center, spacing: 0, content: {
+            drawTitle("날짜", isEssential: true)
+                .frame(width: 100, height: 40, alignment: .leading)
+            Text("\($vm.createdAt.wrappedValue.toEditNoteDate)")
+            Spacer()
+        })
+        .id(CALENDAR_ID)
+        .contentShape(Rectangle())
+        .onTapGesture {
+            scrollProxy.scrollTo(LOCATION_ID, anchor: .top)
+            isPresentCalendar.toggle()
+        }
+        .sheet(isPresented: $isPresentCalendar, onDismiss: {
+            scrollProxy.scrollTo(CALENDAR_ID, anchor: .center)
+        }, content: {
+            VStack(alignment: .leading, spacing: 0) {
+                HStack(alignment: .center, spacing: 0) {
+                    Text("날짜")
+                    Spacer()
+                    FPButton(text: "오늘", status: .able, size: .small, type: .textGray) {
+                        $vm.createdAt.wrappedValue = Date()
+                    }
+                    FPButton(text: "완료", status: .able, size: .small, type: .textGray) {
+                        $isPresentCalendar.wrappedValue = false
+                    }
+                }
+                .sdPaddingHorizontal(24)
+                .sdPaddingTop(26)
+                
+                DatePicker(
+                    "",
+                    selection: $vm.createdAt,
+                    displayedComponents: [.date]
+                )
+                .padding()
+                .datePickerStyle(.graphical)
+                .labelsHidden()
+                .frame(height: 400)
+                
+                Spacer()
+            }
+            .presentationDetents([.height(470), .large])
+            .presentationDragIndicator(.visible)
+        })
     }
     
     private func drawHeader(_ geometry: GeometryProxy) -> some View {
@@ -238,15 +289,22 @@ struct EditNoteView: View {
     }
     
     
-    private func categoryItem(_ item: Category) -> some View {
-        return HStack(alignment: .center, spacing: 6) {
-            Image(item.pinType.pinType().pinWhite)
+    private func categoryItem(_ item: CategoryV2) -> some View {
+        return HStack(alignment: .center, spacing: 8) {
+            Image(item.icon)
                 .resizable()
-                .frame(both: 14.0, alignment: .center)
-                .colorMultiply(Color(hex: item.pinColor.pinColor().pinColorHex))
+                .frame(both: 16.0, alignment: .center)
+                .colorMultiply(Color(hex: item.color))
+                .contrast(3.0)
             Text(item.name)
-                .font(.kr11r)
-                .foregroundColor(.textColor1)
+                .font(.headline3)
+                .foregroundColor(Color(hex: item.color))
         }
+        .sdPaddingVertical(4)
+        .sdPaddingHorizontal(8)
+        .background(
+            RoundedRectangle(cornerRadius: 8)
+                .foregroundStyle(Color(hex: item.color).opacity(0.1))
+        )
     }
 }

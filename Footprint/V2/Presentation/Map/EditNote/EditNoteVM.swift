@@ -33,6 +33,7 @@ public struct FootprintContents {
 
 class EditNoteVM: BaseViewModel {
     @Injected(\.saveNoteUseCase) var saveNoteUseCase
+    @Injected(\.loadCategoriesUseCase) var loadCategoriesUseCase
     
     @Published var isAvailableToSave: Bool = false
     @Published var isStar: Bool = false
@@ -40,6 +41,8 @@ class EditNoteVM: BaseViewModel {
     @Published var content: String = ""
     @Published var address: String = "" { didSet { checkIsAvailableToSave() }}
     @Published var createdAt: Date = Date()
+    @Published var categories: [CategoryV2] = []
+    @Published var category: CategoryV2? = nil
     
     
     
@@ -47,28 +50,25 @@ class EditNoteVM: BaseViewModel {
     
     
     @Published var images: [UIImage] = []
-    @Published var category: Category
     @Published var isCategoryEditMode: Bool = false
     @Published var isPeopleWithEditMode: Bool = false
-    @Published var categories: [Category] = []
     @Published var peopleWith: [PeopleWith] = []
     @Published var type: EditFootprintType? = nil
     
     private var modifyId: ObjectId? = nil
     private var location: Location? = nil
-    private let realm: Realm
     private var placeId: String? = nil
     
     var viewEventTrigger: ((EditNoteView.ViewEventTrigger) -> ())? = nil
     
     override init() {
-        self.realm = R.realm
         
-        self.categories = []
-        self.category = realm.object(ofType: Category.self, forPrimaryKey: 0)!
         super.init()
         
-        self.loadCategories()
+        
+        // loadCategories
+        self.categories = loadCategoriesUseCase.execute()
+        self.category = self.categories.first
     }
     
     func saveNote() {
@@ -110,30 +110,31 @@ class EditNoteVM: BaseViewModel {
         self.location = location
         self.type = type
         
-        if case let .modify(contents) = self.type {
-            self.createdAt = contents.createdAt
-            self.title = contents.title
-            self.content = contents.content
-            self.images = contents.images
-            self.category = contents.category
-            self.peopleWith = contents.peopleWith
-            self.modifyId = contents.id
-            self.isStar = contents.isStar
-        } else if case let .new(name, placeId, address) = self.type {
-            self.title = name ?? ""
-            self.placeId = placeId
-            self.address = address ?? ""
-            
-            let item = self.realm.object(ofType: PeopleWith.self, forPrimaryKey: 0)
-            if let item = item {
-                self.peopleWith.append(item)
-            }
-        } else {
-            let item = self.realm.object(ofType: PeopleWith.self, forPrimaryKey: 0)
-            if let item = item {
-                self.peopleWith.append(item)
-            }
-        }
+        
+//        if case let .modify(contents) = self.type {
+//            self.createdAt = contents.createdAt
+//            self.title = contents.title
+//            self.content = contents.content
+//            self.images = contents.images
+//            self.category = contents.category
+//            self.peopleWith = contents.peopleWith
+//            self.modifyId = contents.id
+//            self.isStar = contents.isStar
+//        } else if case let .new(name, placeId, address) = self.type {
+//            self.title = name ?? ""
+//            self.placeId = placeId
+//            self.address = address ?? ""
+//            
+//            let item = self.realm.object(ofType: PeopleWith.self, forPrimaryKey: 0)
+//            if let item = item {
+//                self.peopleWith.append(item)
+//            }
+//        } else {
+//            let item = self.realm.object(ofType: PeopleWith.self, forPrimaryKey: 0)
+//            if let item = item {
+//                self.peopleWith.append(item)
+//            }
+//        }
         
         self.viewEventTrigger = viewEventTrigger
         
@@ -144,106 +145,6 @@ class EditNoteVM: BaseViewModel {
         self.createdAt = EditNoteTempStorage.createdAt
     }
     
-    
-    private func loadCategories() {
-        self.categories = []
-//        self.category = nil
-        //TODO: self.category 되어있는거 삭제되었을 때 문제되니까 nil로 했는데 이거 수정필요함 => beforeCategory 만들어두긴했는데 코드 안ㅅ짬 이거 사용하던지 다른방식 사용하던지 해야함. loadCategories()에 파라미터 넣어가지고 콜백으로 지금 있는거 지워져쓴지 안지워졌는지 체크해야할 듯(beforeCategory 사용하지 않고)
-        
-        
-        // 모든 객체 얻기
-        let dbCategories = realm.objects(Category.self).sorted(byKeyPath: "tag", ascending: true)
-        for i in dbCategories {
-            //MARK: 이슈 해결: realm 에 data를 넣을 때에는 copy(얕은 복사)를 해서 넣어야만 삭제시 삭제된 아이템 주소 참조가 안되어서 크래시발생 안함.
-            // 삭제했는데 같은 주소를 참조하기 때문에 계속 크래시 발생하기 때문
-            self.categories.append(Category(tag: i.tag, name: i.name, pinType: i.pinType.pinType(), pinColor: i.pinColor.pinColor()))
-        }
-        
-    }
-    
-    
-    func onAppear() {
-        
-    }
-    
-    func onClickSave() {
-        if self.title.isEmpty, self.content.isEmpty {
-//            self.dismiss()
-            return
-        }
-        if self.title.isEmpty {
-            self.title = "no_title".localized();
-        }
-        
-        guard let location = self.location, let type = self.type else { return }
-        // image save
-//        self.startProgress()
-        let imageUrls: List<String> = List<String>()
-        let currentTimeStamp = Int(Date().timeIntervalSince1970)
-        for idx in self.images.indices {
-            let imageName = "\(currentTimeStamp)_\(idx)"
-            let _ = ImageManager.shared.saveImage(image: self.images[idx], imageName: imageName)
-            imageUrls.append(imageName)
-        }
-        print("imageUrls: \(imageUrls)")
-        //TODO: modify 안되고 add 되는데 primaryKey issue일 것 = update: .modified 글로벌 서치해서 addCategoryViewModel 참고하기
-        let peopleWithIds: List<Int> = List<Int>()
-        peopleWithIds.append(objectsIn: self.peopleWith.map { selected in
-            selected.id
-        })
-        print("peopleWithIds: \(peopleWithIds)")
-        
-        try! realm.write {[weak self] in
-            guard let self = self else { return }
-            switch type {
-            case .new:
-                print("new")
-                let item = FootPrint(title: self.title, content: self.content, images: imageUrls, createdAt: self.createdAt, latitude: location.latitude, longitude: location.longitude, tag: category.tag, peopleWithIds: peopleWithIds, placeId: self.placeId, address: self.address, isStar: self.isStar)
-                realm.add(item)
-            case .modify(content: _):
-                print("modify")
-                if let id = self.modifyId, let item = self.realm.object(ofType: FootPrint.self, forPrimaryKey: id) {
-                    item.title = self.title
-                    item.tag = self.category.tag
-                    item.content = self.content
-                    item.createdAt = Int(self.createdAt.timeIntervalSince1970)
-                    item.images = imageUrls
-                    item.peopleWithIds = peopleWithIds
-                    item.isStar = self.isStar
-                    self.realm.add(item, update: .modified)
-                }
-            }
-//            self.stopProgress()
-//            self.dismiss()
-        }
-    }
-    
-    func onClickSelectCategory() {
-//        self.coordinator?.presentCategorySelectorView(type: .select(selectedCategory: self.category, callback: { [weak self] category in
-//            self?.category = category
-//        }))
-    }
-    
-    func onClickAddPeopleWith() {
-        var list: [PeopleWith] = self.peopleWith
-        if let idx = self.peopleWith.firstIndex(where: { item in
-            item.id == 0
-        }) {
-            list.remove(at: idx)
-        }
-//        self.coordinator?.presentPeopleWithSelectorView(type: .select(peopleWith: list, callback: {[weak self] res in
-//            guard let self = self else { return }
-//            self.peopleWith.removeAll()
-//            if res.isEmpty {
-//                let item = self.realm.object(ofType: PeopleWith.self, forPrimaryKey: 0)
-//                if let item = item {
-//                    self.peopleWith.append(item)
-//                }
-//            } else {
-//                self.peopleWith = res
-//            }
-//        }))
-    }
     
     private func photoPermissionCheck(_ callback: @escaping (Bool)->()) {
         let photoAuthStatus = PHPhotoLibrary.authorizationStatus()

@@ -8,6 +8,7 @@
 import Foundation
 
 enum UserDefaultKey: String {
+    case firstLaunch = "FIRST_LAUNCH"
     case launchBefore = "LAUNCH_BEFORE"
     case showingCategories = "SHOWING_CATEGORIES"
     case isSetFilter = "IS_SET_FILTER"
@@ -25,6 +26,8 @@ class Defaults {
     init() {
         
     }
+    @UserDefault<Bool>(key: UserDefaultKey.firstLaunch.rawValue, defaultValue: true)
+    var firstLaunch
     
     @UserDefault<Bool>(key: UserDefaultKey.launchBefore.rawValue, defaultValue: false)
     var launchBefore

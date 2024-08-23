@@ -33,10 +33,11 @@ class SplashVM2: BaseViewModel {
     }
     
     private func createDB() {
-        if userDefaultsManager.launchBefore {
+        if !userDefaultsManager.firstLaunch {
             return
         }
-        self.saveDefaultCategoriesUseCase.execute()   
+        userDefaultsManager.firstLaunch = false
+        self.saveDefaultCategoriesUseCase.execute()
     }
     
 }
