@@ -29,24 +29,30 @@ public struct FootprintContents {
     var isStar: Bool
 }
 
+   
 
 class EditNoteVM: BaseViewModel {
     @Injected(\.saveNoteUseCase) var saveNoteUseCase
     
+    @Published var isAvailableToSave: Bool = false
     @Published var isStar: Bool = false
-    @Published var title: String = ""
+    @Published var title: String = "" { didSet { checkIsAvailableToSave() }}
     @Published var content: String = ""
-    @Published var images: [UIImage] = []
-    @Published var category: Category
-    @Published var isKeyboardVisible = false
-    @Published var isCategoryEditMode: Bool = false
-    @Published var isPeopleWithEditMode: Bool = false
+    @Published var address: String = "" { didSet { checkIsAvailableToSave() }}
     @Published var createdAt: Date = Date()
     
+    
+    
+    
+    
+    
+    @Published var images: [UIImage] = []
+    @Published var category: Category
+    @Published var isCategoryEditMode: Bool = false
+    @Published var isPeopleWithEditMode: Bool = false
     @Published var categories: [Category] = []
     @Published var peopleWith: [PeopleWith] = []
     @Published var type: EditFootprintType? = nil
-    @Published var address: String = ""
     
     private var modifyId: ObjectId? = nil
     private var location: Location? = nil
@@ -63,17 +69,12 @@ class EditNoteVM: BaseViewModel {
         super.init()
         
         self.loadCategories()
-        print("[SD] EditNoteVM init - \(UUID().uuidString)")
     }
     
     func saveNote() {
+        if !self.isAvailableToSave { return }
         guard let location = location else { return }
-        
-        
-        
-        
-        
-        
+
         saveNoteUseCase.execute(
             NoteData(
                 title: self.title,
@@ -85,9 +86,15 @@ class EditNoteVM: BaseViewModel {
                 peopleWithIds: List<Int>(),
                 isStar: self.isStar
             ))
+        EditNoteTempStorage.clear()
         viewEventTrigger?(.pop)
     }
     
+    private func checkIsAvailableToSave() {
+        self.isAvailableToSave = false
+        if self.address.isEmpty || self.title.isEmpty { return }
+        self.isAvailableToSave = true
+    }
     
     
     
@@ -129,6 +136,12 @@ class EditNoteVM: BaseViewModel {
         }
         
         self.viewEventTrigger = viewEventTrigger
+        
+        self.isStar = EditNoteTempStorage.isStar
+        self.title = EditNoteTempStorage.title
+        self.content = EditNoteTempStorage.content
+        self.address = EditNoteTempStorage.address
+        self.createdAt = EditNoteTempStorage.createdAt
     }
     
     
@@ -153,73 +166,7 @@ class EditNoteVM: BaseViewModel {
         
     }
     
-    func onClose() {
-        self.isKeyboardVisible = false
-//        self.alert(.yesOrNo, title: nil, description: "alert_out_without_save".localized()) {[weak self] isClose in
-//            guard let self = self else { return }
-//            if isClose {
-//                self.dismiss()
-//            }
-//        }
-    }
-    
-    func onClickGallery() {
-        self.isKeyboardVisible = false
-        self.photoPermissionCheck {[weak self] isAllow in
-            guard let self = self else { return }
-            if isAllow {
-//                self.coordinator?.presentGalleryView(type: .multi, onClickItem: { [weak self] (items: [GalleryItem]) in
-//                    guard let self = self else { return }
-//                    for item in items {
-//                        if !self.images.contains(item.image) {
-//                            self.images.append(item.image)
-//                        }
-//                    }
-//                })
-            } else {
-//                self.alert(.ok, title: nil, description: "alert_permission_album".localized())
-            }
-        }
-    }
-    
-    func removeImage(_ item: UIImage) {
-        self.isKeyboardVisible = false
-//        self.alert(.yesOrNo, title: nil, description: "alert_delete".localized()) {[weak self] allowRemove in
-//            guard let self = self else { return }
-//            if allowRemove {
-//                for idx in self.images.indices {
-//                    if self.images[idx] == item {
-//                        self.images.remove(at: idx)
-//                        break
-//                    }
-//                }
-//            }
-//        }
-    }
-    
-    func onClickDelete(_ id: ObjectId) {
-//        self.alert(.yesOrNo, title: "alert_delete".localized(), description: "alert_delete_item".localized("\(Defaults.deleteDays)")) {[weak self] isDelete in
-//            guard let self = self else { return }
-//            if isDelete {
-//                guard let item = self.realm.object(ofType: FootPrint.self, forPrimaryKey: id) else {
-//                    self.alert(.ok, title: "alert_fail".localized())
-//                    return
-//                }
-//                try! self.realm.write {[weak self] in
-//                    guard let self = self else { return }
-//                    item.deleteTime = Int(Date().timeIntervalSince1970)
-//                    self.realm.add(item, update: .modified)
-//                    self.stopProgress()
-//                    self.dismiss()
-//                }
-//            } else {
-//                return
-//            }
-//        }
-    }
-    
     func onClickSave() {
-        self.isKeyboardVisible = false
         if self.title.isEmpty, self.content.isEmpty {
 //            self.dismiss()
             return

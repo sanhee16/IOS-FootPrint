@@ -80,6 +80,8 @@
 		2696F4E82C77540800F56E73 /* NoteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2696F4E72C77540800F56E73 /* NoteData.swift */; };
 		2696F4EC2C77556800F56E73 /* SaveNoteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2696F4EB2C77556800F56E73 /* SaveNoteUseCase.swift */; };
 		2696F4EF2C7757F300F56E73 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2696F4EE2C7757F300F56E73 /* DIContainer.swift */; };
+		269CA5542C78A11500366005 /* EditNoteTempStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269CA5532C78A11500366005 /* EditNoteTempStorage.swift */; };
+		269CA5562C78A35D00366005 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269CA5552C78A35D00366005 /* Note.swift */; };
 		26A238FA2A13743700D7CF49 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26A238F92A13743700D7CF49 /* GoogleService-Info.plist */; };
 		26BD8FCB29694CE5005F7E5C /* ApiInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26BD8FCA29694CE5005F7E5C /* ApiInfo.plist */; };
 		26BFFD942C5F8C400001B02B /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 26BFFD932C5F8C400001B02B /* Kingfisher */; };
@@ -246,6 +248,8 @@
 		2696F4E72C77540800F56E73 /* NoteData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteData.swift; sourceTree = "<group>"; };
 		2696F4EB2C77556800F56E73 /* SaveNoteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNoteUseCase.swift; sourceTree = "<group>"; };
 		2696F4EE2C7757F300F56E73 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
+		269CA5532C78A11500366005 /* EditNoteTempStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteTempStorage.swift; sourceTree = "<group>"; };
+		269CA5552C78A35D00366005 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		26A238F92A13743700D7CF49 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		26BD8FCA29694CE5005F7E5C /* ApiInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiInfo.plist; sourceTree = "<group>"; };
 		26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIExtension.swift; sourceTree = "<group>"; };
@@ -610,6 +614,7 @@
 			children = (
 				267CC1952C67823E00D6015E /* EditNoteView.swift */,
 				267CC1972C67824200D6015E /* EditNoteVM.swift */,
+				269CA5532C78A11500366005 /* EditNoteTempStorage.swift */,
 			);
 			path = EditNote;
 			sourceTree = "<group>";
@@ -677,6 +682,7 @@
 		2696F4E62C7753E900F56E73 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				269CA5552C78A35D00366005 /* Note.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1237,6 +1243,7 @@
 				631D752F29667A4D00464F33 /* PeopleWithListViewModel.swift in Sources */,
 				631D752D29667A4700464F33 /* PeopleWithListView.swift in Sources */,
 				631D752A296661FE00464F33 /* MainMapOptionViewModel.swift in Sources */,
+				269CA5562C78A35D00366005 /* Note.swift in Sources */,
 				263FADC32C7164B700AE9E73 /* TabBarService.swift in Sources */,
 				268546E82A28DB1200BDA2EA /* ReviewView.swift in Sources */,
 				63D32FCC29CA9E390049F567 /* FirestoreExtension.swift in Sources */,
@@ -1258,6 +1265,7 @@
 				268546EA2A28DB1800BDA2EA /* ReviewViewModel.swift in Sources */,
 				63D32FC629CA92B60049F567 /* PremiumCodeView.swift in Sources */,
 				63F132492914A18800B3A9E0 /* SwiftExtension.swift in Sources */,
+				269CA5542C78A11500366005 /* EditNoteTempStorage.swift in Sources */,
 				2619FE8A2940D6AC00D24778 /* CheckPermissionView.swift in Sources */,
 				267CC1792C66F28300D6015E /* Coordinator.swift in Sources */,
 				267CC1962C67823E00D6015E /* EditNoteView.swift in Sources */,
