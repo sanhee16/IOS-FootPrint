@@ -14,8 +14,8 @@ class TabBarService: ObservableObject {
         
     }
     
-    func toggleTabBar() {
-        self.isShowTabBar.toggle()
+    func setIsShowTabBar(_ isShow: Bool) {
+        self.isShowTabBar = isShow
     }
 }
 

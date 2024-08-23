@@ -101,7 +101,7 @@ struct MapView2: View {
                             Topbar("위치 선택", type: .back) {
                                 EditNoteTempStorage.clear()
                                 self.mapStatus = .normal
-                                tabBarService.toggleTabBar()
+                                tabBarService.setIsShowTabBar(true)
                             }
                             Text("지도를 움직여 위치를 설정하세요.")
                                 .font(.body2)
@@ -128,7 +128,7 @@ struct MapView2: View {
     //                        output.goToSelectLocation()
                             withAnimation(.smooth) {
                                 self.mapStatus = .adding
-                                tabBarService.toggleTabBar()
+                                tabBarService.setIsShowTabBar(false)
                             }
                         }
                         .sdPadding(top: 0, leading: 16, bottom: 8, trailing: 16)

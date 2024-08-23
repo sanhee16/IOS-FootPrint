@@ -79,15 +79,12 @@ struct EditNoteView: View {
                             
                         }
                         .sdPaddingHorizontal(16)
-                        .sdPaddingVertical(14)
+                        .sdPaddingBottom(14)
                     }
                     
                 }
-                .onChange(of: $vm.address.wrappedValue, perform: { value in
-                    print("[SD] \(value)")
-                })
                 .padding(EdgeInsets(top: safeTop, leading: 0, bottom: 0, trailing: 0))
-                .ignoresSafeArea(.container, edges: [.top, .bottom])
+                .ignoresSafeArea(.keyboard, edges: [.bottom])
                 .frame(width: geometry.size.width, alignment: .leading)
                 .toolbar {
                     ToolbarItemGroup(placement: .keyboard) {
