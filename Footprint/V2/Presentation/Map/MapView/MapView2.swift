@@ -138,6 +138,7 @@ struct MapView2: View {
                             
                             FPButton(text: "여기에 발자국 남기기", status: .press, size: .large, type: .solid) {
                                 if let location = $mapManager.centerPosition.wrappedValue {
+                                    EditNoteTempStorage.address = $mapManager.centerAddress.wrappedValue
                                     output.goToEditNote(
                                         Location(latitude: location.latitude, longitude: location.longitude),
                                         .new(name: nil, placeId: nil, address: $mapManager.centerAddress.wrappedValue)

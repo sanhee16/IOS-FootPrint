@@ -747,10 +747,10 @@
 			isa = PBXGroup;
 			children = (
 				269CA55E2C78A58B00366005 /* SaveDefaultCategoriesUseCase.swift */,
+				269CA5662C78A5FE00366005 /* UpdateCategoryUseCase.swift */,
 				269CA5602C78A5B900366005 /* LoadCategoriesUseCase.swift */,
 				269CA5622C78A5D400366005 /* SaveCategoryUseCase.swift */,
 				269CA5642C78A5EC00366005 /* DeleteCategoryUseCase.swift */,
-				269CA5662C78A5FE00366005 /* UpdateCategoryUseCase.swift */,
 			);
 			path = CategoryUseCases;
 			sourceTree = "<group>";

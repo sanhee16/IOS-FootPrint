@@ -64,14 +64,8 @@ struct EditNoteView: View {
                             FPTextField(placeHolder: "".localized(), text: $vm.address, fieldStyle: .none, lineStyle: .multi(limit: nil), isDisabled: true)
                             
                             FPButton(text: "발자국 위치 확인하기", status: .able, size: .large, type: .lightSolid) {
+                                vm.saveTempStorage()
                                 self.output.pop()
-                                EditNoteTempStorage.save(
-                                    title: $vm.title.wrappedValue,
-                                    isStar: $vm.isStar.wrappedValue,
-                                    content: $vm.content.wrappedValue,
-                                    address: $vm.address.wrappedValue,
-                                    createdAt: $vm.createdAt.wrappedValue
-                                )
                             }
                             .sdPaddingVertical(8)
                             .id(LOCATION_ID)

@@ -96,55 +96,30 @@ class EditNoteVM: BaseViewModel {
         self.isAvailableToSave = true
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     func setValue(location: Location, type: EditFootprintType, viewEventTrigger: @escaping ((EditNoteView.ViewEventTrigger) -> ())) {
         self.location = location
         self.type = type
         
-        
-//        if case let .modify(contents) = self.type {
-//            self.createdAt = contents.createdAt
-//            self.title = contents.title
-//            self.content = contents.content
-//            self.images = contents.images
-//            self.category = contents.category
-//            self.peopleWith = contents.peopleWith
-//            self.modifyId = contents.id
-//            self.isStar = contents.isStar
-//        } else if case let .new(name, placeId, address) = self.type {
-//            self.title = name ?? ""
-//            self.placeId = placeId
-//            self.address = address ?? ""
-//            
-//            let item = self.realm.object(ofType: PeopleWith.self, forPrimaryKey: 0)
-//            if let item = item {
-//                self.peopleWith.append(item)
-//            }
-//        } else {
-//            let item = self.realm.object(ofType: PeopleWith.self, forPrimaryKey: 0)
-//            if let item = item {
-//                self.peopleWith.append(item)
-//            }
-//        }
-        
         self.viewEventTrigger = viewEventTrigger
-        
+        print("self.address: \(EditNoteTempStorage.address)")
         self.isStar = EditNoteTempStorage.isStar
         self.title = EditNoteTempStorage.title
         self.content = EditNoteTempStorage.content
         self.address = EditNoteTempStorage.address
         self.createdAt = EditNoteTempStorage.createdAt
+        self.category = EditNoteTempStorage.category ?? self.categories.first
     }
     
+    func saveTempStorage() {
+        EditNoteTempStorage.save(
+            title: self.title,
+            isStar: self.isStar,
+            content: self.content,
+            address: self.address,
+            createdAt: self.createdAt,
+            category: self.category
+        )
+    }
     
     private func photoPermissionCheck(_ callback: @escaping (Bool)->()) {
         let photoAuthStatus = PHPhotoLibrary.authorizationStatus()

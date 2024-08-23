@@ -13,6 +13,7 @@ class EditNoteTempStorage {
     static var content: String = ""
     static var address: String = ""
     static var createdAt: Date = Date()
+    static var category: CategoryV2? = nil
     
 
     static func clear() {
@@ -21,6 +22,7 @@ class EditNoteTempStorage {
         self.content = ""
         self.address = ""
         self.createdAt = Date()
+        self.category = nil
     }
     
     static func save(
@@ -28,12 +30,14 @@ class EditNoteTempStorage {
         isStar: Bool,
         content: String,
         address: String,
-        createdAt: Date
+        createdAt: Date,
+        category: CategoryV2?
     ) {
         self.title = title
         self.isStar = isStar
         self.content = content
         self.address = address
         self.createdAt = createdAt
+        self.category = category
     }
 }
