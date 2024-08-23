@@ -62,15 +62,15 @@ class Util {
     }
     
     static func getSettingStatus(_ flag: SettingFlag) -> Bool {
-        let settingFlag: UInt8 = Defaults.settingFlag
+        let settingFlag: UInt8 = Defaults.shared.settingFlag
         return (settingFlag & flag.option) > 0
     }
     
     // bit flag: https://boycoding.tistory.com/164
     static func setSettingStatus(_ flag: SettingFlag, isOn: Bool) {
-        let settingFlag: UInt8 = Defaults.settingFlag
+        let settingFlag: UInt8 = Defaults.shared.settingFlag
         let res: UInt8 = isOn ? (settingFlag | flag.option) : (settingFlag & (~flag.option))
-        Defaults.settingFlag = res
+        Defaults.shared.settingFlag = res
     }
 }
 

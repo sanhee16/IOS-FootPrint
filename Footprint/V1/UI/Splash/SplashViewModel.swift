@@ -29,7 +29,7 @@ class SplashViewModel: BaseViewModelV1 {
 //        self.locationManager.allowsBackgroundLocationUpdates = false
         self.realm = R.realm
         super.init(coordinator)
-        print("- splash settingStatus : \(Defaults.settingFlag)")
+        print("- splash settingStatus : \(Defaults.shared.settingFlag)")
         print("- splash settingStatus FILTER: \(Util.getSettingStatus(.FILTER))")
         print("- splash settingStatus SEARCH_BAR: \(Util.getSettingStatus(.SEARCH_BAR))")
         print("- splash settingStatus REVIEW: \(Util.getSettingStatus(.REVIEW))")
@@ -38,9 +38,9 @@ class SplashViewModel: BaseViewModelV1 {
     func onAppear() {
         checkNetworkConnect() {[weak self] in
             guard let self = self else { return }
-            if !Defaults.launchBefore {
-                Defaults.launchBefore = true
-                Defaults.premiumCode = ""
+            if !Defaults.shared.launchBefore {
+                Defaults.shared.launchBefore = true
+                Defaults.shared.premiumCode = ""
                 self.firstLaunchTask()
                 self.locationManager.requestWhenInUseAuthorization()
                 self.startRepeatTimer()
@@ -69,15 +69,15 @@ class SplashViewModel: BaseViewModelV1 {
                 Category(tag: 6, name: "cafe".localized(), pinType: .coffee, pinColor: PinColor.pin6)
             ]
             
-            var showingCategories = Defaults.showingCategories
-            Defaults.settingFlag = 0b11111111
-            Defaults.deleteDays = 30
+            var showingCategories = Defaults.shared.showingCategories
+            Defaults.shared.settingFlag = 0b11111111
+            Defaults.shared.deleteDays = 30
             
             for category in categories {
                 showingCategories.append(category.tag)
                 realm.add(category)
             }
-            Defaults.showingCategories = showingCategories
+            Defaults.shared.showingCategories = showingCategories
         }
     }
     
@@ -118,7 +118,7 @@ class SplashViewModel: BaseViewModelV1 {
         let todayTime = Int(today.timeIntervalSince1970)
         
         let deleteTravels = self.realm.objects(Travel.self).filter { item in
-            if let deleteDate = Calendar.current.date(byAdding: .day, value: Defaults.deleteDays, to: Date(timeIntervalSince1970: Double(item.deleteTime))) {
+            if let deleteDate = Calendar.current.date(byAdding: .day, value: Defaults.shared.deleteDays, to: Date(timeIntervalSince1970: Double(item.deleteTime))) {
                 let deleteTime = Int(deleteDate.timeIntervalSince1970)
                 print("deleteTime: \(deleteTime) / todayTime: \(todayTime)")
                 return (item.deleteTime > 0) && (deleteTime < todayTime)
@@ -126,7 +126,7 @@ class SplashViewModel: BaseViewModelV1 {
             return false
         }
         let deleteFootprints = self.realm.objects(FootPrint.self).filter { item in
-            if let deleteDate = Calendar.current.date(byAdding: .day, value: Defaults.deleteDays, to: Date(timeIntervalSince1970: Double(item.deleteTime))) {
+            if let deleteDate = Calendar.current.date(byAdding: .day, value: Defaults.shared.deleteDays, to: Date(timeIntervalSince1970: Double(item.deleteTime))) {
                 let deleteTime = Int(deleteDate.timeIntervalSince1970)
                 print("deleteTime: \(deleteTime) / todayTime: \(todayTime)")
                 return (item.deleteTime > 0) && (deleteTime < todayTime)

@@ -162,7 +162,7 @@ class EditFootprintViewModel: BaseViewModelV1 {
     }
     
     func onClickDelete(_ id: ObjectId) {
-        self.alert(.yesOrNo, title: "alert_delete".localized(), description: "alert_delete_item".localized("\(Defaults.deleteDays)")) {[weak self] isDelete in
+        self.alert(.yesOrNo, title: "alert_delete".localized(), description: "alert_delete_item".localized("\(Defaults.shared.deleteDays)")) {[weak self] isDelete in
             guard let self = self else { return }
             if isDelete {
                 guard let item = self.realm.object(ofType: FootPrint.self, forPrimaryKey: id) else {

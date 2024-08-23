@@ -49,7 +49,7 @@ class TrashViewModel: BaseViewModelV1 {
         
         for i in travelList {
             var leftDays: Int = 0
-            if let deleteDate = Calendar.current.date(byAdding: .day, value: Defaults.deleteDays, to: Date(timeIntervalSince1970: Double(i.deleteTime))) {
+            if let deleteDate = Calendar.current.date(byAdding: .day, value: Defaults.shared.deleteDays, to: Date(timeIntervalSince1970: Double(i.deleteTime))) {
                 let limit = Int(deleteDate.timeIntervalSince1970)
                 leftDays = (limit - todayTime) / 60 / 60 / 24
             }
@@ -58,7 +58,7 @@ class TrashViewModel: BaseViewModelV1 {
         }
         for i in footprintList {
             var leftDays: Int = 0
-            if let deleteDate = Calendar.current.date(byAdding: .day, value: Defaults.deleteDays, to: Date(timeIntervalSince1970: Double(i.deleteTime))) {
+            if let deleteDate = Calendar.current.date(byAdding: .day, value: Defaults.shared.deleteDays, to: Date(timeIntervalSince1970: Double(i.deleteTime))) {
                 let limit = Int(deleteDate.timeIntervalSince1970)
                 leftDays = (limit - todayTime) / 60 / 60 / 24
             }

@@ -55,7 +55,7 @@ class PremiumCodeViewModel: BaseViewModelV1 {
                     return
                 }
                 
-                Defaults.premiumCode = self.code
+                Defaults.shared.premiumCode = self.code
                 self.alert(.ok, title: "프리미엄 등록이 완료되었습니다.") {[weak self] _ in
                     self?.dismiss()
                 }

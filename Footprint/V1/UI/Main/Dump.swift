@@ -365,7 +365,7 @@ import SDSwiftUIPack
 //        self.categories = []
 //        
 //        // 모든 객체 얻기
-//        self.showingCategories = Defaults.showingCategories
+//        self.showingCategories = Defaults.shared.showingCategories
 //        let dbCategories = realm.objects(Category.self).sorted(byKeyPath: "tag", ascending: true)
 //        for i in dbCategories {
 //            self.categories.append(Category(tag: i.tag, name: i.name, pinType: i.pinType.pinType(), pinColor: i.pinColor.pinColor()))
@@ -379,7 +379,7 @@ import SDSwiftUIPack
 //        } else {
 //            self.showingCategories.append(category.tag)
 //        }
-//        Defaults.showingCategories = self.showingCategories
+//        Defaults.shared.showingCategories = self.showingCategories
 //        self.loadAllMarkers()
 //    }
 //    

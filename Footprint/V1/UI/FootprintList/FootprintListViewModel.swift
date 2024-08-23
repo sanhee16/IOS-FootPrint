@@ -21,7 +21,7 @@ class FootprintListViewModel: BaseViewModelV1 {
     
     override init(_ coordinator: AppCoordinatorV1) {
         self.realm = R.realm
-        self.isShowStarOnly = Defaults.isShowStarOnly
+        self.isShowStarOnly = Defaults.shared.isShowStarOnly
         super.init(coordinator)
         self.loadAllItems()
     }
@@ -43,8 +43,8 @@ class FootprintListViewModel: BaseViewModelV1 {
     }
     
     func loadAllItems() {
-        let filterPeopleWithIds: [Int] = Defaults.filterPeopleIds
-        let filterCategoryIds: [Int] = Defaults.filterCategoryIds
+        let filterPeopleWithIds: [Int] = Defaults.shared.filterPeopleIds
+        let filterCategoryIds: [Int] = Defaults.shared.filterCategoryIds
         print("filterPeopleWithIds: \(filterPeopleWithIds), filterCategoryIds: \(filterCategoryIds)")
         
         if self.isShowStarOnly {
@@ -92,7 +92,7 @@ class FootprintListViewModel: BaseViewModelV1 {
     
     func onClickShowStarOnly() {
         let change = !self.isShowStarOnly
-        Defaults.isShowStarOnly = change
+        Defaults.shared.isShowStarOnly = change
         self.isShowStarOnly = change
         
         self.loadAllItems()

@@ -11,5 +11,5 @@ import RealmSwift
 protocol NoteRepository {
     func saveNotes(_ data: NoteData)
     func deleteNote(_ id: String)
-    func getNotes() -> [NoteData]
+    func loadNotes() -> [NoteData]
 }

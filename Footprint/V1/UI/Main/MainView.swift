@@ -72,7 +72,7 @@ struct MainView: View {
                 default:
                     SettingView(vm: self.settingVm)
                 }
-                if Defaults.premiumCode.isEmpty && $vm.isShowAds.wrappedValue {
+                if Defaults.shared.premiumCode.isEmpty && $vm.isShowAds.wrappedValue {
                     GADBanner().frame(width: GADAdSizeBanner.size.width, height: GADAdSizeBanner.size.height)
                 }
 

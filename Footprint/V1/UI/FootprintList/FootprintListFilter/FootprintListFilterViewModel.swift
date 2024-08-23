@@ -47,9 +47,9 @@ class FootprintListFilterViewModel: BaseViewModelV1 {
             }
         }
         
-        Defaults.isSetFilter = true
-        Defaults.filterCategoryIds = categoryIds
-        Defaults.filterPeopleIds = peopleWithIds
+        Defaults.shared.isSetFilter = true
+        Defaults.shared.filterCategoryIds = categoryIds
+        Defaults.shared.filterPeopleIds = peopleWithIds
         self.dismiss()
     }
     
@@ -61,7 +61,7 @@ class FootprintListFilterViewModel: BaseViewModelV1 {
         peopleWithList.removeAll()
         categoryList.removeAll()
         
-        if !Defaults.isSetFilter {
+        if !Defaults.shared.isSetFilter {
             for i in realm.objects(PeopleWith.self) {
                 peopleWithList.append((item: i, isSelected: true))
             }
@@ -69,8 +69,8 @@ class FootprintListFilterViewModel: BaseViewModelV1 {
                 categoryList.append((item: i, isSelected: true))
             }
         } else {
-            let list1 = Defaults.filterPeopleIds
-            let list2 = Defaults.filterCategoryIds
+            let list1 = Defaults.shared.filterPeopleIds
+            let list2 = Defaults.shared.filterCategoryIds
             
             for i in realm.objects(PeopleWith.self) {
                 if list1.contains(where: { id in

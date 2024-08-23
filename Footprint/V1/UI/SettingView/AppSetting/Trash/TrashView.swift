@@ -26,7 +26,7 @@ struct TrashView: View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 0) {
                 drawHeader(geometry)
-                Text("trash_description".localized("\(Defaults.deleteDays)"))
+                Text("trash_description".localized("\(Defaults.shared.deleteDays)"))
                     .font(.kr11r)
                     .foregroundColor(.textColor1)
                     .padding(EdgeInsets(top: 0, leading: 20, bottom: 8, trailing: 20))

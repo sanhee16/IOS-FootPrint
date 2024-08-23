@@ -82,6 +82,15 @@
 		2696F4EF2C7757F300F56E73 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2696F4EE2C7757F300F56E73 /* DIContainer.swift */; };
 		269CA5542C78A11500366005 /* EditNoteTempStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269CA5532C78A11500366005 /* EditNoteTempStorage.swift */; };
 		269CA5562C78A35D00366005 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269CA5552C78A35D00366005 /* Note.swift */; };
+		269CA5582C78A43300366005 /* CategoryV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269CA5572C78A43300366005 /* CategoryV2.swift */; };
+		269CA55A2C78A4D900366005 /* RealCategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269CA5592C78A4D900366005 /* RealCategoryRepository.swift */; };
+		269CA55C2C78A4DF00366005 /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269CA55B2C78A4DF00366005 /* CategoryRepository.swift */; };
+		269CA55F2C78A58B00366005 /* SaveDefaultCategoriesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269CA55E2C78A58B00366005 /* SaveDefaultCategoriesUseCase.swift */; };
+		269CA5612C78A5B900366005 /* LoadCategoriesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269CA5602C78A5B900366005 /* LoadCategoriesUseCase.swift */; };
+		269CA5632C78A5D400366005 /* SaveCategoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269CA5622C78A5D400366005 /* SaveCategoryUseCase.swift */; };
+		269CA5652C78A5EC00366005 /* DeleteCategoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269CA5642C78A5EC00366005 /* DeleteCategoryUseCase.swift */; };
+		269CA5672C78A5FE00366005 /* UpdateCategoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269CA5662C78A5FE00366005 /* UpdateCategoryUseCase.swift */; };
+		269CA56A2C78A8B600366005 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269CA5692C78A8B600366005 /* UserDefaultsManager.swift */; };
 		26A238FA2A13743700D7CF49 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26A238F92A13743700D7CF49 /* GoogleService-Info.plist */; };
 		26BD8FCB29694CE5005F7E5C /* ApiInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26BD8FCA29694CE5005F7E5C /* ApiInfo.plist */; };
 		26BFFD942C5F8C400001B02B /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 26BFFD932C5F8C400001B02B /* Kingfisher */; };
@@ -141,7 +150,7 @@
 		63F132482914A18800B3A9E0 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F132422914A18800B3A9E0 /* AlertView.swift */; };
 		63F132492914A18800B3A9E0 /* SwiftExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F132432914A18800B3A9E0 /* SwiftExtension.swift */; };
 		63F1324A2914A18800B3A9E0 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F132442914A18800B3A9E0 /* Util.swift */; };
-		63F1324B2914A18800B3A9E0 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F132452914A18800B3A9E0 /* Defaults.swift */; };
+		63F1324B2914A18800B3A9E0 /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F132452914A18800B3A9E0 /* UserDefault.swift */; };
 		63F1324C2914A18800B3A9E0 /* CommonApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F132462914A18800B3A9E0 /* CommonApi.swift */; };
 		63F132502914A18F00B3A9E0 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F1324E2914A18F00B3A9E0 /* BaseViewController.swift */; };
 		63F132512914A18F00B3A9E0 /* BaseViewModelV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F1324F2914A18F00B3A9E0 /* BaseViewModelV1.swift */; };
@@ -250,6 +259,15 @@
 		2696F4EE2C7757F300F56E73 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
 		269CA5532C78A11500366005 /* EditNoteTempStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteTempStorage.swift; sourceTree = "<group>"; };
 		269CA5552C78A35D00366005 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		269CA5572C78A43300366005 /* CategoryV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryV2.swift; sourceTree = "<group>"; };
+		269CA5592C78A4D900366005 /* RealCategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealCategoryRepository.swift; sourceTree = "<group>"; };
+		269CA55B2C78A4DF00366005 /* CategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRepository.swift; sourceTree = "<group>"; };
+		269CA55E2C78A58B00366005 /* SaveDefaultCategoriesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveDefaultCategoriesUseCase.swift; sourceTree = "<group>"; };
+		269CA5602C78A5B900366005 /* LoadCategoriesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadCategoriesUseCase.swift; sourceTree = "<group>"; };
+		269CA5622C78A5D400366005 /* SaveCategoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveCategoryUseCase.swift; sourceTree = "<group>"; };
+		269CA5642C78A5EC00366005 /* DeleteCategoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCategoryUseCase.swift; sourceTree = "<group>"; };
+		269CA5662C78A5FE00366005 /* UpdateCategoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCategoryUseCase.swift; sourceTree = "<group>"; };
+		269CA5692C78A8B600366005 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		26A238F92A13743700D7CF49 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		26BD8FCA29694CE5005F7E5C /* ApiInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiInfo.plist; sourceTree = "<group>"; };
 		26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIExtension.swift; sourceTree = "<group>"; };
@@ -307,7 +325,7 @@
 		63F132422914A18800B3A9E0 /* AlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		63F132432914A18800B3A9E0 /* SwiftExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftExtension.swift; sourceTree = "<group>"; };
 		63F132442914A18800B3A9E0 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
-		63F132452914A18800B3A9E0 /* Defaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
+		63F132452914A18800B3A9E0 /* UserDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
 		63F132462914A18800B3A9E0 /* CommonApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonApi.swift; sourceTree = "<group>"; };
 		63F1324E2914A18F00B3A9E0 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		63F1324F2914A18F00B3A9E0 /* BaseViewModelV1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewModelV1.swift; sourceTree = "<group>"; };
@@ -531,6 +549,7 @@
 		266EDDD72C64EA9A006CF09B /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				269CA5682C78A8AB00366005 /* UserDefaults */,
 				2696F4E52C7753E100F56E73 /* Entities */,
 				2696F4DF2C77538B00F56E73 /* Repositories */,
 			);
@@ -659,6 +678,7 @@
 			isa = PBXGroup;
 			children = (
 				2696F4E02C7753A000F56E73 /* RealNoteRepository.swift */,
+				269CA5592C78A4D900366005 /* RealCategoryRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -667,6 +687,7 @@
 			isa = PBXGroup;
 			children = (
 				2696F4E32C7753C400F56E73 /* NoteRepository.swift */,
+				269CA55B2C78A4DF00366005 /* CategoryRepository.swift */,
 			);
 			path = RepositoryProtocols;
 			sourceTree = "<group>";
@@ -675,6 +696,7 @@
 			isa = PBXGroup;
 			children = (
 				2696F4E72C77540800F56E73 /* NoteData.swift */,
+				269CA5572C78A43300366005 /* CategoryV2.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -690,6 +712,7 @@
 		2696F4E92C77555000F56E73 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				269CA55D2C78A56D00366005 /* CategoryUseCases */,
 				2696F4EA2C77555D00F56E73 /* NoteUseCases */,
 			);
 			path = UseCases;
@@ -709,6 +732,27 @@
 				2696F4EE2C7757F300F56E73 /* DIContainer.swift */,
 			);
 			path = Injected;
+			sourceTree = "<group>";
+		};
+		269CA55D2C78A56D00366005 /* CategoryUseCases */ = {
+			isa = PBXGroup;
+			children = (
+				269CA55E2C78A58B00366005 /* SaveDefaultCategoriesUseCase.swift */,
+				269CA5602C78A5B900366005 /* LoadCategoriesUseCase.swift */,
+				269CA5622C78A5D400366005 /* SaveCategoryUseCase.swift */,
+				269CA5642C78A5EC00366005 /* DeleteCategoryUseCase.swift */,
+				269CA5662C78A5FE00366005 /* UpdateCategoryUseCase.swift */,
+			);
+			path = CategoryUseCases;
+			sourceTree = "<group>";
+		};
+		269CA5682C78A8AB00366005 /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				63F132452914A18800B3A9E0 /* UserDefault.swift */,
+				269CA5692C78A8B600366005 /* UserDefaultsManager.swift */,
+			);
+			path = UserDefaults;
 			sourceTree = "<group>";
 		};
 		26FAB54B2C6B408C006304AE /* SelectLocation */ = {
@@ -894,7 +938,6 @@
 			children = (
 				63F132402914A18800B3A9E0 /* Alert */,
 				63F132442914A18800B3A9E0 /* Util.swift */,
-				63F132452914A18800B3A9E0 /* Defaults.swift */,
 				63F132432914A18800B3A9E0 /* SwiftExtension.swift */,
 				26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */,
 				264B70BF291F8E9C00CDAF9F /* C.swift */,
@@ -1172,6 +1215,7 @@
 				63B1FAFD2914B324007E94B6 /* GalleryViewModel.swift in Sources */,
 				264EEF592925128A00B89624 /* AddCategoryViewModel.swift in Sources */,
 				266EDDD92C64EAA9006CF09B /* FootprintApp.swift in Sources */,
+				269CA55F2C78A58B00366005 /* SaveDefaultCategoriesUseCase.swift in Sources */,
 				63E2756929502DFA00E4AABC /* PinchZoom.swift in Sources */,
 				267CC1822C66FA1200D6015E /* GoogleMapView2.swift in Sources */,
 				63E848A3295ABE7E0037D7A3 /* EditTravelViewModel.swift in Sources */,
@@ -1209,6 +1253,7 @@
 				63F132472914A18800B3A9E0 /* AlertViewModel.swift in Sources */,
 				266EDDE62C64EB46006CF09B /* MainVM2.swift in Sources */,
 				265924C729445BD9001E7025 /* FootprintListView.swift in Sources */,
+				269CA55A2C78A4D900366005 /* RealCategoryRepository.swift in Sources */,
 				63D7EF1F296FC1EF00D72F12 /* SError.swift in Sources */,
 				262D2A06293E310E005984DA /* MailView.swift in Sources */,
 				63D32FCE29CA9E570049F567 /* FirestoreModel.swift in Sources */,
@@ -1227,9 +1272,11 @@
 				262D2A04293E2BAA005984DA /* SettingViewModel.swift in Sources */,
 				63E848A9295ABEC20037D7A3 /* TravelListViewModel.swift in Sources */,
 				63F132512914A18F00B3A9E0 /* BaseViewModelV1.swift in Sources */,
+				269CA5612C78A5B900366005 /* LoadCategoriesUseCase.swift in Sources */,
+				269CA5652C78A5EC00366005 /* DeleteCategoryUseCase.swift in Sources */,
 				63C8CCF62941D60400BB861D /* DevInfoView.swift in Sources */,
 				2619FE8C2940D6B300D24778 /* CheckPermissionViewModel.swift in Sources */,
-				63F1324B2914A18800B3A9E0 /* Defaults.swift in Sources */,
+				63F1324B2914A18800B3A9E0 /* UserDefault.swift in Sources */,
 				63D32FC829CA92BF0049F567 /* PremiumCodeViewModel.swift in Sources */,
 				2696F4E42C7753C400F56E73 /* NoteRepository.swift in Sources */,
 				267CC18C2C6710DF00D6015E /* UINavigationController+Extension.swift in Sources */,
@@ -1243,7 +1290,9 @@
 				631D752F29667A4D00464F33 /* PeopleWithListViewModel.swift in Sources */,
 				631D752D29667A4700464F33 /* PeopleWithListView.swift in Sources */,
 				631D752A296661FE00464F33 /* MainMapOptionViewModel.swift in Sources */,
+				269CA5582C78A43300366005 /* CategoryV2.swift in Sources */,
 				269CA5562C78A35D00366005 /* Note.swift in Sources */,
+				269CA56A2C78A8B600366005 /* UserDefaultsManager.swift in Sources */,
 				263FADC32C7164B700AE9E73 /* TabBarService.swift in Sources */,
 				268546E82A28DB1200BDA2EA /* ReviewView.swift in Sources */,
 				63D32FCC29CA9E390049F567 /* FirestoreExtension.swift in Sources */,
@@ -1267,6 +1316,7 @@
 				63F132492914A18800B3A9E0 /* SwiftExtension.swift in Sources */,
 				269CA5542C78A11500366005 /* EditNoteTempStorage.swift in Sources */,
 				2619FE8A2940D6AC00D24778 /* CheckPermissionView.swift in Sources */,
+				269CA5672C78A5FE00366005 /* UpdateCategoryUseCase.swift in Sources */,
 				267CC1792C66F28300D6015E /* Coordinator.swift in Sources */,
 				267CC1962C67823E00D6015E /* EditNoteView.swift in Sources */,
 				63E848A7295ABEBD0037D7A3 /* TravelListView.swift in Sources */,
@@ -1282,6 +1332,7 @@
 				267CC18E2C6719CA00D6015E /* Font+Extension.swift in Sources */,
 				63C81AB52963BD3D0001A70B /* SelectFootprintsView.swift in Sources */,
 				63F132562914A19F00B3A9E0 /* SceneDelegate.swift in Sources */,
+				269CA55C2C78A4DF00366005 /* CategoryRepository.swift in Sources */,
 				2696F4EC2C77556800F56E73 /* SaveNoteUseCase.swift in Sources */,
 				63C81AB92963D6EF0001A70B /* DragAndDropService.swift in Sources */,
 				63B1FAED2914A85B007E94B6 /* EditFootprintView.swift in Sources */,
@@ -1293,6 +1344,7 @@
 				63C102B8296530680099AF6A /* GoogleMapView.swift in Sources */,
 				63F132992914A1C000B3A9E0 /* Topbar.swift in Sources */,
 				63D32FD729CACEAC0049F567 /* AdView.swift in Sources */,
+				269CA5632C78A5D400366005 /* SaveCategoryUseCase.swift in Sources */,
 				267CC1802C66F2C700D6015E /* MapVM2.swift in Sources */,
 				26FAB54F2C6B4095006304AE /* SelectLocationVM.swift in Sources */,
 				63F132B62914A56300B3A9E0 /* LottieView.swift in Sources */,

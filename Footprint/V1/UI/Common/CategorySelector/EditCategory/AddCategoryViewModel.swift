@@ -98,9 +98,9 @@ class AddCategoryViewModel: BaseViewModelV1 {
             try! realm.write {[weak self] in
                 guard let self = self else { return }
                 let copy = Category(tag: tag, name: self.name, pinType: pinType, pinColor: self.pinColor)
-                var showingCategories = Defaults.showingCategories
+                var showingCategories = Defaults.shared.showingCategories
                 showingCategories.append(tag)
-                Defaults.showingCategories = showingCategories
+                Defaults.shared.showingCategories = showingCategories
                 realm.add(copy)
                 self.stopProgress()
                 self.dismiss(animated: true)

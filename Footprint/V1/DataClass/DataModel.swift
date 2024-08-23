@@ -12,7 +12,7 @@ import MapKit
 import GoogleMaps
 
 /*
- MAX: 8개인데 더 늘릴려면 Defaults.settingFlag 설정해줘야함
+ MAX: 8개인데 더 늘릴려면 Defaults.shared.settingFlag 설정해줘야함
  */
 enum SettingFlag: Int {
     case SEARCH_BAR = 0
