@@ -81,9 +81,7 @@ struct EditNoteView: View {
                         .sdPaddingHorizontal(16)
                         .sdPaddingBottom(14)
                     }
-                    
                 }
-                .padding(EdgeInsets(top: safeTop, leading: 0, bottom: 0, trailing: 0))
                 .ignoresSafeArea(.keyboard, edges: [.bottom])
                 .frame(width: geometry.size.width, alignment: .leading)
                 .toolbar {
@@ -267,9 +265,7 @@ struct EditNoteView: View {
                     vm.saveNote()
                 }
             }
-            .menuView()
         }
-        .frame(width: geometry.size.width, height: 50, alignment: .center)
     }
     
     private func drawTitle(_ text: String, isEssential: Bool) -> some View {
