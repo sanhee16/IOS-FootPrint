@@ -14,10 +14,10 @@ class CategoryV2: Object {
     @Persisted var color: String // hex
     @Persisted var icon: String // icon name
     
-    convenience init(name: String, color: String, icon: String) {
+    convenience init(id: String? = UUID().uuidString, name: String, color: String, icon: String) {
         self.init()
         
-        self.id = UUID().uuidString
+        self.id = id ?? UUID().uuidString
         self.name = name
         self.color = color
         self.icon = icon

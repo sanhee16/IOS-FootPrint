@@ -22,6 +22,10 @@ class Coordinator: BaseCoordinator<Destination> {
     var editNoteOutput: EditNoteView.Output {
         EditNoteView.Output(pop: {
             self.pop()
+        }, pushCategoryListEditView: {
+            self.pushCategoryListEditView(CategoryListEditView.Output(pop: {
+                self.pop()
+            }))
         })
     }
     
@@ -44,6 +48,10 @@ class Coordinator: BaseCoordinator<Destination> {
     
     private func pushEditNote(_ output: EditNoteView.Output, location: Location, type: EditFootprintType) {
         self.push(.editNote(output: output, location: location, type: type))
+    }
+    
+    private func pushCategoryListEditView(_ output: CategoryListEditView.Output) {
+        self.push(.categoryListEditView(output: output))
     }
 }
 

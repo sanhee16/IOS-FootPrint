@@ -11,6 +11,7 @@ import SDSwiftUIPack
 struct EditNoteView: View {
     struct Output {
         var pop: () -> ()
+        var pushCategoryListEditView: () -> ()
     }
     
     enum ViewEventTrigger {
@@ -175,7 +176,8 @@ struct EditNoteView: View {
                     Text("카테고리")
                     Spacer()
                     FPButton(text: "편집", status: .able, size: .small, type: .textGray) {
-                        
+                        $isPresentCategoryList.wrappedValue = false
+                        output.pushCategoryListEditView()
                     }
                     FPButton(text: "완료", status: .able, size: .small, type: .textGray) {
                         $isPresentCategoryList.wrappedValue = false

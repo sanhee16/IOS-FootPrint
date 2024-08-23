@@ -15,6 +15,6 @@ class SaveCategoryUseCase {
     }
     
     func execute(_ category: CategoryV2) {
-        
+        self.categoryRepository.addCategory(category)
     }
 }

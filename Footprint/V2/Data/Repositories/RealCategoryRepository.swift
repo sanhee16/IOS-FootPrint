@@ -12,8 +12,12 @@ class RealCategoryRepository: CategoryRepository {
     func addCategory(_ category: CategoryV2) {
         let realm = try! Realm()
         
-        try! realm.write {
-            realm.add(category, update: .modified)
+        do {
+            try realm.write {
+                realm.add(category, update: .modified)
+            }
+        } catch {
+            print("Error during write transaction: \(error.localizedDescription)")
         }
     }
     

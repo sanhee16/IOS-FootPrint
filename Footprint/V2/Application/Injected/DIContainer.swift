@@ -39,4 +39,9 @@ extension Container {
     var loadCategoriesUseCase: Factory<LoadCategoriesUseCase> {
         Factory(self) { LoadCategoriesUseCase(categoryRepository: self.categoryRepository()) }
     }
+    
+    var saveCategoryUseCase: Factory<SaveCategoryUseCase> {
+        Factory(self) { SaveCategoryUseCase(categoryRepository: self.categoryRepository()) }
+    }
+    
 }

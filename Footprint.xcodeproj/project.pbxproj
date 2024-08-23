@@ -91,6 +91,10 @@
 		269CA5652C78A5EC00366005 /* DeleteCategoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269CA5642C78A5EC00366005 /* DeleteCategoryUseCase.swift */; };
 		269CA5672C78A5FE00366005 /* UpdateCategoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269CA5662C78A5FE00366005 /* UpdateCategoryUseCase.swift */; };
 		269CA56A2C78A8B600366005 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269CA5692C78A8B600366005 /* UserDefaultsManager.swift */; };
+		269CA56F2C78B68600366005 /* CategoryListEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269CA56E2C78B68600366005 /* CategoryListEditView.swift */; };
+		269CA5722C78B69A00366005 /* CategoryListEditVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269CA5712C78B69A00366005 /* CategoryListEditVM.swift */; };
+		269CA5742C78BE3400366005 /* CategoryEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269CA5732C78BE3400366005 /* CategoryEditView.swift */; };
+		269CA5762C78BE9600366005 /* CategoryEditVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269CA5752C78BE9600366005 /* CategoryEditVM.swift */; };
 		26A238FA2A13743700D7CF49 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26A238F92A13743700D7CF49 /* GoogleService-Info.plist */; };
 		26BD8FCB29694CE5005F7E5C /* ApiInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26BD8FCA29694CE5005F7E5C /* ApiInfo.plist */; };
 		26BFFD942C5F8C400001B02B /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 26BFFD932C5F8C400001B02B /* Kingfisher */; };
@@ -268,6 +272,10 @@
 		269CA5642C78A5EC00366005 /* DeleteCategoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCategoryUseCase.swift; sourceTree = "<group>"; };
 		269CA5662C78A5FE00366005 /* UpdateCategoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCategoryUseCase.swift; sourceTree = "<group>"; };
 		269CA5692C78A8B600366005 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		269CA56E2C78B68600366005 /* CategoryListEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListEditView.swift; sourceTree = "<group>"; };
+		269CA5712C78B69A00366005 /* CategoryListEditVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListEditVM.swift; sourceTree = "<group>"; };
+		269CA5732C78BE3400366005 /* CategoryEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEditView.swift; sourceTree = "<group>"; };
+		269CA5752C78BE9600366005 /* CategoryEditVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEditVM.swift; sourceTree = "<group>"; };
 		26A238F92A13743700D7CF49 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		26BD8FCA29694CE5005F7E5C /* ApiInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiInfo.plist; sourceTree = "<group>"; };
 		26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIExtension.swift; sourceTree = "<group>"; };
@@ -527,6 +535,7 @@
 		266EDDD52C64EA90006CF09B /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				269CA56D2C78B67800366005 /* Common */,
 				267CC18F2C67361E00D6015E /* CustomView */,
 				267CC17C2C66F2B500D6015E /* Map */,
 				266EDDE22C64EB3B006CF09B /* Main */,
@@ -753,6 +762,25 @@
 				269CA5692C78A8B600366005 /* UserDefaultsManager.swift */,
 			);
 			path = UserDefaults;
+			sourceTree = "<group>";
+		};
+		269CA56D2C78B67800366005 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				269CA5702C78B68E00366005 /* CategoryListEditView */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		269CA5702C78B68E00366005 /* CategoryListEditView */ = {
+			isa = PBXGroup;
+			children = (
+				269CA56E2C78B68600366005 /* CategoryListEditView.swift */,
+				269CA5712C78B69A00366005 /* CategoryListEditVM.swift */,
+				269CA5732C78BE3400366005 /* CategoryEditView.swift */,
+				269CA5752C78BE9600366005 /* CategoryEditVM.swift */,
+			);
+			path = CategoryListEditView;
 			sourceTree = "<group>";
 		};
 		26FAB54B2C6B408C006304AE /* SelectLocation */ = {
@@ -1221,6 +1249,7 @@
 				63E848A3295ABE7E0037D7A3 /* EditTravelViewModel.swift in Sources */,
 				63F1328E2914A1C000B3A9E0 /* SplashViewModel.swift in Sources */,
 				63C81AB72963BD430001A70B /* SelectFootprintsViewModel.swift in Sources */,
+				269CA5742C78BE3400366005 /* CategoryEditView.swift in Sources */,
 				2627409129699B2F00B47566 /* CategorySelectorViewModel.swift in Sources */,
 				2691D9C5294EE4B6002825B9 /* FootprintListFilterViewModel.swift in Sources */,
 				631D7528296661FA00464F33 /* MainMapOptionView.swift in Sources */,
@@ -1241,6 +1270,7 @@
 				267CC1772C66F27000D6015E /* BaseCoordinator.swift in Sources */,
 				26C04F6D2917667F00890A76 /* SwiftUIExtension.swift in Sources */,
 				631D75242966619B00464F33 /* SToggleView.swift in Sources */,
+				269CA5762C78BE9600366005 /* CategoryEditVM.swift in Sources */,
 				2682A76D2C6D785C00DF1F8A /* FPMapView.swift in Sources */,
 				63D5EF6A29C861BB000ACBC2 /* SwiftUIViewModifier.swift in Sources */,
 				26332176292095E90065AE3A /* ShowFootPrintView.swift in Sources */,
@@ -1265,6 +1295,7 @@
 				26940CAD293C9D0F0091E996 /* ShowImageView.swift in Sources */,
 				264EEF572925128300B89624 /* AddCategoryView.swift in Sources */,
 				262D2A02293E2BA4005984DA /* SettingView.swift in Sources */,
+				269CA5722C78B69A00366005 /* CategoryListEditVM.swift in Sources */,
 				63F1325A2914A1A300B3A9E0 /* AppCoordinatorV1.swift in Sources */,
 				2682A7712C6DB04900DF1F8A /* Date+Extension.swift in Sources */,
 				26940CAF293C9D170091E996 /* ShowImageViewModel.swift in Sources */,
@@ -1308,6 +1339,7 @@
 				266EDDE82C64EB88006CF09B /* BaseViewModel.swift in Sources */,
 				63F132AB2914A1C000B3A9E0 /* MainView.swift in Sources */,
 				2627408F29699B2A00B47566 /* CategorySelectorView.swift in Sources */,
+				269CA56F2C78B68600366005 /* CategoryListEditView.swift in Sources */,
 				63F132502914A18F00B3A9E0 /* BaseViewController.swift in Sources */,
 				63D32FD229CAB61E0049F567 /* FirestoreApi.swift in Sources */,
 				267CC1912C67362500D6015E /* FPButton.swift in Sources */,

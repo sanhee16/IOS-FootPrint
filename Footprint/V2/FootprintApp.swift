@@ -16,7 +16,10 @@ struct FootprintApp: App {
     var body: some Scene {
         WindowGroup {
             if isShowMain {
-                MainView2()
+                CategoryListEditView(output: CategoryListEditView.Output(pop: {
+                    
+                }))
+//                MainView2()
             } else {
                 SplashView2(isShowMain: $isShowMain)
             }

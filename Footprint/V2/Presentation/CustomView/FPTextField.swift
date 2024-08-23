@@ -56,6 +56,9 @@ struct FPTextField: View {
                     .onChange(of: text.wrappedValue, perform: { value in
                         handleTextChange(value, limit: limit)
                     })
+                    .onSubmit {
+                        isFocused = false
+                    }
                 
             case .multi(let limit):
                 TextField(placeHolder, text: text, axis: .vertical)
