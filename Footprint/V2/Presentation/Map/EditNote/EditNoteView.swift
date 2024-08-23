@@ -50,6 +50,7 @@ struct EditNoteView: View {
                     ScrollView(showsIndicators: false) {
                         VStack(alignment: .leading, spacing: 10) {
                             drawTitle("제목", isEssential: true)
+                                .sdPaddingTop(24)
                                 .onTapGesture {
                                     $vm.address.wrappedValue = "Random - \(Int.random(in: 0..<100))"
                                 }
