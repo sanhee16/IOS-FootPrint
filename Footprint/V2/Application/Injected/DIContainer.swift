@@ -13,6 +13,9 @@ extension Container {
         Factory(self) { Defaults() }
     }
     
+    var permissionService: Factory<PermissionService> {
+        Factory(self) { PermissionService() }
+    }
 }
 
 //MARK: Repository

@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Photos
+import PhotosUI
 import SDSwiftUIPack
 
 struct EditNoteView: View {
@@ -37,6 +39,8 @@ struct EditNoteView: View {
     
     @State private var isPresentCategoryList: Bool = false
     @State private var isPresentCalendar: Bool = false
+    @State private var isPresentGallery: Bool = false
+    @State private var isPresentPeopleWith: Bool = false
     
     private let CALENDAR_ID: String = "CALENDAR_ID"
     private let CATEGORY_ID: String = "CATEGORY_ID"
@@ -78,6 +82,38 @@ struct EditNoteView: View {
                             drawDate(scrollProxy: scrollProxy)
                             drawCategory(scrollProxy: scrollProxy)
                             
+                            if !$vm.images.wrappedValue.isEmpty {
+                                drawTitle("사진", isEssential: false)
+                                    .sdPaddingTop(24)
+                                ScrollView(.horizontal, showsIndicators: false) {
+                                    LazyHStack(alignment: .center, spacing: 16, content: {
+                                        ForEach(0..<$vm.images.wrappedValue.count, id: \.self) { index in
+                                            ZStack(alignment: .topTrailing) {
+                                                Image(uiImage: $vm.images.wrappedValue[index])
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .frame(both: 80.0, alignment: .center)
+                                                    .clipShape(
+                                                        Rectangle()
+                                                    )
+                                                
+                                                Image("DeleteButton")
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .frame(both: 16.0, alignment: .center)
+                                                    .contentShape(Rectangle())
+                                                    .offset(x: 8, y: -8)
+                                                    .zIndex(1)
+                                                    .onTapGesture {
+                                                        vm.deleteImage(index)
+                                                    }
+                                            }
+                                            .frame(both: 88.0, alignment: .bottomLeading)
+                                        }
+                                    })
+                                }
+                            }
+                            
                         }
                         .sdPaddingHorizontal(16)
                         .sdPaddingBottom(14)
@@ -95,19 +131,27 @@ struct EditNoteView: View {
                 }
                 
                 HStack(alignment: .center, spacing: 8, content: {
-                    HStack(alignment: .center, spacing: 8, content: {
-                        Image("picture")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(both: 16, alignment: .center)
-                        Text("사진")
-                            .sdFont(.btn3, color: .btn_lightSolid_cont_default)
-                    })
-                    .padding(8)
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        
+                    PhotosPicker(
+                        selection: $vm.selectedPhotos, // holds the selected photos from the picker
+                        maxSelectionCount: nil, // sets the max number of photos the user can select
+                        selectionBehavior: .ordered, // ensures we get the photos in the same order that the user selected them
+                        matching: .images // filter the photos library to only show images
+                    ) {
+                        HStack(alignment: .center, spacing: 8, content: {
+                            Image("picture")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(both: 16, alignment: .center)
+                            Text("사진")
+                                .sdFont(.btn3, color: .btn_lightSolid_cont_default)
+                        })
+                        .padding(8)
+                        .contentShape(Rectangle())
                     }
+                    .onChange(of: vm.selectedPhotos, perform: { value in
+                        vm.addImage()
+                    })
+                    
                     
                     HStack(alignment: .center, spacing: 8, content: {
                         Image("user-add")
@@ -120,8 +164,13 @@ struct EditNoteView: View {
                     .padding(8)
                     .contentShape(Rectangle())
                     .onTapGesture {
-                        
+                        self.isPresentPeopleWith = true
                     }
+                    .sheet(isPresented: $isPresentPeopleWith, onDismiss: {
+                        
+                    }, content: {
+                        
+                    })
                     Spacer()
                 })
                 .sdPaddingVertical(4)

@@ -8,10 +8,11 @@
 import Foundation
 import Combine
 import UIKit
-import Photos
 import RealmSwift
 import Factory
-
+import Photos
+import PhotosUI
+import _PhotosUI_SwiftUI
 
 public enum EditFootprintType {
     case new(name: String?, placeId: String?, address: String?)
@@ -29,11 +30,12 @@ public struct FootprintContents {
     var isStar: Bool
 }
 
-   
+
 
 class EditNoteVM: BaseViewModel {
     @Injected(\.saveNoteUseCase) var saveNoteUseCase
     @Injected(\.loadCategoriesUseCase) var loadCategoriesUseCase
+    @Injected(\.permissionService) var permissionService
     
     @Published var isAvailableToSave: Bool = false
     @Published var isStar: Bool = false
@@ -43,13 +45,12 @@ class EditNoteVM: BaseViewModel {
     @Published var createdAt: Date = Date()
     @Published var categories: [CategoryV2] = []
     @Published var category: CategoryV2? = nil
+    @Published var images: [UIImage] = [UIImage]()
+    @Published var selectedPhotos: [PhotosPickerItem] = [PhotosPickerItem]()
     
     
     
-    
-    
-    
-    @Published var images: [UIImage] = []
+    //    @Published var images: [UIImage] = []
     @Published var isCategoryEditMode: Bool = false
     @Published var isPeopleWithEditMode: Bool = false
     @Published var peopleWith: [PeopleWith] = []
@@ -74,7 +75,7 @@ class EditNoteVM: BaseViewModel {
     func saveNote() {
         if !self.isAvailableToSave { return }
         guard let location = location else { return }
-
+        
         saveNoteUseCase.execute(
             NoteData(
                 title: self.title,
@@ -121,46 +122,33 @@ class EditNoteVM: BaseViewModel {
         )
     }
     
-    private func photoPermissionCheck(_ callback: @escaping (Bool)->()) {
-        let photoAuthStatus = PHPhotoLibrary.authorizationStatus()
-        switch photoAuthStatus {
-        case .notDetermined:
-            print("권한 승인을 아직 하지 않음")
-            PHPhotoLibrary.requestAuthorization() { status in
-                switch status {
-                case .denied:
-                    print("거부됨")
-                    callback(false)
-                    break
-                case .authorized:
-                    print("승인됨")
-                    callback(true)
-                    break
-                default:
-                    callback(false)
-                    break
-                }
-            }
-        case .restricted:
-            print("권한을 부여할 수 없음")
-            callback(false)
-            break
-        case .denied:
-            print("거부됨")
-            callback(false)
-            break
-        case .authorized:
-            print("승인됨")
-            callback(true)
-            break
-        case .limited:
-            print("limited")
-            callback(false)
-            break
-        @unknown default:
-            print("unknown default")
-            callback(false)
-            break
+    func checkPhotoPermsission(_ onDone: @escaping (Bool) -> ()) {
+        self.permissionService.photoPermissionCheck { isAllow in
+            onDone(isAllow)
         }
+    }
+    
+    
+    @MainActor
+    func addImage() {
+        if !selectedPhotos.isEmpty {
+            Task {
+                var temp: [UIImage] = [UIImage]()
+                for eachItem in selectedPhotos {
+                    if let imageData = try? await eachItem.loadTransferable(type: Data.self) {
+                        if let image = UIImage(data: imageData) {
+                            temp.append(image)
+                        }
+                    }
+                }
+                self.images = temp
+            }
+        }
+    }
+    
+    @MainActor
+    func deleteImage(_ idx: Int) {
+        selectedPhotos.remove(at: idx)
+//        images.remove(at: idx)
     }
 }
