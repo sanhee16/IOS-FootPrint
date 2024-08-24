@@ -35,6 +35,7 @@ public struct FootprintContents {
 class EditNoteVM: BaseViewModel {
     @Injected(\.saveNoteUseCase) var saveNoteUseCase
     @Injected(\.loadCategoriesUseCase) var loadCategoriesUseCase
+    @Injected(\.loadMembersUseCase) var loadMembersUseCase
     @Injected(\.permissionService) var permissionService
     
     @Published var isAvailableToSave: Bool = false
@@ -47,6 +48,8 @@ class EditNoteVM: BaseViewModel {
     @Published var category: CategoryV2? = nil
     @Published var images: [UIImage] = [UIImage]()
     @Published var selectedPhotos: [PhotosPickerItem] = [PhotosPickerItem]()
+    @Published var selectMembers: [Member] = []
+    @Published var members: [Member] = []
     
     
     
@@ -68,8 +71,18 @@ class EditNoteVM: BaseViewModel {
         
         
         // loadCategories
-        self.categories = loadCategoriesUseCase.execute()
+        self.loadCategories()
         self.category = self.categories.first
+        self.loadMembers()
+        self.selectMembers = []
+    }
+    
+    func loadCategories() {
+        self.categories = loadCategoriesUseCase.execute()
+    }
+    
+    func loadMembers() {
+        self.members = loadMembersUseCase.execute()
     }
     
     func saveNote() {
@@ -122,9 +135,12 @@ class EditNoteVM: BaseViewModel {
         )
     }
     
-    func checkPhotoPermsission(_ onDone: @escaping (Bool) -> ()) {
-        self.permissionService.photoPermissionCheck { isAllow in
-            onDone(isAllow)
+    
+    func toggleMember(_ member: Member) {
+        if let idx = self.selectMembers.firstIndex(where: { $0 == member }) {
+            self.selectMembers.remove(at: idx)
+        } else {
+            self.selectMembers.append(member)
         }
     }
     
@@ -143,12 +159,19 @@ class EditNoteVM: BaseViewModel {
                 }
                 self.images = temp
             }
+        } else {
+            self.images.removeAll()
         }
     }
     
     @MainActor
     func deleteImage(_ idx: Int) {
         selectedPhotos.remove(at: idx)
-//        images.remove(at: idx)
     }
+    
+//    func checkPhotoPermsission(_ onDone: @escaping (Bool) -> ()) {
+//        self.permissionService.photoPermissionCheck { isAllow in
+//            onDone(isAllow)
+//        }
+//    }
 }

@@ -34,7 +34,12 @@ class RealNoteRepository: NoteRepository {
     
     func loadNotes() -> [NoteData] {
         let realm = try! Realm()
-        let list = Array(realm.objects(NoteData.self))
+        var list: [NoteData] = []
+        realm.objects(NoteData.self).forEach { n in
+            list.append(
+                NoteData(id: n.id, title: n.title, content: n.content, images: n.images, latitude: n.latitude, longitude: n.longitude, tag: n.tag, peopleWithIds: n.peopleWithIds, placeId: n.placeId, address: n.address, isStar: n.isStar)
+                )
+        }
         return list
     }
     

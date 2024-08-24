@@ -22,10 +22,10 @@ class NoteData: Object {
     @Persisted var address: String?
     @Persisted var isStar: Bool
     
-    convenience init(title: String, content: String, images: List<String>, latitude: Double, longitude: Double, tag: Int, peopleWithIds: List<Int>, placeId: String? = nil, address: String? = nil, isStar: Bool) {
+    convenience init(id: String? = UUID().uuidString, title: String, content: String, images: List<String>, latitude: Double, longitude: Double, tag: Int, peopleWithIds: List<Int>, placeId: String? = nil, address: String? = nil, isStar: Bool) {
         self.init()
         
-        self.id = UUID().uuidString
+        self.id = id ?? UUID().uuidString
         self.title = title
         self.content = content
         self.images = images

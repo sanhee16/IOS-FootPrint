@@ -22,7 +22,14 @@ struct MainView2: View {
     var body: some View {
         NavigationStack(path: $coordinator.paths) {
             VStack(alignment: .leading, spacing: 0) {
-                MapView2(output: coordinator.mapOutput)
+                
+                EditNoteView(
+                    output: coordinator.editNoteOutput,
+                    location: Location(latitude: 0.0, longitude: 0.0),
+                    type: .new(name: "", placeId: "", address: "adfasfas")
+                )
+                
+                //                MapView2(output: coordinator.mapOutput)
                 
                 if $tabBarService.isShowTabBar.wrappedValue {
                     MainMenuBar(current: $currentTab.wrappedValue) { type in

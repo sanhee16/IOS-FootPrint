@@ -27,14 +27,21 @@ extension Container {
     var categoryRepository: Factory<CategoryRepository> {
         Factory(self) { RealCategoryRepository() }
     }
+    
+    var memberRepository: Factory<MemberRepository> {
+        Factory(self) { RealMemberRepository() }
+    }
 }
 
-//MARK: UseCase
+//MARK: UseCase - Note
 extension Container {
     var saveNoteUseCase: Factory<SaveNoteUseCase> {
         Factory(self) { SaveNoteUseCase(noteRepository: self.noteRepository()) }
     }
-    
+}
+
+//MARK: UseCase - Category
+extension Container {
     var saveDefaultCategoriesUseCase: Factory<SaveDefaultCategoriesUseCase> {
         Factory(self) { SaveDefaultCategoriesUseCase(categoryRepository: self.categoryRepository()) }
     }
@@ -47,4 +54,30 @@ extension Container {
         Factory(self) { SaveCategoryUseCase(categoryRepository: self.categoryRepository()) }
     }
     
+    var updateCategoryUseCase: Factory<UpdateCategoryUseCase> {
+        Factory(self) { UpdateCategoryUseCase(categoryRepository: self.categoryRepository()) }
+    }
+    
+    var deleteCategoryUseCase: Factory<DeleteCategoryUseCase> {
+        Factory(self) { DeleteCategoryUseCase(categoryRepository: self.categoryRepository()) }
+    }
+}
+
+//MARK: UseCase - Member
+extension Container {
+    var saveMemberUseCase: Factory<SaveMemberUseCase> {
+        Factory(self) { SaveMemberUseCase(memberRepository: self.memberRepository()) }
+    }
+    
+    var loadMembersUseCase: Factory<LoadMembersUseCase> {
+        Factory(self) { LoadMembersUseCase(memberRepository: self.memberRepository()) }
+    }
+    
+    var deleteMemberUseCase: Factory<DeleteMemberUseCase> {
+        Factory(self) { DeleteMemberUseCase(memberRepository: self.memberRepository()) }
+    }
+    
+    var updateMemberUseCase: Factory<UpdateMemberUseCase> {
+        Factory(self) { UpdateMemberUseCase(memberRepository: self.memberRepository()) }
+    }
 }

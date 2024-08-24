@@ -75,7 +75,17 @@
 		2691D9C7294EE505002825B9 /* BluePrintBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2691D9C6294EE505002825B9 /* BluePrintBottomSheetView.swift */; };
 		26940CAD293C9D0F0091E996 /* ShowImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26940CAC293C9D0F0091E996 /* ShowImageView.swift */; };
 		26940CAF293C9D170091E996 /* ShowImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26940CAE293C9D170091E996 /* ShowImageViewModel.swift */; };
-		2694FC852C795E5000F01644 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694FC842C795E5000F01644 /* PhotoPicker.swift */; };
+		2694FC882C797EA700F01644 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694FC872C797EA700F01644 /* Member.swift */; };
+		2694FC8A2C797F2F00F01644 /* MemberRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694FC892C797F2F00F01644 /* MemberRepository.swift */; };
+		2694FC8C2C79821500F01644 /* RealMemberRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694FC8B2C79821500F01644 /* RealMemberRepository.swift */; };
+		2694FC8F2C7984CA00F01644 /* SaveMemberUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694FC8E2C7984CA00F01644 /* SaveMemberUseCase.swift */; };
+		2694FC912C7984F200F01644 /* LoadMembersUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694FC902C7984F200F01644 /* LoadMembersUseCase.swift */; };
+		2694FC932C79851000F01644 /* DeleteMemberUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694FC922C79851000F01644 /* DeleteMemberUseCase.swift */; };
+		2694FC952C79853500F01644 /* UpdateMemberUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694FC942C79853500F01644 /* UpdateMemberUseCase.swift */; };
+		2694FC972C79B99100F01644 /* MemberListEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694FC962C79B99100F01644 /* MemberListEditView.swift */; };
+		2694FC992C79B99500F01644 /* MemberListEditVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694FC982C79B99500F01644 /* MemberListEditVM.swift */; };
+		2694FC9D2C79C2D400F01644 /* MemberEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694FC9C2C79C2D400F01644 /* MemberEditView.swift */; };
+		2694FC9F2C79C2D700F01644 /* MemberEditVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694FC9E2C79C2D700F01644 /* MemberEditVM.swift */; };
 		2696F4E12C7753A000F56E73 /* RealNoteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2696F4E02C7753A000F56E73 /* RealNoteRepository.swift */; };
 		2696F4E42C7753C400F56E73 /* NoteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2696F4E32C7753C400F56E73 /* NoteRepository.swift */; };
 		2696F4E82C77540800F56E73 /* NoteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2696F4E72C77540800F56E73 /* NoteData.swift */; };
@@ -258,7 +268,17 @@
 		2691D9C6294EE505002825B9 /* BluePrintBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluePrintBottomSheetView.swift; sourceTree = "<group>"; };
 		26940CAC293C9D0F0091E996 /* ShowImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowImageView.swift; sourceTree = "<group>"; };
 		26940CAE293C9D170091E996 /* ShowImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowImageViewModel.swift; sourceTree = "<group>"; };
-		2694FC842C795E5000F01644 /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
+		2694FC872C797EA700F01644 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
+		2694FC892C797F2F00F01644 /* MemberRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRepository.swift; sourceTree = "<group>"; };
+		2694FC8B2C79821500F01644 /* RealMemberRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealMemberRepository.swift; sourceTree = "<group>"; };
+		2694FC8E2C7984CA00F01644 /* SaveMemberUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveMemberUseCase.swift; sourceTree = "<group>"; };
+		2694FC902C7984F200F01644 /* LoadMembersUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMembersUseCase.swift; sourceTree = "<group>"; };
+		2694FC922C79851000F01644 /* DeleteMemberUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteMemberUseCase.swift; sourceTree = "<group>"; };
+		2694FC942C79853500F01644 /* UpdateMemberUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMemberUseCase.swift; sourceTree = "<group>"; };
+		2694FC962C79B99100F01644 /* MemberListEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberListEditView.swift; sourceTree = "<group>"; };
+		2694FC982C79B99500F01644 /* MemberListEditVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberListEditVM.swift; sourceTree = "<group>"; };
+		2694FC9C2C79C2D400F01644 /* MemberEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberEditView.swift; sourceTree = "<group>"; };
+		2694FC9E2C79C2D700F01644 /* MemberEditVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberEditVM.swift; sourceTree = "<group>"; };
 		2696F4E02C7753A000F56E73 /* RealNoteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealNoteRepository.swift; sourceTree = "<group>"; };
 		2696F4E32C7753C400F56E73 /* NoteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRepository.swift; sourceTree = "<group>"; };
 		2696F4E72C77540800F56E73 /* NoteData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteData.swift; sourceTree = "<group>"; };
@@ -688,11 +708,51 @@
 			path = ShowImage;
 			sourceTree = "<group>";
 		};
+		2694FC862C7969B700F01644 /* MemberListEditView */ = {
+			isa = PBXGroup;
+			children = (
+				2694FC9B2C79C2CA00F01644 /* MemberEditView */,
+				2694FC962C79B99100F01644 /* MemberListEditView.swift */,
+				2694FC982C79B99500F01644 /* MemberListEditVM.swift */,
+			);
+			path = MemberListEditView;
+			sourceTree = "<group>";
+		};
+		2694FC8D2C7984B600F01644 /* MemberUseCases */ = {
+			isa = PBXGroup;
+			children = (
+				2694FC8E2C7984CA00F01644 /* SaveMemberUseCase.swift */,
+				2694FC902C7984F200F01644 /* LoadMembersUseCase.swift */,
+				2694FC922C79851000F01644 /* DeleteMemberUseCase.swift */,
+				2694FC942C79853500F01644 /* UpdateMemberUseCase.swift */,
+			);
+			path = MemberUseCases;
+			sourceTree = "<group>";
+		};
+		2694FC9A2C79C27800F01644 /* CategoryEditView */ = {
+			isa = PBXGroup;
+			children = (
+				269CA5732C78BE3400366005 /* CategoryEditView.swift */,
+				269CA5752C78BE9600366005 /* CategoryEditVM.swift */,
+			);
+			path = CategoryEditView;
+			sourceTree = "<group>";
+		};
+		2694FC9B2C79C2CA00F01644 /* MemberEditView */ = {
+			isa = PBXGroup;
+			children = (
+				2694FC9C2C79C2D400F01644 /* MemberEditView.swift */,
+				2694FC9E2C79C2D700F01644 /* MemberEditVM.swift */,
+			);
+			path = MemberEditView;
+			sourceTree = "<group>";
+		};
 		2696F4DF2C77538B00F56E73 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
 				2696F4E02C7753A000F56E73 /* RealNoteRepository.swift */,
 				269CA5592C78A4D900366005 /* RealCategoryRepository.swift */,
+				2694FC8B2C79821500F01644 /* RealMemberRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -702,6 +762,7 @@
 			children = (
 				2696F4E32C7753C400F56E73 /* NoteRepository.swift */,
 				269CA55B2C78A4DF00366005 /* CategoryRepository.swift */,
+				2694FC892C797F2F00F01644 /* MemberRepository.swift */,
 			);
 			path = RepositoryProtocols;
 			sourceTree = "<group>";
@@ -711,6 +772,7 @@
 			children = (
 				2696F4E72C77540800F56E73 /* NoteData.swift */,
 				269CA5572C78A43300366005 /* CategoryV2.swift */,
+				2694FC872C797EA700F01644 /* Member.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -726,6 +788,7 @@
 		2696F4E92C77555000F56E73 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				2694FC8D2C7984B600F01644 /* MemberUseCases */,
 				269CA55D2C78A56D00366005 /* CategoryUseCases */,
 				2696F4EA2C77555D00F56E73 /* NoteUseCases */,
 			);
@@ -772,8 +835,8 @@
 		269CA56D2C78B67800366005 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				2694FC862C7969B700F01644 /* MemberListEditView */,
 				269CA5702C78B68E00366005 /* CategoryListEditView */,
-				2694FC842C795E5000F01644 /* PhotoPicker.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -781,10 +844,9 @@
 		269CA5702C78B68E00366005 /* CategoryListEditView */ = {
 			isa = PBXGroup;
 			children = (
+				2694FC9A2C79C27800F01644 /* CategoryEditView */,
 				269CA56E2C78B68600366005 /* CategoryListEditView.swift */,
 				269CA5712C78B69A00366005 /* CategoryListEditVM.swift */,
-				269CA5732C78BE3400366005 /* CategoryEditView.swift */,
-				269CA5752C78BE9600366005 /* CategoryEditVM.swift */,
 			);
 			path = CategoryListEditView;
 			sourceTree = "<group>";
@@ -1265,11 +1327,13 @@
 				63F1328E2914A1C000B3A9E0 /* SplashViewModel.swift in Sources */,
 				63C81AB72963BD430001A70B /* SelectFootprintsViewModel.swift in Sources */,
 				269CA5742C78BE3400366005 /* CategoryEditView.swift in Sources */,
+				2694FC8A2C797F2F00F01644 /* MemberRepository.swift in Sources */,
 				2627409129699B2F00B47566 /* CategorySelectorViewModel.swift in Sources */,
 				2691D9C5294EE4B6002825B9 /* FootprintListFilterViewModel.swift in Sources */,
 				631D7528296661FA00464F33 /* MainMapOptionView.swift in Sources */,
 				265924C929445BE1001E7025 /* FootprintListViewModel.swift in Sources */,
 				264B70BC291F8DD900CDAF9F /* ApiResponse.swift in Sources */,
+				2694FC972C79B99100F01644 /* MemberListEditView.swift in Sources */,
 				63E5C82F2975362300D32FD2 /* MapViewModel.swift in Sources */,
 				63F1328F2914A1C000B3A9E0 /* SplashView.swift in Sources */,
 				63F132AF2914A1C000B3A9E0 /* BluePrintViewModel.swift in Sources */,
@@ -1297,17 +1361,21 @@
 				63F292B2297656D700D42D0E /* TrashView.swift in Sources */,
 				63F132472914A18800B3A9E0 /* AlertViewModel.swift in Sources */,
 				266EDDE62C64EB46006CF09B /* MainVM2.swift in Sources */,
+				2694FC9F2C79C2D700F01644 /* MemberEditVM.swift in Sources */,
 				265924C729445BD9001E7025 /* FootprintListView.swift in Sources */,
 				269CA55A2C78A4D900366005 /* RealCategoryRepository.swift in Sources */,
 				63D7EF1F296FC1EF00D72F12 /* SError.swift in Sources */,
 				262D2A06293E310E005984DA /* MailView.swift in Sources */,
+				2694FC912C7984F200F01644 /* LoadMembersUseCase.swift in Sources */,
 				63D32FCE29CA9E570049F567 /* FirestoreModel.swift in Sources */,
+				2694FC882C797EA700F01644 /* Member.swift in Sources */,
 				63FA238E294C42C900D31506 /* SingleSelectGalleryView.swift in Sources */,
 				63F292B4297656DF00D42D0E /* TrashViewModel.swift in Sources */,
 				63B1FB032914B381007E94B6 /* RealmDB.swift in Sources */,
 				26FAB5512C6B576F006304AE /* EnvironmentValues.swift in Sources */,
 				63F132AA2914A1C000B3A9E0 /* MainViewModel.swift in Sources */,
 				26940CAD293C9D0F0091E996 /* ShowImageView.swift in Sources */,
+				2694FC8C2C79821500F01644 /* RealMemberRepository.swift in Sources */,
 				264EEF572925128300B89624 /* AddCategoryView.swift in Sources */,
 				262D2A02293E2BA4005984DA /* SettingView.swift in Sources */,
 				269CA5722C78B69A00366005 /* CategoryListEditVM.swift in Sources */,
@@ -1316,7 +1384,6 @@
 				26940CAF293C9D170091E996 /* ShowImageViewModel.swift in Sources */,
 				263A97BB2945852E008A69F5 /* PeopleWithSelectorView.swift in Sources */,
 				262D2A04293E2BAA005984DA /* SettingViewModel.swift in Sources */,
-				2694FC852C795E5000F01644 /* PhotoPicker.swift in Sources */,
 				63E848A9295ABEC20037D7A3 /* TravelListViewModel.swift in Sources */,
 				63F132512914A18F00B3A9E0 /* BaseViewModelV1.swift in Sources */,
 				269CA5612C78A5B900366005 /* LoadCategoriesUseCase.swift in Sources */,
@@ -1373,6 +1440,8 @@
 				260C87CD296AADBE00ADCC32 /* ShowTravelViewModel.swift in Sources */,
 				266EDDDE2C64EAD9006CF09B /* SplashVM2.swift in Sources */,
 				63F1324C2914A18800B3A9E0 /* CommonApi.swift in Sources */,
+				2694FC932C79851000F01644 /* DeleteMemberUseCase.swift in Sources */,
+				2694FC8F2C7984CA00F01644 /* SaveMemberUseCase.swift in Sources */,
 				63F1329A2914A1C000B3A9E0 /* WebView.swift in Sources */,
 				2691D9C3294EE4B1002825B9 /* FootprintListFilterView.swift in Sources */,
 				63004AFA29DA63D2000CDBB4 /* RemoteConfig.swift in Sources */,
@@ -1381,8 +1450,10 @@
 				63C81AB52963BD3D0001A70B /* SelectFootprintsView.swift in Sources */,
 				63F132562914A19F00B3A9E0 /* SceneDelegate.swift in Sources */,
 				269CA55C2C78A4DF00366005 /* CategoryRepository.swift in Sources */,
+				2694FC992C79B99500F01644 /* MemberListEditVM.swift in Sources */,
 				2696F4EC2C77556800F56E73 /* SaveNoteUseCase.swift in Sources */,
 				63C81AB92963D6EF0001A70B /* DragAndDropService.swift in Sources */,
+				2694FC952C79853500F01644 /* UpdateMemberUseCase.swift in Sources */,
 				63B1FAED2914A85B007E94B6 /* EditFootprintView.swift in Sources */,
 				265EA947291D1E1400068A5C /* DataModel.swift in Sources */,
 				260C87CB296AADB900ADCC32 /* ShowTravelView.swift in Sources */,
@@ -1402,6 +1473,7 @@
 				267CC1892C6704B900D6015E /* FootprintVM.swift in Sources */,
 				2682A76F2C6D79C700DF1F8A /* FPMapManager.swift in Sources */,
 				63C102B329651E690099AF6A /* Footprint++Bundle.swift in Sources */,
+				2694FC9D2C79C2D400F01644 /* MemberEditView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

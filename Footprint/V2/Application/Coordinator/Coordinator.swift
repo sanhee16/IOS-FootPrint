@@ -10,33 +10,6 @@ import Factory
 import SwiftUI
 
 class Coordinator: BaseCoordinator<Destination> {
-    //MARK: Main Tab Views' Output
-    var mapOutput: MapView2.Output {
-        MapView2.Output { location in
-            self.pushFootprintView(location)
-        } goToEditNote: { location, type in
-            self.pushEditNote(self.editNoteOutput, location: location, type: type)
-        }
-    }
-    
-    var editNoteOutput: EditNoteView.Output {
-        EditNoteView.Output(pop: {
-            self.pop()
-        }, pushCategoryListEditView: {
-            self.pushCategoryListEditView(CategoryListEditView.Output(pop: {
-                self.pop()
-            }))
-        })
-    }
-    
-    var selectLocationOutput: SelectLocationView.Output {
-        SelectLocationView.Output {
-            self.pop()
-        } goToEditNote: { location, type in
-            self.pushEditNote(self.editNoteOutput, location: location, type: type)
-        }
-    }
-    
     private func pushFootprintView(_ location: Location) {
         self.push(.footprint(location: location))
     }
@@ -53,5 +26,49 @@ class Coordinator: BaseCoordinator<Destination> {
     private func pushCategoryListEditView(_ output: CategoryListEditView.Output) {
         self.push(.categoryListEditView(output: output))
     }
+    
+    private func pushPeopleWithListEditView(_ output: MemberListEditView.Output) {
+        self.push(.peopleWithListEditView(output: output))
+    }
 }
 
+//MARK: Output
+extension Coordinator {
+    var mapOutput: MapView2.Output {
+        MapView2.Output { location in
+            self.pushFootprintView(location)
+        } goToEditNote: { location, type in
+            self.pushEditNote(self.editNoteOutput, location: location, type: type)
+        }
+    }
+    
+    var editNoteOutput: EditNoteView.Output {
+        EditNoteView.Output {
+            self.pop()
+        } pushCategoryListEditView: {
+            self.pushCategoryListEditView(self.categoryListEditViewOutput)
+        } pushPeopleWithListEditView: {
+            self.pushPeopleWithListEditView(self.peopleWithListEditViewOutput)
+        }
+    }
+    
+    var selectLocationOutput: SelectLocationView.Output {
+        SelectLocationView.Output {
+            self.pop()
+        } goToEditNote: { location, type in
+            self.pushEditNote(self.editNoteOutput, location: location, type: type)
+        }
+    }
+    
+    var categoryListEditViewOutput: CategoryListEditView.Output {
+        CategoryListEditView.Output {
+            self.pop()
+        }
+    }
+    
+    var peopleWithListEditViewOutput: MemberListEditView.Output {
+        MemberListEditView.Output {
+            self.pop()
+        }
+    }
+}

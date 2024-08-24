@@ -14,6 +14,7 @@ struct EditNoteView: View {
     struct Output {
         var pop: () -> ()
         var pushCategoryListEditView: () -> ()
+        var pushPeopleWithListEditView: () -> ()
     }
     
     enum ViewEventTrigger {
@@ -91,7 +92,7 @@ struct EditNoteView: View {
                                             ZStack(alignment: .topTrailing) {
                                                 Image(uiImage: $vm.images.wrappedValue[index])
                                                     .resizable()
-                                                    .scaledToFit()
+                                                    .scaledToFill()
                                                     .frame(both: 80.0, alignment: .center)
                                                     .clipShape(
                                                         Rectangle()
@@ -135,7 +136,8 @@ struct EditNoteView: View {
                         selection: $vm.selectedPhotos, // holds the selected photos from the picker
                         maxSelectionCount: nil, // sets the max number of photos the user can select
                         selectionBehavior: .ordered, // ensures we get the photos in the same order that the user selected them
-                        matching: .images // filter the photos library to only show images
+                        matching: .images, // filter the photos library to only show images,
+                        photoLibrary: .shared()
                     ) {
                         HStack(alignment: .center, spacing: 8, content: {
                             Image("picture")
@@ -164,12 +166,43 @@ struct EditNoteView: View {
                     .padding(8)
                     .contentShape(Rectangle())
                     .onTapGesture {
-                        self.isPresentPeopleWith = true
+                        vm.loadMembers()
+                        $isPresentPeopleWith.wrappedValue = true
                     }
                     .sheet(isPresented: $isPresentPeopleWith, onDismiss: {
                         
                     }, content: {
-                        
+                        VStack(alignment: .leading, spacing: 0, content: {
+                            HStack(alignment: .center, spacing: 0) {
+                                Text("함께한 사람")
+                                Spacer()
+                                FPButton(text: "편집", status: .able, size: .small, type: .textGray) {
+                                    $isPresentPeopleWith.wrappedValue = false
+                                    output.pushPeopleWithListEditView()
+                                }
+                                FPButton(text: "완료", status: .able, size: .small, type: .textGray) {
+                                    $isPresentPeopleWith.wrappedValue = false
+                                }
+                            }
+                            .sdPaddingHorizontal(24)
+                            .sdPaddingTop(26)
+                            
+                            ScrollView(.vertical, showsIndicators: false, content: {
+                                ForEach($vm.members.wrappedValue, id: \.self) { item in
+                                    HStack(alignment: .center, spacing: 0, content: {
+                                        memberItem(item)
+                                        Spacer()
+                                    })
+                                    .padding(16)
+                                    .contentShape(Rectangle())
+                                    .onTapGesture {
+                                        
+                                    }
+                                }
+                                .sdPaddingBottom(20)
+                            })
+                        })
+                        .presentationDetents([.medium, .large])
                     })
                     Spacer()
                 })
@@ -205,6 +238,7 @@ struct EditNoteView: View {
         .id(CATEGORY_ID)
         .onTapGesture {
             scrollProxy.scrollTo(LOCATION_ID, anchor: .top)
+            vm.loadCategories()
             $isPresentCategoryList.wrappedValue = true
         }
         .sheet(isPresented: $isPresentCategoryList, onDismiss: {
@@ -336,8 +370,7 @@ struct EditNoteView: View {
                 .colorMultiply(Color(hex: item.color))
                 .contrast(3.0)
             Text(item.name)
-                .font(.headline3)
-                .foregroundColor(Color(hex: item.color))
+                .sdFont(.headline3, color: Color(hex: item.color))
         }
         .sdPaddingVertical(4)
         .sdPaddingHorizontal(8)
@@ -345,5 +378,36 @@ struct EditNoteView: View {
             RoundedRectangle(cornerRadius: 8)
                 .foregroundStyle(Color(hex: item.color).opacity(0.1))
         )
+    }
+    
+    private func memberItem(_ item: Member) -> some View {
+        return HStack(alignment: .center, spacing: 8) {
+            if !item.image.isEmpty, let image = ImageManager.shared.getSavedImage(named: item.image) {
+                Image(uiImage: image)
+                    .resizable()
+                    .frame(both: 40.0, alignment: .center)
+                    .clipShape(Circle())
+            } else {
+                Image("profile 1")
+                    .resizable()
+                    .frame(both: 40.0, alignment: .center)
+                    .clipShape(Circle())
+            }
+
+            VStack(alignment: .leading, spacing: 4, content: {
+                Text(item.name)
+                    .sdFont(.headline3, color: .cont_gray_default)
+                Text(item.intro)
+                    .sdFont(.caption1, color: .cont_gray_mid)
+            })
+            Spacer()
+            if $vm.selectMembers.wrappedValue.contains(where: { $0 == item }) {
+                Image("SelectButton")
+                    .resizable()
+                    .frame(width: 16.0, height: 16.0, alignment: .center)
+            }
+        }
+        .sdPaddingVertical(4)
+        .sdPaddingHorizontal(8)
     }
 }

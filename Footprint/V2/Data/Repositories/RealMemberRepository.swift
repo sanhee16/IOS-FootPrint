@@ -1,17 +1,17 @@
 //
-//  RealCategoryRepository.swift
+//  RealMemberRepository.swift
 //  Footprint
 //
-//  Created by sandy on 8/23/24.
+//  Created by sandy on 8/24/24.
 //
 
 import Foundation
 import RealmSwift
 
-class RealCategoryRepository: CategoryRepository {
-    func addCategory(_ category: CategoryV2) {
+class RealMemberRepository: MemberRepository {
+    func addMember(_ member: Member) {
         let realm = try! Realm()
-        let item = CategoryV2(id: category.id, name: category.name, color: category.color, icon: category.icon)
+        let item = Member(id: member.id, name: member.name, image: member.image, intro: member.intro)
         do {
             try realm.write {
                 realm.add(item, update: .modified)
@@ -21,11 +21,11 @@ class RealCategoryRepository: CategoryRepository {
         }
     }
     
-    func deleteCategory(_ id: String) {
+    func deleteMember(_ id: String) {
         let realm = try! Realm()
         
         // 데이터를 가져와서 필터링
-        let deleteItem = realm.objects(CategoryV2.self)
+        let deleteItem = realm.objects(Member.self)
             .filter { $0.id == id }
             .first
         guard let deleteItem = deleteItem else { return }
@@ -36,11 +36,11 @@ class RealCategoryRepository: CategoryRepository {
         }
     }
     
-    func loadCategories() -> [CategoryV2] {
+    func loadMembers() -> [Member] {
         let realm = try! Realm()
-        var list: [CategoryV2] = []
-        realm.objects(CategoryV2.self).forEach { c in
-            list.append(CategoryV2(id: c.id, name: c.name, color: c.color, icon: c.icon))
+        var list: [Member] = []
+        realm.objects(Member.self).forEach { m in
+            list.append(Member(id: m.id, name: m.name, image: m.image, intro: m.intro))
         }
         return list
     }
