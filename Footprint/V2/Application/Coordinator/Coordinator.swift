@@ -19,7 +19,7 @@ class Coordinator: BaseCoordinator<Destination> {
         self.push(.selectLocation(output: output))
     }
     
-    private func pushEditNote(_ output: EditNoteView.Output, location: Location, type: EditFootprintType) {
+    private func pushEditNote(_ output: EditNoteView.Output, location: Location, type: EditNoteType) {
         self.push(.editNote(output: output, location: location, type: type))
     }
     

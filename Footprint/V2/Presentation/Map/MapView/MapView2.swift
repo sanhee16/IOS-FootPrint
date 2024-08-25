@@ -20,7 +20,7 @@ struct MapView2: View {
     
     struct Output {
         var goToFootprintView: (Location) -> ()
-        var goToEditNote: (Location, EditFootprintType) -> ()
+        var goToEditNote: (Location, EditNoteType) -> ()
     }
     private var output: Output
     
@@ -35,6 +35,7 @@ struct MapView2: View {
     @State private var isShowSearchBar: Bool = false
     @State private var mapStatus: MapStatus = .normal
     @State private var centerPos: CGRect = .zero
+    @State private var isShowMarkers: Bool = false
     
     @Environment(\.centerLocation) var centerLocation
 
@@ -92,7 +93,12 @@ struct MapView2: View {
                         HStack(alignment: .center, spacing: 0, content: {
                             Spacer()
                             mapMenuButton("paw-foot") {
-                                
+                                $isShowMarkers.wrappedValue.toggle()
+                                if $isShowMarkers.wrappedValue {
+                                    mapManager.loadMarkers()
+                                } else {
+                                    mapManager.deleteMarkers()
+                                }
                             }
                             .sdPadding(top: 8, leading: 0, bottom: 0, trailing: 16)
                         })
@@ -101,6 +107,9 @@ struct MapView2: View {
                             Topbar("위치 선택", type: .back) {
                                 EditNoteTempStorage.clear()
                                 self.mapStatus = .normal
+                                if $isShowMarkers.wrappedValue {
+                                    mapManager.loadMarkers()
+                                }
                                 tabBarService.setIsShowTabBar(true)
                             }
                             Text("지도를 움직여 위치를 설정하세요.")
@@ -116,7 +125,7 @@ struct MapView2: View {
                     Spacer()
                     HStack(alignment: .center, spacing: 0, content: {
                         mapMenuButton("location-target") {
-                            vm.didTapMyLocationButton()
+                            mapManager.didTapMyLocationButton()
                         }
                         .sdPadding(top: 0, leading: 16, bottom: 18, trailing: 0)
                         Spacer()
@@ -141,7 +150,7 @@ struct MapView2: View {
                                     EditNoteTempStorage.address = $mapManager.centerAddress.wrappedValue
                                     output.goToEditNote(
                                         Location(latitude: location.latitude, longitude: location.longitude),
-                                        .new(name: nil, placeId: nil, address: $mapManager.centerAddress.wrappedValue)
+                                        .create
                                     )
                                 }
                             }
@@ -242,7 +251,7 @@ struct MapView2: View {
         .frame(width: geometry.size.width - 20, alignment: .leading)
         .contentShape(Rectangle())
         .onTapGesture {
-            vm.onClickSearchItem(item)
+//            vm.onClickSearchItem(item)
         }
     }
     
@@ -265,7 +274,7 @@ struct MapView2: View {
                 .sdPaddingHorizontal(8)
                 .layoutPriority(.greatestFiniteMagnitude)
                 .onChange(of: $vm.searchText.wrappedValue) { _ in
-                    vm.enterSearchText()
+//                    vm.enterSearchText()
                 }
             
             if !$vm.searchText.wrappedValue.isEmpty {

@@ -24,11 +24,11 @@ struct EditNoteView: View {
     private var output: Output
     
     private let location: Location
-    private let type: EditFootprintType
+    private let type: EditNoteType
     
     @StateObject var vm: EditNoteVM = EditNoteVM()
     
-    init(output: Output, location: Location, type: EditFootprintType) {
+    init(output: Output, location: Location, type: EditNoteType) {
         self.output = output
         self.location = location
         self.type = type

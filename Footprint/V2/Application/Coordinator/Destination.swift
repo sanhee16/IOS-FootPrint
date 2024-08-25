@@ -11,7 +11,7 @@ import SwiftUI
 enum Destination: Hashable {
     case footprint(location: Location)
     case selectLocation(output: SelectLocationView.Output)
-    case editNote(output: EditNoteView.Output, location: Location, type: EditFootprintType)
+    case editNote(output: EditNoteView.Output, location: Location, type: EditNoteType)
     case categoryListEditView(output: CategoryListEditView.Output)
     case peopleWithListEditView(output: MemberListEditView.Output)
     

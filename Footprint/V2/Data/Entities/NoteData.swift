@@ -16,25 +16,24 @@ class NoteData: Object {
     @Persisted var createdAt: Int
     @Persisted var latitude: Double
     @Persisted var longitude: Double
-    @Persisted var tag: Int // categoryTag
-    @Persisted var peopleWithIds: List<Int> = List()
-    @Persisted var placeId: String?
+    @Persisted var peopleWithIds: List<String> = List()
+    @Persisted var categoryId: String
     @Persisted var address: String?
     @Persisted var isStar: Bool
+
     
-    convenience init(id: String? = UUID().uuidString, title: String, content: String, images: List<String>, latitude: Double, longitude: Double, tag: Int, peopleWithIds: List<Int>, placeId: String? = nil, address: String? = nil, isStar: Bool) {
+    convenience init(id: String? = UUID().uuidString, title: String, content: String, images: List<String>, createdAt: Int, latitude: Double, longitude: Double, peopleWithIds: List<String>, categoryId: String, address: String? = nil, isStar: Bool) {
         self.init()
         
         self.id = id ?? UUID().uuidString
         self.title = title
         self.content = content
         self.images = images
-        self.createdAt = Int(Date().timeIntervalSince1970)
+        self.createdAt = createdAt
         self.latitude = latitude
         self.longitude = longitude
-        self.tag = tag
         self.peopleWithIds = peopleWithIds
-        self.placeId = placeId
+        self.categoryId = categoryId
         self.address = address
         self.isStar = isStar
     }

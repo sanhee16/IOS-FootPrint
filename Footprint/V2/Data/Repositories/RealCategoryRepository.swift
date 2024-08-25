@@ -44,4 +44,12 @@ class RealCategoryRepository: CategoryRepository {
         }
         return list
     }
+    
+    func loadCategory(_ id: String) -> CategoryV2? {
+        let realm = try! Realm()
+        let c = realm.objects(CategoryV2.self).where({ $0.id == id }).first
+        guard let c = c else { return nil }
+        let result = CategoryV2(id: c.id, name: c.name, color: c.color, icon: c.icon)
+        return result
+    }
 }

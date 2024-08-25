@@ -37,7 +37,7 @@ class RealNoteRepository: NoteRepository {
         var list: [NoteData] = []
         realm.objects(NoteData.self).forEach { n in
             list.append(
-                NoteData(id: n.id, title: n.title, content: n.content, images: n.images, latitude: n.latitude, longitude: n.longitude, tag: n.tag, peopleWithIds: n.peopleWithIds, placeId: n.placeId, address: n.address, isStar: n.isStar)
+                NoteData(id: n.id, title: n.title, content: n.content, images: n.images, createdAt: n.createdAt, latitude: n.latitude, longitude: n.longitude, peopleWithIds: n.peopleWithIds, categoryId: n.categoryId, address: n.address, isStar: n.isStar)
                 )
         }
         return list

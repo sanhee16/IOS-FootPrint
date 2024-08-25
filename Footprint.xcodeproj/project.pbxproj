@@ -86,6 +86,8 @@
 		2694FC992C79B99500F01644 /* MemberListEditVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694FC982C79B99500F01644 /* MemberListEditVM.swift */; };
 		2694FC9D2C79C2D400F01644 /* MemberEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694FC9C2C79C2D400F01644 /* MemberEditView.swift */; };
 		2694FC9F2C79C2D700F01644 /* MemberEditVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694FC9E2C79C2D700F01644 /* MemberEditVM.swift */; };
+		2694FCA22C7AA95000F01644 /* LoadNoteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694FCA12C7AA95000F01644 /* LoadNoteUseCase.swift */; };
+		2694FCA42C7AADBC00F01644 /* LoadCategoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694FCA32C7AADBC00F01644 /* LoadCategoryUseCase.swift */; };
 		2696F4E12C7753A000F56E73 /* RealNoteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2696F4E02C7753A000F56E73 /* RealNoteRepository.swift */; };
 		2696F4E42C7753C400F56E73 /* NoteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2696F4E32C7753C400F56E73 /* NoteRepository.swift */; };
 		2696F4E82C77540800F56E73 /* NoteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2696F4E72C77540800F56E73 /* NoteData.swift */; };
@@ -279,6 +281,8 @@
 		2694FC982C79B99500F01644 /* MemberListEditVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberListEditVM.swift; sourceTree = "<group>"; };
 		2694FC9C2C79C2D400F01644 /* MemberEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberEditView.swift; sourceTree = "<group>"; };
 		2694FC9E2C79C2D700F01644 /* MemberEditVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberEditVM.swift; sourceTree = "<group>"; };
+		2694FCA12C7AA95000F01644 /* LoadNoteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadNoteUseCase.swift; sourceTree = "<group>"; };
+		2694FCA32C7AADBC00F01644 /* LoadCategoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadCategoryUseCase.swift; sourceTree = "<group>"; };
 		2696F4E02C7753A000F56E73 /* RealNoteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealNoteRepository.swift; sourceTree = "<group>"; };
 		2696F4E32C7753C400F56E73 /* NoteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRepository.swift; sourceTree = "<group>"; };
 		2696F4E72C77540800F56E73 /* NoteData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteData.swift; sourceTree = "<group>"; };
@@ -799,6 +803,7 @@
 			isa = PBXGroup;
 			children = (
 				2696F4EB2C77556800F56E73 /* SaveNoteUseCase.swift */,
+				2694FCA12C7AA95000F01644 /* LoadNoteUseCase.swift */,
 			);
 			path = NoteUseCases;
 			sourceTree = "<group>";
@@ -817,6 +822,7 @@
 				269CA55E2C78A58B00366005 /* SaveDefaultCategoriesUseCase.swift */,
 				269CA5662C78A5FE00366005 /* UpdateCategoryUseCase.swift */,
 				269CA5602C78A5B900366005 /* LoadCategoriesUseCase.swift */,
+				2694FCA32C7AADBC00F01644 /* LoadCategoryUseCase.swift */,
 				269CA5622C78A5D400366005 /* SaveCategoryUseCase.swift */,
 				269CA5642C78A5EC00366005 /* DeleteCategoryUseCase.swift */,
 			);
@@ -1394,6 +1400,7 @@
 				63D32FC829CA92BF0049F567 /* PremiumCodeViewModel.swift in Sources */,
 				2696F4E42C7753C400F56E73 /* NoteRepository.swift in Sources */,
 				267CC18C2C6710DF00D6015E /* UINavigationController+Extension.swift in Sources */,
+				2694FCA22C7AA95000F01644 /* LoadNoteUseCase.swift in Sources */,
 				264B70C0291F8E9D00CDAF9F /* C.swift in Sources */,
 				266EDDE42C64EB40006CF09B /* MainView2.swift in Sources */,
 				63F132982914A1C000B3A9E0 /* ProgressView.swift in Sources */,
@@ -1453,6 +1460,7 @@
 				2694FC992C79B99500F01644 /* MemberListEditVM.swift in Sources */,
 				2696F4EC2C77556800F56E73 /* SaveNoteUseCase.swift in Sources */,
 				63C81AB92963D6EF0001A70B /* DragAndDropService.swift in Sources */,
+				2694FCA42C7AADBC00F01644 /* LoadCategoryUseCase.swift in Sources */,
 				2694FC952C79853500F01644 /* UpdateMemberUseCase.swift in Sources */,
 				63B1FAED2914A85B007E94B6 /* EditFootprintView.swift in Sources */,
 				265EA947291D1E1400068A5C /* DataModel.swift in Sources */,

@@ -38,6 +38,10 @@ extension Container {
     var saveNoteUseCase: Factory<SaveNoteUseCase> {
         Factory(self) { SaveNoteUseCase(noteRepository: self.noteRepository()) }
     }
+    
+    var loadNoteUseCase: Factory<LoadNoteUseCase> {
+        Factory(self) { LoadNoteUseCase(noteRepository: self.noteRepository()) }
+    }
 }
 
 //MARK: UseCase - Category
@@ -60,6 +64,10 @@ extension Container {
     
     var deleteCategoryUseCase: Factory<DeleteCategoryUseCase> {
         Factory(self) { DeleteCategoryUseCase(categoryRepository: self.categoryRepository()) }
+    }
+    
+    var loadCategoryUseCase: Factory<LoadCategoryUseCase> {
+        Factory(self) { LoadCategoryUseCase(categoryRepository: self.categoryRepository()) }
     }
 }
 

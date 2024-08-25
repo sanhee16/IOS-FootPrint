@@ -16,7 +16,7 @@ import GooglePlaces
 struct SelectLocationView: View {
     struct Output {
         var pop: () -> ()
-        var goToEditNote: (Location, EditFootprintType) -> ()
+        var goToEditNote: (Location, EditNoteType) -> ()
     }
     private var output: Output
     
@@ -77,7 +77,7 @@ struct SelectLocationView: View {
                                 if let location = $mapManager.centerPosition.wrappedValue {
                                     output.goToEditNote(
                                         Location(latitude: location.latitude, longitude: location.longitude),
-                                        .new(name: nil, placeId: nil, address: $vm.centerAddress.wrappedValue)
+                                        .create
                                     )
                                 }
                             }

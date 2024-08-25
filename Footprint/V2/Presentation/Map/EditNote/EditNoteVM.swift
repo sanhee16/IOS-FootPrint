@@ -32,6 +32,12 @@ public struct FootprintContents {
 
 
 
+public enum EditNoteType {
+    case create
+    case modify
+}
+
+
 class EditNoteVM: BaseViewModel {
     @Injected(\.saveNoteUseCase) var saveNoteUseCase
     @Injected(\.loadCategoriesUseCase) var loadCategoriesUseCase
@@ -51,13 +57,14 @@ class EditNoteVM: BaseViewModel {
     @Published var selectMembers: [Member] = []
     @Published var members: [Member] = []
     
+    private var noteId: String? = nil
     
     
     //    @Published var images: [UIImage] = []
     @Published var isCategoryEditMode: Bool = false
     @Published var isPeopleWithEditMode: Bool = false
     @Published var peopleWith: [PeopleWith] = []
-    @Published var type: EditFootprintType? = nil
+    @Published var type: EditNoteType? = nil
     
     private var modifyId: ObjectId? = nil
     private var location: Location? = nil
@@ -87,17 +94,23 @@ class EditNoteVM: BaseViewModel {
     
     func saveNote() {
         if !self.isAvailableToSave { return }
-        guard let location = location else { return }
+        guard let location = location, let categoryId = self.category?.id else { return }
+        
+        var memberIds: List<String> = List()
+        selectMembers.map({ $0.id }).forEach { id in
+            memberIds.append(id)
+        }
         
         saveNoteUseCase.execute(
             NoteData(
                 title: self.title,
                 content: self.content,
                 images: List<String>(),
+                createdAt: Int(Date().timeIntervalSince1970),
                 latitude: location.latitude,
                 longitude: location.longitude,
-                tag: 0,
-                peopleWithIds: List<Int>(),
+                peopleWithIds: memberIds,
+                categoryId: categoryId,
                 isStar: self.isStar
             ))
         EditNoteTempStorage.clear()
@@ -110,12 +123,12 @@ class EditNoteVM: BaseViewModel {
         self.isAvailableToSave = true
     }
     
-    func setValue(location: Location, type: EditFootprintType, viewEventTrigger: @escaping ((EditNoteView.ViewEventTrigger) -> ())) {
+    func setValue(location: Location, type: EditNoteType, viewEventTrigger: @escaping ((EditNoteView.ViewEventTrigger) -> ())) {
         self.location = location
         self.type = type
         
         self.viewEventTrigger = viewEventTrigger
-        print("self.address: \(EditNoteTempStorage.address)")
+
         self.isStar = EditNoteTempStorage.isStar
         self.title = EditNoteTempStorage.title
         self.content = EditNoteTempStorage.content

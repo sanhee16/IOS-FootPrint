@@ -12,5 +12,6 @@ protocol CategoryRepository {
     func addCategory(_ category: CategoryV2)
     func deleteCategory(_ id: String)
     func loadCategories() -> [CategoryV2]
+    func loadCategory(_ id: String) -> CategoryV2?
 }
 
