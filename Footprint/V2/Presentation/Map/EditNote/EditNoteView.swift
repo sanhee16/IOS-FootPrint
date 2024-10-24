@@ -59,26 +59,28 @@ struct EditNoteView: View {
                                 .onTapGesture {
                                     $vm.address.wrappedValue = "Random - \(Int.random(in: 0..<100))"
                                 }
-                            FPTextField(placeHolder: "title".localized(), text: $vm.title, fieldStyle: .line, lineStyle: .single(limit: nil))
-                            
-                            drawTitle("내용", isEssential: false)
-                                .sdPaddingTop(24)
-                            FPTextField(placeHolder: "content".localized(), text: $vm.content, fieldStyle: .line, lineStyle: .multi(limit: nil))
-                            
-                            drawTitle("위치", isEssential: true)
-                                .sdPaddingTop(24)
-                            FPTextField(placeHolder: "".localized(), text: $vm.address, fieldStyle: .none, lineStyle: .multi(limit: nil), isDisabled: true)
-                            
-                            FPButton(text: "발자국 위치 확인하기", status: .able, size: .large, type: .lightSolid) {
-                                vm.saveTempStorage()
-                                self.output.pop()
-                            }
-                            .sdPaddingVertical(8)
-                            .id(LOCATION_ID)
-                            
-                            Divider()
-                                .background(Color.dim_black_low)
+                            Group {
+                                FPTextField(placeHolder: "title".localized(), text: $vm.title, fieldStyle: .line, lineStyle: .single(limit: nil))
+                                
+                                drawTitle("내용", isEssential: false)
+                                    .sdPaddingTop(24)
+                                FPTextField(placeHolder: "content".localized(), text: $vm.content, fieldStyle: .line, lineStyle: .multi(limit: nil))
+                                
+                                drawTitle("위치", isEssential: true)
+                                    .sdPaddingTop(24)
+                                FPTextField(placeHolder: "".localized(), text: $vm.address, fieldStyle: .none, lineStyle: .multi(limit: nil), isDisabled: true)
+                                
+                                FPButton(text: "발자국 위치 확인하기", status: .able, size: .large, type: .lightSolid) {
+                                    vm.saveTempStorage()
+                                    self.output.pop()
+                                }
                                 .sdPaddingVertical(8)
+                                .id(LOCATION_ID)
+                                
+                                Divider()
+                                    .background(Color.dim_black_low)
+                                    .sdPaddingVertical(8)
+                            }
                             
                             drawDate(scrollProxy: scrollProxy)
                             drawCategory(scrollProxy: scrollProxy)
@@ -113,6 +115,54 @@ struct EditNoteView: View {
                                         }
                                     })
                                 }
+                            }
+                            if !$vm.members.wrappedValue.filter({ $0.isSelected }).isEmpty {
+                                HStack(alignment: .center, spacing: 0, content: {
+                                    ZStack(alignment: .center, content: {
+                                        ForEach($vm.members.wrappedValue.filter({ $0.isSelected }).prefix(3).indices, id: \.self) { idx in
+                                            if !$vm.members.wrappedValue.filter({ $0.isSelected })[idx].image.isEmpty, 
+                                                let image = ImageManager.shared.getSavedImage(named: $vm.members.wrappedValue.filter({ $0.isSelected })[idx].image) {
+                                                Image(uiImage: image)
+                                                    .resizable()
+                                                    .aspectRatio(contentMode: .fill)
+                                                    .frame(both: 40)
+                                                    .clipped()
+                                                    .clipShape(Circle())
+                                                    .border(.blueGray_200, lineWidth: 0.7, cornerRadius: 40.0)
+                                                    .offset(x: CGFloat(idx) * 24.0)
+                                                    .zIndex(3 - Double(idx))
+                                            } else {
+                                                Image("profile 1")
+                                                    .resizable()
+                                                    .aspectRatio(contentMode: .fill)
+                                                    .frame(both: 40)
+                                                    .clipped()
+                                                    .clipShape(Circle())
+                                                    .border(.blueGray_200, lineWidth: 0.7, cornerRadius: 40.0)
+                                                    .offset(x: CGFloat(idx) * 24.0)
+                                                    .zIndex(3 - Double(idx))
+                                            }
+                                        }
+                                    })
+                                    .sdPaddingTrailing(16)
+                                    
+                                    if let firstMember = $vm.members.wrappedValue.filter({ $0.isSelected }).first {
+                                        HStack(alignment: .center, spacing: 0, content: {
+                                            Text(firstMember.name)
+                                                .sdFont(.headline3, color: .cont_gray_default)
+                                            if $vm.members.wrappedValue.filter({ $0.isSelected }).count > 1 {
+                                                Text("외")
+                                                    .sdFont(.body3, color: .cont_gray_default)
+                                                    .sdPadding(top: 0, leading: 4, bottom: 0, trailing: 8)
+                                                Text("\($vm.members.wrappedValue.filter({ $0.isSelected }).count - 1)")
+                                                    .sdFont(.headline3, color: .cont_gray_default)
+                                                Text("명")
+                                                    .sdFont(.body3, color: .cont_gray_default)
+                                            }
+                                        })
+                                        .offset(x: CGFloat($vm.members.wrappedValue.filter({ $0.isSelected }).prefix(3).count - 1) * 24.0)
+                                    }
+                                })
                             }
                             
                         }
