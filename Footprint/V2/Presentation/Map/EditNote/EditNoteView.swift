@@ -163,6 +163,7 @@ struct EditNoteView: View {
                                         .offset(x: CGFloat($vm.members.wrappedValue.filter({ $0.isSelected }).prefix(3).count - 1) * 24.0)
                                     }
                                 })
+                                .sdPaddingVertical(8)
                             }
                             
                         }
