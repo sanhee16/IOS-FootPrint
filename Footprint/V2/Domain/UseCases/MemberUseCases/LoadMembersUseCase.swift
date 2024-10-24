@@ -14,7 +14,7 @@ class LoadMembersUseCase {
         self.memberRepository = memberRepository
     }
     
-    func execute() -> [Member] {
+    func execute() -> [MemberEntity] {
         return self.memberRepository.loadMembers()
     }
 }

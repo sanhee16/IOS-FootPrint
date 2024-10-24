@@ -9,9 +9,9 @@ import Foundation
 import RealmSwift
 
 protocol MemberRepository {
-    func addMember(_ member: Member)
+    func addMember(_ id: String?, name: String, image: String, intro: String)
     func deleteMember(_ id: String)
-    func loadMembers() -> [Member]
+    func loadMembers() -> [MemberEntity]
 }
 
 

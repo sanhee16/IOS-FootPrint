@@ -14,8 +14,8 @@ class UpdateMemberUseCase {
         self.memberRepository = memberRepository
     }
     
-    func execute(_ member: Member) {
-        self.memberRepository.addMember(member)
+    func execute(_ id: String?, name: String, image: String, intro: String) {
+        self.memberRepository.addMember(id, name: name, image: image, intro: intro)
     }
 }
 

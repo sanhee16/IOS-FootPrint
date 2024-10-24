@@ -11,8 +11,8 @@ import Factory
 class MemberListEditVM: BaseViewModel {
     @Injected(\.loadMembersUseCase) var loadMembersUseCase
     @Injected(\.deleteMemberUseCase) var deleteMemberUseCase
-    @Published var members: [Member] = []
-    @Published var deleteMember: Member? = nil
+    @Published var members: [MemberEntity] = []
+    @Published var deleteMember: MemberEntity? = nil
     
     override init() {
         super.init()
@@ -23,10 +23,10 @@ class MemberListEditVM: BaseViewModel {
     }
     
     func onDelete() {
-        guard let member = deleteMember, let idx = members.firstIndex(where: { $0 == member }) else { return }
+        guard let member = deleteMember, let idx = members.firstIndex(where: { $0 == member }), let id = member.id else { return }
         self.members.remove(at: idx)
         self.deleteMember = nil
-        self.deleteMemberUseCase.execute(member.id)
+        self.deleteMemberUseCase.execute(id)
         self.loadMembers()
     }
 }

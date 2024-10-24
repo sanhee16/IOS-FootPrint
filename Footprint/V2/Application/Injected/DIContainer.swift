@@ -29,7 +29,7 @@ extension Container {
     }
     
     var memberRepository: Factory<MemberRepository> {
-        Factory(self) { RealMemberRepository() }
+        Factory(self) { MemberRepositoryImpl() }
     }
 }
 

@@ -44,6 +44,8 @@
 		265924C929445BE1001E7025 /* FootprintListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265924C829445BE1001E7025 /* FootprintListViewModel.swift */; };
 		265EA947291D1E1400068A5C /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265EA946291D1E1400068A5C /* DataModel.swift */; };
 		266BE08E2CCA1AA000E754EB /* CategoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BE08D2CCA1AA000E754EB /* CategoryItem.swift */; };
+		266BE0902CCA1FF000E754EB /* MemberEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BE08F2CCA1FF000E754EB /* MemberEntity.swift */; };
+		266BE0922CCA21AA00E754EB /* MemberItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BE0912CCA21AA00E754EB /* MemberItem.swift */; };
 		266EDDD12C64EA16006CF09B /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 266EDDD02C64EA16006CF09B /* Factory */; };
 		266EDDD92C64EAA9006CF09B /* FootprintApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266EDDD82C64EAA9006CF09B /* FootprintApp.swift */; };
 		266EDDDC2C64EACF006CF09B /* SplashView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266EDDDB2C64EACF006CF09B /* SplashView2.swift */; };
@@ -82,7 +84,7 @@
 		26940CAF293C9D170091E996 /* ShowImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26940CAE293C9D170091E996 /* ShowImageViewModel.swift */; };
 		2694FC882C797EA700F01644 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694FC872C797EA700F01644 /* Member.swift */; };
 		2694FC8A2C797F2F00F01644 /* MemberRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694FC892C797F2F00F01644 /* MemberRepository.swift */; };
-		2694FC8C2C79821500F01644 /* RealMemberRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694FC8B2C79821500F01644 /* RealMemberRepository.swift */; };
+		2694FC8C2C79821500F01644 /* MemberRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694FC8B2C79821500F01644 /* MemberRepositoryImpl.swift */; };
 		2694FC8F2C7984CA00F01644 /* SaveMemberUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694FC8E2C7984CA00F01644 /* SaveMemberUseCase.swift */; };
 		2694FC912C7984F200F01644 /* LoadMembersUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694FC902C7984F200F01644 /* LoadMembersUseCase.swift */; };
 		2694FC932C79851000F01644 /* DeleteMemberUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694FC922C79851000F01644 /* DeleteMemberUseCase.swift */; };
@@ -246,6 +248,8 @@
 		265924C829445BE1001E7025 /* FootprintListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootprintListViewModel.swift; sourceTree = "<group>"; };
 		265EA946291D1E1400068A5C /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		266BE08D2CCA1AA000E754EB /* CategoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryItem.swift; sourceTree = "<group>"; };
+		266BE08F2CCA1FF000E754EB /* MemberEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberEntity.swift; sourceTree = "<group>"; };
+		266BE0912CCA21AA00E754EB /* MemberItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberItem.swift; sourceTree = "<group>"; };
 		266EDDD82C64EAA9006CF09B /* FootprintApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootprintApp.swift; sourceTree = "<group>"; };
 		266EDDDB2C64EACF006CF09B /* SplashView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView2.swift; sourceTree = "<group>"; };
 		266EDDDD2C64EAD9006CF09B /* SplashVM2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVM2.swift; sourceTree = "<group>"; };
@@ -282,7 +286,7 @@
 		26940CAE293C9D170091E996 /* ShowImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowImageViewModel.swift; sourceTree = "<group>"; };
 		2694FC872C797EA700F01644 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		2694FC892C797F2F00F01644 /* MemberRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRepository.swift; sourceTree = "<group>"; };
-		2694FC8B2C79821500F01644 /* RealMemberRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealMemberRepository.swift; sourceTree = "<group>"; };
+		2694FC8B2C79821500F01644 /* MemberRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRepositoryImpl.swift; sourceTree = "<group>"; };
 		2694FC8E2C7984CA00F01644 /* SaveMemberUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveMemberUseCase.swift; sourceTree = "<group>"; };
 		2694FC902C7984F200F01644 /* LoadMembersUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMembersUseCase.swift; sourceTree = "<group>"; };
 		2694FC922C79851000F01644 /* DeleteMemberUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteMemberUseCase.swift; sourceTree = "<group>"; };
@@ -537,6 +541,7 @@
 			isa = PBXGroup;
 			children = (
 				266BE08D2CCA1AA000E754EB /* CategoryItem.swift */,
+				266BE0912CCA21AA00E754EB /* MemberItem.swift */,
 			);
 			path = Items;
 			sourceTree = "<group>";
@@ -774,7 +779,7 @@
 			children = (
 				2696F4E02C7753A000F56E73 /* RealNoteRepository.swift */,
 				269CA5592C78A4D900366005 /* CategoryRepositoryImpl.swift */,
-				2694FC8B2C79821500F01644 /* RealMemberRepository.swift */,
+				2694FC8B2C79821500F01644 /* MemberRepositoryImpl.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -805,6 +810,7 @@
 				269CA5552C78A35D00366005 /* Note.swift */,
 				261F6E9E2CC9E47200F7CA18 /* CategoryIcon.swift */,
 				261F6EA02CC9E64100F7CA18 /* CategoryEntity.swift */,
+				266BE08F2CCA1FF000E754EB /* MemberEntity.swift */,
 				261F6EA22CC9E67A00F7CA18 /* CategoryColor.swift */,
 			);
 			path = Entities;
@@ -1357,6 +1363,7 @@
 				63F1328E2914A1C000B3A9E0 /* SplashViewModel.swift in Sources */,
 				63C81AB72963BD430001A70B /* SelectFootprintsViewModel.swift in Sources */,
 				269CA5742C78BE3400366005 /* CategoryEditView.swift in Sources */,
+				266BE0902CCA1FF000E754EB /* MemberEntity.swift in Sources */,
 				261F6E9F2CC9E47200F7CA18 /* CategoryIcon.swift in Sources */,
 				261F6EA12CC9E64100F7CA18 /* CategoryEntity.swift in Sources */,
 				2694FC8A2C797F2F00F01644 /* MemberRepository.swift in Sources */,
@@ -1401,13 +1408,14 @@
 				2694FC912C7984F200F01644 /* LoadMembersUseCase.swift in Sources */,
 				63D32FCE29CA9E570049F567 /* FirestoreModel.swift in Sources */,
 				2694FC882C797EA700F01644 /* Member.swift in Sources */,
+				266BE0922CCA21AA00E754EB /* MemberItem.swift in Sources */,
 				63FA238E294C42C900D31506 /* SingleSelectGalleryView.swift in Sources */,
 				63F292B4297656DF00D42D0E /* TrashViewModel.swift in Sources */,
 				63B1FB032914B381007E94B6 /* RealmDB.swift in Sources */,
 				26FAB5512C6B576F006304AE /* EnvironmentValues.swift in Sources */,
 				63F132AA2914A1C000B3A9E0 /* MainViewModel.swift in Sources */,
 				26940CAD293C9D0F0091E996 /* ShowImageView.swift in Sources */,
-				2694FC8C2C79821500F01644 /* RealMemberRepository.swift in Sources */,
+				2694FC8C2C79821500F01644 /* MemberRepositoryImpl.swift in Sources */,
 				264EEF572925128300B89624 /* AddCategoryView.swift in Sources */,
 				262D2A02293E2BA4005984DA /* SettingView.swift in Sources */,
 				269CA5722C78B69A00366005 /* CategoryListEditVM.swift in Sources */,

@@ -24,7 +24,6 @@ class SaveMemberUseCase {
         } else {
             imageName = ""
         }
-        let member = Member(id: id, name: name, image: imageName, intro: intro)
-        self.memberRepository.addMember(member)
+        self.memberRepository.addMember(id, name: name, image: imageName, intro: intro)
     }
 }

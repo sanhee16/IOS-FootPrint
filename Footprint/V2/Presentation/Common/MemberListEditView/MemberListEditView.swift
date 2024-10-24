@@ -96,26 +96,9 @@ struct MemberListEditView: View {
         })
     }
     
-    private func memberItem(_ item: Member) -> some View {
+    private func memberItem(_ item: MemberEntity) -> some View {
         return HStack(alignment: .center, spacing: 8) {
-            if !item.image.isEmpty, let image = ImageManager.shared.getSavedImage(named: item.image) {
-                Image(uiImage: image)
-                    .resizable()
-                    .frame(both: 40.0, alignment: .center)
-                    .clipShape(Circle())
-            } else {
-                Image("profile 1")
-                    .resizable()
-                    .frame(both: 40.0, alignment: .center)
-                    .clipShape(Circle())
-            }
-
-            VStack(alignment: .leading, spacing: 4, content: {
-                Text(item.name)
-                    .sdFont(.headline3, color: .cont_gray_default)
-                Text(item.intro)
-                    .sdFont(.caption1, color: .cont_gray_mid)
-            })
+            MemberItem(item: item)
             Spacer()
         }
         .sdPaddingVertical(4)

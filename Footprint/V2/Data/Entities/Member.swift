@@ -22,5 +22,14 @@ class Member: Object {
         self.image = image ?? ""
         self.intro = intro
     }
+    
+    func toMemberEntity() -> MemberEntity {
+        MemberEntity(
+            id: self.id,
+            name: self.name,
+            image: self.image,
+            intro: self.intro
+        )
+    }
 }
 

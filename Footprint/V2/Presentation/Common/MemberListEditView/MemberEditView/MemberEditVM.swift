@@ -45,7 +45,7 @@ class MemberEditVM: BaseViewModel {
         super.init()
     }
     
-    func setMember(_ member: Member?) {
+    func setMember(_ member: MemberEntity?) {
         guard let member = member else {
             self.type = .create
             self.id = nil

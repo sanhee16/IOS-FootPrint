@@ -1,5 +1,5 @@
 //
-//  RealMemberRepository.swift
+//  MemberRepositoryImpl.swift
 //  Footprint
 //
 //  Created by sandy on 8/24/24.
@@ -8,10 +8,10 @@
 import Foundation
 import RealmSwift
 
-class RealMemberRepository: MemberRepository {
-    func addMember(_ member: Member) {
+class MemberRepositoryImpl: MemberRepository {
+    func addMember(_ id: String?, name: String, image: String, intro: String) {
         let realm = try! Realm()
-        let item = Member(id: member.id, name: member.name, image: member.image, intro: member.intro)
+        let item = Member(id: id, name: name, image: image, intro: intro)
         do {
             try realm.write {
                 realm.add(item, update: .modified)
@@ -36,11 +36,11 @@ class RealMemberRepository: MemberRepository {
         }
     }
     
-    func loadMembers() -> [Member] {
+    func loadMembers() -> [MemberEntity] {
         let realm = try! Realm()
-        var list: [Member] = []
+        var list: [MemberEntity] = []
         realm.objects(Member.self).forEach { m in
-            list.append(Member(id: m.id, name: m.name, image: m.image, intro: m.intro))
+            list.append(Member(id: m.id, name: m.name, image: m.image, intro: m.intro).toMemberEntity())
         }
         return list
     }
