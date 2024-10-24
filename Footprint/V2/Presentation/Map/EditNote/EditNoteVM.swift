@@ -88,14 +88,20 @@ class EditNoteVM: BaseViewModel {
     }
     
     func loadMembers() {
+        let selectedMembers = self.members.filter({ $0.isSelected })
         self.members = loadMembersUseCase.execute()
+        for i in self.members.indices {
+            if let memberId = self.members[i].id, selectedMembers.contains(where: { $0.id == memberId }) {
+                self.members[i].isSelected = true
+            }
+        }
     }
     
     func saveNote() {
         if !self.isAvailableToSave { return }
         guard let location = location, let categoryId = self.category?.id else { return }
         
-        var memberIds: List<String> = List()
+        let memberIds: List<String> = List()
         members.filter({ $0.isSelected }).compactMap({ $0.id }).forEach { id in
             memberIds.append(id)
         }

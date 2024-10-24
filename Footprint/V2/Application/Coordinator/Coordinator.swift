@@ -47,7 +47,7 @@ extension Coordinator {
             self.pop()
         } pushCategoryListEditView: {
             self.pushCategoryListEditView(self.categoryListEditViewOutput)
-        } pushPeopleWithListEditView: {
+        } pushPeopleWithListEditView: { 
             self.pushPeopleWithListEditView(self.peopleWithListEditViewOutput)
         }
     }

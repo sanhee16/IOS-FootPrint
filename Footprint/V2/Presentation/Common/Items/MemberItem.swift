@@ -20,7 +20,9 @@ struct MemberItem: View {
             if !item.image.isEmpty, let image = ImageManager.shared.getSavedImage(named: item.image) {
                 Image(uiImage: image)
                     .resizable()
+                    .aspectRatio(contentMode: .fill)
                     .frame(both: 40.0, alignment: .center)
+                    .clipped()
                     .clipShape(Circle())
             } else {
                 Image("profile 1")

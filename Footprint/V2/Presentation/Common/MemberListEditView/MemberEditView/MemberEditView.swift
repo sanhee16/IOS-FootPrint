@@ -31,6 +31,7 @@ struct MemberEditView: View {
                         if let image = vm.image {
                             Image(uiImage: image)
                                 .resizable()
+                                .aspectRatio(contentMode: .fill)
                                 .frame(both: 80.0, alignment: .center)
                                 .clipShape(Circle())
                                 .contentShape(Rectangle())

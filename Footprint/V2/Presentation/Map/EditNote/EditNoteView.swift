@@ -166,7 +166,6 @@ struct EditNoteView: View {
                     .padding(8)
                     .contentShape(Rectangle())
                     .onTapGesture {
-                        vm.loadMembers()
                         $isPresentPeopleWith.wrappedValue = true
                     }
                     .sheet(isPresented: $isPresentPeopleWith, onDismiss: {
@@ -186,6 +185,9 @@ struct EditNoteView: View {
                             }
                             .sdPaddingHorizontal(24)
                             .sdPaddingTop(26)
+                            .onAppear {
+                                vm.loadMembers()
+                            }
                             
                             ScrollView(.vertical, showsIndicators: false, content: {
                                 ForEach($vm.members.wrappedValue, id: \.self) { item in
@@ -364,25 +366,6 @@ struct EditNoteView: View {
                 .sdFont(.headline3, color: .blue)
         })
     }
-    
-    
-//    private func categoryItem(_ item: CategoryEntity) -> some View {
-//        return HStack(alignment: .center, spacing: 8) {
-//            Image(item.icon.imageName)
-//                .resizable()
-//                .frame(both: 16.0, alignment: .center)
-//                .colorMultiply(Color(hex: item.color.hex))
-//                .contrast(3.0)
-//            Text(item.name)
-//                .sdFont(.headline3, color: Color(hex: item.color.hex))
-//        }
-//        .sdPaddingVertical(4)
-//        .sdPaddingHorizontal(8)
-//        .background(
-//            RoundedRectangle(cornerRadius: 8)
-//                .foregroundStyle(Color(hex: item.color.hex).opacity(0.1))
-//        )
-//    }
     
     private func memberItem(_ item: MemberEntity) -> some View {
         return HStack(alignment: .center, spacing: 8) {
