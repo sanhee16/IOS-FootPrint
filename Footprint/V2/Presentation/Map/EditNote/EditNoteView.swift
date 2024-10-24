@@ -196,7 +196,7 @@ struct EditNoteView: View {
                                     .padding(16)
                                     .contentShape(Rectangle())
                                     .onTapGesture {
-                                        
+                                        vm.toggleMember(item)
                                     }
                                 }
                                 .sdPaddingBottom(20)
@@ -388,7 +388,7 @@ struct EditNoteView: View {
         return HStack(alignment: .center, spacing: 8) {
             MemberItem(item: item)
             Spacer()
-            if $vm.selectMembers.wrappedValue.contains(where: { $0 == item }) {
+            if $vm.members.wrappedValue.filter({ $0.isSelected }).contains(where: { $0 == item }) {
                 Image("SelectButton")
                     .resizable()
                     .frame(width: 16.0, height: 16.0, alignment: .center)
@@ -396,5 +396,6 @@ struct EditNoteView: View {
         }
         .sdPaddingVertical(4)
         .sdPaddingHorizontal(8)
+        .contentShape(Rectangle())
     }
 }

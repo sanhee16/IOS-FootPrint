@@ -54,7 +54,6 @@ class EditNoteVM: BaseViewModel {
     @Published var category: CategoryEntity? = nil
     @Published var images: [UIImage] = [UIImage]()
     @Published var selectedPhotos: [PhotosPickerItem] = [PhotosPickerItem]()
-    @Published var selectMembers: [MemberEntity] = []
     @Published var members: [MemberEntity] = []
     
     private var noteId: String? = nil
@@ -80,8 +79,8 @@ class EditNoteVM: BaseViewModel {
         // loadCategories
         self.loadCategories()
         self.category = self.categories.first
+        self.members = []
         self.loadMembers()
-        self.selectMembers = []
     }
     
     func loadCategories() {
@@ -97,7 +96,7 @@ class EditNoteVM: BaseViewModel {
         guard let location = location, let categoryId = self.category?.id else { return }
         
         var memberIds: List<String> = List()
-        selectMembers.compactMap({ $0.id }).forEach { id in
+        members.filter({ $0.isSelected }).compactMap({ $0.id }).forEach { id in
             memberIds.append(id)
         }
         
@@ -150,11 +149,8 @@ class EditNoteVM: BaseViewModel {
     
     
     func toggleMember(_ member: MemberEntity) {
-        if let idx = self.selectMembers.firstIndex(where: { $0 == member }) {
-            self.selectMembers.remove(at: idx)
-        } else {
-            self.selectMembers.append(member)
-        }
+        guard let idx = self.members.firstIndex(where: { $0 == member }) else { return }
+        self.members[idx].isSelected.toggle()
     }
     
     
