@@ -14,7 +14,7 @@ class UpdateCategoryUseCase {
         self.categoryRepository = categoryRepository
     }
     
-    func execute(_ category: CategoryV2) {
+    func execute(_ category: CategoryEntity) {
         
     }
 }

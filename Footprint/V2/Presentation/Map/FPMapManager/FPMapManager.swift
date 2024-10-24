@@ -145,9 +145,9 @@ class FPMapManager: NSObject, ObservableObject {
         let backgroundSize = CGSize(width: 130, height: 130)
         let itemSize = CGSize(width: 100, height: 100)
         let itemFinalSize = CGSize(width: 22, height: 22)
-        let markerImage: UIImage? = UIImage(named: category.icon)?.resizeImageTo(size: itemSize)
+        let markerImage: UIImage? = UIImage(named: category.icon.imageName)?.resizeImageTo(size: itemSize)
         var backgroundImage: UIImage? = UIImage(named: "mark_background_black")?.resizeImageTo(size: backgroundSize)
-        backgroundImage = backgroundImage?.withTintColor(UIColor(hex: category.color), renderingMode: .alwaysTemplate)
+        backgroundImage = backgroundImage?.withTintColor(UIColor(hex: category.color.hex), renderingMode: .alwaysTemplate)
         
         guard let markerImage = markerImage, let backgroundImage = backgroundImage else { return nil }
         

@@ -50,8 +50,8 @@ class EditNoteVM: BaseViewModel {
     @Published var content: String = ""
     @Published var address: String = "" { didSet { checkIsAvailableToSave() }}
     @Published var createdAt: Date = Date()
-    @Published var categories: [CategoryV2] = []
-    @Published var category: CategoryV2? = nil
+    @Published var categories: [CategoryEntity] = []
+    @Published var category: CategoryEntity? = nil
     @Published var images: [UIImage] = [UIImage]()
     @Published var selectedPhotos: [PhotosPickerItem] = [PhotosPickerItem]()
     @Published var selectMembers: [Member] = []

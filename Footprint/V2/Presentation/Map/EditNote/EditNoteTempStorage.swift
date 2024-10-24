@@ -13,7 +13,7 @@ class EditNoteTempStorage {
     static var content: String = ""
     static var address: String = ""
     static var createdAt: Date = Date()
-    static var category: CategoryV2? = nil
+    static var category: CategoryEntity? = nil
     
 
     static func clear() {
@@ -31,7 +31,7 @@ class EditNoteTempStorage {
         content: String,
         address: String,
         createdAt: Date,
-        category: CategoryV2?
+        category: CategoryEntity?
     ) {
         self.title = title
         self.isStar = isStar

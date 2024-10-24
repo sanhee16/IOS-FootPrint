@@ -11,7 +11,7 @@ import Factory
 class CategoryListEditVM: BaseViewModel {
     @Injected(\.saveNoteUseCase) var saveNoteUseCase
     @Injected(\.loadCategoriesUseCase) var loadCategoriesUseCase
-    @Published var categories: [CategoryV2] = []
+    @Published var categories: [CategoryEntity] = []
     
     override init() {
         super.init()

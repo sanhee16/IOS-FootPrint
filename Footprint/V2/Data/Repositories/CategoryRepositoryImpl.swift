@@ -1,5 +1,5 @@
 //
-//  RealCategoryRepository.swift
+//  CategoryRepositoryImpl.swift
 //  Footprint
 //
 //  Created by sandy on 8/23/24.
@@ -8,10 +8,10 @@
 import Foundation
 import RealmSwift
 
-class RealCategoryRepository: CategoryRepository {
-    func addCategory(_ category: CategoryV2) {
+class CategoryRepositoryImpl: CategoryRepository {
+    func addCategory(_ id: String?, name: String, color: Int, icon: Int) {
         let realm = try! Realm()
-        let item = CategoryV2(id: category.id, name: category.name, color: category.color, icon: category.icon)
+        let item = CategoryV2(id: id, name: name, color: color, icon: icon)
         do {
             try realm.write {
                 realm.add(item, update: .modified)
@@ -36,20 +36,20 @@ class RealCategoryRepository: CategoryRepository {
         }
     }
     
-    func loadCategories() -> [CategoryV2] {
+    func loadCategories() -> [CategoryEntity] {
         let realm = try! Realm()
-        var list: [CategoryV2] = []
+        var list: [CategoryEntity] = []
         realm.objects(CategoryV2.self).forEach { c in
-            list.append(CategoryV2(id: c.id, name: c.name, color: c.color, icon: c.icon))
+            list.append(CategoryV2(id: c.id, name: c.name, color: c.color, icon: c.icon).toCategoryEntity())
         }
         return list
     }
     
-    func loadCategory(_ id: String) -> CategoryV2? {
+    func loadCategory(_ id: String) -> CategoryEntity? {
         let realm = try! Realm()
         let c = realm.objects(CategoryV2.self).where({ $0.id == id }).first
         guard let c = c else { return nil }
-        let result = CategoryV2(id: c.id, name: c.name, color: c.color, icon: c.icon)
+        let result = CategoryV2(id: c.id, name: c.name, color: c.color, icon: c.icon).toCategoryEntity()
         return result
     }
 }

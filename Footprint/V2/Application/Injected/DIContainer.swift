@@ -25,7 +25,7 @@ extension Container {
     }
     
     var categoryRepository: Factory<CategoryRepository> {
-        Factory(self) { RealCategoryRepository() }
+        Factory(self) { CategoryRepositoryImpl() }
     }
     
     var memberRepository: Factory<MemberRepository> {

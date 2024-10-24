@@ -27,15 +27,15 @@ struct CategoryEditView: View {
                 
                 drawTitle("색상", isEssential: false)
                 HStack(alignment: .bottom, spacing: 0, content: {
-                    ForEach(vm.DEFAULT_COLORS, id: \.self) { hexColor in
+                    ForEach(vm.DEFAULT_COLORS, id: \.self) { color in
                         ZStack(alignment: .bottomTrailing, content: {
-                            colorItem(hexColor)
+                            colorItem(color.hex)
                                 .padding(8)
                                 .background(
                                     RoundedRectangle(cornerRadius: 2)
-                                        .foregroundStyle($vm.color.wrappedValue == hexColor ? Color.zineGray_200 : Color.clear)
+                                        .foregroundStyle($vm.color.wrappedValue == color ? Color.zineGray_200 : Color.clear)
                                 )
-                            if $vm.color.wrappedValue == hexColor {
+                            if $vm.color.wrappedValue == color {
                                 Image("SelectButton")
                                     .resizable()
                                     .offset(x: 4, y: 4)
@@ -47,7 +47,7 @@ struct CategoryEditView: View {
                         .layoutPriority(.greatestFiniteMagnitude)
                         .contentShape(Rectangle())
                         .onTapGesture {
-                            $vm.color.wrappedValue = hexColor
+                            $vm.color.wrappedValue = color
                         }
                     }
                 })
@@ -58,7 +58,7 @@ struct CategoryEditView: View {
                     HStack(alignment: .center, spacing: 0, content: {
                         ForEach(items, id: \.self) { icon in
                             ZStack(alignment: .bottomTrailing, content: {
-                                iconItem(icon)
+                                iconItem(icon.imageName)
                                     .padding(8)
                                     .background(
                                         RoundedRectangle(cornerRadius: 2)

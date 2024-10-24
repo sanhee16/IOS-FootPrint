@@ -11,15 +11,24 @@ import RealmSwift
 class CategoryV2: Object {
     @Persisted(primaryKey: true) var id: String
     @Persisted var name: String
-    @Persisted var color: String // hex
-    @Persisted var icon: String // icon name
+    @Persisted var color: Int // CategoryColor rawValue
+    @Persisted var icon: Int // CategoryImage rawValue
     
-    convenience init(id: String? = UUID().uuidString, name: String, color: String, icon: String) {
+    convenience init(id: String? = UUID().uuidString, name: String, color: Int, icon: Int) {
         self.init()
         
         self.id = id ?? UUID().uuidString
         self.name = name
         self.color = color
         self.icon = icon
+    }
+    
+    func toCategoryEntity() -> CategoryEntity {
+        return CategoryEntity(
+            id: self.id,
+            name: self.name,
+            color: CategoryColor(rawValue: self.color)!,
+            icon: CategoryIcon(rawValue: self.icon)!
+        )
     }
 }

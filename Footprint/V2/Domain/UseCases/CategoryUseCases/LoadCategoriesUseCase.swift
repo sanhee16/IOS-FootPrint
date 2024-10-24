@@ -14,7 +14,7 @@ class LoadCategoriesUseCase {
         self.categoryRepository = categoryRepository
     }
     
-    func execute() -> [CategoryV2] {
+    func execute() -> [CategoryEntity] {
         return self.categoryRepository.loadCategories()
     }
 }

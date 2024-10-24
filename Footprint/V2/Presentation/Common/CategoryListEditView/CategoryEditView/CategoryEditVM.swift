@@ -31,57 +31,24 @@ class CategoryEditVM: BaseViewModel {
     
     private var categoryId: String? = nil
     @Published var name: String = "" { didSet { checkIsAvailableToSave() }}
-    @Published var color: String = "" { didSet { checkIsAvailableToSave() }}
-    @Published var icon: String = "" { didSet { checkIsAvailableToSave() }}
+    @Published var color: CategoryColor = .black { didSet { checkIsAvailableToSave() }}
+    @Published var icon: CategoryIcon = .smile { didSet { checkIsAvailableToSave() }}
     @Published var isAvailableToSave: Bool = false
     let CHUNK_SIZE = 8
     
-    let DEFAULT_COLORS: [String] = [
-        Color.etc_black_high.toHex(),
-        Color.etc_pink_high.toHex(),
-        Color.etc_orange_high.toHex(),
-        Color.etc_yellow_high.toHex(),
-        Color.etc_green_high.toHex(),
-        Color.etc_blue_high.toHex(),
-        Color.etc_purple_high.toHex()
-    ].compactMap({$0})
-    @Published var iconsRows: [[String]] = [[]]
-    private let DEFAULT_ICONS: [String] = [
-        "happy-face--smiley-chat-message-smile-emoji-face-satisfied",
-        "sad-face--smiley-chat-message-emoji-sad-face-unsatisfied",
-        "smiley-angry",
-        "smiley-cool",
-        "sad-face--smiley-chat-message-emoji-sad-face-unsatisfied",
-        "smiley-angry",
-        "smiley-cool",
-        "sad-face--smiley-chat-message-emoji-sad-face-unsatisfied",
-        "smiley-angry",
-        "smiley-cool",
-        "sad-face--smiley-chat-message-emoji-sad-face-unsatisfied",
-        "smiley-angry",
-        "smiley-cool",
-        "sad-face--smiley-chat-message-emoji-sad-face-unsatisfied",
-        "smiley-angry",
-        "smiley-cool",
-        "sad-face--smiley-chat-message-emoji-sad-face-unsatisfied",
-        "smiley-angry",
-        "smiley-cool",
-        "sad-face--smiley-chat-message-emoji-sad-face-unsatisfied",
-        "smiley-angry",
-        "smiley-cool",
-        "sad-face--smiley-chat-message-emoji-sad-face-unsatisfied",
-        "smiley-angry",
-        "smiley-cool",
-        "sad-face--smiley-chat-message-emoji-sad-face-unsatisfied",
-        "smiley-angry",
-        "smiley-cool",
-        "sad-face--smiley-chat-message-emoji-sad-face-unsatisfied",
-        "smiley-angry",
-        "smiley-cool",
-        "sad-face--smiley-chat-message-emoji-sad-face-unsatisfied",
-        "smiley-angry",
-        "smiley-cool"
+    let DEFAULT_COLORS: [CategoryColor] = [
+        .black, .pink, .orange, .yellow, .green, .blue, .purple
     ]
+    
+    let DEFAULT_ICONS: [CategoryIcon] = [
+        .athleticsRunning,
+        .feet,
+        .beer,
+        .smile,
+        .sad
+    ]
+    
+    @Published var iconsRows: [[CategoryIcon]] = [[]]
     private var isLoading: Bool = false
     override init() {
         self.type = .create
@@ -92,12 +59,12 @@ class CategoryEditVM: BaseViewModel {
         }
     }
     
-    func setCategory(_ categoryV2: CategoryV2?) {
-        self.type = categoryV2 == nil ? .create : .modify
-        self.categoryId = categoryV2?.id
-        self.name = categoryV2?.name ?? ""
-        self.color = categoryV2?.color ?? DEFAULT_COLORS.first ?? ""
-        self.icon = categoryV2?.icon ?? DEFAULT_ICONS.first ?? ""
+    func setCategory(_ categoryEntity: CategoryEntity?) {
+        self.type = categoryEntity == nil ? .create : .modify
+        self.categoryId = categoryEntity?.id
+        self.name = categoryEntity?.name ?? ""
+        self.color = categoryEntity?.color ?? DEFAULT_COLORS.first!
+        self.icon = categoryEntity?.icon ?? DEFAULT_ICONS.first!
     }
     
     func saveCategory(_ onFinish: @escaping () -> ()) {
@@ -105,16 +72,19 @@ class CategoryEditVM: BaseViewModel {
         if self.isLoading { return }
         
         self.isLoading = true
-        let category = CategoryV2(id: categoryId, name: self.name, color: self.color, icon: self.icon)
-
-        self.saveCategoryUseCase.execute(category)
+        self.saveCategoryUseCase.execute(
+            categoryId,
+            name: self.name,
+            color: self.color,
+            icon: self.icon
+        )
         self.isLoading = false
         onFinish()
     }
     
     private func checkIsAvailableToSave() {
         self.isAvailableToSave = false
-        if self.name.isEmpty || self.color.isEmpty || self.icon.isEmpty { return }
+        if self.name.isEmpty { return }
         self.isAvailableToSave = true
     }
 }

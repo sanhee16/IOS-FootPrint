@@ -230,7 +230,7 @@ struct EditNoteView: View {
             drawTitle("카테고리", isEssential: true)
                 .frame(width: 100, height: 40, alignment: .leading)
             if let selectedCategory = $vm.category.wrappedValue {
-                categoryItem(selectedCategory)
+                CategoryItem(item: selectedCategory)
             }
             
             Spacer()
@@ -262,7 +262,7 @@ struct EditNoteView: View {
                 ScrollView(.vertical, showsIndicators: false, content: {
                     ForEach($vm.categories.wrappedValue, id: \.self) { item in
                         HStack(alignment: .center, spacing: 0, content: {
-                            categoryItem(item)
+                            CategoryItem(item: item)
                             Spacer()
                             if let selectedCategory = $vm.category.wrappedValue, selectedCategory == item {
                                 Image("SelectButton")
@@ -362,23 +362,23 @@ struct EditNoteView: View {
     }
     
     
-    private func categoryItem(_ item: CategoryV2) -> some View {
-        return HStack(alignment: .center, spacing: 8) {
-            Image(item.icon)
-                .resizable()
-                .frame(both: 16.0, alignment: .center)
-                .colorMultiply(Color(hex: item.color))
-                .contrast(3.0)
-            Text(item.name)
-                .sdFont(.headline3, color: Color(hex: item.color))
-        }
-        .sdPaddingVertical(4)
-        .sdPaddingHorizontal(8)
-        .background(
-            RoundedRectangle(cornerRadius: 8)
-                .foregroundStyle(Color(hex: item.color).opacity(0.1))
-        )
-    }
+//    private func categoryItem(_ item: CategoryEntity) -> some View {
+//        return HStack(alignment: .center, spacing: 8) {
+//            Image(item.icon.imageName)
+//                .resizable()
+//                .frame(both: 16.0, alignment: .center)
+//                .colorMultiply(Color(hex: item.color.hex))
+//                .contrast(3.0)
+//            Text(item.name)
+//                .sdFont(.headline3, color: Color(hex: item.color.hex))
+//        }
+//        .sdPaddingVertical(4)
+//        .sdPaddingHorizontal(8)
+//        .background(
+//            RoundedRectangle(cornerRadius: 8)
+//                .foregroundStyle(Color(hex: item.color.hex).opacity(0.1))
+//        )
+//    }
     
     private func memberItem(_ item: Member) -> some View {
         return HStack(alignment: .center, spacing: 8) {
