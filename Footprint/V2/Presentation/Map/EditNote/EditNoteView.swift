@@ -234,6 +234,8 @@ struct EditNoteView: View {
             }
             
             Spacer()
+            Image("ic_arrow_right")
+                .font(.system(size: 16))
         })
         .id(CATEGORY_ID)
         .onTapGesture {
@@ -289,6 +291,8 @@ struct EditNoteView: View {
                 .frame(width: 100, height: 40, alignment: .leading)
             Text("\($vm.createdAt.wrappedValue.toEditNoteDate)")
             Spacer()
+            Image("ic_arrow_right")
+                .font(.system(size: 16))
         })
         .id(CALENDAR_ID)
         .contentShape(Rectangle())

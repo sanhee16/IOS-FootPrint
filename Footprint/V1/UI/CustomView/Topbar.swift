@@ -10,7 +10,7 @@ import SDSwiftUIPack
 import UIKit
 
 enum TopbarType: String {
-    case back = "Type=Flat, Direction=◀ Left"
+    case back = "ic_arrow_left"
     case close = "close"
     case closeWhite = "close_white"
     case none = ""
