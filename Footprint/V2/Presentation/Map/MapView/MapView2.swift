@@ -177,9 +177,9 @@ struct MapView2: View {
             $vm.viewEvent.wrappedValue = .none
         })
         .onChange(of: $mapManager.selectedMarker.wrappedValue, perform: { id in
-            // TODO: dismiss 되는 시점을 모르기때문에 이 방법은 안될 것 같음
             if let id = id {
                 print("marker: \(id)")
+                $mapManager.selectedMarker.wrappedValue = nil
                 self.output.goToFootprintView(id)
             }
         })
