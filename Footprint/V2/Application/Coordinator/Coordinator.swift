@@ -10,8 +10,8 @@ import Factory
 import SwiftUI
 
 class Coordinator: BaseCoordinator<Destination> {
-    private func pushFootprintView(_ location: Location) {
-        self.push(.footprint(location: location))
+    private func pushFootprintView(_ id: String) {
+        self.push(.footprint(id: id))
     }
     
     
@@ -35,8 +35,8 @@ class Coordinator: BaseCoordinator<Destination> {
 //MARK: Output
 extension Coordinator {
     var mapOutput: MapView2.Output {
-        MapView2.Output { location in
-            self.pushFootprintView(location)
+        MapView2.Output { id in
+            self.pushFootprintView(id)
         } goToEditNote: { location, type in
             self.pushEditNote(self.editNoteOutput, location: location, type: type)
         }

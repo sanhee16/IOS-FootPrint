@@ -13,28 +13,6 @@ import GooglePlaces
 import CoreLocation
 import Contacts
 
-enum MarkerStatus {
-    case stable
-    case move
-    
-    var image: String {
-        switch self {
-        case .stable:
-            return "State=able"
-        case .move:
-            return "State=move"
-        }
-    }
-    
-    var size: CGSize {
-        switch self {
-        case .stable:
-            return CGSize(width: 46, height: 54)
-        case .move:
-            return CGSize(width: 46, height: 72)
-        }
-    }
-}
 
 class SelectLocationVM: BaseViewModel {
     private var locationManager: CLLocationManager

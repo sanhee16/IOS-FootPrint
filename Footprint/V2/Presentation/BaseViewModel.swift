@@ -13,12 +13,12 @@ enum ViewEvent: Equatable {
         lhs.event == rhs.event
     }
     
-    case goToFootprintView(location: Location)
+    case goToFootprintView(id: String)
     case none
     
     var event: String {
         switch self {
-        case .goToFootprintView(let location):
+        case .goToFootprintView(let id):
             return "goToFootprintView"
         case .none:
             return "none"

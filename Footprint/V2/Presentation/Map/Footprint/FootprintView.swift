@@ -11,10 +11,10 @@ import SwiftUIPager
 import SDSwiftUIPack
 
 struct FootprintView: View {
-    @StateObject var vm: FootprintVM = FootprintVM()
+    @StateObject var vm: FootprintVM
     
-    init(location: Location) {
-        self.vm.updateLocation(location)
+    init(id: String) {
+        _vm = StateObject(wrappedValue: { FootprintVM(id) }())
     }
     
     private var safeTop: CGFloat { get { Util.safeTop() }}

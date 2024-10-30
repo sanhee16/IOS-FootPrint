@@ -12,6 +12,7 @@ import GooglePlaces
 import SwiftUI
 import Contacts
 import Factory
+import Combine
 
 @MainActor
 class FPMapManager: NSObject, ObservableObject {
@@ -28,6 +29,8 @@ class FPMapManager: NSObject, ObservableObject {
     
     @Published var mapView: GMSMapView
     @Published var markers: [GMSMarker]
+    
+    @Published var selectedMarker: String? = nil
     
     private var notes: [NoteData]
     
@@ -87,7 +90,7 @@ class FPMapManager: NSObject, ObservableObject {
         self.notes = self.loadNoteUseCase.execute()
         
         self.notes.forEach { note in
-            if let marker = createMarker(location: Location(latitude: note.latitude, longitude: note.longitude), categoryId: note.categoryId) {
+            if let marker = createMarker(location: Location(latitude: note.latitude, longitude: note.longitude), categoryId: note.categoryId, id: note.id) {
                 self.markers.append(marker)
             }
         }
@@ -135,7 +138,7 @@ class FPMapManager: NSObject, ObservableObject {
         }
     }
     
-    func createMarker(location: Location, categoryId: String) -> GMSMarker? {
+    func createMarker(location: Location, categoryId: String, id: String) -> GMSMarker? {
         guard let category = self.loadCategoryUseCase.execute(categoryId) else { return nil }
         // 마커 생성하기
         // MARK: mix two images!
@@ -167,21 +170,29 @@ class FPMapManager: NSObject, ObservableObject {
         marker.map = self.mapView
         marker.tracksViewChanges = false
         marker.isTappable = true
-        
+        marker.userData = id
         return marker
+    }
+    
+    func unSelectMarker() {
+        self.selectedMarker = nil
     }
 }
 
 extension FPMapManager: GMSMapViewDelegate {
-    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        return true
-    }
-    
     func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
         self.changeStateSelectedMarker(true, target: nil)
     }
-
+    
     func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
         self.changeStateSelectedMarker(false, target: position.target)
+    }
+    
+    // 마커 클릭
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        if let id = marker.userData as? String {
+            self.selectedMarker = id
+        }
+        return true
     }
 }

@@ -11,6 +11,7 @@ import GoogleMobileAds
 import MapKit
 import GoogleMaps
 import GooglePlaces
+import Combine
 
 struct MapView2: View {
     enum MapStatus {
@@ -19,10 +20,11 @@ struct MapView2: View {
     }
     
     struct Output {
-        var goToFootprintView: (Location) -> ()
+        var goToFootprintView: (String) -> ()
         var goToEditNote: (Location, EditNoteType) -> ()
     }
     private var output: Output
+    private var subscription = Set<AnyCancellable>()
     
     @StateObject var vm: MapVM2 = MapVM2()
     @ObservedObject var mapManager: FPMapManager = FPMapManager.shared
@@ -36,6 +38,7 @@ struct MapView2: View {
     @State private var mapStatus: MapStatus = .normal
     @State private var centerPos: CGRect = .zero
     @State private var isShowMarkers: Bool = false
+    @State private var isPresentFootprint: Bool = false
     
     @Environment(\.centerLocation) var centerLocation
 
@@ -166,12 +169,19 @@ struct MapView2: View {
         }
         .onChange(of: $vm.viewEvent.wrappedValue, perform: { value in
             switch value {
-            case .goToFootprintView(let location):
-                self.output.goToFootprintView(location)
+            case .goToFootprintView(let id):
+                self.output.goToFootprintView(id)
             default:
                 break
             }
             $vm.viewEvent.wrappedValue = .none
+        })
+        .onChange(of: $mapManager.selectedMarker.wrappedValue, perform: { id in
+            // TODO: dismiss 되는 시점을 모르기때문에 이 방법은 안될 것 같음
+            if let id = id {
+                print("marker: \(id)")
+                self.output.goToFootprintView(id)
+            }
         })
         .onAppear {
             vm.onAppear()

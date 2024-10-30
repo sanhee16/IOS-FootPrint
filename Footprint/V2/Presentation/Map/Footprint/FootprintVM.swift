@@ -22,9 +22,11 @@ class FootprintVM: BaseViewModel {
     private let realm: Realm
     private var location: Location?
     private var isLoading: Bool = false
+    private let id: String
     
-    override init() {
+    init(_ id: String) {
         self.realm = R.realm
+        self.id = id
         self.location = nil
         self.page = .withIndex(0)
         self.pageIdx = 0
@@ -51,7 +53,7 @@ class FootprintVM: BaseViewModel {
         print("loadAll")
         self.footPrints.removeAll()
         let items = realm.objects(FootPrint.self)
-            .filter("latitude == \(location.latitude) AND longitude == \(location.longitude) AND deleteTime == 0")
+            .filter("id == \(id)")
             .sorted(byKeyPath: "createdAt", ascending: true)
         print("\(items.count)")
         print("\(items)")
