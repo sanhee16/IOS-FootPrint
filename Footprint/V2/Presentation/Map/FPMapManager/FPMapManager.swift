@@ -145,7 +145,7 @@ class FPMapManager: NSObject, ObservableObject {
 
         let backgroundSize = CGSize(width: 40, height: 40)
         let itemSize = CGSize(width: 20, height: 20)
-        let itemFinalSize = CGSize(width: 20, height: 20)
+        let itemFinalSize = CGSize(width: 40, height: 40)
 
         let markerImage: UIImage? = UIImage(named: category.icon.imageName)?.resizeImageTo(size: itemSize)
         var backgroundImage: UIImage? = UIImage(named: "mark_background_black")?.resizeImageTo(size: backgroundSize)
@@ -195,6 +195,7 @@ class FPMapManager: NSObject, ObservableObject {
         marker.tracksViewChanges = false
         marker.isTappable = true
         marker.userData = id
+        
         return marker
     }
     
@@ -205,7 +206,7 @@ class FPMapManager: NSObject, ObservableObject {
 
         let backgroundSize = CGSize(width: 40, height: 40)
         let itemSize = CGSize(width: 20, height: 20)
-        let itemFinalSize = CGSize(width: 20, height: 20)
+        let itemFinalSize = CGSize(width: 40, height: 40)
 
         let markerImage: UIImage? = UIImage(named: category.icon.imageName)?.resizeImageTo(size: itemSize)
         var backgroundImage: UIImage? = UIImage(named: "mark_background_black")?.resizeImageTo(size: backgroundSize)
@@ -261,26 +262,27 @@ class FPMapManager: NSObject, ObservableObject {
         guard let category = self.loadCategoryUseCase.execute(categoryId) else { return nil }
         // 마커 생성하기
         let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
-        
+
         let backgroundSize = CGSize(width: 40, height: 40)
         let itemSize = CGSize(width: 20, height: 20)
-        let itemFinalSize = CGSize(width: 20, height: 20)
+        let itemFinalSize = CGSize(width: 40, height: 40) // 크기를 증가시킴
+
         let markerImage: UIImage? = UIImage(named: category.icon.imageName)?.resizeImageTo(size: itemSize)
         var backgroundImage: UIImage? = UIImage(named: "mark_background_black")?.resizeImageTo(size: backgroundSize)
         backgroundImage = backgroundImage?.withTintColor(UIColor(hex: category.color.hex), renderingMode: .alwaysTemplate)
-        
+
         guard let markerImage = markerImage, let backgroundImage = backgroundImage else { return nil }
-        
+
         let backgroundRect = CGRect(x: 0, y: 0, width: backgroundSize.width, height: backgroundSize.height)
         let itemRect = CGRect(x: (backgroundSize.width - itemSize.width) / 2, y: (backgroundSize.height - itemSize.height) / 2, width: itemSize.width, height: itemSize.height)
-        
+
         UIGraphicsBeginImageContext(backgroundSize)
         backgroundImage.draw(in: backgroundRect, blendMode: .normal, alpha: 1)
         markerImage.draw(in: itemRect, blendMode: .normal, alpha: 1)
-        
+
         let finalMarkerImage: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        
+
         guard let finalMarkerImage = finalMarkerImage?.resizeImageTo(size: itemFinalSize) else { return nil }
         let finalMarkerImageView = UIImageView(image: finalMarkerImage.withRenderingMode(.alwaysOriginal))
         marker.iconView = finalMarkerImageView
@@ -288,6 +290,7 @@ class FPMapManager: NSObject, ObservableObject {
         marker.tracksViewChanges = false
         marker.isTappable = true
         marker.userData = id
+        
         return marker
     }
     
