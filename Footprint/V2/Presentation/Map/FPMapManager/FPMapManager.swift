@@ -138,7 +138,7 @@ class FPMapManager: NSObject, ObservableObject {
         }
     }
     
-    func createMarker(location: Location, categoryId: String, id: String) -> GMSMarker? {
+    func createMarkerWithNumberNoti(location: Location, categoryId: String, id: String) -> GMSMarker? {
         guard let category = self.loadCategoryUseCase.execute(categoryId) else { return nil }
         // 마커 생성하기
         let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
@@ -191,6 +191,99 @@ class FPMapManager: NSObject, ObservableObject {
         markerContainerView.addSubview(numberView)
 
         marker.iconView = markerContainerView
+        marker.map = self.mapView
+        marker.tracksViewChanges = false
+        marker.isTappable = true
+        marker.userData = id
+        return marker
+    }
+    
+    func createMarkerWithNumber(location: Location, categoryId: String, id: String) -> GMSMarker? {
+        guard let category = self.loadCategoryUseCase.execute(categoryId) else { return nil }
+        // 마커 생성하기
+        let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
+
+        let backgroundSize = CGSize(width: 40, height: 40)
+        let itemSize = CGSize(width: 20, height: 20)
+        let itemFinalSize = CGSize(width: 20, height: 20)
+
+        let markerImage: UIImage? = UIImage(named: category.icon.imageName)?.resizeImageTo(size: itemSize)
+        var backgroundImage: UIImage? = UIImage(named: "mark_background_black")?.resizeImageTo(size: backgroundSize)
+        backgroundImage = backgroundImage?.withTintColor(UIColor(hex: category.color.hex), renderingMode: .alwaysTemplate)
+
+        guard let markerImage = markerImage, let backgroundImage = backgroundImage else { return nil }
+
+        let backgroundRect = CGRect(x: 0, y: 0, width: backgroundSize.width, height: backgroundSize.height)
+        let itemRect = CGRect(x: (backgroundSize.width - itemSize.width) / 2, y: (backgroundSize.height - itemSize.height) / 2, width: itemSize.width, height: itemSize.height)
+
+        UIGraphicsBeginImageContext(backgroundSize)
+        backgroundImage.draw(in: backgroundRect, blendMode: .normal, alpha: 1)
+        markerImage.draw(in: itemRect, blendMode: .normal, alpha: 1)
+
+        let finalMarkerImage: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        guard let finalMarkerImage = finalMarkerImage?.resizeImageTo(size: itemFinalSize) else { return nil }
+
+        // Create a container view for the marker
+        let markerContainerView = UIView(frame: CGRect(x: 0, y: 0, width: backgroundSize.width, height: backgroundSize.height))
+
+        // Create the marker image view
+        let finalMarkerImageView = UIImageView(image: finalMarkerImage.withRenderingMode(.alwaysOriginal))
+        finalMarkerImageView.frame = CGRect(x: 0, y: 0, width: backgroundSize.width, height: backgroundSize.height)
+        markerContainerView.addSubview(finalMarkerImageView)
+
+        // Create a circle view for the number, same size as the background
+        let numberView = UIView(frame: CGRect(x: 0, y: 0, width: backgroundSize.width, height: backgroundSize.height))
+        numberView.backgroundColor = .red // 원하는 배경색
+        numberView.layer.cornerRadius = backgroundSize.width / 2 // 원형으로 만들기
+        numberView.clipsToBounds = true
+
+        // Create the label for the number, centered in the number view
+        let numberLabel = UILabel(frame: numberView.bounds)
+        numberLabel.text = "\(2)" // yourNumber를 원하는 숫자로 변경
+        numberLabel.textColor = .white
+        numberLabel.textAlignment = .center
+        numberLabel.font = UIFont.boldSystemFont(ofSize: 16) // 필요에 따라 조정
+
+        numberView.addSubview(numberLabel)
+        markerContainerView.addSubview(numberView)
+
+        marker.iconView = markerContainerView
+        marker.map = self.mapView
+        marker.tracksViewChanges = false
+        marker.isTappable = true
+        marker.userData = id
+        return marker
+    }
+    
+    func createMarker(location: Location, categoryId: String, id: String) -> GMSMarker? {
+        guard let category = self.loadCategoryUseCase.execute(categoryId) else { return nil }
+        // 마커 생성하기
+        let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
+        
+        let backgroundSize = CGSize(width: 40, height: 40)
+        let itemSize = CGSize(width: 20, height: 20)
+        let itemFinalSize = CGSize(width: 20, height: 20)
+        let markerImage: UIImage? = UIImage(named: category.icon.imageName)?.resizeImageTo(size: itemSize)
+        var backgroundImage: UIImage? = UIImage(named: "mark_background_black")?.resizeImageTo(size: backgroundSize)
+        backgroundImage = backgroundImage?.withTintColor(UIColor(hex: category.color.hex), renderingMode: .alwaysTemplate)
+        
+        guard let markerImage = markerImage, let backgroundImage = backgroundImage else { return nil }
+        
+        let backgroundRect = CGRect(x: 0, y: 0, width: backgroundSize.width, height: backgroundSize.height)
+        let itemRect = CGRect(x: (backgroundSize.width - itemSize.width) / 2, y: (backgroundSize.height - itemSize.height) / 2, width: itemSize.width, height: itemSize.height)
+        
+        UIGraphicsBeginImageContext(backgroundSize)
+        backgroundImage.draw(in: backgroundRect, blendMode: .normal, alpha: 1)
+        markerImage.draw(in: itemRect, blendMode: .normal, alpha: 1)
+        
+        let finalMarkerImage: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        guard let finalMarkerImage = finalMarkerImage?.resizeImageTo(size: itemFinalSize) else { return nil }
+        let finalMarkerImageView = UIImageView(image: finalMarkerImage.withRenderingMode(.alwaysOriginal))
+        marker.iconView = finalMarkerImageView
         marker.map = self.mapView
         marker.tracksViewChanges = false
         marker.isTappable = true
