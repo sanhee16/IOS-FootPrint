@@ -20,7 +20,6 @@ struct MapView2: View {
     }
     
     struct Output {
-        var goToFootprintView: (String) -> ()
         var goToEditNote: (Location, EditNoteType) -> ()
     }
     private var output: Output
@@ -39,7 +38,7 @@ struct MapView2: View {
     @State private var centerPos: CGRect = .zero
     @State private var isShowMarkers: Bool = false
     @State private var isPresentFootprint: Bool = false
-    
+    @State private var selectedId: String? = nil
     @Environment(\.centerLocation) var centerLocation
 
     init(output: Output) {
@@ -167,20 +166,29 @@ struct MapView2: View {
             }
             .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
         }
-        .onChange(of: $vm.viewEvent.wrappedValue, perform: { value in
-            switch value {
-            case .goToFootprintView(let id):
-                self.output.goToFootprintView(id)
-            default:
-                break
-            }
-            $vm.viewEvent.wrappedValue = .none
+        .sheet(isPresented: $isPresentFootprint, onDismiss: {
+            $isPresentFootprint.wrappedValue = false
+        }, content: {
+            FootprintView(isPresented: $isPresentFootprint)
+                .environmentObject(FootprintVM(selectedId))
+                .presentationDetents([.fraction(0.8), .large])
         })
+//        .onChange(of: $vm.viewEvent.wrappedValue, perform: { value in
+//            switch value {
+//            case .goToFootprintView(let id):
+//                self.output.goToFootprintView(id)
+//            default:
+//                break
+//            }
+//            $vm.viewEvent.wrappedValue = .none
+//        })
         .onChange(of: $mapManager.selectedMarker.wrappedValue, perform: { id in
             if let id = id {
                 print("marker: \(id)")
                 $mapManager.selectedMarker.wrappedValue = nil
-                self.output.goToFootprintView(id)
+//                self.output.goToFootprintView(id)
+                self.selectedId = id
+                $isPresentFootprint.wrappedValue = true
             }
         })
         .onAppear {

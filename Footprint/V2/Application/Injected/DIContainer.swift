@@ -50,6 +50,10 @@ extension Container {
     var loadNoteUseCaseWithAddress: Factory<LoadNoteUseCaseWithAddress> {
         Factory(self) { LoadNoteUseCaseWithAddress(noteRepository: self.noteRepository(), categoryRepository: self.categoryRepository(), memberRepository: self.memberRepository()) }
     }
+    
+    var toogleStarUseCase: Factory<ToogleStarUseCase> {
+        Factory(self) { ToogleStarUseCase(noteRepository: self.noteRepository()) }
+    }
 }
 
 //MARK: UseCase - Category

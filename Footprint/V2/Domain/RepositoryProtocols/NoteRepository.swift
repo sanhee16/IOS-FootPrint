@@ -14,4 +14,5 @@ protocol NoteRepository {
     func loadNotes() -> [Note]
     func loadNote(id: String) -> Note?
     func loadNote(address: String) -> [Note]
+    func toggleStar(id: String) -> Bool
 }
