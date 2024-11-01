@@ -66,7 +66,7 @@ class MapVM2: BaseViewModel {
     @Published var isLoading: Bool = false
     
     var centerPosition: CLLocationCoordinate2D? = nil
-    private var allFootprints: [FootPrint] = []
+//    private var allFootprints: [Note] = []
     
     private var searchCnt: Int = 0
     private var lastSearchText: String? = nil

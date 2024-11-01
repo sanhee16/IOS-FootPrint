@@ -2,7 +2,7 @@
 //  DataClass.swift
 //  Footprint
 //
-//  Created by Studio-SJ on 2022/11/04.
+//  Created by sandy on 2022/11/04.
 //
 
 

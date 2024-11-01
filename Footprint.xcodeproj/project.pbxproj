@@ -20,6 +20,7 @@
 		261F6E9F2CC9E47200F7CA18 /* CategoryIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261F6E9E2CC9E47200F7CA18 /* CategoryIcon.swift */; };
 		261F6EA12CC9E64100F7CA18 /* CategoryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261F6EA02CC9E64100F7CA18 /* CategoryEntity.swift */; };
 		261F6EA32CC9E67A00F7CA18 /* CategoryColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261F6EA22CC9E67A00F7CA18 /* CategoryColor.swift */; };
+		261FF6E42CD3569300B49442 /* LoadNoteUseCaseWithId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261FF6E32CD3569300B49442 /* LoadNoteUseCaseWithId.swift */; };
 		26205C812C6ED65D00AB8325 /* GooglePlaces in Frameworks */ = {isa = PBXBuildFile; productRef = 26205C802C6ED65D00AB8325 /* GooglePlaces */; };
 		2627408F29699B2A00B47566 /* CategorySelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2627408E29699B2A00B47566 /* CategorySelectorView.swift */; };
 		2627409129699B2F00B47566 /* CategorySelectorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2627409029699B2F00B47566 /* CategorySelectorViewModel.swift */; };
@@ -93,9 +94,9 @@
 		2694FC992C79B99500F01644 /* MemberListEditVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694FC982C79B99500F01644 /* MemberListEditVM.swift */; };
 		2694FC9D2C79C2D400F01644 /* MemberEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694FC9C2C79C2D400F01644 /* MemberEditView.swift */; };
 		2694FC9F2C79C2D700F01644 /* MemberEditVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694FC9E2C79C2D700F01644 /* MemberEditVM.swift */; };
-		2694FCA22C7AA95000F01644 /* LoadNoteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694FCA12C7AA95000F01644 /* LoadNoteUseCase.swift */; };
+		2694FCA22C7AA95000F01644 /* LoadAllNoteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694FCA12C7AA95000F01644 /* LoadAllNoteUseCase.swift */; };
 		2694FCA42C7AADBC00F01644 /* LoadCategoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694FCA32C7AADBC00F01644 /* LoadCategoryUseCase.swift */; };
-		2696F4E12C7753A000F56E73 /* RealNoteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2696F4E02C7753A000F56E73 /* RealNoteRepository.swift */; };
+		2696F4E12C7753A000F56E73 /* NoteRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2696F4E02C7753A000F56E73 /* NoteRepositoryImpl.swift */; };
 		2696F4E42C7753C400F56E73 /* NoteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2696F4E32C7753C400F56E73 /* NoteRepository.swift */; };
 		2696F4E82C77540800F56E73 /* NoteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2696F4E72C77540800F56E73 /* NoteData.swift */; };
 		2696F4EC2C77556800F56E73 /* SaveNoteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2696F4EB2C77556800F56E73 /* SaveNoteUseCase.swift */; };
@@ -229,6 +230,7 @@
 		261F6E9E2CC9E47200F7CA18 /* CategoryIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryIcon.swift; sourceTree = "<group>"; };
 		261F6EA02CC9E64100F7CA18 /* CategoryEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEntity.swift; sourceTree = "<group>"; };
 		261F6EA22CC9E67A00F7CA18 /* CategoryColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryColor.swift; sourceTree = "<group>"; };
+		261FF6E32CD3569300B49442 /* LoadNoteUseCaseWithId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadNoteUseCaseWithId.swift; sourceTree = "<group>"; };
 		2627408E29699B2A00B47566 /* CategorySelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectorView.swift; sourceTree = "<group>"; };
 		2627409029699B2F00B47566 /* CategorySelectorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectorViewModel.swift; sourceTree = "<group>"; };
 		262D2A01293E2BA4005984DA /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
@@ -295,9 +297,9 @@
 		2694FC982C79B99500F01644 /* MemberListEditVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberListEditVM.swift; sourceTree = "<group>"; };
 		2694FC9C2C79C2D400F01644 /* MemberEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberEditView.swift; sourceTree = "<group>"; };
 		2694FC9E2C79C2D700F01644 /* MemberEditVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberEditVM.swift; sourceTree = "<group>"; };
-		2694FCA12C7AA95000F01644 /* LoadNoteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadNoteUseCase.swift; sourceTree = "<group>"; };
+		2694FCA12C7AA95000F01644 /* LoadAllNoteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadAllNoteUseCase.swift; sourceTree = "<group>"; };
 		2694FCA32C7AADBC00F01644 /* LoadCategoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadCategoryUseCase.swift; sourceTree = "<group>"; };
-		2696F4E02C7753A000F56E73 /* RealNoteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealNoteRepository.swift; sourceTree = "<group>"; };
+		2696F4E02C7753A000F56E73 /* NoteRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRepositoryImpl.swift; sourceTree = "<group>"; };
 		2696F4E32C7753C400F56E73 /* NoteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRepository.swift; sourceTree = "<group>"; };
 		2696F4E72C77540800F56E73 /* NoteData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteData.swift; sourceTree = "<group>"; };
 		2696F4EB2C77556800F56E73 /* SaveNoteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNoteUseCase.swift; sourceTree = "<group>"; };
@@ -777,7 +779,7 @@
 		2696F4DF2C77538B00F56E73 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				2696F4E02C7753A000F56E73 /* RealNoteRepository.swift */,
+				2696F4E02C7753A000F56E73 /* NoteRepositoryImpl.swift */,
 				269CA5592C78A4D900366005 /* CategoryRepositoryImpl.swift */,
 				2694FC8B2C79821500F01644 /* MemberRepositoryImpl.swift */,
 			);
@@ -830,7 +832,8 @@
 			isa = PBXGroup;
 			children = (
 				2696F4EB2C77556800F56E73 /* SaveNoteUseCase.swift */,
-				2694FCA12C7AA95000F01644 /* LoadNoteUseCase.swift */,
+				2694FCA12C7AA95000F01644 /* LoadAllNoteUseCase.swift */,
+				261FF6E32CD3569300B49442 /* LoadNoteUseCaseWithId.swift */,
 			);
 			path = NoteUseCases;
 			sourceTree = "<group>";
@@ -1374,6 +1377,7 @@
 				264B70BC291F8DD900CDAF9F /* ApiResponse.swift in Sources */,
 				2694FC972C79B99100F01644 /* MemberListEditView.swift in Sources */,
 				63E5C82F2975362300D32FD2 /* MapViewModel.swift in Sources */,
+				261FF6E42CD3569300B49442 /* LoadNoteUseCaseWithId.swift in Sources */,
 				63F1328F2914A1C000B3A9E0 /* SplashView.swift in Sources */,
 				63F132AF2914A1C000B3A9E0 /* BluePrintViewModel.swift in Sources */,
 				63F132AE2914A1C000B3A9E0 /* BluePrintView.swift in Sources */,
@@ -1434,13 +1438,13 @@
 				63D32FC829CA92BF0049F567 /* PremiumCodeViewModel.swift in Sources */,
 				2696F4E42C7753C400F56E73 /* NoteRepository.swift in Sources */,
 				267CC18C2C6710DF00D6015E /* UINavigationController+Extension.swift in Sources */,
-				2694FCA22C7AA95000F01644 /* LoadNoteUseCase.swift in Sources */,
+				2694FCA22C7AA95000F01644 /* LoadAllNoteUseCase.swift in Sources */,
 				264B70C0291F8E9D00CDAF9F /* C.swift in Sources */,
 				266EDDE42C64EB40006CF09B /* MainView2.swift in Sources */,
 				63F132982914A1C000B3A9E0 /* ProgressView.swift in Sources */,
 				267CC1872C6704B400D6015E /* FootprintView.swift in Sources */,
 				267CC1932C67385900D6015E /* Color+Extension.swift in Sources */,
-				2696F4E12C7753A000F56E73 /* RealNoteRepository.swift in Sources */,
+				2696F4E12C7753A000F56E73 /* NoteRepositoryImpl.swift in Sources */,
 				267CC17E2C66F2BC00D6015E /* MapView2.swift in Sources */,
 				631D752F29667A4D00464F33 /* PeopleWithListViewModel.swift in Sources */,
 				631D752D29667A4700464F33 /* PeopleWithListView.swift in Sources */,

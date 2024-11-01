@@ -14,7 +14,7 @@ class SaveNoteUseCase {
         self.noteRepository = noteRepository
     }
     
-    func execute(_ data: NoteData) {
+    func execute(_ data: Note) {
         self.noteRepository.saveNotes(data)
     }
 }

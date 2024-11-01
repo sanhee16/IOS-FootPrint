@@ -12,9 +12,41 @@ public struct Note {
     var id: String
     var title: String
     var content: String
-    var createdAt: Date
-    var images: [UIImage]
-    var category: Category
-    var peopleWith: [PeopleWith]
+    var createdAt: Int
+    var imageUrls: [String] // path
+    var categoryId: String
+    var peopleWithIds: [String]
     var isStar: Bool
+    var latitude: Double
+    var longitude: Double
+    var address: String
+    var category: CategoryEntity?
+    var peopleWith: [MemberEntity]?
+    
+    init(
+        title: String,
+        content: String,
+        createdAt: Int,
+        imageUrls: [String],
+        categoryId: String,
+        peopleWithIds: [String],
+        isStar: Bool,
+        latitude: Double,
+        longitude: Double,
+        address: String
+    ) {
+        self.id = UUID().uuidString
+        self.title = title
+        self.content = content
+        self.createdAt = createdAt
+        self.imageUrls = imageUrls
+        self.categoryId = categoryId
+        self.peopleWithIds = peopleWithIds
+        self.isStar = isStar
+        self.latitude = latitude
+        self.longitude = longitude
+        self.address = address
+        self.category = nil
+        self.peopleWith = nil
+    }
 }

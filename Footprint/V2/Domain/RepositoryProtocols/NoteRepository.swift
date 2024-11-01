@@ -9,7 +9,9 @@ import Foundation
 import RealmSwift
 
 protocol NoteRepository {
-    func saveNotes(_ data: NoteData)
+    func saveNotes(_ data: Note)
     func deleteNote(_ id: String)
-    func loadNotes() -> [NoteData]
+    func loadNotes() -> [Note]
+    func loadNote(_ id: String) -> Note?
+    func loadNote(_ address: String) -> [Note]
 }

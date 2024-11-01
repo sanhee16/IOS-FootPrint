@@ -12,6 +12,7 @@ protocol MemberRepository {
     func addMember(_ id: String?, name: String, image: String, intro: String)
     func deleteMember(_ id: String)
     func loadMembers() -> [MemberEntity]
+    func loadMembers(_ ids: [String]) -> [MemberEntity]
 }
 
 

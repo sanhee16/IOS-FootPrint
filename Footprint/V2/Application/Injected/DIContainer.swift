@@ -21,7 +21,7 @@ extension Container {
 //MARK: Repository
 extension Container {
     var noteRepository: Factory<NoteRepository> {
-        Factory(self) { RealNoteRepository() }
+        Factory(self) { NoteRepositoryImpl() }
     }
     
     var categoryRepository: Factory<CategoryRepository> {
@@ -39,8 +39,12 @@ extension Container {
         Factory(self) { SaveNoteUseCase(noteRepository: self.noteRepository()) }
     }
     
-    var loadNoteUseCase: Factory<LoadNoteUseCase> {
-        Factory(self) { LoadNoteUseCase(noteRepository: self.noteRepository()) }
+    var loadAllNoteUseCase: Factory<LoadAllNoteUseCase> {
+        Factory(self) { LoadAllNoteUseCase(noteRepository: self.noteRepository(), categoryRepository: self.categoryRepository(), memberRepository: self.memberRepository()) }
+    }
+    
+    var loadNoteUseCaseWithId: Factory<LoadNoteUseCaseWithId> {
+        Factory(self) { LoadNoteUseCaseWithId(noteRepository: self.noteRepository(), categoryRepository: self.categoryRepository(), memberRepository: self.memberRepository()) }
     }
 }
 

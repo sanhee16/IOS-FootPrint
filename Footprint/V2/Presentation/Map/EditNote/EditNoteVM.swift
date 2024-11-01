@@ -99,26 +99,35 @@ class EditNoteVM: BaseViewModel {
     
     func saveNote() {
         if !self.isAvailableToSave { return }
-        guard let location = location, let categoryId = self.category?.id else { return }
+        guard let location = location, let category = self.category, let categoryId = category.id else { return }
         
         let memberIds: List<String> = List()
         members.filter({ $0.isSelected }).compactMap({ $0.id }).forEach { id in
             memberIds.append(id)
         }
+        var imageUrls: [String] = []
+        let currentTimeStamp = Int(Date().timeIntervalSince1970)
+        for idx in self.images.indices {
+            let imageName = "\(currentTimeStamp)_\(idx)"
+            let _ = ImageManager.shared.saveImage(image: self.images[idx], imageName: imageName)
+            imageUrls.append(imageName)
+        }
         
         saveNoteUseCase.execute(
-            NoteData(
+            Note(
                 title: self.title,
                 content: self.content,
-                images: List<String>(),
-                createdAt: Int(Date().timeIntervalSince1970),
+                createdAt: currentTimeStamp,
+                imageUrls: imageUrls,
+                categoryId: categoryId,
+                peopleWithIds: self.members.compactMap({ $0.id }),
+                isStar: self.isStar,
                 latitude: location.latitude,
                 longitude: location.longitude,
-                peopleWithIds: memberIds,
-                categoryId: categoryId,
-                isStar: self.isStar
-            ))
-        EditNoteTempStorage.clear()
+                address: self.address
+            )
+        )
+//        EditNoteTempStorage.clear()
         viewEventTrigger?(.pop)
     }
     
@@ -142,16 +151,16 @@ class EditNoteVM: BaseViewModel {
         self.category = EditNoteTempStorage.category ?? self.categories.first
     }
     
-    func saveTempStorage() {
-        EditNoteTempStorage.save(
-            title: self.title,
-            isStar: self.isStar,
-            content: self.content,
-            address: self.address,
-            createdAt: self.createdAt,
-            category: self.category
-        )
-    }
+//    func saveTempStorage() {
+//        EditNoteTempStorage.save(
+//            title: self.title,
+//            isStar: self.isStar,
+//            content: self.content,
+//            address: self.address,
+//            createdAt: self.createdAt,
+//            category: self.category
+//        )
+//    }
     
     
     func toggleMember(_ member: MemberEntity) {

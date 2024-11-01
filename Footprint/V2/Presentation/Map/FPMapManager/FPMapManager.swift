@@ -16,7 +16,7 @@ import Combine
 
 @MainActor
 class FPMapManager: NSObject, ObservableObject {
-    @Injected(\.loadNoteUseCase) var loadNoteUseCase
+    @Injected(\.loadAllNoteUseCase) var loadAllNoteUseCase
     @Injected(\.loadCategoryUseCase) var loadCategoryUseCase
     
     static let shared = FPMapManager()
@@ -32,7 +32,7 @@ class FPMapManager: NSObject, ObservableObject {
     
     @Published var selectedMarker: String? = nil
     
-    private var notes: [NoteData]
+    private var notes: [Note]
     
     private override init() {
         self.mapView = GMSMapView.init()
@@ -87,8 +87,8 @@ class FPMapManager: NSObject, ObservableObject {
     
     func loadMarkers() {
         self.markers.removeAll()
-        self.notes = self.loadNoteUseCase.execute()
-        
+        self.notes = self.loadAllNoteUseCase.execute()
+        print("self.notes: \(self.notes)")
         self.notes.forEach { note in
             if let marker = createMarker(location: Location(latitude: note.latitude, longitude: note.longitude), categoryId: note.categoryId, id: note.id) {
                 self.markers.append(marker)

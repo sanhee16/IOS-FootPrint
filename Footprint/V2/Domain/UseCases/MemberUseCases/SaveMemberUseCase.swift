@@ -19,7 +19,7 @@ class SaveMemberUseCase {
         var imageName: String = ""
         if let image = image {
             let currentTimeStamp = Int(Date().timeIntervalSince1970)
-            imageName = "\(currentTimeStamp)_people_with"
+            imageName = "\(currentTimeStamp)_member"
             _ = ImageManager.shared.saveImage(image: image, imageName: imageName)
         } else {
             imageName = ""

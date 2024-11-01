@@ -16,7 +16,7 @@ import SwiftUI
 import SDSwiftUIPack
 
 class FootprintVM: BaseViewModel {
-    @Published var footPrints: [FootPrint] = []
+    @Published var footPrints: [Note] = []
     @Published var page: Page
     @Published var pageIdx: Int = 0
     private let realm: Realm
@@ -32,41 +32,40 @@ class FootprintVM: BaseViewModel {
         self.pageIdx = 0
         super.init()
         self.page.update(.new(index: 0))
+        self.loadData()
     }
     
     func onAppear() {
         
     }
     
-    func updateLocation(_ location: Location) {
-        self.location = location
-        self.loadAll()
-    }
-    
-    func loadAll() {
-        guard let location = self.location else { return }
-        if isLoading {
-            return
-        }
-        
+    func loadData() {
         self.isLoading = true
-        print("loadAll")
+        print("loadData")
         self.footPrints.removeAll()
-        let items = realm.objects(FootPrint.self)
-            .filter("id == \(id)")
-            .sorted(byKeyPath: "createdAt", ascending: true)
-        print("\(items.count)")
-        print("\(items)")
-        for i in items {
-            self.footPrints.append(i)
-        }
+        //TODO: Address기준으로 다시 가져오자
+        
+        
+//        let address = realm.objects(NoteData.self)
+//            .filter("id == \(id)")
+//            .first?.address
+//        guard let address = address else { return }
+//        
+//        let items = realm.objects(NoteData.self)
+//            .filter("address == \(address)")
+//            .sorted(byKeyPath: "createdAt", ascending: true)
+//        print("\(items.count)")
+//        print("\(items)")
+//        for i in items {
+//            self.footPrints.append(i)
+//        }
         
         self.isLoading = false
     }
     
     func onClickAddFootprint() {
-        let placeId: String? = footPrints.first?.placeId
-        let address: String? = footPrints.first?.address
+//        let placeId: String? = footPrints.first?.placeId
+//        let address: String? = footPrints.first?.address
 //        self.coordinator?.changeAddFootprintView(location: self.location, type: .new(name: nil, placeId: placeId, address: address)) {
 //        }
     }
@@ -93,36 +92,36 @@ class FootprintVM: BaseViewModel {
 //        }
     }
     
-    func onClickModifyFootprint() {
-        let item = self.footPrints[pageIdx]
-        guard let category = item.tag.getCategory() else {
-            return
-        }
-        var uiImages: [UIImage] = []
-        for image in item.images {
-            if let uiImage = ImageManager.shared.getSavedImage(named: image) {
-                uiImages.append(uiImage)
-            } else {
-                print("failed")
-            }
-        }
-        
-        
-        //        var peopleWith: [PeopleWith] = item.peopleWithIds
-        //        let realm = try! Realm()
-        if let footprint = self.realm.object(ofType: FootPrint.self, forPrimaryKey: item.id) {
-            var peopleWith: [PeopleWith] = []
-            for i in footprint.peopleWithIds {
-                if let peopleWithItem = i.getPeopleWith() {
-                    peopleWith.append(peopleWithItem)
-                }
-            }
-            print("peopleWith: \(peopleWith)")
-            
-//            self.coordinator?.changeAddFootprintView(location: self.location, type: .modify(content: FootprintContents(title: item.title, content: item.content, createdAt: Date(timeIntervalSince1970: Double(item.createdAt)), images: uiImages, category: category, peopleWith: peopleWith, id: item.id, isStar: item.isStar))) {
+//    func onClickModifyFootprint() {
+//        let item = self.footPrints[pageIdx]
+//        guard let category = item.tag.getCategory() else {
+//            return
+//        }
+//        var uiImages: [UIImage] = []
+//        for image in item.images {
+//            if let uiImage = ImageManager.shared.getSavedImage(named: image) {
+//                uiImages.append(uiImage)
+//            } else {
+//                print("failed")
 //            }
-        }
-    }
+//        }
+//        
+//        
+//        //        var peopleWith: [PeopleWith] = item.peopleWithIds
+//        //        let realm = try! Realm()
+//        if let footprint = self.realm.object(ofType: FootPrint.self, forPrimaryKey: item.id) {
+//            var peopleWith: [PeopleWith] = []
+//            for i in footprint.peopleWithIds {
+//                if let peopleWithItem = i.getPeopleWith() {
+//                    peopleWith.append(peopleWithItem)
+//                }
+//            }
+//            print("peopleWith: \(peopleWith)")
+//            
+////            self.coordinator?.changeAddFootprintView(location: self.location, type: .modify(content: FootprintContents(title: item.title, content: item.content, createdAt: Date(timeIntervalSince1970: Double(item.createdAt)), images: uiImages, category: category, peopleWith: peopleWith, id: item.id, isStar: item.isStar))) {
+////            }
+//        }
+//    }
     
     func onClose() {
 //        self.dismiss()
@@ -151,13 +150,13 @@ class FootprintVM: BaseViewModel {
     }
     
     func showImage(_ idx: Int) {
-        var uiImages: [UIImage] = []
-        let images = self.footPrints[self.pageIdx].images
-        for image in images {
-            if let uiImage = ImageManager.shared.getSavedImage(named: image) {
-                uiImages.append(uiImage)
-            }
-        }
+//        var uiImages: [UIImage] = []
+//        let images = self.footPrints[self.pageIdx].images
+//        for image in images {
+//            if let uiImage = ImageManager.shared.getSavedImage(named: image) {
+//                uiImages.append(uiImage)
+//            }
+//        }
 //        self.coordinator?.presentShowImageView(idx, images: uiImages)
     }
     

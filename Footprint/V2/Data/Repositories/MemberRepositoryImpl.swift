@@ -44,4 +44,23 @@ class MemberRepositoryImpl: MemberRepository {
         }
         return list
     }
+    
+    func loadMembers(_ ids: [String]) -> [MemberEntity]  {
+        let realm = try! Realm()
+        var list: [MemberEntity] = []
+        
+        ids.forEach { id in
+            if let m = realm.objects(Member.self).filter("id == %s", id).first {
+                list.append(
+                    Member(
+                        id: m.id,
+                        name: m.name,
+                        image: m.image,
+                        intro: m.intro
+                    ).toMemberEntity()
+                )
+            }
+        }
+        return list
+    }
 }

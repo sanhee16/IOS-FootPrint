@@ -71,7 +71,7 @@ struct EditNoteView: View {
                                 FPTextField(placeHolder: "".localized(), text: $vm.address, fieldStyle: .none, lineStyle: .multi(limit: nil), isDisabled: true)
                                 
                                 FPButton(text: "발자국 위치 확인하기", status: .able, size: .large, type: .lightSolid) {
-                                    vm.saveTempStorage()
+                                    vm.saveNote()
                                     self.output.pop()
                                 }
                                 .sdPaddingVertical(8)
