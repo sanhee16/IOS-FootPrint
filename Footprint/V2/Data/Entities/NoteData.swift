@@ -53,6 +53,7 @@ class NoteData: Object {
     
     func mapper() -> Note {
         return Note(
+            id: self.id,
             title: self.title,
             content: self.content,
             createdAt: self.createdAt,

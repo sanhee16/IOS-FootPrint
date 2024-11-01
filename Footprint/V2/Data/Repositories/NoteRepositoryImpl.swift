@@ -59,15 +59,15 @@ class NoteRepositoryImpl: NoteRepository {
         return list.map { $0.mapper() }
     }
     
-    func loadNote(_ id: String) -> Note? {
+    func loadNote(id: String) -> Note? {
         let realm = try! Realm()
         guard let data = realm.objects(NoteData.self).filter("id == %s", id).first else { return nil }
         return data.mapper()
     }
     
-    func loadNote(_ address: String) -> [Note] {
+    func loadNote(address: String) -> [Note] {
         let realm = try! Realm()
-        var list: [NoteData] = Array(realm.objects(NoteData.self).filter("address == %s", address))
+        let list: [NoteData] = Array(realm.objects(NoteData.self).filter("address == %s", address))
         return list.map { $0.mapper() }
     }
     

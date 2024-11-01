@@ -90,11 +90,24 @@ class FPMapManager: NSObject, ObservableObject {
         self.notes = self.loadAllNoteUseCase.execute()
         print("self.notes: \(self.notes)")
         self.notes.forEach { note in
-            if let marker = createMarker(location: Location(latitude: note.latitude, longitude: note.longitude), categoryId: note.categoryId, id: note.id) {
+            print("note id: \(note.id)")
+            if let marker = createMarker(
+                location: Location(
+                    latitude: note.latitude,
+                    longitude: note.longitude
+                ),
+                categoryId: note.categoryId,
+                id: note.id
+            ) {
                 self.markers.append(marker)
             }
         }
     }
+    /*
+     [0] = "7037DAF3-B203-4CA5-BAF9-1FF2B9803BE2"
+     [1] = "BDA30B2C-7D77-443C-BBAA-979A20DFA6FD"
+
+     */
     
     func deleteMarkers() {
         for marker in markers {

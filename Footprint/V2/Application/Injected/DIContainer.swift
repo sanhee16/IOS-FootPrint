@@ -46,6 +46,10 @@ extension Container {
     var loadNoteUseCaseWithId: Factory<LoadNoteUseCaseWithId> {
         Factory(self) { LoadNoteUseCaseWithId(noteRepository: self.noteRepository(), categoryRepository: self.categoryRepository(), memberRepository: self.memberRepository()) }
     }
+    
+    var loadNoteUseCaseWithAddress: Factory<LoadNoteUseCaseWithAddress> {
+        Factory(self) { LoadNoteUseCaseWithAddress(noteRepository: self.noteRepository(), categoryRepository: self.categoryRepository(), memberRepository: self.memberRepository()) }
+    }
 }
 
 //MARK: UseCase - Category

@@ -121,6 +121,7 @@
 		26BD8FCB29694CE5005F7E5C /* ApiInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26BD8FCA29694CE5005F7E5C /* ApiInfo.plist */; };
 		26BFFD942C5F8C400001B02B /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 26BFFD932C5F8C400001B02B /* Kingfisher */; };
 		26C04F6D2917667F00890A76 /* SwiftUIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */; };
+		26F137072CD48BA300096181 /* LoadNoteUseCaseWithAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F137062CD48BA300096181 /* LoadNoteUseCaseWithAddress.swift */; };
 		26FAB54D2C6B4091006304AE /* SelectLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FAB54C2C6B4091006304AE /* SelectLocationView.swift */; };
 		26FAB54F2C6B4095006304AE /* SelectLocationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FAB54E2C6B4095006304AE /* SelectLocationVM.swift */; };
 		26FAB5512C6B576F006304AE /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FAB5502C6B576F006304AE /* EnvironmentValues.swift */; };
@@ -323,6 +324,7 @@
 		26A238F92A13743700D7CF49 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		26BD8FCA29694CE5005F7E5C /* ApiInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiInfo.plist; sourceTree = "<group>"; };
 		26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIExtension.swift; sourceTree = "<group>"; };
+		26F137062CD48BA300096181 /* LoadNoteUseCaseWithAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadNoteUseCaseWithAddress.swift; sourceTree = "<group>"; };
 		26FAB54C2C6B4091006304AE /* SelectLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationView.swift; sourceTree = "<group>"; };
 		26FAB54E2C6B4095006304AE /* SelectLocationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationVM.swift; sourceTree = "<group>"; };
 		26FAB5502C6B576F006304AE /* EnvironmentValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentValues.swift; sourceTree = "<group>"; };
@@ -834,6 +836,7 @@
 				2696F4EB2C77556800F56E73 /* SaveNoteUseCase.swift */,
 				2694FCA12C7AA95000F01644 /* LoadAllNoteUseCase.swift */,
 				261FF6E32CD3569300B49442 /* LoadNoteUseCaseWithId.swift */,
+				26F137062CD48BA300096181 /* LoadNoteUseCaseWithAddress.swift */,
 			);
 			path = NoteUseCases;
 			sourceTree = "<group>";
@@ -1370,6 +1373,7 @@
 				261F6E9F2CC9E47200F7CA18 /* CategoryIcon.swift in Sources */,
 				261F6EA12CC9E64100F7CA18 /* CategoryEntity.swift in Sources */,
 				2694FC8A2C797F2F00F01644 /* MemberRepository.swift in Sources */,
+				26F137072CD48BA300096181 /* LoadNoteUseCaseWithAddress.swift in Sources */,
 				2627409129699B2F00B47566 /* CategorySelectorViewModel.swift in Sources */,
 				2691D9C5294EE4B6002825B9 /* FootprintListFilterViewModel.swift in Sources */,
 				631D7528296661FA00464F33 /* MainMapOptionView.swift in Sources */,

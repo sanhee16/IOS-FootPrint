@@ -23,7 +23,7 @@ class LoadNoteUseCaseWithId {
     }
     
     func execute(_ id: String) -> Note? {
-        guard var note = self.noteRepository.loadNote(id), let category = self.categoryRepository.loadCategory(note.categoryId) else { return nil }
+        guard var note = self.noteRepository.loadNote(id: id), let category = self.categoryRepository.loadCategory(note.categoryId) else { return nil }
         let peopleWith = self.memberRepository.loadMembers(note.peopleWithIds)
         note.category = category
         note.peopleWith = peopleWith

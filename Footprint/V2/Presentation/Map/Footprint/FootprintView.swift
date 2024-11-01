@@ -25,9 +25,12 @@ struct FootprintView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 0) {
-                Text("hello, world!")
-//                drawHeader(geometry)
-//                drawBody(geometry)
+                if $vm.isFailToLoad.wrappedValue {
+                    Text("정보 불러오기에 실패했습니다")
+                } else {
+                    Text("hello, world!")
+                    Text($vm.footPrints.wrappedValue?.address ?? "")
+                }
             }
             .padding(EdgeInsets(top: safeTop, leading: 0, bottom: safeBottom, trailing: 0))
             .edgesIgnoringSafeArea(.all)
@@ -38,4 +41,6 @@ struct FootprintView: View {
         }
         .navigationBarBackButtonHidden()
     }
+    
+//    private func draw
 }
