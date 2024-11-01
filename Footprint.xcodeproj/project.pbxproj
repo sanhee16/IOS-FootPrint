@@ -122,6 +122,7 @@
 		26BFFD942C5F8C400001B02B /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 26BFFD932C5F8C400001B02B /* Kingfisher */; };
 		26C04F6D2917667F00890A76 /* SwiftUIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */; };
 		26F137072CD48BA300096181 /* LoadNoteUseCaseWithAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F137062CD48BA300096181 /* LoadNoteUseCaseWithAddress.swift */; };
+		26F1370A2CD4AADB00096181 /* PeopleWithView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F137092CD4AADB00096181 /* PeopleWithView.swift */; };
 		26FAB54D2C6B4091006304AE /* SelectLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FAB54C2C6B4091006304AE /* SelectLocationView.swift */; };
 		26FAB54F2C6B4095006304AE /* SelectLocationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FAB54E2C6B4095006304AE /* SelectLocationVM.swift */; };
 		26FAB5512C6B576F006304AE /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FAB5502C6B576F006304AE /* EnvironmentValues.swift */; };
@@ -325,6 +326,7 @@
 		26BD8FCA29694CE5005F7E5C /* ApiInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiInfo.plist; sourceTree = "<group>"; };
 		26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIExtension.swift; sourceTree = "<group>"; };
 		26F137062CD48BA300096181 /* LoadNoteUseCaseWithAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadNoteUseCaseWithAddress.swift; sourceTree = "<group>"; };
+		26F137092CD4AADB00096181 /* PeopleWithView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleWithView.swift; sourceTree = "<group>"; };
 		26FAB54C2C6B4091006304AE /* SelectLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationView.swift; sourceTree = "<group>"; };
 		26FAB54E2C6B4095006304AE /* SelectLocationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationVM.swift; sourceTree = "<group>"; };
 		26FAB5502C6B576F006304AE /* EnvironmentValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentValues.swift; sourceTree = "<group>"; };
@@ -874,6 +876,7 @@
 		269CA56D2C78B67800366005 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				26F137082CD4AACA00096181 /* Components */,
 				266BE08C2CCA1A9400E754EB /* Items */,
 				2694FC862C7969B700F01644 /* MemberListEditView */,
 				269CA5702C78B68E00366005 /* CategoryListEditView */,
@@ -897,6 +900,14 @@
 				269CA5782C78E1B800366005 /* PermissionService.swift */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		26F137082CD4AACA00096181 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				26F137092CD4AADB00096181 /* PeopleWithView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		26FAB54B2C6B408C006304AE /* SelectLocation */ = {
@@ -1480,6 +1491,7 @@
 				63D32FC629CA92B60049F567 /* PremiumCodeView.swift in Sources */,
 				63F132492914A18800B3A9E0 /* SwiftExtension.swift in Sources */,
 				269CA5542C78A11500366005 /* EditNoteTempStorage.swift in Sources */,
+				26F1370A2CD4AADB00096181 /* PeopleWithView.swift in Sources */,
 				2619FE8A2940D6AC00D24778 /* CheckPermissionView.swift in Sources */,
 				269CA5672C78A5FE00366005 /* UpdateCategoryUseCase.swift in Sources */,
 				267CC1792C66F28300D6015E /* Coordinator.swift in Sources */,

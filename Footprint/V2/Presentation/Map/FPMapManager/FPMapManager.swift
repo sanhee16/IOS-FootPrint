@@ -67,6 +67,18 @@ class FPMapManager: NSObject, ObservableObject {
     }
     
     @MainActor
+    func moveToLocation(_ location: Location) {
+        self.getCurrentLocation()
+        
+        let zoom: Float = 17.8
+        let latitude: Double = location.latitude
+        let longitude: Double = location.longitude
+        
+        let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: zoom)
+        mapView.camera = camera
+    }
+    
+    @MainActor
     func settingMapView() {
         self.moveToCurrentLocation()
         
@@ -324,6 +336,7 @@ extension FPMapManager: GMSMapViewDelegate {
     // 마커 클릭
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         if let id = marker.userData as? String {
+            self.moveToLocation(Location(latitude: marker.position.latitude, longitude: marker.position.longitude))
             self.selectedMarker = id
         }
         return true

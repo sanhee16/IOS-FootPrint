@@ -17,13 +17,14 @@ import Factory
 
 class FootprintVM: BaseViewModel {
     @Injected(\.loadNoteUseCaseWithId) var loadNoteUseCaseWithId
-    @Published var footPrints: Note? = nil
+    var footPrint: Note? = nil
     private let realm: Realm
     private var isLoading: Bool = false
-    private let id: String
+    private let id: String?
     @Published var isFailToLoad: Bool = false
+    @Published var isStar: Bool = false
     
-    init(_ id: String) {
+    init(_ id: String?) {
         self.realm = R.realm
         self.id = id
         super.init()
@@ -35,10 +36,12 @@ class FootprintVM: BaseViewModel {
     }
     
     func loadData() {
-        guard let note = self.loadNoteUseCaseWithId.execute(id) else {
+        guard let id = id, let note = self.loadNoteUseCaseWithId.execute(id) else {
             self.isFailToLoad = true
             return
         }
-        self.footPrints = note
+        self.footPrint = note
+        self.isStar = self.footPrint?.isStar ?? false
+        self.objectWillChange.send()
     }
 }

@@ -11,7 +11,7 @@ import UIKit
 
 enum TopbarType: String {
     case back = "ic_arrow_left"
-    case close = "close"
+    case close = "ic_close"
     case closeWhite = "close_white"
     case none = ""
 }
@@ -20,13 +20,15 @@ struct Topbar: View {
     var title: String
     var type: TopbarType
     var textColor: Color
+    var backgroundColor: Color
     var callback: (() -> Void)?
     
-    init(_ title: String = "", type: TopbarType = .none, textColor: Color = Color.gray90, onTap: (() -> Void)? = nil) {
+    init(_ title: String = "", type: TopbarType = .none, textColor: Color = Color.gray90, backgroundColor: Color = .bg_bgb, onTap: (() -> Void)? = nil) {
         self.title = title
         self.type = type
         self.callback = onTap
         self.textColor = textColor
+        self.backgroundColor = backgroundColor
     }
     
     var body: some View {
@@ -49,6 +51,6 @@ struct Topbar: View {
                 .foregroundColor(textColor)
         }
         .frame(height: 55, alignment: .center)
-        .background(Color(hex: "#F1F5F9"))
+        .background(backgroundColor)
     }
 }

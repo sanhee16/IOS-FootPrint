@@ -117,55 +117,9 @@ struct EditNoteView: View {
                                 }
                             }
                             if !$vm.members.wrappedValue.filter({ $0.isSelected }).isEmpty {
-                                HStack(alignment: .center, spacing: 0, content: {
-                                    ZStack(alignment: .center, content: {
-                                        ForEach($vm.members.wrappedValue.filter({ $0.isSelected }).prefix(3).indices, id: \.self) { idx in
-                                            if !$vm.members.wrappedValue.filter({ $0.isSelected })[idx].image.isEmpty, 
-                                                let image = ImageManager.shared.getSavedImage(named: $vm.members.wrappedValue.filter({ $0.isSelected })[idx].image) {
-                                                Image(uiImage: image)
-                                                    .resizable()
-                                                    .aspectRatio(contentMode: .fill)
-                                                    .frame(both: 40)
-                                                    .clipped()
-                                                    .clipShape(Circle())
-                                                    .border(.blueGray_200, lineWidth: 0.7, cornerRadius: 40.0)
-                                                    .offset(x: CGFloat(idx) * 24.0)
-                                                    .zIndex(3 - Double(idx))
-                                            } else {
-                                                Image("profile 1")
-                                                    .resizable()
-                                                    .aspectRatio(contentMode: .fill)
-                                                    .frame(both: 40)
-                                                    .clipped()
-                                                    .clipShape(Circle())
-                                                    .border(.blueGray_200, lineWidth: 0.7, cornerRadius: 40.0)
-                                                    .offset(x: CGFloat(idx) * 24.0)
-                                                    .zIndex(3 - Double(idx))
-                                            }
-                                        }
-                                    })
-                                    .sdPaddingTrailing(16)
-                                    
-                                    if let firstMember = $vm.members.wrappedValue.filter({ $0.isSelected }).first {
-                                        HStack(alignment: .center, spacing: 0, content: {
-                                            Text(firstMember.name)
-                                                .sdFont(.headline3, color: .cont_gray_default)
-                                            if $vm.members.wrappedValue.filter({ $0.isSelected }).count > 1 {
-                                                Text("외")
-                                                    .sdFont(.body3, color: .cont_gray_default)
-                                                    .sdPadding(top: 0, leading: 4, bottom: 0, trailing: 8)
-                                                Text("\($vm.members.wrappedValue.filter({ $0.isSelected }).count - 1)")
-                                                    .sdFont(.headline3, color: .cont_gray_default)
-                                                Text("명")
-                                                    .sdFont(.body3, color: .cont_gray_default)
-                                            }
-                                        })
-                                        .offset(x: CGFloat($vm.members.wrappedValue.filter({ $0.isSelected }).prefix(3).count - 1) * 24.0)
-                                    }
-                                })
-                                .sdPaddingVertical(8)
+                                PeopleWithView(members: $vm.members.wrappedValue.filter({ $0.isSelected }))
+                                    .sdPaddingVertical(8)
                             }
-                            
                         }
                         .sdPaddingHorizontal(16)
                         .sdPaddingBottom(14)
