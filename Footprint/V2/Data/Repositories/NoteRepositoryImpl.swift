@@ -11,8 +11,8 @@ import RealmSwift
 class NoteRepositoryImpl: NoteRepository {
     func saveNotes(_ data: Note) {
         let realm = try! Realm()
-        var imageUrls: List<String> = List()
-        var peopleWithIds: List<String> = List()
+        let imageUrls: List<String> = List()
+        let peopleWithIds: List<String> = List()
         data.imageUrls.forEach {
             imageUrls.append($0)
         }
@@ -71,5 +71,15 @@ class NoteRepositoryImpl: NoteRepository {
         return list.map { $0.mapper() }
     }
     
-    
+    func toggleStar(id: String) -> Bool {
+        let realm = try! Realm()
+        guard let item = realm.objects(NoteData.self).filter({ $0.id == id }).first else { return false }
+        try! realm.write {
+            item.isStar = !item.isStar
+            realm.add(item, update: .modified)
+        }
+        
+        guard let item = realm.objects(NoteData.self).filter ({ $0.id == id }).first else { return false }
+        return item.isStar
+    }
 }

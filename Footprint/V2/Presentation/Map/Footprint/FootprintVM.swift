@@ -17,6 +17,8 @@ import Factory
 
 class FootprintVM: BaseViewModel {
     @Injected(\.loadNoteUseCaseWithId) var loadNoteUseCaseWithId
+    @Injected(\.toogleStarUseCase) var toogleStarUseCase
+    
     var footPrint: Note? = nil
     private let realm: Realm
     private var isLoading: Bool = false
@@ -43,5 +45,10 @@ class FootprintVM: BaseViewModel {
         self.footPrint = note
         self.isStar = self.footPrint?.isStar ?? false
         self.objectWillChange.send()
+    }
+
+    func onToggleStar() {
+        guard let id = id else { return }
+        self.isStar = self.toogleStarUseCase.execute(id)
     }
 }

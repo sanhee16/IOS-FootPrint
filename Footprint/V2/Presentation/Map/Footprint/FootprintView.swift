@@ -29,12 +29,11 @@ struct FootprintView: View {
                     Spacer()
                     Image("ic_star")
                         .renderingMode(.template)
-                        .tint($vm.isStar.wrappedValue ? Color.btn_ic_cont_default : Color.btn_ic_cont_disable)
+                        .foregroundColor($vm.isStar.wrappedValue ? Color.btn_ic_cont_default : Color.btn_ic_cont_disable)
                         .font(.system(size: 20))
                         .contentShape(Rectangle())
                         .onTapGesture {
-                            $vm.isStar.wrappedValue.toggle()
-                            print("$vm.isStar.wrappedValue: \($vm.isStar.wrappedValue)")
+                            vm.onToggleStar()
                         }
                     Text("편집")
                         .sdFont(.btn3, color: Color.btn_lightSolid_cont_default)
