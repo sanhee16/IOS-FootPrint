@@ -23,6 +23,7 @@ struct MemberListEditView: View {
     @StateObject var vm: MemberListEditVM = MemberListEditVM()
     @StateObject var memberEditVM: MemberEditVM = MemberEditVM()
     @State private var isPresentDelete: Bool = false
+    @State private var isPresentDeleteComplete: Bool = false
     @State private var isPresentAddMember: Bool = false
     
     
@@ -74,21 +75,35 @@ struct MemberListEditView: View {
                     MemberEditView(isPresented: $isPresentAddMember)
                         .presentationDetents([.medium, .large])
                 })
+                VStack{}
+                    .alert(isPresented: $isPresentDelete) {
+                        Alert(
+                            title: Text("함께한 사람 삭제하기"),
+                            message: Text("삭제한 사람은 복구할 수 없습니다.\n‘\($vm.deleteMember.wrappedValue?.name ?? "")’를 삭제 하시겠습니까?"),
+                            primaryButton: .default(Text("취소"), action: {
+                                
+                            }),
+                            secondaryButton: .default(Text("삭제"), action: {
+                                vm.onDelete()
+                                DispatchQueue.main.async {
+                                    $isPresentDeleteComplete.wrappedValue = true
+                                }
+                            })
+                        )
+                    }
+                
+                VStack{}
+                    .alert(isPresented: $isPresentDeleteComplete) {
+                        Alert(
+                            title: Text("삭제완료"),
+                            message: Text("‘\($vm.deleteMember.wrappedValue?.name ?? "")’를 삭제했습니다."),
+                            dismissButton: .default(Text("확인"), action: {
+                                $vm.deleteMember.wrappedValue = nil
+                            })
+                        )
+                    }
             })
         })
-        .alert(isPresented: $isPresentDelete) {
-            Alert(
-                title: Text("함께한 사람 삭제하기"),
-                message: Text("삭제한 사람은 복구할 수 없습니다.\n‘\($vm.deleteMember.wrappedValue?.name ?? "")’를 삭제 하시겠습니까?"),
-                primaryButton: .default(Text("취소"), action: {
-                    $isPresentDelete.wrappedValue = false
-                }),
-                secondaryButton: .default(Text("삭제"), action: {
-                    $isPresentDelete.wrappedValue = false
-                    vm.onDelete()
-                })
-            )
-        }
         .environmentObject(memberEditVM)
         .navigationBarBackButtonHidden()
         .onAppear(perform: {

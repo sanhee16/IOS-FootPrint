@@ -8,6 +8,7 @@
 import Foundation
 import Factory
 
+
 class MemberListEditVM: BaseViewModel {
     @Injected(\.loadMembersUseCase) var loadMembersUseCase
     @Injected(\.deleteMemberUseCase) var deleteMemberUseCase
@@ -25,7 +26,6 @@ class MemberListEditVM: BaseViewModel {
     func onDelete() {
         guard let member = deleteMember, let idx = members.firstIndex(where: { $0 == member }), let id = member.id else { return }
         self.members.remove(at: idx)
-        self.deleteMember = nil
         self.deleteMemberUseCase.execute(id)
         self.loadMembers()
     }
