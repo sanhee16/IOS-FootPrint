@@ -172,7 +172,7 @@ class FPMapManager: NSObject, ObservableObject {
         let itemSize = CGSize(width: 20, height: 20)
         let itemFinalSize = CGSize(width: 40, height: 40)
 
-        let markerImage: UIImage? = UIImage(named: category.icon.imageName)?.resizeImageTo(size: itemSize)
+        let markerImage: UIImage? = UIImage(named: category.icon.imageName)?.resizeImageTo(size: itemSize)?.withTintColor(UIColor.white)
         var backgroundImage: UIImage? = UIImage(named: "mark_background_black")?.resizeImageTo(size: backgroundSize)
         backgroundImage = backgroundImage?.withTintColor(UIColor(hex: category.color.hex), renderingMode: .alwaysTemplate)
 
@@ -233,7 +233,7 @@ class FPMapManager: NSObject, ObservableObject {
         let itemSize = CGSize(width: 20, height: 20)
         let itemFinalSize = CGSize(width: 40, height: 40)
 
-        let markerImage: UIImage? = UIImage(named: category.icon.imageName)?.resizeImageTo(size: itemSize)
+        let markerImage: UIImage? = UIImage(named: category.icon.imageName)?.resizeImageTo(size: itemSize)?.withTintColor(UIColor.white)
         var backgroundImage: UIImage? = UIImage(named: "mark_background_black")?.resizeImageTo(size: backgroundSize)
         backgroundImage = backgroundImage?.withTintColor(UIColor(hex: category.color.hex), renderingMode: .alwaysTemplate)
 
@@ -292,7 +292,7 @@ class FPMapManager: NSObject, ObservableObject {
         let itemSize = CGSize(width: 20, height: 20)
         let itemFinalSize = CGSize(width: 40, height: 40) // 크기를 증가시킴
 
-        let markerImage: UIImage? = UIImage(named: category.icon.imageName)?.resizeImageTo(size: itemSize)
+        let markerImage: UIImage? = UIImage(named: category.icon.imageName)?.resizeImageTo(size: itemSize)?.withTintColor(UIColor.white)
         var backgroundImage: UIImage? = UIImage(named: "mark_background_black")?.resizeImageTo(size: backgroundSize)
         backgroundImage = backgroundImage?.withTintColor(UIColor(hex: category.color.hex), renderingMode: .alwaysTemplate)
 
