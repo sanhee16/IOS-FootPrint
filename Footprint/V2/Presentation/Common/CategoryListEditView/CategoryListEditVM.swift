@@ -11,6 +11,7 @@ import Factory
 class CategoryListEditVM: BaseViewModel {
     @Injected(\.saveNoteUseCase) var saveNoteUseCase
     @Injected(\.loadCategoriesUseCase) var loadCategoriesUseCase
+    @Injected(\.deleteCategoryUseCase) var deleteCategoryUseCase
     @Published var categories: [CategoryEntity] = []
     
     override init() {
@@ -19,5 +20,10 @@ class CategoryListEditVM: BaseViewModel {
     
     func loadCategories() {
         self.categories = loadCategoriesUseCase.execute()
+    }
+
+    func deleteCategory(_ id: String) {
+        self.deleteCategoryUseCase.execute(id)
+        self.loadCategories()
     }
 }

@@ -12,9 +12,9 @@ class CategoryV2: Object {
     @Persisted(primaryKey: true) var id: String
     @Persisted var name: String
     @Persisted var color: Int // CategoryColor rawValue
-    @Persisted var icon: Int // CategoryImage rawValue
+    @Persisted var icon: String // CategoryImage rawValue
     
-    convenience init(id: String? = UUID().uuidString, name: String, color: Int, icon: Int) {
+    convenience init(id: String? = UUID().uuidString, name: String, color: Int, icon: String) {
         self.init()
         
         self.id = id ?? UUID().uuidString

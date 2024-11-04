@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 
 protocol CategoryRepository {
-    func addCategory(_ id: String?, name: String, color: Int, icon: Int)
+    func addCategory(_ id: String?, name: String, color: Int, icon: String)
     func deleteCategory(_ id: String)
     func loadCategories() -> [CategoryEntity]
     func loadCategory(_ id: String) -> CategoryEntity?

@@ -31,8 +31,8 @@ class CategoryEditVM: BaseViewModel {
     
     private var categoryId: String? = nil
     @Published var name: String = "" { didSet { checkIsAvailableToSave() }}
-    @Published var color: CategoryColor = .black { didSet { checkIsAvailableToSave() }}
-    @Published var icon: CategoryIcon = .smile { didSet { checkIsAvailableToSave() }}
+    @Published var color: CategoryColor? = nil { didSet { checkIsAvailableToSave() }}
+    @Published var icon: CategoryIcon? = nil { didSet { checkIsAvailableToSave() }}
     @Published var isAvailableToSave: Bool = false
     let CHUNK_SIZE = 8
     
@@ -40,23 +40,28 @@ class CategoryEditVM: BaseViewModel {
         .black, .pink, .orange, .yellow, .green, .blue, .purple
     ]
     
-    let DEFAULT_ICONS: [CategoryIcon] = [
-        .athleticsRunning,
-        .feet,
-        .beer,
-        .smile,
-        .sad
+    let emotionIcons: [CategoryIcon] = [
+        .alien, .chatSmiley, .chatSquare_question, .chatSquare_warning, .emojiCheerful, .emojiDevastated, .emojiExcited, .emojiFace, .emojiHungry, .emojiLol, .emojiSad, .handOk, .heart, .heartBreak, .magicWand, .skull, .star, .thumbsUp, .twinkle
     ]
+    let dailyIcons: [CategoryIcon] = [
+        .airport, .baggage, .beach, .bicycle, .burger, .bus, .car, .carrot, .chicken, .coffee_mug, .donut, .forkSpoon, .gift, .home, .location_pin, .location_user, .medicalBandage, .money_piggy, .money, .shoppingBasket, .shoppingCart, .smoking, .strawberry, .waterMelon, .wine
+    ]
+    let activityIcons: [CategoryIcon] = [
+        .baseball_batBall, .bowlingSet, .brush, .camera_video, .camera, .controller_wireless, .fitnessBicycle, .golfHole, .groupRunning, .headphones, .mike, .robot, .tambourine, .yoga
+    ]
+    let natureIcons: [CategoryIcon] = [
+        .cat, .cloud, .dog, .fire, .lightning, .petPaw, .quill, .snow, .sun, .tree, .umbrella
+    ]
+    let etcIcons: [CategoryIcon] = [
+        .bell, .bookmark, .calendar_check, .chat_twoBubbles, .cursorArrow1, .cursorArrow2, .letter, .lightBulb, .loading, .lock, .megaPhone, .moustache, .phone
+    ]
+    
     
     @Published var iconsRows: [[CategoryIcon]] = [[]]
     private var isLoading: Bool = false
     override init() {
         self.type = .create
         super.init()
-        
-        iconsRows = stride(from: 0, to: DEFAULT_ICONS.count, by: CHUNK_SIZE).map {
-            Array(DEFAULT_ICONS[$0..<min($0 + CHUNK_SIZE, DEFAULT_ICONS.count)])
-        }
     }
     
     func setCategory(_ categoryEntity: CategoryEntity?) {
@@ -64,19 +69,23 @@ class CategoryEditVM: BaseViewModel {
         self.categoryId = categoryEntity?.id
         self.name = categoryEntity?.name ?? ""
         self.color = categoryEntity?.color ?? DEFAULT_COLORS.first!
-        self.icon = categoryEntity?.icon ?? DEFAULT_ICONS.first!
+        self.icon = categoryEntity?.icon ?? emotionIcons.first!
     }
     
     func saveCategory(_ onFinish: @escaping () -> ()) {
         if !self.isAvailableToSave { return }
+        guard let color = self.color, let icon = self.icon else {
+             return
+        }
+        
         if self.isLoading { return }
         
         self.isLoading = true
         self.saveCategoryUseCase.execute(
             categoryId,
             name: self.name,
-            color: self.color,
-            icon: self.icon
+            color: color,
+            icon: icon
         )
         self.isLoading = false
         onFinish()

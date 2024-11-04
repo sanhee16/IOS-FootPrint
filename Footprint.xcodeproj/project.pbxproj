@@ -42,6 +42,7 @@
 		264EEF572925128300B89624 /* AddCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EEF562925128300B89624 /* AddCategoryView.swift */; };
 		264EEF592925128A00B89624 /* AddCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EEF582925128A00B89624 /* AddCategoryViewModel.swift */; };
 		265917112CD857CC008C39E9 /* ToogleStarUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265917102CD857CC008C39E9 /* ToogleStarUseCase.swift */; };
+		265917142CD87764008C39E9 /* SDFlowLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 265917132CD87764008C39E9 /* SDFlowLayout */; };
 		265924C729445BD9001E7025 /* FootprintListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265924C629445BD9001E7025 /* FootprintListView.swift */; };
 		265924C929445BE1001E7025 /* FootprintListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265924C829445BE1001E7025 /* FootprintListViewModel.swift */; };
 		265EA947291D1E1400068A5C /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265EA946291D1E1400068A5C /* DataModel.swift */; };
@@ -423,6 +424,7 @@
 				63B1FAE42914A6D8007E94B6 /* Lottie in Frameworks */,
 				63B1FB062914B5CB007E94B6 /* SwiftUIPullToRefresh in Frameworks */,
 				260BF1C22C6ED35E00442CCC /* GoogleMobileAds in Frameworks */,
+				265917142CD87764008C39E9 /* SDFlowLayout in Frameworks */,
 				63B1FAE72914A6FE007E94B6 /* Alamofire in Frameworks */,
 				263ED44E2C60E54E00FAC148 /* FirebaseFirestore in Frameworks */,
 				26205C812C6ED65D00AB8325 /* GooglePlaces in Frameworks */,
@@ -1291,6 +1293,7 @@
 				260BF1BE2C6ED34900442CCC /* GoogleMaps */,
 				260BF1C12C6ED35E00442CCC /* GoogleMobileAds */,
 				26205C802C6ED65D00AB8325 /* GooglePlaces */,
+				265917132CD87764008C39E9 /* SDFlowLayout */,
 			);
 			productName = Footprint;
 			productReference = 63209FE42913C3BF00709227 /* Footprint.app */;
@@ -1334,6 +1337,7 @@
 				260BF1BD2C6ED34900442CCC /* XCRemoteSwiftPackageReference "ios-maps-sdk" */,
 				260BF1C02C6ED35E00442CCC /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 				26205C7F2C6ED65D00AB8325 /* XCRemoteSwiftPackageReference "ios-places-sdk" */,
+				265917122CD87764008C39E9 /* XCRemoteSwiftPackageReference "SDFlowLayout" */,
 			);
 			productRefGroup = 63209FE52913C3BF00709227 /* Products */;
 			projectDirPath = "";
@@ -1811,6 +1815,14 @@
 				minimumVersion = 11.0.0;
 			};
 		};
+		265917122CD87764008C39E9 /* XCRemoteSwiftPackageReference "SDFlowLayout" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sanhee16/SDFlowLayout.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.6;
+			};
+		};
 		266EDDCF2C64EA16006CF09B /* XCRemoteSwiftPackageReference "Factory" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hmlongco/Factory.git";
@@ -1907,6 +1919,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 263ED44C2C60E54E00FAC148 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		265917132CD87764008C39E9 /* SDFlowLayout */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 265917122CD87764008C39E9 /* XCRemoteSwiftPackageReference "SDFlowLayout" */;
+			productName = SDFlowLayout;
 		};
 		266EDDD02C64EA16006CF09B /* Factory */ = {
 			isa = XCSwiftPackageProductDependency;

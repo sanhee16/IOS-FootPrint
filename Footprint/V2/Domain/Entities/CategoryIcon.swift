@@ -7,114 +7,174 @@
 
 import Foundation
 
-enum CategoryIcon: Int {
-    case athleticsRunning = 0
-    case bagDollar
-    case baggage
-    case bandage
-    case beer
-    case bicycle
-    case capsule
-    case cloud
-    case coffee
-    case controller
-    case diamond
-    case disableHeart
-    case donut
-    case drool
-    case education
-    case feet
-    case fitness
-    case fitnessShaker
-    case flower
-    case forkSpoon
-    case gift
-    case grumpy
-    case heart
-    case iceCream
-    case island
-    case laughing
-    case leaf
-    case lightbulb
-    case love
-    case mask
-    case medical
-    case paint
-    case peaceHand
-    case plane
-    case planet
-    case prayingHand
-    case rocket
-    case running
-    case sad
-    case shocked
-    case shoppingCart
-    case smile
-    case snow
-    case soccerField
-    case star
-    case sun
-    case swimming
-    case syringe
-    case thumbsUp
-    case umbrella
-    case walking
-    case yoga
+enum CategoryIcon: String {
+    case baseball_batBall = "baseball_batBall"
+    case bowlingSet = "bowlingSet"
+    case brush = "brush"
+    case camera_video = "camera_video"
+    case camera = "camera"
+    case controller_wireless = "controller_wireless"
+    case fitnessBicycle = "fitnessBicycle"
+    case golfHole = "golfHole"
+    case groupRunning = "groupRunning"
+    case headphones = "headphones"
+    case mike = "mike"
+    case robot = "robot"
+    case tambourine = "tambourine"
+    case yoga = "yoga"
+    case airport = "airport"
+    case baggage = "baggage"
+    case beach = "beach"
+    case bicycle = "bicycle"
+    case burger = "burger"
+    case bus = "bus"
+    case car = "car"
+    case carrot = "carrot"
+    case chicken = "chicken"
+    case coffee_mug = "coffee_mug"
+    case donut = "donut"
+    case forkSpoon = "forkSpoon"
+    case gift = "gift"
+    case home = "home"
+    case location_pin = "location_pin"
+    case location_user = "location_user"
+    case medicalBandage = "medicalBandage"
+    case money_piggy = "money_piggy"
+    case money = "money"
+    case shoppingBasket = "shoppingBasket"
+    case shoppingCart = "shoppingCart"
+    case smoking = "smoking"
+    case strawberry = "strawberry"
+    case waterMelon = "waterMelon"
+    case wine = "wine"
+    case alien = "alien"
+    case chatSmiley = "chatSmiley"
+    case chatSquare_question = "chatSquare_question"
+    case chatSquare_warning = "chatSquare_warning"
+    case emojiCheerful = "emojiCheerful"
+    case emojiDevastated = "emojiDevastated"
+    case emojiExcited = "emojiExcited"
+    case emojiFace = "emojiFace"
+    case emojiHungry = "emojiHungry"
+    case emojiLol = "emojiLol"
+    case emojiSad = "emojiSad"
+    case handOk = "handOk"
+    case heart = "heart"
+    case heartBreak = "heartBreak"
+    case magicWand = "magicWand"
+    case skull = "skull"
+    case star = "star"
+    case thumbsUp = "thumbsUp"
+    case twinkle = "twinkle"
+    case bell = "bell"
+    case bookmark = "bookmark"
+    case calendar_check = "calendar_check"
+    case chat_twoBubbles = "chat_twoBubbles"
+    case cursorArrow1 = "cursorArrow1"
+    case cursorArrow2 = "cursorArrow2"
+    case letter = "letter"
+    case lightBulb = "lightBulb"
+    case loading = "loading"
+    case lock = "lock"
+    case megaPhone = "megaPhone"
+    case moustache = "moustache"
+    case phone = "phone"
+    case cat = "cat"
+    case cloud = "cloud"
+    case dog = "dog"
+    case fire = "fire"
+    case lightning = "lightning"
+    case petPaw = "petPaw"
+    case quill = "quill"
+    case snow = "snow"
+    case sun = "sun"
+    case tree = "tree"
+    case umbrella = "umbrella"
     
     var imageName: String {
         switch self {
-        case .athleticsRunning: return "ic_category_athleticsRunning"
-        case .bagDollar: return "ic_category_bagDollar"
-        case .baggage: return "ic_category_baggage"
-        case .bandage: return "ic_category_bandage"
-        case .beer: return "ic_category_beer"
-        case .bicycle: return "ic_category_bicycle"
-        case .capsule: return "ic_category_capsule"
-        case .cloud: return "ic_category_cloud"
-        case .coffee: return "ic_category_coffee"
-        case .controller: return "ic_category_controller"
-        case .diamond: return "ic_category_diamond"
-        case .disableHeart: return "ic_category_disableHeart"
-        case .donut: return "ic_category_donut"
-        case .drool: return "ic_category_drool"
-        case .education: return "ic_category_education"
-        case .feet: return "ic_category_feet"
-        case .fitness: return "ic_category_fitness"
-        case .fitnessShaker: return "ic_category_fitnessShaker"
-        case .flower: return "ic_category_flower"
-        case .forkSpoon: return "ic_category_forkSpoon"
-        case .gift: return "ic_category_gift"
-        case .grumpy: return "ic_category_grumpy"
-        case .heart: return "ic_category_heart"
-        case .iceCream: return "ic_category_iceCream"
-        case .island: return "ic_category_island"
-        case .laughing: return "ic_category_laughing"
-        case .leaf: return "ic_category_leaf"
-        case .lightbulb: return "ic_category_lightbulb"
-        case .love: return "ic_category_love"
-        case .mask: return "ic_category_mask"
-        case .medical: return "ic_category_medical"
-        case .paint: return "ic_category_paint"
-        case .peaceHand: return "ic_category_peaceHand"
-        case .plane: return "ic_category_plane"
-        case .planet: return "ic_category_planet"
-        case .prayingHand: return "ic_category_prayingHand"
-        case .rocket: return "ic_category_rocket"
-        case .running: return "ic_category_running"
-        case .sad: return "ic_category_sad"
-        case .shocked: return "ic_category_shocked"
-        case .shoppingCart: return "ic_category_shoppingCart"
-        case .smile: return "ic_category_smile"
-        case .snow: return "ic_category_snow"
-        case .soccerField: return "ic_category_soccerField"
-        case .star: return "ic_category_star"
-        case .sun: return "ic_category_sun"
-        case .swimming: return "ic_category_swimming"
-        case .syringe: return "ic_category_syringe"
-        case .thumbsUp: return "ic_category_thumbsUp"
-        case .umbrella: return "ic_category_umbrella"
-        case .walking: return "ic_category_walking"
-        case .yoga: return "ic_category_yoga"
+        case .baseball_batBall: return "ic_category_activity_baseball_batBall"
+        case .bowlingSet: return "ic_category_activity_bowlingSet"
+        case .brush: return "ic_category_activity_brush"
+        case .camera_video: return "ic_category_activity_camera_video"
+        case .camera: return "ic_category_activity_camera"
+        case .controller_wireless: return "ic_category_activity_controller_wireless"
+        case .fitnessBicycle: return "ic_category_activity_fitnessBicycle"
+        case .golfHole: return "ic_category_activity_golfHole"
+        case .groupRunning: return "ic_category_activity_groupRunning"
+        case .headphones: return "ic_category_activity_headphones"
+        case .mike: return "ic_category_activity_mike"
+        case .robot: return "ic_category_activity_robot"
+        case .tambourine: return "ic_category_activity_tambourine"
+        case .yoga: return "ic_category_activity_yoga"
+        case .airport: return "ic_category_daily_airport"
+        case .baggage: return "ic_category_daily_baggage"
+        case .beach: return "ic_category_daily_beach"
+        case .bicycle: return "ic_category_daily_bicycle"
+        case .burger: return "ic_category_daily_burger"
+        case .bus: return "ic_category_daily_bus"
+        case .car: return "ic_category_daily_car"
+        case .carrot: return "ic_category_daily_carrot"
+        case .chicken: return "ic_category_daily_chicken"
+        case .coffee_mug: return "ic_category_daily_coffee_mug"
+        case .donut: return "ic_category_daily_donut"
+        case .forkSpoon: return "ic_category_daily_forkSpoon"
+        case .gift: return "ic_category_daily_gift"
+        case .home: return "ic_category_daily_home"
+        case .location_pin: return "ic_category_daily_location_pin"
+        case .location_user: return "ic_category_daily_location_user"
+        case .medicalBandage: return "ic_category_daily_medicalBandage"
+        case .money_piggy: return "ic_category_daily_money_piggy"
+        case .money: return "ic_category_daily_money"
+        case .shoppingBasket: return "ic_category_daily_shoppingBasket"
+        case .shoppingCart: return "ic_category_daily_shoppingCart"
+        case .smoking: return "ic_category_daily_smoking"
+        case .strawberry: return "ic_category_daily_strawberry"
+        case .waterMelon: return "ic_category_daily_waterMelon"
+        case .wine: return "ic_category_daily_wine"
+        case .alien: return "ic_category_emotion_alien"
+        case .chatSmiley: return "ic_category_emotion_chatSmiley"
+        case .chatSquare_question: return "ic_category_emotion_chatSquare_question"
+        case .chatSquare_warning: return "ic_category_emotion_chatSquare_warning"
+        case .emojiCheerful: return "ic_category_emotion_emojiCheerful"
+        case .emojiDevastated: return "ic_category_emotion_emojiDevastated"
+        case .emojiExcited: return "ic_category_emotion_emojiExcited"
+        case .emojiFace: return "ic_category_emotion_emojiFace"
+        case .emojiHungry: return "ic_category_emotion_emojiHungry"
+        case .emojiLol: return "ic_category_emotion_emojiLol"
+        case .emojiSad: return "ic_category_emotion_emojiSad"
+        case .handOk: return "ic_category_emotion_handOk"
+        case .heart: return "ic_category_emotion_heart"
+        case .heartBreak: return "ic_category_emotion_heartBreak"
+        case .magicWand: return "ic_category_emotion_magicWand"
+        case .skull: return "ic_category_emotion_skull"
+        case .star: return "ic_category_emotion_star"
+        case .thumbsUp: return "ic_category_emotion_thumbsUp"
+        case .twinkle: return "ic_category_emotion_twinkle"
+        case .bell: return "ic_category_etc_bell"
+        case .bookmark: return "ic_category_etc_bookmark"
+        case .calendar_check: return "ic_category_etc_calendar_check"
+        case .chat_twoBubbles: return "ic_category_etc_chat_twoBubbles"
+        case .cursorArrow1: return "ic_category_etc_cursorArrow1"
+        case .cursorArrow2: return "ic_category_etc_cursorArrow2"
+        case .letter: return "ic_category_etc_letter"
+        case .lightBulb: return "ic_category_etc_lightBulb"
+        case .loading: return "ic_category_etc_loading"
+        case .lock: return "ic_category_etc_lock"
+        case .megaPhone: return "ic_category_etc_megaPhone"
+        case .moustache: return "ic_category_etc_moustache"
+        case .phone: return "ic_category_etc_phone"
+        case .cat: return "ic_category_nature_cat"
+        case .cloud: return "ic_category_nature_cloud"
+        case .dog: return "ic_category_nature_dog"
+        case .fire: return "ic_category_nature_fire"
+        case .lightning: return "ic_category_nature_lightning"
+        case .petPaw: return "ic_category_nature_petPaw"
+        case .quill: return "ic_category_nature_quill"
+        case .snow: return "ic_category_nature_snow"
+        case .sun: return "ic_category_nature_sun"
+        case .tree: return "ic_category_nature_tree"
+        case .umbrella: return "ic_category_nature_umbrella"
         }
     }
 }

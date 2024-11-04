@@ -18,9 +18,9 @@ struct CategoryItem: View {
         HStack(alignment: .center, spacing: 8) {
             Image(item.icon.imageName)
                 .resizable()
+                .renderingMode(.template)
+                .foregroundColor(Color(hex: item.color.hex))
                 .frame(both: 16.0, alignment: .center)
-                .colorMultiply(Color(hex: item.color.hex))
-                .contrast(3.0)
             Text(item.name)
                 .font(.headline3)
                 .foregroundColor(Color(hex: item.color.hex))

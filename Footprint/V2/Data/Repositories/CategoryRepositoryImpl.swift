@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 
 class CategoryRepositoryImpl: CategoryRepository {
-    func addCategory(_ id: String?, name: String, color: Int, icon: Int) {
+    func addCategory(_ id: String?, name: String, color: Int, icon: String) {
         let realm = try! Realm()
         let item = CategoryV2(id: id, name: name, color: color, icon: icon)
         do {

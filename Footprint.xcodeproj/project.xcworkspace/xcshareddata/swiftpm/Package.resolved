@@ -1,5 +1,5 @@
 {
-  "originHash" : "4ad71a54db0f7bb0be4bce1b128dfcdce6d9fae8c7aabf3e2eed34ccb9db856f",
+  "originHash" : "c933e4cc7f6b525247b47ca21aa10c12fd3c50633bf94fef869aa23777571aee",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -179,6 +179,15 @@
       "state" : {
         "branch" : "master",
         "revision" : "95c99a826aa06dae3ca40011491afd5acf890ad5"
+      }
+    },
+    {
+      "identity" : "sdflowlayout",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sanhee16/SDFlowLayout.git",
+      "state" : {
+        "revision" : "bf28115396dc6f898d9beec077df22e8cf3a0566",
+        "version" : "1.0.6"
       }
     },
     {
