@@ -111,7 +111,6 @@ struct MapView2: View {
                                 if $isShowMarkers.wrappedValue {
                                     mapManager.loadMarkers()
                                 }
-                                tabBarService.setIsShowTabBar(true)
                             }
                             Text("지도를 움직여 위치를 설정하세요.")
                                 .font(.body2)
@@ -138,7 +137,6 @@ struct MapView2: View {
                             //                        output.goToSelectLocation()
                             withAnimation(.smooth) {
                                 mapStatusVM.updateMapStatus(.adding)
-                                tabBarService.setIsShowTabBar(false)
                             }
                         }
                         .sdPadding(top: 0, leading: 16, bottom: 8, trailing: 16)
@@ -148,15 +146,23 @@ struct MapView2: View {
                                content: {
                             Text($mapManager.centerAddress.wrappedValue)
                             
-                            FPButton(text: "여기에 발자국 남기기", status: .press, size: .large, type: .solid) {
-                                if let location = $mapManager.centerPosition.wrappedValue {
-                                    MapStatusVM.tempNote?.address = $mapManager.centerAddress.wrappedValue
-                                    MapStatusVM.tempNote?.location = Location(latitude: location.latitude, longitude: location.longitude)
-                                    output.goToEditNote(
-                                        .create(location: Location(latitude: location.latitude, longitude: location.longitude), address: $mapManager.centerAddress.wrappedValue)
-                                    )
+                            HStack(alignment: .center, spacing: 8, content: {
+                                FPButton(text: "닫기", status: .able, size: .large, type: .lightSolid) {
+                                    mapStatusVM.updateMapStatus(.normal)
                                 }
-                            }
+                                .frame(width: (UIScreen.main.bounds.size.width - 32 - 8) / 10 * 3)
+                                
+                                FPButton(text: "여기에 발자국 남기기", status: $mapManager.centerMarkerStatus.wrappedValue == .move ? .disable : .press, size: .large, type: .solid) {
+                                    if let location = $mapManager.centerPosition.wrappedValue {
+                                        MapStatusVM.tempNote?.address = $mapManager.centerAddress.wrappedValue
+                                        MapStatusVM.tempNote?.location = Location(latitude: location.latitude, longitude: location.longitude)
+                                        output.goToEditNote(
+                                            .create(location: Location(latitude: location.latitude, longitude: location.longitude), address: $mapManager.centerAddress.wrappedValue)
+                                        )
+                                    }
+                                }
+                                .frame(width: (UIScreen.main.bounds.size.width - 32 - 8) / 10 * 7)
+                            })
                         })
                         .sdPadding(top: 16, leading: 16, bottom: 8, trailing: 16)
                         .background(Color(hex: "#F1F5F9"))

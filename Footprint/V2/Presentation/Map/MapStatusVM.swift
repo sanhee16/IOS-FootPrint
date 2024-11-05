@@ -47,8 +47,10 @@ class MapStatusVM: ObservableObject {
         switch status {
         case .normal:
             Self.tempNote = nil
+            NotificationCenter.default.post(name: .isShowTabBar, object: true)
             break
         case .adding:
+            NotificationCenter.default.post(name: .isShowTabBar, object: false)
             break
         }
     }

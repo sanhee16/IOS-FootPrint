@@ -84,6 +84,7 @@ struct FPButton: View {
                     .border(self.borderColor, lineWidth: 1.5, cornerRadius: 12)
             )
         })
+        .disabled(status == .disable)
     }
 }
 
