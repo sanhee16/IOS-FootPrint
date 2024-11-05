@@ -126,6 +126,9 @@
 		26BFFD942C5F8C400001B02B /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 26BFFD932C5F8C400001B02B /* Kingfisher */; };
 		26C04F6D2917667F00890A76 /* SwiftUIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */; };
 		26EB9D1B2CD9A34300D3B0CE /* TempNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EB9D1A2CD9A34300D3B0CE /* TempNote.swift */; };
+		26EB9D1D2CD9E2C500D3B0CE /* MapStatusVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EB9D1C2CD9E2C500D3B0CE /* MapStatusVM.swift */; };
+		26EB9D1F2CD9E4B100D3B0CE /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EB9D1E2CD9E4B100D3B0CE /* NotificationName.swift */; };
+		26EB9D212CD9E4E500D3B0CE /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EB9D202CD9E4E500D3B0CE /* NotificationService.swift */; };
 		26F137072CD48BA300096181 /* LoadNoteUseCaseWithAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F137062CD48BA300096181 /* LoadNoteUseCaseWithAddress.swift */; };
 		26F1370A2CD4AADB00096181 /* PeopleWithView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F137092CD4AADB00096181 /* PeopleWithView.swift */; };
 		26FAB54D2C6B4091006304AE /* SelectLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FAB54C2C6B4091006304AE /* SelectLocationView.swift */; };
@@ -334,6 +337,9 @@
 		26BD8FCA29694CE5005F7E5C /* ApiInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiInfo.plist; sourceTree = "<group>"; };
 		26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIExtension.swift; sourceTree = "<group>"; };
 		26EB9D1A2CD9A34300D3B0CE /* TempNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempNote.swift; sourceTree = "<group>"; };
+		26EB9D1C2CD9E2C500D3B0CE /* MapStatusVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStatusVM.swift; sourceTree = "<group>"; };
+		26EB9D1E2CD9E4B100D3B0CE /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
+		26EB9D202CD9E4E500D3B0CE /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		26F137062CD48BA300096181 /* LoadNoteUseCaseWithAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadNoteUseCaseWithAddress.swift; sourceTree = "<group>"; };
 		26F137092CD4AADB00096181 /* PeopleWithView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleWithView.swift; sourceTree = "<group>"; };
 		26FAB54C2C6B4091006304AE /* SelectLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationView.swift; sourceTree = "<group>"; };
@@ -666,6 +672,7 @@
 			isa = PBXGroup;
 			children = (
 				26EB9D1A2CD9A34300D3B0CE /* TempNote.swift */,
+				26EB9D1C2CD9E2C500D3B0CE /* MapStatusVM.swift */,
 				2682A76B2C6D783C00DF1F8A /* FPMapManager */,
 				260C3CD62C6CA53D004A9206 /* MapView */,
 				26FAB54B2C6B408C006304AE /* SelectLocation */,
@@ -912,6 +919,8 @@
 			isa = PBXGroup;
 			children = (
 				269CA5782C78E1B800366005 /* PermissionService.swift */,
+				26EB9D1E2CD9E4B100D3B0CE /* NotificationName.swift */,
+				26EB9D202CD9E4E500D3B0CE /* NotificationService.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1422,6 +1431,7 @@
 				266EDDDC2C64EACF006CF09B /* SplashView2.swift in Sources */,
 				63B1FAEF2914A861007E94B6 /* EditFootprintViewModel.swift in Sources */,
 				267CC1772C66F27000D6015E /* BaseCoordinator.swift in Sources */,
+				26EB9D1D2CD9E2C500D3B0CE /* MapStatusVM.swift in Sources */,
 				26C04F6D2917667F00890A76 /* SwiftUIExtension.swift in Sources */,
 				631D75242966619B00464F33 /* SToggleView.swift in Sources */,
 				269CA5762C78BE9600366005 /* CategoryEditVM.swift in Sources */,
@@ -1433,6 +1443,7 @@
 				260C87D0296AAF5C00ADCC32 /* FootprintItem.swift in Sources */,
 				2613ED4B2973C5AC0060EF23 /* MainMenuBar.swift in Sources */,
 				26FAB54D2C6B4091006304AE /* SelectLocationView.swift in Sources */,
+				26EB9D212CD9E4E500D3B0CE /* NotificationService.swift in Sources */,
 				63F292B2297656D700D42D0E /* TrashView.swift in Sources */,
 				63F132472914A18800B3A9E0 /* AlertViewModel.swift in Sources */,
 				266EDDE62C64EB46006CF09B /* MainVM2.swift in Sources */,
@@ -1472,6 +1483,7 @@
 				2696F4E42C7753C400F56E73 /* NoteRepository.swift in Sources */,
 				267CC18C2C6710DF00D6015E /* UINavigationController+Extension.swift in Sources */,
 				2694FCA22C7AA95000F01644 /* LoadAllNoteUseCase.swift in Sources */,
+				26EB9D1F2CD9E4B100D3B0CE /* NotificationName.swift in Sources */,
 				264B70C0291F8E9D00CDAF9F /* C.swift in Sources */,
 				266EDDE42C64EB40006CF09B /* MainView2.swift in Sources */,
 				63F132982914A1C000B3A9E0 /* ProgressView.swift in Sources */,

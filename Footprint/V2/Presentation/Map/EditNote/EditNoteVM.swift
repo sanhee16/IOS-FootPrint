@@ -16,7 +16,7 @@ import _PhotosUI_SwiftUI
 
 public enum EditNoteType {
     case create(location: Location, address: String)
-    case modify(id: String)
+    case modify(id: String, address: String)
 }
 
 class EditNoteVM: BaseViewModel {
@@ -59,7 +59,8 @@ class EditNoteVM: BaseViewModel {
         // load categories, members
         self.loadCategories()
         self.loadMembers()
-        if let tempNote = MapView2.tempNote {
+        if let tempNote = MapStatusVM.tempNote {
+            self.noteId = tempNote.id
             self.isStar = tempNote.isStar
             self.title = tempNote.title
             self.content = tempNote.content
@@ -71,6 +72,7 @@ class EditNoteVM: BaseViewModel {
             self.imageUrls = tempNote.imageUrls
             self.selectedPhotos = tempNote.selectedPhotos
             self.members = tempNote.members
+            self.location = tempNote.location
         } else {
             switch self.type {
             case .create(let location, let address):
@@ -78,8 +80,9 @@ class EditNoteVM: BaseViewModel {
                 self.address = address
                 self.category = self.categories.first
                 self.members = []
-            case .modify(let id):
+            case .modify(let id, let address):
                 self.noteId = id
+                self.address = address
                 self.loadNote()
             }
         }
@@ -131,6 +134,7 @@ class EditNoteVM: BaseViewModel {
         
         saveNoteUseCase.execute(
             Note(
+                id: self.noteId,
                 title: self.title,
                 content: self.content,
                 createdAt: Int(createdAt.timeIntervalSince1970),
@@ -143,11 +147,14 @@ class EditNoteVM: BaseViewModel {
                 address: self.address
             )
         )
+        NotificationCenter.default.post(name: .changeMapStatus, object: MapStatus.normal.rawValue)
         onDone()
     }
     
     func saveTempNote(_ onDone: @escaping ()->()) {
-        MapView2.tempNote = TempNote(
+        guard let location = self.location else { return }
+        MapStatusVM.tempNote = TempNote(
+            id: self.noteId,
             isStar: self.isStar,
             title: self.title,
             content: self.content,
@@ -158,9 +165,12 @@ class EditNoteVM: BaseViewModel {
             images: self.images,
             imageUrls: self.imageUrls,
             selectedPhotos: self.selectedPhotos,
-            members: self.members
+            members: self.members,
+            location: location
         )
-        
+
+        NotificationCenter.default.post(name: .changeMapStatus, object: MapStatus.adding.rawValue)
+
         onDone()
     }
     

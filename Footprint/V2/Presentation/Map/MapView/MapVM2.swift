@@ -98,8 +98,6 @@ class MapVM2: BaseViewModel {
     
     
     
-    
-    
     //MARK: Timer
     private func placeSearch(_ text: String) {
         guard let myLocation = myLocation else { return }

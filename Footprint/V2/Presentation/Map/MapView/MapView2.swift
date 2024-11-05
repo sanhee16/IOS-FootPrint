@@ -14,10 +14,6 @@ import GooglePlaces
 import Combine
 
 struct MapView2: View {
-    enum MapStatus {
-        case normal
-        case adding
-    }
     
     struct Output {
         var goToEditNote: (EditNoteType) -> ()
@@ -28,21 +24,19 @@ struct MapView2: View {
     @StateObject var vm: MapVM2 = MapVM2()
     @ObservedObject var mapManager: FPMapManager = FPMapManager.shared
     @EnvironmentObject private var tabBarService: TabBarService
+    @EnvironmentObject private var mapStatusVM: MapStatusVM
     
     private var safeTop: CGFloat { get { Util.safeTop() }}
     private var safeBottom: CGFloat { get { Util.safeBottom() }}
     private let optionHeight: CGFloat = 36.0
     private let optionVerticalPadding: CGFloat = 8.0
     @State private var isShowSearchBar: Bool = false
-    @State private var mapStatus: MapStatus = .normal
     @State private var centerPos: CGRect = .zero
     @State private var isShowMarkers: Bool = false
     @State private var isPresentFootprint: Bool = false
     @State private var selectedId: String? = nil
     @Environment(\.centerLocation) var centerLocation
 
-    static var tempNote: TempNote? = nil
-    
     
     init(output: Output) {
         self.output = output
@@ -51,7 +45,7 @@ struct MapView2: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .topLeading) {
-                if self.mapStatus == .adding {
+                if $mapStatusVM.status.wrappedValue == .adding {
                     Image($mapManager.centerMarkerStatus.wrappedValue.image)
                         .resizable()
                         .scaledToFit()
@@ -67,8 +61,10 @@ struct MapView2: View {
                         .zIndex(1)
                 }
                 
-                VStack(alignment: .center, spacing: 0, content: {
-                    switch self.mapStatus {
+                VStack(alignment: .center,
+                       spacing: 0,
+                       content: {
+                    switch $mapStatusVM.status.wrappedValue {
                     case .normal:
                         if Defaults.shared.premiumCode.isEmpty && $vm.isShowAds.wrappedValue {
                             GADBanner().frame(width: GADAdSizeBanner.size.width, height: GADAdSizeBanner.size.height)
@@ -110,9 +106,8 @@ struct MapView2: View {
                     case .adding:
                         VStack(alignment: .leading, spacing: 0, content: {
                             Topbar("위치 선택", type: .back) {
-                                EditNoteTempStorage.clear()
-                                self.mapStatus = .normal
-                                Self.tempNote = nil
+                                mapStatusVM.updateMapStatus(.normal)
+                                
                                 if $isShowMarkers.wrappedValue {
                                     mapManager.loadMarkers()
                                 }
@@ -137,24 +132,29 @@ struct MapView2: View {
                         Spacer()
                     })
                     
-                    switch self.mapStatus {
+                    switch $mapStatusVM.status.wrappedValue {
                     case .normal:
                         FPButton(text: "발자국 남기기", location: .leading(name: "paw-foot-white"), status: .press, size: .large, type: .solid) {
-    //                        output.goToSelectLocation()
+                            //                        output.goToSelectLocation()
                             withAnimation(.smooth) {
-                                self.mapStatus = .adding
+                                mapStatusVM.updateMapStatus(.adding)
                                 tabBarService.setIsShowTabBar(false)
                             }
                         }
                         .sdPadding(top: 0, leading: 16, bottom: 8, trailing: 16)
                     case .adding:
-                        VStack(alignment: .leading, spacing: 24, content: {
+                        VStack(alignment: .leading,
+                               spacing: 24,
+                               content: {
                             Text($mapManager.centerAddress.wrappedValue)
                             
                             FPButton(text: "여기에 발자국 남기기", status: .press, size: .large, type: .solid) {
                                 if let location = $mapManager.centerPosition.wrappedValue {
-                                    EditNoteTempStorage.address = $mapManager.centerAddress.wrappedValue
-                                    output.goToEditNote(.create(location: Location(latitude: location.latitude, longitude: location.longitude), address: $mapManager.centerAddress.wrappedValue))
+                                    MapStatusVM.tempNote?.address = $mapManager.centerAddress.wrappedValue
+                                    MapStatusVM.tempNote?.location = Location(latitude: location.latitude, longitude: location.longitude)
+                                    output.goToEditNote(
+                                        .create(location: Location(latitude: location.latitude, longitude: location.longitude), address: $mapManager.centerAddress.wrappedValue)
+                                    )
                                 }
                             }
                         })
@@ -172,31 +172,28 @@ struct MapView2: View {
         }, content: {
             FootprintView(isPresented: $isPresentFootprint, output: FootprintView.Output(pushEditNoteView: {
                 if let id = selectedId {
-                    self.output.goToEditNote(.modify(id: id))
+                    self.output.goToEditNote(.modify(id: id, address: $mapManager.centerAddress.wrappedValue))
+                    
+                    //TODO:
+//                    mapStatusVM.updateMapStatus(.adding)
+//                    tabBarService.setIsShowTabBar(false)
                 }
             }))
             .environmentObject(FootprintVM(selectedId))
             .presentationDetents([.fraction(0.8), .large])
         })
-//        .onChange(of: $vm.viewEvent.wrappedValue, perform: { value in
-//            switch value {
-//            case .goToFootprintView(let id):
-//                self.output.goToFootprintView(id)
-//            default:
-//                break
-//            }
-//            $vm.viewEvent.wrappedValue = .none
-//        })
         .onChange(of: $mapManager.selectedMarker.wrappedValue, perform: { id in
             if let id = id {
                 print("marker: \(id)")
                 $mapManager.selectedMarker.wrappedValue = nil
-//                self.output.goToFootprintView(id)
                 self.selectedId = id
                 $isPresentFootprint.wrappedValue = true
             }
         })
         .onAppear {
+            if $isShowMarkers.wrappedValue {
+                mapManager.loadMarkers()
+            }
             vm.onAppear()
         }
     }

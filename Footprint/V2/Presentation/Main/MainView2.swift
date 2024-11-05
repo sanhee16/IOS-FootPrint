@@ -14,6 +14,7 @@ struct MainView2: View {
     @StateObject private var coordinator: Coordinator = Coordinator()
     @StateObject private var vm: MainVM2 = MainVM2()
     @StateObject private var tabBarService: TabBarService = TabBarService()
+    @StateObject private var mapStatusVM: MapStatusVM = MapStatusVM()
     
     @State private var selectedIndex: Int = 0
     @State private var currentTab: MainMenuType = .map
@@ -30,6 +31,7 @@ struct MainView2: View {
 //                )
 //                
                 MapView2(output: coordinator.mapOutput)
+                    .environmentObject(mapStatusVM)
                 
                 if $tabBarService.isShowTabBar.wrappedValue {
                     MainMenuBar(current: $currentTab.wrappedValue) { type in

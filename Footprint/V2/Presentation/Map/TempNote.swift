@@ -12,6 +12,7 @@ import _PhotosUI_SwiftUI
 import UIKit
 
 public struct TempNote {
+    var id: String?
     var isStar: Bool
     var title: String
     var content: String
@@ -23,6 +24,7 @@ public struct TempNote {
     var imageUrls: [String]
     var selectedPhotos: [PhotosPickerItem]
     var members: [MemberEntity]
+    var location: Location
 }
 
 var tempNote: TempNote? = nil
