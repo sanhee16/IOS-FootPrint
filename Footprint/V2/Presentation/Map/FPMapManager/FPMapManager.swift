@@ -93,6 +93,7 @@ class FPMapManager: NSObject, ObservableObject {
     
     
     func didTapMyLocationButton() {
+        self.getCurrentLocation()
         guard let myLocation = self.myLocation else { return }
         self.mapView.animate(toLocation: CLLocationCoordinate2D(latitude: myLocation.latitude, longitude: myLocation.longitude))
     }
