@@ -105,7 +105,7 @@ struct MapView2: View {
                         })
                     case .adding:
                         VStack(alignment: .leading, spacing: 0, content: {
-                            Topbar("위치 선택", type: .back) {
+                            Topbar("위치 선택", type: .close) {
                                 mapStatusVM.updateMapStatus(.normal)
                                 
                                 if $isShowMarkers.wrappedValue {
