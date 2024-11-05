@@ -15,10 +15,9 @@ import PhotosUI
 import _PhotosUI_SwiftUI
 
 public enum EditNoteType {
-    case create(location: Location)
+    case create(location: Location, address: String)
     case modify(id: String)
 }
-
 
 class EditNoteVM: BaseViewModel {
     @Injected(\.saveNoteUseCase) var saveNoteUseCase
@@ -74,8 +73,9 @@ class EditNoteVM: BaseViewModel {
             self.members = tempNote.members
         } else {
             switch self.type {
-            case .create(let location):
+            case .create(let location, let address):
                 self.location = location
+                self.address = address
                 self.category = self.categories.first
                 self.members = []
             case .modify(let id):
