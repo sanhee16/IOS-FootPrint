@@ -16,16 +16,21 @@ import RealmSwift
 //    case modify(content: FootprintContents)
 //}
 //
-//public struct FootprintContents {
-//    var title: String
-//    var content: String
-//    var createdAt: Date
-//    var images: [UIImage]
-//    var category: Category
-//    var peopleWith: [PeopleWith]
-//    var id: ObjectId
-//    var isStar: Bool
-//}
+public struct FootprintContents {
+    var title: String
+    var content: String
+    var createdAt: Date
+    var images: [UIImage]
+    var category: Category
+    var peopleWith: [PeopleWith]
+    var id: ObjectId
+    var isStar: Bool
+}
+
+public enum EditFootprintType {
+    case new(name: String?, placeId: String?, address: String?)
+    case modify(content: FootprintContents)
+}
 
 
 class EditFootprintViewModel: BaseViewModelV1 {

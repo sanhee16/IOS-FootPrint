@@ -54,6 +54,10 @@ extension Container {
     var toogleStarUseCase: Factory<ToogleStarUseCase> {
         Factory(self) { ToogleStarUseCase(noteRepository: self.noteRepository()) }
     }
+    
+    var deleteImageUrlUseCase: Factory<DeleteImageUrlUseCase> {
+        Factory(self) { DeleteImageUrlUseCase(noteRepository: self.noteRepository()) }
+    }
 }
 
 //MARK: UseCase - Category

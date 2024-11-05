@@ -14,35 +14,19 @@ import Photos
 import PhotosUI
 import _PhotosUI_SwiftUI
 
-public enum EditFootprintType {
-    case new(name: String?, placeId: String?, address: String?)
-    case modify(content: FootprintContents)
-}
-
-public struct FootprintContents {
-    var title: String
-    var content: String
-    var createdAt: Date
-    var images: [UIImage]
-    var category: Category
-    var peopleWith: [PeopleWith]
-    var id: ObjectId
-    var isStar: Bool
-}
-
-
-
 public enum EditNoteType {
-    case create
-    case modify
+    case create(location: Location)
+    case modify(id: String)
 }
 
 
 class EditNoteVM: BaseViewModel {
     @Injected(\.saveNoteUseCase) var saveNoteUseCase
+    @Injected(\.deleteImageUrlUseCase) var deleteImageUrlUseCase
     @Injected(\.loadCategoriesUseCase) var loadCategoriesUseCase
     @Injected(\.loadMembersUseCase) var loadMembersUseCase
     @Injected(\.permissionService) var permissionService
+    @Injected(\.loadNoteUseCaseWithId) var loadNoteUseCaseWithId
     
     @Published var isAvailableToSave: Bool = false
     @Published var isStar: Bool = false
@@ -53,34 +37,66 @@ class EditNoteVM: BaseViewModel {
     @Published var categories: [CategoryEntity] = []
     @Published var category: CategoryEntity? = nil
     @Published var images: [UIImage] = [UIImage]()
+    @Published var imageUrls: [String] = []
     @Published var selectedPhotos: [PhotosPickerItem] = [PhotosPickerItem]()
     @Published var members: [MemberEntity] = []
     
     private var noteId: String? = nil
     
-    
     //    @Published var images: [UIImage] = []
     @Published var isCategoryEditMode: Bool = false
     @Published var isPeopleWithEditMode: Bool = false
     @Published var peopleWith: [PeopleWith] = []
-    @Published var type: EditNoteType? = nil
+    let type: EditNoteType
     
     private var modifyId: ObjectId? = nil
     private var location: Location? = nil
     private var placeId: String? = nil
-    
-    var viewEventTrigger: ((EditNoteView.ViewEventTrigger) -> ())? = nil
-    
-    override init() {
+        
+    init(type: EditNoteType) {
+        self.type = type
         
         super.init()
-        
-        
-        // loadCategories
+        // load categories, members
         self.loadCategories()
-        self.category = self.categories.first
-        self.members = []
         self.loadMembers()
+        if let tempNote = MapView2.tempNote {
+            self.isStar = tempNote.isStar
+            self.title = tempNote.title
+            self.content = tempNote.content
+            self.address = tempNote.address
+            self.createdAt = tempNote.createdAt
+            self.categories = tempNote.categories
+            self.category = tempNote.category
+            self.images = tempNote.images
+            self.imageUrls = tempNote.imageUrls
+            self.selectedPhotos = tempNote.selectedPhotos
+            self.members = tempNote.members
+        } else {
+            switch self.type {
+            case .create(let location):
+                self.location = location
+                self.category = self.categories.first
+                self.members = []
+            case .modify(let id):
+                self.noteId = id
+                self.loadNote()
+            }
+        }
+    }
+    
+    private func loadNote() {
+        guard let noteId = self.noteId, let note = self.loadNoteUseCaseWithId.execute(noteId) else { return }
+        self.isStar = note.isStar
+        self.title = note.title
+        self.content = note.content
+        self.address = note.address
+        self.createdAt = Date(timeIntervalSince1970: Double(note.createdAt))
+        self.category = note.category
+        self.imageUrls = note.imageUrls
+        self.location = Location(latitude: note.latitude, longitude: note.longitude)
+        self.selectedPhotos = []
+        self.members = note.peopleWith ?? []
     }
     
     func loadCategories() {
@@ -97,7 +113,7 @@ class EditNoteVM: BaseViewModel {
         }
     }
     
-    func saveNote() {
+    func saveNote(_ onDone: @escaping ()->()) {
         if !self.isAvailableToSave { return }
         guard let location = location, let category = self.category, let categoryId = category.id else { return }
         
@@ -105,20 +121,20 @@ class EditNoteVM: BaseViewModel {
         members.filter({ $0.isSelected }).compactMap({ $0.id }).forEach { id in
             memberIds.append(id)
         }
-        var imageUrls: [String] = []
+//        var imageUrls: [String] = self.imageUrls
         let currentTimeStamp = Int(Date().timeIntervalSince1970)
         for idx in self.images.indices {
             let imageName = "\(currentTimeStamp)_\(idx)"
             let _ = ImageManager.shared.saveImage(image: self.images[idx], imageName: imageName)
-            imageUrls.append(imageName)
+            self.imageUrls.append(imageName)
         }
         
         saveNoteUseCase.execute(
             Note(
                 title: self.title,
                 content: self.content,
-                createdAt: currentTimeStamp,
-                imageUrls: imageUrls,
+                createdAt: Int(createdAt.timeIntervalSince1970),
+                imageUrls: self.imageUrls,
                 categoryId: categoryId,
                 peopleWithIds: self.members.compactMap({ $0.id }),
                 isStar: self.isStar,
@@ -127,8 +143,25 @@ class EditNoteVM: BaseViewModel {
                 address: self.address
             )
         )
-//        EditNoteTempStorage.clear()
-        viewEventTrigger?(.pop)
+        onDone()
+    }
+    
+    func saveTempNote(_ onDone: @escaping ()->()) {
+        MapView2.tempNote = TempNote(
+            isStar: self.isStar,
+            title: self.title,
+            content: self.content,
+            address: self.address,
+            createdAt: self.createdAt,
+            categories: self.categories,
+            category: self.category,
+            images: self.images,
+            imageUrls: self.imageUrls,
+            selectedPhotos: self.selectedPhotos,
+            members: self.members
+        )
+        
+        onDone()
     }
     
     private func checkIsAvailableToSave() {
@@ -136,32 +169,6 @@ class EditNoteVM: BaseViewModel {
         if self.address.isEmpty || self.title.isEmpty { return }
         self.isAvailableToSave = true
     }
-    
-    func setValue(location: Location, type: EditNoteType, viewEventTrigger: @escaping ((EditNoteView.ViewEventTrigger) -> ())) {
-        self.location = location
-        self.type = type
-        
-        self.viewEventTrigger = viewEventTrigger
-
-        self.isStar = EditNoteTempStorage.isStar
-        self.title = EditNoteTempStorage.title
-        self.content = EditNoteTempStorage.content
-        self.address = EditNoteTempStorage.address
-        self.createdAt = EditNoteTempStorage.createdAt
-        self.category = EditNoteTempStorage.category ?? self.categories.first
-    }
-    
-//    func saveTempStorage() {
-//        EditNoteTempStorage.save(
-//            title: self.title,
-//            isStar: self.isStar,
-//            content: self.content,
-//            address: self.address,
-//            createdAt: self.createdAt,
-//            category: self.category
-//        )
-//    }
-    
     
     func toggleMember(_ member: MemberEntity) {
         guard let idx = self.members.firstIndex(where: { $0 == member }) else { return }
@@ -191,6 +198,14 @@ class EditNoteVM: BaseViewModel {
     @MainActor
     func deleteImage(_ idx: Int) {
         selectedPhotos.remove(at: idx)
+    }
+    
+    @MainActor
+    func deleteImageUrl(_ idx: Int) {
+        guard let noteId = self.noteId else { return }
+        //TODO: DB에서 이미지 url 삭제해야함
+        self.deleteImageUrlUseCase.execute(noteId, url: imageUrls[idx])
+        imageUrls.remove(at: idx)
     }
     
 //    func checkPhotoPermsission(_ onDone: @escaping (Bool) -> ()) {

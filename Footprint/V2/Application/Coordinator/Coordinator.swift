@@ -10,8 +10,8 @@ import Factory
 import SwiftUI
 
 class Coordinator: BaseCoordinator<Destination> {    
-    private func pushEditNote(_ output: EditNoteView.Output, location: Location, type: EditNoteType) {
-        self.push(.editNote(output: output, location: location, type: type))
+    private func pushEditNote(type: EditNoteType, output: EditNoteView.Output) {
+        self.push(.editNote(type: type, output: output))
     }
     
     private func pushCategoryListEditView(_ output: CategoryListEditView.Output) {
@@ -26,8 +26,8 @@ class Coordinator: BaseCoordinator<Destination> {
 //MARK: Output
 extension Coordinator {
     var mapOutput: MapView2.Output {
-        MapView2.Output { location, type in
-            self.pushEditNote(self.editNoteOutput, location: location, type: type)
+        MapView2.Output { type in
+            self.pushEditNote(type: type, output: self.editNoteOutput)
         }
     }
     
@@ -44,8 +44,8 @@ extension Coordinator {
     var selectLocationOutput: SelectLocationView.Output {
         SelectLocationView.Output {
             self.pop()
-        } goToEditNote: { location, type in
-            self.pushEditNote(self.editNoteOutput, location: location, type: type)
+        } goToEditNote: { type in
+            self.pushEditNote(type: type, output: self.editNoteOutput)
         }
     }
     

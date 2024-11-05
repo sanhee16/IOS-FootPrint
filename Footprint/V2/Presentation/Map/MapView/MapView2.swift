@@ -20,7 +20,7 @@ struct MapView2: View {
     }
     
     struct Output {
-        var goToEditNote: (Location, EditNoteType) -> ()
+        var goToEditNote: (EditNoteType) -> ()
     }
     private var output: Output
     private var subscription = Set<AnyCancellable>()
@@ -41,6 +41,9 @@ struct MapView2: View {
     @State private var selectedId: String? = nil
     @Environment(\.centerLocation) var centerLocation
 
+    static var tempNote: TempNote? = nil
+    
+    
     init(output: Output) {
         self.output = output
     }
@@ -109,6 +112,7 @@ struct MapView2: View {
                             Topbar("위치 선택", type: .back) {
                                 EditNoteTempStorage.clear()
                                 self.mapStatus = .normal
+                                Self.tempNote = nil
                                 if $isShowMarkers.wrappedValue {
                                     mapManager.loadMarkers()
                                 }
@@ -150,10 +154,7 @@ struct MapView2: View {
                             FPButton(text: "여기에 발자국 남기기", status: .press, size: .large, type: .solid) {
                                 if let location = $mapManager.centerPosition.wrappedValue {
                                     EditNoteTempStorage.address = $mapManager.centerAddress.wrappedValue
-                                    output.goToEditNote(
-                                        Location(latitude: location.latitude, longitude: location.longitude),
-                                        .create
-                                    )
+                                    output.goToEditNote(.create(location: Location(latitude: location.latitude, longitude: location.longitude)))
                                 }
                             }
                         })
@@ -169,9 +170,13 @@ struct MapView2: View {
         .sheet(isPresented: $isPresentFootprint, onDismiss: {
             $isPresentFootprint.wrappedValue = false
         }, content: {
-            FootprintView(isPresented: $isPresentFootprint)
-                .environmentObject(FootprintVM(selectedId))
-                .presentationDetents([.fraction(0.8), .large])
+            FootprintView(isPresented: $isPresentFootprint, output: FootprintView.Output(pushEditNoteView: {
+                if let id = selectedId {
+                    self.output.goToEditNote(.modify(id: id))
+                }
+            }))
+            .environmentObject(FootprintVM(selectedId))
+            .presentationDetents([.fraction(0.8), .large])
         })
 //        .onChange(of: $vm.viewEvent.wrappedValue, perform: { value in
 //            switch value {

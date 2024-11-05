@@ -25,11 +25,6 @@ struct GalleryItem: Equatable {
     var isSelected: Bool
 }
 
-struct Location {
-    var latitude: Double
-    var longitude: Double
-}
-
 class FootPrint: Object {
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var title: String

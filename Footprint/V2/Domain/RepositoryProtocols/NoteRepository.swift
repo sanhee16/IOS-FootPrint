@@ -15,4 +15,5 @@ protocol NoteRepository {
     func loadNote(id: String) -> Note?
     func loadNote(address: String) -> [Note]
     func toggleStar(id: String) -> Bool
+    func deleteImageUrl(_ id: String, url: String)
 }

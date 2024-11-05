@@ -82,4 +82,16 @@ class NoteRepositoryImpl: NoteRepository {
         guard let item = realm.objects(NoteData.self).filter ({ $0.id == id }).first else { return false }
         return item.isStar
     }
+    
+    func deleteImageUrl(_ id: String, url: String) {
+        let realm = try! Realm()
+        guard let item = realm.objects(NoteData.self).filter({ $0.id == id }).first else { return }
+        try! realm.write {
+            if let idx = item.imageUrls.firstIndex(where: { $0 == url }) {
+                item.imageUrls.remove(at: idx)
+                realm.add(item, update: .modified)
+            }
+        }
+        return
+    }
 }

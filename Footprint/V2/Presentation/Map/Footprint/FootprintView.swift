@@ -19,6 +19,17 @@ struct FootprintView: View {
     
     private let IMAGE_SIZE: CGFloat = 70.0
     
+    struct Output {
+        var pushEditNoteView: () -> ()
+    }
+    
+    private var output: Output
+    
+    init(isPresented: Binding<Bool>, output: Output) {
+        self._isPresented = isPresented
+        self.output = output
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             ZStack(content: {
@@ -40,7 +51,8 @@ struct FootprintView: View {
                         .padding(16)
                         .contentShape(Rectangle())
                         .onTapGesture {
-                            
+                            $isPresented.wrappedValue = false
+                            self.output.pushEditNoteView()
                         }
                 })
             })

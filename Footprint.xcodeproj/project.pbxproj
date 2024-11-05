@@ -43,6 +43,8 @@
 		264EEF592925128A00B89624 /* AddCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EEF582925128A00B89624 /* AddCategoryViewModel.swift */; };
 		265917112CD857CC008C39E9 /* ToogleStarUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265917102CD857CC008C39E9 /* ToogleStarUseCase.swift */; };
 		265917142CD87764008C39E9 /* SDFlowLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 265917132CD87764008C39E9 /* SDFlowLayout */; };
+		265917162CD8B986008C39E9 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265917152CD8B986008C39E9 /* Location.swift */; };
+		265917182CD8BE55008C39E9 /* DeleteImageUrlUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265917172CD8BE55008C39E9 /* DeleteImageUrlUseCase.swift */; };
 		265924C729445BD9001E7025 /* FootprintListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265924C629445BD9001E7025 /* FootprintListView.swift */; };
 		265924C929445BE1001E7025 /* FootprintListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265924C829445BE1001E7025 /* FootprintListViewModel.swift */; };
 		265EA947291D1E1400068A5C /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265EA946291D1E1400068A5C /* DataModel.swift */; };
@@ -123,6 +125,7 @@
 		26BD8FCB29694CE5005F7E5C /* ApiInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26BD8FCA29694CE5005F7E5C /* ApiInfo.plist */; };
 		26BFFD942C5F8C400001B02B /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 26BFFD932C5F8C400001B02B /* Kingfisher */; };
 		26C04F6D2917667F00890A76 /* SwiftUIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */; };
+		26EB9D1B2CD9A34300D3B0CE /* TempNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EB9D1A2CD9A34300D3B0CE /* TempNote.swift */; };
 		26F137072CD48BA300096181 /* LoadNoteUseCaseWithAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F137062CD48BA300096181 /* LoadNoteUseCaseWithAddress.swift */; };
 		26F1370A2CD4AADB00096181 /* PeopleWithView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F137092CD4AADB00096181 /* PeopleWithView.swift */; };
 		26FAB54D2C6B4091006304AE /* SelectLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FAB54C2C6B4091006304AE /* SelectLocationView.swift */; };
@@ -251,6 +254,8 @@
 		264EEF562925128300B89624 /* AddCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryView.swift; sourceTree = "<group>"; };
 		264EEF582925128A00B89624 /* AddCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryViewModel.swift; sourceTree = "<group>"; };
 		265917102CD857CC008C39E9 /* ToogleStarUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToogleStarUseCase.swift; sourceTree = "<group>"; };
+		265917152CD8B986008C39E9 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		265917172CD8BE55008C39E9 /* DeleteImageUrlUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteImageUrlUseCase.swift; sourceTree = "<group>"; };
 		265924C629445BD9001E7025 /* FootprintListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootprintListView.swift; sourceTree = "<group>"; };
 		265924C829445BE1001E7025 /* FootprintListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootprintListViewModel.swift; sourceTree = "<group>"; };
 		265EA946291D1E1400068A5C /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
@@ -328,6 +333,7 @@
 		26A238F92A13743700D7CF49 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		26BD8FCA29694CE5005F7E5C /* ApiInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiInfo.plist; sourceTree = "<group>"; };
 		26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIExtension.swift; sourceTree = "<group>"; };
+		26EB9D1A2CD9A34300D3B0CE /* TempNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempNote.swift; sourceTree = "<group>"; };
 		26F137062CD48BA300096181 /* LoadNoteUseCaseWithAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadNoteUseCaseWithAddress.swift; sourceTree = "<group>"; };
 		26F137092CD4AADB00096181 /* PeopleWithView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleWithView.swift; sourceTree = "<group>"; };
 		26FAB54C2C6B4091006304AE /* SelectLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationView.swift; sourceTree = "<group>"; };
@@ -659,6 +665,7 @@
 		267CC17C2C66F2B500D6015E /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				26EB9D1A2CD9A34300D3B0CE /* TempNote.swift */,
 				2682A76B2C6D783C00DF1F8A /* FPMapManager */,
 				260C3CD62C6CA53D004A9206 /* MapView */,
 				26FAB54B2C6B408C006304AE /* SelectLocation */,
@@ -822,6 +829,7 @@
 				261F6EA02CC9E64100F7CA18 /* CategoryEntity.swift */,
 				266BE08F2CCA1FF000E754EB /* MemberEntity.swift */,
 				261F6EA22CC9E67A00F7CA18 /* CategoryColor.swift */,
+				265917152CD8B986008C39E9 /* Location.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -844,6 +852,7 @@
 				261FF6E32CD3569300B49442 /* LoadNoteUseCaseWithId.swift */,
 				26F137062CD48BA300096181 /* LoadNoteUseCaseWithAddress.swift */,
 				265917102CD857CC008C39E9 /* ToogleStarUseCase.swift */,
+				265917172CD8BE55008C39E9 /* DeleteImageUrlUseCase.swift */,
 			);
 			path = NoteUseCases;
 			sourceTree = "<group>";
@@ -1398,6 +1407,7 @@
 				265924C929445BE1001E7025 /* FootprintListViewModel.swift in Sources */,
 				264B70BC291F8DD900CDAF9F /* ApiResponse.swift in Sources */,
 				2694FC972C79B99100F01644 /* MemberListEditView.swift in Sources */,
+				26EB9D1B2CD9A34300D3B0CE /* TempNote.swift in Sources */,
 				63E5C82F2975362300D32FD2 /* MapViewModel.swift in Sources */,
 				261FF6E42CD3569300B49442 /* LoadNoteUseCaseWithId.swift in Sources */,
 				63F1328F2914A1C000B3A9E0 /* SplashView.swift in Sources */,
@@ -1437,6 +1447,7 @@
 				266BE0922CCA21AA00E754EB /* MemberItem.swift in Sources */,
 				63FA238E294C42C900D31506 /* SingleSelectGalleryView.swift in Sources */,
 				63F292B4297656DF00D42D0E /* TrashViewModel.swift in Sources */,
+				265917162CD8B986008C39E9 /* Location.swift in Sources */,
 				63B1FB032914B381007E94B6 /* RealmDB.swift in Sources */,
 				26FAB5512C6B576F006304AE /* EnvironmentValues.swift in Sources */,
 				63F132AA2914A1C000B3A9E0 /* MainViewModel.swift in Sources */,
@@ -1537,6 +1548,7 @@
 				269CA5632C78A5D400366005 /* SaveCategoryUseCase.swift in Sources */,
 				267CC1802C66F2C700D6015E /* MapVM2.swift in Sources */,
 				26FAB54F2C6B4095006304AE /* SelectLocationVM.swift in Sources */,
+				265917182CD8BE55008C39E9 /* DeleteImageUrlUseCase.swift in Sources */,
 				63F132B62914A56300B3A9E0 /* LottieView.swift in Sources */,
 				63D32FDB29CAEA4C0049F567 /* NetworkMonitor.swift in Sources */,
 				63FA2390294C42CE00D31506 /* SingleSelectGalleryViewModel.swift in Sources */,

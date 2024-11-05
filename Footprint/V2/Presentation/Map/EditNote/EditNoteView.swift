@@ -17,21 +17,13 @@ struct EditNoteView: View {
         var pushPeopleWithListEditView: () -> ()
     }
     
-    enum ViewEventTrigger {
-        case pop
-    }
-    
     private var output: Output
     
-    private let location: Location
-    private let type: EditNoteType
+    @StateObject var vm: EditNoteVM
     
-    @StateObject var vm: EditNoteVM = EditNoteVM()
-    
-    init(output: Output, location: Location, type: EditNoteType) {
+    init(type: EditNoteType, output: Output) {
+        _vm = StateObject(wrappedValue: EditNoteVM(type: type))
         self.output = output
-        self.location = location
-        self.type = type
     }
     
     private var safeTop: CGFloat { get { Util.safeTop() }}
@@ -71,8 +63,9 @@ struct EditNoteView: View {
                                 FPTextField(placeHolder: "".localized(), text: $vm.address, fieldStyle: .none, lineStyle: .multi(limit: nil), isDisabled: true)
                                 
                                 FPButton(text: "발자국 위치 확인하기", status: .able, size: .large, type: .lightSolid) {
-                                    vm.saveNote()
-                                    self.output.pop()
+                                    vm.saveTempNote {
+                                        self.output.pop()
+                                    }
                                 }
                                 .sdPaddingVertical(8)
                                 .id(LOCATION_ID)
@@ -90,6 +83,32 @@ struct EditNoteView: View {
                                     .sdPaddingTop(24)
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     LazyHStack(alignment: .center, spacing: 16, content: {
+                                        ForEach(0..<$vm.imageUrls.wrappedValue.count, id: \.self) { index in
+                                            if let dir = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false),
+                                               let uiImage = UIImage(contentsOfFile: URL(fileURLWithPath: dir.absoluteString).appendingPathComponent($vm.imageUrls.wrappedValue[index]).path) {
+                                                ZStack(alignment: .topTrailing) {
+                                                    Image(uiImage: uiImage)
+                                                        .resizable()
+                                                        .scaledToFill()
+                                                        .frame(both: 80.0, alignment: .center)
+                                                        .clipShape(
+                                                            Rectangle()
+                                                        )
+                                                    
+                                                    Image("DeleteButton")
+                                                        .resizable()
+                                                        .scaledToFit()
+                                                        .frame(both: 16.0, alignment: .center)
+                                                        .contentShape(Rectangle())
+                                                        .offset(x: 8, y: -8)
+                                                        .zIndex(1)
+                                                        .onTapGesture {
+                                                            vm.deleteImageUrl(index)
+                                                        }
+                                                }
+                                                .frame(both: 88.0, alignment: .bottomLeading)
+                                            }
+                                        }
                                         ForEach(0..<$vm.images.wrappedValue.count, id: \.self) { index in
                                             ZStack(alignment: .topTrailing) {
                                                 Image(uiImage: $vm.images.wrappedValue[index])
@@ -222,14 +241,6 @@ struct EditNoteView: View {
         }
         .background(Color.bg_bgb)
         .navigationBarBackButtonHidden()
-        .onAppear {
-            vm.setValue(location: self.location, type: self.type) { eventTrigger in
-                switch eventTrigger {
-                case .pop:
-                    self.output.pop()
-                }
-            }
-        }
     }
     
     private func drawCategory(scrollProxy: ScrollViewProxy) -> some View {
@@ -357,7 +368,9 @@ struct EditNoteView: View {
                         $vm.isStar.wrappedValue = !$vm.isStar.wrappedValue
                     }
                 FPButton(text: "완료", status: $vm.isAvailableToSave.wrappedValue ? .able : .disable, size: .small, type: .textPrimary) {
-                    vm.saveNote()
+                    vm.saveNote {
+                        self.output.pop()
+                    }
                 }
             }
         }
