@@ -18,6 +18,7 @@ enum UserDefaultKey: String {
     case isShowStarOnly = "IS_SHOW_STAR_ONLY"
     case premiumCode = "PREMIUM_CODE"
     case settingFlag = "SETTING_FLAG"
+    case isShowMarker = "IS_SHOW_MARKER"
 }
 
 
@@ -52,6 +53,9 @@ class Defaults {
     
     @UserDefault<String>(key: UserDefaultKey.premiumCode.rawValue, defaultValue: "")
     var premiumCode
+    
+    @UserDefault<String>(key: UserDefaultKey.isShowMarker.rawValue, defaultValue: "")
+    var isShowMarker
     
     //MARK: Setting
     /*

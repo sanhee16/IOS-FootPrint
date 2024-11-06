@@ -529,6 +529,13 @@
 			path = PeopleWithSelector;
 			sourceTree = "<group>";
 		};
+		2643E0D22CDB00780075BA69 /* SettingUseCases */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SettingUseCases;
+			sourceTree = "<group>";
+		};
 		264B70BA291F8DD000CDAF9F /* Api */ = {
 			isa = PBXGroup;
 			children = (
@@ -844,6 +851,7 @@
 		2696F4E92C77555000F56E73 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				2643E0D22CDB00780075BA69 /* SettingUseCases */,
 				2694FC8D2C7984B600F01644 /* MemberUseCases */,
 				269CA55D2C78A56D00366005 /* CategoryUseCases */,
 				2696F4EA2C77555D00F56E73 /* NoteUseCases */,

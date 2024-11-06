@@ -93,7 +93,7 @@ struct MapView2: View {
                         
                         HStack(alignment: .center, spacing: 0, content: {
                             Spacer()
-                            mapMenuButton("paw-foot") {
+                            markerMenuButton("paw-foot") {
                                 $isShowMarkers.wrappedValue.toggle()
                                 if $isShowMarkers.wrappedValue {
                                     mapManager.loadMarkers()
@@ -216,8 +216,30 @@ struct MapView2: View {
                 .padding(10)
                 .background(
                     Circle()
-                        .foregroundStyle(Color.white)
-                        .border(Color(hex: "E2E8F0"), lineWidth: 0.7, cornerRadius: 100)
+                        .foregroundStyle(Color.btn_ic_bg_default)
+                        .border(Color.btn_ic_stroke_able, lineWidth: 0.7, cornerRadius: 100)
+                )
+                .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: 2)
+                .contentShape(Rectangle())
+        })
+    }
+    
+    private func markerMenuButton(_ image: String, onTap: @escaping ()->()) -> some View {
+        Button(action: {
+            onTap()
+        }, label: {
+            Image(image)
+                .resizable()
+                .renderingMode(.template)
+                .scaledToFit()
+                .foregroundStyle($isShowMarkers.wrappedValue ? Color.btn_ic_cont_press : Color.btn_ic_cont_default)
+                .frame(width: 20)
+                .padding(10)
+                .background(
+                    Circle()
+                        .foregroundStyle(Color.btn_ic_bg_default)
+                        .border(
+                            $isShowMarkers.wrappedValue ? Color.btn_ic_stroke_press : Color.btn_ic_stroke_able, lineWidth: 0.7, cornerRadius: 100)
                 )
                 .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: 2)
                 .contentShape(Rectangle())
