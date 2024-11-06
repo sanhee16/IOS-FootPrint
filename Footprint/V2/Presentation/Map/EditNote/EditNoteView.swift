@@ -78,16 +78,43 @@ struct EditNoteView: View {
                             drawDate(scrollProxy: scrollProxy)
                             drawCategory(scrollProxy: scrollProxy)
                             
-                            if !$vm.images.wrappedValue.isEmpty {
+                            if (!$vm.images.wrappedValue.isEmpty) || (!$vm.imageUrls.wrappedValue.isEmpty) {
                                 drawTitle("사진", isEssential: false)
                                     .sdPaddingTop(24)
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     LazyHStack(alignment: .center, spacing: 16, content: {
-                                        ForEach(0..<$vm.imageUrls.wrappedValue.count, id: \.self) { index in
-                                            if let dir = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false),
-                                               let uiImage = UIImage(contentsOfFile: URL(fileURLWithPath: dir.absoluteString).appendingPathComponent($vm.imageUrls.wrappedValue[index]).path) {
+                                        if !$vm.imageUrls.wrappedValue.isEmpty {
+                                            ForEach(0..<$vm.imageUrls.wrappedValue.count, id: \.self) { index in
+                                                if let dir = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false),
+                                                   let uiImage = UIImage(contentsOfFile: URL(fileURLWithPath: dir.absoluteString).appendingPathComponent($vm.imageUrls.wrappedValue[index]).path) {
+                                                    ZStack(alignment: .topTrailing) {
+                                                        Image(uiImage: uiImage)
+                                                            .resizable()
+                                                            .scaledToFill()
+                                                            .frame(both: 80.0, alignment: .center)
+                                                            .clipShape(
+                                                                Rectangle()
+                                                            )
+                                                        
+                                                        Image("DeleteButton")
+                                                            .resizable()
+                                                            .scaledToFit()
+                                                            .frame(both: 16.0, alignment: .center)
+                                                            .contentShape(Rectangle())
+                                                            .offset(x: 8, y: -8)
+                                                            .zIndex(1)
+                                                            .onTapGesture {
+                                                                vm.deleteImageUrl(index)
+                                                            }
+                                                    }
+                                                    .frame(both: 88.0, alignment: .bottomLeading)
+                                                }
+                                            }
+                                        }
+                                        if !$vm.images.wrappedValue.isEmpty {
+                                            ForEach(0..<$vm.images.wrappedValue.count, id: \.self) { index in
                                                 ZStack(alignment: .topTrailing) {
-                                                    Image(uiImage: uiImage)
+                                                    Image(uiImage: $vm.images.wrappedValue[index])
                                                         .resizable()
                                                         .scaledToFill()
                                                         .frame(both: 80.0, alignment: .center)
@@ -103,34 +130,11 @@ struct EditNoteView: View {
                                                         .offset(x: 8, y: -8)
                                                         .zIndex(1)
                                                         .onTapGesture {
-                                                            vm.deleteImageUrl(index)
+                                                            vm.deleteImage(index)
                                                         }
                                                 }
                                                 .frame(both: 88.0, alignment: .bottomLeading)
                                             }
-                                        }
-                                        ForEach(0..<$vm.images.wrappedValue.count, id: \.self) { index in
-                                            ZStack(alignment: .topTrailing) {
-                                                Image(uiImage: $vm.images.wrappedValue[index])
-                                                    .resizable()
-                                                    .scaledToFill()
-                                                    .frame(both: 80.0, alignment: .center)
-                                                    .clipShape(
-                                                        Rectangle()
-                                                    )
-                                                
-                                                Image("DeleteButton")
-                                                    .resizable()
-                                                    .scaledToFit()
-                                                    .frame(both: 16.0, alignment: .center)
-                                                    .contentShape(Rectangle())
-                                                    .offset(x: 8, y: -8)
-                                                    .zIndex(1)
-                                                    .onTapGesture {
-                                                        vm.deleteImage(index)
-                                                    }
-                                            }
-                                            .frame(both: 88.0, alignment: .bottomLeading)
                                         }
                                     })
                                 }
