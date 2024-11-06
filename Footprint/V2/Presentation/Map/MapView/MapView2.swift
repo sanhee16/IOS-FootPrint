@@ -52,7 +52,10 @@ struct MapView2: View {
                         .frame(width: 46)
                         .zIndex(2)
                         .rectReader($centerPos, in: .global)
-                        .offset(x: geometry.size.width / 2 - $centerPos.wrappedValue.width / 2, y: geometry.size.height / 2 - $centerPos.wrappedValue.height / 2)
+                        .offset(
+                            x: geometry.size.width / 2 - $centerPos.wrappedValue.width / 2,
+                            y: geometry.size.height / 2 - $centerPos.wrappedValue.height
+                        )
                 }
                 
                 if !$vm.isLoading.wrappedValue {
