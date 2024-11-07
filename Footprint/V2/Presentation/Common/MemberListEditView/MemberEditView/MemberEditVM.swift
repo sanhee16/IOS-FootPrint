@@ -28,6 +28,7 @@ enum MemberEditType {
 
 class MemberEditVM: BaseViewModel {
     @Injected(\.saveMemberUseCase) var saveMemberUseCase
+    @Injected(\.updateMemberUseCase) var updateMemberUseCase
     var type: MemberEditType
     
     @Published var name: String = "" { didSet { checkIsAvailableToSave() }}
@@ -36,6 +37,7 @@ class MemberEditVM: BaseViewModel {
     @Published var isAvailableToSave: Bool = false
     @Published var selectedPhoto: PhotosPickerItem? = nil
     private var id: String? = nil
+    private var idx: Int? = nil
     
     private var isLoading: Bool = false
     
@@ -56,6 +58,7 @@ class MemberEditVM: BaseViewModel {
         }
         self.type = .modify
         self.id = member.id
+        self.idx = member.idx
         self.name = member.name
         self.image = ImageManager.shared.getSavedImage(named: member.image)
         self.intro = member.intro
@@ -63,7 +66,13 @@ class MemberEditVM: BaseViewModel {
 
     func saveMember(_ onDone: @escaping () -> ()) {
         if !self.isAvailableToSave { return }
-        self.saveMemberUseCase.execute(id, name: self.name, image: self.image, intro: self.intro)
+        switch self.type {
+        case .create:
+            self.saveMemberUseCase.execute(id, name: self.name, image: self.image, intro: self.intro)
+        case .modify:
+            guard let id = id, let idx = idx else { return }
+            self.updateMemberUseCase.execute(id, idx: idx, name: self.name, image: self.image, intro: self.intro)
+        }
         onDone()
     }
     

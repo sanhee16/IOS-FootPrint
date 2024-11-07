@@ -24,7 +24,7 @@ public struct Note {
     var peopleWith: [MemberEntity]?
     
     init(
-        id: String?,
+        id: String = UUID().uuidString,
         title: String,
         content: String,
         createdAt: Int,
@@ -36,7 +36,7 @@ public struct Note {
         longitude: Double,
         address: String
     ) {
-        self.id = id ?? UUID().uuidString
+        self.id = id
         self.title = title
         self.content = content
         self.createdAt = createdAt

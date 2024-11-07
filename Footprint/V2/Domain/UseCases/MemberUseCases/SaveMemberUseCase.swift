@@ -15,7 +15,7 @@ class SaveMemberUseCase {
         self.memberRepository = memberRepository
     }
     
-    func execute(_ id: String? = UUID().uuidString, name: String, image: UIImage? = nil, intro: String) {
+    func execute(_ id: String? = nil, name: String, image: UIImage? = nil, intro: String) {
         var imageName: String = ""
         if let image = image {
             let currentTimeStamp = Int(Date().timeIntervalSince1970)
@@ -24,6 +24,7 @@ class SaveMemberUseCase {
         } else {
             imageName = ""
         }
+        
         self.memberRepository.addMember(id, name: name, image: imageName, intro: intro)
     }
 }

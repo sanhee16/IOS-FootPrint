@@ -104,4 +104,8 @@ extension Container {
     var updateMemberUseCase: Factory<UpdateMemberUseCase> {
         Factory(self) { UpdateMemberUseCase(memberRepository: self.memberRepository()) }
     }
+    
+    var updateMemberOrderUseCase: Factory<UpdateMemberOrderUseCase> {
+        Factory(self) { UpdateMemberOrderUseCase(memberRepository: self.memberRepository()) }
+    }
 }

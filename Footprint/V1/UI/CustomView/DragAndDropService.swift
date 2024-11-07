@@ -19,6 +19,10 @@ struct DragAndDropService<T: Equatable>: DropDelegate {
         return true
     }
     
+    func dropUpdated(info: DropInfo) -> DropProposal? {
+        DropProposal(operation: .move)
+    }
+
     func dropEntered(info: DropInfo) {
         guard let draggedItem = draggedItem,
               draggedItem != currentItem,
@@ -30,5 +34,9 @@ struct DragAndDropService<T: Equatable>: DropDelegate {
         withAnimation {
             items.move(fromOffsets: IndexSet(integer: from), toOffset: to > from ? to + 1 : to)
         }
+    }
+    
+    func dropExited(info: DropInfo) {
+        print("dropExited")
     }
 }

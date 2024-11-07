@@ -56,9 +56,7 @@ struct CategoryListEditView: View {
                             .frame(both: 24.0, alignment: .center)
                             .contentShape(Rectangle())
                             .onTapGesture {
-                                if let id = item.id {
-                                    vm.deleteCategory(id)
-                                }
+                                vm.deleteCategory(item.id)
                             }
                     })
                     .padding(16)

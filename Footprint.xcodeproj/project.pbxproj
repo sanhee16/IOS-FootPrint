@@ -37,6 +37,7 @@
 		263ED4522C60E54E00FAC148 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 263ED4512C60E54E00FAC148 /* FirebaseStorage */; };
 		263ED4532C60F05700FAC148 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 268262292C60E2EA0069134C /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		263FADC32C7164B700AE9E73 /* TabBarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263FADC22C7164B700AE9E73 /* TabBarService.swift */; };
+		2643E0D42CDB3DD30075BA69 /* UpdateMemberOrderUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2643E0D32CDB3DD30075BA69 /* UpdateMemberOrderUseCase.swift */; };
 		264B70BC291F8DD900CDAF9F /* ApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264B70BB291F8DD900CDAF9F /* ApiResponse.swift */; };
 		264B70C0291F8E9D00CDAF9F /* C.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264B70BF291F8E9C00CDAF9F /* C.swift */; };
 		264EEF572925128300B89624 /* AddCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EEF562925128300B89624 /* AddCategoryView.swift */; };
@@ -252,6 +253,7 @@
 		263A97BA2945852E008A69F5 /* PeopleWithSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleWithSelectorView.swift; sourceTree = "<group>"; };
 		263A97BC29458533008A69F5 /* PeopleWithSelectorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleWithSelectorViewModel.swift; sourceTree = "<group>"; };
 		263FADC22C7164B700AE9E73 /* TabBarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarService.swift; sourceTree = "<group>"; };
+		2643E0D32CDB3DD30075BA69 /* UpdateMemberOrderUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMemberOrderUseCase.swift; sourceTree = "<group>"; };
 		264B70BB291F8DD900CDAF9F /* ApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponse.swift; sourceTree = "<group>"; };
 		264B70BF291F8E9C00CDAF9F /* C.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C.swift; sourceTree = "<group>"; };
 		264EEF562925128300B89624 /* AddCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryView.swift; sourceTree = "<group>"; };
@@ -783,6 +785,7 @@
 				2694FC902C7984F200F01644 /* LoadMembersUseCase.swift */,
 				2694FC922C79851000F01644 /* DeleteMemberUseCase.swift */,
 				2694FC942C79853500F01644 /* UpdateMemberUseCase.swift */,
+				2643E0D32CDB3DD30075BA69 /* UpdateMemberOrderUseCase.swift */,
 			);
 			path = MemberUseCases;
 			sourceTree = "<group>";
@@ -1402,6 +1405,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63E5C8312975367200D32FD2 /* Dump.swift in Sources */,
+				2643E0D42CDB3DD30075BA69 /* UpdateMemberOrderUseCase.swift in Sources */,
 				63B1FAFD2914B324007E94B6 /* GalleryViewModel.swift in Sources */,
 				264EEF592925128A00B89624 /* AddCategoryViewModel.swift in Sources */,
 				266EDDD92C64EAA9006CF09B /* FootprintApp.swift in Sources */,

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class UpdateMemberUseCase {
     let memberRepository: MemberRepository
@@ -14,8 +15,17 @@ class UpdateMemberUseCase {
         self.memberRepository = memberRepository
     }
     
-    func execute(_ id: String?, name: String, image: String, intro: String) {
-        self.memberRepository.addMember(id, name: name, image: image, intro: intro)
+    func execute(_ id: String, idx: Int, name: String, image: UIImage? = nil, intro: String) {
+        var imageName: String = ""
+        if let image = image {
+            let currentTimeStamp = Int(Date().timeIntervalSince1970)
+            imageName = "\(currentTimeStamp)_member"
+            _ = ImageManager.shared.saveImage(image: image, imageName: imageName)
+        } else {
+            imageName = ""
+        }
+
+        self.memberRepository.updateMember(id, idx: idx, name: name, image: imageName, intro: intro)
     }
 }
 

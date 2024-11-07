@@ -11,7 +11,9 @@ import RealmSwift
 class CategoryRepositoryImpl: CategoryRepository {
     func addCategory(_ id: String?, name: String, color: Int, icon: String) {
         let realm = try! Realm()
-        let item = CategoryV2(id: id, name: name, color: color, icon: icon)
+        let lastIdx: Int = (realm.objects(Member.self).map({ $0.idx }).max() ?? 0)
+        
+        let item = CategoryV2(id: id ?? UUID().uuidString, idx: lastIdx + 1, name: name, color: color, icon: icon)
         do {
             try realm.write {
                 realm.add(item, update: .modified)
@@ -40,7 +42,7 @@ class CategoryRepositoryImpl: CategoryRepository {
         let realm = try! Realm()
         var list: [CategoryEntity] = []
         realm.objects(CategoryV2.self).forEach { c in
-            list.append(CategoryV2(id: c.id, name: c.name, color: c.color, icon: c.icon).toCategoryEntity())
+            list.append(CategoryV2(id: c.id, idx: c.idx, name: c.name, color: c.color, icon: c.icon).toCategoryEntity())
         }
         return list
     }
@@ -49,7 +51,7 @@ class CategoryRepositoryImpl: CategoryRepository {
         let realm = try! Realm()
         let c = realm.objects(CategoryV2.self).where({ $0.id == id }).first
         guard let c = c else { return nil }
-        let result = CategoryV2(id: c.id, name: c.name, color: c.color, icon: c.icon).toCategoryEntity()
+        let result = CategoryV2(id: c.id, idx: c.idx, name: c.name, color: c.color, icon: c.icon).toCategoryEntity()
         return result
     }
 }

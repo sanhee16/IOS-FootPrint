@@ -51,7 +51,7 @@ class EditNoteVM: BaseViewModel {
     private var modifyId: ObjectId? = nil
     private var location: Location? = nil
     private var placeId: String? = nil
-        
+    
     init(type: EditNoteType) {
         self.type = type
         
@@ -110,7 +110,7 @@ class EditNoteVM: BaseViewModel {
         let selectedMembers = self.members.filter({ $0.isSelected })
         self.members = loadMembersUseCase.execute()
         for i in self.members.indices {
-            if let memberId = self.members[i].id, selectedMembers.contains(where: { $0.id == memberId }) {
+            if selectedMembers.contains(where: { $0.id == members[i].id }) {
                 self.members[i].isSelected = true
             }
         }
@@ -118,13 +118,13 @@ class EditNoteVM: BaseViewModel {
     
     func saveNote(_ onDone: @escaping ()->()) {
         if !self.isAvailableToSave { return }
-        guard let location = location, let category = self.category, let categoryId = category.id else { return }
+        guard let location = location, let category = self.category else { return }
         
         let memberIds: List<String> = List()
         members.filter({ $0.isSelected }).compactMap({ $0.id }).forEach { id in
             memberIds.append(id)
         }
-//        var imageUrls: [String] = self.imageUrls
+        //        var imageUrls: [String] = self.imageUrls
         let currentTimeStamp = Int(Date().timeIntervalSince1970)
         for idx in self.images.indices {
             let imageName = "\(currentTimeStamp)_\(idx)"
@@ -133,19 +133,17 @@ class EditNoteVM: BaseViewModel {
         }
         
         saveNoteUseCase.execute(
-            Note(
-                id: self.noteId,
-                title: self.title,
-                content: self.content,
-                createdAt: Int(createdAt.timeIntervalSince1970),
-                imageUrls: self.imageUrls,
-                categoryId: categoryId,
-                peopleWithIds: self.members.compactMap({ $0.id }),
-                isStar: self.isStar,
-                latitude: location.latitude,
-                longitude: location.longitude,
-                address: self.address
-            )
+            id: self.noteId,
+            title: self.title,
+            content: self.content,
+            createdAt: Int(createdAt.timeIntervalSince1970),
+            imageUrls: self.imageUrls,
+            categoryId: category.id,
+            peopleWithIds: self.members.compactMap({ $0.id }),
+            isStar: self.isStar,
+            latitude: location.latitude,
+            longitude: location.longitude,
+            address: self.address
         )
         NotificationCenter.default.post(name: .changeMapStatus, object: MapStatus.normal.rawValue)
         onDone()
@@ -168,10 +166,10 @@ class EditNoteVM: BaseViewModel {
             members: self.members,
             location: location
         )
-
+        
         NotificationCenter.default.post(name: .changeMapStatus, object: MapStatus.adding.rawValue)
         NotificationCenter.default.post(name: .isShowTabBar, object: false)
-
+        
         onDone()
     }
     
@@ -219,9 +217,9 @@ class EditNoteVM: BaseViewModel {
         imageUrls.remove(at: idx)
     }
     
-//    func checkPhotoPermsission(_ onDone: @escaping (Bool) -> ()) {
-//        self.permissionService.photoPermissionCheck { isAllow in
-//            onDone(isAllow)
-//        }
-//    }
+    //    func checkPhotoPermsission(_ onDone: @escaping (Bool) -> ()) {
+    //        self.permissionService.photoPermissionCheck { isAllow in
+    //            onDone(isAllow)
+    //        }
+    //    }
 }

@@ -9,29 +9,55 @@ import Foundation
 import RealmSwift
 
 class NoteRepositoryImpl: NoteRepository {
-    func saveNotes(_ data: Note) {
+    func saveNotes(
+        id: String?,
+        title: String,
+        content: String,
+        createdAt: Int,
+        imageUrls: [String],
+        categoryId: String,
+        peopleWithIds: [String],
+        isStar: Bool,
+        latitude: Double,
+        longitude: Double,
+        address: String
+    ) {
+        var note = Note(
+            id: id ?? UUID().uuidString,
+            title: title,
+            content: content,
+            createdAt: createdAt,
+            imageUrls: imageUrls,
+            categoryId: categoryId,
+            peopleWithIds: peopleWithIds,
+            isStar: isStar,
+            latitude: latitude,
+            longitude: longitude,
+            address: address
+        )
         let realm = try! Realm()
         let imageUrls: List<String> = List()
         let peopleWithIds: List<String> = List()
-        data.imageUrls.forEach {
+        
+        note.imageUrls.forEach {
             imageUrls.append($0)
         }
-        data.peopleWithIds.forEach {
+        note.peopleWithIds.forEach {
             peopleWithIds.append($0)
         }
         
         let data: NoteData = NoteData(
-            id: data.id,
-            title: data.title,
-            content: data.content,
+            id: note.id,
+            title: note.title,
+            content: note.content,
             imageUrls: imageUrls,
-            createdAt: data.createdAt,
-            latitude: data.latitude,
-            longitude: data.longitude,
+            createdAt: note.createdAt,
+            latitude: note.latitude,
+            longitude: note.longitude,
             peopleWithIds: peopleWithIds,
-            categoryId: data.categoryId,
-            address: data.address,
-            isStar: data.isStar
+            categoryId: note.categoryId,
+            address: note.address,
+            isStar: note.isStar
         )
         try! realm.write {
             realm.add(data, update: .modified)
