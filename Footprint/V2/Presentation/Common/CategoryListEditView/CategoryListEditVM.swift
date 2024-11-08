@@ -13,12 +13,15 @@ class CategoryListEditVM: BaseViewModel {
     @Injected(\.loadCategoriesUseCase) var loadCategoriesUseCase
     @Injected(\.deleteCategoryUseCase) var deleteCategoryUseCase
     @Injected(\.updateCategoryOrderUseCase) var updateCategoryOrderUseCase
+    @Injected(\.getNoteCountUseCase) var getNoteCountUseCase
     @Published var categories: [CategoryEntity] = [] {
         didSet {
             self.updateOrder()
         }
     }
     @Published var isLoading: Bool = false
+    @Published var deleteCategory: CategoryEntity? = nil
+    @Published var deleteCategoryNoteCount: Int = 0
     private var saveTimer: Timer?
     
     override init() {
@@ -28,9 +31,14 @@ class CategoryListEditVM: BaseViewModel {
     func loadCategories() {
         self.categories = loadCategoriesUseCase.execute()
     }
+    
+    func getDeletedCategoryNoteCount(_ id: String) {
+        self.deleteCategoryNoteCount = self.getNoteCountUseCase.execute(id)
+    }
 
-    func deleteCategory(_ id: String) {
-        let _ = self.deleteCategoryUseCase.execute(id)
+    func onDelete(_ id: String) {
+        guard let category = deleteCategory else { return }
+        let _ = self.deleteCategoryUseCase.execute(category.id)
         self.loadCategories()
     }
     

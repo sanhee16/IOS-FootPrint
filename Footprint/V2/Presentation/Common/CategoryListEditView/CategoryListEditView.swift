@@ -23,9 +23,10 @@ struct CategoryListEditView: View {
     
     @StateObject var vm: CategoryListEditVM = CategoryListEditVM()
     @StateObject var categoryEditVM: CategoryEditVM = CategoryEditVM()
-    @State private var isPresentDelete: Bool = false
-    @State private var isPresentAddCategory: Bool = false
     @State private var draggedItem: CategoryEntity? = nil
+    @State private var isPresentDelete: Bool = false
+    @State private var isPresentDeleteComplete: Bool = false
+    @State private var isPresentAddCategory: Bool = false
     
     
     init(output: Output) {
@@ -36,11 +37,15 @@ struct CategoryListEditView: View {
     private var safeBottom: CGFloat { get { Util.safeBottom() }}
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0, content: {
+        VStack(alignment: .leading,
+               spacing: 0,
+               content: {
             Topbar("카테고리 편집하기", type: .back) {
                 output.pop()
             }
-            ScrollView(.vertical, showsIndicators: false, content: {
+            ScrollView(.vertical,
+                       showsIndicators: false,
+                       content: {
                 ForEach($vm.categories.wrappedValue, id: \.self) { item in
                     HStack(alignment: .center, spacing: 16, content: {
                         CategoryItem(item: item)
@@ -86,6 +91,38 @@ struct CategoryListEditView: View {
                 }, content: {
                     CategoryEditView(isPresented: $isPresentAddCategory)
                 })
+                
+                VStack{}
+                    .alert(isPresented: $isPresentDelete) {
+                        Alert(
+                            title: Text("카테고리 삭제하기"),
+                            message: Text(
+                                $vm.getNoteCountUseCase.wrappedValue > 0 
+                                ? "‘\($vm.deleteCategory.wrappedValue?.name)’ 카테고리에 \($vm.getNoteCountUseCase.wrappedValue)개의 발자국이 있습니다.\n삭제 시 이 카테고리에 속한 모든 발자국이 삭제됩니다."
+                                : "‘\($vm.deleteCategory.wrappedValue?.name)’ 카테고리를 삭제하시겠습니까?"
+                            ),
+                            primaryButton: .default(Text("취소"), action: {
+                                
+                            }),
+                            secondaryButton: .default(Text("삭제"), action: {
+                                vm.onDelete()
+                                DispatchQueue.main.async {
+                                    $isPresentDeleteComplete.wrappedValue = true
+                                }
+                            })
+                        )
+                    }
+                
+                VStack{}
+                    .alert(isPresented: $isPresentDeleteComplete) {
+                        Alert(
+                            title: Text("삭제완료"),
+                            message: Text("‘\($vm.deleteCategory.wrappedValue?.name ?? "")’를 삭제했습니다."),
+                            dismissButton: .default(Text("확인"), action: {
+                                $vm.deleteCategory.wrappedValue = nil
+                            })
+                        )
+                    }
             })
         })
         .navigationBarBackButtonHidden()

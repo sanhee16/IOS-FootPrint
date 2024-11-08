@@ -65,6 +65,7 @@
 		2675D2082CDDDE9000BD7633 /* GetIsShowMarkerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2675D2072CDDDE9000BD7633 /* GetIsShowMarkerUseCase.swift */; };
 		2675D20A2CDDDF8F00BD7633 /* SettingRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2675D2092CDDDF8F00BD7633 /* SettingRepositoryImpl.swift */; };
 		2675D20C2CDDE3AF00BD7633 /* UpdateCategoryOrderUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2675D20B2CDDE3AF00BD7633 /* UpdateCategoryOrderUseCase.swift */; };
+		2675D2102CDE0D0800BD7633 /* GetNoteCountUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2675D20F2CDE0D0800BD7633 /* GetNoteCountUseCase.swift */; };
 		2679D2B32C6830B90073297F /* FPTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2679D2B22C6830B90073297F /* FPTextField.swift */; };
 		267CC1772C66F27000D6015E /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC1762C66F27000D6015E /* BaseCoordinator.swift */; };
 		267CC1792C66F28300D6015E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC1782C66F28300D6015E /* Coordinator.swift */; };
@@ -283,6 +284,7 @@
 		2675D2072CDDDE9000BD7633 /* GetIsShowMarkerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetIsShowMarkerUseCase.swift; sourceTree = "<group>"; };
 		2675D2092CDDDF8F00BD7633 /* SettingRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRepositoryImpl.swift; sourceTree = "<group>"; };
 		2675D20B2CDDE3AF00BD7633 /* UpdateCategoryOrderUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCategoryOrderUseCase.swift; sourceTree = "<group>"; };
+		2675D20F2CDE0D0800BD7633 /* GetNoteCountUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNoteCountUseCase.swift; sourceTree = "<group>"; };
 		2679D2B22C6830B90073297F /* FPTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPTextField.swift; sourceTree = "<group>"; };
 		267CC1762C66F27000D6015E /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		267CC1782C66F28300D6015E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -907,6 +909,7 @@
 				269CA5622C78A5D400366005 /* SaveCategoryUseCase.swift */,
 				269CA5642C78A5EC00366005 /* DeleteCategoryUseCase.swift */,
 				2675D20B2CDDE3AF00BD7633 /* UpdateCategoryOrderUseCase.swift */,
+				2675D20F2CDE0D0800BD7633 /* GetNoteCountUseCase.swift */,
 			);
 			path = CategoryUseCases;
 			sourceTree = "<group>";
@@ -1487,6 +1490,7 @@
 				2694FC882C797EA700F01644 /* Member.swift in Sources */,
 				266BE0922CCA21AA00E754EB /* MemberItem.swift in Sources */,
 				63FA238E294C42C900D31506 /* SingleSelectGalleryView.swift in Sources */,
+				2675D2102CDE0D0800BD7633 /* GetNoteCountUseCase.swift in Sources */,
 				63F292B4297656DF00D42D0E /* TrashViewModel.swift in Sources */,
 				265917162CD8B986008C39E9 /* Location.swift in Sources */,
 				63B1FB032914B381007E94B6 /* RealmDB.swift in Sources */,

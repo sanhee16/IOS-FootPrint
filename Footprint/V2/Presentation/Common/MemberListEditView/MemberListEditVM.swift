@@ -33,8 +33,7 @@ class MemberListEditVM: BaseViewModel {
     }
     
     func onDelete() {
-        guard let member = deleteMember, let idx = members.firstIndex(where: { $0 == member }) else { return }
-        self.members.remove(at: idx)
+        guard let member = deleteMember else { return }
         self.deleteMemberUseCase.execute(member.id)
         self.loadMembers()
     }

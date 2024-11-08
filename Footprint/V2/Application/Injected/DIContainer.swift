@@ -93,6 +93,10 @@ extension Container {
     var updateCategoryOrderUseCase: Factory<UpdateCategoryOrderUseCase> {
         Factory(self) { UpdateCategoryOrderUseCase(categoryRepository: self.categoryRepository()) }
     }
+    
+    var getNoteCountUseCase: Factory<GetNoteCountUseCase> {
+        Factory(self) { GetNoteCountUseCase(noteRepository: self.noteRepository()) }
+    }
 }
 
 //MARK: UseCase - Member
