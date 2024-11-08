@@ -139,8 +139,8 @@ struct EditNoteView: View {
                                     })
                                 }
                             }
-                            if !$vm.members.wrappedValue.filter({ $0.isSelected }).isEmpty {
-                                PeopleWithView(members: $vm.members.wrappedValue.filter({ $0.isSelected }))
+                            if !$vm.selectedMembers.wrappedValue.isEmpty {
+                                PeopleWithView(members: $vm.selectedMembers.wrappedValue)
                                     .sdPaddingVertical(8)
                             }
                         }
@@ -218,7 +218,7 @@ struct EditNoteView: View {
                             }
                             
                             ScrollView(.vertical, showsIndicators: false, content: {
-                                ForEach($vm.members.wrappedValue, id: \.self) { item in
+                                ForEach($vm.entireMembers.wrappedValue, id: \.self) { item in
                                     HStack(alignment: .center, spacing: 0, content: {
                                         memberItem(item)
                                         Spacer()
@@ -393,7 +393,7 @@ struct EditNoteView: View {
         return HStack(alignment: .center, spacing: 8) {
             MemberItem(item: item)
             Spacer()
-            if $vm.members.wrappedValue.filter({ $0.isSelected }).contains(where: { $0 == item }) {
+            if $vm.selectedMembers.wrappedValue.contains(where: { $0.id == item.id }) {
                 Image("SelectButton")
                     .resizable()
                     .frame(width: 16.0, height: 16.0, alignment: .center)

@@ -31,8 +31,7 @@ class Member: Object {
             idx: self.idx,
             name: self.name,
             image: self.image,
-            intro: self.intro,
-            isSelected: false
+            intro: self.intro
         )
     }
 }

@@ -11,6 +11,5 @@ struct MemberEntity: Equatable, Hashable {
     var name: String
     var image: String
     var intro: String
-    var isSelected: Bool
 }
 

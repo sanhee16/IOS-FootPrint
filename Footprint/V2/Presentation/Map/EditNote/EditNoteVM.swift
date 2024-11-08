@@ -38,19 +38,14 @@ class EditNoteVM: BaseViewModel {
     @Published var images: [UIImage] = [UIImage]()
     @Published var imageUrls: [String] = []
     @Published var selectedPhotos: [PhotosPickerItem] = [PhotosPickerItem]()
-    @Published var members: [MemberEntity] = []
+    
+    @Published var selectedMembers: [MemberEntity] = []
+    @Published var entireMembers: [MemberEntity] = []
     
     private var noteId: String? = nil
-    
-    //    @Published var images: [UIImage] = []
-    @Published var isCategoryEditMode: Bool = false
-    @Published var isPeopleWithEditMode: Bool = false
-    @Published var peopleWith: [PeopleWith] = []
     let type: EditNoteType
     
-    private var modifyId: ObjectId? = nil
     private var location: Location? = nil
-    private var placeId: String? = nil
     
     init(type: EditNoteType) {
         self.type = type
@@ -71,7 +66,7 @@ class EditNoteVM: BaseViewModel {
             self.images = tempNote.images
             self.imageUrls = tempNote.imageUrls
             self.selectedPhotos = tempNote.selectedPhotos
-            self.members = tempNote.members
+            self.selectedMembers = tempNote.members
             self.location = tempNote.location
         } else {
             switch self.type {
@@ -79,16 +74,16 @@ class EditNoteVM: BaseViewModel {
                 self.location = location
                 self.address = address
                 self.category = self.categories.first
-                self.members = []
+                self.selectedMembers = []
             case .modify(let id, let address):
                 self.noteId = id
                 self.address = address
-                self.loadNote()
+                self.loadExistedNote()
             }
         }
     }
     
-    private func loadNote() {
+    private func loadExistedNote() {
         guard let noteId = self.noteId, let note = self.loadNoteUseCaseWithId.execute(noteId) else { return }
         self.isStar = note.isStar
         self.title = note.title
@@ -99,7 +94,7 @@ class EditNoteVM: BaseViewModel {
         self.imageUrls = note.imageUrls
         self.location = Location(latitude: note.latitude, longitude: note.longitude)
         self.selectedPhotos = []
-        self.members = note.peopleWith ?? []
+        self.selectedMembers = note.peopleWith ?? []
     }
     
     func loadCategories() {
@@ -107,23 +102,13 @@ class EditNoteVM: BaseViewModel {
     }
     
     func loadMembers() {
-        let selectedMembers = self.members.filter({ $0.isSelected })
-        self.members = loadMembersUseCase.execute()
-        for i in self.members.indices {
-            if selectedMembers.contains(where: { $0.id == members[i].id }) {
-                self.members[i].isSelected = true
-            }
-        }
+        self.entireMembers = loadMembersUseCase.execute()
     }
     
     func saveNote(_ onDone: @escaping ()->()) {
         if !self.isAvailableToSave { return }
         guard let location = location, let category = self.category else { return }
         
-        let memberIds: List<String> = List()
-        members.filter({ $0.isSelected }).compactMap({ $0.id }).forEach { id in
-            memberIds.append(id)
-        }
         //        var imageUrls: [String] = self.imageUrls
         let currentTimeStamp = Int(Date().timeIntervalSince1970)
         for idx in self.images.indices {
@@ -139,7 +124,7 @@ class EditNoteVM: BaseViewModel {
             createdAt: Int(createdAt.timeIntervalSince1970),
             imageUrls: self.imageUrls,
             categoryId: category.id,
-            peopleWithIds: self.members.compactMap({ $0.id }),
+            peopleWithIds: self.selectedMembers.compactMap({ $0.id }),
             isStar: self.isStar,
             latitude: location.latitude,
             longitude: location.longitude,
@@ -163,7 +148,7 @@ class EditNoteVM: BaseViewModel {
             images: self.images,
             imageUrls: self.imageUrls,
             selectedPhotos: self.selectedPhotos,
-            members: self.members,
+            members: self.selectedMembers,
             location: location
         )
         
@@ -180,8 +165,11 @@ class EditNoteVM: BaseViewModel {
     }
     
     func toggleMember(_ member: MemberEntity) {
-        guard let idx = self.members.firstIndex(where: { $0 == member }) else { return }
-        self.members[idx].isSelected.toggle()
+        guard let idx = self.selectedMembers.firstIndex(where: { $0.id == member.id }) else {
+            self.selectedMembers.append(member)
+            return
+        }
+        self.selectedMembers.remove(at: idx)
     }
     
     
