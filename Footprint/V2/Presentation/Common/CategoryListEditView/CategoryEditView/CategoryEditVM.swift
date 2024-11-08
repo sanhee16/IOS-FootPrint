@@ -26,6 +26,7 @@ enum CategoryEditType {
 class CategoryEditVM: BaseViewModel {
     @Injected(\.saveNoteUseCase) var saveNoteUseCase
     @Injected(\.loadCategoriesUseCase) var loadCategoriesUseCase
+    @Injected(\.updateCategoryUseCase) var updateCategoryUseCase
     @Injected(\.saveCategoryUseCase) var saveCategoryUseCase
     var type: CategoryEditType
     
@@ -34,6 +35,7 @@ class CategoryEditVM: BaseViewModel {
     @Published var color: CategoryColor? = nil { didSet { checkIsAvailableToSave() }}
     @Published var icon: CategoryIcon? = nil { didSet { checkIsAvailableToSave() }}
     @Published var isAvailableToSave: Bool = false
+    var idx: Int? = nil
     let CHUNK_SIZE = 8
     
     let DEFAULT_COLORS: [CategoryColor] = [
@@ -67,6 +69,7 @@ class CategoryEditVM: BaseViewModel {
     func setCategory(_ categoryEntity: CategoryEntity?) {
         self.type = categoryEntity == nil ? .create : .modify
         self.categoryId = categoryEntity?.id
+        self.idx = categoryEntity?.idx
         self.name = categoryEntity?.name ?? ""
         self.color = categoryEntity?.color ?? DEFAULT_COLORS.first!
         self.icon = categoryEntity?.icon ?? emotionIcons.first!
@@ -81,12 +84,27 @@ class CategoryEditVM: BaseViewModel {
         if self.isLoading { return }
         
         self.isLoading = true
-        self.saveCategoryUseCase.execute(
-            categoryId,
-            name: self.name,
-            color: color,
-            icon: icon
-        )
+        
+        switch type {
+        case .create:
+            self.saveCategoryUseCase.execute(
+                categoryId,
+                name: self.name,
+                color: color,
+                icon: icon,
+                isDeletable: true
+            )
+        case .modify:
+            guard let categoryId = self.categoryId, let idx = self.idx else { return }
+            self.updateCategoryUseCase.execute(
+                categoryId,
+                idx: idx,
+                name: self.name,
+                color: color,
+                icon: icon,
+                isDeletable: true
+            )
+        }
         self.isLoading = false
         onFinish()
     }

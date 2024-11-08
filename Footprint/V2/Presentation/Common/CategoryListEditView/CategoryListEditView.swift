@@ -43,21 +43,23 @@ struct CategoryListEditView: View {
                     HStack(alignment: .center, spacing: 16, content: {
                         CategoryItem(item: item)
                         Spacer()
-                        Image("ModifyButton")
-                            .resizable()
-                            .frame(both: 24.0, alignment: .center)
-                            .contentShape(Rectangle())
-                            .onTapGesture {
-                                categoryEditVM.setCategory(item)
-                                $isPresentAddCategory.wrappedValue = true
-                            }
-                        Image("TrashButton")
-                            .resizable()
-                            .frame(both: 24.0, alignment: .center)
-                            .contentShape(Rectangle())
-                            .onTapGesture {
-                                vm.deleteCategory(item.id)
-                            }
+                        if item.isDeletable {
+                            Image("ModifyButton")
+                                .resizable()
+                                .frame(both: 24.0, alignment: .center)
+                                .contentShape(Rectangle())
+                                .onTapGesture {
+                                    categoryEditVM.setCategory(item)
+                                    $isPresentAddCategory.wrappedValue = true
+                                }
+                            Image("TrashButton")
+                                .resizable()
+                                .frame(both: 24.0, alignment: .center)
+                                .contentShape(Rectangle())
+                                .onTapGesture {
+                                    vm.deleteCategory(item.id)
+                                }
+                        }
                     })
                     .padding(16)
                     .contentShape(Rectangle())

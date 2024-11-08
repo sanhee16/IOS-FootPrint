@@ -5,8 +5,6 @@
 //  Created by sandy on 11/6/24.
 //
 
-import Foundation
-
 class UpdateMemberOrderUseCase {
     let memberRepository: MemberRepository
     
@@ -18,5 +16,3 @@ class UpdateMemberOrderUseCase {
         self.memberRepository.updateOrder(members)
     }
 }
-
-

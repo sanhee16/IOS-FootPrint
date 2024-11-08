@@ -15,7 +15,7 @@ class MemberListEditVM: BaseViewModel {
     @Injected(\.updateMemberOrderUseCase) var updateMemberOrderUseCase
     @Published var members: [MemberEntity] = [] {
         didSet {
-            self.updateMemberOrder()
+            self.updateOrder()
 //            print("members: \(members.map({ $0.name }))")
         }
     }
@@ -39,7 +39,7 @@ class MemberListEditVM: BaseViewModel {
         self.loadMembers()
     }
     
-    func updateMemberOrder() {
+    func updateOrder() {
         // 이전 타이머 취소
         saveTimer?.invalidate()
         

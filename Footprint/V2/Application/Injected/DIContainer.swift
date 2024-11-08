@@ -89,6 +89,10 @@ extension Container {
     var loadCategoryUseCase: Factory<LoadCategoryUseCase> {
         Factory(self) { LoadCategoryUseCase(categoryRepository: self.categoryRepository()) }
     }
+    
+    var updateCategoryOrderUseCase: Factory<UpdateCategoryOrderUseCase> {
+        Factory(self) { UpdateCategoryOrderUseCase(categoryRepository: self.categoryRepository()) }
+    }
 }
 
 //MARK: UseCase - Member

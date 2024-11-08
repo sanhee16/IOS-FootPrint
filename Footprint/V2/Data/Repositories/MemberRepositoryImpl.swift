@@ -83,11 +83,12 @@ class MemberRepositoryImpl: MemberRepository {
     
     func updateOrder(_ members: [MemberEntity]) {
         let realm = try! Realm()
-//        guard let item = realm.objects(Member.self).filter({ $0.id == id }).first else { return }
         
         try! realm.write {
             let preList = realm.objects(Member.self)
-            let postList = members.map({ Member(id: $0.id, idx: 0, name: $0.name, image: $0.image, intro: $0.intro) })
+            let postList = members.map({
+                Member(id: $0.id, idx: 0, name: $0.name, image: $0.image, intro: $0.intro)
+            })
             postList.indices.forEach { i in
                 postList[i].idx = i
             }

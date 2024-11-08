@@ -14,7 +14,8 @@ class DeleteCategoryUseCase {
         self.categoryRepository = categoryRepository
     }
     
-    func execute(_ id: String) {
-        
+    func execute(_ id: String) -> Bool {
+        guard let item = self.categoryRepository.loadCategory(id), item.isDeletable else { return false }
+        return self.categoryRepository.deleteCategory(id)
     }
 }

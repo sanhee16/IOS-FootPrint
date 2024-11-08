@@ -64,6 +64,7 @@
 		2675D2062CDDDE4500BD7633 /* SettingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2675D2052CDDDE4500BD7633 /* SettingRepository.swift */; };
 		2675D2082CDDDE9000BD7633 /* GetIsShowMarkerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2675D2072CDDDE9000BD7633 /* GetIsShowMarkerUseCase.swift */; };
 		2675D20A2CDDDF8F00BD7633 /* SettingRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2675D2092CDDDF8F00BD7633 /* SettingRepositoryImpl.swift */; };
+		2675D20C2CDDE3AF00BD7633 /* UpdateCategoryOrderUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2675D20B2CDDE3AF00BD7633 /* UpdateCategoryOrderUseCase.swift */; };
 		2679D2B32C6830B90073297F /* FPTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2679D2B22C6830B90073297F /* FPTextField.swift */; };
 		267CC1772C66F27000D6015E /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC1762C66F27000D6015E /* BaseCoordinator.swift */; };
 		267CC1792C66F28300D6015E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC1782C66F28300D6015E /* Coordinator.swift */; };
@@ -281,6 +282,7 @@
 		2675D2052CDDDE4500BD7633 /* SettingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRepository.swift; sourceTree = "<group>"; };
 		2675D2072CDDDE9000BD7633 /* GetIsShowMarkerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetIsShowMarkerUseCase.swift; sourceTree = "<group>"; };
 		2675D2092CDDDF8F00BD7633 /* SettingRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRepositoryImpl.swift; sourceTree = "<group>"; };
+		2675D20B2CDDE3AF00BD7633 /* UpdateCategoryOrderUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCategoryOrderUseCase.swift; sourceTree = "<group>"; };
 		2679D2B22C6830B90073297F /* FPTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPTextField.swift; sourceTree = "<group>"; };
 		267CC1762C66F27000D6015E /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		267CC1782C66F28300D6015E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -904,6 +906,7 @@
 				2694FCA32C7AADBC00F01644 /* LoadCategoryUseCase.swift */,
 				269CA5622C78A5D400366005 /* SaveCategoryUseCase.swift */,
 				269CA5642C78A5EC00366005 /* DeleteCategoryUseCase.swift */,
+				2675D20B2CDDE3AF00BD7633 /* UpdateCategoryOrderUseCase.swift */,
 			);
 			path = CategoryUseCases;
 			sourceTree = "<group>";
@@ -1449,6 +1452,7 @@
 				63F132AE2914A1C000B3A9E0 /* BluePrintView.swift in Sources */,
 				63F132962914A1C000B3A9E0 /* MultilineTextView.swift in Sources */,
 				63B1FAF52914B148007E94B6 /* SProgress.swift in Sources */,
+				2675D20C2CDDE3AF00BD7633 /* UpdateCategoryOrderUseCase.swift in Sources */,
 				63FA2389294C35E300D31506 /* PeopleEditViewModel.swift in Sources */,
 				63F132552914A19F00B3A9E0 /* AppDelegate.swift in Sources */,
 				63E848A1295ABE790037D7A3 /* EditTravelView.swift in Sources */,

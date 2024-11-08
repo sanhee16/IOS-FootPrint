@@ -11,4 +11,5 @@ struct CategoryEntity: Equatable, Hashable {
     var name: String
     var color: CategoryColor
     var icon: CategoryIcon
+    var isDeletable: Bool
 }

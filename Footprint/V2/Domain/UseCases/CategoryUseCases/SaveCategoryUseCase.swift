@@ -14,7 +14,7 @@ class SaveCategoryUseCase {
         self.categoryRepository = categoryRepository
     }
     
-    func execute(_ id: String? = nil, name: String, color: CategoryColor, icon: CategoryIcon) {
-        self.categoryRepository.addCategory(id, name: name, color: color.rawValue, icon: icon.rawValue)
+    func execute(_ id: String? = nil, name: String, color: CategoryColor, icon: CategoryIcon, isDeletable: Bool) {
+        self.categoryRepository.addCategory(id, name: name, color: color.rawValue, icon: icon.rawValue, isDeletable: isDeletable)
     }
 }

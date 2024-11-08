@@ -14,8 +14,9 @@ class CategoryV2: Object {
     @Persisted var name: String
     @Persisted var color: Int // CategoryColor rawValue
     @Persisted var icon: String // CategoryImage rawValue
+    @Persisted var isDeletable: Bool
     
-    convenience init(id: String = UUID().uuidString, idx: Int, name: String, color: Int, icon: String) {
+    convenience init(id: String = UUID().uuidString, idx: Int, name: String, color: Int, icon: String, isDeletable: Bool) {
         self.init()
         
         self.id = id
@@ -23,6 +24,7 @@ class CategoryV2: Object {
         self.name = name
         self.color = color
         self.icon = icon
+        self.isDeletable = isDeletable
     }
     
     func toCategoryEntity() -> CategoryEntity {
@@ -31,7 +33,8 @@ class CategoryV2: Object {
             idx: self.idx,
             name: self.name,
             color: CategoryColor(rawValue: self.color)!,
-            icon: CategoryIcon(rawValue: self.icon)!
+            icon: CategoryIcon(rawValue: self.icon)!,
+            isDeletable: self.isDeletable
         )
     }
 }

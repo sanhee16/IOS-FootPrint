@@ -14,7 +14,7 @@ class UpdateCategoryUseCase {
         self.categoryRepository = categoryRepository
     }
     
-    func execute(_ category: CategoryEntity) {
-        
+    func execute(_ id: String, idx: Int, name: String, color: CategoryColor, icon: CategoryIcon, isDeletable: Bool) {
+        self.categoryRepository.updateCategory(id, idx: idx, name: name, color: color.rawValue, icon: icon.rawValue, isDeletable: isDeletable)
     }
 }
