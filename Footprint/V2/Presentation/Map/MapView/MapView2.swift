@@ -32,7 +32,6 @@ struct MapView2: View {
     private let optionVerticalPadding: CGFloat = 8.0
     @State private var isShowSearchBar: Bool = false
     @State private var centerPos: CGRect = .zero
-    @State private var isShowMarkers: Bool = false
     @State private var isPresentFootprint: Bool = false
     @State private var selectedId: String? = nil
     @Environment(\.centerLocation) var centerLocation
@@ -97,8 +96,8 @@ struct MapView2: View {
                         HStack(alignment: .center, spacing: 0, content: {
                             Spacer()
                             markerMenuButton("paw-foot") {
-                                $isShowMarkers.wrappedValue.toggle()
-                                if $isShowMarkers.wrappedValue {
+                                vm.toggleIsShowMarker()
+                                if $vm.isShowMarkers.wrappedValue {
                                     mapManager.loadMarkers()
                                 } else {
                                     mapManager.deleteMarkers()
@@ -111,7 +110,7 @@ struct MapView2: View {
                             Topbar("위치 선택", type: .close) {
                                 mapStatusVM.updateMapStatus(.normal)
                                 
-                                if $isShowMarkers.wrappedValue {
+                                if $vm.isShowMarkers.wrappedValue {
                                     mapManager.loadMarkers()
                                 }
                             }
@@ -200,7 +199,7 @@ struct MapView2: View {
             }
         })
         .onAppear {
-            if $isShowMarkers.wrappedValue {
+            if $vm.isShowMarkers.wrappedValue {
                 mapManager.loadMarkers()
             }
             vm.onAppear()
@@ -235,14 +234,14 @@ struct MapView2: View {
                 .resizable()
                 .renderingMode(.template)
                 .scaledToFit()
-                .foregroundStyle($isShowMarkers.wrappedValue ? Color.btn_ic_cont_press : Color.btn_ic_cont_default)
+                .foregroundStyle($vm.isShowMarkers.wrappedValue ? Color.btn_ic_cont_press : Color.btn_ic_cont_default)
                 .frame(width: 20)
                 .padding(10)
                 .background(
                     Circle()
                         .foregroundStyle(Color.btn_ic_bg_default)
                         .border(
-                            $isShowMarkers.wrappedValue ? Color.btn_ic_stroke_press : Color.btn_ic_stroke_able, lineWidth: 0.7, cornerRadius: 100)
+                            $vm.isShowMarkers.wrappedValue ? Color.btn_ic_stroke_press : Color.btn_ic_stroke_able, lineWidth: 0.7, cornerRadius: 100)
                 )
                 .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: 2)
                 .contentShape(Rectangle())

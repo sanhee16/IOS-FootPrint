@@ -54,7 +54,7 @@ class Defaults {
     @UserDefault<String>(key: UserDefaultKey.premiumCode.rawValue, defaultValue: "")
     var premiumCode
     
-    @UserDefault<String>(key: UserDefaultKey.isShowMarker.rawValue, defaultValue: "")
+    @UserDefault<Bool>(key: UserDefaultKey.isShowMarker.rawValue, defaultValue: true)
     var isShowMarker
     
     //MARK: Setting

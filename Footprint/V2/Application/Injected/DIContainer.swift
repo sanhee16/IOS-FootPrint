@@ -31,6 +31,10 @@ extension Container {
     var memberRepository: Factory<MemberRepository> {
         Factory(self) { MemberRepositoryImpl() }
     }
+    
+    var settingRepository: Factory<SettingRepository> {
+        Factory(self) { SettingRepositoryImpl(userDefaultsManager: self.userDefaultsManager()) }
+    }
 }
 
 //MARK: UseCase - Note
@@ -107,5 +111,16 @@ extension Container {
     
     var updateMemberOrderUseCase: Factory<UpdateMemberOrderUseCase> {
         Factory(self) { UpdateMemberOrderUseCase(memberRepository: self.memberRepository()) }
+    }
+}
+
+//MARK: UseCase - Setting
+extension Container {
+    var updateIsShowMarkerUseCase: Factory<UpdateIsShowMarkerUseCase> {
+        Factory(self) { UpdateIsShowMarkerUseCase(settingRepository: self.settingRepository()) }
+    }
+    
+    var getIsShowMarkerUseCase: Factory<GetIsShowMarkerUseCase> {
+        Factory(self) { GetIsShowMarkerUseCase(settingRepository: self.settingRepository()) }
     }
 }

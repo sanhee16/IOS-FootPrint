@@ -12,6 +12,7 @@ import GoogleMaps
 import GooglePlaces
 import CoreLocation
 import Contacts
+import Factory
 
 struct Pin: Identifiable {
     let id = UUID()
@@ -43,6 +44,9 @@ enum MarkerStatus {
 }
 
 class MapVM2: BaseViewModel {
+    @Injected(\.getIsShowMarkerUseCase) var getIsShowMarkerUseCase
+    @Injected(\.updateIsShowMarkerUseCase) var updateIsShowMarkerUseCase
+    
     private var locationManager: CLLocationManager
     @Published var isShowAds: Bool = false
     @Published var annotations: [Pin] = []
@@ -63,6 +67,8 @@ class MapVM2: BaseViewModel {
     @Published var centerMarkerStatus: MarkerStatus = .stable
     @Published var centerAddress: String = ""
     
+    @Published var isShowMarkers: Bool = true
+    
     @Published var isLoading: Bool = false
     
     var centerPosition: CLLocationCoordinate2D? = nil
@@ -81,6 +87,8 @@ class MapVM2: BaseViewModel {
         self.googleApi = GoogleApi.instance
         super.init()
         
+        self.isShowMarkers = getIsShowMarkerUseCase.execute()
+        
         Remote.init().getIsShowAds({[weak self] value in
             DispatchQueue.main.async {
                 self?.isShowAds = value
@@ -96,6 +104,9 @@ class MapVM2: BaseViewModel {
         })
     }
     
+    func toggleIsShowMarker() {
+        self.isShowMarkers = updateIsShowMarkerUseCase.execute(!self.isShowMarkers)
+    }
     
     
     //MARK: Timer

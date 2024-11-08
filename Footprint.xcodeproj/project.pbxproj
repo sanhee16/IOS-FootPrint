@@ -60,6 +60,10 @@
 		266EDDE42C64EB40006CF09B /* MainView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266EDDE32C64EB40006CF09B /* MainView2.swift */; };
 		266EDDE62C64EB46006CF09B /* MainVM2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266EDDE52C64EB46006CF09B /* MainVM2.swift */; };
 		266EDDE82C64EB88006CF09B /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266EDDE72C64EB88006CF09B /* BaseViewModel.swift */; };
+		2675D2042CDDDE3100BD7633 /* UpdateIsShowMarkerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2675D2032CDDDE3100BD7633 /* UpdateIsShowMarkerUseCase.swift */; };
+		2675D2062CDDDE4500BD7633 /* SettingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2675D2052CDDDE4500BD7633 /* SettingRepository.swift */; };
+		2675D2082CDDDE9000BD7633 /* GetIsShowMarkerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2675D2072CDDDE9000BD7633 /* GetIsShowMarkerUseCase.swift */; };
+		2675D20A2CDDDF8F00BD7633 /* SettingRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2675D2092CDDDF8F00BD7633 /* SettingRepositoryImpl.swift */; };
 		2679D2B32C6830B90073297F /* FPTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2679D2B22C6830B90073297F /* FPTextField.swift */; };
 		267CC1772C66F27000D6015E /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC1762C66F27000D6015E /* BaseCoordinator.swift */; };
 		267CC1792C66F28300D6015E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC1782C66F28300D6015E /* Coordinator.swift */; };
@@ -273,6 +277,10 @@
 		266EDDE32C64EB40006CF09B /* MainView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView2.swift; sourceTree = "<group>"; };
 		266EDDE52C64EB46006CF09B /* MainVM2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVM2.swift; sourceTree = "<group>"; };
 		266EDDE72C64EB88006CF09B /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		2675D2032CDDDE3100BD7633 /* UpdateIsShowMarkerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateIsShowMarkerUseCase.swift; sourceTree = "<group>"; };
+		2675D2052CDDDE4500BD7633 /* SettingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRepository.swift; sourceTree = "<group>"; };
+		2675D2072CDDDE9000BD7633 /* GetIsShowMarkerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetIsShowMarkerUseCase.swift; sourceTree = "<group>"; };
+		2675D2092CDDDF8F00BD7633 /* SettingRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRepositoryImpl.swift; sourceTree = "<group>"; };
 		2679D2B22C6830B90073297F /* FPTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPTextField.swift; sourceTree = "<group>"; };
 		267CC1762C66F27000D6015E /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		267CC1782C66F28300D6015E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -534,6 +542,8 @@
 		2643E0D22CDB00780075BA69 /* SettingUseCases */ = {
 			isa = PBXGroup;
 			children = (
+				2675D2032CDDDE3100BD7633 /* UpdateIsShowMarkerUseCase.swift */,
+				2675D2072CDDDE9000BD7633 /* GetIsShowMarkerUseCase.swift */,
 			);
 			path = SettingUseCases;
 			sourceTree = "<group>";
@@ -814,6 +824,7 @@
 				2696F4E02C7753A000F56E73 /* NoteRepositoryImpl.swift */,
 				269CA5592C78A4D900366005 /* CategoryRepositoryImpl.swift */,
 				2694FC8B2C79821500F01644 /* MemberRepositoryImpl.swift */,
+				2675D2092CDDDF8F00BD7633 /* SettingRepositoryImpl.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -824,6 +835,7 @@
 				2696F4E32C7753C400F56E73 /* NoteRepository.swift */,
 				269CA55B2C78A4DF00366005 /* CategoryRepository.swift */,
 				2694FC892C797F2F00F01644 /* MemberRepository.swift */,
+				2675D2052CDDDE4500BD7633 /* SettingRepository.swift */,
 			);
 			path = RepositoryProtocols;
 			sourceTree = "<group>";
@@ -1432,6 +1444,7 @@
 				63E5C82F2975362300D32FD2 /* MapViewModel.swift in Sources */,
 				261FF6E42CD3569300B49442 /* LoadNoteUseCaseWithId.swift in Sources */,
 				63F1328F2914A1C000B3A9E0 /* SplashView.swift in Sources */,
+				2675D2062CDDDE4500BD7633 /* SettingRepository.swift in Sources */,
 				63F132AF2914A1C000B3A9E0 /* BluePrintViewModel.swift in Sources */,
 				63F132AE2914A1C000B3A9E0 /* BluePrintView.swift in Sources */,
 				63F132962914A1C000B3A9E0 /* MultilineTextView.swift in Sources */,
@@ -1448,6 +1461,7 @@
 				631D75242966619B00464F33 /* SToggleView.swift in Sources */,
 				269CA5762C78BE9600366005 /* CategoryEditVM.swift in Sources */,
 				2682A76D2C6D785C00DF1F8A /* FPMapView.swift in Sources */,
+				2675D2042CDDDE3100BD7633 /* UpdateIsShowMarkerUseCase.swift in Sources */,
 				63D5EF6A29C861BB000ACBC2 /* SwiftUIViewModifier.swift in Sources */,
 				26332176292095E90065AE3A /* ShowFootPrintView.swift in Sources */,
 				63F132972914A1C000B3A9E0 /* EmailSender.swift in Sources */,
@@ -1486,6 +1500,7 @@
 				262D2A04293E2BAA005984DA /* SettingViewModel.swift in Sources */,
 				63E848A9295ABEC20037D7A3 /* TravelListViewModel.swift in Sources */,
 				63F132512914A18F00B3A9E0 /* BaseViewModelV1.swift in Sources */,
+				2675D2082CDDDE9000BD7633 /* GetIsShowMarkerUseCase.swift in Sources */,
 				269CA5612C78A5B900366005 /* LoadCategoriesUseCase.swift in Sources */,
 				269CA5652C78A5EC00366005 /* DeleteCategoryUseCase.swift in Sources */,
 				63C8CCF62941D60400BB861D /* DevInfoView.swift in Sources */,
@@ -1509,6 +1524,7 @@
 				269CA5582C78A43300366005 /* CategoryV2.swift in Sources */,
 				269CA5562C78A35D00366005 /* Note.swift in Sources */,
 				269CA56A2C78A8B600366005 /* UserDefaultsManager.swift in Sources */,
+				2675D20A2CDDDF8F00BD7633 /* SettingRepositoryImpl.swift in Sources */,
 				263FADC32C7164B700AE9E73 /* TabBarService.swift in Sources */,
 				268546E82A28DB1200BDA2EA /* ReviewView.swift in Sources */,
 				63D32FCC29CA9E390049F567 /* FirestoreExtension.swift in Sources */,
