@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import UniformTypeIdentifiers
 import SDSwiftUIPack
 
 struct CategoryListEditView: View {
@@ -24,6 +25,7 @@ struct CategoryListEditView: View {
     @StateObject var categoryEditVM: CategoryEditVM = CategoryEditVM()
     @State private var isPresentDelete: Bool = false
     @State private var isPresentAddCategory: Bool = false
+    @State private var draggedItem: CategoryEntity? = nil
     
     
     init(output: Output) {
@@ -63,9 +65,14 @@ struct CategoryListEditView: View {
                     })
                     .padding(16)
                     .contentShape(Rectangle())
-                    .onTapGesture {
-
+                    .onDrag {
+                        $draggedItem.wrappedValue = item
+                        return NSItemProvider(item: nil, typeIdentifier: item.id)
                     }
+                    .onDrop(
+                        of: [UTType.text],
+                        delegate: DragAndDropService<CategoryEntity>(currentItem: item, items: $vm.categories, draggedItem: $draggedItem)
+                    )
                 }
                 FPButton(text: "카테고리 추가하기", status: .able, size: .large, type: .lightSolid) {
                     categoryEditVM.setCategory(nil)
