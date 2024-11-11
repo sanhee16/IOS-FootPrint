@@ -76,7 +76,11 @@ struct CategoryListEditView: View {
                     }
                     .onDrop(
                         of: [UTType.text],
-                        delegate: DragAndDropService<CategoryEntity>(currentItem: item, items: $vm.categories, draggedItem: $draggedItem)
+                        delegate: DragAndDropService<CategoryEntity>(
+                            currentItem: item,
+                            items: $vm.categories,
+                            draggedItem: $draggedItem
+                        )
                     )
                 }
                 FPButton(text: "카테고리 추가하기", status: .able, size: .large, type: .lightSolid) {

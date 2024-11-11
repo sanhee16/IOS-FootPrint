@@ -37,6 +37,6 @@ struct DragAndDropService<T: Equatable>: DropDelegate {
     }
     
     func dropExited(info: DropInfo) {
-        print("dropExited")
+//        print("dropExited")
     }
 }
