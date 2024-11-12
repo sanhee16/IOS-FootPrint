@@ -47,41 +47,23 @@ struct CategoryListEditView: View {
                        showsIndicators: false,
                        content: {
                 ForEach($vm.categories.wrappedValue, id: \.self) { item in
-                    HStack(alignment: .center, spacing: 16, content: {
-                        CategoryItem(item: item)
-                        Spacer()
-                        if item.isDeletable {
-                            Image("ModifyButton")
-                                .resizable()
-                                .frame(both: 24.0, alignment: .center)
-                                .contentShape(Rectangle())
-                                .onTapGesture {
-                                    categoryEditVM.setCategory(item)
-                                    $isPresentAddCategory.wrappedValue = true
-                                }
-                            Image("TrashButton")
-                                .resizable()
-                                .frame(both: 24.0, alignment: .center)
-                                .contentShape(Rectangle())
-                                .onTapGesture {
-                                    vm.deleteCategory(item.id)
-                                }
+                    if item.isDeletable {
+                        categoryItem(item)
+                        .onDrag {
+                            $draggedItem.wrappedValue = item
+                            return NSItemProvider(item: nil, typeIdentifier: item.id)
                         }
-                    })
-                    .padding(16)
-                    .contentShape(Rectangle())
-                    .onDrag {
-                        $draggedItem.wrappedValue = item
-                        return NSItemProvider(item: nil, typeIdentifier: item.id)
-                    }
-                    .onDrop(
-                        of: [UTType.text],
-                        delegate: DragAndDropService<CategoryEntity>(
-                            currentItem: item,
-                            items: $vm.categories,
-                            draggedItem: $draggedItem
+                        .onDrop(
+                            of: [UTType.text],
+                            delegate: DragAndDropService<CategoryEntity>(
+                                currentItem: item,
+                                items: $vm.categories,
+                                draggedItem: $draggedItem
+                            )
                         )
-                    )
+                    } else {
+                        categoryItem(item)
+                    }
                 }
                 FPButton(text: "카테고리 추가하기", status: .able, size: .large, type: .lightSolid) {
                     categoryEditVM.setCategory(nil)
@@ -101,9 +83,9 @@ struct CategoryListEditView: View {
                         Alert(
                             title: Text("카테고리 삭제하기"),
                             message: Text(
-                                $vm.getNoteCountUseCase.wrappedValue > 0 
-                                ? "‘\($vm.deleteCategory.wrappedValue?.name)’ 카테고리에 \($vm.getNoteCountUseCase.wrappedValue)개의 발자국이 있습니다.\n삭제 시 이 카테고리에 속한 모든 발자국이 삭제됩니다."
-                                : "‘\($vm.deleteCategory.wrappedValue?.name)’ 카테고리를 삭제하시겠습니까?"
+                                $vm.deleteCategoryNoteCount.wrappedValue > 0
+                                ? "‘\($vm.deleteCategory.wrappedValue?.name ?? "")’ 카테고리에 \($vm.deleteCategoryNoteCount.wrappedValue)개의 발자국이 있습니다.\n삭제 시 이 카테고리에 속한 모든 발자국이 삭제됩니다."
+                                : "‘\($vm.deleteCategory.wrappedValue?.name ?? "")’ 카테고리를 삭제하시겠습니까?"
                             ),
                             primaryButton: .default(Text("취소"), action: {
                                 
@@ -134,6 +116,34 @@ struct CategoryListEditView: View {
         .onAppear(perform: {
             vm.loadCategories()
         })
+    }
+    
+    private func categoryItem(_ item: CategoryEntity) -> some View {
+        HStack(alignment: .center, spacing: 16, content: {
+            CategoryItem(item: item)
+            Spacer()
+            if item.isDeletable {
+                Image("ModifyButton")
+                    .resizable()
+                    .frame(both: 24.0, alignment: .center)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        categoryEditVM.setCategory(item)
+                        $isPresentAddCategory.wrappedValue = true
+                    }
+                Image("TrashButton")
+                    .resizable()
+                    .frame(both: 24.0, alignment: .center)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        vm.getDeletedCategoryNoteCount(item) {
+                            $isPresentDelete.wrappedValue = true
+                        }
+                    }
+            }
+        })
+        .padding(16)
+        .contentShape(Rectangle())
     }
 }
 

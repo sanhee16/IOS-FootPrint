@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CategoryIcon: String {
+enum CategoryIcon: String, Equatable, Hashable {
     case baseball_batBall = "baseball_batBall"
     case bowlingSet = "bowlingSet"
     case brush = "brush"

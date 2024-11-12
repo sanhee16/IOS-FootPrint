@@ -54,7 +54,11 @@ struct MemberListEditView: View {
                             }
                             .onDrop(
                                 of: [UTType.text],
-                                delegate: DragAndDropService<MemberEntity>(currentItem: item, items: $vm.members, draggedItem: $draggedItem)
+                                delegate: DragAndDropService<MemberEntity>(
+                                    currentItem: item,
+                                    items: $vm.members,
+                                    draggedItem: $draggedItem
+                                )
                             )
                     }
                 }

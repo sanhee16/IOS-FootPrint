@@ -5,7 +5,7 @@
 //  Created by sandy on 10/24/24.
 //
 
-enum CategoryColor: Int {
+enum CategoryColor: Int, Equatable, Hashable {
     case black = 0
     case pink
     case orange

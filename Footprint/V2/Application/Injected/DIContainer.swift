@@ -83,7 +83,7 @@ extension Container {
     }
     
     var deleteCategoryUseCase: Factory<DeleteCategoryUseCase> {
-        Factory(self) { DeleteCategoryUseCase(categoryRepository: self.categoryRepository()) }
+        Factory(self) { DeleteCategoryUseCase(categoryRepository: self.categoryRepository(), noteRepository: self.noteRepository()) }
     }
     
     var loadCategoryUseCase: Factory<LoadCategoryUseCase> {

@@ -32,11 +32,13 @@ class CategoryListEditVM: BaseViewModel {
         self.categories = loadCategoriesUseCase.execute()
     }
     
-    func getDeletedCategoryNoteCount(_ id: String) {
-        self.deleteCategoryNoteCount = self.getNoteCountUseCase.execute(id)
+    func getDeletedCategoryNoteCount(_ item: CategoryEntity, onDone: @escaping () -> ()) {
+        self.deleteCategoryNoteCount = self.getNoteCountUseCase.execute(item.id)
+        self.deleteCategory = item
+        onDone()
     }
 
-    func onDelete(_ id: String) {
+    func onDelete() {
         guard let category = deleteCategory else { return }
         let _ = self.deleteCategoryUseCase.execute(category.id)
         self.loadCategories()
