@@ -44,6 +44,11 @@
 		264EEF592925128A00B89624 /* AddCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EEF582925128A00B89624 /* AddCategoryViewModel.swift */; };
 		2650A05B2CE311D900040512 /* TripIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2650A05A2CE311D900040512 /* TripIcons.xcassets */; };
 		2650A05D2CE3253E00040512 /* TripIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2650A05C2CE3253E00040512 /* TripIcon.swift */; };
+		2650A0612CE3353200040512 /* TripListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2650A0602CE3353200040512 /* TripListView.swift */; };
+		2650A0632CE3353500040512 /* TripListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2650A0622CE3353500040512 /* TripListVM.swift */; };
+		2650A0682CE3357900040512 /* TripListEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2650A0672CE3357900040512 /* TripListEntity.swift */; };
+		2650A06C2CE33CDB00040512 /* TripIconEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2650A06B2CE33CDB00040512 /* TripIconEntity.swift */; };
+		2650A06E2CE33D4000040512 /* TripFootprintEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2650A06D2CE33D3F00040512 /* TripFootprintEntity.swift */; };
 		265917112CD857CC008C39E9 /* ToogleStarUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265917102CD857CC008C39E9 /* ToogleStarUseCase.swift */; };
 		265917142CD87764008C39E9 /* SDFlowLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 265917132CD87764008C39E9 /* SDFlowLayout */; };
 		265917162CD8B986008C39E9 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265917152CD8B986008C39E9 /* Location.swift */; };
@@ -268,6 +273,11 @@
 		264EEF582925128A00B89624 /* AddCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryViewModel.swift; sourceTree = "<group>"; };
 		2650A05A2CE311D900040512 /* TripIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TripIcons.xcassets; sourceTree = "<group>"; };
 		2650A05C2CE3253E00040512 /* TripIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripIcon.swift; sourceTree = "<group>"; };
+		2650A0602CE3353200040512 /* TripListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripListView.swift; sourceTree = "<group>"; };
+		2650A0622CE3353500040512 /* TripListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripListVM.swift; sourceTree = "<group>"; };
+		2650A0672CE3357900040512 /* TripListEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripListEntity.swift; sourceTree = "<group>"; };
+		2650A06B2CE33CDB00040512 /* TripIconEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripIconEntity.swift; sourceTree = "<group>"; };
+		2650A06D2CE33D3F00040512 /* TripFootprintEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripFootprintEntity.swift; sourceTree = "<group>"; };
 		265917102CD857CC008C39E9 /* ToogleStarUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToogleStarUseCase.swift; sourceTree = "<group>"; };
 		265917152CD8B986008C39E9 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		265917172CD8BE55008C39E9 /* DeleteImageUrlUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteImageUrlUseCase.swift; sourceTree = "<group>"; };
@@ -576,6 +586,54 @@
 			path = EditCategory;
 			sourceTree = "<group>";
 		};
+		2650A05E2CE3351200040512 /* Trip */ = {
+			isa = PBXGroup;
+			children = (
+				2650A05F2CE3352A00040512 /* TripList */,
+			);
+			path = Trip;
+			sourceTree = "<group>";
+		};
+		2650A05F2CE3352A00040512 /* TripList */ = {
+			isa = PBXGroup;
+			children = (
+				2650A0602CE3353200040512 /* TripListView.swift */,
+				2650A0622CE3353500040512 /* TripListVM.swift */,
+			);
+			path = TripList;
+			sourceTree = "<group>";
+		};
+		2650A0642CE3354B00040512 /* Infos */ = {
+			isa = PBXGroup;
+			children = (
+				261F6EA22CC9E67A00F7CA18 /* CategoryColor.swift */,
+				261F6E9E2CC9E47200F7CA18 /* CategoryIcon.swift */,
+				2650A05C2CE3253E00040512 /* TripIcon.swift */,
+			);
+			path = Infos;
+			sourceTree = "<group>";
+		};
+		2650A0652CE3355300040512 /* Trip */ = {
+			isa = PBXGroup;
+			children = (
+				2650A0672CE3357900040512 /* TripListEntity.swift */,
+				2650A06D2CE33D3F00040512 /* TripFootprintEntity.swift */,
+				2650A06B2CE33CDB00040512 /* TripIconEntity.swift */,
+			);
+			path = Trip;
+			sourceTree = "<group>";
+		};
+		2650A0662CE3355600040512 /* Footprint */ = {
+			isa = PBXGroup;
+			children = (
+				265917152CD8B986008C39E9 /* Location.swift */,
+				269CA5552C78A35D00366005 /* Note.swift */,
+				261F6EA02CC9E64100F7CA18 /* CategoryEntity.swift */,
+				266BE08F2CCA1FF000E754EB /* MemberEntity.swift */,
+			);
+			path = Footprint;
+			sourceTree = "<group>";
+		};
 		265924C529445BC7001E7025 /* FootprintList */ = {
 			isa = PBXGroup;
 			children = (
@@ -636,6 +694,7 @@
 		266EDDD52C64EA90006CF09B /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				2650A05E2CE3351200040512 /* Trip */,
 				269CA56D2C78B67800366005 /* Common */,
 				267CC18F2C67361E00D6015E /* CustomView */,
 				267CC17C2C66F2B500D6015E /* Map */,
@@ -861,13 +920,9 @@
 		2696F4E62C7753E900F56E73 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				269CA5552C78A35D00366005 /* Note.swift */,
-				261F6E9E2CC9E47200F7CA18 /* CategoryIcon.swift */,
-				2650A05C2CE3253E00040512 /* TripIcon.swift */,
-				261F6EA02CC9E64100F7CA18 /* CategoryEntity.swift */,
-				266BE08F2CCA1FF000E754EB /* MemberEntity.swift */,
-				261F6EA22CC9E67A00F7CA18 /* CategoryColor.swift */,
-				265917152CD8B986008C39E9 /* Location.swift */,
+				2650A0662CE3355600040512 /* Footprint */,
+				2650A0652CE3355300040512 /* Trip */,
+				2650A0642CE3354B00040512 /* Infos */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1451,6 +1506,7 @@
 				2691D9C5294EE4B6002825B9 /* FootprintListFilterViewModel.swift in Sources */,
 				631D7528296661FA00464F33 /* MainMapOptionView.swift in Sources */,
 				265924C929445BE1001E7025 /* FootprintListViewModel.swift in Sources */,
+				2650A06C2CE33CDB00040512 /* TripIconEntity.swift in Sources */,
 				264B70BC291F8DD900CDAF9F /* ApiResponse.swift in Sources */,
 				2694FC972C79B99100F01644 /* MemberListEditView.swift in Sources */,
 				26EB9D1B2CD9A34300D3B0CE /* TempNote.swift in Sources */,
@@ -1465,6 +1521,7 @@
 				2675D20C2CDDE3AF00BD7633 /* UpdateCategoryOrderUseCase.swift in Sources */,
 				63FA2389294C35E300D31506 /* PeopleEditViewModel.swift in Sources */,
 				63F132552914A19F00B3A9E0 /* AppDelegate.swift in Sources */,
+				2650A0632CE3353500040512 /* TripListVM.swift in Sources */,
 				63E848A1295ABE790037D7A3 /* EditTravelView.swift in Sources */,
 				63B1FAFB2914B31E007E94B6 /* GalleryView.swift in Sources */,
 				266EDDDC2C64EACF006CF09B /* SplashView2.swift in Sources */,
@@ -1474,6 +1531,7 @@
 				26C04F6D2917667F00890A76 /* SwiftUIExtension.swift in Sources */,
 				631D75242966619B00464F33 /* SToggleView.swift in Sources */,
 				269CA5762C78BE9600366005 /* CategoryEditVM.swift in Sources */,
+				2650A0612CE3353200040512 /* TripListView.swift in Sources */,
 				2682A76D2C6D785C00DF1F8A /* FPMapView.swift in Sources */,
 				2675D2042CDDDE3100BD7633 /* UpdateIsShowMarkerUseCase.swift in Sources */,
 				63D5EF6A29C861BB000ACBC2 /* SwiftUIViewModifier.swift in Sources */,
@@ -1503,6 +1561,7 @@
 				63B1FB032914B381007E94B6 /* RealmDB.swift in Sources */,
 				26FAB5512C6B576F006304AE /* EnvironmentValues.swift in Sources */,
 				63F132AA2914A1C000B3A9E0 /* MainViewModel.swift in Sources */,
+				2650A06E2CE33D4000040512 /* TripFootprintEntity.swift in Sources */,
 				26940CAD293C9D0F0091E996 /* ShowImageView.swift in Sources */,
 				2694FC8C2C79821500F01644 /* MemberRepositoryImpl.swift in Sources */,
 				264EEF572925128300B89624 /* AddCategoryView.swift in Sources */,
@@ -1550,6 +1609,7 @@
 				63F1324A2914A18800B3A9E0 /* Util.swift in Sources */,
 				63F1325B2914A1A300B3A9E0 /* CoordinatorV1.swift in Sources */,
 				63F132482914A18800B3A9E0 /* AlertView.swift in Sources */,
+				2650A0682CE3357900040512 /* TripListEntity.swift in Sources */,
 				2639921F291FEBA60049F047 /* KeyboardReadable.swift in Sources */,
 				2679D2B32C6830B90073297F /* FPTextField.swift in Sources */,
 				266EDDE82C64EB88006CF09B /* BaseViewModel.swift in Sources */,
