@@ -355,9 +355,11 @@ struct EditNoteView: View {
             }
             HStack(alignment: .center, spacing: 12) {
                 Spacer()
-                Image($vm.isStar.wrappedValue ? "star_on" : "star_off")
+                Image("ic_star")
+                    .renderingMode(.template)
                     .resizable()
                     .scaledToFit()
+                    .foregroundColor($vm.isStar.wrappedValue ? Color.btn_ic_cont_default : Color.btn_ic_cont_disable)
                     .frame(both: 20.0, alignment: .center)
                     .onTapGesture {
                         $vm.isStar.wrappedValue = !$vm.isStar.wrappedValue
