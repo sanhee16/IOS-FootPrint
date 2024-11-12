@@ -65,7 +65,7 @@ struct FPButton: View {
                 }
                 
                 Text(text)
-                    .sdFont(.btn1, color: self.textColor)
+                    .sdFont(self.font, color: self.textColor)
                 
                 if case let .trailing(name) = location {
                     Image(name)
@@ -92,13 +92,13 @@ struct FPButton: View {
 //#Preview {
 //    VStack(alignment: .leading, spacing: 0, content: {
 //        FPButton(text: "hello, world!", status: .disable, size: .large, type: .lightSolid) {
-//            
+//
 //        }
 //        FPButton(text: "hello, world!", status: .press, size: .medium, type: .lightSolid) {
-//            
+//
 //        }
 //        FPButton(text: "hello, world!", status: .able, size: .small, type: .solid) {
-//            
+//
 //        }
 //    })
 //}
@@ -125,6 +125,22 @@ extension FPButton {
             return 16
         case .small:
             return 16
+        }
+    }
+    
+    var font: Font {
+        switch self.size {
+        case .large:
+            return .btn1
+        case .medium:
+            return .btn2
+        case .small:
+            switch self.type {
+            case .solid, .lightSolid, .outline:
+                return .btn2
+            case .textPrimary, .textGray:
+                return .btn3
+            }
         }
     }
     

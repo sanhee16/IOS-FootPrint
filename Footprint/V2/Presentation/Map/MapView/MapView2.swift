@@ -135,7 +135,7 @@ struct MapView2: View {
                     
                     switch $mapStatusVM.status.wrappedValue {
                     case .normal:
-                        FPButton(text: "발자국 남기기", location: .leading(name: "paw-foot-white"), status: .press, size: .large, type: .solid) {
+                        FPButton(text: "발자국 남기기", location: .leading(name: "paw-foot-white"), status: .able, size: .large, type: .solid) {
                             //                        output.goToSelectLocation()
                             withAnimation(.smooth) {
                                 mapStatusVM.updateMapStatus(.adding)
@@ -154,7 +154,7 @@ struct MapView2: View {
                                 }
                                 .frame(width: (UIScreen.main.bounds.size.width - 32 - 8) / 10 * 3)
                                 
-                                FPButton(text: "여기에 발자국 남기기", status: $mapManager.centerMarkerStatus.wrappedValue == .move ? .disable : .press, size: .large, type: .solid) {
+                                FPButton(text: "여기에 발자국 남기기", status: $mapManager.centerMarkerStatus.wrappedValue == .move ? .disable : .able, size: .large, type: .solid) {
                                     if let location = $mapManager.centerPosition.wrappedValue {
                                         MapStatusVM.tempNote?.address = $mapManager.centerAddress.wrappedValue
                                         MapStatusVM.tempNote?.location = Location(latitude: location.latitude, longitude: location.longitude)

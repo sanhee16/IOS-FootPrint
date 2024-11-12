@@ -207,9 +207,6 @@ struct EditNoteView: View {
                                     $isPresentPeopleWith.wrappedValue = false
                                     output.pushPeopleWithListEditView()
                                 }
-                                FPButton(text: "완료", status: .able, size: .small, type: .textGray) {
-                                    $isPresentPeopleWith.wrappedValue = false
-                                }
                             }
                             .sdPaddingHorizontal(24)
                             .sdPaddingTop(26)
@@ -276,9 +273,6 @@ struct EditNoteView: View {
                         $isPresentCategoryList.wrappedValue = false
                         output.pushCategoryListEditView()
                     }
-                    FPButton(text: "완료", status: .able, size: .small, type: .textGray) {
-                        $isPresentCategoryList.wrappedValue = false
-                    }
                 }
                 .sdPaddingHorizontal(24)
                 .sdPaddingTop(26)
@@ -331,9 +325,6 @@ struct EditNoteView: View {
                     Spacer()
                     FPButton(text: "오늘", status: .able, size: .small, type: .textGray) {
                         $vm.createdAt.wrappedValue = Date()
-                    }
-                    FPButton(text: "완료", status: .able, size: .small, type: .textGray) {
-                        $isPresentCalendar.wrappedValue = false
                     }
                 }
                 .sdPaddingHorizontal(24)
