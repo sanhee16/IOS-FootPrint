@@ -43,6 +43,7 @@
 		264EEF572925128300B89624 /* AddCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EEF562925128300B89624 /* AddCategoryView.swift */; };
 		264EEF592925128A00B89624 /* AddCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EEF582925128A00B89624 /* AddCategoryViewModel.swift */; };
 		2650A05B2CE311D900040512 /* TripIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2650A05A2CE311D900040512 /* TripIcons.xcassets */; };
+		2650A05D2CE3253E00040512 /* TripIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2650A05C2CE3253E00040512 /* TripIcon.swift */; };
 		265917112CD857CC008C39E9 /* ToogleStarUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265917102CD857CC008C39E9 /* ToogleStarUseCase.swift */; };
 		265917142CD87764008C39E9 /* SDFlowLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 265917132CD87764008C39E9 /* SDFlowLayout */; };
 		265917162CD8B986008C39E9 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265917152CD8B986008C39E9 /* Location.swift */; };
@@ -266,6 +267,7 @@
 		264EEF562925128300B89624 /* AddCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryView.swift; sourceTree = "<group>"; };
 		264EEF582925128A00B89624 /* AddCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryViewModel.swift; sourceTree = "<group>"; };
 		2650A05A2CE311D900040512 /* TripIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TripIcons.xcassets; sourceTree = "<group>"; };
+		2650A05C2CE3253E00040512 /* TripIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripIcon.swift; sourceTree = "<group>"; };
 		265917102CD857CC008C39E9 /* ToogleStarUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToogleStarUseCase.swift; sourceTree = "<group>"; };
 		265917152CD8B986008C39E9 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		265917172CD8BE55008C39E9 /* DeleteImageUrlUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteImageUrlUseCase.swift; sourceTree = "<group>"; };
@@ -861,6 +863,7 @@
 			children = (
 				269CA5552C78A35D00366005 /* Note.swift */,
 				261F6E9E2CC9E47200F7CA18 /* CategoryIcon.swift */,
+				2650A05C2CE3253E00040512 /* TripIcon.swift */,
 				261F6EA02CC9E64100F7CA18 /* CategoryEntity.swift */,
 				266BE08F2CCA1FF000E754EB /* MemberEntity.swift */,
 				261F6EA22CC9E67A00F7CA18 /* CategoryColor.swift */,
@@ -1573,6 +1576,7 @@
 				266EDDDE2C64EAD9006CF09B /* SplashVM2.swift in Sources */,
 				63F1324C2914A18800B3A9E0 /* CommonApi.swift in Sources */,
 				2694FC932C79851000F01644 /* DeleteMemberUseCase.swift in Sources */,
+				2650A05D2CE3253E00040512 /* TripIcon.swift in Sources */,
 				265917112CD857CC008C39E9 /* ToogleStarUseCase.swift in Sources */,
 				2694FC8F2C7984CA00F01644 /* SaveMemberUseCase.swift in Sources */,
 				63F1329A2914A1C000B3A9E0 /* WebView.swift in Sources */,
