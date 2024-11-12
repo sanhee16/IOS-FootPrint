@@ -16,7 +16,7 @@
 		2613ED4B2973C5AC0060EF23 /* MainMenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2613ED4A2973C5AC0060EF23 /* MainMenuBar.swift */; };
 		2619FE8A2940D6AC00D24778 /* CheckPermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2619FE892940D6AC00D24778 /* CheckPermissionView.swift */; };
 		2619FE8C2940D6B300D24778 /* CheckPermissionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2619FE8B2940D6B300D24778 /* CheckPermissionViewModel.swift */; };
-		261F6E9D2CC9E36100F7CA18 /* Categories.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 261F6E9C2CC9E36100F7CA18 /* Categories.xcassets */; };
+		261F6E9D2CC9E36100F7CA18 /* CategoryIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 261F6E9C2CC9E36100F7CA18 /* CategoryIcons.xcassets */; };
 		261F6E9F2CC9E47200F7CA18 /* CategoryIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261F6E9E2CC9E47200F7CA18 /* CategoryIcon.swift */; };
 		261F6EA12CC9E64100F7CA18 /* CategoryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261F6EA02CC9E64100F7CA18 /* CategoryEntity.swift */; };
 		261F6EA32CC9E67A00F7CA18 /* CategoryColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261F6EA22CC9E67A00F7CA18 /* CategoryColor.swift */; };
@@ -42,6 +42,7 @@
 		264B70C0291F8E9D00CDAF9F /* C.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264B70BF291F8E9C00CDAF9F /* C.swift */; };
 		264EEF572925128300B89624 /* AddCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EEF562925128300B89624 /* AddCategoryView.swift */; };
 		264EEF592925128A00B89624 /* AddCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EEF582925128A00B89624 /* AddCategoryViewModel.swift */; };
+		2650A05B2CE311D900040512 /* TripIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2650A05A2CE311D900040512 /* TripIcons.xcassets */; };
 		265917112CD857CC008C39E9 /* ToogleStarUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265917102CD857CC008C39E9 /* ToogleStarUseCase.swift */; };
 		265917142CD87764008C39E9 /* SDFlowLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 265917132CD87764008C39E9 /* SDFlowLayout */; };
 		265917162CD8B986008C39E9 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265917152CD8B986008C39E9 /* Location.swift */; };
@@ -243,7 +244,7 @@
 		2613ED4A2973C5AC0060EF23 /* MainMenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuBar.swift; sourceTree = "<group>"; };
 		2619FE892940D6AC00D24778 /* CheckPermissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPermissionView.swift; sourceTree = "<group>"; };
 		2619FE8B2940D6B300D24778 /* CheckPermissionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPermissionViewModel.swift; sourceTree = "<group>"; };
-		261F6E9C2CC9E36100F7CA18 /* Categories.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Categories.xcassets; sourceTree = "<group>"; };
+		261F6E9C2CC9E36100F7CA18 /* CategoryIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = CategoryIcons.xcassets; sourceTree = "<group>"; };
 		261F6E9E2CC9E47200F7CA18 /* CategoryIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryIcon.swift; sourceTree = "<group>"; };
 		261F6EA02CC9E64100F7CA18 /* CategoryEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEntity.swift; sourceTree = "<group>"; };
 		261F6EA22CC9E67A00F7CA18 /* CategoryColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryColor.swift; sourceTree = "<group>"; };
@@ -264,6 +265,7 @@
 		264B70BF291F8E9C00CDAF9F /* C.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C.swift; sourceTree = "<group>"; };
 		264EEF562925128300B89624 /* AddCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryView.swift; sourceTree = "<group>"; };
 		264EEF582925128A00B89624 /* AddCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryViewModel.swift; sourceTree = "<group>"; };
+		2650A05A2CE311D900040512 /* TripIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TripIcons.xcassets; sourceTree = "<group>"; };
 		265917102CD857CC008C39E9 /* ToogleStarUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToogleStarUseCase.swift; sourceTree = "<group>"; };
 		265917152CD8B986008C39E9 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		265917172CD8BE55008C39E9 /* DeleteImageUrlUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteImageUrlUseCase.swift; sourceTree = "<group>"; };
@@ -1054,7 +1056,8 @@
 			children = (
 				26A238F92A13743700D7CF49 /* GoogleService-Info.plist */,
 				63209FEB2913C3C000709227 /* Assets.xcassets */,
-				261F6E9C2CC9E36100F7CA18 /* Categories.xcassets */,
+				261F6E9C2CC9E36100F7CA18 /* CategoryIcons.xcassets */,
+				2650A05A2CE311D900040512 /* TripIcons.xcassets */,
 				6374539829714A73000A61D5 /* loading_bar.json */,
 				6374539929714A73000A61D5 /* loading_circular.json */,
 				2606B4CC29437BD10012349A /* loading.json */,
@@ -1403,9 +1406,10 @@
 				6374539A29714A73000A61D5 /* loading_bar.json in Resources */,
 				63004B0029DA6B1D000CDBB4 /* RemoteConfigValue.plist in Resources */,
 				63209FEF2913C3C000709227 /* Preview Assets.xcassets in Resources */,
+				2650A05B2CE311D900040512 /* TripIcons.xcassets in Resources */,
 				63209FEC2913C3C000709227 /* Assets.xcassets in Resources */,
 				63D32FE829CAFF8A0049F567 /* Localizable.strings in Resources */,
-				261F6E9D2CC9E36100F7CA18 /* Categories.xcassets in Resources */,
+				261F6E9D2CC9E36100F7CA18 /* CategoryIcons.xcassets in Resources */,
 				26BD8FCB29694CE5005F7E5C /* ApiInfo.plist in Resources */,
 				2606B4CD29437BD10012349A /* loading.json in Resources */,
 				6374539B29714A73000A61D5 /* loading_circular.json in Resources */,
