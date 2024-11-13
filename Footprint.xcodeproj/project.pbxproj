@@ -49,7 +49,7 @@
 		2650A0682CE3357900040512 /* TripEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2650A0672CE3357900040512 /* TripEntity.swift */; };
 		2650A06C2CE33CDB00040512 /* TripIconEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2650A06B2CE33CDB00040512 /* TripIconEntity.swift */; };
 		2650A06E2CE33D4000040512 /* TripFootprintEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2650A06D2CE33D3F00040512 /* TripFootprintEntity.swift */; };
-		2650A0702CE3428300040512 /* TripV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2650A06F2CE3428300040512 /* TripV2.swift */; };
+		2650A0702CE3428300040512 /* TripDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2650A06F2CE3428300040512 /* TripDAO.swift */; };
 		265917112CD857CC008C39E9 /* ToogleStarUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265917102CD857CC008C39E9 /* ToogleStarUseCase.swift */; };
 		265917142CD87764008C39E9 /* SDFlowLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 265917132CD87764008C39E9 /* SDFlowLayout */; };
 		265917162CD8B986008C39E9 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265917152CD8B986008C39E9 /* Location.swift */; };
@@ -140,6 +140,10 @@
 		26BD8FCB29694CE5005F7E5C /* ApiInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26BD8FCA29694CE5005F7E5C /* ApiInfo.plist */; };
 		26BFFD942C5F8C400001B02B /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 26BFFD932C5F8C400001B02B /* Kingfisher */; };
 		26C04F6D2917667F00890A76 /* SwiftUIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */; };
+		26D018B42CE4336C00891B89 /* TripRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D018B32CE4336C00891B89 /* TripRepositoryImpl.swift */; };
+		26D018B72CE433B600891B89 /* TripRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D018B62CE433B600891B89 /* TripRepository.swift */; };
+		26D018B92CE436A200891B89 /* TripIconRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D018B82CE436A200891B89 /* TripIconRepository.swift */; };
+		26D018BC2CE4396800891B89 /* DBError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D018BB2CE4396800891B89 /* DBError.swift */; };
 		26EB9D1B2CD9A34300D3B0CE /* TempNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EB9D1A2CD9A34300D3B0CE /* TempNote.swift */; };
 		26EB9D1D2CD9E2C500D3B0CE /* MapStatusVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EB9D1C2CD9E2C500D3B0CE /* MapStatusVM.swift */; };
 		26EB9D1F2CD9E4B100D3B0CE /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EB9D1E2CD9E4B100D3B0CE /* NotificationName.swift */; };
@@ -279,7 +283,7 @@
 		2650A0672CE3357900040512 /* TripEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripEntity.swift; sourceTree = "<group>"; };
 		2650A06B2CE33CDB00040512 /* TripIconEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripIconEntity.swift; sourceTree = "<group>"; };
 		2650A06D2CE33D3F00040512 /* TripFootprintEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripFootprintEntity.swift; sourceTree = "<group>"; };
-		2650A06F2CE3428300040512 /* TripV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripV2.swift; sourceTree = "<group>"; };
+		2650A06F2CE3428300040512 /* TripDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDAO.swift; sourceTree = "<group>"; };
 		265917102CD857CC008C39E9 /* ToogleStarUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToogleStarUseCase.swift; sourceTree = "<group>"; };
 		265917152CD8B986008C39E9 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		265917172CD8BE55008C39E9 /* DeleteImageUrlUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteImageUrlUseCase.swift; sourceTree = "<group>"; };
@@ -366,6 +370,10 @@
 		26A238F92A13743700D7CF49 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		26BD8FCA29694CE5005F7E5C /* ApiInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiInfo.plist; sourceTree = "<group>"; };
 		26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIExtension.swift; sourceTree = "<group>"; };
+		26D018B32CE4336C00891B89 /* TripRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripRepositoryImpl.swift; sourceTree = "<group>"; };
+		26D018B62CE433B600891B89 /* TripRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripRepository.swift; sourceTree = "<group>"; };
+		26D018B82CE436A200891B89 /* TripIconRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripIconRepository.swift; sourceTree = "<group>"; };
+		26D018BB2CE4396800891B89 /* DBError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBError.swift; sourceTree = "<group>"; };
 		26EB9D1A2CD9A34300D3B0CE /* TempNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempNote.swift; sourceTree = "<group>"; };
 		26EB9D1C2CD9E2C500D3B0CE /* MapStatusVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStatusVM.swift; sourceTree = "<group>"; };
 		26EB9D1E2CD9E4B100D3B0CE /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
@@ -894,6 +902,7 @@
 				269CA5592C78A4D900366005 /* CategoryRepositoryImpl.swift */,
 				2694FC8B2C79821500F01644 /* MemberRepositoryImpl.swift */,
 				2675D2092CDDDF8F00BD7633 /* SettingRepositoryImpl.swift */,
+				26D018B32CE4336C00891B89 /* TripRepositoryImpl.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -905,6 +914,8 @@
 				269CA55B2C78A4DF00366005 /* CategoryRepository.swift */,
 				2694FC892C797F2F00F01644 /* MemberRepository.swift */,
 				2675D2052CDDDE4500BD7633 /* SettingRepository.swift */,
+				26D018B62CE433B600891B89 /* TripRepository.swift */,
+				26D018B82CE436A200891B89 /* TripIconRepository.swift */,
 			);
 			path = RepositoryProtocols;
 			sourceTree = "<group>";
@@ -915,7 +926,7 @@
 				2696F4E72C77540800F56E73 /* NoteData.swift */,
 				269CA5572C78A43300366005 /* CategoryV2.swift */,
 				2694FC872C797EA700F01644 /* Member.swift */,
-				2650A06F2CE3428300040512 /* TripV2.swift */,
+				2650A06F2CE3428300040512 /* TripDAO.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -923,6 +934,7 @@
 		2696F4E62C7753E900F56E73 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				26D018BA2CE4396100891B89 /* Error */,
 				2650A0662CE3355600040512 /* Footprint */,
 				2650A0652CE3355300040512 /* Trip */,
 				2650A0642CE3354B00040512 /* Infos */,
@@ -933,6 +945,7 @@
 		2696F4E92C77555000F56E73 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				26D018B52CE433A200891B89 /* TripUseCases */,
 				2643E0D22CDB00780075BA69 /* SettingUseCases */,
 				2694FC8D2C7984B600F01644 /* MemberUseCases */,
 				269CA55D2C78A56D00366005 /* CategoryUseCases */,
@@ -1015,6 +1028,21 @@
 				26EB9D202CD9E4E500D3B0CE /* NotificationService.swift */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		26D018B52CE433A200891B89 /* TripUseCases */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TripUseCases;
+			sourceTree = "<group>";
+		};
+		26D018BA2CE4396100891B89 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				26D018BB2CE4396800891B89 /* DBError.swift */,
+			);
+			path = Error;
 			sourceTree = "<group>";
 		};
 		26F137082CD4AACA00096181 /* Components */ = {
@@ -1546,7 +1574,7 @@
 				26FAB54D2C6B4091006304AE /* SelectLocationView.swift in Sources */,
 				26EB9D212CD9E4E500D3B0CE /* NotificationService.swift in Sources */,
 				63F292B2297656D700D42D0E /* TrashView.swift in Sources */,
-				2650A0702CE3428300040512 /* TripV2.swift in Sources */,
+				2650A0702CE3428300040512 /* TripDAO.swift in Sources */,
 				63F132472914A18800B3A9E0 /* AlertViewModel.swift in Sources */,
 				266EDDE62C64EB46006CF09B /* MainVM2.swift in Sources */,
 				2694FC9F2C79C2D700F01644 /* MemberEditVM.swift in Sources */,
@@ -1564,6 +1592,7 @@
 				265917162CD8B986008C39E9 /* Location.swift in Sources */,
 				63B1FB032914B381007E94B6 /* RealmDB.swift in Sources */,
 				26FAB5512C6B576F006304AE /* EnvironmentValues.swift in Sources */,
+				26D018B72CE433B600891B89 /* TripRepository.swift in Sources */,
 				63F132AA2914A1C000B3A9E0 /* MainViewModel.swift in Sources */,
 				2650A06E2CE33D4000040512 /* TripFootprintEntity.swift in Sources */,
 				26940CAD293C9D0F0091E996 /* ShowImageView.swift in Sources */,
@@ -1606,6 +1635,7 @@
 				263FADC32C7164B700AE9E73 /* TabBarService.swift in Sources */,
 				268546E82A28DB1200BDA2EA /* ReviewView.swift in Sources */,
 				63D32FCC29CA9E390049F567 /* FirestoreExtension.swift in Sources */,
+				26D018BC2CE4396800891B89 /* DBError.swift in Sources */,
 				2691D9C7294EE505002825B9 /* BluePrintBottomSheetView.swift in Sources */,
 				63E5C82D2975361C00D32FD2 /* MapView.swift in Sources */,
 				263A97BD29458533008A69F5 /* PeopleWithSelectorViewModel.swift in Sources */,
@@ -1651,6 +1681,7 @@
 				63C81AB52963BD3D0001A70B /* SelectFootprintsView.swift in Sources */,
 				63F132562914A19F00B3A9E0 /* SceneDelegate.swift in Sources */,
 				269CA55C2C78A4DF00366005 /* CategoryRepository.swift in Sources */,
+				26D018B42CE4336C00891B89 /* TripRepositoryImpl.swift in Sources */,
 				2694FC992C79B99500F01644 /* MemberListEditVM.swift in Sources */,
 				2696F4EC2C77556800F56E73 /* SaveNoteUseCase.swift in Sources */,
 				63C81AB92963D6EF0001A70B /* DragAndDropService.swift in Sources */,
@@ -1676,6 +1707,7 @@
 				267CC1892C6704B900D6015E /* FootprintVM.swift in Sources */,
 				2682A76F2C6D79C700DF1F8A /* FPMapManager.swift in Sources */,
 				63C102B329651E690099AF6A /* Footprint++Bundle.swift in Sources */,
+				26D018B92CE436A200891B89 /* TripIconRepository.swift in Sources */,
 				266BE08E2CCA1AA000E754EB /* CategoryItem.swift in Sources */,
 				2694FC9D2C79C2D400F01644 /* MemberEditView.swift in Sources */,
 			);

@@ -14,3 +14,15 @@ struct TripEntity {
     var startAt: Int
     var endAt: Int
 }
+
+extension TripEntity {
+    struct DAO {
+        let id: String
+        let title: String
+        let content: String
+        var iconId: String
+        var footprintIds: [String]
+        var startAt: Int
+        var endAt: Int
+    }
+}
