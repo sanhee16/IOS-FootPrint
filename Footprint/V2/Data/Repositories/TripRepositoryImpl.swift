@@ -89,16 +89,17 @@ class TripRepositoryImpl: TripRepository {
     func loadTrips() -> Result<[TripEntity.DAO], DBError> {
         let realm = try! Realm()
         let list: [TripEntity.DAO] = realm.objects(TripDAO.self).map({ $0.toTripEntityDao() })
-        return .success(list)
+        return list.isEmpty ? .failure(.notFound) : .success(list)
     }
     
     func loadTrip(_ id: String) -> Result<TripEntity.DAO, DBError> {
         let realm = try! Realm()
-        guard let item: TripEntity.DAO = realm.objects(TripDAO.self).filter({ $0.id == id }).first?.toTripEntityDao() else {
+        guard let item: TripEntity.DAO = realm.objects(TripDAO.self)
+            .filter({ $0.id == id })
+            .first?
+            .toTripEntityDao() else {
             return .failure(.notFound)
         }
         return .success(item)
     }
-    
-    
 }

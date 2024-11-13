@@ -6,5 +6,8 @@
 //
 
 protocol TripIconRepository {
-    func saveTripIcon(icon: TripIcon)
+    func saveTripIcon(icon: TripIcon) -> Result<String, DBError>
+    func deleteTripIcon(id: String) -> Result<String, DBError>
+    func loadTripIcons() -> Result<[TripIconEntity.DAO], DBError>
+    func loadTripIcon(id: String) -> Result<TripIconEntity.DAO, DBError>
 }

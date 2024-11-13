@@ -10,3 +10,10 @@ struct TripIconEntity: Equatable, Hashable {
     let icon: TripIcon
     var isSelected: Bool
 }
+
+extension TripIconEntity {
+    struct DAO {
+        let id: String
+        let iconId: String
+    }
+}
