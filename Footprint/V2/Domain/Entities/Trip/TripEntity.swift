@@ -1,11 +1,11 @@
 //
-//  TripListEntity.swift
+//  TripEntity.swift
 //  Footprint
 //
 //  Created by sandy on 11/12/24.
 //
 
-struct TripListEntity {
+struct TripEntity {
     let id: String
     let title: String
     let content: String
