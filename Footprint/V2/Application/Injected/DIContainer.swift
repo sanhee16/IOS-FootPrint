@@ -35,6 +35,14 @@ extension Container {
     var settingRepository: Factory<SettingRepository> {
         Factory(self) { SettingRepositoryImpl(userDefaultsManager: self.userDefaultsManager()) }
     }
+    
+    var tripIconRepository: Factory<TripIconRepository> {
+        Factory(self) { TripIconRepositoryImpl() }
+    }
+    
+    var tripRepository: Factory<TripRepository> {
+        Factory(self) { TripRepositoryImpl() }
+    }
 }
 
 //MARK: UseCase - Note
@@ -130,5 +138,12 @@ extension Container {
     
     var getIsShowMarkerUseCase: Factory<GetIsShowMarkerUseCase> {
         Factory(self) { GetIsShowMarkerUseCase(settingRepository: self.settingRepository()) }
+    }
+}
+
+//MARK: UseCase - TripIcon
+extension Container {
+    var saveTripIconUseCase: Factory<SaveTripIconUseCase> {
+        Factory(self) { SaveTripIconUseCase(tripIconRepository: self.tripIconRepository()) }
     }
 }

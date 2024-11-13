@@ -146,6 +146,7 @@
 		26D018BC2CE4396800891B89 /* DBError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D018BB2CE4396800891B89 /* DBError.swift */; };
 		26D018BE2CE4554C00891B89 /* TripIconRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D018BD2CE4554C00891B89 /* TripIconRepositoryImpl.swift */; };
 		26D018C02CE4557200891B89 /* TripIconDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D018BF2CE4557200891B89 /* TripIconDAO.swift */; };
+		26D018C32CE4598500891B89 /* SaveTripIconUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D018C22CE4598500891B89 /* SaveTripIconUseCase.swift */; };
 		26EB9D1B2CD9A34300D3B0CE /* TempNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EB9D1A2CD9A34300D3B0CE /* TempNote.swift */; };
 		26EB9D1D2CD9E2C500D3B0CE /* MapStatusVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EB9D1C2CD9E2C500D3B0CE /* MapStatusVM.swift */; };
 		26EB9D1F2CD9E4B100D3B0CE /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EB9D1E2CD9E4B100D3B0CE /* NotificationName.swift */; };
@@ -378,6 +379,7 @@
 		26D018BB2CE4396800891B89 /* DBError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBError.swift; sourceTree = "<group>"; };
 		26D018BD2CE4554C00891B89 /* TripIconRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripIconRepositoryImpl.swift; sourceTree = "<group>"; };
 		26D018BF2CE4557200891B89 /* TripIconDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripIconDAO.swift; sourceTree = "<group>"; };
+		26D018C22CE4598500891B89 /* SaveTripIconUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveTripIconUseCase.swift; sourceTree = "<group>"; };
 		26EB9D1A2CD9A34300D3B0CE /* TempNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempNote.swift; sourceTree = "<group>"; };
 		26EB9D1C2CD9E2C500D3B0CE /* MapStatusVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStatusVM.swift; sourceTree = "<group>"; };
 		26EB9D1E2CD9E4B100D3B0CE /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
@@ -951,6 +953,7 @@
 		2696F4E92C77555000F56E73 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				26D018C12CE4597500891B89 /* TripIconUseCases */,
 				26D018B52CE433A200891B89 /* TripUseCases */,
 				2643E0D22CDB00780075BA69 /* SettingUseCases */,
 				2694FC8D2C7984B600F01644 /* MemberUseCases */,
@@ -1049,6 +1052,14 @@
 				26D018BB2CE4396800891B89 /* DBError.swift */,
 			);
 			path = Error;
+			sourceTree = "<group>";
+		};
+		26D018C12CE4597500891B89 /* TripIconUseCases */ = {
+			isa = PBXGroup;
+			children = (
+				26D018C22CE4598500891B89 /* SaveTripIconUseCase.swift */,
+			);
+			path = TripIconUseCases;
 			sourceTree = "<group>";
 		};
 		26F137082CD4AACA00096181 /* Components */ = {
@@ -1679,6 +1690,7 @@
 				63F1324C2914A18800B3A9E0 /* CommonApi.swift in Sources */,
 				2694FC932C79851000F01644 /* DeleteMemberUseCase.swift in Sources */,
 				2650A05D2CE3253E00040512 /* TripIcon.swift in Sources */,
+				26D018C32CE4598500891B89 /* SaveTripIconUseCase.swift in Sources */,
 				265917112CD857CC008C39E9 /* ToogleStarUseCase.swift in Sources */,
 				2694FC8F2C7984CA00F01644 /* SaveMemberUseCase.swift in Sources */,
 				63F1329A2914A1C000B3A9E0 /* WebView.swift in Sources */,
