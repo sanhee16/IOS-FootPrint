@@ -14,6 +14,6 @@ struct TripIconEntity: Equatable, Hashable {
 extension TripIconEntity {
     struct DAO {
         let id: String
-        let iconId: String
+        let iconName: String
     }
 }

@@ -9,18 +9,18 @@ import RealmSwift
 
 class TripIconDAO: Object {
     @Persisted(primaryKey: true) var id: String
-    @Persisted var icon: String
+    @Persisted var iconName: String
     @Persisted var isAvailable: Bool
     
-    convenience init(id: String, icon: String, isAvailable: Bool) {
+    convenience init(id: String, iconName: String, isAvailable: Bool) {
         self.init()
         
         self.id = id
-        self.icon = icon
+        self.iconName = iconName
         self.isAvailable = isAvailable
     }
     
     func toTripIconEntityDao() -> TripIconEntity.DAO {
-        return TripIconEntity.DAO(id: self.id, iconId: self.icon)
+        return TripIconEntity.DAO(id: self.id, iconName: self.iconName)
     }
 }

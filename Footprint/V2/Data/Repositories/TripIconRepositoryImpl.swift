@@ -11,7 +11,7 @@ import RealmSwift
 class TripIconRepositoryImpl: TripIconRepository {
     func saveTripIcon(icon: TripIcon) -> Result<String, DBError> {
         let realm = try! Realm()
-        let item = TripIconDAO(id: UUID().uuidString, icon: icon.rawValue, isAvailable: true)
+        let item = TripIconDAO(id: UUID().uuidString, iconName: icon.rawValue, isAvailable: true)
         do {
             try realm.write {
                 realm.add(item, update: .modified)
