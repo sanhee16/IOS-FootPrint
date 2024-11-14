@@ -42,8 +42,7 @@ enum Destination: Hashable {
         case .peopleWithListEditView(let output):
             MemberListEditView(output: output)
         case .editTrip(let type, let output):
-            EditTripView(output: output)
-                .environmentObject(EditTripVM(type: type))
+            EditTripView(type: type, output: output)
         }
     }
 }

@@ -9,7 +9,7 @@ struct TripEntity {
     let id: String
     let title: String
     let content: String
-    var icon: TripIcon
+    var icon: TripIconEntity
     var footprints: [TripFootprintEntity]
     var startAt: Int
     var endAt: Int

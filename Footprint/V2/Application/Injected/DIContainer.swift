@@ -150,6 +150,10 @@ extension Container {
     var saveDefaultTripIconUseCase: Factory<SaveDefaultTripIconUseCase> {
         Factory(self) { SaveDefaultTripIconUseCase(tripIconRepository: self.tripIconRepository()) }
     }
+    
+    var loadTripIconsUseCase: Factory<LoadTripIconsUseCase> {
+        Factory(self) { LoadTripIconsUseCase(tripIconRepository: self.tripIconRepository()) }
+    }
 }
 
 //MARK: UseCase - Trip
@@ -164,7 +168,25 @@ extension Container {
         }
     }
     
+    var loadTripUseCase: Factory<LoadTripUseCase> {
+        Factory(self) {
+            LoadTripUseCase(
+                tripRepository: self.tripRepository(),
+                tripIconRepository: self.tripIconRepository(),
+                noteRepository: self.noteRepository()
+            )
+        }
+    }
+    
     var saveTripUseCase: Factory<SaveTripUseCase> {
         Factory(self) { SaveTripUseCase(tripRepository: self.tripRepository()) }
+    }
+    
+    var updateTripUseCase: Factory<UpdateTripUseCase> {
+        Factory(self) { UpdateTripUseCase(tripRepository: self.tripRepository()) }
+    }
+    
+    var loadFootprintsUseCase: Factory<LoadFootprintsUseCase> {
+        Factory(self) { LoadFootprintsUseCase(noteRepository: self.noteRepository()) }
     }
 }

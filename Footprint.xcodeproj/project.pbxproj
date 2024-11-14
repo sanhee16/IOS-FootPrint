@@ -27,6 +27,12 @@
 		262424DE2CE595A700595132 /* EditTripVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262424DD2CE595A700595132 /* EditTripVM.swift */; };
 		262424E02CE5AD6000595132 /* SaveTripUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262424DF2CE5AD6000595132 /* SaveTripUseCase.swift */; };
 		262424E22CE5ADC800595132 /* LoadTripsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262424E12CE5ADC800595132 /* LoadTripsUseCase.swift */; };
+		262424E42CE5B2A200595132 /* LoadTripIconsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262424E32CE5B2A200595132 /* LoadTripIconsUseCase.swift */; };
+		262424E62CE5B7D900595132 /* LoadTripUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262424E52CE5B7D900595132 /* LoadTripUseCase.swift */; };
+		262424E82CE5B9CE00595132 /* TripIconItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262424E72CE5B9CE00595132 /* TripIconItem.swift */; };
+		262424EA2CE5DF1400595132 /* UpdateTripUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262424E92CE5DF1400595132 /* UpdateTripUseCase.swift */; };
+		262424EC2CE5E73100595132 /* LoadFootprintsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262424EB2CE5E73100595132 /* LoadFootprintsUseCase.swift */; };
+		262424EE2CE5E94900595132 /* SelectFootprintsViewV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262424ED2CE5E94900595132 /* SelectFootprintsViewV2.swift */; };
 		2627408F29699B2A00B47566 /* CategorySelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2627408E29699B2A00B47566 /* CategorySelectorView.swift */; };
 		2627409129699B2F00B47566 /* CategorySelectorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2627409029699B2F00B47566 /* CategorySelectorViewModel.swift */; };
 		262D2A02293E2BA4005984DA /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262D2A01293E2BA4005984DA /* SettingView.swift */; };
@@ -273,6 +279,12 @@
 		262424DD2CE595A700595132 /* EditTripVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTripVM.swift; sourceTree = "<group>"; };
 		262424DF2CE5AD6000595132 /* SaveTripUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveTripUseCase.swift; sourceTree = "<group>"; };
 		262424E12CE5ADC800595132 /* LoadTripsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadTripsUseCase.swift; sourceTree = "<group>"; };
+		262424E32CE5B2A200595132 /* LoadTripIconsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadTripIconsUseCase.swift; sourceTree = "<group>"; };
+		262424E52CE5B7D900595132 /* LoadTripUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadTripUseCase.swift; sourceTree = "<group>"; };
+		262424E72CE5B9CE00595132 /* TripIconItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripIconItem.swift; sourceTree = "<group>"; };
+		262424E92CE5DF1400595132 /* UpdateTripUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTripUseCase.swift; sourceTree = "<group>"; };
+		262424EB2CE5E73100595132 /* LoadFootprintsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadFootprintsUseCase.swift; sourceTree = "<group>"; };
+		262424ED2CE5E94900595132 /* SelectFootprintsViewV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFootprintsViewV2.swift; sourceTree = "<group>"; };
 		2627408E29699B2A00B47566 /* CategorySelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectorView.swift; sourceTree = "<group>"; };
 		2627409029699B2F00B47566 /* CategorySelectorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectorViewModel.swift; sourceTree = "<group>"; };
 		262D2A01293E2BA4005984DA /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
@@ -536,6 +548,7 @@
 			children = (
 				262424DB2CE595A200595132 /* EditTripView.swift */,
 				262424DD2CE595A700595132 /* EditTripVM.swift */,
+				262424ED2CE5E94900595132 /* SelectFootprintsViewV2.swift */,
 			);
 			path = EditTrip;
 			sourceTree = "<group>";
@@ -685,6 +698,7 @@
 			children = (
 				266BE08D2CCA1AA000E754EB /* CategoryItem.swift */,
 				266BE0912CCA21AA00E754EB /* MemberItem.swift */,
+				262424E72CE5B9CE00595132 /* TripIconItem.swift */,
 			);
 			path = Items;
 			sourceTree = "<group>";
@@ -1063,7 +1077,10 @@
 			isa = PBXGroup;
 			children = (
 				262424DF2CE5AD6000595132 /* SaveTripUseCase.swift */,
+				262424E92CE5DF1400595132 /* UpdateTripUseCase.swift */,
 				262424E12CE5ADC800595132 /* LoadTripsUseCase.swift */,
+				262424E52CE5B7D900595132 /* LoadTripUseCase.swift */,
+				262424EB2CE5E73100595132 /* LoadFootprintsUseCase.swift */,
 			);
 			path = TripUseCases;
 			sourceTree = "<group>";
@@ -1081,6 +1098,7 @@
 			children = (
 				26D018C22CE4598500891B89 /* SaveTripIconUseCase.swift */,
 				262424D82CE590BD00595132 /* SaveDefaultTripIconUseCase.swift */,
+				262424E32CE5B2A200595132 /* LoadTripIconsUseCase.swift */,
 			);
 			path = TripIconUseCases;
 			sourceTree = "<group>";
@@ -1563,6 +1581,7 @@
 				266EDDD92C64EAA9006CF09B /* FootprintApp.swift in Sources */,
 				269CA55F2C78A58B00366005 /* SaveDefaultCategoriesUseCase.swift in Sources */,
 				26D018C02CE4557200891B89 /* TripIconDAO.swift in Sources */,
+				262424E62CE5B7D900595132 /* LoadTripUseCase.swift in Sources */,
 				63E2756929502DFA00E4AABC /* PinchZoom.swift in Sources */,
 				267CC1822C66FA1200D6015E /* GoogleMapView2.swift in Sources */,
 				63E848A3295ABE7E0037D7A3 /* EditTravelViewModel.swift in Sources */,
@@ -1593,6 +1612,7 @@
 				63F132962914A1C000B3A9E0 /* MultilineTextView.swift in Sources */,
 				63B1FAF52914B148007E94B6 /* SProgress.swift in Sources */,
 				2675D20C2CDDE3AF00BD7633 /* UpdateCategoryOrderUseCase.swift in Sources */,
+				262424EC2CE5E73100595132 /* LoadFootprintsUseCase.swift in Sources */,
 				63FA2389294C35E300D31506 /* PeopleEditViewModel.swift in Sources */,
 				63F132552914A19F00B3A9E0 /* AppDelegate.swift in Sources */,
 				2650A0632CE3353500040512 /* TripListVM.swift in Sources */,
@@ -1654,8 +1674,10 @@
 				269CA5612C78A5B900366005 /* LoadCategoriesUseCase.swift in Sources */,
 				269CA5652C78A5EC00366005 /* DeleteCategoryUseCase.swift in Sources */,
 				63C8CCF62941D60400BB861D /* DevInfoView.swift in Sources */,
+				262424EE2CE5E94900595132 /* SelectFootprintsViewV2.swift in Sources */,
 				2619FE8C2940D6B300D24778 /* CheckPermissionViewModel.swift in Sources */,
 				63F1324B2914A18800B3A9E0 /* UserDefault.swift in Sources */,
+				262424E82CE5B9CE00595132 /* TripIconItem.swift in Sources */,
 				63D32FC829CA92BF0049F567 /* PremiumCodeViewModel.swift in Sources */,
 				2696F4E42C7753C400F56E73 /* NoteRepository.swift in Sources */,
 				267CC18C2C6710DF00D6015E /* UINavigationController+Extension.swift in Sources */,
@@ -1701,6 +1723,7 @@
 				268546EA2A28DB1800BDA2EA /* ReviewViewModel.swift in Sources */,
 				261F6EA32CC9E67A00F7CA18 /* CategoryColor.swift in Sources */,
 				63D32FC629CA92B60049F567 /* PremiumCodeView.swift in Sources */,
+				262424EA2CE5DF1400595132 /* UpdateTripUseCase.swift in Sources */,
 				63F132492914A18800B3A9E0 /* SwiftExtension.swift in Sources */,
 				269CA5542C78A11500366005 /* EditNoteTempStorage.swift in Sources */,
 				26F1370A2CD4AADB00096181 /* PeopleWithView.swift in Sources */,
@@ -1732,6 +1755,7 @@
 				26D018B42CE4336C00891B89 /* TripRepositoryImpl.swift in Sources */,
 				2694FC992C79B99500F01644 /* MemberListEditVM.swift in Sources */,
 				2696F4EC2C77556800F56E73 /* SaveNoteUseCase.swift in Sources */,
+				262424E42CE5B2A200595132 /* LoadTripIconsUseCase.swift in Sources */,
 				63C81AB92963D6EF0001A70B /* DragAndDropService.swift in Sources */,
 				2694FCA42C7AADBC00F01644 /* LoadCategoryUseCase.swift in Sources */,
 				2694FC952C79853500F01644 /* UpdateMemberUseCase.swift in Sources */,

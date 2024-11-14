@@ -21,10 +21,11 @@ class LoadTripsUseCase {
         var result: [TripEntity] = []
         value.forEach { dao in
             do {
-                guard let iconName = try? self.tripIconRepository.loadTripIcon(id: dao.iconId).get().iconName,
-                      let icon = TripIcon(rawValue: iconName) else {
+                guard let iconDao = try? self.tripIconRepository.loadTripIcon(id: dao.iconId).get(),
+                      let tripIcon = TripIcon(rawValue: iconDao.iconName) else {
                     return
                 }
+                let icon = TripIconEntity(id: iconDao.id, icon: tripIcon, isSelected: true)
                 var footprints: [TripFootprintEntity] = []
                 var idx: Int = 0
                 

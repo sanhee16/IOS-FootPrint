@@ -5,9 +5,9 @@
 //  Created by sandy on 11/12/24.
 //
 
-struct TripFootprintEntity {
+struct TripFootprintEntity: Hashable, Equatable {
     let id: String
-    var idx: Int
+    var idx: Int?
     let title: String
     let content: String
     let address: String
