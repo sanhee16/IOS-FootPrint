@@ -151,3 +151,20 @@ extension Container {
         Factory(self) { SaveDefaultTripIconUseCase(tripIconRepository: self.tripIconRepository()) }
     }
 }
+
+//MARK: UseCase - Trip
+extension Container {
+    var loadTripsUseCase: Factory<LoadTripsUseCase> {
+        Factory(self) {
+            LoadTripsUseCase(
+                tripRepository: self.tripRepository(),
+                tripIconRepository: self.tripIconRepository(),
+                noteRepository: self.noteRepository()
+            )
+        }
+    }
+    
+    var saveTripUseCase: Factory<SaveTripUseCase> {
+        Factory(self) { SaveTripUseCase(tripRepository: self.tripRepository()) }
+    }
+}
