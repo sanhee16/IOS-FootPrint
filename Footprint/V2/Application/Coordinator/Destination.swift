@@ -13,6 +13,7 @@ enum Destination: Hashable {
     case editNote(type: EditNoteType, output: EditNoteView.Output)
     case categoryListEditView(output: CategoryListEditView.Output)
     case peopleWithListEditView(output: MemberListEditView.Output)
+    case editTrip(type: EditTripType, output: EditTripView.Output)
     
     var viewName: String {
         switch self {
@@ -24,6 +25,8 @@ enum Destination: Hashable {
             return "categoryListEditView"
         case .peopleWithListEditView:
             return "peopleWithListEditView"
+        case .editTrip:
+            return "editTrip"
         }
     }
     
@@ -38,6 +41,9 @@ enum Destination: Hashable {
             CategoryListEditView(output: output)
         case .peopleWithListEditView(let output):
             MemberListEditView(output: output)
+        case .editTrip(let type, let output):
+            EditTripView(output: output)
+                .environmentObject(EditTripVM(type: type))
         }
     }
 }

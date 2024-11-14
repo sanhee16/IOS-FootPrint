@@ -29,13 +29,21 @@ struct MainView2: View {
 //                    location: Location(latitude: 0.0, longitude: 0.0),
 //                    type: .create
 //                )
-//                
-                MapView2(output: coordinator.mapOutput)
-                    .environmentObject(mapStatusVM)
-                
+//
+                switch $currentTab.wrappedValue {
+                case .map:
+                    MapView2(output: coordinator.mapOutput)
+                        .environmentObject(mapStatusVM)
+                case .travel:
+                    TripListView(output: coordinator.tripListViewOutput)
+                default:
+                    VStack {
+                        Spacer()
+                    }
+                }
                 if $tabBarService.isShowTabBar.wrappedValue {
                     MainMenuBar(current: $currentTab.wrappedValue) { type in
-                        
+                        $currentTab.wrappedValue = type
                     }
                 }
             }

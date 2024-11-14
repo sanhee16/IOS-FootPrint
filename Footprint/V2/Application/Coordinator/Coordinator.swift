@@ -21,6 +21,12 @@ class Coordinator: BaseCoordinator<Destination> {
     private func pushPeopleWithListEditView(_ output: MemberListEditView.Output) {
         self.push(.peopleWithListEditView(output: output))
     }
+    
+    private func pushEditTripView(_ type: EditTripType) {
+        self.push(.editTrip(type: type, output: EditTripView.Output(pop: {
+            self.pop()
+        })))
+    }
 }
 
 //MARK: Output
@@ -58,6 +64,12 @@ extension Coordinator {
     var peopleWithListEditViewOutput: MemberListEditView.Output {
         MemberListEditView.Output {
             self.pop()
+        }
+    }
+    
+    var tripListViewOutput: TripListView.Output {
+        TripListView.Output { type in
+            self.pushEditTripView(type)
         }
     }
 }

@@ -23,6 +23,8 @@
 		261FF6E42CD3569300B49442 /* LoadNoteUseCaseWithId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261FF6E32CD3569300B49442 /* LoadNoteUseCaseWithId.swift */; };
 		26205C812C6ED65D00AB8325 /* GooglePlaces in Frameworks */ = {isa = PBXBuildFile; productRef = 26205C802C6ED65D00AB8325 /* GooglePlaces */; };
 		262424D92CE590BD00595132 /* SaveDefaultTripIconUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262424D82CE590BD00595132 /* SaveDefaultTripIconUseCase.swift */; };
+		262424DC2CE595A200595132 /* EditTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262424DB2CE595A200595132 /* EditTripView.swift */; };
+		262424DE2CE595A700595132 /* EditTripVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262424DD2CE595A700595132 /* EditTripVM.swift */; };
 		2627408F29699B2A00B47566 /* CategorySelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2627408E29699B2A00B47566 /* CategorySelectorView.swift */; };
 		2627409129699B2F00B47566 /* CategorySelectorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2627409029699B2F00B47566 /* CategorySelectorViewModel.swift */; };
 		262D2A02293E2BA4005984DA /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262D2A01293E2BA4005984DA /* SettingView.swift */; };
@@ -265,6 +267,8 @@
 		261F6EA22CC9E67A00F7CA18 /* CategoryColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryColor.swift; sourceTree = "<group>"; };
 		261FF6E32CD3569300B49442 /* LoadNoteUseCaseWithId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadNoteUseCaseWithId.swift; sourceTree = "<group>"; };
 		262424D82CE590BD00595132 /* SaveDefaultTripIconUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveDefaultTripIconUseCase.swift; sourceTree = "<group>"; };
+		262424DB2CE595A200595132 /* EditTripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTripView.swift; sourceTree = "<group>"; };
+		262424DD2CE595A700595132 /* EditTripVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTripVM.swift; sourceTree = "<group>"; };
 		2627408E29699B2A00B47566 /* CategorySelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectorView.swift; sourceTree = "<group>"; };
 		2627409029699B2F00B47566 /* CategorySelectorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectorViewModel.swift; sourceTree = "<group>"; };
 		262D2A01293E2BA4005984DA /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
@@ -523,6 +527,15 @@
 			path = CheckPermission;
 			sourceTree = "<group>";
 		};
+		262424DA2CE5959B00595132 /* EditTrip */ = {
+			isa = PBXGroup;
+			children = (
+				262424DB2CE595A200595132 /* EditTripView.swift */,
+				262424DD2CE595A700595132 /* EditTripVM.swift */,
+			);
+			path = EditTrip;
+			sourceTree = "<group>";
+		};
 		2627408D29699B1900B47566 /* CategorySelector */ = {
 			isa = PBXGroup;
 			children = (
@@ -607,6 +620,7 @@
 		2650A05E2CE3351200040512 /* Trip */ = {
 			isa = PBXGroup;
 			children = (
+				262424DA2CE5959B00595132 /* EditTrip */,
 				2650A05F2CE3352A00040512 /* TripList */,
 			);
 			path = Trip;
@@ -1548,6 +1562,7 @@
 				269CA5792C78E1B800366005 /* PermissionService.swift in Sources */,
 				63F1328E2914A1C000B3A9E0 /* SplashViewModel.swift in Sources */,
 				63C81AB72963BD430001A70B /* SelectFootprintsViewModel.swift in Sources */,
+				262424DC2CE595A200595132 /* EditTripView.swift in Sources */,
 				269CA5742C78BE3400366005 /* CategoryEditView.swift in Sources */,
 				266BE0902CCA1FF000E754EB /* MemberEntity.swift in Sources */,
 				261F6E9F2CC9E47200F7CA18 /* CategoryIcon.swift in Sources */,
@@ -1683,6 +1698,7 @@
 				269CA5542C78A11500366005 /* EditNoteTempStorage.swift in Sources */,
 				26F1370A2CD4AADB00096181 /* PeopleWithView.swift in Sources */,
 				2619FE8A2940D6AC00D24778 /* CheckPermissionView.swift in Sources */,
+				262424DE2CE595A700595132 /* EditTripVM.swift in Sources */,
 				269CA5672C78A5FE00366005 /* UpdateCategoryUseCase.swift in Sources */,
 				267CC1792C66F28300D6015E /* Coordinator.swift in Sources */,
 				267CC1962C67823E00D6015E /* EditNoteView.swift in Sources */,

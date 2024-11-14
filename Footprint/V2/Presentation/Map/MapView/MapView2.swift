@@ -14,10 +14,10 @@ import GooglePlaces
 import Combine
 
 struct MapView2: View {
-    
     struct Output {
         var goToEditNote: (EditNoteType) -> ()
     }
+    
     private var output: Output
     private var subscription = Set<AnyCancellable>()
     
