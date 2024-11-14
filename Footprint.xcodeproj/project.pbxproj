@@ -22,6 +22,7 @@
 		261F6EA32CC9E67A00F7CA18 /* CategoryColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261F6EA22CC9E67A00F7CA18 /* CategoryColor.swift */; };
 		261FF6E42CD3569300B49442 /* LoadNoteUseCaseWithId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261FF6E32CD3569300B49442 /* LoadNoteUseCaseWithId.swift */; };
 		26205C812C6ED65D00AB8325 /* GooglePlaces in Frameworks */ = {isa = PBXBuildFile; productRef = 26205C802C6ED65D00AB8325 /* GooglePlaces */; };
+		262424D92CE590BD00595132 /* SaveDefaultTripIconUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262424D82CE590BD00595132 /* SaveDefaultTripIconUseCase.swift */; };
 		2627408F29699B2A00B47566 /* CategorySelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2627408E29699B2A00B47566 /* CategorySelectorView.swift */; };
 		2627409129699B2F00B47566 /* CategorySelectorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2627409029699B2F00B47566 /* CategorySelectorViewModel.swift */; };
 		262D2A02293E2BA4005984DA /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262D2A01293E2BA4005984DA /* SettingView.swift */; };
@@ -263,6 +264,7 @@
 		261F6EA02CC9E64100F7CA18 /* CategoryEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEntity.swift; sourceTree = "<group>"; };
 		261F6EA22CC9E67A00F7CA18 /* CategoryColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryColor.swift; sourceTree = "<group>"; };
 		261FF6E32CD3569300B49442 /* LoadNoteUseCaseWithId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadNoteUseCaseWithId.swift; sourceTree = "<group>"; };
+		262424D82CE590BD00595132 /* SaveDefaultTripIconUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveDefaultTripIconUseCase.swift; sourceTree = "<group>"; };
 		2627408E29699B2A00B47566 /* CategorySelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectorView.swift; sourceTree = "<group>"; };
 		2627409029699B2F00B47566 /* CategorySelectorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectorViewModel.swift; sourceTree = "<group>"; };
 		262D2A01293E2BA4005984DA /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
@@ -1058,6 +1060,7 @@
 			isa = PBXGroup;
 			children = (
 				26D018C22CE4598500891B89 /* SaveTripIconUseCase.swift */,
+				262424D82CE590BD00595132 /* SaveDefaultTripIconUseCase.swift */,
 			);
 			path = TripIconUseCases;
 			sourceTree = "<group>";
@@ -1666,6 +1669,7 @@
 				2639921F291FEBA60049F047 /* KeyboardReadable.swift in Sources */,
 				2679D2B32C6830B90073297F /* FPTextField.swift in Sources */,
 				266EDDE82C64EB88006CF09B /* BaseViewModel.swift in Sources */,
+				262424D92CE590BD00595132 /* SaveDefaultTripIconUseCase.swift in Sources */,
 				63F132AB2914A1C000B3A9E0 /* MainView.swift in Sources */,
 				2627408F29699B2A00B47566 /* CategorySelectorView.swift in Sources */,
 				269CA56F2C78B68600366005 /* CategoryListEditView.swift in Sources */,

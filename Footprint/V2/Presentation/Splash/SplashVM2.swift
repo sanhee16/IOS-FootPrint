@@ -14,6 +14,7 @@ class SplashVM2: BaseViewModel {
     @Injected(\.userDefaultsManager) var userDefaultsManager
     @Injected(\.saveDefaultCategoriesUseCase) var saveDefaultCategoriesUseCase
     @Injected(\.loadCategoriesUseCase) var loadCategoriesUseCase
+    @Injected(\.saveDefaultTripIconUseCase) var saveDefaultTripIconUseCase
     
     @Published var isShowMain: Bool = false
     var myLocation: Location? = nil
@@ -38,6 +39,7 @@ class SplashVM2: BaseViewModel {
         }
         userDefaultsManager.firstLaunch = false
         self.saveDefaultCategoriesUseCase.execute()
+        self.saveDefaultTripIconUseCase.execute()
     }
     
 }

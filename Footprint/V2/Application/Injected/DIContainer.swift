@@ -146,4 +146,8 @@ extension Container {
     var saveTripIconUseCase: Factory<SaveTripIconUseCase> {
         Factory(self) { SaveTripIconUseCase(tripIconRepository: self.tripIconRepository()) }
     }
+    
+    var saveDefaultTripIconUseCase: Factory<SaveDefaultTripIconUseCase> {
+        Factory(self) { SaveDefaultTripIconUseCase(tripIconRepository: self.tripIconRepository()) }
+    }
 }
