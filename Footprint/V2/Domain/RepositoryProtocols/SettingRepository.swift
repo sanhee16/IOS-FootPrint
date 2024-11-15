@@ -8,4 +8,6 @@
 protocol SettingRepository {
     func updateIsShowMarker(_ isShow: Bool)
     func getIsShowMarker() -> Bool
+    func updateTripSortType(_ value: Int)
+    func getTripSortType() -> Int
 }

@@ -19,6 +19,7 @@ enum UserDefaultKey: String {
     case premiumCode = "PREMIUM_CODE"
     case settingFlag = "SETTING_FLAG"
     case isShowMarker = "IS_SHOW_MARKER"
+    case tripSortType = "TRIP_SORT_TYPE"
 }
 
 
@@ -56,6 +57,9 @@ class Defaults {
     
     @UserDefault<Bool>(key: UserDefaultKey.isShowMarker.rawValue, defaultValue: true)
     var isShowMarker
+    
+    @UserDefault<Int>(key: UserDefaultKey.tripSortType.rawValue, defaultValue: 0)
+    var tripSortType
     
     //MARK: Setting
     /*

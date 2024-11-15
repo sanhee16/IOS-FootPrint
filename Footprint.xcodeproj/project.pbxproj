@@ -150,6 +150,8 @@
 		26A238FA2A13743700D7CF49 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26A238F92A13743700D7CF49 /* GoogleService-Info.plist */; };
 		26A8806F2CE70D36003F4FA9 /* TripDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A8806E2CE70D36003F4FA9 /* TripDetailView.swift */; };
 		26A880712CE70D39003F4FA9 /* TripDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A880702CE70D39003F4FA9 /* TripDetailVM.swift */; };
+		26A880732CE71C03003F4FA9 /* GetTripSortTypeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A880722CE71C03003F4FA9 /* GetTripSortTypeUseCase.swift */; };
+		26A880752CE71C41003F4FA9 /* UpdateTripSortTypeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A880742CE71C41003F4FA9 /* UpdateTripSortTypeUseCase.swift */; };
 		26BD8FCB29694CE5005F7E5C /* ApiInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26BD8FCA29694CE5005F7E5C /* ApiInfo.plist */; };
 		26BFFD942C5F8C400001B02B /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 26BFFD932C5F8C400001B02B /* Kingfisher */; };
 		26C04F6D2917667F00890A76 /* SwiftUIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */; };
@@ -397,6 +399,8 @@
 		26A238F92A13743700D7CF49 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		26A8806E2CE70D36003F4FA9 /* TripDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailView.swift; sourceTree = "<group>"; };
 		26A880702CE70D39003F4FA9 /* TripDetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailVM.swift; sourceTree = "<group>"; };
+		26A880722CE71C03003F4FA9 /* GetTripSortTypeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTripSortTypeUseCase.swift; sourceTree = "<group>"; };
+		26A880742CE71C41003F4FA9 /* UpdateTripSortTypeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTripSortTypeUseCase.swift; sourceTree = "<group>"; };
 		26BD8FCA29694CE5005F7E5C /* ApiInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiInfo.plist; sourceTree = "<group>"; };
 		26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIExtension.swift; sourceTree = "<group>"; };
 		26D018B32CE4336C00891B89 /* TripRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripRepositoryImpl.swift; sourceTree = "<group>"; };
@@ -614,6 +618,8 @@
 			children = (
 				2675D2032CDDDE3100BD7633 /* UpdateIsShowMarkerUseCase.swift */,
 				2675D2072CDDDE9000BD7633 /* GetIsShowMarkerUseCase.swift */,
+				26A880722CE71C03003F4FA9 /* GetTripSortTypeUseCase.swift */,
+				26A880742CE71C41003F4FA9 /* UpdateTripSortTypeUseCase.swift */,
 			);
 			path = SettingUseCases;
 			sourceTree = "<group>";
@@ -1716,6 +1722,7 @@
 				268546E82A28DB1200BDA2EA /* ReviewView.swift in Sources */,
 				63D32FCC29CA9E390049F567 /* FirestoreExtension.swift in Sources */,
 				26D018BC2CE4396800891B89 /* DBError.swift in Sources */,
+				26A880752CE71C41003F4FA9 /* UpdateTripSortTypeUseCase.swift in Sources */,
 				26D018BE2CE4554C00891B89 /* TripIconRepositoryImpl.swift in Sources */,
 				2691D9C7294EE505002825B9 /* BluePrintBottomSheetView.swift in Sources */,
 				63E5C82D2975361C00D32FD2 /* MapView.swift in Sources */,
@@ -1724,6 +1731,7 @@
 				63F1324A2914A18800B3A9E0 /* Util.swift in Sources */,
 				63F1325B2914A1A300B3A9E0 /* CoordinatorV1.swift in Sources */,
 				63F132482914A18800B3A9E0 /* AlertView.swift in Sources */,
+				26A880732CE71C03003F4FA9 /* GetTripSortTypeUseCase.swift in Sources */,
 				2650A0682CE3357900040512 /* TripEntity.swift in Sources */,
 				2639921F291FEBA60049F047 /* KeyboardReadable.swift in Sources */,
 				2679D2B32C6830B90073297F /* FPTextField.swift in Sources */,

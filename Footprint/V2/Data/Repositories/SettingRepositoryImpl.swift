@@ -21,4 +21,12 @@ class SettingRepositoryImpl: SettingRepository {
     func getIsShowMarker() -> Bool {
         self.userDefaultsManager.isShowMarker
     }
+    
+    func updateTripSortType(_ value: Int) {
+        self.userDefaultsManager.tripSortType = value
+    }
+    
+    func getTripSortType() -> Int {
+        self.userDefaultsManager.tripSortType
+    }
 }
