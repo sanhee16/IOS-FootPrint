@@ -6,9 +6,12 @@
 //
 
 struct TripIconEntity: Equatable, Hashable {
+    public static func == (lhs: TripIconEntity, rhs: TripIconEntity) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
     let id: String
     let icon: TripIcon
-    var isSelected: Bool
 }
 
 extension TripIconEntity {

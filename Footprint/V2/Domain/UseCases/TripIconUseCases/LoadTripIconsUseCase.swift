@@ -20,7 +20,7 @@ class LoadTripIconsUseCase {
             guard let tripIcon = TripIcon(rawValue: dao.iconName) else {
                 return
             }
-            result.append(TripIconEntity(id: dao.id, icon: tripIcon, isSelected: false))
+            result.append(TripIconEntity(id: dao.id, icon: tripIcon))
         }
         
         return result

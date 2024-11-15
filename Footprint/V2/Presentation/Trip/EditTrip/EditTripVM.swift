@@ -72,7 +72,7 @@ class EditTripVM: ObservableObject {
         self.content = ""
         self.startAt = Date()
         self.endAt = Date()
-        self.icon = nil
+        self.icon = self.icons.first
         self.footprints = self.loadFootprintsUseCase.execute()
         self.startAtStatus = .unSelected
         self.endAtStatus = .unSelected

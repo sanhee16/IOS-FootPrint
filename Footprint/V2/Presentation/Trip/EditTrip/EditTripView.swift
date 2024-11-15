@@ -58,6 +58,10 @@ struct EditTripView: View {
                         
                         drawTitle("발자취 컨셉", isEssential: true)
                             .sdPaddingTop(24)
+                        if let icon = $vm.icon.wrappedValue {
+                            TripIconItem(item: icon)
+                                .padding(8)
+                        }
                         if $isExpanded.wrappedValue {
                             SDFlowLayout(data: $vm.icons.wrappedValue, id: \.self) { icon in
                                 iconItem(icon)

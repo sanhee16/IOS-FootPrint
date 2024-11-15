@@ -44,7 +44,7 @@ class LoadTripsUseCase {
                       let tripIcon = TripIcon(rawValue: iconDao.iconName) else {
                     return
                 }
-                let icon = TripIconEntity(id: iconDao.id, icon: tripIcon, isSelected: true)
+                let icon = TripIconEntity(id: iconDao.id, icon: tripIcon)
                 var footprints: [TripFootprintEntity] = []
                 var idx: Int = 0
                 
