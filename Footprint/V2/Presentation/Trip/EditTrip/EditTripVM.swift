@@ -93,6 +93,8 @@ class EditTripVM: ObservableObject {
                 }
                 self.startAtStatus = .selected
                 self.endAtStatus = .selected
+                
+                self.setSelectedFootprints()
             } else {
                 //TODO: fail to load
             }
@@ -140,11 +142,14 @@ class EditTripVM: ObservableObject {
     private func save(_ onDone: @escaping () -> ()) {
         if !self.isAvailableToSave { return }
         guard let icon = self.icon else { return }
+        let footprintIds = self.selectedFootprints.sorted(by: { lhs, rhs in
+            lhs.idx! < rhs.idx!
+        }).map({ $0.id })
         guard let result = self.saveTripUseCase.execute(
             title: self.title,
             content: self.content,
             iconId: icon.id,
-            footprintIds: self.footprints.filter({ $0.idx != nil }).map({ $0.id }),
+            footprintIds: footprintIds,
             startAt: Int(self.startAt.timeIntervalSince1970),
             endAt: Int(self.endAt.timeIntervalSince1970)
         ) else {
@@ -157,12 +162,15 @@ class EditTripVM: ObservableObject {
     private func update(_ id: String, onDone: @escaping () -> ()) {
         if !self.isAvailableToSave { return }
         guard let icon = self.icon else { return }
+        let footprintIds = self.selectedFootprints.sorted(by: { lhs, rhs in
+            lhs.idx! < rhs.idx!
+        }).map({ $0.id })
         guard let result = self.updateTripUseCase.execute(
             id: id,
             title: self.title,
             content: self.content,
             iconId: icon.id,
-            footprintIds: self.footprints.filter({ $0.idx != nil }).map({ $0.id }),
+            footprintIds: footprintIds,
             startAt: Int(self.startAt.timeIntervalSince1970),
             endAt: Int(self.endAt.timeIntervalSince1970)
         ) else {
