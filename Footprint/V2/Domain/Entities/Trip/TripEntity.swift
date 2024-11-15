@@ -24,5 +24,6 @@ extension TripEntity {
         var footprintIds: [String]
         var startAt: Int
         var endAt: Int
+        let createdAt: Int
     }
 }

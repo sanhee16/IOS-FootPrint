@@ -16,9 +16,28 @@ class LoadTripsUseCase {
         self.noteRepository = noteRepository
     }
     
-    func execute() -> [TripEntity] {
-        guard let value = try? self.tripRepository.loadTrips().get() else { return [] }
+    func execute(_ type: TripSortType) -> [TripEntity] {
+        guard var value = try? self.tripRepository.loadTrips().get() else { return [] }
         var result: [TripEntity] = []
+        switch type {
+        case .latest:
+            value = value.sorted(by: { lhs, rhs in
+                lhs.createdAt < rhs.createdAt
+            })
+        case .earliest:
+            value = value.sorted(by: { lhs, rhs in
+                lhs.createdAt > rhs.createdAt
+            })
+        case .more:
+            value = value.sorted(by: { lhs, rhs in
+                lhs.footprintIds.count > rhs.footprintIds.count
+            })
+        case .less:
+            value = value.sorted(by: { lhs, rhs in
+                lhs.footprintIds.count < rhs.footprintIds.count
+            })
+        }
+        
         value.forEach { dao in
             do {
                 guard let iconDao = try? self.tripIconRepository.loadTripIcon(id: dao.iconId).get(),
@@ -56,6 +75,7 @@ class LoadTripsUseCase {
                 ))
             }
         }
+        
         return result
     }
 }

@@ -31,7 +31,9 @@ struct TripListView: View {
                     VStack(alignment: .leading, spacing: 0, content: {
                         ForEach(vm.sortTypes.indices, id: \.self) { idx in
                             sortItem(vm.sortTypes[idx].text) {
-                                
+                                vm.onSelectSortType(vm.sortTypes[idx]) {
+                                    isShowSorting = false
+                                }
                             }
                             if idx < vm.sortTypes.count - 1 {
                                 Rectangle()

@@ -41,10 +41,12 @@ class TripListVM: ObservableObject {
     }
     
     func loadData() {
-        self.trips = self.loadTripsUseCase.execute()
+        self.trips = self.loadTripsUseCase.execute(self.sortType)
     }
     
-    func onSelectSortType(_ sortType: TripSortType) {
+    func onSelectSortType(_ sortType: TripSortType, onDone: @escaping ()->()) {
         self.sortType = self.updateTripSortTypeUseCase.execute(sortType)
+        loadData()
+        onDone()
     }
 }

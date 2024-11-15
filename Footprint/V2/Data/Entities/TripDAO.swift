@@ -38,7 +38,8 @@ class TripDAO: Object {
             iconId: self.iconId,
             footprintIds: Array(self.footprintIds),
             startAt: self.startAt,
-            endAt: self.endAt
+            endAt: self.endAt,
+            createdAt: self.createdAt
         )
     }
 }
