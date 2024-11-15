@@ -139,6 +139,14 @@ extension Container {
     var getIsShowMarkerUseCase: Factory<GetIsShowMarkerUseCase> {
         Factory(self) { GetIsShowMarkerUseCase(settingRepository: self.settingRepository()) }
     }
+    
+    var getTripSortTypeUseCase: Factory<GetTripSortTypeUseCase> {
+        Factory(self) { GetTripSortTypeUseCase(settingRepository: self.settingRepository()) }
+    }
+    
+    var updateTripSortTypeUseCase: Factory<UpdateTripSortTypeUseCase> {
+        Factory(self) { UpdateTripSortTypeUseCase(settingRepository: self.settingRepository()) }
+    }
 }
 
 //MARK: UseCase - TripIcon

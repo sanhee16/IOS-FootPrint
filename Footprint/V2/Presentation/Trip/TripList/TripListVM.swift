@@ -30,12 +30,14 @@ enum TripSortType: Int {
 
 class TripListVM: ObservableObject {
     @Injected(\.loadTripsUseCase) var loadTripsUseCase
+    @Injected(\.getTripSortTypeUseCase) var getTripSortTypeUseCase
+    @Injected(\.updateTripSortTypeUseCase) var updateTripSortTypeUseCase
     @Published var trips: [TripEntity] = []
     let sortTypes: [TripSortType] = [.latest, .earliest, .more, .less]
     @Published var sortType: TripSortType = .latest
     
     init() {
-        
+        self.sortType = self.getTripSortTypeUseCase.execute()
     }
     
     func loadData() {
@@ -43,6 +45,6 @@ class TripListVM: ObservableObject {
     }
     
     func onSelectSortType(_ sortType: TripSortType) {
-        self.sortType = sortType
+        self.sortType = self.updateTripSortTypeUseCase.execute(sortType)
     }
 }
