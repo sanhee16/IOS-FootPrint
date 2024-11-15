@@ -13,6 +13,15 @@ import SwiftUI
 public enum EditTripType {
     case create
     case modify(id: String)
+    
+    var title: String {
+        switch self {
+        case .create:
+            return "발자취 만들기"
+        case .modify(let id):
+            return "발자취 편집하기"
+        }
+    }
 }
 
 public enum PeriodStatus {
@@ -33,12 +42,13 @@ public enum PeriodStatus {
 }
 
 class EditTripVM: ObservableObject {
-    private let type: EditTripType
+    let type: EditTripType
     @Injected(\.saveTripUseCase) var saveTripUseCase
     @Injected(\.updateTripUseCase) var updateTripUseCase
     @Injected(\.loadTripUseCase) var loadTripUseCase
     @Injected(\.loadTripIconsUseCase) var loadTripIconsUseCase
     @Injected(\.loadFootprintsUseCase) var loadFootprintsUseCase
+    @Injected(\.deleteTripUseCase) var deleteTripUseCase
     
     @Published var isAvailableToSave: Bool = false
     
@@ -115,6 +125,17 @@ class EditTripVM: ObservableObject {
             self.save(onDone)
         case .modify(let id):
             self.update(id, onDone: onDone)
+        }
+    }
+    
+    func onDelete(_ onDone: @escaping () -> ()) {
+        if case let .modify(id) = self.type {
+            let result = self.deleteTripUseCase.execute(id)
+            if result != nil {
+                onDone()
+            } else {
+                //TODO: 삭제 실패
+            }
         }
     }
     

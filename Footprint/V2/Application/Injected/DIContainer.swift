@@ -197,4 +197,8 @@ extension Container {
     var loadFootprintsUseCase: Factory<LoadFootprintsUseCase> {
         Factory(self) { LoadFootprintsUseCase(noteRepository: self.noteRepository()) }
     }
+    
+    var deleteTripUseCase: Factory<DeleteTripUseCase> {
+        Factory(self) { DeleteTripUseCase(tripRepository: self.tripRepository()) }
+    }
 }

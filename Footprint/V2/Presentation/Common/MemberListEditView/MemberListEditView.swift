@@ -96,7 +96,7 @@ struct MemberListEditView: View {
                 VStack{}
                     .alert(isPresented: $isPresentDeleteComplete) {
                         Alert(
-                            title: Text("삭제완료"),
+                            title: Text("삭제 완료"),
                             message: Text("‘\($vm.deleteMember.wrappedValue?.name ?? "")’를 삭제했습니다."),
                             dismissButton: .default(Text("확인"), action: {
                                 $vm.deleteMember.wrappedValue = nil

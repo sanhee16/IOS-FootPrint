@@ -23,9 +23,11 @@ class Coordinator: BaseCoordinator<Destination> {
     }
     
     private func pushEditTripView(_ type: EditTripType) {
-        self.push(.editTrip(type: type, output: EditTripView.Output(pop: {
+        self.push(.editTrip(type: type, output:  EditTripView.Output {
             self.pop()
-        })))
+        } popToList: {
+            self.popToRoot()
+        }))
     }
     
     private func pushTripDetailView(_ id: String) {

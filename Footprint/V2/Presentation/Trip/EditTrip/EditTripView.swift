@@ -12,6 +12,7 @@ import SDFlowLayout
 struct EditTripView: View {
     struct Output {
         var pop: () -> ()
+        var popToList: () -> ()
     }
     private let output: Output
     let CHUNK_SIZE = 7
@@ -21,6 +22,8 @@ struct EditTripView: View {
     @State private var isPresentEndAtCalendar: Bool = false
     @State private var isPresentFootprints: Bool = false
     @State private var isMoveNextCalendar: Bool = false
+    @State private var isPresentDelete: Bool = false
+    @State private var isPresentDeleteComplete: Bool = false
     
     private let CALENDAR_ID: String = "CALENDAR_ID"
     private let CONTENT_ID: String = "CONTENT_ID"
@@ -103,6 +106,35 @@ struct EditTripView: View {
                                 drawFootprintItem(item)
                             }
                         }
+                        
+                        VStack{}
+                            .alert(isPresented: $isPresentDelete) {
+                                Alert(
+                                    title: Text("발자취 삭제하기"),
+                                    message: Text("삭제한 발자취는 복구할 수 없습니다.\n‘\($vm.title.wrappedValue)’를 삭제하시겠습니까?\n(발자국은 삭제되지 않습니다.)"),
+                                    primaryButton: .default(Text("취소"), action: {
+                                        
+                                    }),
+                                    secondaryButton: .default(Text("삭제"), action: {
+                                        vm.onDelete {
+                                            DispatchQueue.main.async {
+                                                $isPresentDeleteComplete.wrappedValue = true
+                                            }
+                                        }
+                                    })
+                                )
+                            }
+                        
+                        VStack{}
+                            .alert(isPresented: $isPresentDeleteComplete) {
+                                Alert(
+                                    title: Text("삭제 완료"),
+                                    message: Text("‘\($vm.title.wrappedValue)’가 삭제 되었습니다."),
+                                    dismissButton: .default(Text("확인"), action: {
+                                        self.output.popToList()
+                                    })
+                                )
+                            }
                     }
                     .sdPaddingVertical(4)
                     .sdPaddingHorizontal(16)
@@ -245,11 +277,16 @@ struct EditTripView: View {
     
     private func drawHeader() -> some View {
         return ZStack(alignment: .leading) {
-            Topbar("발자취 만들기", type: .back) {
+            Topbar(vm.type.title, type: .back) {
                 self.output.pop()
             }
             HStack(alignment: .center, spacing: 12) {
                 Spacer()
+                if case .modify = vm.type {
+                    FPButton(text: "삭제", status: .able, size: .small, type: .textGray) {
+                        $isPresentDelete.wrappedValue = true
+                    }
+                }
                 FPButton(text: "완료", status: $vm.isAvailableToSave.wrappedValue ? .able : .disable, size: .small, type: .textPrimary) {
                     vm.onSave {
                         self.output.pop()

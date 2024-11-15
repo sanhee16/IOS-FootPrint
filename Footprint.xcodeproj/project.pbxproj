@@ -152,6 +152,7 @@
 		26A880712CE70D39003F4FA9 /* TripDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A880702CE70D39003F4FA9 /* TripDetailVM.swift */; };
 		26A880732CE71C03003F4FA9 /* GetTripSortTypeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A880722CE71C03003F4FA9 /* GetTripSortTypeUseCase.swift */; };
 		26A880752CE71C41003F4FA9 /* UpdateTripSortTypeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A880742CE71C41003F4FA9 /* UpdateTripSortTypeUseCase.swift */; };
+		26A880772CE73FCA003F4FA9 /* DeleteTripUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A880762CE73FCA003F4FA9 /* DeleteTripUseCase.swift */; };
 		26BD8FCB29694CE5005F7E5C /* ApiInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26BD8FCA29694CE5005F7E5C /* ApiInfo.plist */; };
 		26BFFD942C5F8C400001B02B /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 26BFFD932C5F8C400001B02B /* Kingfisher */; };
 		26C04F6D2917667F00890A76 /* SwiftUIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */; };
@@ -401,6 +402,7 @@
 		26A880702CE70D39003F4FA9 /* TripDetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailVM.swift; sourceTree = "<group>"; };
 		26A880722CE71C03003F4FA9 /* GetTripSortTypeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTripSortTypeUseCase.swift; sourceTree = "<group>"; };
 		26A880742CE71C41003F4FA9 /* UpdateTripSortTypeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTripSortTypeUseCase.swift; sourceTree = "<group>"; };
+		26A880762CE73FCA003F4FA9 /* DeleteTripUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTripUseCase.swift; sourceTree = "<group>"; };
 		26BD8FCA29694CE5005F7E5C /* ApiInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiInfo.plist; sourceTree = "<group>"; };
 		26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIExtension.swift; sourceTree = "<group>"; };
 		26D018B32CE4336C00891B89 /* TripRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripRepositoryImpl.swift; sourceTree = "<group>"; };
@@ -1101,6 +1103,7 @@
 				262424E12CE5ADC800595132 /* LoadTripsUseCase.swift */,
 				262424E52CE5B7D900595132 /* LoadTripUseCase.swift */,
 				262424EB2CE5E73100595132 /* LoadFootprintsUseCase.swift */,
+				26A880762CE73FCA003F4FA9 /* DeleteTripUseCase.swift */,
 			);
 			path = TripUseCases;
 			sourceTree = "<group>";
@@ -1806,6 +1809,7 @@
 				26D018B92CE436A200891B89 /* TripIconRepository.swift in Sources */,
 				266BE08E2CCA1AA000E754EB /* CategoryItem.swift in Sources */,
 				2694FC9D2C79C2D400F01644 /* MemberEditView.swift in Sources */,
+				26A880772CE73FCA003F4FA9 /* DeleteTripUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
