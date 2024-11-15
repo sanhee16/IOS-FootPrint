@@ -61,7 +61,7 @@ struct FPButton: View {
                     Image(name)
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 24, alignment: .center)
+                        .frame(width: self.imageSize, alignment: .center)
                 }
                 
                 Text(text)
@@ -71,7 +71,7 @@ struct FPButton: View {
                     Image(name)
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 24, alignment: .center)
+                        .frame(width: self.imageSize, alignment: .center)
                 }
             })
             .sdPaddingVertical(self.verticalPadding)
@@ -114,6 +114,22 @@ extension FPButton {
             return 17
         case .small:
             return 12
+        }
+    }
+    
+    var imageSize: CGFloat? {
+        switch self.size {
+        case .large:
+            return 24
+        case .medium:
+            return 24
+        case .small:
+            switch self.type {
+            case .solid, .lightSolid, .outline:
+                return 20
+            case .textPrimary, .textGray:
+                return 16
+            }
         }
     }
     

@@ -5,7 +5,7 @@
 //  Created by sandy on 11/12/24.
 //
 
-struct TripEntity {
+struct TripEntity: Hashable, Equatable {
     let id: String
     let title: String
     let content: String

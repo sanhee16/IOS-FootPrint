@@ -102,7 +102,7 @@ struct EditTripView: View {
                     }
                     .sdPaddingVertical(4)
                     .sdPaddingHorizontal(16)
-                    .background(Color.bg_bgb)
+                    .background(Color.bg_default)
                 }
                 .ignoresSafeArea(.keyboard, edges: [.bottom])
             }
