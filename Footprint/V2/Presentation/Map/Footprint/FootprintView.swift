@@ -13,6 +13,7 @@ import SDSwiftUIPack
 struct FootprintView: View {
     @EnvironmentObject var vm: FootprintVM
     @Binding var isPresented: Bool
+    let isEditable: Bool
     
     private var safeTop: CGFloat { get { Util.safeTop() }}
     private var safeBottom: CGFloat { get { Util.safeBottom() }}
@@ -25,9 +26,11 @@ struct FootprintView: View {
     
     private var output: Output
     
-    init(isPresented: Binding<Bool>, output: Output) {
+    
+    init(isPresented: Binding<Bool>, output: Output, isEditable: Bool = true) {
         self._isPresented = isPresented
         self.output = output
+        self.isEditable = isEditable
     }
 
     var body: some View {
@@ -36,29 +39,38 @@ struct FootprintView: View {
                 Topbar("", type: .close, backgroundColor: .white) {
                     $isPresented.wrappedValue = false
                 }
-                HStack(alignment: .center, spacing: 0, content: {
-                    Spacer()
-                    Image("ic_star")
-                        .renderingMode(.template)
-                        .foregroundColor($vm.isStar.wrappedValue ? Color.btn_ic_cont_default : Color.btn_ic_cont_disable)
-                        .font(.system(size: 20))
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            vm.onToggleStar()
-                        }
-                    Text("편집")
-                        .sdFont(.btn3, color: Color.btn_lightSolid_cont_default)
-                        .padding(16)
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            $isPresented.wrappedValue = false
-                            self.output.pushEditNoteView()
-                        }
-                })
+                if isEditable && (!$vm.isFailToLoad.wrappedValue) {
+                    HStack(alignment: .center, spacing: 0, content: {
+                        Spacer()
+                        Image("ic_star")
+                            .renderingMode(.template)
+                            .foregroundColor($vm.isStar.wrappedValue ? Color.btn_ic_cont_default : Color.btn_ic_cont_disable)
+                            .font(.system(size: 20))
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                vm.onToggleStar()
+                            }
+                        Text("편집")
+                            .sdFont(.btn3, color: Color.btn_lightSolid_cont_default)
+                            .padding(16)
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                $isPresented.wrappedValue = false
+                                self.output.pushEditNoteView()
+                            }
+                    })
+                }
             })
-            .padding(EdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 8))
+            .padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 8))
+            
             if $vm.isFailToLoad.wrappedValue {
-                Text("정보 불러오기에 실패했습니다")
+                VStack(alignment: .leading, spacing: 0) {
+                    Text("정보 불러오기에 실패했습니다")
+                        .sdFont(.headline1, color: Color.black)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .sdPaddingTop(20)
+                    Spacer()
+                }
             } else {
                 ScrollView(.vertical, showsIndicators: false, content: {
                     VStack(alignment: .leading, spacing: 0) {

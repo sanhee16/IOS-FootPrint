@@ -10,6 +10,7 @@ import SwiftUI
 struct TripListView: View {
     struct Output {
         var goToEditTrip: (EditTripType) -> ()
+        var goToTripDetail: (String) -> ()
     }
     
     private var output: Output
@@ -82,7 +83,7 @@ struct TripListView: View {
                         ForEach($vm.trips.wrappedValue, id: \.self) { item in
                             TripItem(item: item)
                                 .onTapGesture {
-                                    
+                                    self.output.goToTripDetail(item.id)
                                 }
                         }
                     })

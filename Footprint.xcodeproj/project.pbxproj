@@ -148,6 +148,8 @@
 		269CA5762C78BE9600366005 /* CategoryEditVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269CA5752C78BE9600366005 /* CategoryEditVM.swift */; };
 		269CA5792C78E1B800366005 /* PermissionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269CA5782C78E1B800366005 /* PermissionService.swift */; };
 		26A238FA2A13743700D7CF49 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26A238F92A13743700D7CF49 /* GoogleService-Info.plist */; };
+		26A8806F2CE70D36003F4FA9 /* TripDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A8806E2CE70D36003F4FA9 /* TripDetailView.swift */; };
+		26A880712CE70D39003F4FA9 /* TripDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A880702CE70D39003F4FA9 /* TripDetailVM.swift */; };
 		26BD8FCB29694CE5005F7E5C /* ApiInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26BD8FCA29694CE5005F7E5C /* ApiInfo.plist */; };
 		26BFFD942C5F8C400001B02B /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 26BFFD932C5F8C400001B02B /* Kingfisher */; };
 		26C04F6D2917667F00890A76 /* SwiftUIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */; };
@@ -393,6 +395,8 @@
 		269CA5752C78BE9600366005 /* CategoryEditVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEditVM.swift; sourceTree = "<group>"; };
 		269CA5782C78E1B800366005 /* PermissionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionService.swift; sourceTree = "<group>"; };
 		26A238F92A13743700D7CF49 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		26A8806E2CE70D36003F4FA9 /* TripDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailView.swift; sourceTree = "<group>"; };
+		26A880702CE70D39003F4FA9 /* TripDetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailVM.swift; sourceTree = "<group>"; };
 		26BD8FCA29694CE5005F7E5C /* ApiInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiInfo.plist; sourceTree = "<group>"; };
 		26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIExtension.swift; sourceTree = "<group>"; };
 		26D018B32CE4336C00891B89 /* TripRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripRepositoryImpl.swift; sourceTree = "<group>"; };
@@ -637,6 +641,7 @@
 		2650A05E2CE3351200040512 /* Trip */ = {
 			isa = PBXGroup;
 			children = (
+				26A8806D2CE70D2A003F4FA9 /* TripDetail */,
 				262424DA2CE5959B00595132 /* EditTrip */,
 				2650A05F2CE3352A00040512 /* TripList */,
 			);
@@ -1071,6 +1076,15 @@
 				26EB9D202CD9E4E500D3B0CE /* NotificationService.swift */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		26A8806D2CE70D2A003F4FA9 /* TripDetail */ = {
+			isa = PBXGroup;
+			children = (
+				26A8806E2CE70D36003F4FA9 /* TripDetailView.swift */,
+				26A880702CE70D39003F4FA9 /* TripDetailVM.swift */,
+			);
+			path = TripDetail;
 			sourceTree = "<group>";
 		};
 		26D018B52CE433A200891B89 /* TripUseCases */ = {
@@ -1663,6 +1677,7 @@
 				264EEF572925128300B89624 /* AddCategoryView.swift in Sources */,
 				262D2A02293E2BA4005984DA /* SettingView.swift in Sources */,
 				269CA5722C78B69A00366005 /* CategoryListEditVM.swift in Sources */,
+				26A880712CE70D39003F4FA9 /* TripDetailVM.swift in Sources */,
 				63F1325A2914A1A300B3A9E0 /* AppCoordinatorV1.swift in Sources */,
 				2682A7712C6DB04900DF1F8A /* Date+Extension.swift in Sources */,
 				26940CAF293C9D170091E996 /* ShowImageViewModel.swift in Sources */,
@@ -1713,6 +1728,7 @@
 				2639921F291FEBA60049F047 /* KeyboardReadable.swift in Sources */,
 				2679D2B32C6830B90073297F /* FPTextField.swift in Sources */,
 				266EDDE82C64EB88006CF09B /* BaseViewModel.swift in Sources */,
+				26A8806F2CE70D36003F4FA9 /* TripDetailView.swift in Sources */,
 				262424D92CE590BD00595132 /* SaveDefaultTripIconUseCase.swift in Sources */,
 				63F132AB2914A1C000B3A9E0 /* MainView.swift in Sources */,
 				2627408F29699B2A00B47566 /* CategorySelectorView.swift in Sources */,

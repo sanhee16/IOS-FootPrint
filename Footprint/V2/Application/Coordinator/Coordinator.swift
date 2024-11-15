@@ -27,6 +27,14 @@ class Coordinator: BaseCoordinator<Destination> {
             self.pop()
         })))
     }
+    
+    private func pushTripDetailView(_ id: String) {
+        self.push(.tripDetailView(id: id, output: TripDetailView.Output(pop: {
+            self.pop()
+        }, goToEditTrip: {
+            self.pushEditTripView(.modify(id: id))
+        })))
+    }
 }
 
 //MARK: Output
@@ -68,8 +76,10 @@ extension Coordinator {
     }
     
     var tripListViewOutput: TripListView.Output {
-        TripListView.Output { type in
+        TripListView.Output {type in
             self.pushEditTripView(type)
+        } goToTripDetail: { id in
+            self.pushTripDetailView(id)
         }
     }
 }
