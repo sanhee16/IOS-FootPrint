@@ -63,6 +63,9 @@ class EditTripVM: ObservableObject {
     @Published var startAtStatus: PeriodStatus = .unSelected { didSet { self.checkIsAvailableToSave() }}
     @Published var endAtStatus: PeriodStatus = .unSelected { didSet { self.checkIsAvailableToSave() }}
     @Published var icons: [TripIconEntity] = []
+    var entireIcons: [TripIconEntity] = []
+    @Published var isExpanded: Bool = false
+    let CHUNK_SIZE = 7
     
     var originalFootprints: [TripFootprintEntity] = []
     
@@ -72,9 +75,15 @@ class EditTripVM: ObservableObject {
         self.loadIcons()
         self.loadData(self.type)
     }
+
+    func toggleExpandIcon() {
+        self.isExpanded.toggle()
+        self.icons = self.isExpanded ? self.entireIcons : Array(self.entireIcons.prefix(self.CHUNK_SIZE * 2))
+    }
     
     private func loadIcons() {
-        self.icons = self.loadTripIconsUseCase.execute()
+        self.entireIcons = self.loadTripIconsUseCase.execute()
+        self.icons = self.isExpanded ? self.entireIcons : Array(self.entireIcons.prefix(self.CHUNK_SIZE * 2))
     }
     
     private func loadData(_ type: EditTripType) {

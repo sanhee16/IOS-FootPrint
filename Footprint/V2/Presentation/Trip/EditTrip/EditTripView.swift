@@ -15,9 +15,7 @@ struct EditTripView: View {
         var popToList: () -> ()
     }
     private let output: Output
-    let CHUNK_SIZE = 7
     @StateObject private var vm: EditTripVM
-    @State private var isExpanded: Bool = false
     @State private var isPresentStartAtCalendar: Bool = false
     @State private var isPresentEndAtCalendar: Bool = false
     @State private var isPresentFootprints: Bool = false
@@ -34,7 +32,9 @@ struct EditTripView: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0, content: {
+        VStack(alignment: .leading,
+               spacing: 0,
+               content: {
             drawHeader()
             
             ScrollViewReader { scrollProxy in
@@ -65,24 +65,69 @@ struct EditTripView: View {
                             TripIconItem(item: icon)
                                 .padding(8)
                         }
-                        if $isExpanded.wrappedValue {
+                        
+                        VStack(alignment: .leading,
+                               spacing: 0,
+                               content: {
                             SDFlowLayout(data: $vm.icons.wrappedValue, id: \.self) { icon in
                                 iconItem(icon)
+                                    .sdPaddingBottom(8)
                             }
-                            .sdPaddingVertical(16)
-                        } else {
-                            VStack(alignment: .leading, spacing: 0, content: {
-                                SDFlowLayout(data: $vm.icons.wrappedValue.prefix(self.CHUNK_SIZE * 2), id: \.self) { icon in
-                                    iconItem(icon)
-                                }
-                                FPButton(text: "컨셉 목록 전체보기", location: .trailing(name: "ic_arrow_down"), status: .able, size: .small, type: .textGray) {
-                                    $isExpanded.wrappedValue = true
+                            
+                            if $vm.isExpanded.wrappedValue {
+                                FPButton(
+                                    text: "컨셉 목록 숨기기",
+                                    location: .trailing(name: "ic_arrow_up"),
+                                    status: .able,
+                                    size: .small,
+                                    type: .textGray
+                                ) {
+                                    vm.toggleExpandIcon()
                                 }
                                 .sdPaddingVertical(12)
                                 .frame(maxWidth: .infinity, alignment: .center)
-                            })
-                            .sdPaddingVertical(16)
-                        }
+                            } else {
+                                FPButton(
+                                    text: "컨셉 목록 전체보기",
+                                    location: .trailing(name: "ic_arrow_down"),
+                                    status: .able,
+                                    size: .small,
+                                    type: .textGray
+                                ) {
+                                    vm.toggleExpandIcon()
+                                }
+                                .sdPaddingVertical(12)
+                                .frame(maxWidth: .infinity, alignment: .center)
+                            }
+                        })
+                        .sdPaddingVertical(16)
+                        
+//                        if $isExpanded.wrappedValue {
+//                            VStack(alignment: .leading, spacing: 0, content: {
+//                                SDFlowLayout(data: $vm.icons.wrappedValue, id: \.self) { icon in
+//                                    iconItem(icon)
+//                                        .sdPaddingBottom(8)
+//                                }
+//                                FPButton(text: "컨셉 목록 숨기기", location: .trailing(name: "ic_arrow_up"), status: .able, size: .small, type: .textGray) {
+//                                    $isExpanded.wrappedValue = false
+//                                }
+//                                .sdPaddingVertical(12)
+//                                .frame(maxWidth: .infinity, alignment: .center)
+//                            })
+//                            .sdPaddingVertical(16)
+//                        } else {
+//                            VStack(alignment: .leading, spacing: 0, content: {
+//                                SDFlowLayout(data: $vm.icons.wrappedValue.prefix(self.CHUNK_SIZE * 2), id: \.self) { icon in
+//                                    iconItem(icon)
+//                                }
+//                                FPButton(text: "컨셉 목록 전체보기", location: .trailing(name: "ic_arrow_down"), status: .able, size: .small, type: .textGray) {
+//                                    $isExpanded.wrappedValue = true
+//                                }
+//                                .sdPaddingVertical(12)
+//                                .frame(maxWidth: .infinity, alignment: .center)
+//                            })
+//                            .sdPaddingVertical(16)
+//                        }
                         
                         HStack(alignment: .center, spacing: 0, content: {
                             drawTitle("발자국 모음", isEssential: true)
@@ -313,7 +358,7 @@ struct EditTripView: View {
                     .zIndex(1)
             }
         })
-        .frame(width: (UIScreen.main.bounds.width - 32.0) / CGFloat(self.CHUNK_SIZE), alignment: .center)
+        .frame(width: (UIScreen.main.bounds.width - 32.0) / CGFloat(vm.CHUNK_SIZE), alignment: .center)
         .contentShape(Rectangle())
         .onTapGesture {
             $vm.icon.wrappedValue = item
