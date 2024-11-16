@@ -20,7 +20,8 @@ struct SelectFootprintsViewV2: View {
             ScrollView(.vertical, showsIndicators: false, content: {
                 VStack(alignment: .leading, spacing: 0, content: {
                     ForEach($vm.footprints.wrappedValue, id: \.self) { item in
-                        drawItem(item)
+                        Item(item: item)
+                            .environmentObject(vm)
                             .sdPaddingBottom(16)
                     }
                 })
@@ -50,43 +51,48 @@ struct SelectFootprintsViewV2: View {
 
     }
     
-    private func drawItem(_ item: TripFootprintEntity) -> some View {
-        VStack(alignment: .leading, spacing: 0, content: {
-            HStack(alignment: .center, spacing: 0, content: {
-                Text(item.title)
-                    .sdFont(.headline2, color: Color.cont_gray_default)
+    private struct Item: View {
+        @EnvironmentObject var vm: EditTripVM
+        let item: TripFootprintEntity
+        
+        var body: some View {
+            VStack(alignment: .leading, spacing: 0, content: {
+                HStack(alignment: .center, spacing: 0, content: {
+                    Text(item.title)
+                        .sdFont(.headline2, color: Color.cont_gray_default)
+                        .lineLimit(1)
+                    Spacer()
+                    Text("\((item.idx ?? 0) + 1)")
+                        .sdFont(.caption, color: item.idx == nil ? Color.clear : Color.white)
+                        .sdPadding(top: 5, leading: 8, bottom: 5, trailing: 8)
+                        .background(
+                            RoundedRectangle(cornerRadius: 999)
+                                .foregroundStyle(item.idx == nil ? Color.clear : Color.cont_primary_mid)
+                        )
+                })
+                
+                Text(item.content)
+                    .sdFont(.body3, color: Color.cont_gray_high)
+                    .sdPaddingTop(16)
                     .lineLimit(1)
-                Spacer()
-                Text("\((item.idx ?? 0) + 1)")
-                    .sdFont(.caption, color: item.idx == nil ? Color.clear : Color.white)
-                    .sdPadding(top: 5, leading: 8, bottom: 5, trailing: 8)
-                    .background(
-                        RoundedRectangle(cornerRadius: 999)
-                            .foregroundStyle(item.idx == nil ? Color.clear : Color.cont_primary_mid)
-                    )
+                
+                Text(item.address)
+                    .sdFont(.headline4, color: Color.cont_gray_mid)
+                    .sdPaddingTop(8)
+                    .lineLimit(1)
             })
-            
-            Text(item.content)
-                .sdFont(.body3, color: Color.cont_gray_high)
-                .sdPaddingTop(16)
-                .lineLimit(1)
-            
-            Text(item.address)
-                .sdFont(.headline4, color: Color.cont_gray_mid)
-                .sdPaddingTop(8)
-                .lineLimit(1)
-        })
-        .sdPaddingHorizontal(16)
-        .sdPaddingVertical(18)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .contentShape(Rectangle())
-        .background(
-            RoundedRectangle(cornerRadius: 12)
-                .foregroundStyle(item.idx == nil ? Color.bg_white : Color.bg_bgb)
-        )
-        .border(item.idx == nil ? Color.bg_white : Color.cont_primary_mid, lineWidth: 2, cornerRadius: 12)
-        .onTapGesture {
-            vm.toggleFootprint(item.id)
+            .sdPaddingHorizontal(16)
+            .sdPaddingVertical(18)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .contentShape(Rectangle())
+            .background(
+                RoundedRectangle(cornerRadius: 12)
+                    .foregroundStyle(item.idx == nil ? Color.bg_white : Color.bg_bgb)
+            )
+            .border(item.idx == nil ? Color.bg_white : Color.cont_primary_mid, lineWidth: 2, cornerRadius: 12)
+            .onTapGesture {
+                vm.toggleFootprint(item.id)
+            }
         }
     }
 }
