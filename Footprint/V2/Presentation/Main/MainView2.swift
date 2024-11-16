@@ -34,7 +34,7 @@ struct MainView2: View {
                 case .map:
                     MapView2(output: coordinator.mapOutput)
                         .environmentObject(mapStatusVM)
-                case .travel:
+                case .trip:
                     TripListView(output: coordinator.tripListViewOutput)
                 default:
                     VStack {

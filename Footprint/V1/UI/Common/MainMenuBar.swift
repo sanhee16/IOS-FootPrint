@@ -17,27 +17,27 @@ public struct MainMenuElements {
 public enum MainMenuType: Int, Equatable {
     case map
     case footprints
-    case travel
+    case trip
     case favorite
     case setting
     
     var onImage: String {
         switch self {
-        case .map: return "map_on"
-        case .footprints: return "list_on"
-        case .travel: return "travel_on"
+        case .map: return "ic_location_compass_on"
+        case .footprints: return "ic_feet_on"
+        case .trip: return "ic_arrow-roadmap_on"
         case .favorite: return "favorite_on"
-        case .setting: return "setting_on"
+        case .setting: return "ic_setting_on"
         }
     }
     
     var offImage: String {
         switch self {
-        case .map: return "map_off"
-        case .footprints: return "list_off"
-        case .travel: return "travel_off"
+        case .map: return "ic_location_compass_off"
+        case .footprints: return "ic_feet_off"
+        case .trip: return "ic_arrow-roadmap_off"
         case .favorite: return "favorite_off"
-        case .setting: return "setting_off"
+        case .setting: return "ic_setting_off"
         }
     }
     
@@ -45,7 +45,7 @@ public enum MainMenuType: Int, Equatable {
         switch self {
         case .map: return "map".localized()
         case .footprints: return "footprints".localized()
-        case .travel: return "travel".localized()
+        case .trip: return "travel".localized()
         case .favorite: return "favorite".localized()
         case .setting: return "setting".localized()
         }
@@ -55,7 +55,7 @@ public enum MainMenuType: Int, Equatable {
         switch self {
         case .map: return String(describing: MainView.self)
         case .footprints: return String(describing: FootprintListView.self)
-        case .travel: return String(describing: TravelListView.self)
+        case .trip: return String(describing: TravelListView.self)
         case .favorite: return String(describing: TravelListView.self)
         case .setting: return String(describing: SettingView.self)
         }
@@ -65,10 +65,10 @@ public enum MainMenuType: Int, Equatable {
 public struct MainMenuBar: View {
     private var current: MainMenuType
     private var onClick: ((MainMenuType)->())?
-    private let ICON_SIZE: CGFloat = 38.0
+    private let ICON_SIZE: CGFloat = 24.0
     private let ITEM_WIDTH: CGFloat = UIScreen.main.bounds.width / 4
-    private let ITEM_HEIGHT: CGFloat = 60.0
-    private let list: [MainMenuType] = [.map, .footprints, .travel, .setting]
+    private let ITEM_HEIGHT: CGFloat = 64.0
+    private let list: [MainMenuType] = [.map, .footprints, .trip, .setting]
     
     init(current: MainMenuType, onClick: ((MainMenuType)->())?) {
         self.current = current
@@ -85,26 +85,25 @@ public struct MainMenuBar: View {
     }
     
     private func drawItem(_ item: MainMenuType, isSelected: Bool) -> some View {
-        return VStack(alignment: .center, spacing: 0) {
+        return VStack(alignment: .center, spacing: 8) {
             Image(isSelected ? item.onImage : item.offImage)
                 .resizable()
                 .scaledToFit()
                 .frame(both: ICON_SIZE, alignment: .center)
             Text(item.text)
-                .font(isSelected ? .kr10b : .kr10r)
-                .foregroundColor(isSelected ? .fColor3 : .textColor1)
+                .sdFont(.caption2, color: isSelected ? Color.cont_primary_mid : Color.cont_gray_mid)
         }
+        .frame(width: ITEM_WIDTH, height: ITEM_HEIGHT, alignment: .center)
         .contentShape(Rectangle())
         .onTapGesture {
             switch item {
             case .map: self.onClick?(.map)
             case .footprints: self.onClick?(.footprints)
-            case .travel: self.onClick?(.travel)
+            case .trip: self.onClick?(.trip)
             case .favorite: self.onClick?(.favorite)
             case .setting: self.onClick?(.setting)
             }
         }
-        .frame(width: ITEM_WIDTH, height: ITEM_HEIGHT, alignment: .center)
     }
 }
 

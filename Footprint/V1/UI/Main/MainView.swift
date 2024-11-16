@@ -65,7 +65,7 @@ struct MainView: View {
                     MapView(vm: self.mapVm)
                 case .footprints:
                     FootprintListView(vm: self.listVm)
-                case .travel:
+                case .trip:
                     TravelListView(vm: self.travelVm)
                 case .setting:
                     SettingView(vm: self.settingVm)
