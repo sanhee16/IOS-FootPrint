@@ -20,6 +20,7 @@ struct EditTripView: View {
     @State private var isPresentEndAtCalendar: Bool = false
     @State private var isPresentFootprints: Bool = false
     @State private var isMoveNextCalendar: Bool = false
+    @State private var isPresentCreateComplete: Bool = false
     @State private var isPresentDelete: Bool = false
     @State private var isPresentDeleteComplete: Bool = false
     
@@ -102,33 +103,6 @@ struct EditTripView: View {
                         })
                         .sdPaddingVertical(16)
                         
-//                        if $isExpanded.wrappedValue {
-//                            VStack(alignment: .leading, spacing: 0, content: {
-//                                SDFlowLayout(data: $vm.icons.wrappedValue, id: \.self) { icon in
-//                                    iconItem(icon)
-//                                        .sdPaddingBottom(8)
-//                                }
-//                                FPButton(text: "컨셉 목록 숨기기", location: .trailing(name: "ic_arrow_up"), status: .able, size: .small, type: .textGray) {
-//                                    $isExpanded.wrappedValue = false
-//                                }
-//                                .sdPaddingVertical(12)
-//                                .frame(maxWidth: .infinity, alignment: .center)
-//                            })
-//                            .sdPaddingVertical(16)
-//                        } else {
-//                            VStack(alignment: .leading, spacing: 0, content: {
-//                                SDFlowLayout(data: $vm.icons.wrappedValue.prefix(self.CHUNK_SIZE * 2), id: \.self) { icon in
-//                                    iconItem(icon)
-//                                }
-//                                FPButton(text: "컨셉 목록 전체보기", location: .trailing(name: "ic_arrow_down"), status: .able, size: .small, type: .textGray) {
-//                                    $isExpanded.wrappedValue = true
-//                                }
-//                                .sdPaddingVertical(12)
-//                                .frame(maxWidth: .infinity, alignment: .center)
-//                            })
-//                            .sdPaddingVertical(16)
-//                        }
-                        
                         HStack(alignment: .center, spacing: 0, content: {
                             drawTitle("발자국 모음", isEssential: true)
                             Spacer()
@@ -177,6 +151,17 @@ struct EditTripView: View {
                                     message: Text("‘\($vm.title.wrappedValue)’가 삭제 되었습니다."),
                                     dismissButton: .default(Text("확인"), action: {
                                         self.output.popToList()
+                                    })
+                                )
+                            }
+                        
+                        VStack{}
+                            .alert(isPresented: $isPresentCreateComplete) {
+                                Alert(
+                                    title: Text("발자취 만들기 성공"),
+                                    message: Text("‘\($vm.title.wrappedValue)’ 발자취를 만들었어요."),
+                                    dismissButton: .default(Text("확인"), action: {
+                                        self.output.pop()
                                     })
                                 )
                             }
@@ -334,7 +319,8 @@ struct EditTripView: View {
                 }
                 FPButton(text: "완료", status: $vm.isAvailableToSave.wrappedValue ? .able : .disable, size: .small, type: .textPrimary) {
                     vm.onSave {
-                        self.output.pop()
+//                        self.output.pop()
+                        self.isPresentCreateComplete = true
                     }
                 }
             }
