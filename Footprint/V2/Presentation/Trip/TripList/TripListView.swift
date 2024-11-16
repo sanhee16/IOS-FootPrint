@@ -30,7 +30,7 @@ struct TripListView: View {
                 ZStack(alignment: .bottom, content: {
                     VStack(alignment: .leading, spacing: 0, content: {
                         ForEach(vm.sortTypes.indices, id: \.self) { idx in
-                            sortItem(vm.sortTypes[idx].text) {
+                            sortItem(vm.sortTypes[idx]) {
                                 vm.onSelectSortType(vm.sortTypes[idx]) {
                                     isShowSorting = false
                                 }
@@ -113,13 +113,18 @@ struct TripListView: View {
         }
     }
     
-    private func sortItem(_ text: String, onTap: @escaping () -> ()) -> some View {
-        HStack(alignment: .center, spacing: 0, content: {
-            Text(text)
+    private func sortItem(_ item: TripSortType, onTap: @escaping () -> ()) -> some View {
+        HStack(alignment: .center, spacing: 4, content: {
+            if $vm.sortType.wrappedValue == item {
+                Image("ic_check")
+                    .resizable()
+                    .frame(both: 16, alignment: .center)
+            }
+            Text(item.text)
                 .sdFont(.btn3, color: Color.btn_text_gray_default)
-                .sdPadding(top: 14, leading: 16, bottom: 14, trailing: 16)
             Spacer()
         })
+        .sdPadding(top: 14, leading: 16, bottom: 14, trailing: 16)
         .frame(maxWidth: .infinity)
         .contentShape(Rectangle())
         .onTapGesture {
