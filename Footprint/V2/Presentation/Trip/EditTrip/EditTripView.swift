@@ -186,6 +186,16 @@ struct EditTripView: View {
             .environmentObject(vm)
             .presentationDetents([.large])
         })
+        .toolbar {
+            ToolbarItemGroup(placement: .keyboard) {
+                Spacer() // Spacer to push button to the right
+                Button(action: {
+                    UIApplication.shared.hideKeyborad()
+                }, label: {
+                    Image("ic_keyboardOff")
+                })
+            }
+        }
     }
     
     private func drawPeriod(scrollProxy: ScrollViewProxy) -> some View {

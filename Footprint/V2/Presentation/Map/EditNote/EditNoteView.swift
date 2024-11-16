@@ -150,9 +150,11 @@ struct EditNoteView: View {
                 .toolbar {
                     ToolbarItemGroup(placement: .keyboard) {
                         Spacer() // Spacer to push button to the right
-                        Button("Done") {
+                        Button(action: {
                             UIApplication.shared.hideKeyborad()
-                        }
+                        }, label: {
+                            Image("ic_keyboardOff")
+                        })
                     }
                 }
                 
