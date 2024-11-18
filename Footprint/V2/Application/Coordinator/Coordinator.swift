@@ -60,6 +60,8 @@ extension Coordinator {
         } popToSelectLocation: {
             self.tabBarService.isShowTabBar = false
             self.mapStatusVM.status = .adding
+            
+            
             self.popToRoot()
         }
     }

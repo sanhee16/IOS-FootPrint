@@ -22,7 +22,8 @@ struct MapView2: View {
     private var subscription = Set<AnyCancellable>()
     
     @StateObject var vm: MapVM2 = MapVM2()
-    @ObservedObject var mapManager: FPMapManager = FPMapManager.shared
+    @StateObject var mapManager: FPMapManager = FPMapManager.shared
+    @StateObject private var footprintVM: FootprintVM = FootprintVM()
     @EnvironmentObject private var tabBarService: TabBarService
     @EnvironmentObject private var mapStatusVM: MapStatusVM
     
@@ -182,7 +183,7 @@ struct MapView2: View {
                     
                 }
             }))
-            .environmentObject(FootprintVM(selectedId))
+            .environmentObject(footprintVM)
             .presentationDetents([.fraction(0.8), .large])
         })
         .onChange(of: $mapManager.selectedMarker.wrappedValue, perform: { id in
@@ -190,6 +191,7 @@ struct MapView2: View {
                 print("marker: \(id)")
                 $mapManager.selectedMarker.wrappedValue = nil
                 self.selectedId = id
+                self.footprintVM.updateId(id)
                 $isPresentFootprint.wrappedValue = true
             }
         })

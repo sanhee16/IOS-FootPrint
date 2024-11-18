@@ -16,6 +16,7 @@ struct TripDetailView: View {
     }
     private let output: Output
     @StateObject private var vm: TripDetailVM
+    @StateObject private var footprintVM: FootprintVM = FootprintVM()
     @State private var isPresentFootprint: Bool = false
     @State private var selectedId: String? = nil
     
@@ -70,6 +71,7 @@ struct TripDetailView: View {
                             drawFootprintItem(item)
                                 .onTapGesture {
                                     selectedId = item.id
+                                    self.footprintVM.updateId(item.id)
                                     $isPresentFootprint.wrappedValue = true
                                 }
                         }
@@ -93,7 +95,7 @@ struct TripDetailView: View {
             FootprintView(isPresented: $isPresentFootprint, output: FootprintView.Output(pushEditNoteView: {
                 
             }), isEditable: false)
-            .environmentObject(FootprintVM(selectedId))
+            .environmentObject(footprintVM)
             .presentationDetents([.fraction(0.8), .large])
         })
     }

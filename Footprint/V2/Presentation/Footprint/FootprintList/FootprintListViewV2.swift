@@ -16,6 +16,7 @@ struct FootprintListViewV2: View {
     
     @EnvironmentObject private var tabBarService: TabBarService
     @StateObject private var vm: FootprintListVMV2 = FootprintListVMV2()
+    @StateObject private var footprintVM: FootprintVM = FootprintVM()
     @State private var isPresentFootprint: Bool = false
     @State private var selectedId: String? = nil
     
@@ -92,6 +93,7 @@ struct FootprintListViewV2: View {
                             NoteItem(item: item)
                                 .onTapGesture {
                                     self.selectedId = item.id
+                                    self.footprintVM.updateId(item.id)
                                     $isPresentFootprint.wrappedValue = true
                                 }
                             
@@ -110,7 +112,7 @@ struct FootprintListViewV2: View {
                         self.output.goToEditNote(.modify(id: id))
                     }
                 }))
-                .environmentObject(FootprintVM(selectedId))
+                .environmentObject(footprintVM)
                 .presentationDetents([.fraction(0.8), .large])
             })
             .onAppear {

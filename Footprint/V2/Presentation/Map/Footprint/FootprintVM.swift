@@ -10,9 +10,6 @@ import Combine
 import UIKit
 import SwiftUI
 import SwiftUIPullToRefresh
-import SwiftUIPager
-import RealmSwift
-import SwiftUI
 import Factory
 
 class FootprintVM: BaseViewModel {
@@ -20,21 +17,22 @@ class FootprintVM: BaseViewModel {
     @Injected(\.toogleStarUseCase) var toogleStarUseCase
     
     var footPrint: Note? = nil
-    private let realm: Realm
     private var isLoading: Bool = false
-    private let id: String?
+    private var id: String? = nil
     @Published var isFailToLoad: Bool = false
     @Published var isStar: Bool = false
     
-    init(_ id: String?) {
-        self.realm = R.realm
-        self.id = id
+    override init() {
         super.init()
-        self.loadData()
     }
     
     func onAppear() {
         
+    }
+    
+    func updateId(_ id: String) {
+        self.id = id
+        self.loadData()
     }
     
     func loadData() {
