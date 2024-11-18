@@ -86,6 +86,10 @@
 		2675D20C2CDDE3AF00BD7633 /* UpdateCategoryOrderUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2675D20B2CDDE3AF00BD7633 /* UpdateCategoryOrderUseCase.swift */; };
 		2675D2102CDE0D0800BD7633 /* GetNoteCountUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2675D20F2CDE0D0800BD7633 /* GetNoteCountUseCase.swift */; };
 		2679D2B32C6830B90073297F /* FPTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2679D2B22C6830B90073297F /* FPTextField.swift */; };
+		267A22C72CEAE0080079D146 /* NanumSquareRoundOTFL.otf in Resources */ = {isa = PBXBuildFile; fileRef = 267A22C32CEAE0080079D146 /* NanumSquareRoundOTFL.otf */; };
+		267A22C82CEAE0080079D146 /* NanumSquareRoundOTFEB.otf in Resources */ = {isa = PBXBuildFile; fileRef = 267A22C42CEAE0080079D146 /* NanumSquareRoundOTFEB.otf */; };
+		267A22C92CEAE0080079D146 /* NanumSquareRoundOTFB.otf in Resources */ = {isa = PBXBuildFile; fileRef = 267A22C52CEAE0080079D146 /* NanumSquareRoundOTFB.otf */; };
+		267A22CA2CEAE0080079D146 /* NanumSquareRoundOTFR.otf in Resources */ = {isa = PBXBuildFile; fileRef = 267A22C62CEAE0080079D146 /* NanumSquareRoundOTFR.otf */; };
 		267CC1772C66F27000D6015E /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC1762C66F27000D6015E /* BaseCoordinator.swift */; };
 		267CC1792C66F28300D6015E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC1782C66F28300D6015E /* Coordinator.swift */; };
 		267CC17B2C66F28E00D6015E /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC17A2C66F28E00D6015E /* Destination.swift */; };
@@ -336,6 +340,10 @@
 		2675D20B2CDDE3AF00BD7633 /* UpdateCategoryOrderUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCategoryOrderUseCase.swift; sourceTree = "<group>"; };
 		2675D20F2CDE0D0800BD7633 /* GetNoteCountUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNoteCountUseCase.swift; sourceTree = "<group>"; };
 		2679D2B22C6830B90073297F /* FPTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPTextField.swift; sourceTree = "<group>"; };
+		267A22C32CEAE0080079D146 /* NanumSquareRoundOTFL.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareRoundOTFL.otf; sourceTree = "<group>"; };
+		267A22C42CEAE0080079D146 /* NanumSquareRoundOTFEB.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareRoundOTFEB.otf; sourceTree = "<group>"; };
+		267A22C52CEAE0080079D146 /* NanumSquareRoundOTFB.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareRoundOTFB.otf; sourceTree = "<group>"; };
+		267A22C62CEAE0080079D146 /* NanumSquareRoundOTFR.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareRoundOTFR.otf; sourceTree = "<group>"; };
 		267CC1762C66F27000D6015E /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		267CC1782C66F28300D6015E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		267CC17A2C66F28E00D6015E /* Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
@@ -807,6 +815,17 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		267A22C22CEADFEE0079D146 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				267A22C52CEAE0080079D146 /* NanumSquareRoundOTFB.otf */,
+				267A22C42CEAE0080079D146 /* NanumSquareRoundOTFEB.otf */,
+				267A22C32CEAE0080079D146 /* NanumSquareRoundOTFL.otf */,
+				267A22C62CEAE0080079D146 /* NanumSquareRoundOTFR.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		267CC1752C66F26400D6015E /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
@@ -1224,6 +1243,7 @@
 		63B1FAF62914B29A007E94B6 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				267A22C22CEADFEE0079D146 /* Fonts */,
 				26A238F92A13743700D7CF49 /* GoogleService-Info.plist */,
 				63209FEB2913C3C000709227 /* Assets.xcassets */,
 				261F6E9C2CC9E36100F7CA18 /* CategoryIcons.xcassets */,
@@ -1575,12 +1595,16 @@
 			files = (
 				6374539A29714A73000A61D5 /* loading_bar.json in Resources */,
 				63004B0029DA6B1D000CDBB4 /* RemoteConfigValue.plist in Resources */,
+				267A22C92CEAE0080079D146 /* NanumSquareRoundOTFB.otf in Resources */,
 				63209FEF2913C3C000709227 /* Preview Assets.xcassets in Resources */,
 				2650A05B2CE311D900040512 /* TripIcons.xcassets in Resources */,
+				267A22C72CEAE0080079D146 /* NanumSquareRoundOTFL.otf in Resources */,
 				63209FEC2913C3C000709227 /* Assets.xcassets in Resources */,
 				63D32FE829CAFF8A0049F567 /* Localizable.strings in Resources */,
 				261F6E9D2CC9E36100F7CA18 /* CategoryIcons.xcassets in Resources */,
 				26BD8FCB29694CE5005F7E5C /* ApiInfo.plist in Resources */,
+				267A22CA2CEAE0080079D146 /* NanumSquareRoundOTFR.otf in Resources */,
+				267A22C82CEAE0080079D146 /* NanumSquareRoundOTFEB.otf in Resources */,
 				2606B4CD29437BD10012349A /* loading.json in Resources */,
 				6374539B29714A73000A61D5 /* loading_circular.json in Resources */,
 				26A238FA2A13743700D7CF49 /* GoogleService-Info.plist in Resources */,
