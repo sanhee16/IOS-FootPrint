@@ -29,4 +29,13 @@ class SettingRepositoryImpl: SettingRepository {
     func getTripSortType() -> Int {
         self.userDefaultsManager.tripSortType
     }
+    
+    func updateFootprintSortType(_ value: Int) {
+        self.userDefaultsManager.footprintSortType = value
+    }
+    
+    func getFootprintSortType() -> Int {
+        self.userDefaultsManager.footprintSortType
+    }
+    
 }

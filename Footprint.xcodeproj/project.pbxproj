@@ -90,6 +90,10 @@
 		267A22C82CEAE0080079D146 /* NanumSquareRoundOTFEB.otf in Resources */ = {isa = PBXBuildFile; fileRef = 267A22C42CEAE0080079D146 /* NanumSquareRoundOTFEB.otf */; };
 		267A22C92CEAE0080079D146 /* NanumSquareRoundOTFB.otf in Resources */ = {isa = PBXBuildFile; fileRef = 267A22C52CEAE0080079D146 /* NanumSquareRoundOTFB.otf */; };
 		267A22CA2CEAE0080079D146 /* NanumSquareRoundOTFR.otf in Resources */ = {isa = PBXBuildFile; fileRef = 267A22C62CEAE0080079D146 /* NanumSquareRoundOTFR.otf */; };
+		267A22CE2CEAE5CF0079D146 /* FootprintListViewV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267A22CD2CEAE5CF0079D146 /* FootprintListViewV2.swift */; };
+		267A22D02CEAE5D20079D146 /* FootprintListVMV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267A22CF2CEAE5D20079D146 /* FootprintListVMV2.swift */; };
+		267A22D22CEAE71F0079D146 /* UpdateFootprintSortTypeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267A22D12CEAE71F0079D146 /* UpdateFootprintSortTypeUseCase.swift */; };
+		267A22D42CEAE7490079D146 /* GetFootprintSortTypeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267A22D32CEAE7490079D146 /* GetFootprintSortTypeUseCase.swift */; };
 		267CC1772C66F27000D6015E /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC1762C66F27000D6015E /* BaseCoordinator.swift */; };
 		267CC1792C66F28300D6015E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC1782C66F28300D6015E /* Coordinator.swift */; };
 		267CC17B2C66F28E00D6015E /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC17A2C66F28E00D6015E /* Destination.swift */; };
@@ -344,6 +348,10 @@
 		267A22C42CEAE0080079D146 /* NanumSquareRoundOTFEB.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareRoundOTFEB.otf; sourceTree = "<group>"; };
 		267A22C52CEAE0080079D146 /* NanumSquareRoundOTFB.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareRoundOTFB.otf; sourceTree = "<group>"; };
 		267A22C62CEAE0080079D146 /* NanumSquareRoundOTFR.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareRoundOTFR.otf; sourceTree = "<group>"; };
+		267A22CD2CEAE5CF0079D146 /* FootprintListViewV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootprintListViewV2.swift; sourceTree = "<group>"; };
+		267A22CF2CEAE5D20079D146 /* FootprintListVMV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootprintListVMV2.swift; sourceTree = "<group>"; };
+		267A22D12CEAE71F0079D146 /* UpdateFootprintSortTypeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateFootprintSortTypeUseCase.swift; sourceTree = "<group>"; };
+		267A22D32CEAE7490079D146 /* GetFootprintSortTypeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFootprintSortTypeUseCase.swift; sourceTree = "<group>"; };
 		267CC1762C66F27000D6015E /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		267CC1782C66F28300D6015E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		267CC17A2C66F28E00D6015E /* Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
@@ -630,6 +638,8 @@
 				2675D2072CDDDE9000BD7633 /* GetIsShowMarkerUseCase.swift */,
 				26A880722CE71C03003F4FA9 /* GetTripSortTypeUseCase.swift */,
 				26A880742CE71C41003F4FA9 /* UpdateTripSortTypeUseCase.swift */,
+				267A22D32CEAE7490079D146 /* GetFootprintSortTypeUseCase.swift */,
+				267A22D12CEAE71F0079D146 /* UpdateFootprintSortTypeUseCase.swift */,
 			);
 			path = SettingUseCases;
 			sourceTree = "<group>";
@@ -765,6 +775,7 @@
 		266EDDD52C64EA90006CF09B /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				267A22CB2CEAE5A80079D146 /* Footprint */,
 				2650A05E2CE3351200040512 /* Trip */,
 				269CA56D2C78B67800366005 /* Common */,
 				267CC18F2C67361E00D6015E /* CustomView */,
@@ -824,6 +835,23 @@
 				267A22C62CEAE0080079D146 /* NanumSquareRoundOTFR.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		267A22CB2CEAE5A80079D146 /* Footprint */ = {
+			isa = PBXGroup;
+			children = (
+				267A22CC2CEAE5B90079D146 /* FootprintList */,
+			);
+			path = Footprint;
+			sourceTree = "<group>";
+		};
+		267A22CC2CEAE5B90079D146 /* FootprintList */ = {
+			isa = PBXGroup;
+			children = (
+				267A22CD2CEAE5CF0079D146 /* FootprintListViewV2.swift */,
+				267A22CF2CEAE5D20079D146 /* FootprintListVMV2.swift */,
+			);
+			path = FootprintList;
 			sourceTree = "<group>";
 		};
 		267CC1752C66F26400D6015E /* Coordinator */ = {
@@ -1628,8 +1656,10 @@
 				266EDDD92C64EAA9006CF09B /* FootprintApp.swift in Sources */,
 				269CA55F2C78A58B00366005 /* SaveDefaultCategoriesUseCase.swift in Sources */,
 				26D018C02CE4557200891B89 /* TripIconDAO.swift in Sources */,
+				267A22D42CEAE7490079D146 /* GetFootprintSortTypeUseCase.swift in Sources */,
 				262424E62CE5B7D900595132 /* LoadTripUseCase.swift in Sources */,
 				63E2756929502DFA00E4AABC /* PinchZoom.swift in Sources */,
+				267A22CE2CEAE5CF0079D146 /* FootprintListViewV2.swift in Sources */,
 				267CC1822C66FA1200D6015E /* GoogleMapView2.swift in Sources */,
 				63E848A3295ABE7E0037D7A3 /* EditTravelViewModel.swift in Sources */,
 				269CA5792C78E1B800366005 /* PermissionService.swift in Sources */,
@@ -1672,6 +1702,7 @@
 				26C04F6D2917667F00890A76 /* SwiftUIExtension.swift in Sources */,
 				631D75242966619B00464F33 /* SToggleView.swift in Sources */,
 				269CA5762C78BE9600366005 /* CategoryEditVM.swift in Sources */,
+				267A22D22CEAE71F0079D146 /* UpdateFootprintSortTypeUseCase.swift in Sources */,
 				2650A0612CE3353200040512 /* TripListView.swift in Sources */,
 				2682A76D2C6D785C00DF1F8A /* FPMapView.swift in Sources */,
 				2675D2042CDDDE3100BD7633 /* UpdateIsShowMarkerUseCase.swift in Sources */,
@@ -1751,6 +1782,7 @@
 				26D018BC2CE4396800891B89 /* DBError.swift in Sources */,
 				26A880752CE71C41003F4FA9 /* UpdateTripSortTypeUseCase.swift in Sources */,
 				26D018BE2CE4554C00891B89 /* TripIconRepositoryImpl.swift in Sources */,
+				267A22D02CEAE5D20079D146 /* FootprintListVMV2.swift in Sources */,
 				2691D9C7294EE505002825B9 /* BluePrintBottomSheetView.swift in Sources */,
 				63E5C82D2975361C00D32FD2 /* MapView.swift in Sources */,
 				263A97BD29458533008A69F5 /* PeopleWithSelectorViewModel.swift in Sources */,

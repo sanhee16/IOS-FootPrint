@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-public struct Note {
+public struct Note: Equatable, Hashable {
     var id: String
     var title: String
     var content: String

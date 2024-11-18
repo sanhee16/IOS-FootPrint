@@ -101,7 +101,7 @@ class FPMapManager: NSObject, ObservableObject {
     func loadMarkers() {
         self.deleteMarkers()
         self.markers.removeAll()
-        self.notes = self.loadAllNoteUseCase.execute()
+        self.notes = self.loadAllNoteUseCase.execute(.latest)
         self.notes.forEach { note in
             if let marker = createMarker(
                 location: Location(

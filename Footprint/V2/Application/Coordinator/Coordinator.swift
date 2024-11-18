@@ -9,7 +9,10 @@ import Foundation
 import Factory
 import SwiftUI
 
-class Coordinator: BaseCoordinator<Destination> {    
+class Coordinator: BaseCoordinator<Destination> {
+    let tabBarService: TabBarService = TabBarService()
+    let mapStatusVM: MapStatusVM = MapStatusVM()
+    
     private func pushEditNote(type: EditNoteType, output: EditNoteView.Output) {
         self.push(.editNote(type: type, output: output))
     }
@@ -54,6 +57,10 @@ extension Coordinator {
             self.pushCategoryListEditView(self.categoryListEditViewOutput)
         } pushPeopleWithListEditView: { 
             self.pushPeopleWithListEditView(self.peopleWithListEditViewOutput)
+        } popToSelectLocation: {
+            self.tabBarService.isShowTabBar = false
+            self.mapStatusVM.status = .adding
+            self.popToRoot()
         }
     }
     
@@ -82,6 +89,12 @@ extension Coordinator {
             self.pushEditTripView(type)
         } goToTripDetail: { id in
             self.pushTripDetailView(id)
+        }
+    }
+    
+    var footprintListViewOutput: FootprintListViewV2.Output {
+        FootprintListViewV2.Output { type in
+            self.pushEditNote(type: type, output: self.editNoteOutput)
         }
     }
 }

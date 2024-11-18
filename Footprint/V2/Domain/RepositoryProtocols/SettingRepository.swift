@@ -10,4 +10,6 @@ protocol SettingRepository {
     func getIsShowMarker() -> Bool
     func updateTripSortType(_ value: Int)
     func getTripSortType() -> Int
+    func updateFootprintSortType(_ value: Int)
+    func getFootprintSortType() -> Int
 }

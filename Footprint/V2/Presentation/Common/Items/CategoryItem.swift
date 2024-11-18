@@ -28,7 +28,7 @@ struct CategoryItem: View {
         .sdPaddingVertical(4)
         .sdPaddingHorizontal(8)
         .background(
-            RoundedRectangle(cornerRadius: 8)
+            RoundedRectangle(cornerRadius: 4)
                 .foregroundStyle(Color(hex: item.color.hex).opacity(0.1))
         )
     }

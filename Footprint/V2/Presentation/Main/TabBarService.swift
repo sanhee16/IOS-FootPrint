@@ -9,16 +9,21 @@ import Foundation
 
 class TabBarService: ObservableObject {
     @Published var isShowTabBar: Bool = true
+    @Published var currentTab: MainMenuType = .map
     
     init() {
         addObserver()
+    }
+    
+    func onTab(_ tab: MainMenuType) {
+        self.currentTab = tab
     }
     
     func setIsShowTabBar(_ isShow: Bool) {
         self.isShowTabBar = isShow
     }
     
-    func addObserver() {
+    private func addObserver() {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(

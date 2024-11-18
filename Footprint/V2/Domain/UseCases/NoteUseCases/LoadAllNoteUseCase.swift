@@ -22,8 +22,20 @@ class LoadAllNoteUseCase {
         self.memberRepository = memberRepository
     }
     
-    func execute() -> [Note] {
+    func execute(_ type: FootprintSortType) -> [Note] {
         var list = self.noteRepository.loadNotes()
+        
+        switch type {
+        case .latest:
+            list = list.sorted(by: { lhs, rhs in
+                lhs.createdAt > rhs.createdAt
+            })
+        case .earliest:
+            list = list.sorted(by: { lhs, rhs in
+                lhs.createdAt < rhs.createdAt
+            })
+        }
+        
         for i in list.indices {
             if let category = self.categoryRepository.loadCategory(list[i].categoryId) {
                 let peopleWith = self.memberRepository.loadMembers(list[i].peopleWithIds)

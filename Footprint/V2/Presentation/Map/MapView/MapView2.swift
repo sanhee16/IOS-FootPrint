@@ -158,9 +158,7 @@ struct MapView2: View {
                                     if let location = $mapManager.centerPosition.wrappedValue {
                                         MapStatusVM.tempNote?.address = $mapManager.centerAddress.wrappedValue
                                         MapStatusVM.tempNote?.location = Location(latitude: location.latitude, longitude: location.longitude)
-                                        output.goToEditNote(
-                                            .create(location: Location(latitude: location.latitude, longitude: location.longitude), address: $mapManager.centerAddress.wrappedValue)
-                                        )
+                                        output.goToEditNote(.create)
                                     }
                                 }
                                 .frame(width: (UIScreen.main.bounds.size.width - 32 - 8) / 10 * 7)
@@ -180,11 +178,8 @@ struct MapView2: View {
         }, content: {
             FootprintView(isPresented: $isPresentFootprint, output: FootprintView.Output(pushEditNoteView: {
                 if let id = selectedId {
-                    self.output.goToEditNote(.modify(id: id, address: $mapManager.centerAddress.wrappedValue))
+                    self.output.goToEditNote(.modify(id: id))
                     
-                    //TODO:
-//                    mapStatusVM.updateMapStatus(.adding)
-//                    tabBarService.setIsShowTabBar(false)
                 }
             }))
             .environmentObject(FootprintVM(selectedId))

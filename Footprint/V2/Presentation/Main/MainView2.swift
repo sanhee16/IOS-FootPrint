@@ -17,7 +17,6 @@ struct MainView2: View {
     @StateObject private var mapStatusVM: MapStatusVM = MapStatusVM()
     
     @State private var selectedIndex: Int = 0
-    @State private var currentTab: MainMenuType = .map
     
     
     var body: some View {
@@ -30,10 +29,12 @@ struct MainView2: View {
 //                    type: .create
 //                )
 //
-                switch $currentTab.wrappedValue {
+                switch $tabBarService.currentTab.wrappedValue {
                 case .map:
                     MapView2(output: coordinator.mapOutput)
                         .environmentObject(mapStatusVM)
+                case .footprints:
+                    FootprintListViewV2(output: coordinator.footprintListViewOutput)
                 case .trip:
                     TripListView(output: coordinator.tripListViewOutput)
                 default:
@@ -42,8 +43,8 @@ struct MainView2: View {
                     }
                 }
                 if $tabBarService.isShowTabBar.wrappedValue {
-                    MainMenuBar(current: $currentTab.wrappedValue) { type in
-                        $currentTab.wrappedValue = type
+                    MainMenuBar(current: $tabBarService.currentTab.wrappedValue) { type in
+                        tabBarService.onTab(type)
                     }
                 }
             }

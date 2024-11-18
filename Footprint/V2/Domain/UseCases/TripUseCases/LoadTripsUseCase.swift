@@ -22,11 +22,11 @@ class LoadTripsUseCase {
         switch type {
         case .latest:
             value = value.sorted(by: { lhs, rhs in
-                lhs.createdAt < rhs.createdAt
+                lhs.createdAt > rhs.createdAt
             })
         case .earliest:
             value = value.sorted(by: { lhs, rhs in
-                lhs.createdAt > rhs.createdAt
+                lhs.createdAt < rhs.createdAt
             })
         case .more:
             value = value.sorted(by: { lhs, rhs in

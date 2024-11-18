@@ -20,6 +20,7 @@ enum UserDefaultKey: String {
     case settingFlag = "SETTING_FLAG"
     case isShowMarker = "IS_SHOW_MARKER"
     case tripSortType = "TRIP_SORT_TYPE"
+    case footprintSortType = "FOOTPRINT_SORT_TYPE"
 }
 
 
@@ -60,6 +61,9 @@ class Defaults {
     
     @UserDefault<Int>(key: UserDefaultKey.tripSortType.rawValue, defaultValue: 0)
     var tripSortType
+    
+    @UserDefault<Int>(key: UserDefaultKey.footprintSortType.rawValue, defaultValue: 0)
+    var footprintSortType
     
     //MARK: Setting
     /*

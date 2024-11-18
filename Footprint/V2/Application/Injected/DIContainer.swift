@@ -147,6 +147,14 @@ extension Container {
     var updateTripSortTypeUseCase: Factory<UpdateTripSortTypeUseCase> {
         Factory(self) { UpdateTripSortTypeUseCase(settingRepository: self.settingRepository()) }
     }
+    
+    var getFootprintSortTypeUseCase: Factory<GetFootprintSortTypeUseCase> {
+        Factory(self) { GetFootprintSortTypeUseCase(settingRepository: self.settingRepository()) }
+    }
+    
+    var updateFootprintSortTypeUseCase: Factory<UpdateFootprintSortTypeUseCase> {
+        Factory(self) { UpdateFootprintSortTypeUseCase(settingRepository: self.settingRepository()) }
+    }
 }
 
 //MARK: UseCase - TripIcon
