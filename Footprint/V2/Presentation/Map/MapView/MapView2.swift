@@ -49,7 +49,12 @@ struct MapView2: View {
         GeometryReader { geometry in
             ZStack(alignment: .topLeading) {
                 if let selectedAddress = selectedAddress, $isPresentFootprintSelector.wrappedValue {
-                    MultiMarkerSelectorView(address: selectedAddress) {
+                    MultiMarkerSelectorView(address: selectedAddress) { id in
+                        $isPresentFootprintSelector.wrappedValue = false
+                        self.selectedId = id
+                        self.footprintVM.updateId(id)
+                        $isPresentFootprint.wrappedValue = true
+                    } onClickViewAll: {
                         $isPresentFootprintSelector.wrappedValue = false
                         //TODO: View All
                         

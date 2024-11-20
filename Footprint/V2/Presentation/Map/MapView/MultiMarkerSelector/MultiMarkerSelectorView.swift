@@ -10,15 +10,17 @@ import SwiftUI
 
 struct MultiMarkerSelectorView: View {
     @StateObject private var vm: MultiMarkerSelectorVM
+    let onClickNote: (String) -> ()
     let onClickViewAll: () -> ()
     let onClickAddNote: (Location) -> ()
     
-    init(address: String, onClickViewAll: @escaping () -> (), onClickAddNote: @escaping (Location) -> ()) {
+    init(address: String, onClickNote: @escaping (String) -> (), onClickViewAll: @escaping () -> (), onClickAddNote: @escaping (Location) -> ()) {
         _vm = StateObject(
             wrappedValue: MultiMarkerSelectorVM(
                 address: address
             )
         )
+        self.onClickNote = onClickNote
         self.onClickViewAll = onClickViewAll
         self.onClickAddNote = onClickAddNote
     }
@@ -37,7 +39,7 @@ struct MultiMarkerSelectorView: View {
                 
                 ForEach($vm.notes.wrappedValue.indices, id: \.self) { idx in
                     Button(action: {
-                        
+                        self.onClickNote($vm.notes.wrappedValue[idx].id)
                     }, label: {
                         Text($vm.notes.wrappedValue[idx].title)
                             .sdFont(.btn3, color: .btn_text_gray_default)
