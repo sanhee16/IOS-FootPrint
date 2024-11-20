@@ -102,24 +102,40 @@ class FPMapManager: NSObject, ObservableObject {
         self.deleteMarkers()
         self.markers.removeAll()
         self.notes = self.loadAllNoteUseCase.execute(.latest)
+        // multi-marker: Address 기준으로 같은 marker를 grouping
+        var group: [String: [Note]] = [:]
         self.notes.forEach { note in
-            if let marker = createMarker(
-                location: Location(
-                    latitude: note.latitude,
-                    longitude: note.longitude
-                ),
-                categoryId: note.categoryId,
-                id: note.id
-            ) {
+            if group[note.address] == nil {
+                group[note.address] = []
+            }
+            group[note.address]?.append(note)
+        }
+        
+        group.forEach { (key: String, notes: [Note]) in
+            let number = notes.count
+            let categoryId: String? = number > 1 ? nil : notes.first?.categoryId
+            var location: Location? = nil
+            
+            if let firstItem = notes.first {
+                location = Location(latitude: firstItem.latitude, longitude: firstItem.longitude)
+            }
+            
+            var marker: GMSMarker? = nil
+            if let location = location, let categoryId = categoryId, let id = notes.first?.id, number == 1 {
+                marker = createMarker(location: location, categoryId: categoryId, id: id)
+            } else {
+                marker = createMarkerWithNumberNoti(
+                    location: location,
+                    ids: notes.compactMap({ $0.id }),
+                    number: number
+                )
+            }
+            
+            if let marker = marker {
                 self.markers.append(marker)
             }
         }
     }
-    /*
-     [0] = "7037DAF3-B203-4CA5-BAF9-1FF2B9803BE2"
-     [1] = "BDA30B2C-7D77-443C-BBAA-979A20DFA6FD"
-
-     */
     
     func deleteMarkers() {
         for marker in markers {
@@ -163,67 +179,56 @@ class FPMapManager: NSObject, ObservableObject {
         }
     }
     
-    func createMarkerWithNumberNoti(location: Location, categoryId: String, id: String) -> GMSMarker? {
-        guard let category = self.loadCategoryUseCase.execute(categoryId) else { return nil }
+    func createMarkerWithNumberNoti(location: Location?, ids: [String], number: Int) -> GMSMarker? {
+        guard let location = location else { return nil }
+        
         // 마커 생성하기
         let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
 
-        let backgroundSize = CGSize(width: 40, height: 40)
-        let itemSize = CGSize(width: 20, height: 20)
-        let itemFinalSize = CGSize(width: 40, height: 40)
-
-        let markerImage: UIImage? = UIImage(named: category.icon.imageName)?.resizeImageTo(size: itemSize)?.withTintColor(UIColor.white)
-        var backgroundImage: UIImage? = UIImage(named: "mark_background_black")?.resizeImageTo(size: backgroundSize)
-        backgroundImage = backgroundImage?.withTintColor(UIColor(hex: category.color.hex), renderingMode: .alwaysTemplate)
-
-        guard let markerImage = markerImage, let backgroundImage = backgroundImage else { return nil }
-
-        let backgroundRect = CGRect(x: 0, y: 0, width: backgroundSize.width, height: backgroundSize.height)
-        let itemRect = CGRect(x: (backgroundSize.width - itemSize.width) / 2, y: (backgroundSize.height - itemSize.height) / 2, width: itemSize.width, height: itemSize.height)
-
-        UIGraphicsBeginImageContext(backgroundSize)
-        backgroundImage.draw(in: backgroundRect, blendMode: .normal, alpha: 1)
-        markerImage.draw(in: itemRect, blendMode: .normal, alpha: 1)
-
-        let finalMarkerImage: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-
-        guard let finalMarkerImage = finalMarkerImage?.resizeImageTo(size: itemFinalSize) else { return nil }
-
-        // Create a container view for the marker
-        let markerContainerView = UIView(frame: CGRect(x: 0, y: 0, width: backgroundSize.width, height: backgroundSize.height))
-
-        // Create the marker image view
+        let itemSize = CGSize(width: 60, height: 50)
+        let markerImage: UIImage? = UIImage(named: "multi_noShadow")?.resizeImageTo(size: itemSize)
+        let itemRect = CGRect(x: 0, y: 0, width: itemSize.width, height: itemSize.height)
+        
+        markerImage?.draw(in: itemRect, blendMode: .normal, alpha: 1)
+        
+        
+        guard let finalMarkerImage = markerImage?.resizeImageTo(size: itemSize) else { return nil }
+        
+        // 컨테이너 뷰 크기를 늘려서 뱃지가 잘리지 않도록 조정
+        let newContainerHeight = itemSize.height + 10 // 여유 공간 추가
+        let markerContainerView = UIView(frame: CGRect(x: 0, y: 0, width: itemSize.width, height: newContainerHeight))
+        
+        // 마커 이미지 뷰
         let finalMarkerImageView = UIImageView(image: finalMarkerImage.withRenderingMode(.alwaysOriginal))
-        finalMarkerImageView.frame = CGRect(x: 0, y: 0, width: backgroundSize.width, height: backgroundSize.height)
+        finalMarkerImageView.frame = CGRect(x: 0, y: 0, width: itemSize.width, height: itemSize.height)
         markerContainerView.addSubview(finalMarkerImageView)
-
-        // Create a circle view for the number
+        
+        // 숫자 뷰 생성
         let numberViewSize: CGFloat = 20
-        let numberView = UIView(frame: CGRect(x: backgroundSize.width - numberViewSize, y: backgroundSize.height - numberViewSize, width: numberViewSize, height: numberViewSize))
+        let numberView = UIView(frame: CGRect(x: (itemSize.width - numberViewSize) / 2, y: itemSize.height - numberViewSize / 2, width: numberViewSize, height: numberViewSize))
         numberView.backgroundColor = .red // 원하는 배경색
         numberView.layer.cornerRadius = numberViewSize / 2
         numberView.clipsToBounds = true
-
-        // Create the label for the number
+        
+        // 숫자 라벨 생성
         let numberLabel = UILabel(frame: numberView.bounds)
-        numberLabel.text = "\(2)" // yourNumber를 원하는 숫자로 변경
+        numberLabel.text = "\(number)"
         numberLabel.textColor = .white
         numberLabel.textAlignment = .center
-        numberLabel.font = UIFont.boldSystemFont(ofSize: 12) // 폰트 크기 조정 가능
-
+        numberLabel.font = UIFont(name: "NanumSquareRoundOTF", size: 14.0) // 폰트 크기 조정 가능
+        
         numberView.addSubview(numberLabel)
         markerContainerView.addSubview(numberView)
-
+        
         marker.iconView = markerContainerView
         marker.map = self.mapView
         marker.tracksViewChanges = false
         marker.isTappable = true
-        marker.userData = id
+        marker.userData = ids
         
         return marker
     }
-    
+
     func createMarkerWithNumber(location: Location, categoryId: String, id: String) -> GMSMarker? {
         guard let category = self.loadCategoryUseCase.execute(categoryId) else { return nil }
         // 마커 생성하기
@@ -279,45 +284,56 @@ class FPMapManager: NSObject, ObservableObject {
         marker.map = self.mapView
         marker.tracksViewChanges = false
         marker.isTappable = true
-        marker.userData = id
+        marker.userData = [id]
         return marker
     }
     
     func createMarker(location: Location, categoryId: String, id: String) -> GMSMarker? {
         guard let category = self.loadCategoryUseCase.execute(categoryId) else { return nil }
+        
         // 마커 생성하기
         let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
-
+        
         let backgroundSize = CGSize(width: 40, height: 40)
+        let innerCircleInset: CGFloat = 2
         let itemSize = CGSize(width: 20, height: 20)
         let itemFinalSize = CGSize(width: 40, height: 40) // 크기를 증가시킴
-
+        
         let markerImage: UIImage? = UIImage(named: category.icon.imageName)?.resizeImageTo(size: itemSize)?.withTintColor(UIColor.white)
-        var backgroundImage: UIImage? = UIImage(named: "mark_background_black")?.resizeImageTo(size: backgroundSize)
-        backgroundImage = backgroundImage?.withTintColor(UIColor(hex: category.color.hex), renderingMode: .alwaysTemplate)
-
-        guard let markerImage = markerImage, let backgroundImage = backgroundImage else { return nil }
-
-        let backgroundRect = CGRect(x: 0, y: 0, width: backgroundSize.width, height: backgroundSize.height)
+        
+        guard let markerImage = markerImage else { return nil }
+        
+        // 전체 이미지 그리기 시작
+        UIGraphicsBeginImageContextWithOptions(backgroundSize, false, 0)
+        let context = UIGraphicsGetCurrentContext()
+        
+        // 흰색 바깥쪽 원 그리기 (테두리)
+        context?.setFillColor(UIColor.white.cgColor)
+        context?.fillEllipse(in: CGRect(x: 0, y: 0, width: backgroundSize.width, height: backgroundSize.height))
+        
+        // 색상이 채워진 안쪽 원 그리기
+        context?.setFillColor(UIColor(hex: category.color.hex).cgColor)
+        context?.fillEllipse(in: CGRect(x: innerCircleInset, y: innerCircleInset, width: backgroundSize.width - 2 * innerCircleInset, height: backgroundSize.height - 2 * innerCircleInset))
+        
+        // 마커 이미지 그리기
         let itemRect = CGRect(x: (backgroundSize.width - itemSize.width) / 2, y: (backgroundSize.height - itemSize.height) / 2, width: itemSize.width, height: itemSize.height)
-
-        UIGraphicsBeginImageContext(backgroundSize)
-        backgroundImage.draw(in: backgroundRect, blendMode: .normal, alpha: 1)
         markerImage.draw(in: itemRect, blendMode: .normal, alpha: 1)
-
+        
         let finalMarkerImage: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-
+        
         guard let finalMarkerImage = finalMarkerImage?.resizeImageTo(size: itemFinalSize) else { return nil }
         let finalMarkerImageView = UIImageView(image: finalMarkerImage.withRenderingMode(.alwaysOriginal))
+        
         marker.iconView = finalMarkerImageView
         marker.map = self.mapView
         marker.tracksViewChanges = false
         marker.isTappable = true
-        marker.userData = id
+        marker.userData = [id]
         
         return marker
     }
+
     
     func unSelectMarker() {
         self.selectedMarker = nil

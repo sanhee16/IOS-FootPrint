@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "happy-face--smiley-chat-message-smile-emoji-face-satisfied.png",
+      "filename" : "multi_noShadow.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "happy-face--smiley-chat-message-smile-emoji-face-satisfied@2x.png",
+      "filename" : "multi_noShadow@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "happy-face--smiley-chat-message-smile-emoji-face-satisfied@3x.png",
+      "filename" : "multi_noShadow@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
