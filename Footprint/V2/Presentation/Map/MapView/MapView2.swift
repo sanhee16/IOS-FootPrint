@@ -251,6 +251,7 @@ struct MapView2: View {
             }
             vm.onAppear()
         }
+        .toolbar($mapManager.status.wrappedValue == .adding ? .hidden : .visible, for: .tabBar)
     }
     
     

@@ -240,6 +240,7 @@ struct EditNoteView: View {
             }
             .background(Color.white)
         }
+        .toolbar(.hidden, for: .tabBar)
         .background(Color.bg_bgb)
         .navigationBarBackButtonHidden()
     }
