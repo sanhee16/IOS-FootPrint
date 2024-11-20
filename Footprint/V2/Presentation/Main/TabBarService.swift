@@ -9,14 +9,9 @@ import Foundation
 
 class TabBarService: ObservableObject {
     @Published var isShowTabBar: Bool = true
-    @Published var currentTab: MainMenuType = .map
     
     init() {
         addObserver()
-    }
-    
-    func onTab(_ tab: MainMenuType) {
-        self.currentTab = tab
     }
     
     func setIsShowTabBar(_ isShow: Bool) {

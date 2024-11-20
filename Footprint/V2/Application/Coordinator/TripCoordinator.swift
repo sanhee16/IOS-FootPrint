@@ -1,15 +1,15 @@
 //
-//  Coordinator.swift
+//  TripCoordinator.swift
 //  Footprint
 //
-//  Created by sandy on 8/10/24.
+//  Created by sandy on 11/20/24.
 //
 
 import Foundation
 import Factory
 import SwiftUI
 
-class Coordinator: BaseCoordinator<Destination> {
+class TripCoordinator: BaseCoordinator<Destination> {
     let tabBarService: TabBarService = TabBarService()
     
     private func pushEditNote(note: TemporaryNote, output: EditNoteView.Output) {
@@ -42,7 +42,7 @@ class Coordinator: BaseCoordinator<Destination> {
 }
 
 //MARK: Output
-extension Coordinator {
+extension TripCoordinator {
     var mapOutput: MapView2.Output {
         MapView2.Output { note in
             self.pushEditNote(note: note, output: self.editNoteOutput)
@@ -54,21 +54,13 @@ extension Coordinator {
             self.pop()
         } pushCategoryListEditView: {
             self.pushCategoryListEditView(self.categoryListEditViewOutput)
-        } pushPeopleWithListEditView: { 
+        } pushPeopleWithListEditView: {
             self.pushPeopleWithListEditView(self.peopleWithListEditViewOutput)
         } popToSelectLocation: {
             self.tabBarService.isShowTabBar = false
             
             
             self.popToRoot()
-        }
-    }
-    
-    var selectLocationOutput: SelectLocationView.Output {
-        SelectLocationView.Output {
-            self.pop()
-        } goToEditNote: { note in
-            self.pushEditNote(note: note, output: self.editNoteOutput)
         }
     }
     
@@ -98,3 +90,4 @@ extension Coordinator {
         }
     }
 }
+

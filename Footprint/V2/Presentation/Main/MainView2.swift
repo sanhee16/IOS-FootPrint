@@ -11,39 +11,74 @@ import Kingfisher
 import Factory
 
 struct MainView2: View {
-    @StateObject private var coordinator: Coordinator = Coordinator()
+    @StateObject private var mapCoordinator: MapCoordinator = MapCoordinator()
+    @StateObject private var footprintCoordinator: FootprintCoordinator = FootprintCoordinator()
+    @StateObject private var tripCoordinator: TripCoordinator = TripCoordinator()
+    
     @StateObject private var vm: MainVM2 = MainVM2()
     @StateObject private var tabBarService: TabBarService = TabBarService()
     
-    @State private var selectedIndex: Int = 0
+    @State private var currentTab: Int = 0
     
+    private let ICON_SIZE: CGFloat = 24.0
+    private let ITEM_WIDTH: CGFloat = UIScreen.main.bounds.width / 4
+    private let ITEM_HEIGHT: CGFloat = 64.0
+    
+    init() {
+        UITabBar.appearance().barTintColor = .clear
+    }
     
     var body: some View {
-        NavigationStack(path: $coordinator.paths) {
-            VStack(alignment: .leading, spacing: 0) {
-                switch $tabBarService.currentTab.wrappedValue {
-                case .map:
-                    MapView2(output: coordinator.mapOutput)
-                case .footprints:
-                    FootprintListViewV2(output: coordinator.footprintListViewOutput)
-                case .trip:
-                    TripListView(output: coordinator.tripListViewOutput)
-                default:
-                    VStack {
-                        Spacer()
+        VStack(alignment: .leading, spacing: 0) {
+            TabView(selection: $currentTab, content:  {
+                MapView2(output: mapCoordinator.mapOutput)
+                    .tabItem {
+                        drawTabItem(MainMenuType.map)
                     }
-                }
-                if $tabBarService.isShowTabBar.wrappedValue {
-                    MainMenuBar(current: $tabBarService.currentTab.wrappedValue) { type in
-                        tabBarService.onTab(type)
+                    .tag(MainMenuType.map.rawValue)
+                    .environmentObject(mapCoordinator)
+                
+                FootprintListViewV2(output: footprintCoordinator.footprintListViewOutput)
+                    .tabItem {
+                        drawTabItem(MainMenuType.footprints)
                     }
-                }
-            }
-            .navigationBarBackButtonHidden()
-            .navigationDestination(for: Destination.self) { destination in
-                coordinator.moveToDestination(destination: destination)
-            }
+                    .tag(MainMenuType.footprints.rawValue)
+                    .environmentObject(footprintCoordinator)
+                
+                TripListView(output: tripCoordinator.tripListViewOutput)
+                    .tabItem {
+                        drawTabItem(MainMenuType.trip)
+                    }
+                    .tag(MainMenuType.trip.rawValue)
+                    .environmentObject(tripCoordinator)
+            })
+            .tint(.cont_primary_mid)
         }
         .environmentObject(tabBarService)
+        .onAppear {
+            UITabBar.appearance().barTintColor = .clear
+            UITabBar.appearance().backgroundColor = Color.bg_bgb.uiColor
+            
+            let standardAppearance = UITabBarAppearance()
+            standardAppearance.backgroundColor = Color.bg_bgb.uiColor
+            UITabBar.appearance().standardAppearance = standardAppearance
+            
+            let scrollEdgeAppearance = UITabBarAppearance()
+            scrollEdgeAppearance.backgroundColor = Color.bg_bgb.uiColor
+            UITabBar.appearance().scrollEdgeAppearance = scrollEdgeAppearance
+        }
+        .navigationBarBackButtonHidden()
+    }
+    
+    private func drawTabItem(_ item: MainMenuType) -> some View {
+        return VStack(alignment: .center, spacing: 8) {
+            Image($currentTab.wrappedValue == item.rawValue ? item.onImage : item.offImage)
+                .resizable()
+                .scaledToFit()
+                .frame(both: ICON_SIZE, alignment: .center)
+            Text(item.text)
+                .sdFont(.caption2, color: Color.cont_gray_mid)
+        }
+        .background(Color.bg_bgb)
     }
 }

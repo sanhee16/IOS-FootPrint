@@ -84,6 +84,8 @@
 		26756A142CEDC3160031923F /* MultiMarkerSelectorVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26756A132CEDC3160031923F /* MultiMarkerSelectorVM.swift */; };
 		26756A162CEDE13A0031923F /* NoteEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26756A152CEDE13A0031923F /* NoteEntity.swift */; };
 		26756A182CEE04CF0031923F /* UpdateNoteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26756A172CEE04CF0031923F /* UpdateNoteUseCase.swift */; };
+		26756A1A2CEE0B670031923F /* FootprintCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26756A192CEE0B670031923F /* FootprintCoordinator.swift */; };
+		26756A1C2CEE0B7C0031923F /* TripCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26756A1B2CEE0B7C0031923F /* TripCoordinator.swift */; };
 		2675D2042CDDDE3100BD7633 /* UpdateIsShowMarkerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2675D2032CDDDE3100BD7633 /* UpdateIsShowMarkerUseCase.swift */; };
 		2675D2062CDDDE4500BD7633 /* SettingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2675D2052CDDDE4500BD7633 /* SettingRepository.swift */; };
 		2675D2082CDDDE9000BD7633 /* GetIsShowMarkerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2675D2072CDDDE9000BD7633 /* GetIsShowMarkerUseCase.swift */; };
@@ -101,7 +103,7 @@
 		267A22D42CEAE7490079D146 /* GetFootprintSortTypeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267A22D32CEAE7490079D146 /* GetFootprintSortTypeUseCase.swift */; };
 		267A22DA2CEB68770079D146 /* TemporaryNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267A22D92CEB68770079D146 /* TemporaryNote.swift */; };
 		267CC1772C66F27000D6015E /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC1762C66F27000D6015E /* BaseCoordinator.swift */; };
-		267CC1792C66F28300D6015E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC1782C66F28300D6015E /* Coordinator.swift */; };
+		267CC1792C66F28300D6015E /* MapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC1782C66F28300D6015E /* MapCoordinator.swift */; };
 		267CC17B2C66F28E00D6015E /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC17A2C66F28E00D6015E /* Destination.swift */; };
 		267CC17E2C66F2BC00D6015E /* MapView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC17D2C66F2BC00D6015E /* MapView2.swift */; };
 		267CC1802C66F2C700D6015E /* MapVM2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC17F2C66F2C700D6015E /* MapVM2.swift */; };
@@ -347,6 +349,8 @@
 		26756A132CEDC3160031923F /* MultiMarkerSelectorVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiMarkerSelectorVM.swift; sourceTree = "<group>"; };
 		26756A152CEDE13A0031923F /* NoteEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEntity.swift; sourceTree = "<group>"; };
 		26756A172CEE04CF0031923F /* UpdateNoteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNoteUseCase.swift; sourceTree = "<group>"; };
+		26756A192CEE0B670031923F /* FootprintCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootprintCoordinator.swift; sourceTree = "<group>"; };
+		26756A1B2CEE0B7C0031923F /* TripCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripCoordinator.swift; sourceTree = "<group>"; };
 		2675D2032CDDDE3100BD7633 /* UpdateIsShowMarkerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateIsShowMarkerUseCase.swift; sourceTree = "<group>"; };
 		2675D2052CDDDE4500BD7633 /* SettingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRepository.swift; sourceTree = "<group>"; };
 		2675D2072CDDDE9000BD7633 /* GetIsShowMarkerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetIsShowMarkerUseCase.swift; sourceTree = "<group>"; };
@@ -364,7 +368,7 @@
 		267A22D32CEAE7490079D146 /* GetFootprintSortTypeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFootprintSortTypeUseCase.swift; sourceTree = "<group>"; };
 		267A22D92CEB68770079D146 /* TemporaryNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryNote.swift; sourceTree = "<group>"; };
 		267CC1762C66F27000D6015E /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
-		267CC1782C66F28300D6015E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		267CC1782C66F28300D6015E /* MapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCoordinator.swift; sourceTree = "<group>"; };
 		267CC17A2C66F28E00D6015E /* Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
 		267CC17D2C66F2BC00D6015E /* MapView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView2.swift; sourceTree = "<group>"; };
 		267CC17F2C66F2C700D6015E /* MapVM2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVM2.swift; sourceTree = "<group>"; };
@@ -879,7 +883,9 @@
 			isa = PBXGroup;
 			children = (
 				267CC1762C66F27000D6015E /* BaseCoordinator.swift */,
-				267CC1782C66F28300D6015E /* Coordinator.swift */,
+				267CC1782C66F28300D6015E /* MapCoordinator.swift */,
+				26756A192CEE0B670031923F /* FootprintCoordinator.swift */,
+				26756A1B2CEE0B7C0031923F /* TripCoordinator.swift */,
 				267CC17A2C66F28E00D6015E /* Destination.swift */,
 			);
 			path = Coordinator;
@@ -1797,6 +1803,7 @@
 				2696F4E12C7753A000F56E73 /* NoteRepositoryImpl.swift in Sources */,
 				267CC17E2C66F2BC00D6015E /* MapView2.swift in Sources */,
 				631D752F29667A4D00464F33 /* PeopleWithListViewModel.swift in Sources */,
+				26756A1A2CEE0B670031923F /* FootprintCoordinator.swift in Sources */,
 				631D752D29667A4700464F33 /* PeopleWithListView.swift in Sources */,
 				631D752A296661FE00464F33 /* MainMapOptionViewModel.swift in Sources */,
 				269CA5582C78A43300366005 /* CategoryV2.swift in Sources */,
@@ -1839,7 +1846,7 @@
 				2619FE8A2940D6AC00D24778 /* CheckPermissionView.swift in Sources */,
 				262424DE2CE595A700595132 /* EditTripVM.swift in Sources */,
 				269CA5672C78A5FE00366005 /* UpdateCategoryUseCase.swift in Sources */,
-				267CC1792C66F28300D6015E /* Coordinator.swift in Sources */,
+				267CC1792C66F28300D6015E /* MapCoordinator.swift in Sources */,
 				267CC1962C67823E00D6015E /* EditNoteView.swift in Sources */,
 				63E848A7295ABEBD0037D7A3 /* TravelListView.swift in Sources */,
 				2696F4EF2C7757F300F56E73 /* DIContainer.swift in Sources */,
@@ -1872,6 +1879,7 @@
 				63B1FAED2914A85B007E94B6 /* EditFootprintView.swift in Sources */,
 				265EA947291D1E1400068A5C /* DataModel.swift in Sources */,
 				260C87CB296AADB900ADCC32 /* ShowTravelView.swift in Sources */,
+				26756A1C2CEE0B7C0031923F /* TripCoordinator.swift in Sources */,
 				26756A162CEDE13A0031923F /* NoteEntity.swift in Sources */,
 				63D7EF1D296FBE2500D72F12 /* GoogleApi.swift in Sources */,
 				63FA2387294C35CB00D31506 /* PeopleEditView.swift in Sources */,

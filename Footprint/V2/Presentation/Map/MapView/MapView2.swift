@@ -25,7 +25,7 @@ struct MapView2: View {
     @StateObject var mapManager: FPMapManager = FPMapManager.shared
     @StateObject private var footprintVM: FootprintVM = FootprintVM()
     @EnvironmentObject private var tabBarService: TabBarService
-    //    @EnvironmentObject private var mapStatusVM: MapStatusVM
+    @EnvironmentObject private var coordinator: MapCoordinator
     
     private var safeTop: CGFloat { get { Util.safeTop() }}
     private var safeBottom: CGFloat { get { Util.safeBottom() }}
@@ -46,7 +46,7 @@ struct MapView2: View {
     }
     
     var body: some View {
-        GeometryReader { geometry in
+        NavigationStack(path: $coordinator.paths) {
             ZStack(alignment: .topLeading) {
                 if let selectedAddress = selectedAddress, $isPresentFootprintSelector.wrappedValue {
                     MultiMarkerSelectorView(address: selectedAddress) { id in
@@ -95,14 +95,14 @@ struct MapView2: View {
                         .zIndex(2)
                         .rectReader($centerPos, in: .global)
                         .offset(
-                            x: geometry.size.width / 2 - $centerPos.wrappedValue.width / 2,
-                            y: geometry.size.height / 2 - $centerPos.wrappedValue.height
+                            x: UIScreen.main.bounds.size.width / 2 - $centerPos.wrappedValue.width / 2,
+                            y: UIScreen.main.bounds.size.height / 2 - $centerPos.wrappedValue.height
                         )
                 }
                 
                 if !$vm.isLoading.wrappedValue {
                     FPMapView(mapView: $mapManager.mapView.wrappedValue)
-                        .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
+                        .frame(maxWidth: .infinity, alignment: .center)
                         .zIndex(1)
                 }
                 
@@ -118,13 +118,13 @@ struct MapView2: View {
                             Spacer()
                             if isShowSearchBar {
                                 VStack(alignment: .leading, spacing: 9, content: {
-                                    drawSearchBox(geometry)
+                                    drawSearchBox()
                                         .sdPadding(top: 8, leading: 16, bottom: 0, trailing: 16)
                                         .onTapGesture { }
-                                    if !$vm.searchItems.wrappedValue.isEmpty {
-                                        drawSearchList(geometry)
-                                            .padding(.top, 6)
-                                    }
+//                                    if !$vm.searchItems.wrappedValue.isEmpty {
+//                                        drawSearchList()
+//                                            .padding(.top, 6)
+//                                    }
                                 })
                             } else {
                                 mapMenuButton("search") {
@@ -161,7 +161,7 @@ struct MapView2: View {
                                 .font(.body2)
                                 .foregroundStyle(Color.white)
                                 .sdPaddingVertical(16)
-                                .frame(width: geometry.size.width)
+                                .frame(width: UIScreen.main.bounds.size.width)
                                 .background(Color.black.opacity(0.7))
                         })
                         .zIndex(1)
@@ -192,18 +192,12 @@ struct MapView2: View {
                             Text($mapManager.centerAddress.wrappedValue)
                             
                             HStack(alignment: .center, spacing: 8, content: {
-                                //                                FPButton(text: "닫기", status: .able, size: .large, type: .lightSolid) {
-                                //                                    mapStatusVM.updateMapStatus(.normal)
-                                //                                    vm.clearFootprint()
-                                //                                }
-                                //                                .frame(width: (UIScreen.main.bounds.size.width - 32 - 8) / 10 * 3)
                                 
                                 FPButton(text: "여기에 발자국 남기기", status: $mapManager.centerMarkerStatus.wrappedValue == .move ? .disable : .able, size: .large, type: .solid) {
                                     if let location = $mapManager.centerPosition.wrappedValue, let note = vm.updateTempLocation(Location(latitude: location.latitude, longitude: location.longitude), address: $mapManager.centerAddress.wrappedValue) {
                                         output.goToEditNote(note)
                                     }
                                 }
-                                //                                .frame(width: (UIScreen.main.bounds.size.width - 32 - 8) / 10 * 7)
                             })
                         })
                         .sdPadding(top: 16, leading: 16, bottom: 8, trailing: 16)
@@ -213,7 +207,9 @@ struct MapView2: View {
                 })
                 .zIndex(2)
             }
-            .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
+            .frame(maxWidth: .infinity, alignment: .center).navigationDestination(for: Destination.self) { destination in
+                coordinator.moveToDestination(destination: destination)
+            }
         }
         .sheet(isPresented: $isPresentFootprint, onDismiss: {
             $isPresentFootprint.wrappedValue = false
@@ -356,7 +352,7 @@ struct MapView2: View {
         }
     }
     
-    private func drawSearchBox(_ geometry: GeometryProxy) -> some View {
+    private func drawSearchBox() -> some View {
         return HStack(alignment: .center) {
             Image("search")
                 .resizable()
