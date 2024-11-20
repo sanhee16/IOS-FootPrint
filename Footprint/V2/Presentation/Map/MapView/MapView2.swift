@@ -188,11 +188,14 @@ struct MapView2: View {
         })
         .onChange(of: $mapManager.selectedMarker.wrappedValue, perform: { id in
             if let id = id {
-                print("marker: \(id)")
-                $mapManager.selectedMarker.wrappedValue = nil
-                self.selectedId = id
-                self.footprintVM.updateId(id)
-                $isPresentFootprint.wrappedValue = true
+                mapManager.unSelectMarker()
+                if $mapStatusVM.status.wrappedValue == .adding {
+                    self.selectedId = nil
+                } else {
+                    self.selectedId = id
+                    self.footprintVM.updateId(id)
+                    $isPresentFootprint.wrappedValue = true
+                }
             }
         })
         .onAppear {
