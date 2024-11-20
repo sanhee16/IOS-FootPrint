@@ -14,6 +14,11 @@ import Contacts
 import Factory
 import Combine
 
+enum MapStatus: String {
+    case normal
+    case adding
+}
+
 @MainActor
 class FPMapManager: NSObject, ObservableObject {
     @Injected(\.loadAllNoteUseCase) var loadAllNoteUseCase
@@ -31,6 +36,8 @@ class FPMapManager: NSObject, ObservableObject {
     @Published var markers: [GMSMarker]
     
     @Published var selectedMarkers: [String] = []
+    @Published var status: MapStatus = .normal
+    static var tempNote: TempNote? = nil
     
     private var notes: [Note]
     
@@ -47,6 +54,7 @@ class FPMapManager: NSObject, ObservableObject {
         mapView.delegate = self
         
         self.settingMapView()
+        addObserver()
     }
     
     @MainActor
@@ -91,6 +99,40 @@ class FPMapManager: NSObject, ObservableObject {
         C.mapView = mapView
     }
     
+    func addObserver() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(
+                didRecieveChangeMapStatusNotification(
+                    _:
+                )
+            ),
+            name: .changeMapStatus,
+            object: nil
+        )
+    }
+
+    @objc func didRecieveChangeMapStatusNotification(_ notification: Notification) {
+        let getValue = notification.object as! String
+        print("didRecieveChangeMapStatusNotification: \(getValue)")
+        if let status = MapStatus(rawValue: getValue) {
+            self.updateMapStatus(status)
+        }
+    }
+
+    func updateMapStatus(_ status: MapStatus) {
+        print("updateMapStatus: \(status.rawValue)")
+        self.status = status
+        switch status {
+        case .normal:
+            Self.tempNote = nil
+            NotificationCenter.default.post(name: .isShowTabBar, object: true)
+            break
+        case .adding:
+            NotificationCenter.default.post(name: .isShowTabBar, object: false)
+            break
+        }
+    }
     
     func didTapMyLocationButton() {
         self.getCurrentLocation()
@@ -365,7 +407,12 @@ extension FPMapManager: GMSMapViewDelegate {
     // 마커 클릭
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         if let ids = marker.userData as? [String] {
-            self.moveToLocation(Location(latitude: marker.position.latitude, longitude: marker.position.longitude))
+            self.moveToLocation(
+                Location(
+                    latitude: marker.position.latitude - (status == .normal ? 0.001 : 0.0),
+                    longitude: marker.position.longitude
+                )
+            )
             self.selectedMarkers = ids
         }
         return true

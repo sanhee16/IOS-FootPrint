@@ -14,7 +14,7 @@ struct MainView2: View {
     @StateObject private var coordinator: Coordinator = Coordinator()
     @StateObject private var vm: MainVM2 = MainVM2()
     @StateObject private var tabBarService: TabBarService = TabBarService()
-    @StateObject private var mapStatusVM: MapStatusVM = MapStatusVM()
+//    @StateObject private var mapStatusVM: MapStatusVM = MapStatusVM()
     
     @State private var selectedIndex: Int = 0
     
@@ -32,7 +32,7 @@ struct MainView2: View {
                 switch $tabBarService.currentTab.wrappedValue {
                 case .map:
                     MapView2(output: coordinator.mapOutput)
-                        .environmentObject(mapStatusVM)
+//                        .environmentObject(mapStatusVM)
                 case .footprints:
                     FootprintListViewV2(output: coordinator.footprintListViewOutput)
                 case .trip:

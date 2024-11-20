@@ -11,7 +11,6 @@ import SwiftUI
 
 class Coordinator: BaseCoordinator<Destination> {
     let tabBarService: TabBarService = TabBarService()
-    let mapStatusVM: MapStatusVM = MapStatusVM()
     
     private func pushEditNote(note: TemporaryNote, output: EditNoteView.Output) {
         self.push(.editNote(note: note, output: output))
@@ -59,7 +58,6 @@ extension Coordinator {
             self.pushPeopleWithListEditView(self.peopleWithListEditViewOutput)
         } popToSelectLocation: {
             self.tabBarService.isShowTabBar = false
-            self.mapStatusVM.status = .adding
             
             
             self.popToRoot()

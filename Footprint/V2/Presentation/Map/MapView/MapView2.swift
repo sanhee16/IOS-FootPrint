@@ -25,7 +25,7 @@ struct MapView2: View {
     @StateObject var mapManager: FPMapManager = FPMapManager.shared
     @StateObject private var footprintVM: FootprintVM = FootprintVM()
     @EnvironmentObject private var tabBarService: TabBarService
-    @EnvironmentObject private var mapStatusVM: MapStatusVM
+//    @EnvironmentObject private var mapStatusVM: MapStatusVM
     
     private var safeTop: CGFloat { get { Util.safeTop() }}
     private var safeBottom: CGFloat { get { Util.safeBottom() }}
@@ -45,7 +45,7 @@ struct MapView2: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .topLeading) {
-                if $mapStatusVM.status.wrappedValue == .adding {
+                if $mapManager.status.wrappedValue == .adding {
                     Image($mapManager.centerMarkerStatus.wrappedValue.image)
                         .resizable()
                         .scaledToFit()
@@ -67,7 +67,7 @@ struct MapView2: View {
                 VStack(alignment: .center,
                        spacing: 0,
                        content: {
-                    switch $mapStatusVM.status.wrappedValue {
+                    switch $mapManager.status.wrappedValue {
                     case .normal:
                         if Defaults.shared.premiumCode.isEmpty && $vm.isShowAds.wrappedValue {
                             GADBanner().frame(width: GADAdSizeBanner.size.width, height: GADAdSizeBanner.size.height)
@@ -110,7 +110,7 @@ struct MapView2: View {
                         VStack(alignment: .leading, spacing: 0, content: {
                             Topbar("위치 선택", type: .close) {
                                 vm.clearFootprint()
-                                mapStatusVM.updateMapStatus(.normal)
+                                mapManager.updateMapStatus(.normal)
                                 if $vm.isShowMarkers.wrappedValue {
                                     mapManager.loadMarkers()
                                 }
@@ -134,12 +134,12 @@ struct MapView2: View {
                         Spacer()
                     })
                     
-                    switch $mapStatusVM.status.wrappedValue {
+                    switch $mapManager.status.wrappedValue {
                     case .normal:
                         FPButton(text: "발자국 남기기", location: .leading(name: "paw-foot-white"), status: .able, size: .large, type: .solid) {
                             //                        output.goToSelectLocation()
                             withAnimation(.smooth) {
-                                mapStatusVM.updateMapStatus(.adding)
+                                mapManager.updateMapStatus(.adding)
                             }
                         }
                         .sdPadding(top: 0, leading: 16, bottom: 8, trailing: 16)
@@ -189,7 +189,7 @@ struct MapView2: View {
         .onChange(of: $mapManager.selectedMarkers.wrappedValue, perform: { ids in
             if !ids.isEmpty {
                 mapManager.unSelectMarker()
-                if $mapStatusVM.status.wrappedValue == .adding {
+                if $mapManager.status.wrappedValue == .adding {
                     self.selectedId = nil
                 } else {
                     if ids.count == 1, let firstId = ids.first {
