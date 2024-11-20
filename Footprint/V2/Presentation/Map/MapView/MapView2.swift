@@ -34,9 +34,12 @@ struct MapView2: View {
     @State private var isShowSearchBar: Bool = false
     @State private var centerPos: CGRect = .zero
     @State private var isPresentFootprint: Bool = false
+    @State private var isPresentFootprintSelector: Bool = false
     @State private var selectedId: String? = nil
+    @State private var selectedAddress: String? = nil
     @Environment(\.centerLocation) var centerLocation
 
+    @State private var selectorWidth: CGFloat = .zero
     
     init(output: Output) {
         self.output = output
@@ -45,6 +48,33 @@ struct MapView2: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .topLeading) {
+                if let selectedAddress = selectedAddress, $isPresentFootprintSelector.wrappedValue {
+                    MultiMarkerSelectorView(
+                        address: selectedAddress
+                    )
+                    .background(
+                        GeometryReader { geo in
+                            Color.clear
+                                .onAppear {
+                                    self.selectorWidth = geo.size.width
+                                }
+                        }
+                    )
+                    .zIndex(4)
+                    .offset(x: (UIScreen.main.bounds.size.width - $selectorWidth.wrappedValue) / 2, y: 174)
+                    
+                    VStack(alignment: .center) {
+                        
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                    .background(Color.black.opacity(0.5))
+                    .contentShape(Rectangle())
+                    .zIndex(3)
+                    .onTapGesture {
+                        $isPresentFootprintSelector.wrappedValue = false
+                    }
+                }
+                
                 if $mapManager.status.wrappedValue == .adding {
                     Image($mapManager.centerMarkerStatus.wrappedValue.image)
                         .resizable()
@@ -192,10 +222,17 @@ struct MapView2: View {
                 if $mapManager.status.wrappedValue == .adding {
                     self.selectedId = nil
                 } else {
-                    if ids.count == 1, let firstId = ids.first {
-                        self.selectedId = firstId
-                        self.footprintVM.updateId(firstId)
-                        $isPresentFootprint.wrappedValue = true
+                    if let firstId = ids.first {
+                        if ids.count == 1 {
+                            self.selectedId = firstId
+                            self.footprintVM.updateId(firstId)
+                            $isPresentFootprint.wrappedValue = true
+                        } else {
+                            vm.getMultiNoteAddress(firstId) { address in
+                                self.selectedAddress = address
+                                $isPresentFootprintSelector.wrappedValue = true
+                            }
+                        }
                     }
                 }
             }

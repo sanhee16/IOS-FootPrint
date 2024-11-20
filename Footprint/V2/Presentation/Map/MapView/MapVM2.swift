@@ -47,6 +47,8 @@ class MapVM2: BaseViewModel {
     @Injected(\.getIsShowMarkerUseCase) var getIsShowMarkerUseCase
     @Injected(\.updateIsShowMarkerUseCase) var updateIsShowMarkerUseCase
     @Injected(\.temporaryNoteService) var temporaryNoteService
+    @Injected(\.loadNoteUseCaseWithAddress) var loadNoteUseCaseWithAddress
+    @Injected(\.loadNoteUseCaseWithId) var loadNoteUseCaseWithId
     
     private var locationManager: CLLocationManager
     @Published var isShowAds: Bool = false
@@ -73,7 +75,6 @@ class MapVM2: BaseViewModel {
     @Published var isLoading: Bool = false
     
     var centerPosition: CLLocationCoordinate2D? = nil
-//    private var allFootprints: [Note] = []
     
     private var searchCnt: Int = 0
     private var lastSearchText: String? = nil
@@ -195,5 +196,14 @@ class MapVM2: BaseViewModel {
             searchTimer = nil
             searchCnt = 0
         }
+    }
+    
+    func getMultiNoteAddress(_ id: String, onDone: @escaping (String?) -> ()) {
+        guard let note = self.loadNoteUseCaseWithId.execute(id) else {
+            onDone(nil)
+            return
+        }
+        onDone(note.address)
+        return
     }
 }

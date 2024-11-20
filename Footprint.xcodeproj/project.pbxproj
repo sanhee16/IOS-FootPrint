@@ -80,6 +80,8 @@
 		266EDDE62C64EB46006CF09B /* MainVM2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266EDDE52C64EB46006CF09B /* MainVM2.swift */; };
 		266EDDE82C64EB88006CF09B /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266EDDE72C64EB88006CF09B /* BaseViewModel.swift */; };
 		26756A0F2CEC42BA0031923F /* TemporaryNoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26756A0E2CEC42BA0031923F /* TemporaryNoteService.swift */; };
+		26756A122CEDC3120031923F /* MultiMarkerSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26756A112CEDC3120031923F /* MultiMarkerSelectorView.swift */; };
+		26756A142CEDC3160031923F /* MultiMarkerSelectorVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26756A132CEDC3160031923F /* MultiMarkerSelectorVM.swift */; };
 		2675D2042CDDDE3100BD7633 /* UpdateIsShowMarkerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2675D2032CDDDE3100BD7633 /* UpdateIsShowMarkerUseCase.swift */; };
 		2675D2062CDDDE4500BD7633 /* SettingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2675D2052CDDDE4500BD7633 /* SettingRepository.swift */; };
 		2675D2082CDDDE9000BD7633 /* GetIsShowMarkerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2675D2072CDDDE9000BD7633 /* GetIsShowMarkerUseCase.swift */; };
@@ -340,6 +342,8 @@
 		266EDDE52C64EB46006CF09B /* MainVM2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVM2.swift; sourceTree = "<group>"; };
 		266EDDE72C64EB88006CF09B /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		26756A0E2CEC42BA0031923F /* TemporaryNoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryNoteService.swift; sourceTree = "<group>"; };
+		26756A112CEDC3120031923F /* MultiMarkerSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiMarkerSelectorView.swift; sourceTree = "<group>"; };
+		26756A132CEDC3160031923F /* MultiMarkerSelectorVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiMarkerSelectorVM.swift; sourceTree = "<group>"; };
 		2675D2032CDDDE3100BD7633 /* UpdateIsShowMarkerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateIsShowMarkerUseCase.swift; sourceTree = "<group>"; };
 		2675D2052CDDDE4500BD7633 /* SettingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRepository.swift; sourceTree = "<group>"; };
 		2675D2072CDDDE9000BD7633 /* GetIsShowMarkerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetIsShowMarkerUseCase.swift; sourceTree = "<group>"; };
@@ -549,6 +553,7 @@
 		260C3CD62C6CA53D004A9206 /* MapView */ = {
 			isa = PBXGroup;
 			children = (
+				26756A102CEDC2F80031923F /* MultiMarkerSelector */,
 				267CC17D2C66F2BC00D6015E /* MapView2.swift */,
 				267CC17F2C66F2C700D6015E /* MapVM2.swift */,
 			);
@@ -829,6 +834,15 @@
 				263FADC22C7164B700AE9E73 /* TabBarService.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		26756A102CEDC2F80031923F /* MultiMarkerSelector */ = {
+			isa = PBXGroup;
+			children = (
+				26756A112CEDC3120031923F /* MultiMarkerSelectorView.swift */,
+				26756A132CEDC3160031923F /* MultiMarkerSelectorVM.swift */,
+			);
+			path = MultiMarkerSelector;
 			sourceTree = "<group>";
 		};
 		267A22C22CEADFEE0079D146 /* Fonts */ = {
@@ -1767,6 +1781,7 @@
 				262424E82CE5B9CE00595132 /* TripIconItem.swift in Sources */,
 				63D32FC829CA92BF0049F567 /* PremiumCodeViewModel.swift in Sources */,
 				2696F4E42C7753C400F56E73 /* NoteRepository.swift in Sources */,
+				26756A122CEDC3120031923F /* MultiMarkerSelectorView.swift in Sources */,
 				267CC18C2C6710DF00D6015E /* UINavigationController+Extension.swift in Sources */,
 				2694FCA22C7AA95000F01644 /* LoadAllNoteUseCase.swift in Sources */,
 				26EB9D1F2CD9E4B100D3B0CE /* NotificationName.swift in Sources */,
@@ -1826,6 +1841,7 @@
 				63E848A7295ABEBD0037D7A3 /* TravelListView.swift in Sources */,
 				2696F4EF2C7757F300F56E73 /* DIContainer.swift in Sources */,
 				267CC1982C67824200D6015E /* EditNoteVM.swift in Sources */,
+				26756A142CEDC3160031923F /* MultiMarkerSelectorVM.swift in Sources */,
 				260C87CD296AADBE00ADCC32 /* ShowTravelViewModel.swift in Sources */,
 				266EDDDE2C64EAD9006CF09B /* SplashVM2.swift in Sources */,
 				63F1324C2914A18800B3A9E0 /* CommonApi.swift in Sources */,
