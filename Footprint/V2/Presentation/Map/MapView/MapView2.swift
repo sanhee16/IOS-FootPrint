@@ -113,6 +113,7 @@ struct MapView2: View {
                     case .normal:
                         if Defaults.shared.premiumCode.isEmpty && $vm.isShowAds.wrappedValue {
                             GADBanner().frame(width: GADAdSizeBanner.size.width, height: GADAdSizeBanner.size.height)
+                                .zIndex(5)
                         }
                         HStack(alignment: .center, spacing: 0, content: {
                             Spacer()
