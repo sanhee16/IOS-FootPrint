@@ -26,7 +26,7 @@ class MultiMarkerSelectorVM: ObservableObject {
     }
     
     private func loadData() {
-        self.notes = self.loadNoteUseCaseWithAddress.execute(self.address)
+        self.notes = self.loadNoteUseCaseWithAddress.execute(self.address, type: .latest)
         self.totalNotes = self.notes.count
         self.notes = Array(self.notes.prefix(3))
         

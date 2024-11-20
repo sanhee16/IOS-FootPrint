@@ -10,13 +10,17 @@ import SwiftUI
 
 struct MultiMarkerSelectorView: View {
     @StateObject private var vm: MultiMarkerSelectorVM
+    let onClickViewAll: () -> ()
+    let onClickAddNote: (Location) -> ()
     
-    init(address: String) {
+    init(address: String, onClickViewAll: @escaping () -> (), onClickAddNote: @escaping (Location) -> ()) {
         _vm = StateObject(
             wrappedValue: MultiMarkerSelectorVM(
                 address: address
             )
         )
+        self.onClickViewAll = onClickViewAll
+        self.onClickAddNote = onClickAddNote
     }
     
     var body: some View {
@@ -56,7 +60,7 @@ struct MultiMarkerSelectorView: View {
                         .frame(width: 275, height: 4, alignment: .center)
                     
                     Button(action: {
-                        
+                        self.onClickViewAll()
                     }, label: {
                         HStack(alignment: .center, spacing: 12, content: {
                             Image("ic_arrow-to")
@@ -78,7 +82,9 @@ struct MultiMarkerSelectorView: View {
             .sdPaddingBottom(16)
             
             Button(action: {
-                
+                if let location = $vm.location.wrappedValue {
+                    self.onClickAddNote(location)
+                }
             }, label: {
                 HStack(alignment: .center, spacing: 12, content: {
                     Image("ic_feet")

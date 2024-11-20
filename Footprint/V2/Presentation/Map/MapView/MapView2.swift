@@ -25,7 +25,7 @@ struct MapView2: View {
     @StateObject var mapManager: FPMapManager = FPMapManager.shared
     @StateObject private var footprintVM: FootprintVM = FootprintVM()
     @EnvironmentObject private var tabBarService: TabBarService
-//    @EnvironmentObject private var mapStatusVM: MapStatusVM
+    //    @EnvironmentObject private var mapStatusVM: MapStatusVM
     
     private var safeTop: CGFloat { get { Util.safeTop() }}
     private var safeBottom: CGFloat { get { Util.safeBottom() }}
@@ -38,7 +38,7 @@ struct MapView2: View {
     @State private var selectedId: String? = nil
     @State private var selectedAddress: String? = nil
     @Environment(\.centerLocation) var centerLocation
-
+    
     @State private var selectorWidth: CGFloat = .zero
     
     init(output: Output) {
@@ -49,9 +49,16 @@ struct MapView2: View {
         GeometryReader { geometry in
             ZStack(alignment: .topLeading) {
                 if let selectedAddress = selectedAddress, $isPresentFootprintSelector.wrappedValue {
-                    MultiMarkerSelectorView(
-                        address: selectedAddress
-                    )
+                    MultiMarkerSelectorView(address: selectedAddress) {
+                        $isPresentFootprintSelector.wrappedValue = false
+                        //TODO: View All
+                        
+                    } onClickAddNote: { location in
+                        $isPresentFootprintSelector.wrappedValue = false
+                        if let note = vm.updateTempLocation(Location(latitude: location.latitude, longitude: location.longitude), address: selectedAddress) {
+                            output.goToEditNote(note)
+                        }
+                    }
                     .background(
                         GeometryReader { geo in
                             Color.clear
@@ -180,18 +187,18 @@ struct MapView2: View {
                             Text($mapManager.centerAddress.wrappedValue)
                             
                             HStack(alignment: .center, spacing: 8, content: {
-//                                FPButton(text: "닫기", status: .able, size: .large, type: .lightSolid) {
-//                                    mapStatusVM.updateMapStatus(.normal)
-//                                    vm.clearFootprint()
-//                                }
-//                                .frame(width: (UIScreen.main.bounds.size.width - 32 - 8) / 10 * 3)
+                                //                                FPButton(text: "닫기", status: .able, size: .large, type: .lightSolid) {
+                                //                                    mapStatusVM.updateMapStatus(.normal)
+                                //                                    vm.clearFootprint()
+                                //                                }
+                                //                                .frame(width: (UIScreen.main.bounds.size.width - 32 - 8) / 10 * 3)
                                 
                                 FPButton(text: "여기에 발자국 남기기", status: $mapManager.centerMarkerStatus.wrappedValue == .move ? .disable : .able, size: .large, type: .solid) {
                                     if let location = $mapManager.centerPosition.wrappedValue, let note = vm.updateTempLocation(Location(latitude: location.latitude, longitude: location.longitude), address: $mapManager.centerAddress.wrappedValue) {
                                         output.goToEditNote(note)
                                     }
                                 }
-//                                .frame(width: (UIScreen.main.bounds.size.width - 32 - 8) / 10 * 7)
+                                //                                .frame(width: (UIScreen.main.bounds.size.width - 32 - 8) / 10 * 7)
                             })
                         })
                         .sdPadding(top: 16, leading: 16, bottom: 8, trailing: 16)
@@ -340,7 +347,7 @@ struct MapView2: View {
         .frame(width: geometry.size.width - 20, alignment: .leading)
         .contentShape(Rectangle())
         .onTapGesture {
-//            vm.onClickSearchItem(item)
+            //            vm.onClickSearchItem(item)
         }
     }
     
@@ -363,7 +370,7 @@ struct MapView2: View {
                 .sdPaddingHorizontal(8)
                 .layoutPriority(.greatestFiniteMagnitude)
                 .onChange(of: $vm.searchText.wrappedValue) { _ in
-//                    vm.enterSearchText()
+                    //                    vm.enterSearchText()
                 }
             
             if !$vm.searchText.wrappedValue.isEmpty {
