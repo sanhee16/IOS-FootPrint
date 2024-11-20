@@ -1,13 +1,13 @@
 //
-//  LoadAllNoteUseCase.swift
+//  LoadNotesUseCaseWithAddress.swift
 //  Footprint
 //
-//  Created by sandy on 8/25/24.
+//  Created by sandy on 11/1/24.
 //
 
 import Foundation
 
-class LoadAllNoteUseCase {
+class LoadNotesUseCaseWithAddress {
     let noteRepository: NoteRepository
     let categoryRepository: CategoryRepository
     let memberRepository: MemberRepository
@@ -22,8 +22,8 @@ class LoadAllNoteUseCase {
         self.memberRepository = memberRepository
     }
     
-    func execute(_ type: FootprintSortType) -> [NoteEntity] {
-        var list = self.noteRepository.loadNotes()
+    func execute(_ address: String, type: FootprintSortType) -> [NoteEntity] {
+        var list = self.noteRepository.loadNotes(address: address)
         var result: [NoteEntity] = []
         
         switch type {

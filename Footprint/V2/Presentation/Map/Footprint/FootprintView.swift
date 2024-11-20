@@ -102,14 +102,12 @@ struct FootprintView: View {
                             .sdPaddingTop(24)
                             .sdPaddingHorizontal(16)
                             
-                            if let category = note.category {
-                                HStack(alignment: .center, spacing: 0, content: {
-                                    drawTitle("카테고리")
-                                    CategoryItem(item: category)
-                                })
-                                .sdPaddingTop(24)
-                                .sdPaddingHorizontal(16)
-                            }
+                            HStack(alignment: .center, spacing: 0, content: {
+                                drawTitle("카테고리")
+                                CategoryItem(item: note.category)
+                            })
+                            .sdPaddingTop(24)
+                            .sdPaddingHorizontal(16)
                             
                             if !note.imageUrls.isEmpty {
                                 drawTitle("사진")
@@ -133,11 +131,11 @@ struct FootprintView: View {
                                 }
                                 .frame(height: 80.0)
                             }
-                            if let peopleWith = note.peopleWith, !peopleWith.isEmpty {
+                            if !note.members.isEmpty {
                                 drawTitle("함께한 사람")
                                     .sdPaddingTop(24)
                                     .sdPaddingHorizontal(16)
-                                PeopleWithView(members: peopleWith)
+                                PeopleWithView(members: note.members)
                                     .sdPaddingVertical(8)
                                     .sdPaddingHorizontal(16)
                             }

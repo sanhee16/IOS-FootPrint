@@ -16,7 +16,7 @@ class FootprintVM: BaseViewModel {
     @Injected(\.loadNoteUseCaseWithId) var loadNoteUseCaseWithId
     @Injected(\.toogleStarUseCase) var toogleStarUseCase
     
-    var footPrint: Note? = nil
+    var footPrint: NoteEntity? = nil
     private var isLoading: Bool = false
     private var id: String? = nil
     @Published var isFailToLoad: Bool = false

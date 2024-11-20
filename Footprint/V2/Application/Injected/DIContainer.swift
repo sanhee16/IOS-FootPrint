@@ -18,13 +18,7 @@ extension Container {
     }
     
     var temporaryNoteService: Factory<TemporaryNoteService> {
-        Factory(self) {
-            TemporaryNoteService(
-                noteRepository: self.noteRepository(),
-                categoryRepository: self.categoryRepository(),
-                memberRepository: self.memberRepository()
-            )
-        }.singleton
+        Factory(self) { TemporaryNoteService(loadNoteUseCaseWithId: self.loadNoteUseCaseWithId()) }.singleton
     }
 }
 
@@ -62,15 +56,33 @@ extension Container {
     }
     
     var loadAllNoteUseCase: Factory<LoadAllNoteUseCase> {
-        Factory(self) { LoadAllNoteUseCase(noteRepository: self.noteRepository(), categoryRepository: self.categoryRepository(), memberRepository: self.memberRepository()) }
+        Factory(self) {
+            LoadAllNoteUseCase(
+                noteRepository: self.noteRepository(),
+                categoryRepository: self.categoryRepository(),
+                memberRepository: self.memberRepository()
+            )
+        }
     }
     
     var loadNoteUseCaseWithId: Factory<LoadNoteUseCaseWithId> {
-        Factory(self) { LoadNoteUseCaseWithId(noteRepository: self.noteRepository(), categoryRepository: self.categoryRepository(), memberRepository: self.memberRepository()) }
+        Factory(self) {
+            LoadNoteUseCaseWithId(
+                noteRepository: self.noteRepository(),
+                categoryRepository: self.categoryRepository(),
+                memberRepository: self.memberRepository()
+            )
+        }
     }
     
-    var loadNoteUseCaseWithAddress: Factory<LoadNoteUseCaseWithAddress> {
-        Factory(self) { LoadNoteUseCaseWithAddress(noteRepository: self.noteRepository(), categoryRepository: self.categoryRepository(), memberRepository: self.memberRepository()) }
+    var loadNotesUseCaseWithAddress: Factory<LoadNotesUseCaseWithAddress> {
+        Factory(self) {
+            LoadNotesUseCaseWithAddress(
+                noteRepository: self.noteRepository(),
+                categoryRepository: self.categoryRepository(),
+                memberRepository: self.memberRepository()
+            )
+        }
     }
     
     var toogleStarUseCase: Factory<ToogleStarUseCase> {
@@ -79,6 +91,10 @@ extension Container {
     
     var deleteImageUrlUseCase: Factory<DeleteImageUrlUseCase> {
         Factory(self) { DeleteImageUrlUseCase(noteRepository: self.noteRepository()) }
+    }
+    
+    var updateNoteUseCase: Factory<UpdateNoteUseCase> {
+        Factory(self) { UpdateNoteUseCase(noteRepository: self.noteRepository()) }
     }
 }
 

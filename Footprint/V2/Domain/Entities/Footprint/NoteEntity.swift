@@ -1,53 +1,62 @@
 //
-//  Note.swift
+//  NoteEntity.swift
 //  Footprint
 //
-//  Created by sandy on 8/23/24.
+//  Created by sandy on 11/20/24.
 //
 
-import Foundation
-import SwiftUI
-
-public struct Note: Equatable, Hashable {
+public struct NoteEntity: Equatable, Hashable {
     var id: String
     var title: String
     var content: String
     var createdAt: Int
     var imageUrls: [String] // path
-    var categoryId: String
-    var peopleWithIds: [String]
     var isStar: Bool
     var latitude: Double
     var longitude: Double
     var address: String
-    var category: CategoryEntity?
-    var peopleWith: [MemberEntity]?
+    var category: CategoryEntity
+    var members: [MemberEntity]
     
     init(
-        id: String = UUID().uuidString,
+        id: String,
         title: String,
         content: String,
         createdAt: Int,
         imageUrls: [String],
-        categoryId: String,
-        peopleWithIds: [String],
         isStar: Bool,
         latitude: Double,
         longitude: Double,
-        address: String
+        address: String,
+        category: CategoryEntity,
+        members: [MemberEntity]
     ) {
         self.id = id
         self.title = title
         self.content = content
         self.createdAt = createdAt
         self.imageUrls = imageUrls
-        self.categoryId = categoryId
-        self.peopleWithIds = peopleWithIds
         self.isStar = isStar
         self.latitude = latitude
         self.longitude = longitude
         self.address = address
-        self.category = nil
-        self.peopleWith = nil
+        self.category = category
+        self.members = members
+    }
+}
+
+extension NoteEntity {
+    struct DAO {
+        var id: String
+        var title: String
+        var content: String
+        var createdAt: Int
+        var imageUrls: [String]
+        var categoryId: String
+        var memberIds: [String]
+        var isStar: Bool
+        var latitude: Double
+        var longitude: Double
+        var address: String
     }
 }

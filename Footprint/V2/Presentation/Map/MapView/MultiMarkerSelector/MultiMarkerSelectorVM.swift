@@ -9,10 +9,9 @@ import Foundation
 import Factory
 
 class MultiMarkerSelectorVM: ObservableObject {
-    @Injected(\.loadNoteUseCaseWithAddress) var loadNoteUseCaseWithAddress
+    @Injected(\.loadNotesUseCaseWithAddress) var loadNotesUseCaseWithAddress
     
-    
-    @Published var notes: [Note] = []
+    @Published var notes: [NoteEntity] = []
     @Published var address: String = ""
     @Published var location: Location?
     @Published var totalNotes: Int = 0
@@ -26,7 +25,7 @@ class MultiMarkerSelectorVM: ObservableObject {
     }
     
     private func loadData() {
-        self.notes = self.loadNoteUseCaseWithAddress.execute(self.address, type: .latest)
+        self.notes = self.loadNotesUseCaseWithAddress.execute(self.address, type: .latest)
         self.totalNotes = self.notes.count
         self.notes = Array(self.notes.prefix(3))
         

@@ -28,7 +28,7 @@ class FootprintListVMV2: ObservableObject {
     @Injected(\.updateFootprintSortTypeUseCase) var updateFootprintSortTypeUseCase
     @Injected(\.temporaryNoteService) var temporaryNoteService
     
-    @Published var notes: [Note] = []
+    @Published var notes: [NoteEntity] = []
     let sortTypes: [FootprintSortType] = [.latest, .earliest]
     @Published var sortType: FootprintSortType = .latest
     

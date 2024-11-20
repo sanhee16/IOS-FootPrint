@@ -15,26 +15,24 @@ class SaveNoteUseCase {
     }
     
     func execute(
-        id: String?,
         title: String,
         content: String,
         createdAt: Int,
         imageUrls: [String],
-        categoryId: String,
-        peopleWithIds: [String],
+        category: CategoryEntity,
+        members: [MemberEntity],
         isStar: Bool,
         latitude: Double,
         longitude: Double,
         address: String
     ) {
-        self.noteRepository.saveNotes(
-                id: id,
+        self.noteRepository.saveNote(
                 title: title,
                 content: content,
                 createdAt: createdAt,
                 imageUrls: imageUrls,
-                categoryId: categoryId,
-                peopleWithIds: peopleWithIds,
+                categoryId: category.id,
+                memberIds: members.compactMap({ $0.id }),
                 isStar: isStar,
                 latitude: latitude,
                 longitude: longitude,

@@ -9,55 +9,75 @@ import Foundation
 import RealmSwift
 
 class NoteRepositoryImpl: NoteRepository {
-    func saveNotes(
-        id: String?,
+    func saveNote(
         title: String,
         content: String,
         createdAt: Int,
         imageUrls: [String],
         categoryId: String,
-        peopleWithIds: [String],
+        memberIds: [String],
         isStar: Bool,
         latitude: Double,
         longitude: Double,
         address: String
     ) {
-        var note = Note(
-            id: id ?? UUID().uuidString,
-            title: title,
-            content: content,
-            createdAt: createdAt,
-            imageUrls: imageUrls,
-            categoryId: categoryId,
-            peopleWithIds: peopleWithIds,
-            isStar: isStar,
-            latitude: latitude,
-            longitude: longitude,
-            address: address
-        )
         let realm = try! Realm()
-        let imageUrls: List<String> = List()
-        let peopleWithIds: List<String> = List()
+        let imageUrlsList: List<String> = List()
+        let membersList: List<String> = List()
         
-        note.imageUrls.forEach {
-            imageUrls.append($0)
-        }
-        note.peopleWithIds.forEach {
-            peopleWithIds.append($0)
-        }
+        imageUrlsList.append(objectsIn: imageUrls)
+        membersList.append(objectsIn: imageUrls)
         
         let data: NoteData = NoteData(
-            id: note.id,
-            title: note.title,
-            content: note.content,
-            imageUrls: imageUrls,
-            createdAt: note.createdAt,
-            latitude: note.latitude,
-            longitude: note.longitude,
-            peopleWithIds: peopleWithIds,
-            categoryId: note.categoryId,
-            address: note.address,
-            isStar: note.isStar
+            id: UUID().uuidString,
+            title: title,
+            content: content,
+            imageUrls: imageUrlsList,
+            createdAt: createdAt,
+            latitude: latitude,
+            longitude: longitude,
+            peopleWithIds: membersList,
+            categoryId: categoryId,
+            address: address,
+            isStar: isStar
+        )
+        try! realm.write {
+            realm.add(data, update: .modified)
+        }
+    }
+    
+    func updateNote(
+        id: String,
+        title: String,
+        content: String,
+        createdAt: Int,
+        imageUrls: [String],
+        categoryId: String,
+        memberIds: [String],
+        isStar: Bool,
+        latitude: Double,
+        longitude: Double,
+        address: String
+    ) {
+        let realm = try! Realm()
+        let imageUrlsList: List<String> = List()
+        let membersList: List<String> = List()
+        
+        imageUrlsList.append(objectsIn: imageUrls)
+        membersList.append(objectsIn: imageUrls)
+        
+        let data: NoteData = NoteData(
+            id: id,
+            title: title,
+            content: content,
+            imageUrls: imageUrlsList,
+            createdAt: createdAt,
+            latitude: latitude,
+            longitude: longitude,
+            peopleWithIds: membersList,
+            categoryId: categoryId,
+            address: address,
+            isStar: isStar
         )
         try! realm.write {
             realm.add(data, update: .modified)
@@ -79,19 +99,19 @@ class NoteRepositoryImpl: NoteRepository {
         }
     }
     
-    func loadNotes() -> [Note] {
+    func loadNotes() -> [NoteEntity.DAO] {
         let realm = try! Realm()
         let list: [NoteData] = Array(realm.objects(NoteData.self))
         return list.map { $0.mapper() }
     }
     
-    func loadNote(id: String) -> Note? {
+    func loadNote(id: String) -> NoteEntity.DAO? {
         let realm = try! Realm()
         guard let data = realm.objects(NoteData.self).filter("id == %s", id).first else { return nil }
         return data.mapper()
     }
     
-    func loadNote(address: String) -> [Note] {
+    func loadNotes(address: String) -> [NoteEntity.DAO] {
         let realm = try! Realm()
         let list: [NoteData] = Array(realm.objects(NoteData.self).filter("address == %s", address))
         return list.map { $0.mapper() }

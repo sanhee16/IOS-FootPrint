@@ -22,12 +22,29 @@ class LoadNoteUseCaseWithId {
         self.memberRepository = memberRepository
     }
     
-    func execute(_ id: String) -> Note? {
-        guard var note = self.noteRepository.loadNote(id: id), let category = self.categoryRepository.loadCategory(note.categoryId) else { return nil }
-        let peopleWith = self.memberRepository.loadMembers(note.peopleWithIds)
-        note.category = category
-        note.peopleWith = peopleWith
-        return note
+    func execute(_ id: String) -> NoteEntity? {
+        guard let note = self.noteRepository.loadNote(id: id),
+              let category = self.categoryRepository.loadCategory(note.categoryId) else {
+            return nil
+        }
+        
+        let members = self.memberRepository.loadMembers(note.memberIds)
+        
+        let result = NoteEntity(
+            id: note.id,
+            title: note.title,
+            content: note.content,
+            createdAt: note.createdAt,
+            imageUrls: note.imageUrls,
+            isStar: note.isStar,
+            latitude: note.latitude,
+            longitude: note.longitude,
+            address: note.address,
+            category: category,
+            members: self.memberRepository.loadMembers(note.memberIds)
+        )
+        
+        return result
     }
 }
 

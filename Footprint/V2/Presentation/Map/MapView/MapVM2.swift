@@ -47,7 +47,7 @@ class MapVM2: BaseViewModel {
     @Injected(\.getIsShowMarkerUseCase) var getIsShowMarkerUseCase
     @Injected(\.updateIsShowMarkerUseCase) var updateIsShowMarkerUseCase
     @Injected(\.temporaryNoteService) var temporaryNoteService
-    @Injected(\.loadNoteUseCaseWithAddress) var loadNoteUseCaseWithAddress
+    @Injected(\.loadNotesUseCaseWithAddress) var loadNotesUseCaseWithAddress
     @Injected(\.loadNoteUseCaseWithId) var loadNoteUseCaseWithId
     
     private var locationManager: CLLocationManager
@@ -58,8 +58,6 @@ class MapVM2: BaseViewModel {
     @Published var markerList: [MarkerItem] = []
     
     @Published var isShowingSearchResults: Bool = false
-    @Published var categories: [Category] = []
-    @Published var showingCategories: [Int] = []
     @Published var searchText: String = ""
     @Published var searchItems: [SearchItemResponse] = []
     @Published var locationPermission: Bool = false
@@ -78,12 +76,10 @@ class MapVM2: BaseViewModel {
     
     private var searchCnt: Int = 0
     private var lastSearchText: String? = nil
-//    private let realm: Realm
     private let googleApi: GoogleApi
     
     
     override init() {
-        print("[SD] init")
         self.locationManager = CLLocationManager()
         self.locationManager.allowsBackgroundLocationUpdates = false
         self.googleApi = GoogleApi.instance

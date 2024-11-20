@@ -16,6 +16,7 @@ import _PhotosUI_SwiftUI
 
 class EditNoteVM: BaseViewModel {
     @Injected(\.saveNoteUseCase) var saveNoteUseCase
+    @Injected(\.updateNoteUseCase) var updateNoteUseCase
     @Injected(\.deleteImageUrlUseCase) var deleteImageUrlUseCase
     @Injected(\.loadCategoriesUseCase) var loadCategoriesUseCase
     @Injected(\.loadMembersUseCase) var loadMembersUseCase
@@ -70,7 +71,6 @@ class EditNoteVM: BaseViewModel {
     
     func loadCategories() {
         self.categories = loadCategoriesUseCase.execute()
-        print("self.categories: \(self.categories)")
     }
     
     func loadMembers() {
@@ -87,20 +87,34 @@ class EditNoteVM: BaseViewModel {
             let _ = ImageManager.shared.saveImage(image: self.images[idx], imageName: imageName)
             self.imageUrls.append(imageName)
         }
-        
-        saveNoteUseCase.execute(
-            id: self.noteId,
-            title: self.title,
-            content: self.content,
-            createdAt: Int(createdAt.timeIntervalSince1970),
-            imageUrls: self.imageUrls,
-            categoryId: category.id,
-            peopleWithIds: self.selectedMembers.compactMap({ $0.id }),
-            isStar: self.isStar,
-            latitude: location.latitude,
-            longitude: location.longitude,
-            address: self.address
-        )
+        if let id = self.noteId {
+            self.updateNoteUseCase.execute(
+                id: id,
+                title: self.title,
+                content: self.content,
+                createdAt: Int(createdAt.timeIntervalSince1970),
+                imageUrls: self.imageUrls,
+                category: category,
+                members: self.selectedMembers,
+                isStar: self.isStar,
+                latitude: location.latitude,
+                longitude: location.longitude,
+                address: self.address
+            )
+        } else {
+            self.saveNoteUseCase.execute(
+                title: self.title,
+                content: self.content,
+                createdAt: Int(createdAt.timeIntervalSince1970),
+                imageUrls: self.imageUrls,
+                category: category,
+                members: self.selectedMembers,
+                isStar: self.isStar,
+                latitude: location.latitude,
+                longitude: location.longitude,
+                address: self.address
+            )
+        }
         
         self.temporaryNoteService.clear()
         

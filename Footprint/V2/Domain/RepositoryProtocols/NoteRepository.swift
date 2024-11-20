@@ -9,23 +9,35 @@ import Foundation
 import RealmSwift
 
 protocol NoteRepository {
-    func saveNotes(
-        id: String?,
+    func saveNote(
         title: String,
         content: String,
         createdAt: Int,
         imageUrls: [String],
         categoryId: String,
-        peopleWithIds: [String],
+        memberIds: [String],
+        isStar: Bool,
+        latitude: Double,
+        longitude: Double,
+        address: String
+    )
+    func updateNote(
+        id: String,
+        title: String,
+        content: String,
+        createdAt: Int,
+        imageUrls: [String],
+        categoryId: String,
+        memberIds: [String],
         isStar: Bool,
         latitude: Double,
         longitude: Double,
         address: String
     )
     func deleteNote(_ id: String)
-    func loadNotes() -> [Note]
-    func loadNote(id: String) -> Note?
-    func loadNote(address: String) -> [Note]
+    func loadNotes() -> [NoteEntity.DAO]
+    func loadNote(id: String) -> NoteEntity.DAO?
+    func loadNotes(address: String) -> [NoteEntity.DAO]
     func toggleStar(id: String) -> Bool
     func deleteImageUrl(_ id: String, url: String)
 }

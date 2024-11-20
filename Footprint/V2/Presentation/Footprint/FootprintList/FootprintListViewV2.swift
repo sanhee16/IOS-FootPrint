@@ -141,14 +141,12 @@ struct FootprintListViewV2: View {
     }
     
     private struct NoteItem: View {
-        let item: Note
+        let item: NoteEntity
         
         var body: some View {
             VStack(alignment: .leading, spacing: 0, content: {
                 HStack(alignment: .center, spacing: 8, content: {
-                    if let category = item.category {
-                        CategoryItem(item: category)
-                    }
+                    CategoryItem(item: item.category)
                     if item.isStar {
                         Image("ic_star")
                             .renderingMode(.template)

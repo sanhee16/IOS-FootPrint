@@ -39,7 +39,7 @@ class FPMapManager: NSObject, ObservableObject {
     @Published var status: MapStatus = .normal
     static var tempNote: TempNote? = nil
     
-    private var notes: [Note]
+    private var notes: [NoteEntity]
     
     private override init() {
         self.mapView = GMSMapView.init()
@@ -145,7 +145,7 @@ class FPMapManager: NSObject, ObservableObject {
         self.markers.removeAll()
         self.notes = self.loadAllNoteUseCase.execute(.latest)
         // multi-marker: Address 기준으로 같은 marker를 grouping
-        var group: [String: [Note]] = [:]
+        var group: [String: [NoteEntity]] = [:]
         self.notes.forEach { note in
             if group[note.address] == nil {
                 group[note.address] = []
@@ -153,9 +153,9 @@ class FPMapManager: NSObject, ObservableObject {
             group[note.address]?.append(note)
         }
         
-        group.forEach { (key: String, notes: [Note]) in
+        group.forEach { (key: String, notes: [NoteEntity]) in
             let number = notes.count
-            let categoryId: String? = number > 1 ? nil : notes.first?.categoryId
+            let categoryId: String? = number > 1 ? nil : notes.first?.category.id
             var location: Location? = nil
             
             if let firstItem = notes.first {

@@ -51,15 +51,15 @@ class NoteData: Object {
         self.isStar = isStar
     }
     
-    func mapper() -> Note {
-        return Note(
+    func mapper() -> NoteEntity.DAO {
+        return NoteEntity.DAO(
             id: self.id,
             title: self.title,
             content: self.content,
             createdAt: self.createdAt,
             imageUrls: Array(self.imageUrls),
             categoryId: categoryId,
-            peopleWithIds: Array(self.peopleWithIds),
+            memberIds: Array(self.peopleWithIds),
             isStar: self.isStar,
             latitude: self.latitude,
             longitude: self.longitude,

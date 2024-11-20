@@ -82,6 +82,8 @@
 		26756A0F2CEC42BA0031923F /* TemporaryNoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26756A0E2CEC42BA0031923F /* TemporaryNoteService.swift */; };
 		26756A122CEDC3120031923F /* MultiMarkerSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26756A112CEDC3120031923F /* MultiMarkerSelectorView.swift */; };
 		26756A142CEDC3160031923F /* MultiMarkerSelectorVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26756A132CEDC3160031923F /* MultiMarkerSelectorVM.swift */; };
+		26756A162CEDE13A0031923F /* NoteEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26756A152CEDE13A0031923F /* NoteEntity.swift */; };
+		26756A182CEE04CF0031923F /* UpdateNoteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26756A172CEE04CF0031923F /* UpdateNoteUseCase.swift */; };
 		2675D2042CDDDE3100BD7633 /* UpdateIsShowMarkerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2675D2032CDDDE3100BD7633 /* UpdateIsShowMarkerUseCase.swift */; };
 		2675D2062CDDDE4500BD7633 /* SettingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2675D2052CDDDE4500BD7633 /* SettingRepository.swift */; };
 		2675D2082CDDDE9000BD7633 /* GetIsShowMarkerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2675D2072CDDDE9000BD7633 /* GetIsShowMarkerUseCase.swift */; };
@@ -144,7 +146,6 @@
 		2696F4EC2C77556800F56E73 /* SaveNoteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2696F4EB2C77556800F56E73 /* SaveNoteUseCase.swift */; };
 		2696F4EF2C7757F300F56E73 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2696F4EE2C7757F300F56E73 /* DIContainer.swift */; };
 		269CA5542C78A11500366005 /* EditNoteTempStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269CA5532C78A11500366005 /* EditNoteTempStorage.swift */; };
-		269CA5562C78A35D00366005 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269CA5552C78A35D00366005 /* Note.swift */; };
 		269CA5582C78A43300366005 /* CategoryV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269CA5572C78A43300366005 /* CategoryV2.swift */; };
 		269CA55A2C78A4D900366005 /* CategoryRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269CA5592C78A4D900366005 /* CategoryRepositoryImpl.swift */; };
 		269CA55C2C78A4DF00366005 /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269CA55B2C78A4DF00366005 /* CategoryRepository.swift */; };
@@ -179,7 +180,7 @@
 		26EB9D1D2CD9E2C500D3B0CE /* MapStatusVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EB9D1C2CD9E2C500D3B0CE /* MapStatusVM.swift */; };
 		26EB9D1F2CD9E4B100D3B0CE /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EB9D1E2CD9E4B100D3B0CE /* NotificationName.swift */; };
 		26EB9D212CD9E4E500D3B0CE /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EB9D202CD9E4E500D3B0CE /* NotificationService.swift */; };
-		26F137072CD48BA300096181 /* LoadNoteUseCaseWithAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F137062CD48BA300096181 /* LoadNoteUseCaseWithAddress.swift */; };
+		26F137072CD48BA300096181 /* LoadNotesUseCaseWithAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F137062CD48BA300096181 /* LoadNotesUseCaseWithAddress.swift */; };
 		26F1370A2CD4AADB00096181 /* PeopleWithView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F137092CD4AADB00096181 /* PeopleWithView.swift */; };
 		26FAB54D2C6B4091006304AE /* SelectLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FAB54C2C6B4091006304AE /* SelectLocationView.swift */; };
 		26FAB54F2C6B4095006304AE /* SelectLocationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FAB54E2C6B4095006304AE /* SelectLocationVM.swift */; };
@@ -344,6 +345,8 @@
 		26756A0E2CEC42BA0031923F /* TemporaryNoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryNoteService.swift; sourceTree = "<group>"; };
 		26756A112CEDC3120031923F /* MultiMarkerSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiMarkerSelectorView.swift; sourceTree = "<group>"; };
 		26756A132CEDC3160031923F /* MultiMarkerSelectorVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiMarkerSelectorVM.swift; sourceTree = "<group>"; };
+		26756A152CEDE13A0031923F /* NoteEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEntity.swift; sourceTree = "<group>"; };
+		26756A172CEE04CF0031923F /* UpdateNoteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNoteUseCase.swift; sourceTree = "<group>"; };
 		2675D2032CDDDE3100BD7633 /* UpdateIsShowMarkerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateIsShowMarkerUseCase.swift; sourceTree = "<group>"; };
 		2675D2052CDDDE4500BD7633 /* SettingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRepository.swift; sourceTree = "<group>"; };
 		2675D2072CDDDE9000BD7633 /* GetIsShowMarkerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetIsShowMarkerUseCase.swift; sourceTree = "<group>"; };
@@ -406,7 +409,6 @@
 		2696F4EB2C77556800F56E73 /* SaveNoteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNoteUseCase.swift; sourceTree = "<group>"; };
 		2696F4EE2C7757F300F56E73 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
 		269CA5532C78A11500366005 /* EditNoteTempStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteTempStorage.swift; sourceTree = "<group>"; };
-		269CA5552C78A35D00366005 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		269CA5572C78A43300366005 /* CategoryV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryV2.swift; sourceTree = "<group>"; };
 		269CA5592C78A4D900366005 /* CategoryRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRepositoryImpl.swift; sourceTree = "<group>"; };
 		269CA55B2C78A4DF00366005 /* CategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRepository.swift; sourceTree = "<group>"; };
@@ -440,7 +442,7 @@
 		26EB9D1C2CD9E2C500D3B0CE /* MapStatusVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStatusVM.swift; sourceTree = "<group>"; };
 		26EB9D1E2CD9E4B100D3B0CE /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		26EB9D202CD9E4E500D3B0CE /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
-		26F137062CD48BA300096181 /* LoadNoteUseCaseWithAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadNoteUseCaseWithAddress.swift; sourceTree = "<group>"; };
+		26F137062CD48BA300096181 /* LoadNotesUseCaseWithAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadNotesUseCaseWithAddress.swift; sourceTree = "<group>"; };
 		26F137092CD4AADB00096181 /* PeopleWithView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleWithView.swift; sourceTree = "<group>"; };
 		26FAB54C2C6B4091006304AE /* SelectLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationView.swift; sourceTree = "<group>"; };
 		26FAB54E2C6B4095006304AE /* SelectLocationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationVM.swift; sourceTree = "<group>"; };
@@ -716,10 +718,10 @@
 			isa = PBXGroup;
 			children = (
 				265917152CD8B986008C39E9 /* Location.swift */,
-				269CA5552C78A35D00366005 /* Note.swift */,
 				261F6EA02CC9E64100F7CA18 /* CategoryEntity.swift */,
 				266BE08F2CCA1FF000E754EB /* MemberEntity.swift */,
 				267A22D92CEB68770079D146 /* TemporaryNote.swift */,
+				26756A152CEDE13A0031923F /* NoteEntity.swift */,
 			);
 			path = Footprint;
 			sourceTree = "<group>";
@@ -1080,9 +1082,10 @@
 			isa = PBXGroup;
 			children = (
 				2696F4EB2C77556800F56E73 /* SaveNoteUseCase.swift */,
+				26756A172CEE04CF0031923F /* UpdateNoteUseCase.swift */,
 				2694FCA12C7AA95000F01644 /* LoadAllNoteUseCase.swift */,
 				261FF6E32CD3569300B49442 /* LoadNoteUseCaseWithId.swift */,
-				26F137062CD48BA300096181 /* LoadNoteUseCaseWithAddress.swift */,
+				26F137062CD48BA300096181 /* LoadNotesUseCaseWithAddress.swift */,
 				265917102CD857CC008C39E9 /* ToogleStarUseCase.swift */,
 				265917172CD8BE55008C39E9 /* DeleteImageUrlUseCase.swift */,
 			);
@@ -1691,7 +1694,7 @@
 				261F6E9F2CC9E47200F7CA18 /* CategoryIcon.swift in Sources */,
 				261F6EA12CC9E64100F7CA18 /* CategoryEntity.swift in Sources */,
 				2694FC8A2C797F2F00F01644 /* MemberRepository.swift in Sources */,
-				26F137072CD48BA300096181 /* LoadNoteUseCaseWithAddress.swift in Sources */,
+				26F137072CD48BA300096181 /* LoadNotesUseCaseWithAddress.swift in Sources */,
 				2627409129699B2F00B47566 /* CategorySelectorViewModel.swift in Sources */,
 				2691D9C5294EE4B6002825B9 /* FootprintListFilterViewModel.swift in Sources */,
 				631D7528296661FA00464F33 /* MainMapOptionView.swift in Sources */,
@@ -1720,6 +1723,7 @@
 				63B1FAEF2914A861007E94B6 /* EditFootprintViewModel.swift in Sources */,
 				267CC1772C66F27000D6015E /* BaseCoordinator.swift in Sources */,
 				26EB9D1D2CD9E2C500D3B0CE /* MapStatusVM.swift in Sources */,
+				26756A182CEE04CF0031923F /* UpdateNoteUseCase.swift in Sources */,
 				26C04F6D2917667F00890A76 /* SwiftUIExtension.swift in Sources */,
 				631D75242966619B00464F33 /* SToggleView.swift in Sources */,
 				269CA5762C78BE9600366005 /* CategoryEditVM.swift in Sources */,
@@ -1796,7 +1800,6 @@
 				631D752D29667A4700464F33 /* PeopleWithListView.swift in Sources */,
 				631D752A296661FE00464F33 /* MainMapOptionViewModel.swift in Sources */,
 				269CA5582C78A43300366005 /* CategoryV2.swift in Sources */,
-				269CA5562C78A35D00366005 /* Note.swift in Sources */,
 				269CA56A2C78A8B600366005 /* UserDefaultsManager.swift in Sources */,
 				2675D20A2CDDDF8F00BD7633 /* SettingRepositoryImpl.swift in Sources */,
 				263FADC32C7164B700AE9E73 /* TabBarService.swift in Sources */,
@@ -1869,6 +1872,7 @@
 				63B1FAED2914A85B007E94B6 /* EditFootprintView.swift in Sources */,
 				265EA947291D1E1400068A5C /* DataModel.swift in Sources */,
 				260C87CB296AADB900ADCC32 /* ShowTravelView.swift in Sources */,
+				26756A162CEDE13A0031923F /* NoteEntity.swift in Sources */,
 				63D7EF1D296FBE2500D72F12 /* GoogleApi.swift in Sources */,
 				63FA2387294C35CB00D31506 /* PeopleEditView.swift in Sources */,
 				2696F4E82C77540800F56E73 /* NoteData.swift in Sources */,

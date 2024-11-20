@@ -13,19 +13,11 @@ import UIKit
 
 class TemporaryNoteService {
     private var temporaryNote: TemporaryNote?
-    private let noteRepository: NoteRepository
-    private let categoryRepository: CategoryRepository
-    private let memberRepository: MemberRepository
+    private let loadNoteUseCaseWithId: LoadNoteUseCaseWithId
     
-    init(
-        noteRepository: NoteRepository,
-        categoryRepository: CategoryRepository,
-        memberRepository: MemberRepository
-    ) {
+    init(loadNoteUseCaseWithId: LoadNoteUseCaseWithId) {
         self.temporaryNote = nil
-        self.noteRepository = noteRepository
-        self.categoryRepository = categoryRepository
-        self.memberRepository = memberRepository
+        self.loadNoteUseCaseWithId = loadNoteUseCaseWithId
     }
     
     func saveTempNote(
@@ -56,25 +48,16 @@ class TemporaryNoteService {
         self.temporaryNote?.selectedPhotos = selectedPhotos
         self.temporaryNote?.members = members
         self.temporaryNote?.location = location
-        
-        
     }
     
     func loadTempNote(_ id: String?) -> TemporaryNote? {
         if let temporaryNote = self.temporaryNote { return temporaryNote }
-        guard
-            let id = id,
-            var note = self.noteRepository.loadNote(id: id),
-            let category = self.categoryRepository.loadCategory(note.categoryId) else {
-            self.temporaryNote = TemporaryNote()
-            return self.temporaryNote!
-        }
         self.temporaryNote = TemporaryNote()
         
-        let peopleWith = self.memberRepository.loadMembers(note.peopleWithIds)
-        note.category = category
-        note.peopleWith = peopleWith
-        
+        guard let id = id, let note = self.loadNoteUseCaseWithId.execute(id) else {
+            return self.temporaryNote!
+        }
+                
         self.temporaryNote?.id = id
         self.temporaryNote?.isStar = note.isStar
         self.temporaryNote?.title = note.title
@@ -85,7 +68,7 @@ class TemporaryNoteService {
         self.temporaryNote?.imageUrls = note.imageUrls
         self.temporaryNote?.location = Location(latitude: note.latitude, longitude: note.longitude)
         self.temporaryNote?.selectedPhotos = []
-        self.temporaryNote?.members = note.peopleWith ?? []
+        self.temporaryNote?.members = note.members
         
         return self.temporaryNote
     }
