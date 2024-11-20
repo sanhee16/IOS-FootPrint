@@ -186,15 +186,17 @@ struct MapView2: View {
             .environmentObject(footprintVM)
             .presentationDetents([.fraction(0.8), .large])
         })
-        .onChange(of: $mapManager.selectedMarker.wrappedValue, perform: { id in
-            if let id = id {
+        .onChange(of: $mapManager.selectedMarkers.wrappedValue, perform: { ids in
+            if !ids.isEmpty {
                 mapManager.unSelectMarker()
                 if $mapStatusVM.status.wrappedValue == .adding {
                     self.selectedId = nil
                 } else {
-                    self.selectedId = id
-                    self.footprintVM.updateId(id)
-                    $isPresentFootprint.wrappedValue = true
+                    if ids.count == 1, let firstId = ids.first {
+                        self.selectedId = firstId
+                        self.footprintVM.updateId(firstId)
+                        $isPresentFootprint.wrappedValue = true
+                    }
                 }
             }
         })

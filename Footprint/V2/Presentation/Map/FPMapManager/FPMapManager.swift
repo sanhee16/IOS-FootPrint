@@ -30,7 +30,7 @@ class FPMapManager: NSObject, ObservableObject {
     @Published var mapView: GMSMapView
     @Published var markers: [GMSMarker]
     
-    @Published var selectedMarker: String? = nil
+    @Published var selectedMarkers: [String] = []
     
     private var notes: [Note]
     
@@ -186,6 +186,7 @@ class FPMapManager: NSObject, ObservableObject {
         let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
 
         let itemSize = CGSize(width: 60, height: 50)
+        let padding: CGFloat = 15.0
         let markerImage: UIImage? = UIImage(named: "multi_noShadow")?.resizeImageTo(size: itemSize)
         let itemRect = CGRect(x: 0, y: 0, width: itemSize.width, height: itemSize.height)
         
@@ -195,16 +196,23 @@ class FPMapManager: NSObject, ObservableObject {
         guard let finalMarkerImage = markerImage?.resizeImageTo(size: itemSize) else { return nil }
         
         // 컨테이너 뷰 크기를 늘려서 뱃지가 잘리지 않도록 조정
-        let newContainerHeight = itemSize.height + 10 // 여유 공간 추가
-        let markerContainerView = UIView(frame: CGRect(x: 0, y: 0, width: itemSize.width, height: newContainerHeight))
+        let numberViewSize: CGFloat = 24.0
+        let newContainerHeight = itemSize.height + numberViewSize / 2// 여유 공간 추가
+        let markerContainerView = UIView(frame: CGRect(x: 0, y: 0, width: itemSize.width + padding * 2, height: newContainerHeight + padding * 2))
         
         // 마커 이미지 뷰
         let finalMarkerImageView = UIImageView(image: finalMarkerImage.withRenderingMode(.alwaysOriginal))
-        finalMarkerImageView.frame = CGRect(x: 0, y: 0, width: itemSize.width, height: itemSize.height)
+        finalMarkerImageView.frame = CGRect(x: padding, y: padding, width: itemSize.width, height: itemSize.height)
+        
+        // 그림자 속성 설정
+        finalMarkerImageView.layer.shadowColor = Color.dropSahdow_gray_low.cgColor
+        finalMarkerImageView.layer.shadowOffset = CGSize(width: 0, height: 13.33) // 그림자 위치
+        finalMarkerImageView.layer.shadowRadius = 13.33 // 그림자 반경
+        finalMarkerImageView.layer.masksToBounds = false
+
         markerContainerView.addSubview(finalMarkerImageView)
         
         // 숫자 뷰 생성
-        let numberViewSize: CGFloat = 20
         let numberView = UIView(frame: CGRect(x: (itemSize.width - numberViewSize) / 2, y: itemSize.height - numberViewSize / 2, width: numberViewSize, height: numberViewSize))
         numberView.backgroundColor = .red // 원하는 배경색
         numberView.layer.cornerRadius = numberViewSize / 2
@@ -218,7 +226,7 @@ class FPMapManager: NSObject, ObservableObject {
         numberLabel.font = UIFont(name: "NanumSquareRoundOTF", size: 14.0) // 폰트 크기 조정 가능
         
         numberView.addSubview(numberLabel)
-        markerContainerView.addSubview(numberView)
+        finalMarkerImageView.addSubview(numberView)
         
         marker.iconView = markerContainerView
         marker.map = self.mapView
@@ -295,28 +303,33 @@ class FPMapManager: NSObject, ObservableObject {
         let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
         
         let backgroundSize = CGSize(width: 40, height: 40)
+        let padding: CGFloat = 15.0
         let innerCircleInset: CGFloat = 2
         let itemSize = CGSize(width: 20, height: 20)
-        let itemFinalSize = CGSize(width: 40, height: 40) // 크기를 증가시킴
+        let itemFinalSize = CGSize(width: backgroundSize.width + padding * 2, height: backgroundSize.height + padding * 2)
         
         let markerImage: UIImage? = UIImage(named: category.icon.imageName)?.resizeImageTo(size: itemSize)?.withTintColor(UIColor.white)
         
         guard let markerImage = markerImage else { return nil }
         
         // 전체 이미지 그리기 시작
-        UIGraphicsBeginImageContextWithOptions(backgroundSize, false, 0)
+        UIGraphicsBeginImageContextWithOptions(itemFinalSize, false, 0)
         let context = UIGraphicsGetCurrentContext()
-        
-        // 흰색 바깥쪽 원 그리기 (테두리)
+
+        // 바깥쪽 원에 그림자 설정 (테두리)
+        context?.setShadow(offset: CGSize(width: 0, height: 3.33), blur: 13.33, color: Color.dropSahdow_gray_low.cgColor)
         context?.setFillColor(UIColor.white.cgColor)
-        context?.fillEllipse(in: CGRect(x: 0, y: 0, width: backgroundSize.width, height: backgroundSize.height))
+        context?.fillEllipse(in: CGRect(x: padding, y: padding, width: backgroundSize.width, height: backgroundSize.height))
         
+        // 그림자 제거 (안쪽 원과 나머지에 영향을 주지 않도록)
+        context?.setShadow(offset: CGSize.zero, blur: 0)
+
         // 색상이 채워진 안쪽 원 그리기
         context?.setFillColor(UIColor(hex: category.color.hex).cgColor)
-        context?.fillEllipse(in: CGRect(x: innerCircleInset, y: innerCircleInset, width: backgroundSize.width - 2 * innerCircleInset, height: backgroundSize.height - 2 * innerCircleInset))
-        
+        context?.fillEllipse(in: CGRect(x: innerCircleInset + padding, y: innerCircleInset + padding, width: backgroundSize.width - 2 * innerCircleInset, height: backgroundSize.height - 2 * innerCircleInset))
+
         // 마커 이미지 그리기
-        let itemRect = CGRect(x: (backgroundSize.width - itemSize.width) / 2, y: (backgroundSize.height - itemSize.height) / 2, width: itemSize.width, height: itemSize.height)
+        let itemRect = CGRect(x: (backgroundSize.width - itemSize.width) / 2 + padding, y: (backgroundSize.height - itemSize.height) / 2 + padding, width: itemSize.width, height: itemSize.height)
         markerImage.draw(in: itemRect, blendMode: .normal, alpha: 1)
         
         let finalMarkerImage: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
@@ -336,7 +349,7 @@ class FPMapManager: NSObject, ObservableObject {
 
     
     func unSelectMarker() {
-        self.selectedMarker = nil
+        self.selectedMarkers = []
     }
 }
 
@@ -351,9 +364,9 @@ extension FPMapManager: GMSMapViewDelegate {
     
     // 마커 클릭
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        if let id = marker.userData as? String {
+        if let ids = marker.userData as? [String] {
             self.moveToLocation(Location(latitude: marker.position.latitude, longitude: marker.position.longitude))
-            self.selectedMarker = id
+            self.selectedMarkers = ids
         }
         return true
     }
