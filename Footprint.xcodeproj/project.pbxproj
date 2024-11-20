@@ -79,6 +79,7 @@
 		266EDDE42C64EB40006CF09B /* MainView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266EDDE32C64EB40006CF09B /* MainView2.swift */; };
 		266EDDE62C64EB46006CF09B /* MainVM2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266EDDE52C64EB46006CF09B /* MainVM2.swift */; };
 		266EDDE82C64EB88006CF09B /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266EDDE72C64EB88006CF09B /* BaseViewModel.swift */; };
+		26756A0F2CEC42BA0031923F /* TemporaryNoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26756A0E2CEC42BA0031923F /* TemporaryNoteService.swift */; };
 		2675D2042CDDDE3100BD7633 /* UpdateIsShowMarkerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2675D2032CDDDE3100BD7633 /* UpdateIsShowMarkerUseCase.swift */; };
 		2675D2062CDDDE4500BD7633 /* SettingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2675D2052CDDDE4500BD7633 /* SettingRepository.swift */; };
 		2675D2082CDDDE9000BD7633 /* GetIsShowMarkerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2675D2072CDDDE9000BD7633 /* GetIsShowMarkerUseCase.swift */; };
@@ -94,6 +95,7 @@
 		267A22D02CEAE5D20079D146 /* FootprintListVMV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267A22CF2CEAE5D20079D146 /* FootprintListVMV2.swift */; };
 		267A22D22CEAE71F0079D146 /* UpdateFootprintSortTypeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267A22D12CEAE71F0079D146 /* UpdateFootprintSortTypeUseCase.swift */; };
 		267A22D42CEAE7490079D146 /* GetFootprintSortTypeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267A22D32CEAE7490079D146 /* GetFootprintSortTypeUseCase.swift */; };
+		267A22DA2CEB68770079D146 /* TemporaryNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267A22D92CEB68770079D146 /* TemporaryNote.swift */; };
 		267CC1772C66F27000D6015E /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC1762C66F27000D6015E /* BaseCoordinator.swift */; };
 		267CC1792C66F28300D6015E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC1782C66F28300D6015E /* Coordinator.swift */; };
 		267CC17B2C66F28E00D6015E /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC17A2C66F28E00D6015E /* Destination.swift */; };
@@ -337,6 +339,7 @@
 		266EDDE32C64EB40006CF09B /* MainView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView2.swift; sourceTree = "<group>"; };
 		266EDDE52C64EB46006CF09B /* MainVM2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVM2.swift; sourceTree = "<group>"; };
 		266EDDE72C64EB88006CF09B /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		26756A0E2CEC42BA0031923F /* TemporaryNoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryNoteService.swift; sourceTree = "<group>"; };
 		2675D2032CDDDE3100BD7633 /* UpdateIsShowMarkerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateIsShowMarkerUseCase.swift; sourceTree = "<group>"; };
 		2675D2052CDDDE4500BD7633 /* SettingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRepository.swift; sourceTree = "<group>"; };
 		2675D2072CDDDE9000BD7633 /* GetIsShowMarkerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetIsShowMarkerUseCase.swift; sourceTree = "<group>"; };
@@ -352,6 +355,7 @@
 		267A22CF2CEAE5D20079D146 /* FootprintListVMV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootprintListVMV2.swift; sourceTree = "<group>"; };
 		267A22D12CEAE71F0079D146 /* UpdateFootprintSortTypeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateFootprintSortTypeUseCase.swift; sourceTree = "<group>"; };
 		267A22D32CEAE7490079D146 /* GetFootprintSortTypeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFootprintSortTypeUseCase.swift; sourceTree = "<group>"; };
+		267A22D92CEB68770079D146 /* TemporaryNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryNote.swift; sourceTree = "<group>"; };
 		267CC1762C66F27000D6015E /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		267CC1782C66F28300D6015E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		267CC17A2C66F28E00D6015E /* Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
@@ -710,6 +714,7 @@
 				269CA5552C78A35D00366005 /* Note.swift */,
 				261F6EA02CC9E64100F7CA18 /* CategoryEntity.swift */,
 				266BE08F2CCA1FF000E754EB /* MemberEntity.swift */,
+				267A22D92CEB68770079D146 /* TemporaryNote.swift */,
 			);
 			path = Footprint;
 			sourceTree = "<group>";
@@ -1129,6 +1134,7 @@
 				269CA5782C78E1B800366005 /* PermissionService.swift */,
 				26EB9D1E2CD9E4B100D3B0CE /* NotificationName.swift */,
 				26EB9D202CD9E4E500D3B0CE /* NotificationService.swift */,
+				26756A0E2CEC42BA0031923F /* TemporaryNoteService.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1679,6 +1685,7 @@
 				2650A06C2CE33CDB00040512 /* TripIconEntity.swift in Sources */,
 				264B70BC291F8DD900CDAF9F /* ApiResponse.swift in Sources */,
 				2694FC972C79B99100F01644 /* MemberListEditView.swift in Sources */,
+				26756A0F2CEC42BA0031923F /* TemporaryNoteService.swift in Sources */,
 				26EB9D1B2CD9A34300D3B0CE /* TempNote.swift in Sources */,
 				63E5C82F2975362300D32FD2 /* MapViewModel.swift in Sources */,
 				261FF6E42CD3569300B49442 /* LoadNoteUseCaseWithId.swift in Sources */,
@@ -1748,6 +1755,7 @@
 				263A97BB2945852E008A69F5 /* PeopleWithSelectorView.swift in Sources */,
 				262D2A04293E2BAA005984DA /* SettingViewModel.swift in Sources */,
 				63E848A9295ABEC20037D7A3 /* TravelListViewModel.swift in Sources */,
+				267A22DA2CEB68770079D146 /* TemporaryNote.swift in Sources */,
 				63F132512914A18F00B3A9E0 /* BaseViewModelV1.swift in Sources */,
 				2675D2082CDDDE9000BD7633 /* GetIsShowMarkerUseCase.swift in Sources */,
 				269CA5612C78A5B900366005 /* LoadCategoriesUseCase.swift in Sources */,

@@ -16,7 +16,7 @@ import GooglePlaces
 struct SelectLocationView: View {
     struct Output {
         var pop: () -> ()
-        var goToEditNote: (EditNoteType) -> ()
+        var goToEditNote: (TemporaryNote) -> ()
     }
     private var output: Output
     
@@ -75,9 +75,9 @@ struct SelectLocationView: View {
                             
                             FPButton(text: "여기에 발자국 남기기", status: .press, size: .large, type: .solid) {
                                 if let location = $mapManager.centerPosition.wrappedValue {
-                                    output.goToEditNote(
-                                        .create
-                                    )
+//                                    output.goToEditNote(
+//                                        .create
+//                                    )
                                 }
                             }
                         })

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FootprintListViewV2: View {
     struct Output {
-        var goToEditNote: (EditNoteType) -> ()
+        var goToEditNote: (TemporaryNote) -> ()
     }
     
     private var output: Output
@@ -108,8 +108,8 @@ struct FootprintListViewV2: View {
                 $isPresentFootprint.wrappedValue = false
             }, content: {
                 FootprintView(isPresented: $isPresentFootprint, output: FootprintView.Output(pushEditNoteView: {
-                    if let id = selectedId {
-                        self.output.goToEditNote(.modify(id: id))
+                    if let id = selectedId, let note = vm.loadTempFootprint(id) {
+                        self.output.goToEditNote(note)
                     }
                 }))
                 .environmentObject(footprintVM)

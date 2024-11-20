@@ -15,7 +15,7 @@ import Combine
 
 struct MapView2: View {
     struct Output {
-        var goToEditNote: (EditNoteType) -> ()
+        var goToEditNote: (TemporaryNote) -> ()
     }
     
     private var output: Output
@@ -109,8 +109,8 @@ struct MapView2: View {
                     case .adding:
                         VStack(alignment: .leading, spacing: 0, content: {
                             Topbar("위치 선택", type: .close) {
+                                vm.clearFootprint()
                                 mapStatusVM.updateMapStatus(.normal)
-                                
                                 if $vm.isShowMarkers.wrappedValue {
                                     mapManager.loadMarkers()
                                 }
@@ -150,19 +150,18 @@ struct MapView2: View {
                             Text($mapManager.centerAddress.wrappedValue)
                             
                             HStack(alignment: .center, spacing: 8, content: {
-                                FPButton(text: "닫기", status: .able, size: .large, type: .lightSolid) {
-                                    mapStatusVM.updateMapStatus(.normal)
-                                }
-                                .frame(width: (UIScreen.main.bounds.size.width - 32 - 8) / 10 * 3)
+//                                FPButton(text: "닫기", status: .able, size: .large, type: .lightSolid) {
+//                                    mapStatusVM.updateMapStatus(.normal)
+//                                    vm.clearFootprint()
+//                                }
+//                                .frame(width: (UIScreen.main.bounds.size.width - 32 - 8) / 10 * 3)
                                 
                                 FPButton(text: "여기에 발자국 남기기", status: $mapManager.centerMarkerStatus.wrappedValue == .move ? .disable : .able, size: .large, type: .solid) {
-                                    if let location = $mapManager.centerPosition.wrappedValue {
-                                        MapStatusVM.tempNote?.address = $mapManager.centerAddress.wrappedValue
-                                        MapStatusVM.tempNote?.location = Location(latitude: location.latitude, longitude: location.longitude)
-                                        output.goToEditNote(.create)
+                                    if let location = $mapManager.centerPosition.wrappedValue, let note = vm.updateTempLocation(Location(latitude: location.latitude, longitude: location.longitude), address: $mapManager.centerAddress.wrappedValue) {
+                                        output.goToEditNote(note)
                                     }
                                 }
-                                .frame(width: (UIScreen.main.bounds.size.width - 32 - 8) / 10 * 7)
+//                                .frame(width: (UIScreen.main.bounds.size.width - 32 - 8) / 10 * 7)
                             })
                         })
                         .sdPadding(top: 16, leading: 16, bottom: 8, trailing: 16)
@@ -176,11 +175,12 @@ struct MapView2: View {
         }
         .sheet(isPresented: $isPresentFootprint, onDismiss: {
             $isPresentFootprint.wrappedValue = false
+            vm.clearFootprint()
         }, content: {
             FootprintView(isPresented: $isPresentFootprint, output: FootprintView.Output(pushEditNoteView: {
-                if let id = selectedId {
-                    self.output.goToEditNote(.modify(id: id))
-                    
+                if let id = selectedId, let note = vm.loadTempFootprint(id) {
+                    //MARK: 편집하기
+                    self.output.goToEditNote(note)
                 }
             }))
             .environmentObject(footprintVM)

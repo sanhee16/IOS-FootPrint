@@ -14,11 +14,6 @@ import Photos
 import PhotosUI
 import _PhotosUI_SwiftUI
 
-public enum EditNoteType {
-    case create
-    case modify(id: String)
-}
-
 class EditNoteVM: BaseViewModel {
     @Injected(\.saveNoteUseCase) var saveNoteUseCase
     @Injected(\.deleteImageUrlUseCase) var deleteImageUrlUseCase
@@ -26,6 +21,7 @@ class EditNoteVM: BaseViewModel {
     @Injected(\.loadMembersUseCase) var loadMembersUseCase
     @Injected(\.permissionService) var permissionService
     @Injected(\.loadNoteUseCaseWithId) var loadNoteUseCaseWithId
+    @Injected(\.temporaryNoteService) var temporaryNoteService
     
     @Published var isAvailableToSave: Bool = false
     @Published var isStar: Bool = false
@@ -43,59 +39,38 @@ class EditNoteVM: BaseViewModel {
     @Published var entireMembers: [MemberEntity] = []
     
     private var noteId: String? = nil
-    let type: EditNoteType
     
     private var location: Location? = nil
     
-    init(type: EditNoteType) {
-        self.type = type
-        
+    init(note: TemporaryNote) {
         super.init()
         // load categories, members
         self.loadCategories()
         self.loadMembers()
-        if let tempNote = MapStatusVM.tempNote {
-            self.noteId = tempNote.id
-            self.isStar = tempNote.isStar
-            self.title = tempNote.title
-            self.content = tempNote.content
-            self.address = tempNote.address
-            self.createdAt = tempNote.createdAt
-            self.categories = tempNote.categories
-            self.category = tempNote.category
-            self.images = tempNote.images
-            self.imageUrls = tempNote.imageUrls
-            self.selectedPhotos = tempNote.selectedPhotos
-            self.selectedMembers = tempNote.members
-            self.location = tempNote.location
-        } else {
-            switch self.type {
-            case .create:
-                self.category = self.categories.first
-                self.selectedMembers = []
-            case .modify(let id):
-                self.noteId = id
-                self.loadExistedNote()
-            }
-        }
+        
+        self.loadNote(note)
     }
     
-    private func loadExistedNote() {
-        guard let noteId = self.noteId, let note = self.loadNoteUseCaseWithId.execute(noteId) else { return }
-        self.isStar = note.isStar
-        self.title = note.title
-        self.content = note.content
-        self.address = note.address
-        self.createdAt = Date(timeIntervalSince1970: Double(note.createdAt))
-        self.category = note.category
-        self.imageUrls = note.imageUrls
-        self.location = Location(latitude: note.latitude, longitude: note.longitude)
-        self.selectedPhotos = []
-        self.selectedMembers = note.peopleWith ?? []
+    private func loadNote(_ tempNote: TemporaryNote) {
+        self.noteId = tempNote.id
+        self.isStar = tempNote.isStar
+        self.title = tempNote.title
+        self.content = tempNote.content
+        self.address = tempNote.address
+        self.createdAt = tempNote.createdAt
+        self.category = tempNote.category ?? self.categories.first
+        self.images = tempNote.images
+        self.imageUrls = tempNote.imageUrls
+        self.selectedPhotos = tempNote.selectedPhotos
+        self.selectedMembers = tempNote.members
+        self.location = tempNote.location
+        
+        self.noteId = tempNote.id
     }
     
     func loadCategories() {
         self.categories = loadCategoriesUseCase.execute()
+        print("self.categories: \(self.categories)")
     }
     
     func loadMembers() {
@@ -106,7 +81,6 @@ class EditNoteVM: BaseViewModel {
         if !self.isAvailableToSave { return }
         guard let location = location, let category = self.category else { return }
         
-        //        var imageUrls: [String] = self.imageUrls
         let currentTimeStamp = Int(Date().timeIntervalSince1970)
         for idx in self.images.indices {
             let imageName = "\(currentTimeStamp)_\(idx)"
@@ -127,20 +101,22 @@ class EditNoteVM: BaseViewModel {
             longitude: location.longitude,
             address: self.address
         )
+        
+        self.temporaryNoteService.clear()
+        
         NotificationCenter.default.post(name: .changeMapStatus, object: MapStatus.normal.rawValue)
         onDone()
     }
     
     func saveTempNote(_ onDone: @escaping ()->()) {
         guard let location = self.location else { return }
-        MapStatusVM.tempNote = TempNote(
+        self.temporaryNoteService.saveTempNote(
             id: self.noteId,
             isStar: self.isStar,
             title: self.title,
             content: self.content,
             address: self.address,
             createdAt: self.createdAt,
-            categories: self.categories,
             category: self.category,
             images: self.images,
             imageUrls: self.imageUrls,
@@ -153,6 +129,10 @@ class EditNoteVM: BaseViewModel {
         NotificationCenter.default.post(name: .isShowTabBar, object: false)
         
         onDone()
+    }
+    
+    func clearFootprint() {
+        self.temporaryNoteService.clear()
     }
     
     private func checkIsAvailableToSave() {
@@ -201,10 +181,4 @@ class EditNoteVM: BaseViewModel {
         self.deleteImageUrlUseCase.execute(noteId, url: imageUrls[idx])
         imageUrls.remove(at: idx)
     }
-    
-    //    func checkPhotoPermsission(_ onDone: @escaping (Bool) -> ()) {
-    //        self.permissionService.photoPermissionCheck { isAllow in
-    //            onDone(isAllow)
-    //        }
-    //    }
 }

@@ -24,5 +24,6 @@ public class C {
     static var isFirstAppStart: Bool = true
     
     static var devMode: DevMode = .release
+    static var temporaryNote: TemporaryNote? = nil
 }
 

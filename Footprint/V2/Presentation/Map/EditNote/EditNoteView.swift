@@ -22,8 +22,8 @@ struct EditNoteView: View {
     
     @StateObject var vm: EditNoteVM
     
-    init(type: EditNoteType, output: Output) {
-        _vm = StateObject(wrappedValue: EditNoteVM(type: type))
+    init(note: TemporaryNote, output: Output) {
+        _vm = StateObject(wrappedValue: EditNoteVM(note: note))
         self.output = output
     }
     
@@ -350,8 +350,8 @@ struct EditNoteView: View {
     private func drawHeader(_ geometry: GeometryProxy) -> some View {
         return ZStack(alignment: .leading) {
             Topbar("발자국 남기기", type: .back) {
+                vm.clearFootprint()
                 self.output.pop()
-                EditNoteTempStorage.clear()
             }
             HStack(alignment: .center, spacing: 12) {
                 Spacer()

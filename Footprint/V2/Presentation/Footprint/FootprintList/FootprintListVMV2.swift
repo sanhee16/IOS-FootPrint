@@ -26,6 +26,7 @@ class FootprintListVMV2: ObservableObject {
     @Injected(\.loadAllNoteUseCase) var loadAllNoteUseCase
     @Injected(\.getFootprintSortTypeUseCase) var getFootprintSortTypeUseCase
     @Injected(\.updateFootprintSortTypeUseCase) var updateFootprintSortTypeUseCase
+    @Injected(\.temporaryNoteService) var temporaryNoteService
     
     @Published var notes: [Note] = []
     let sortTypes: [FootprintSortType] = [.latest, .earliest]
@@ -43,5 +44,13 @@ class FootprintListVMV2: ObservableObject {
         self.sortType = self.updateFootprintSortTypeUseCase.execute(sortType)
         loadData()
         onDone()
+    }
+    
+    func loadTempFootprint(_ id: String) -> TemporaryNote? {
+        self.temporaryNoteService.loadTempNote(id)
+    }
+    
+    func clearFootprint() {
+        self.temporaryNoteService.clear()
     }
 }

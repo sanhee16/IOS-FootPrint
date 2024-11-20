@@ -16,6 +16,16 @@ extension Container {
     var permissionService: Factory<PermissionService> {
         Factory(self) { PermissionService() }
     }
+    
+    var temporaryNoteService: Factory<TemporaryNoteService> {
+        Factory(self) {
+            TemporaryNoteService(
+                noteRepository: self.noteRepository(),
+                categoryRepository: self.categoryRepository(),
+                memberRepository: self.memberRepository()
+            )
+        }.singleton
+    }
 }
 
 //MARK: Repository

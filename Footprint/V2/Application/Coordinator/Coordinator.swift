@@ -13,8 +13,8 @@ class Coordinator: BaseCoordinator<Destination> {
     let tabBarService: TabBarService = TabBarService()
     let mapStatusVM: MapStatusVM = MapStatusVM()
     
-    private func pushEditNote(type: EditNoteType, output: EditNoteView.Output) {
-        self.push(.editNote(type: type, output: output))
+    private func pushEditNote(note: TemporaryNote, output: EditNoteView.Output) {
+        self.push(.editNote(note: note, output: output))
     }
     
     private func pushCategoryListEditView(_ output: CategoryListEditView.Output) {
@@ -45,8 +45,8 @@ class Coordinator: BaseCoordinator<Destination> {
 //MARK: Output
 extension Coordinator {
     var mapOutput: MapView2.Output {
-        MapView2.Output { type in
-            self.pushEditNote(type: type, output: self.editNoteOutput)
+        MapView2.Output { note in
+            self.pushEditNote(note: note, output: self.editNoteOutput)
         }
     }
     
@@ -69,8 +69,8 @@ extension Coordinator {
     var selectLocationOutput: SelectLocationView.Output {
         SelectLocationView.Output {
             self.pop()
-        } goToEditNote: { type in
-            self.pushEditNote(type: type, output: self.editNoteOutput)
+        } goToEditNote: { note in
+            self.pushEditNote(note: note, output: self.editNoteOutput)
         }
     }
     
@@ -95,8 +95,8 @@ extension Coordinator {
     }
     
     var footprintListViewOutput: FootprintListViewV2.Output {
-        FootprintListViewV2.Output { type in
-            self.pushEditNote(type: type, output: self.editNoteOutput)
+        FootprintListViewV2.Output { note in
+            self.pushEditNote(note: note, output: self.editNoteOutput)
         }
     }
 }

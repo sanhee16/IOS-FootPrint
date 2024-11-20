@@ -46,6 +46,7 @@ enum MarkerStatus {
 class MapVM2: BaseViewModel {
     @Injected(\.getIsShowMarkerUseCase) var getIsShowMarkerUseCase
     @Injected(\.updateIsShowMarkerUseCase) var updateIsShowMarkerUseCase
+    @Injected(\.temporaryNoteService) var temporaryNoteService
     
     private var locationManager: CLLocationManager
     @Published var isShowAds: Bool = false
@@ -108,6 +109,18 @@ class MapVM2: BaseViewModel {
         self.isShowMarkers = updateIsShowMarkerUseCase.execute(!self.isShowMarkers)
     }
     
+    //MARK: temporary note
+    func updateTempLocation(_ location: Location, address: String) -> TemporaryNote? {
+        self.temporaryNoteService.updateTempLocation(address: address, location: location)
+    }
+    
+    func loadTempFootprint(_ id: String) -> TemporaryNote? {
+        self.temporaryNoteService.loadTempNote(id)
+    }
+    
+    func clearFootprint() {
+        self.temporaryNoteService.clear()
+    }
     
     //MARK: Timer
     private func placeSearch(_ text: String) {
