@@ -100,6 +100,7 @@ struct MapView2: View {
                         )
                 }
                 
+                //MARK: Map
                 if !$vm.isLoading.wrappedValue {
                     FPMapView(mapView: $mapManager.mapView.wrappedValue)
                         .frame(maxWidth: .infinity, alignment: .center)

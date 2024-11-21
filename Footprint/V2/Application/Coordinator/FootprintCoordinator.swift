@@ -37,6 +37,14 @@ class FootprintCoordinator: BaseCoordinator<Destination> {
             self.pushEditTripView(.modify(id: id))
         })))
     }
+    
+    private func pushSelectLocationView(_ location: Location) {
+        self.push(.selectLocation(output: SelectLocationView.Output(pop: {
+            self.pop()
+        }, goToEditNote: { note in
+            
+        }), location: location))
+    }
 }
 
 //MARK: Output
@@ -54,8 +62,8 @@ extension FootprintCoordinator {
             self.pushCategoryListEditView(self.categoryListEditViewOutput)
         } pushPeopleWithListEditView: {
             self.pushPeopleWithListEditView(self.peopleWithListEditViewOutput)
-        } popToSelectLocation: {
-            self.popToRoot()
+        } popToSelectLocation: { location in
+            self.pushSelectLocationView(location)
         }
     }
     

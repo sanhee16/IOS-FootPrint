@@ -54,8 +54,8 @@ extension TripCoordinator {
             self.pushCategoryListEditView(self.categoryListEditViewOutput)
         } pushPeopleWithListEditView: {
             self.pushPeopleWithListEditView(self.peopleWithListEditViewOutput)
-        } popToSelectLocation: {
-            self.popToRoot()
+        } popToSelectLocation: { location in
+            // TODO: 
         }
     }
     

@@ -15,7 +15,7 @@ struct EditNoteView: View {
         var pop: () -> ()
         var pushCategoryListEditView: () -> ()
         var pushPeopleWithListEditView: () -> ()
-        var popToSelectLocation: () -> ()
+        var popToSelectLocation: (Location) -> ()
     }
     
     private var output: Output
@@ -61,7 +61,9 @@ struct EditNoteView: View {
                             
                             FPButton(text: "발자국 위치 확인하기", status: .able, size: .large, type: .lightSolid) {
                                 vm.saveTempNote {
-                                    self.output.popToSelectLocation()
+                                    if let location = $vm.location.wrappedValue {
+                                        self.output.popToSelectLocation(location)
+                                    }
                                 }
                             }
                             .sdPaddingVertical(8)

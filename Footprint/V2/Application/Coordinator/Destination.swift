@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 enum Destination: Hashable {
-    case selectLocation(output: SelectLocationView.Output)
+    case selectLocation(output: SelectLocationView.Output, location: Location)
     case editNote(note: TemporaryNote, output: EditNoteView.Output)
     case categoryListEditView(output: CategoryListEditView.Output)
     case peopleWithListEditView(output: MemberListEditView.Output)
@@ -36,8 +36,8 @@ enum Destination: Hashable {
     @ViewBuilder
     var view: some View {
         switch self {
-        case .selectLocation(let output):
-            SelectLocationView(output: output)
+        case .selectLocation(let output, let location):
+            SelectLocationView(output: output, location: location)
         case .editNote(let note, let output):
             EditNoteView(note: note, output: output)
         case .categoryListEditView(let output):

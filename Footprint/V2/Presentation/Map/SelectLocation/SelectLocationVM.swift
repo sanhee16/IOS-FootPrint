@@ -5,106 +5,31 @@
 //  Created by sandy on 8/13/24.
 //
 
-import Foundation
 import Combine
-import RealmSwift
-import GoogleMaps
-import GooglePlaces
-import CoreLocation
-import Contacts
-
+import Factory
 
 class SelectLocationVM: BaseViewModel {
-    private var locationManager: CLLocationManager
-
-    @Published var selectedMarker: GMSMarker? = nil
-    @Published var centerMarkerStatus: MarkerStatus = .stable
-    @Published var centerAddress: String = ""
-    @Published var isLoading: Bool = false
-    var myLocation: Location? = nil
-    
-    var centerPosition: CLLocationCoordinate2D?
-    private var allFootprints: [FootPrint] = []
+    @Injected(\.temporaryNoteService) var temporaryNoteService
     
     override init() {
-        self.centerPosition = nil
-        self.locationManager = CLLocationManager()
-        self.locationManager.allowsBackgroundLocationUpdates = false
-        super.init()
-        self.getCurrentLocation()
+        
     }
     
     func onAppear() {
-        self.isLoading = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.001, execute: {
-            self.isLoading = false
-        })
+        
     }
     
-    func setLocation(location: Location) {
-        self.centerPosition = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
+    //MARK: temporary note
+    func updateTempLocation(_ location: Location, address: String) -> TemporaryNote? {
+        self.temporaryNoteService.updateTempLocation(address: address, location: location)
     }
     
-    private func getCurrentLocation() {
-        if let coor = locationManager.location?.coordinate {
-            let latitude = coor.latitude
-            let longitude = coor.longitude
-            print("위도 :\(latitude), 경도: \(longitude)")
-            self.myLocation = Location(latitude: latitude, longitude: longitude)
-        }
+    func loadTempFootprint(_ id: String) -> TemporaryNote? {
+        self.temporaryNoteService.loadTempNote(id)
     }
     
-    //MARK: MAP
-    func createMapView() -> GMSMapView {
-        if let mapView = C.mapView {
-            return mapView
-        }
-        let zoom: Float = 17.8
-        print("[MAP VIEW] createMapView")
-        
-        let latitude: Double = self.centerPosition?.latitude ?? self.myLocation?.latitude ?? 0.0
-        let longitude: Double = self.centerPosition?.longitude ?? self.myLocation?.longitude ?? 0.0
-        
-        let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: zoom)
-        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
-        
-        // 지도 setting
-        // https://developers.google.com/maps/documentation/ios-sdk/controls
-        mapView.isIndoorEnabled = false
-        mapView.isMyLocationEnabled = true
-        mapView.isBuildingsEnabled = false
-        mapView.settings.compassButton = true
-        
-        return mapView
+    func clearFootprint() {
+        self.temporaryNoteService.clear()
     }
     
-    func changeStateSelectedMarker(_ isDrag: Bool, target: CLLocationCoordinate2D?) {
-        self.centerMarkerStatus = isDrag ? .move : .stable
-        self.centerPosition = target
-        
-        guard let target = target else { return }
-        
-        let location = CLLocation(latitude: target.latitude, longitude: target.longitude)
-        let geocoder = CLGeocoder()
-        let locale = Locale(identifier: "Ko-kr")
-        
-        geocoder.reverseGeocodeLocation(location, preferredLocale: locale) { [weak self] placemarks, _ in
-            guard let placemarks = placemarks,
-                  let address = placemarks.last
-            else { return }
-            
-            if let postalAddress = address.postalAddress {
-                let formatter = CNPostalAddressFormatter()
-                let addressString = formatter.string(from: postalAddress)
-                
-                print("addressString: \(addressString)")
-                var result: String = ""
-                addressString.split(separator: "\n").forEach { value in
-                    result.append(contentsOf: "\(value) ")
-                }
-                self?.centerAddress = result
-                print("result: \(result)")
-            }
-        }
-    }
 }

@@ -41,7 +41,7 @@ class EditNoteVM: BaseViewModel {
     
     private var noteId: String? = nil
     
-    private var location: Location? = nil
+    @Published var location: Location? = nil
     
     init(note: TemporaryNote) {
         super.init()
