@@ -14,7 +14,6 @@ struct FootprintListViewV2: View {
     
     private var output: Output
     
-    @EnvironmentObject private var tabBarService: TabBarService
     @EnvironmentObject private var coordinator: FootprintCoordinator
     @StateObject private var vm: FootprintListVMV2 = FootprintListVMV2()
     @StateObject private var footprintVM: FootprintVM = FootprintVM()

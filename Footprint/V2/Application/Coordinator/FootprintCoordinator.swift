@@ -10,8 +10,6 @@ import Factory
 import SwiftUI
 
 class FootprintCoordinator: BaseCoordinator<Destination> {
-    let tabBarService: TabBarService = TabBarService()
-    
     private func pushEditNote(note: TemporaryNote, output: EditNoteView.Output) {
         self.push(.editNote(note: note, output: output))
     }
@@ -57,9 +55,6 @@ extension FootprintCoordinator {
         } pushPeopleWithListEditView: {
             self.pushPeopleWithListEditView(self.peopleWithListEditViewOutput)
         } popToSelectLocation: {
-            self.tabBarService.isShowTabBar = false
-            
-            
             self.popToRoot()
         }
     }

@@ -47,7 +47,7 @@
 		263ED4502C60E54E00FAC148 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 263ED44F2C60E54E00FAC148 /* FirebaseRemoteConfig */; };
 		263ED4522C60E54E00FAC148 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 263ED4512C60E54E00FAC148 /* FirebaseStorage */; };
 		263ED4532C60F05700FAC148 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 268262292C60E2EA0069134C /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		263FADC32C7164B700AE9E73 /* TabBarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263FADC22C7164B700AE9E73 /* TabBarService.swift */; };
+		263FADC32C7164B700AE9E73 /* TabBarVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263FADC22C7164B700AE9E73 /* TabBarVM.swift */; };
 		2643E0D42CDB3DD30075BA69 /* UpdateMemberOrderUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2643E0D32CDB3DD30075BA69 /* UpdateMemberOrderUseCase.swift */; };
 		264B70BC291F8DD900CDAF9F /* ApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264B70BB291F8DD900CDAF9F /* ApiResponse.swift */; };
 		264B70C0291F8E9D00CDAF9F /* C.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264B70BF291F8E9C00CDAF9F /* C.swift */; };
@@ -315,7 +315,7 @@
 		2639921E291FEBA60049F047 /* KeyboardReadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardReadable.swift; sourceTree = "<group>"; };
 		263A97BA2945852E008A69F5 /* PeopleWithSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleWithSelectorView.swift; sourceTree = "<group>"; };
 		263A97BC29458533008A69F5 /* PeopleWithSelectorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleWithSelectorViewModel.swift; sourceTree = "<group>"; };
-		263FADC22C7164B700AE9E73 /* TabBarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarService.swift; sourceTree = "<group>"; };
+		263FADC22C7164B700AE9E73 /* TabBarVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVM.swift; sourceTree = "<group>"; };
 		2643E0D32CDB3DD30075BA69 /* UpdateMemberOrderUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMemberOrderUseCase.swift; sourceTree = "<group>"; };
 		264B70BB291F8DD900CDAF9F /* ApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponse.swift; sourceTree = "<group>"; };
 		264B70BF291F8E9C00CDAF9F /* C.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C.swift; sourceTree = "<group>"; };
@@ -837,7 +837,7 @@
 			children = (
 				266EDDE32C64EB40006CF09B /* MainView2.swift */,
 				266EDDE52C64EB46006CF09B /* MainVM2.swift */,
-				263FADC22C7164B700AE9E73 /* TabBarService.swift */,
+				263FADC22C7164B700AE9E73 /* TabBarVM.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -1809,7 +1809,7 @@
 				269CA5582C78A43300366005 /* CategoryV2.swift in Sources */,
 				269CA56A2C78A8B600366005 /* UserDefaultsManager.swift in Sources */,
 				2675D20A2CDDDF8F00BD7633 /* SettingRepositoryImpl.swift in Sources */,
-				263FADC32C7164B700AE9E73 /* TabBarService.swift in Sources */,
+				263FADC32C7164B700AE9E73 /* TabBarVM.swift in Sources */,
 				268546E82A28DB1200BDA2EA /* ReviewView.swift in Sources */,
 				63D32FCC29CA9E390049F567 /* FirestoreExtension.swift in Sources */,
 				26D018BC2CE4396800891B89 /* DBError.swift in Sources */,

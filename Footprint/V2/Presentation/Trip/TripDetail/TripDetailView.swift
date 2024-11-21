@@ -98,7 +98,6 @@ struct TripDetailView: View {
             .environmentObject(footprintVM)
             .presentationDetents([.fraction(0.8), .large])
         })
-        .toolbar(.hidden, for: .tabBar)
     }
     
     private func drawPeriod() -> some View {

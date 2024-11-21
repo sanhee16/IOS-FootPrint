@@ -16,7 +16,7 @@ struct MainView2: View {
     @StateObject private var tripCoordinator: TripCoordinator = TripCoordinator()
     
     @StateObject private var vm: MainVM2 = MainVM2()
-    @StateObject private var tabBarService: TabBarService = TabBarService()
+    @StateObject private var tabBarService: TabBarVM = TabBarVM()
     
     @State private var currentTab: Int = 0
     
@@ -37,6 +37,7 @@ struct MainView2: View {
                     }
                     .tag(MainMenuType.map.rawValue)
                     .environmentObject(mapCoordinator)
+                    .toolbar($tabBarService.isShowTabBar.wrappedValue ? .visible : .hidden, for: .tabBar)
                 
                 FootprintListViewV2(output: footprintCoordinator.footprintListViewOutput)
                     .tabItem {
@@ -44,6 +45,7 @@ struct MainView2: View {
                     }
                     .tag(MainMenuType.footprints.rawValue)
                     .environmentObject(footprintCoordinator)
+                    .toolbar($tabBarService.isShowTabBar.wrappedValue ? .visible : .hidden, for: .tabBar)
                 
                 TripListView(output: tripCoordinator.tripListViewOutput)
                     .tabItem {
@@ -51,6 +53,7 @@ struct MainView2: View {
                     }
                     .tag(MainMenuType.trip.rawValue)
                     .environmentObject(tripCoordinator)
+                    .toolbar($tabBarService.isShowTabBar.wrappedValue ? .visible : .hidden, for: .tabBar)
             })
             .tint(.cont_primary_mid)
         }

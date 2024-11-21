@@ -1,5 +1,5 @@
 //
-//  TabBarService.swift
+//  TabBarVM.swift
 //  Footprint
 //
 //  Created by sandy on 8/18/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class TabBarService: ObservableObject {
+class TabBarVM: ObservableObject {
     @Published var isShowTabBar: Bool = true
     
     init() {
@@ -15,6 +15,7 @@ class TabBarService: ObservableObject {
     }
     
     func setIsShowTabBar(_ isShow: Bool) {
+        print("setIsShowTabBar: \(isShow)")
         self.isShowTabBar = isShow
     }
     

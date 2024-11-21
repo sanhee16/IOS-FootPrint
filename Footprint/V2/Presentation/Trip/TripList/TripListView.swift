@@ -14,7 +14,6 @@ struct TripListView: View {
     }
     
     private var output: Output
-    @EnvironmentObject private var tabBarService: TabBarService
     @EnvironmentObject private var coordinator: TripCoordinator
     @StateObject private var vm: TripListVM = TripListVM()
     @State private var isShowSorting: Bool = false

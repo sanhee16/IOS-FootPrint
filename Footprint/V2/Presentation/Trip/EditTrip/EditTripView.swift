@@ -196,7 +196,6 @@ struct EditTripView: View {
                 })
             }
         }
-        .toolbar(.hidden, for: .tabBar)
     }
     
     private func drawPeriod(scrollProxy: ScrollViewProxy) -> some View {
