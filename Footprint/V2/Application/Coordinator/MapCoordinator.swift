@@ -63,8 +63,6 @@ extension MapCoordinator {
     var selectLocationOutput: SelectLocationView.Output {
         SelectLocationView.Output {
             self.pop()
-        } goToEditNote: { note in
-            self.pushEditNote(note: note, output: self.editNoteOutput)
         }
     }
     

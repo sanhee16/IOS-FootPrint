@@ -16,7 +16,6 @@ import GooglePlaces
 struct SelectLocationView: View {
     struct Output {
         var pop: () -> ()
-        var goToEditNote: (TemporaryNote) -> ()
     }
     private var output: Output
     
@@ -33,9 +32,8 @@ struct SelectLocationView: View {
     var body: some View {
         ZStack(alignment: .center) {
             VStack(alignment: .leading, spacing: 0, content: {
-                Topbar("위치 선택~~~", type: .close) {
-                    vm.clearFootprint()
-                    mapManager.updateMapStatus(.normal)
+                Topbar("위치 선택", type: .close) {
+                    self.output.pop()
                 }
                 Text("지도를 움직여 위치를 설정하세요.")
                     .font(.body2)
@@ -82,7 +80,9 @@ struct SelectLocationView: View {
                         
                         FPButton(text: "여기에 발자국 남기기", status: $mapManager.centerMarkerStatus.wrappedValue == .move ? .disable : .able, size: .large, type: .solid) {
                             if let location = $mapManager.centerPosition.wrappedValue, let note = vm.updateTempLocation(Location(latitude: location.latitude, longitude: location.longitude), address: $mapManager.centerAddress.wrappedValue) {
-                                output.goToEditNote(note)
+                                self.output.pop()
+                                //TODO: TemporaryNote를 전달해줄 방법이 없음
+                                // > EditNoteView에서 TemporaryNote를 파라미터로 받는걸 없애면 될듯..??
                             }
                         }
                     })

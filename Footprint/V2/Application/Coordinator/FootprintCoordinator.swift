@@ -41,8 +41,6 @@ class FootprintCoordinator: BaseCoordinator<Destination> {
     private func pushSelectLocationView(_ location: Location) {
         self.push(.selectLocation(output: SelectLocationView.Output(pop: {
             self.pop()
-        }, goToEditNote: { note in
-            
         }), location: location))
     }
 }
@@ -70,8 +68,6 @@ extension FootprintCoordinator {
     var selectLocationOutput: SelectLocationView.Output {
         SelectLocationView.Output {
             self.pop()
-        } goToEditNote: { note in
-            self.pushEditNote(note: note, output: self.editNoteOutput)
         }
     }
     
