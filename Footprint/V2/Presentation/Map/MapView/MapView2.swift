@@ -211,46 +211,47 @@ struct MapView2: View {
             .frame(maxWidth: .infinity, alignment: .center).navigationDestination(for: Destination.self) { destination in
                 coordinator.moveToDestination(destination: destination)
             }
-        }
-        .sheet(isPresented: $isPresentFootprint, onDismiss: {
-            $isPresentFootprint.wrappedValue = false
-            vm.clearFootprint()
-        }, content: {
-            FootprintView(isPresented: $isPresentFootprint, output: FootprintView.Output(pushEditNoteView: {
-                if let id = selectedId, let note = vm.loadTempFootprint(id) {
-                    //MARK: 편집하기
-                    self.output.goToEditNote(note)
+            .onAppear {
+                print("onAppear Map!")
+                if $vm.isShowMarkers.wrappedValue {
+                    mapManager.loadMarkers()
                 }
-            }))
-            .environmentObject(footprintVM)
-            .presentationDetents([.fraction(0.8), .large])
-        })
-        .onChange(of: $mapManager.selectedMarkers.wrappedValue, perform: { ids in
-            if !ids.isEmpty {
-                mapManager.unSelectMarker()
-                if $mapManager.status.wrappedValue == .adding {
-                    self.selectedId = nil
-                } else {
-                    if let firstId = ids.first {
-                        if ids.count == 1 {
-                            self.selectedId = firstId
-                            self.footprintVM.updateId(firstId)
-                            $isPresentFootprint.wrappedValue = true
-                        } else {
-                            vm.getMultiNoteAddress(firstId) { address in
-                                self.selectedAddress = address
-                                $isPresentFootprintSelector.wrappedValue = true
+                vm.onAppear()
+            }
+            .sheet(isPresented: $isPresentFootprint, onDismiss: {
+                $isPresentFootprint.wrappedValue = false
+                vm.clearFootprint()
+            }, content: {
+                FootprintView(isPresented: $isPresentFootprint, output: FootprintView.Output(pushEditNoteView: {
+                    if let id = selectedId, let note = vm.loadTempFootprint(id) {
+                        //MARK: 편집하기
+                        self.output.goToEditNote(note)
+                    }
+                }))
+                .environmentObject(footprintVM)
+                .presentationDetents([.fraction(0.8), .large])
+            })
+            .onChange(of: $mapManager.selectedMarkers.wrappedValue, perform: { ids in
+                if !ids.isEmpty {
+                    mapManager.unSelectMarker()
+                    if $mapManager.status.wrappedValue == .adding {
+                        self.selectedId = nil
+                    } else {
+                        if let firstId = ids.first {
+                            if ids.count == 1 {
+                                self.selectedId = firstId
+                                self.footprintVM.updateId(firstId)
+                                $isPresentFootprint.wrappedValue = true
+                            } else {
+                                vm.getMultiNoteAddress(firstId) { address in
+                                    self.selectedAddress = address
+                                    $isPresentFootprintSelector.wrappedValue = true
+                                }
                             }
                         }
                     }
                 }
-            }
-        })
-        .onAppear {
-            if $vm.isShowMarkers.wrappedValue {
-                mapManager.loadMarkers()
-            }
-            vm.onAppear()
+            })
         }
         .toolbar($mapManager.status.wrappedValue == .adding ? .hidden : .visible, for: .tabBar)
     }
