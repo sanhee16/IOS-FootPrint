@@ -9,10 +9,14 @@ import Foundation
 import SwiftUI
 
 class BaseCoordinator<T: Hashable>: ObservableObject {
-    @Published var paths: [T] = [] { didSet { print("paths: \(paths)" )}}
+    @Published var paths: [T] = [] { didSet {
+        self.onPathChanged()
+    }}
+    var prePathsCount: Int = 0
     
     func push(_ path: T) {
         self.paths.append(path)
+        self.prePathsCount = paths.count
     }
     
     func pop() {
@@ -34,6 +38,15 @@ class BaseCoordinator<T: Hashable>: ObservableObject {
 
     func moveToDestination(destination: Destination) -> some View {
         return destination.view
+    }
+    
+    private func onPathChanged() {
+//        print("paths: \(paths)" )
+        let postPathsCount = self.paths.count
+        if postPathsCount < prePathsCount {
+            //MARK: pop!
+            
+        }
     }
 }
 
