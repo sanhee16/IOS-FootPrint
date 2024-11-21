@@ -158,9 +158,6 @@ struct EditNoteView: View {
                     })
                 }
             }
-            .onAppear {
-                NotificationCenter.default.post(name: .isShowTabBar, object: false)
-            }
             
             
             HStack(alignment: .center, spacing: 8, content: {

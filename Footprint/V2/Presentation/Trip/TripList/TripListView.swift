@@ -16,6 +16,7 @@ struct TripListView: View {
     private var output: Output
     @EnvironmentObject private var coordinator: TripCoordinator
     @StateObject private var vm: TripListVM = TripListVM()
+    @EnvironmentObject private var tabBarVM: TabBarVM
     @State private var isShowSorting: Bool = false
     @State private var sortButtonLocation: CGRect = .zero
     @State private var sortBoxWidth: CGFloat = .zero
@@ -110,6 +111,10 @@ struct TripListView: View {
                         .padding(16)
                         .zIndex(1)
                     })
+                    
+                    MainMenuBar(current: .trip) { type in
+                        tabBarVM.onChangeTab(type)
+                    }
                 })
             
             }

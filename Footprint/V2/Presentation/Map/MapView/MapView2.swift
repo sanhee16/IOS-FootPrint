@@ -25,6 +25,7 @@ struct MapView2: View {
     @StateObject var mapManager: FPMapManager = FPMapManager.shared
     @StateObject private var footprintVM: FootprintVM = FootprintVM()
     @EnvironmentObject private var coordinator: MapCoordinator
+    @EnvironmentObject private var tabBarVM: TabBarVM
     
     private var safeTop: CGFloat { get { Util.safeTop() }}
     private var safeBottom: CGFloat { get { Util.safeBottom() }}
@@ -204,6 +205,9 @@ struct MapView2: View {
                         .background(Color(hex: "#F1F5F9"))
                     }
                     
+                    MainMenuBar(current: .map) { type in
+                        tabBarVM.onChangeTab(type)
+                    }
                 })
                 .zIndex(2)
             }
@@ -252,7 +256,6 @@ struct MapView2: View {
                 }
             })
         }
-//        .toolbar($mapManager.status.wrappedValue == .adding ? .hidden : .visible, for: .tabBar)
     }
     
     

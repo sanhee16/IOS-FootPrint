@@ -9,9 +9,14 @@ import Foundation
 
 class TabBarVM: ObservableObject {
     @Published var isShowTabBar: Bool = true
+    @Published var currentTab: MainMenuType = .map
     
     init() {
         addObserver()
+    }
+    
+    func onChangeTab(_ type: MainMenuType) {
+        self.currentTab = type
     }
     
     func setIsShowTabBar(_ isShow: Bool) {
@@ -37,5 +42,7 @@ class TabBarVM: ObservableObject {
             self.setIsShowTabBar(isShow)
         }
     }
+    
+    
 }
 

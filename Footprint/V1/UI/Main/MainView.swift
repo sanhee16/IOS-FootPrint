@@ -76,9 +76,9 @@ struct MainView: View {
                     GADBanner().frame(width: GADAdSizeBanner.size.width, height: GADAdSizeBanner.size.height)
                 }
 
-                MainMenuBar(current: $vm.currentTab.wrappedValue) { type in
-                    vm.onClickTab(type)
-                }
+//                MainMenuBar(current: $vm.currentTab.wrappedValue) { type in
+//                    vm.onClickTab(type)
+//                }
             }
             .frame(width: geometry.size.width, alignment: .center)
         }

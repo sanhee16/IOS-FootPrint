@@ -140,7 +140,6 @@ class EditNoteVM: BaseViewModel {
         )
         
         NotificationCenter.default.post(name: .changeMapStatus, object: MapStatus.adding.rawValue)
-        NotificationCenter.default.post(name: .isShowTabBar, object: false)
         
         onDone()
     }

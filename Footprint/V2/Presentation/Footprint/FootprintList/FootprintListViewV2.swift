@@ -17,6 +17,7 @@ struct FootprintListViewV2: View {
     @EnvironmentObject private var coordinator: FootprintCoordinator
     @StateObject private var vm: FootprintListVMV2 = FootprintListVMV2()
     @StateObject private var footprintVM: FootprintVM = FootprintVM()
+    @EnvironmentObject private var tabBarVM: TabBarVM
     @State private var isPresentFootprint: Bool = false
     @State private var selectedId: String? = nil
     
@@ -103,6 +104,10 @@ struct FootprintListViewV2: View {
                         .sdPaddingHorizontal(16)
                     })
                     .background(Color.bg_default)
+                    
+                    MainMenuBar(current: .footprints) { type in
+                        tabBarVM.onChangeTab(type)
+                    }
                 })
                 .frame(maxWidth: .infinity, alignment: .topLeading)
                 .background(Color.bg_default)
