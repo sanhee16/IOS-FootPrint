@@ -412,9 +412,10 @@ extension FPMapManager: GMSMapViewDelegate {
     // 마커 클릭
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         if let ids = marker.userData as? [String] {
+            //TODO: status 관리 필요! 
             self.moveToLocation(
                 Location(
-                    latitude: marker.position.latitude - (status == .normal ? 0.001 : 0.0),
+                    latitude: marker.position.latitude /*- (status == .normal ? 0.001 : 0.0)*/,
                     longitude: marker.position.longitude
                 )
             )

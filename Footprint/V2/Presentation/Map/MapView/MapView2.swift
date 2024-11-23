@@ -48,6 +48,7 @@ struct MapView2: View {
     var body: some View {
         NavigationStack(path: $coordinator.paths) {
             ZStack(alignment: .topLeading) {
+                //MARK: 다중 마커 아이콘 클릭 시
                 if let selectedAddress = selectedAddress, $isPresentFootprintSelector.wrappedValue {
                     MultiMarkerSelectorView(address: selectedAddress) { id in
                         $isPresentFootprintSelector.wrappedValue = false
@@ -87,130 +88,35 @@ struct MapView2: View {
                     }
                 }
                 
-                if $mapManager.status.wrappedValue == .adding {
-                    Image($mapManager.centerMarkerStatus.wrappedValue.image)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 46)
-                        .zIndex(2)
-                        .rectReader($centerPos, in: .global)
-                        .offset(
-                            x: UIScreen.main.bounds.size.width / 2 - $centerPos.wrappedValue.width / 2,
-                            y: UIScreen.main.bounds.size.height / 2 - $centerPos.wrappedValue.height
-                        )
-                }
-                
-                //MARK: Map
-                if !$vm.isLoading.wrappedValue {
-                    FPMapView(mapView: $mapManager.mapView.wrappedValue)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .zIndex(1)
-                }
-                
-                VStack(alignment: .center,
-                       spacing: 0,
-                       content: {
-                    switch $mapManager.status.wrappedValue {
-                    case .normal:
-                        if Defaults.shared.premiumCode.isEmpty && $vm.isShowAds.wrappedValue {
-                            GADBanner().frame(width: GADAdSizeBanner.size.width, height: GADAdSizeBanner.size.height)
-                                .zIndex(5)
+                VStack(alignment: .center, spacing: 0, content: {
+                    ZStack(content: {
+                        // MARK: Map
+                        if !$vm.isLoading.wrappedValue {
+                            FPMapView(mapView: $mapManager.mapView.wrappedValue)
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                .zIndex(1)
                         }
-                        HStack(alignment: .center, spacing: 0, content: {
-                            Spacer()
-                            if isShowSearchBar {
-                                VStack(alignment: .leading, spacing: 9, content: {
-                                    drawSearchBox()
-                                        .sdPadding(top: 8, leading: 16, bottom: 0, trailing: 16)
-                                        .onTapGesture { }
-//                                    if !$vm.searchItems.wrappedValue.isEmpty {
-//                                        drawSearchList()
-//                                            .padding(.top, 6)
-//                                    }
-                                })
-                            } else {
-                                mapMenuButton("search") {
-                                    withAnimation {
-                                        self.isShowSearchBar = true
-                                    }
-                                }
-                                .sdPadding(top: 8, leading: 0, bottom: 0, trailing: 16)
-                            }
-                        })
                         
-                        HStack(alignment: .center, spacing: 0, content: {
-                            Spacer()
-                            markerMenuButton("paw-foot") {
-                                vm.toggleIsShowMarker()
-                                if $vm.isShowMarkers.wrappedValue {
-                                    mapManager.loadMarkers()
-                                } else {
-                                    mapManager.deleteMarkers()
-                                }
-                            }
-                            .sdPadding(top: 8, leading: 0, bottom: 0, trailing: 16)
-                        })
-                    case .adding:
-                        VStack(alignment: .leading, spacing: 0, content: {
-                            Topbar("위치 선택", type: .close) {
-                                vm.clearFootprint()
-                                mapManager.updateMapStatus(.normal)
-                                if $vm.isShowMarkers.wrappedValue {
-                                    mapManager.loadMarkers()
-                                }
-                            }
-                            Text("지도를 움직여 위치를 설정하세요.")
-                                .font(.body2)
-                                .foregroundStyle(Color.white)
-                                .sdPaddingVertical(16)
-                                .frame(width: UIScreen.main.bounds.size.width)
-                                .background(Color.black.opacity(0.7))
-                        })
-                        .zIndex(1)
-                    }
-                    
-                    Spacer()
-                    HStack(alignment: .center, spacing: 0, content: {
-                        mapMenuButton("location-target") {
-                            mapManager.didTapMyLocationButton()
+                        // MARK: Center position icon
+                        if $mapManager.status.wrappedValue == .adding {
+                            Image($mapManager.centerMarkerStatus.wrappedValue.image)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 46)
+                                .zIndex(3)
                         }
-                        .sdPadding(top: 0, leading: 16, bottom: 18, trailing: 0)
-                        Spacer()
                     })
-                    
-                    switch $mapManager.status.wrappedValue {
-                    case .normal:
-                        FPButton(text: "발자국 남기기", location: .leading(name: "paw-foot-white"), status: .able, size: .large, type: .solid) {
-                            //                        output.goToSelectLocation()
-                            withAnimation(.smooth) {
-                                mapManager.updateMapStatus(.adding)
-                            }
-                        }
-                        .sdPadding(top: 0, leading: 16, bottom: 8, trailing: 16)
-                    case .adding:
-                        VStack(alignment: .leading,
-                               spacing: 24,
-                               content: {
-                            Text($mapManager.centerAddress.wrappedValue)
-                            
-                            HStack(alignment: .center, spacing: 8, content: {
-                                
-                                FPButton(text: "여기에 발자국 남기기", status: $mapManager.centerMarkerStatus.wrappedValue == .move ? .disable : .able, size: .large, type: .solid) {
-                                    if let location = $mapManager.centerPosition.wrappedValue, let _ = vm.updateTempLocation(Location(latitude: location.latitude, longitude: location.longitude), address: $mapManager.centerAddress.wrappedValue) {
-                                        output.goToEditNote()
-                                    }
-                                }
-                            })
-                        })
-                        .sdPadding(top: 16, leading: 16, bottom: 8, trailing: 16)
-                        .background(Color(hex: "#F1F5F9"))
-                    }
-                    
-                    MainMenuBar(current: .map) { type in
-                        tabBarVM.onChangeTab(type)
-                    }
                 })
-                .zIndex(2)
+                
+                switch $mapManager.status.wrappedValue {
+                case .normal:
+                    drawNormalStatus()
+                        .zIndex(2)
+                    
+                case .adding:
+                    drawAddingStatus()
+                        .zIndex(2)
+                }
             }
             .frame(maxWidth: .infinity, alignment: .center).navigationDestination(for: Destination.self) { destination in
                 coordinator.moveToDestination(destination: destination)
@@ -258,6 +164,121 @@ struct MapView2: View {
                 }
             })
         }
+    }
+    
+    private func drawNormalStatus() -> some View {
+        VStack(alignment: .leading, spacing: 0, content: {
+            if Defaults.shared.premiumCode.isEmpty && $vm.isShowAds.wrappedValue {
+                HStack(alignment: .center, spacing: 0, content: {
+                    Spacer()
+                    GADBanner().frame(width: GADAdSizeBanner.size.width, height: GADAdSizeBanner.size.height)
+                        .zIndex(5)
+                    Spacer()
+                })
+            }
+            HStack(alignment: .center, spacing: 0, content: {
+                Spacer()
+                if isShowSearchBar {
+                    VStack(alignment: .leading, spacing: 9, content: {
+                        drawSearchBox()
+                            .sdPadding(top: 8, leading: 16, bottom: 0, trailing: 16)
+                            .onTapGesture { }
+                        //                                    if !$vm.searchItems.wrappedValue.isEmpty {
+                        //                                        drawSearchList()
+                        //                                            .padding(.top, 6)
+                        //                                    }
+                    })
+                } else {
+                    mapMenuButton("search") {
+                        withAnimation {
+                            self.isShowSearchBar = true
+                        }
+                    }
+                    .sdPadding(top: 8, leading: 0, bottom: 0, trailing: 16)
+                }
+            })
+            
+            HStack(alignment: .center, spacing: 0, content: {
+                Spacer()
+                markerMenuButton("paw-foot") {
+                    vm.toggleIsShowMarker()
+                    if $vm.isShowMarkers.wrappedValue {
+                        mapManager.loadMarkers()
+                    } else {
+                        mapManager.deleteMarkers()
+                    }
+                }
+                .sdPadding(top: 8, leading: 0, bottom: 0, trailing: 16)
+            })
+            
+            Spacer()
+            HStack(alignment: .center, spacing: 0, content: {
+                mapMenuButton("location-target") {
+                    mapManager.didTapMyLocationButton()
+                }
+                .sdPadding(top: 0, leading: 16, bottom: 18, trailing: 0)
+                .zIndex(3)
+                Spacer()
+            })
+            
+            FPButton(text: "발자국 남기기", location: .leading(name: "paw-foot-white"), status: .able, size: .large, type: .solid) {
+                //                        output.goToSelectLocation()
+                withAnimation(.smooth) {
+                    mapManager.updateMapStatus(.adding)
+                }
+            }
+            .sdPadding(top: 0, leading: 16, bottom: 8, trailing: 16)
+            
+            MainMenuBar(current: .map) { type in
+                tabBarVM.onChangeTab(type)
+            }
+        })
+    }
+    
+    private func drawAddingStatus() -> some View {
+        VStack(alignment: .leading, spacing: 0, content: {
+            Topbar("위치 선택", type: .close) {
+                vm.clearFootprint()
+                mapManager.updateMapStatus(.normal)
+                if $vm.isShowMarkers.wrappedValue {
+                    mapManager.loadMarkers()
+                }
+            }
+            
+            Text("지도를 움직여 위치를 설정하세요.")
+                .font(.body2)
+                .foregroundStyle(Color.white)
+                .sdPaddingVertical(16)
+                .frame(width: UIScreen.main.bounds.size.width)
+                .background(Color.black.opacity(0.7))
+            
+            Spacer()
+            HStack(alignment: .center, spacing: 0, content: {
+                mapMenuButton("location-target") {
+                    mapManager.didTapMyLocationButton()
+                }
+                .sdPadding(top: 0, leading: 16, bottom: 18, trailing: 0)
+                .zIndex(3)
+                Spacer()
+            })
+            
+            VStack(alignment: .leading,
+                   spacing: 24,
+                   content: {
+                Text($mapManager.centerAddress.wrappedValue)
+                
+                HStack(alignment: .center, spacing: 8, content: {
+                    
+                    FPButton(text: "여기에 발자국 남기기", status: $mapManager.centerMarkerStatus.wrappedValue == .move ? .disable : .able, size: .large, type: .solid) {
+                        if let location = $mapManager.centerPosition.wrappedValue, let _ = vm.updateTempLocation(Location(latitude: location.latitude, longitude: location.longitude), address: $mapManager.centerAddress.wrappedValue) {
+                            output.goToEditNote()
+                        }
+                    }
+                })
+            })
+            .sdPadding(top: 16, leading: 16, bottom: 8, trailing: 16)
+            .background(Color(hex: "#F1F5F9"))
+        })
     }
     
     
