@@ -53,7 +53,7 @@ class EditNoteVM: BaseViewModel {
         self.loadNote()
     }
     
-    private func loadNote() {
+    func loadNote() {
         let tempNote: TemporaryNote = self.temporaryNoteService.loadTempNote()
         
         self.noteId = tempNote.id
@@ -139,8 +139,6 @@ class EditNoteVM: BaseViewModel {
             members: self.selectedMembers,
             location: location
         )
-        
-        NotificationCenter.default.post(name: .changeMapStatus, object: MapStatus.adding.rawValue)
         
         onDone()
     }

@@ -64,6 +64,7 @@ extension MapCoordinator {
             self.pushPeopleWithListEditView(self.peopleWithListEditViewOutput)
         } pushSelectLocation: { location in
             Task {
+                NotificationCenter.default.post(name: .changeMapStatus, object: MapStatus.adding.rawValue)
                 await self.mapManager.moveToLocation(location)
                 self.pop()
             }

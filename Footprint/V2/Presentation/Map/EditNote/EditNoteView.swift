@@ -160,6 +160,9 @@ struct EditNoteView: View {
                     })
                 }
             }
+            .onAppear(perform: {
+                vm.loadNote()
+            })
             
             
             HStack(alignment: .center, spacing: 8, content: {

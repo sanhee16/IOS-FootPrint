@@ -31,43 +31,41 @@ struct SelectLocationView: View {
     
     var body: some View {
         ZStack(alignment: .center) {
+            
+            VStack(alignment: .center, spacing: 0, content: {
+                ZStack(content: {
+                    FPMapView(mapView: $mapManager.mapView.wrappedValue)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .zIndex(1)
+                    
+                    Image($mapManager.centerMarkerStatus.wrappedValue.image)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 46)
+                        .zIndex(3)
+                })
+            })
+            
+            
             VStack(alignment: .leading, spacing: 0, content: {
                 Topbar("위치 선택", type: .close) {
                     self.output.pop()
                 }
+                
                 Text("지도를 움직여 위치를 설정하세요.")
                     .font(.body2)
                     .foregroundStyle(Color.white)
                     .sdPaddingVertical(16)
                     .frame(width: UIScreen.main.bounds.size.width)
                     .background(Color.black.opacity(0.7))
-                Spacer()
-            })
-            .zIndex(2)
-            
-            
-            //MARK: Map
-            FPMapView(mapView: $mapManager.mapView.wrappedValue)
-                .frame(maxWidth: .infinity, alignment: .center)
-                .zIndex(1)
-            
-            VStack(alignment: .center, spacing: 0, content: {
-                Spacer()
-                Image($mapManager.centerMarkerStatus.wrappedValue.image)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 46)
-                Spacer()
-            })
-            .zIndex(3)
-            
-            VStack(alignment: .center, spacing: 0, content: {
+                
                 Spacer()
                 HStack(alignment: .center, spacing: 0, content: {
                     mapMenuButton("location-target") {
                         mapManager.didTapMyLocationButton()
                     }
                     .sdPadding(top: 0, leading: 16, bottom: 18, trailing: 0)
+                    .zIndex(3)
                     Spacer()
                 })
                 
