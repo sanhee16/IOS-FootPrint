@@ -111,8 +111,8 @@ class MapVM2: BaseViewModel {
         self.temporaryNoteService.updateTempLocation(address: address, location: location)
     }
     
-    func loadTempFootprint(_ id: String) -> TemporaryNote? {
-        self.temporaryNoteService.loadTempNote(id)
+    func updateTempNote(_ id: String) {
+        self.temporaryNoteService.updateTempNote(id)
     }
     
     func clearFootprint() {

@@ -50,14 +50,23 @@ class TemporaryNoteService {
         self.temporaryNote?.location = location
     }
     
-    func loadTempNote(_ id: String?) -> TemporaryNote? {
-        if let temporaryNote = self.temporaryNote { return temporaryNote }
+    func updateTempLocation(
+        address: String = "",
+        location: Location? = nil
+    ) -> TemporaryNote? {
+        self.temporaryNote = self.temporaryNote ?? TemporaryNote()
+        self.temporaryNote?.address = address
+        self.temporaryNote?.location = location
+        return self.temporaryNote
+    }
+    
+    func updateTempNote(_ id: String) {
         self.temporaryNote = TemporaryNote()
         
-        guard let id = id, let note = self.loadNoteUseCaseWithId.execute(id) else {
-            return self.temporaryNote!
+        guard let note = self.loadNoteUseCaseWithId.execute(id) else {
+            return
         }
-                
+        
         self.temporaryNote?.id = id
         self.temporaryNote?.isStar = note.isStar
         self.temporaryNote?.title = note.title
@@ -69,18 +78,14 @@ class TemporaryNoteService {
         self.temporaryNote?.location = Location(latitude: note.latitude, longitude: note.longitude)
         self.temporaryNote?.selectedPhotos = []
         self.temporaryNote?.members = note.members
-        
-        return self.temporaryNote
+
+        return
     }
     
-    func updateTempLocation(
-        address: String = "",
-        location: Location? = nil
-    ) -> TemporaryNote? {
-        self.temporaryNote = self.temporaryNote ?? TemporaryNote()
-        self.temporaryNote?.address = address
-        self.temporaryNote?.location = location
-        return self.temporaryNote
+    func loadTempNote() -> TemporaryNote {
+        if let temporaryNote = self.temporaryNote { return temporaryNote }
+        self.temporaryNote = TemporaryNote()
+        return self.temporaryNote!
     }
     
     func clear() {

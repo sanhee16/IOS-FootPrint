@@ -15,15 +15,15 @@ struct EditNoteView: View {
         var pop: () -> ()
         var pushCategoryListEditView: () -> ()
         var pushPeopleWithListEditView: () -> ()
-        var popToSelectLocation: (Location) -> ()
+        var pushSelectLocation: (Location) -> ()
     }
     
     private var output: Output
     
     @StateObject var vm: EditNoteVM
     
-    init(note: TemporaryNote, output: Output) {
-        _vm = StateObject(wrappedValue: EditNoteVM(note: note))
+    init(output: Output) {
+        _vm = StateObject(wrappedValue: EditNoteVM())
         self.output = output
     }
     
@@ -62,7 +62,7 @@ struct EditNoteView: View {
                             FPButton(text: "발자국 위치 확인하기", status: .able, size: .large, type: .lightSolid) {
                                 vm.saveTempNote {
                                     if let location = $vm.location.wrappedValue {
-                                        self.output.popToSelectLocation(location)
+                                        self.output.pushSelectLocation(location)
                                     }
                                 }
                             }

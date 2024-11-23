@@ -43,16 +43,19 @@ class EditNoteVM: BaseViewModel {
     
     @Published var location: Location? = nil
     
-    init(note: TemporaryNote) {
+    override init() {
         super.init()
+        
         // load categories, members
         self.loadCategories()
         self.loadMembers()
         
-        self.loadNote(note)
+        self.loadNote()
     }
     
-    private func loadNote(_ tempNote: TemporaryNote) {
+    private func loadNote() {
+        let tempNote: TemporaryNote = self.temporaryNoteService.loadTempNote()
+        
         self.noteId = tempNote.id
         self.isStar = tempNote.isStar
         self.title = tempNote.title
@@ -65,8 +68,6 @@ class EditNoteVM: BaseViewModel {
         self.selectedPhotos = tempNote.selectedPhotos
         self.selectedMembers = tempNote.members
         self.location = tempNote.location
-        
-        self.noteId = tempNote.id
     }
     
     func loadCategories() {

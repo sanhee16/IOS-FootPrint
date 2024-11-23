@@ -79,10 +79,8 @@ struct SelectLocationView: View {
                     HStack(alignment: .center, spacing: 8, content: {
                         
                         FPButton(text: "여기에 발자국 남기기", status: $mapManager.centerMarkerStatus.wrappedValue == .move ? .disable : .able, size: .large, type: .solid) {
-                            if let location = $mapManager.centerPosition.wrappedValue, let note = vm.updateTempLocation(Location(latitude: location.latitude, longitude: location.longitude), address: $mapManager.centerAddress.wrappedValue) {
+                            if let location = $mapManager.centerPosition.wrappedValue, let _ = vm.updateTempLocation(Location(latitude: location.latitude, longitude: location.longitude), address: $mapManager.centerAddress.wrappedValue) {
                                 self.output.pop()
-                                //TODO: TemporaryNote를 전달해줄 방법이 없음
-                                // > EditNoteView에서 TemporaryNote를 파라미터로 받는걸 없애면 될듯..??
                             }
                         }
                     })

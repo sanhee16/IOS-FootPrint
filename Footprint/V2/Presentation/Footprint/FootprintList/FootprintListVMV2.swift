@@ -46,8 +46,8 @@ class FootprintListVMV2: ObservableObject {
         onDone()
     }
     
-    func loadTempFootprint(_ id: String) -> TemporaryNote? {
-        self.temporaryNoteService.loadTempNote(id)
+    func updateTempNote(_ id: String) {
+        self.temporaryNoteService.updateTempNote(id)
     }
     
     func clearFootprint() {

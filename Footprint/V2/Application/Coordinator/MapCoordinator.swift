@@ -10,9 +10,10 @@ import Factory
 import SwiftUI
 
 class MapCoordinator: BaseCoordinator<Destination> {
+    private let mapManager: FPMapManager = FPMapManager.shared
     
-    private func pushEditNote(note: TemporaryNote, output: EditNoteView.Output) {
-        self.push(.editNote(note: note, output: output))
+    private func pushEditNote(output: EditNoteView.Output) {
+        self.push(.editNote(output: output))
     }
     
     private func pushCategoryListEditView(_ output: CategoryListEditView.Output) {
@@ -38,13 +39,19 @@ class MapCoordinator: BaseCoordinator<Destination> {
             self.pushEditTripView(.modify(id: id))
         })))
     }
+    
+    private func pushSelectLocationView(_ location: Location) {
+        self.push(.selectLocation(output: SelectLocationView.Output(pop: {
+            self.pop()
+        }), location: location))
+    }
 }
 
 //MARK: Output
 extension MapCoordinator {
     var mapOutput: MapView2.Output {
-        MapView2.Output { note in
-            self.pushEditNote(note: note, output: self.editNoteOutput)
+        MapView2.Output {
+            self.pushEditNote(output: self.editNoteOutput)
         }
     }
     
@@ -55,8 +62,11 @@ extension MapCoordinator {
             self.pushCategoryListEditView(self.categoryListEditViewOutput)
         } pushPeopleWithListEditView: { 
             self.pushPeopleWithListEditView(self.peopleWithListEditViewOutput)
-        } popToSelectLocation: { location in
-            
+        } pushSelectLocation: { location in
+            Task {
+                await self.mapManager.moveToLocation(location)
+                self.pop()
+            }
         }
     }
     
@@ -87,8 +97,8 @@ extension MapCoordinator {
     }
     
     var footprintListViewOutput: FootprintListViewV2.Output {
-        FootprintListViewV2.Output { note in
-            self.pushEditNote(note: note, output: self.editNoteOutput)
+        FootprintListViewV2.Output {
+            self.pushEditNote(output: self.editNoteOutput)
         }
     }
 }

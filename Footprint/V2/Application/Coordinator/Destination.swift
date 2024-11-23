@@ -10,7 +10,7 @@ import SwiftUI
 
 enum Destination: Hashable {
     case selectLocation(output: SelectLocationView.Output, location: Location)
-    case editNote(note: TemporaryNote, output: EditNoteView.Output)
+    case editNote(output: EditNoteView.Output)
     case categoryListEditView(output: CategoryListEditView.Output)
     case peopleWithListEditView(output: MemberListEditView.Output)
     case editTrip(type: EditTripType, output: EditTripView.Output)
@@ -38,8 +38,8 @@ enum Destination: Hashable {
         switch self {
         case .selectLocation(let output, let location):
             SelectLocationView(output: output, location: location)
-        case .editNote(let note, let output):
-            EditNoteView(note: note, output: output)
+        case .editNote(let output):
+            EditNoteView(output: output)
         case .categoryListEditView(let output):
             CategoryListEditView(output: output)
         case .peopleWithListEditView(let output):

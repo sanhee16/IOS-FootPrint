@@ -15,7 +15,7 @@ import Combine
 
 struct MapView2: View {
     struct Output {
-        var goToEditNote: (TemporaryNote) -> ()
+        var goToEditNote: () -> ()
     }
     
     private var output: Output
@@ -60,8 +60,8 @@ struct MapView2: View {
                         
                     } onClickAddNote: { location in
                         $isPresentFootprintSelector.wrappedValue = false
-                        if let note = vm.updateTempLocation(Location(latitude: location.latitude, longitude: location.longitude), address: selectedAddress) {
-                            output.goToEditNote(note)
+                        if let _ = vm.updateTempLocation(Location(latitude: location.latitude, longitude: location.longitude), address: selectedAddress) {
+                            output.goToEditNote()
                         }
                     }
                     .background(
@@ -196,8 +196,8 @@ struct MapView2: View {
                             HStack(alignment: .center, spacing: 8, content: {
                                 
                                 FPButton(text: "여기에 발자국 남기기", status: $mapManager.centerMarkerStatus.wrappedValue == .move ? .disable : .able, size: .large, type: .solid) {
-                                    if let location = $mapManager.centerPosition.wrappedValue, let note = vm.updateTempLocation(Location(latitude: location.latitude, longitude: location.longitude), address: $mapManager.centerAddress.wrappedValue) {
-                                        output.goToEditNote(note)
+                                    if let location = $mapManager.centerPosition.wrappedValue, let _ = vm.updateTempLocation(Location(latitude: location.latitude, longitude: location.longitude), address: $mapManager.centerAddress.wrappedValue) {
+                                        output.goToEditNote()
                                     }
                                 }
                             })
@@ -227,9 +227,10 @@ struct MapView2: View {
                 vm.clearFootprint()
             }, content: {
                 FootprintView(isPresented: $isPresentFootprint, output: FootprintView.Output(pushEditNoteView: {
-                    if let id = selectedId, let note = vm.loadTempFootprint(id) {
+                    if let id = selectedId {
                         //MARK: 편집하기
-                        self.output.goToEditNote(note)
+                        vm.updateTempNote(id)
+                        self.output.goToEditNote()
                     }
                 }))
                 .environmentObject(footprintVM)
