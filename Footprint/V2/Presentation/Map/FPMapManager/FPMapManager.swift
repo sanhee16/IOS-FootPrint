@@ -40,6 +40,7 @@ class FPMapManager: NSObject, ObservableObject {
     static var tempNote: TempNote? = nil
     
     private var notes: [NoteEntity]
+    private var zoom: Float? = nil
     
     private override init() {
         self.mapView = GMSMapView.init()
@@ -66,11 +67,11 @@ class FPMapManager: NSObject, ObservableObject {
     func moveToCurrentLocation() {
         self.getCurrentLocation()
         
-        let zoom: Float = 17.8
         let latitude: Double = self.myLocation?.latitude ?? 37.574187
         let longitude: Double = self.myLocation?.longitude ?? 126.976882
         
-        let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: zoom)
+        let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: (zoom == nil ? 18.0 : mapView.camera.zoom))
+        self.zoom = mapView.camera.zoom
         mapView.camera = camera
     }
     
@@ -78,11 +79,11 @@ class FPMapManager: NSObject, ObservableObject {
     func moveToLocation(_ location: Location) {
         self.getCurrentLocation()
         
-        let zoom: Float = 17.8
         let latitude: Double = location.latitude
         let longitude: Double = location.longitude
         
-        let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: zoom)
+        let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: (zoom == nil ? 18.0 : mapView.camera.zoom))
+        self.zoom = mapView.camera.zoom
         mapView.camera = camera
     }
     

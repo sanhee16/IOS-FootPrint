@@ -37,8 +37,6 @@ struct MainMapView: UIViewRepresentable {
         return Coordinator(mapView: mapView, changeStateSelectedMarker: changeStateSelectedMarker)
     }
     
-    private let zoom: Float = 17.8
-    
     func makeUIView(context: Self.Context) -> GMSMapView {
         self.mapView.delegate = context.coordinator
         return mapView
@@ -46,34 +44,6 @@ struct MainMapView: UIViewRepresentable {
     
     func updateUIView(_ mapView: GMSMapView, context: Context) {
         
-    }
-    
-    private mutating func createMapView() {
-        self.getCurrentLocation()
-        let zoom: Float = 17.8
-        let latitude: Double = self.myLocation?.latitude ?? 37.574187
-        let longitude: Double = self.myLocation?.longitude ?? 126.976882
-        
-        let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: zoom)
-        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
-        
-        // 지도 setting
-        // https://developers.google.com/maps/documentation/ios-sdk/controls
-        mapView.isIndoorEnabled = false
-        mapView.isMyLocationEnabled = true
-        mapView.isBuildingsEnabled = false
-        mapView.settings.compassButton = true
-        mapView.settings.myLocationButton = true
-        
-        C.mapView = mapView
-    }
-    
-    private mutating func getCurrentLocation() {
-        if let coor = CLLocationManager().location?.coordinate {
-            let latitude = coor.latitude
-            let longitude = coor.longitude
-            self.myLocation = Location(latitude: latitude, longitude: longitude)
-        }
     }
     
     class Coordinator: NSObject, GMSMapViewDelegate {
