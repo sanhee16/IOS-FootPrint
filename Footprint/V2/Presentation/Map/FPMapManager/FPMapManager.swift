@@ -270,6 +270,8 @@ class FPMapManager: NSObject, ObservableObject {
         numberView.addSubview(numberLabel)
         finalMarkerImageView.addSubview(numberView)
         
+        
+        marker.groundAnchor = CGPointMake(0.5, 0.5)
         marker.iconView = markerContainerView
         marker.map = self.mapView
         marker.tracksViewChanges = false
@@ -329,7 +331,8 @@ class FPMapManager: NSObject, ObservableObject {
 
         numberView.addSubview(numberLabel)
         markerContainerView.addSubview(numberView)
-
+        
+        marker.groundAnchor = CGPointMake(0.5, 0.5)
         marker.iconView = markerContainerView
         marker.map = self.mapView
         marker.tracksViewChanges = false
@@ -343,6 +346,7 @@ class FPMapManager: NSObject, ObservableObject {
         
         // 마커 생성하기
         let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
+        
         
         let backgroundSize = CGSize(width: 40, height: 40)
         let padding: CGFloat = 15.0
@@ -379,7 +383,8 @@ class FPMapManager: NSObject, ObservableObject {
         
         guard let finalMarkerImage = finalMarkerImage?.resizeImageTo(size: itemFinalSize) else { return nil }
         let finalMarkerImageView = UIImageView(image: finalMarkerImage.withRenderingMode(.alwaysOriginal))
-        
+            
+        marker.groundAnchor = CGPointMake(0.5, 0.5)
         marker.iconView = finalMarkerImageView
         marker.map = self.mapView
         marker.tracksViewChanges = false
