@@ -188,7 +188,7 @@ extension FPButton {
             }
         case .textGray:
             switch self.status {
-            case .able: return Color.btn_text_gray_default
+            case .able: return Color.btn_lightSolid_cont_default
             case .press: return Color.btn_text_gray_press
             case .disable: return Color.btn_lightSolid_cont_disable
             }

@@ -329,7 +329,6 @@ struct EditTripView: View {
                 }
                 FPButton(text: "완료", status: $vm.isAvailableToSave.wrappedValue ? .able : .disable, size: .small, type: .textPrimary) {
                     vm.onSave {
-//                        self.output.pop()
                         self.isPresentCreateComplete = true
                     }
                 }

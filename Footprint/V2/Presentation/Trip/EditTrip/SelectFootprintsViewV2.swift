@@ -30,6 +30,7 @@ struct SelectFootprintsViewV2: View {
                 .sdPaddingBottom(30)
             })
         })
+        .background(Color.bg_default)
     }
     
     private func drawHeader() -> some View {
