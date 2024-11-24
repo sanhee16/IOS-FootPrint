@@ -41,7 +41,7 @@ class LoadNoteUseCaseWithId {
             longitude: note.longitude,
             address: note.address,
             category: category,
-            members: self.memberRepository.loadMembers(note.memberIds)
+            members: members
         )
         
         return result

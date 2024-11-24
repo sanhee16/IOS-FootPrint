@@ -82,16 +82,16 @@ struct FootprintView: View {
                             if !note.content.isEmpty {
                                 Text(note.content)
                                     .sdFont(.body1, color: .cont_gray_default)
-                                    .padding(16)
+                                    .sdPadding(top: 16, leading: 16, bottom: 8, trailing: 16)
                             }
                             
                             VStack(alignment: .leading, spacing: 0, content: {
-                                drawTitle("위치")
+                                drawTitle("위치", alignment: .bottomLeading)
                                 Text(note.address)
                                     .sdFont(.body1, color: .cont_gray_default)
-                                    .sdPaddingTop(16)
+                                    .sdPadding(top: 16, leading: 0, bottom: 8, trailing: 16)
                             })
-                            .sdPaddingTop(24)
+                            .sdPaddingTop(48)
                             .sdPaddingHorizontal(16)
                             
                             HStack(alignment: .center, spacing: 0, content: {
@@ -99,19 +99,18 @@ struct FootprintView: View {
                                 Text(note.createdAt.getDate("yyyy. MM. dd"))
                                     .sdFont(.body1, color: .cont_gray_default)
                             })
-                            .sdPaddingTop(24)
                             .sdPaddingHorizontal(16)
+                            .sdPaddingVertical(8)
                             
                             HStack(alignment: .center, spacing: 0, content: {
                                 drawTitle("카테고리")
                                 CategoryItem(item: note.category)
                             })
-                            .sdPaddingTop(24)
                             .sdPaddingHorizontal(16)
+                            .sdPaddingVertical(8)
                             
                             if !note.imageUrls.isEmpty {
-                                drawTitle("사진")
-                                    .sdPaddingTop(24)
+                                drawTitle("사진", alignment: .bottomLeading)
                                     .sdPaddingHorizontal(16)
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     LazyHStack(alignment: .center, spacing: 16, content: {
@@ -127,17 +126,17 @@ struct FootprintView: View {
                                             }
                                         }
                                     })
-                                    .sdPaddingHorizontal(16)
+                                    .padding(16)
                                 }
-                                .frame(height: 80.0)
+                                .frame(height: 80.0 + 16 * 2)
                             }
                             if !note.members.isEmpty {
-                                drawTitle("함께한 사람")
-                                    .sdPaddingTop(24)
-                                    .sdPaddingHorizontal(16)
-                                PeopleWithView(members: note.members)
-                                    .sdPaddingVertical(8)
-                                    .sdPaddingHorizontal(16)
+                                VStack(alignment: .leading, spacing: 0, content: {
+                                    drawTitle("함께한 사람", alignment: .bottomLeading)
+                                    PeopleWithView(members: note.members)
+                                        .sdPaddingVertical(16)
+                                })
+                                .sdPaddingHorizontal(16)
                             }
                         }
                     }
@@ -151,9 +150,9 @@ struct FootprintView: View {
         .navigationBarBackButtonHidden()
     }
 
-    private func drawTitle(_ text: String) -> some View {
+    private func drawTitle(_ text: String, alignment: Alignment = .leading) -> some View {
         Text(text)
             .sdFont(.headline4, color: .zineGray_700)
-            .frame(width: 100, height: 40, alignment: .leading)
+            .frame(width: 100, height: 40, alignment: alignment)
     }
 }

@@ -64,7 +64,7 @@ class NoteRepositoryImpl: NoteRepository {
         let membersList: List<String> = List()
         
         imageUrlsList.append(objectsIn: imageUrls)
-        membersList.append(objectsIn: imageUrls)
+        membersList.append(objectsIn: memberIds)
         
         let data: NoteData = NoteData(
             id: id,
