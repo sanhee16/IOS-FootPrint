@@ -15,10 +15,6 @@ class SelectLocationVM: BaseViewModel {
         
     }
     
-    func onAppear() {
-        
-    }
-    
     //MARK: temporary note
     func updateTempLocation(_ location: Location, address: String) -> TemporaryNote? {
         self.temporaryNoteService.updateTempLocation(address: address, location: location)

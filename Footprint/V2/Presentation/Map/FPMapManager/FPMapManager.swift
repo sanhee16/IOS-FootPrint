@@ -58,11 +58,6 @@ class FPMapManager: NSObject, ObservableObject {
         addObserver()
     }
     
-//    @MainActor
-//    func updateMapView() {
-//        self.mapView = GMSMapView.init()
-//    }
-    
     @MainActor
     func moveToCurrentLocation() {
         self.getCurrentLocation()

@@ -63,10 +63,10 @@ extension MapCoordinator {
         } pushPeopleWithListEditView: { 
             self.pushPeopleWithListEditView(self.peopleWithListEditViewOutput)
         } pushSelectLocation: { location in
+            NotificationCenter.default.post(name: .changeMapStatus, object: MapStatus.adding.rawValue)
+            self.pop()
             Task {
-                NotificationCenter.default.post(name: .changeMapStatus, object: MapStatus.adding.rawValue)
                 await self.mapManager.moveToLocation(location)
-                self.pop()
             }
         }
     }

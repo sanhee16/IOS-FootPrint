@@ -89,7 +89,7 @@ struct SelectLocationView: View {
             .zIndex(2)
         }
         .onAppear {
-            vm.onAppear()
+            mapManager.loadMarkers()
         }
         .navigationBarBackButtonHidden()
     }
