@@ -1,5 +1,5 @@
 //
-//  SettingView.swift
+//  SettingView1.swift
 //  Footprint
 //
 //  Created by sandy on 2022/12/05.
@@ -19,8 +19,8 @@ import SDSwiftUIPack
  
  */
 
-struct SettingView: View {
-    typealias VM = SettingViewModel
+struct SettingView1: View {
+    typealias VM = SettingViewModel1
     public static func vc(_ coordinator: AppCoordinatorV1, completion: (()-> Void)? = nil) -> UIViewController {
         let vm = VM.init(coordinator)
         let view = Self.init(vm: vm)

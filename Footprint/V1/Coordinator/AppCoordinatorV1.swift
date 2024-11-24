@@ -91,7 +91,7 @@ class AppCoordinatorV1: CoordinatorV1, Terminatable {
     }
     
     func presentSettingView() {
-        let vc = SettingView.vc(self)
+        let vc = SettingView1.vc(self)
         self.present(vc, animated: true)
     }
     
@@ -187,7 +187,7 @@ class AppCoordinatorV1: CoordinatorV1, Terminatable {
     }
     
     func changeSettingView() {
-        let vc = SettingView.vc(self)
+        let vc = SettingView1.vc(self)
         self.change(vc, animated: true)
     }
 }

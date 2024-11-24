@@ -35,7 +35,7 @@ struct MainView: View {
         let mapVm = MapViewModel.init(coordinator)
         let listVm = FootprintListViewModel.init(coordinator)
         let travelVm = TravelListViewModel.init(coordinator)
-        let settingVm = SettingViewModel.init(coordinator)
+        let settingVm = SettingViewModel1.init(coordinator)
         
         let view = Self.init(vm: vm, mapVm: mapVm, listVm: listVm, travelVm: travelVm, settingVm: settingVm)
         
@@ -49,7 +49,7 @@ struct MainView: View {
     @ObservedObject var mapVm: MapViewModel
     @ObservedObject var listVm: FootprintListViewModel
     @ObservedObject var travelVm: TravelListViewModel
-    @ObservedObject var settingVm: SettingViewModel
+    @ObservedObject var settingVm: SettingViewModel1
     
     private var safeTop: CGFloat { get { Util.safeTop() }}
     private var safeBottom: CGFloat { get { Util.safeBottom() }}
@@ -68,9 +68,9 @@ struct MainView: View {
                 case .trip:
                     TravelListView(vm: self.travelVm)
                 case .setting:
-                    SettingView(vm: self.settingVm)
+                    SettingView1(vm: self.settingVm)
                 default:
-                    SettingView(vm: self.settingVm)
+                    SettingView1(vm: self.settingVm)
                 }
                 if Defaults.shared.premiumCode.isEmpty && $vm.isShowAds.wrappedValue {
                     GADBanner().frame(width: GADAdSizeBanner.size.width, height: GADAdSizeBanner.size.height)

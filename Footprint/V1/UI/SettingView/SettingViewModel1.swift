@@ -1,5 +1,5 @@
 //
-//  SettingViewModel.swift
+//  SettingViewModel1.swift
 //  Footprint
 //
 //  Created by sandy on 2022/12/05.
@@ -13,7 +13,7 @@ import MessageUI
 import SwiftUI
 import SDSwiftUIPack
 
-class SettingViewModel: BaseViewModelV1 {
+class SettingViewModel1: BaseViewModelV1 {
     @Published var isShowingMailView = false
     @Published var result: Result<MFMailComposeResult, Error>? = nil
     @Published var isOnSearchBar: Bool

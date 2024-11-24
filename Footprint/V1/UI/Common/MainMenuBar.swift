@@ -57,7 +57,7 @@ public enum MainMenuType: Int, Equatable {
         case .footprints: return String(describing: FootprintListView.self)
         case .trip: return String(describing: TravelListView.self)
         case .favorite: return String(describing: TravelListView.self)
-        case .setting: return String(describing: SettingView.self)
+        case .setting: return String(describing: SettingView1.self)
         }
     }
 }
