@@ -20,7 +20,7 @@ class BaseCoordinator<T: Hashable>: ObservableObject {
     }
     
     func pop() {
-        if paths.count <= 1 { return }
+        if paths.count < 1 { return }
         paths.removeLast()
     }
     
@@ -28,7 +28,7 @@ class BaseCoordinator<T: Hashable>: ObservableObject {
         guard let found = paths.firstIndex(where: { $0 == to }) else {
             return
         }
-        if paths.count <= 1 { return }
+        if paths.count < 1 { return }
         // 중복된 View가 있어도 맨 처음 push된 View로 pop시킨다.
         let numToPop = (found..<paths.endIndex).count - 1
         paths.removeLast(numToPop)
