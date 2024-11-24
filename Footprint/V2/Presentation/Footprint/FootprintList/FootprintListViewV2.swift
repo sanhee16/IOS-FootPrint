@@ -102,6 +102,7 @@ struct FootprintListViewV2: View {
                             }
                         })
                         .sdPaddingHorizontal(16)
+                        .sdPadding(bottom: 40)
                     })
                     .background(Color.bg_default)
                     

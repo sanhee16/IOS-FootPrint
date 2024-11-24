@@ -178,6 +178,9 @@
 		26D018BE2CE4554C00891B89 /* TripIconRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D018BD2CE4554C00891B89 /* TripIconRepositoryImpl.swift */; };
 		26D018C02CE4557200891B89 /* TripIconDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D018BF2CE4557200891B89 /* TripIconDAO.swift */; };
 		26D018C32CE4598500891B89 /* SaveTripIconUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D018C22CE4598500891B89 /* SaveTripIconUseCase.swift */; };
+		26DBE4442CF2B49100AE14F8 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DBE4432CF2B49100AE14F8 /* SettingView.swift */; };
+		26DBE4462CF2B49500AE14F8 /* SettingVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DBE4452CF2B49500AE14F8 /* SettingVM.swift */; };
+		26DBE4482CF2B4FC00AE14F8 /* SettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DBE4472CF2B4FC00AE14F8 /* SettingCoordinator.swift */; };
 		26EB9D1B2CD9A34300D3B0CE /* TempNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EB9D1A2CD9A34300D3B0CE /* TempNote.swift */; };
 		26EB9D1D2CD9E2C500D3B0CE /* MapStatusVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EB9D1C2CD9E2C500D3B0CE /* MapStatusVM.swift */; };
 		26EB9D1F2CD9E4B100D3B0CE /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EB9D1E2CD9E4B100D3B0CE /* NotificationName.swift */; };
@@ -442,6 +445,9 @@
 		26D018BD2CE4554C00891B89 /* TripIconRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripIconRepositoryImpl.swift; sourceTree = "<group>"; };
 		26D018BF2CE4557200891B89 /* TripIconDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripIconDAO.swift; sourceTree = "<group>"; };
 		26D018C22CE4598500891B89 /* SaveTripIconUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveTripIconUseCase.swift; sourceTree = "<group>"; };
+		26DBE4432CF2B49100AE14F8 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		26DBE4452CF2B49500AE14F8 /* SettingVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVM.swift; sourceTree = "<group>"; };
+		26DBE4472CF2B4FC00AE14F8 /* SettingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCoordinator.swift; sourceTree = "<group>"; };
 		26EB9D1A2CD9A34300D3B0CE /* TempNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempNote.swift; sourceTree = "<group>"; };
 		26EB9D1C2CD9E2C500D3B0CE /* MapStatusVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStatusVM.swift; sourceTree = "<group>"; };
 		26EB9D1E2CD9E4B100D3B0CE /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
@@ -791,6 +797,7 @@
 		266EDDD52C64EA90006CF09B /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				26DBE4422CF2B48800AE14F8 /* Setting */,
 				267A22CB2CEAE5A80079D146 /* Footprint */,
 				2650A05E2CE3351200040512 /* Trip */,
 				269CA56D2C78B67800366005 /* Common */,
@@ -886,6 +893,7 @@
 				267CC1782C66F28300D6015E /* MapCoordinator.swift */,
 				26756A192CEE0B670031923F /* FootprintCoordinator.swift */,
 				26756A1B2CEE0B7C0031923F /* TripCoordinator.swift */,
+				26DBE4472CF2B4FC00AE14F8 /* SettingCoordinator.swift */,
 				267CC17A2C66F28E00D6015E /* Destination.swift */,
 			);
 			path = Coordinator;
@@ -1200,6 +1208,15 @@
 				262424E32CE5B2A200595132 /* LoadTripIconsUseCase.swift */,
 			);
 			path = TripIconUseCases;
+			sourceTree = "<group>";
+		};
+		26DBE4422CF2B48800AE14F8 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				26DBE4432CF2B49100AE14F8 /* SettingView.swift */,
+				26DBE4452CF2B49500AE14F8 /* SettingVM.swift */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 		26F137082CD4AACA00096181 /* Components */ = {
@@ -1799,6 +1816,7 @@
 				266EDDE42C64EB40006CF09B /* MainView2.swift in Sources */,
 				63F132982914A1C000B3A9E0 /* ProgressView.swift in Sources */,
 				267CC1872C6704B400D6015E /* FootprintView.swift in Sources */,
+				26DBE4462CF2B49500AE14F8 /* SettingVM.swift in Sources */,
 				267CC1932C67385900D6015E /* Color+Extension.swift in Sources */,
 				2696F4E12C7753A000F56E73 /* NoteRepositoryImpl.swift in Sources */,
 				267CC17E2C66F2BC00D6015E /* MapView2.swift in Sources */,
@@ -1852,6 +1870,7 @@
 				2696F4EF2C7757F300F56E73 /* DIContainer.swift in Sources */,
 				267CC1982C67824200D6015E /* EditNoteVM.swift in Sources */,
 				26756A142CEDC3160031923F /* MultiMarkerSelectorVM.swift in Sources */,
+				26DBE4442CF2B49100AE14F8 /* SettingView.swift in Sources */,
 				260C87CD296AADBE00ADCC32 /* ShowTravelViewModel.swift in Sources */,
 				266EDDDE2C64EAD9006CF09B /* SplashVM2.swift in Sources */,
 				63F1324C2914A18800B3A9E0 /* CommonApi.swift in Sources */,
@@ -1892,6 +1911,7 @@
 				26FAB54F2C6B4095006304AE /* SelectLocationVM.swift in Sources */,
 				265917182CD8BE55008C39E9 /* DeleteImageUrlUseCase.swift in Sources */,
 				63F132B62914A56300B3A9E0 /* LottieView.swift in Sources */,
+				26DBE4482CF2B4FC00AE14F8 /* SettingCoordinator.swift in Sources */,
 				63D32FDB29CAEA4C0049F567 /* NetworkMonitor.swift in Sources */,
 				63FA2390294C42CE00D31506 /* SingleSelectGalleryViewModel.swift in Sources */,
 				267CC1842C66FE6400D6015E /* GoogleMapVM.swift in Sources */,

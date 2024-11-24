@@ -148,6 +148,7 @@ class FPMapManager: NSObject, ObservableObject {
             }
             group[note.address]?.append(note)
         }
+        print("notes: \(self.notes)")
         
         group.forEach { (key: String, notes: [NoteEntity]) in
             let number = notes.count

@@ -14,6 +14,7 @@ struct MainView2: View {
     @StateObject private var mapCoordinator: MapCoordinator = MapCoordinator()
     @StateObject private var footprintCoordinator: FootprintCoordinator = FootprintCoordinator()
     @StateObject private var tripCoordinator: TripCoordinator = TripCoordinator()
+    @StateObject private var settingCoordinator: SettingCoordinator = SettingCoordinator()
     
     @StateObject private var vm: MainVM2 = MainVM2()
     @StateObject private var tabBarVM: TabBarVM = TabBarVM()
@@ -39,6 +40,9 @@ struct MainView2: View {
             case .trip:
                 TripListView(output: tripCoordinator.tripListViewOutput)
                     .environmentObject(tripCoordinator)
+            case .setting:
+                SettingView(output: SettingView.Output())
+                    .environmentObject(settingCoordinator)
             default:
                 VStack{}
             }
