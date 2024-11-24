@@ -39,7 +39,7 @@ struct Topbar: View {
                         .resizable()
                         .scaledToFit()
                         .frame(both: 24)
-                        .padding(.leading, 10)
+                        .padding(.leading, 16)
                         .onTapGesture {
                             callback?()
                         }
