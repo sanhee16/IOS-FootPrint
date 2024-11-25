@@ -17,23 +17,17 @@ struct SettingToggleItem: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0, content: {
-            HStack(alignment: .center, spacing: 0, content: {
-                Text(text)
-                    .sdFont(.body1, color: .cont_gray_high)
-                Spacer()
-                
-                Toggle(isOn: $isOn, label: {
-                    
-                })
-                .toggleStyle(SwitchToggleStyle(tint: Color.cont_primary_mid))
-            })
-            .sdPaddingVertical(24)
+        HStack(alignment: .center, spacing: 0, content: {
+            Text(text)
+                .sdFont(.body1, color: .cont_gray_high)
+            Spacer()
             
-            Rectangle()
-                .frame(height: 0.5)
-                .foregroundStyle(Color.dim_black_low)
+            Toggle(isOn: $isOn, label: {
+                
+            })
+            .toggleStyle(SwitchToggleStyle(tint: Color.cont_primary_mid))
         })
+        .sdPaddingVertical(24)
         .contentShape(Rectangle())
     }
 }
