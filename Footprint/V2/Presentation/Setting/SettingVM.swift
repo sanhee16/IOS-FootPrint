@@ -8,6 +8,9 @@
 import Combine
 import Factory
 import Foundation
+import CoreLocation
+import Contacts
+import MapKit
 
 class SettingVM: ObservableObject {
     @Injected(\.saveNoteUseCase) var saveNoteUseCase
@@ -20,28 +23,62 @@ class SettingVM: ObservableObject {
     
     //MARK: DebugMode
     func addData() {
-        self.addNotes()
-        self.addTrips()
-        
+        Task {
+            await self.addNotes()
+            self.addTrips()
+        }
     }
     
-    func addNotes() {
+    func addNotes() async {
+        func getAddress(lat: Double, lon: Double) async -> String {
+            let geocoder = CLGeocoder()
+            var addr: String = ""
+            
+            do {
+                let address = try await geocoder.reverseGeocodeLocation(CLLocation(latitude: lat, longitude: lon), preferredLocale: Locale(identifier: "Ko-kr")).last
+                if let postalAddress = address?.postalAddress {
+                    let formatter = CNPostalAddressFormatter()
+                    let addressString = formatter.string(from: postalAddress)
+                    
+                    var result: String = ""
+                    addressString.split(separator: "\n").forEach { value in
+                        result.append(contentsOf: "\(value) ")
+                    }
+                    addr = result
+                } 
+                return addr
+            } catch {
+                return addr
+            }
+        }
+        
+        let locationManager: CLLocationManager = CLLocationManager()
+        var latitude = 37.323562519200344
+        var longitude = 127.09580697119236
+        var coordinates: [(Double, Double, String)] = []
+        
+        if let coor = locationManager.location?.coordinate {
+            latitude = coor.latitude
+            longitude = coor.longitude
+        }
+        
+        let values: [Double] = [0.0001, 0.0002, 0.0003, 0.0004, 0.0005, 0.0006, 0.0007, -0.0001, -0.0002, -0.0003, -0.0004, -0.0005, -0.0006, -0.0007]
+        
+        for i in values.indices {
+            let lat = latitude + values[i]
+            let lon = longitude + values.randomElement()!
+            let address = await getAddress(lat: lat, lon: lon)
+            coordinates.append((lat, lon, address))
+        }
+        
+        for i in 0..<3 {
+            let lat = latitude
+            let lon = longitude
+            let address = await getAddress(lat: lat, lon: lon)
+            coordinates.append((lat, lon, address))
+        }
+    
         let categories: [CategoryEntity] = self.loadCategoriesUseCase.execute()
-        let coordinates: [(Double, Double, String)] = [
-            (37.323562519200344, 127.09580697119236, "대한민국 경기도 용인시 풍덕천동 712-6 16837"),
-            (37.322598949458204, 127.09686610847713, "대한민국 경기도 용인시 풍덕천동 790 16835"),
-            (37.323562519200344, 127.09580697119236, "대한민국 경기도 용인시 풍덕천동 712-6 16837"),
-            (37.32397017960268, 127.09449972957374, "대한민국 경기도 용인시 정평로 120 16836"),
-            (37.32305700656524, 127.0955816656351, "대한민국 경기도 용인시 풍덕천로 119 16836"),
-            (37.323562519200344, 127.09580697119236, "대한민국 경기도 용인시 풍덕천동 712-6 16837"),
-            (37.322582418823586, 127.09461405873299, "대한민국 경기도 용인시 풍덕천로 117 16836"),
-            (37.3241272175849, 127.09613822400571, "대한민국 경기도 용인시 풍덕천로129번길 6-5 16837"),
-            (37.32366410123411, 127.09638163447379, "대한민국 경기도 용인시 풍덕천로 133 16837"),
-            (37.32363690605743, 127.09794268012047, "대한민국 경기도 용인시 풍덕천로140번길 5-12 16835"),
-            (37.32241577915837, 127.09573321044446, "대한민국 경기도 용인시 풍덕천동 1080-18 16841"),
-            (37.32409655654456, 127.09620527923107, "대한민국 경기도 용인시 풍덕천로129번길 16837"),
-            (37.3241272175849, 127.09613822400571, "대한민국 경기도 용인시 풍덕천로129번길 6-5 16837")
-        ]
         
         for i in 0..<coordinates.count {
             self.saveNoteUseCase.execute(
@@ -57,7 +94,6 @@ class SettingVM: ObservableObject {
                 address: coordinates[i].2
             )
         }
-        
     }
     
     func addTrips() {
