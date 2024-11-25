@@ -41,7 +41,7 @@ struct MainView2: View {
                 TripListView(output: tripCoordinator.tripListViewOutput)
                     .environmentObject(tripCoordinator)
             case .setting:
-                SettingView(output: SettingView.Output())
+                SettingView(output: settingCoordinator.settingOutput)
                     .environmentObject(settingCoordinator)
             default:
                 VStack{}
