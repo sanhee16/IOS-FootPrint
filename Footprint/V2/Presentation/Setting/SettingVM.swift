@@ -18,8 +18,7 @@ class SettingVM: ObservableObject {
     @Injected(\.saveTripUseCase) var saveTripUseCase
     @Injected(\.loadAllNoteUseCase) var loadAllNoteUseCase
     @Injected(\.loadTripIconsUseCase) var loadTripIconsUseCase
-    
-    
+    @Published var isShowSearchBar: Bool = false
     
     //MARK: DebugMode
     func addData() {
