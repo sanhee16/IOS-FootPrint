@@ -16,7 +16,7 @@ enum Destination: Hashable {
     case editTrip(type: EditTripType, output: EditTripView.Output)
     case tripDetailView(id: String, output: TripDetailView.Output)
     case setMapIconView
-    case permissionView
+    case permissionView(output: PermissionView.Output)
     case privacyPolicyView
     
     var viewName: String {
@@ -59,8 +59,8 @@ enum Destination: Hashable {
             TripDetailView(id: id, output: output)
         case .setMapIconView:
             EmptyView()
-        case .permissionView:
-            EmptyView()
+        case .permissionView(let output):
+            PermissionView(output: output)
         case .privacyPolicyView:
             EmptyView()
         }

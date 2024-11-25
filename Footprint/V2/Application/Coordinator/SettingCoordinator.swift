@@ -8,12 +8,12 @@
 import Foundation
 
 class SettingCoordinator: BaseCoordinator<Destination> {
-    private func pushCategoryListEditView(_ output: CategoryListEditView.Output) {
-        self.push(.categoryListEditView(output: output))
+    private func pushCategoryListEditView() {
+        self.push(.categoryListEditView(output: categoryListEditViewOutput))
     }
     
-    private func pushMemberListEditView(_ output: MemberListEditView.Output) {
-        self.push(.peopleWithListEditView(output: output))
+    private func pushMemberListEditView() {
+        self.push(.peopleWithListEditView(output: memberListEditViewOutput))
     }
     
     private func pushSetMapIconView() {
@@ -21,7 +21,7 @@ class SettingCoordinator: BaseCoordinator<Destination> {
     }
     
     private func pushPermissionView() {
-        self.push(.permissionView)
+        self.push(.permissionView(output: permissionViewOutput))
     }
     
     private func pushPrivacyPolicyView() {
@@ -42,6 +42,11 @@ extension SettingCoordinator {
             self.pop()
         }
     }
+    var permissionViewOutput: PermissionView.Output {
+        PermissionView.Output {
+            self.pop()
+        }
+    }
     
     var settingOutput: SettingView.Output {
         SettingView.Output {
@@ -49,9 +54,9 @@ extension SettingCoordinator {
         } pushPermissionView: {
             self.pushPermissionView()
         } pushMemberListEditView: {
-            self.pushMemberListEditView(self.memberListEditViewOutput)
+            self.pushMemberListEditView()
         } pushCategoryListEditView: {
-            self.pushCategoryListEditView(self.categoryListEditViewOutput)
+            self.pushCategoryListEditView()
         } pushPrivacyPolicyView: {
             self.pushPrivacyPolicyView()
         }

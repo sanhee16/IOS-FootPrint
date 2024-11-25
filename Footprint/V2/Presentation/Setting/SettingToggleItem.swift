@@ -27,7 +27,7 @@ struct SettingToggleItem: View {
             })
             .toggleStyle(SwitchToggleStyle(tint: Color.cont_primary_mid))
         })
-        .sdPaddingVertical(24)
+        .sdPadding(top: 24, leading: 0, bottom: 16, trailing: 0)
         .contentShape(Rectangle())
     }
 }

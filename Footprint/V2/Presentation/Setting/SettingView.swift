@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDSwiftUIPack
 
 struct SettingView: View {
     struct Output {
@@ -76,6 +77,7 @@ struct SettingView: View {
             }
             .frame(maxWidth: .infinity, alignment: .topLeading)
             .background(Color.bg_default)
+            .navigationBarBackButtonHidden()
             .navigationDestination(for: Destination.self) { destination in
                 coordinator.moveToDestination(destination: destination)
             }

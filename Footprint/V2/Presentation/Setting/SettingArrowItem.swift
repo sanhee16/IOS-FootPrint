@@ -25,7 +25,7 @@ struct SettingArrowItem: View {
                 .resizable()
                 .frame(both: 24.0, alignment: .center)
         })
-        .sdPaddingVertical(24)
+        .sdPadding(top: 24, leading: 0, bottom: 16, trailing: 0)
         .contentShape(Rectangle())
         .onTapGesture {
             onTap()

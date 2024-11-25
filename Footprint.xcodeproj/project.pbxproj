@@ -124,6 +124,8 @@
 		2682A7712C6DB04900DF1F8A /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2682A7702C6DB04900DF1F8A /* Date+Extension.swift */; };
 		2682FE262CF441B4008664C8 /* SettingArrowItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2682FE252CF441B4008664C8 /* SettingArrowItem.swift */; };
 		2682FE282CF45558008664C8 /* SettingToggleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2682FE272CF45558008664C8 /* SettingToggleItem.swift */; };
+		2682FE2B2CF46502008664C8 /* PermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2682FE2A2CF46502008664C8 /* PermissionView.swift */; };
+		2682FE2D2CF46510008664C8 /* PermissionVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2682FE2C2CF46510008664C8 /* PermissionVM.swift */; };
 		268546E82A28DB1200BDA2EA /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268546E72A28DB1200BDA2EA /* ReviewView.swift */; };
 		268546EA2A28DB1800BDA2EA /* ReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268546E92A28DB1800BDA2EA /* ReviewViewModel.swift */; };
 		2691D9C3294EE4B1002825B9 /* FootprintListFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2691D9C2294EE4B1002825B9 /* FootprintListFilterView.swift */; };
@@ -394,6 +396,8 @@
 		2682A7702C6DB04900DF1F8A /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		2682FE252CF441B4008664C8 /* SettingArrowItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingArrowItem.swift; sourceTree = "<group>"; };
 		2682FE272CF45558008664C8 /* SettingToggleItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingToggleItem.swift; sourceTree = "<group>"; };
+		2682FE2A2CF46502008664C8 /* PermissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionView.swift; sourceTree = "<group>"; };
+		2682FE2C2CF46510008664C8 /* PermissionVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionVM.swift; sourceTree = "<group>"; };
 		268546E72A28DB1200BDA2EA /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
 		268546E92A28DB1800BDA2EA /* ReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
 		2691D9C2294EE4B1002825B9 /* FootprintListFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootprintListFilterView.swift; sourceTree = "<group>"; };
@@ -967,6 +971,15 @@
 			path = FPMapManager;
 			sourceTree = "<group>";
 		};
+		2682FE292CF464DE008664C8 /* Permission */ = {
+			isa = PBXGroup;
+			children = (
+				2682FE2A2CF46502008664C8 /* PermissionView.swift */,
+				2682FE2C2CF46510008664C8 /* PermissionVM.swift */,
+			);
+			path = Permission;
+			sourceTree = "<group>";
+		};
 		268546E62A28DB0300BDA2EA /* Review */ = {
 			isa = PBXGroup;
 			children = (
@@ -1217,6 +1230,7 @@
 		26DBE4422CF2B48800AE14F8 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				2682FE292CF464DE008664C8 /* Permission */,
 				26DBE4432CF2B49100AE14F8 /* SettingView.swift */,
 				26DBE4452CF2B49500AE14F8 /* SettingVM.swift */,
 				2682FE252CF441B4008664C8 /* SettingArrowItem.swift */,
@@ -1917,11 +1931,13 @@
 				269CA5632C78A5D400366005 /* SaveCategoryUseCase.swift in Sources */,
 				267CC1802C66F2C700D6015E /* MapVM2.swift in Sources */,
 				26FAB54F2C6B4095006304AE /* SelectLocationVM.swift in Sources */,
+				2682FE2D2CF46510008664C8 /* PermissionVM.swift in Sources */,
 				265917182CD8BE55008C39E9 /* DeleteImageUrlUseCase.swift in Sources */,
 				63F132B62914A56300B3A9E0 /* LottieView.swift in Sources */,
 				26DBE4482CF2B4FC00AE14F8 /* SettingCoordinator.swift in Sources */,
 				63D32FDB29CAEA4C0049F567 /* NetworkMonitor.swift in Sources */,
 				63FA2390294C42CE00D31506 /* SingleSelectGalleryViewModel.swift in Sources */,
+				2682FE2B2CF46502008664C8 /* PermissionView.swift in Sources */,
 				267CC1842C66FE6400D6015E /* GoogleMapVM.swift in Sources */,
 				267CC1892C6704B900D6015E /* FootprintVM.swift in Sources */,
 				2682A76F2C6D79C700DF1F8A /* FPMapManager.swift in Sources */,
