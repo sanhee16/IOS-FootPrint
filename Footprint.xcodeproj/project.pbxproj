@@ -126,6 +126,10 @@
 		2682FE282CF45558008664C8 /* SettingToggleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2682FE272CF45558008664C8 /* SettingToggleItem.swift */; };
 		2682FE2B2CF46502008664C8 /* PermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2682FE2A2CF46502008664C8 /* PermissionView.swift */; };
 		2682FE2D2CF46510008664C8 /* PermissionVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2682FE2C2CF46510008664C8 /* PermissionVM.swift */; };
+		2682FE302CF46D37008664C8 /* GetPhotoPermissionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2682FE2F2CF46D37008664C8 /* GetPhotoPermissionUseCase.swift */; };
+		2682FE332CF46E8D008664C8 /* GetTrackingPermissionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2682FE322CF46E8D008664C8 /* GetTrackingPermissionUseCase.swift */; };
+		2682FE352CF4716E008664C8 /* GetNotificationPermissionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2682FE342CF4716E008664C8 /* GetNotificationPermissionUseCase.swift */; };
+		2682FE372CF471D5008664C8 /* GetLocationPermissionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2682FE362CF471D5008664C8 /* GetLocationPermissionUseCase.swift */; };
 		268546E82A28DB1200BDA2EA /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268546E72A28DB1200BDA2EA /* ReviewView.swift */; };
 		268546EA2A28DB1800BDA2EA /* ReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268546E92A28DB1800BDA2EA /* ReviewViewModel.swift */; };
 		2691D9C3294EE4B1002825B9 /* FootprintListFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2691D9C2294EE4B1002825B9 /* FootprintListFilterView.swift */; };
@@ -398,6 +402,10 @@
 		2682FE272CF45558008664C8 /* SettingToggleItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingToggleItem.swift; sourceTree = "<group>"; };
 		2682FE2A2CF46502008664C8 /* PermissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionView.swift; sourceTree = "<group>"; };
 		2682FE2C2CF46510008664C8 /* PermissionVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionVM.swift; sourceTree = "<group>"; };
+		2682FE2F2CF46D37008664C8 /* GetPhotoPermissionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPhotoPermissionUseCase.swift; sourceTree = "<group>"; };
+		2682FE322CF46E8D008664C8 /* GetTrackingPermissionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTrackingPermissionUseCase.swift; sourceTree = "<group>"; };
+		2682FE342CF4716E008664C8 /* GetNotificationPermissionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNotificationPermissionUseCase.swift; sourceTree = "<group>"; };
+		2682FE362CF471D5008664C8 /* GetLocationPermissionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetLocationPermissionUseCase.swift; sourceTree = "<group>"; };
 		268546E72A28DB1200BDA2EA /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
 		268546E92A28DB1800BDA2EA /* ReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
 		2691D9C2294EE4B1002825B9 /* FootprintListFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootprintListFilterView.swift; sourceTree = "<group>"; };
@@ -663,6 +671,7 @@
 		2643E0D22CDB00780075BA69 /* SettingUseCases */ = {
 			isa = PBXGroup;
 			children = (
+				2682FE312CF46E7F008664C8 /* Permission */,
 				2675D2032CDDDE3100BD7633 /* UpdateIsShowMarkerUseCase.swift */,
 				2675D2072CDDDE9000BD7633 /* GetIsShowMarkerUseCase.swift */,
 				26A880722CE71C03003F4FA9 /* GetTripSortTypeUseCase.swift */,
@@ -976,6 +985,17 @@
 			children = (
 				2682FE2A2CF46502008664C8 /* PermissionView.swift */,
 				2682FE2C2CF46510008664C8 /* PermissionVM.swift */,
+			);
+			path = Permission;
+			sourceTree = "<group>";
+		};
+		2682FE312CF46E7F008664C8 /* Permission */ = {
+			isa = PBXGroup;
+			children = (
+				2682FE2F2CF46D37008664C8 /* GetPhotoPermissionUseCase.swift */,
+				2682FE322CF46E8D008664C8 /* GetTrackingPermissionUseCase.swift */,
+				2682FE342CF4716E008664C8 /* GetNotificationPermissionUseCase.swift */,
+				2682FE362CF471D5008664C8 /* GetLocationPermissionUseCase.swift */,
 			);
 			path = Permission;
 			sourceTree = "<group>";
@@ -1744,6 +1764,7 @@
 				265924C929445BE1001E7025 /* FootprintListViewModel.swift in Sources */,
 				2650A06C2CE33CDB00040512 /* TripIconEntity.swift in Sources */,
 				264B70BC291F8DD900CDAF9F /* ApiResponse.swift in Sources */,
+				2682FE332CF46E8D008664C8 /* GetTrackingPermissionUseCase.swift in Sources */,
 				2694FC972C79B99100F01644 /* MemberListEditView.swift in Sources */,
 				26756A0F2CEC42BA0031923F /* TemporaryNoteService.swift in Sources */,
 				26EB9D1B2CD9A34300D3B0CE /* TempNote.swift in Sources */,
@@ -1917,12 +1938,14 @@
 				2694FCA42C7AADBC00F01644 /* LoadCategoryUseCase.swift in Sources */,
 				2694FC952C79853500F01644 /* UpdateMemberUseCase.swift in Sources */,
 				63B1FAED2914A85B007E94B6 /* EditFootprintView.swift in Sources */,
+				2682FE372CF471D5008664C8 /* GetLocationPermissionUseCase.swift in Sources */,
 				265EA947291D1E1400068A5C /* DataModel.swift in Sources */,
 				260C87CB296AADB900ADCC32 /* ShowTravelView.swift in Sources */,
 				26756A1C2CEE0B7C0031923F /* TripCoordinator.swift in Sources */,
 				26756A162CEDE13A0031923F /* NoteEntity.swift in Sources */,
 				63D7EF1D296FBE2500D72F12 /* GoogleApi.swift in Sources */,
 				63FA2387294C35CB00D31506 /* PeopleEditView.swift in Sources */,
+				2682FE302CF46D37008664C8 /* GetPhotoPermissionUseCase.swift in Sources */,
 				2696F4E82C77540800F56E73 /* NoteData.swift in Sources */,
 				63C102B8296530680099AF6A /* GoogleMapView.swift in Sources */,
 				2682FE282CF45558008664C8 /* SettingToggleItem.swift in Sources */,
@@ -1944,6 +1967,7 @@
 				63C102B329651E690099AF6A /* Footprint++Bundle.swift in Sources */,
 				26D018B92CE436A200891B89 /* TripIconRepository.swift in Sources */,
 				266BE08E2CCA1AA000E754EB /* CategoryItem.swift in Sources */,
+				2682FE352CF4716E008664C8 /* GetNotificationPermissionUseCase.swift in Sources */,
 				2694FC9D2C79C2D400F01644 /* MemberEditView.swift in Sources */,
 				26A880772CE73FCA003F4FA9 /* DeleteTripUseCase.swift in Sources */,
 			);
