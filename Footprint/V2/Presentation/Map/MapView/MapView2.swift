@@ -24,6 +24,7 @@ struct MapView2: View {
     @StateObject var vm: MapVM2 = MapVM2()
     @StateObject var mapManager: FPMapManager = FPMapManager.shared
     @StateObject private var footprintVM: FootprintVM = FootprintVM()
+    @StateObject private var searchMapVM: SearchMapVM = SearchMapVM()
     @EnvironmentObject private var coordinator: MapCoordinator
     @EnvironmentObject private var tabBarVM: TabBarVM
     
@@ -183,11 +184,6 @@ struct MapView2: View {
                         VStack(alignment: .leading, spacing: 9, content: {
                             drawSearchBox()
                                 .sdPadding(top: 8, leading: 16, bottom: 0, trailing: 16)
-                                .onTapGesture { }
-                            //                                    if !$vm.searchItems.wrappedValue.isEmpty {
-                            //                                        drawSearchList()
-                            //                                            .padding(.top, 6)
-                            //                                    }
                         })
                     }
                     
@@ -199,18 +195,28 @@ struct MapView2: View {
                     .sdPadding(top: 8, leading: 0, bottom: 0, trailing: 16)
                 })
             }
-            
-            HStack(alignment: .center, spacing: 0, content: {
-                Spacer()
-                markerMenuButton("paw-foot") {
-                    vm.toggleIsShowMarker()
-                    if $vm.isShowMarkers.wrappedValue {
-                        mapManager.loadMarkers()
-                    } else {
-                        mapManager.deleteMarkers()
+            ZStack(alignment: .top, content: {
+                if isShowSearchBar {
+                    if $searchMapVM.searchStatus.wrappedValue != .none {
+                        drawSearchList()
+                            .sdPaddingTop(8)
+                            .zIndex(5)
                     }
                 }
-                .sdPadding(top: 8, leading: 0, bottom: 0, trailing: 16)
+                HStack(alignment: .center, spacing: 0, content: {
+                    Spacer()
+                    markerMenuButton("paw-foot") {
+                        if !isShowSearchBar {
+                            vm.toggleIsShowMarker()
+                            if $vm.isShowMarkers.wrappedValue {
+                                mapManager.loadMarkers()
+                            } else {
+                                mapManager.deleteMarkers()
+                            }
+                        }
+                    }
+                    .sdPadding(top: 8, leading: 0, bottom: 0, trailing: 16)
+                })
             })
             
             Spacer()
@@ -222,14 +228,16 @@ struct MapView2: View {
                 .zIndex(3)
                 Spacer()
             })
-            
-            FPButton(text: "발자국 남기기", location: .leading(name: "paw-foot-white"), status: .able, size: .large, type: .solid) {
-                //                        output.goToSelectLocation()
-                withAnimation(.smooth) {
-                    mapManager.updateMapStatus(.adding)
+            if !isShowSearchBar {
+                FPButton(text: "발자국 남기기", location: .leading(name: "paw-foot-white"), status: .able, size: .large, type: .solid) {
+                    //                        output.goToSelectLocation()
+                    withAnimation(.smooth) {
+                        mapManager.updateMapStatus(.adding)
+                    }
                 }
+                .sdPadding(top: 0, leading: 16, bottom: 8, trailing: 16)
+                .ignoresSafeArea(.keyboard)
             }
-            .sdPadding(top: 0, leading: 16, bottom: 8, trailing: 16)
             
             MainMenuBar(current: .map) { type in
                 tabBarVM.onChangeTab(type)
@@ -325,58 +333,30 @@ struct MapView2: View {
         })
     }
     
-    private func drawSearchList(_ geometry: GeometryProxy) -> some View {
-        return VStack(alignment: .leading, spacing: 0) {
-            ZStack(alignment: .center) {
-                if $vm.searchTimer.wrappedValue != nil {
-                    VStack(alignment: .center, spacing: 8) {
-                        Spacer()
-                        HStack(alignment: .center, spacing: 0) {
-                            Spacer()
-                            SandyProgressView(size: 130.0)
-                            Spacer()
-                        }
-                        .frame(width: geometry.size.width - 20, height: geometry.size.height / 5 * 2, alignment: .center)
-                        Spacer()
-                    }
-                    .frame(width: geometry.size.width - 20, height: geometry.size.height / 5 * 2, alignment: .center)
-                    .zIndex(1)
+    private func drawSearchList() -> some View {
+        return ScrollView(.vertical, showsIndicators: true) {
+            VStack(alignment: .leading, spacing: 8) {
+                ForEach($searchMapVM.searchItems.wrappedValue.indices, id: \.self) { idx in
+                    searchItem($searchMapVM.searchItems.wrappedValue[idx])
+                        .skeleton($searchMapVM.searchStatus.wrappedValue == .searching, reason: .placeholder)
                 }
-                
-                ScrollView(.vertical, showsIndicators: true) {
-                    VStack(alignment: .leading, spacing: 8) {
-                        ForEach($vm.searchItems.wrappedValue.indices, id: \.self) { idx in
-                            searchItem(geometry, item: $vm.searchItems.wrappedValue[idx])
-                        }
-                    }
-                    .padding(EdgeInsets(top: 12, leading: 8, bottom: 12, trailing: 6))
-                }
-                .frame(width: geometry.size.width - 20, height: geometry.size.height / 5 * 2, alignment: .leading)
             }
-            .frame(width: geometry.size.width - 20, height: geometry.size.height / 5 * 2, alignment: .leading)
         }
-        .background(
-            RoundedRectangle(cornerRadius: 6)
-                .foregroundColor(Color.white.opacity(0.90))
-        )
-        .frame(width: geometry.size.width - 32, height: geometry.size.height / 5 * 2, alignment: .leading)
-        .padding([.leading, .trailing], 16)
+        .frame(width: UIScreen.main.bounds.size.width - 16 * 2, height: 65 * 3, alignment: .center)
+        .background(Color.dim_white_high)
+        .sdPaddingHorizontal(16)
     }
     
-    private func searchItem(_ geometry: GeometryProxy, item: SearchItemResponse) -> some View {
-        return VStack(alignment: .leading, spacing: 6) {
+    private func searchItem(_ item: SearchEntity) -> some View {
+        return VStack(alignment: .leading, spacing: 4) {
             Text(item.name)
-                .font(.kr12r)
-                .foregroundColor(.textColor1)
+                .sdFont(.body1, color: Color.cont_gray_default)
             Text(item.fullAddress)
-                .font(.kr11r)
-                .foregroundColor(.gray60)
-            Divider()
-                .frame(width: geometry.size.width - 34, alignment: .center)
+                .sdFont(.body3, color: Color.cont_gray_mid)
         }
-        .padding([.top, .bottom], 2)
-        .frame(width: geometry.size.width - 20, alignment: .leading)
+        .sdPadding(top: 8, leading: 16, bottom: 12, trailing: 16)
         .contentShape(Rectangle())
+        .frame(maxWidth: .infinity, alignment: .leading)
         .onTapGesture {
             //            vm.onClickSearchItem(item)
         }
@@ -384,16 +364,16 @@ struct MapView2: View {
     
     private func drawSearchBox() -> some View {
         return HStack(alignment: .center) {
-            TextField("", text: $vm.searchText, prompt: Text("검색어를 입력하세요").sdFont(.body1, color: Color.cont_gray_low).sdPaddingLeading(12) as? Text)
+            TextField("", text: $searchMapVM.searchText, prompt: Text("검색어를 입력하세요").sdFont(.body1, color: Color.cont_gray_low).sdPaddingLeading(12) as? Text)
                 .sdFont(.body1, color: Color.cont_gray_default)
                 .accentColor(.fColor2)
                 .sdPaddingHorizontal(8)
                 .layoutPriority(.greatestFiniteMagnitude)
-                .onChange(of: $vm.searchText.wrappedValue) { _ in
-                    //                    vm.enterSearchText()
+                .onChange(of: $searchMapVM.searchText.wrappedValue) { _ in
+                    searchMapVM.onTypeText()
                 }
             
-            if !$vm.searchText.wrappedValue.isEmpty {
+            if !$searchMapVM.searchText.wrappedValue.isEmpty {
                 Image("ic_close")
                     .resizable()
                     .renderingMode(.template)
@@ -403,8 +383,7 @@ struct MapView2: View {
                     .contentShape(Rectangle())
                     .sdPaddingTrailing(8)
                     .onTapGesture {
-                        $vm.searchText.wrappedValue.removeAll()
-                        $vm.searchItems.wrappedValue.removeAll()
+                        searchMapVM.onCancel()
                     }
             }
         }

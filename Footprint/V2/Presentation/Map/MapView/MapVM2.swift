@@ -59,10 +59,10 @@ class MapVM2: BaseViewModel {
     @Published var markerList: [MarkerItem] = []
     
     @Published var isShowingSearchResults: Bool = false
-    @Published var searchText: String = ""
-    @Published var searchItems: [SearchItemResponse] = []
+//    @Published var searchText: String = ""
+//    @Published var searchItems: [SearchItemResponse] = []
     @Published var locationPermission: Bool = false
-    @Published var searchTimer: Timer? = nil
+//    @Published var searchTimer: Timer? = nil
     @Published var isGettingLocation: Bool = true
     
     @Published var selectedMarker: GMSMarker? = nil
@@ -120,81 +120,6 @@ class MapVM2: BaseViewModel {
     
     func clearFootprint() {
         self.temporaryNoteService.clear()
-    }
-    
-    //MARK: Timer
-    private func placeSearch(_ text: String) {
-        guard let myLocation = myLocation else { return }
-        let filter = GMSAutocompleteFilter()
-        let searchBound: Double = 2.0
-        let northEastBounds = CLLocationCoordinate2DMake(myLocation.latitude + searchBound, myLocation.longitude + searchBound);
-        let southWestBounds = CLLocationCoordinate2DMake(myLocation.latitude - searchBound, myLocation.longitude - searchBound);
-        filter.locationBias = GMSPlaceRectangularLocationOption(northEastBounds, southWestBounds);
-        
-        let placesClient: GMSPlacesClient = GMSPlacesClient()
-        placesClient.findAutocompletePredictions(fromQuery: text, filter: filter, sessionToken: nil, callback: {[weak self] (results, error) in
-            guard let self = self else {
-                return
-            }
-            if let error = error {
-                print("Autocomplete error: \(error)")
-                self.searchItems.removeAll()
-                return
-            }
-            if let results = results {
-                self.searchItems.removeAll()
-                for result in results {
-                    self.searchItems.append(
-                        SearchItemResponse(
-                            name: result.attributedPrimaryText.string,
-                            fullAddress: result.attributedFullText.string,
-                            secondaryAddress: result.attributedSecondaryText?.string,
-                            placeId: result.placeID,
-                            types: result.types
-                        )
-                    )
-                }
-            }
-        })
-    }
-        
-    private func timerStopAndTask() {
-        if let lastSearchText = self.lastSearchText, lastSearchText == self.searchText {
-            return
-        }
-        self.lastSearchText = self.searchText
-        self.placeSearch(self.searchText)
-    }
-    
-    // 반복 타이머 시작
-    private func startRepeatTimer() {
-        searchTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(timerTask(timer:)), userInfo: "check permission", repeats: true)
-    }
-    
-    // 반복 타이머 실행, 타이머 돌때 할 작업
-    @objc private func timerTask(timer: Timer) {
-        if timer.userInfo != nil {
-            searchCnt += 1
-            print("timer run : \(searchCnt)")
-            if searchCnt == 4 {
-                stopRepeatTimer()
-                // timer 종료되고 할 작업
-                self.timerStopAndTask()
-            }
-        }
-    }
-    
-    
-    // 반복 타이머 종료
-    private func stopRepeatTimer() {
-        if let timer = searchTimer {
-            print("timer stop!")
-            if timer.isValid {
-                timer.invalidate()
-            }
-            searchTimer = nil
-            searchCnt = 0
-        }
     }
     
     func getMultiNoteAddress(_ id: String, onDone: @escaping (String?) -> ()) {

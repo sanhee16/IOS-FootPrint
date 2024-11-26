@@ -135,6 +135,10 @@
 		268BD7AE2CF5512B00788A65 /* SDWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268BD7AD2CF5512B00788A65 /* SDWebView.swift */; };
 		268BD7B22CF55C2600788A65 /* UpdateIsShowSearchBarUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268BD7B12CF55C2600788A65 /* UpdateIsShowSearchBarUseCase.swift */; };
 		268BD7B42CF55C7300788A65 /* GetIsShowSearchBarUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268BD7B32CF55C7300788A65 /* GetIsShowSearchBarUseCase.swift */; };
+		268BD7B62CF5797800788A65 /* SearchMapVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268BD7B52CF5797800788A65 /* SearchMapVM.swift */; };
+		268BD7B82CF57A2300788A65 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268BD7B72CF57A2300788A65 /* TimerManager.swift */; };
+		268BD7BB2CF57DA400788A65 /* SearchEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268BD7BA2CF57DA400788A65 /* SearchEntity.swift */; };
+		268BD7BE2CF57DD100788A65 /* SearchPlaceUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268BD7BD2CF57DD100788A65 /* SearchPlaceUseCase.swift */; };
 		2691D9C3294EE4B1002825B9 /* FootprintListFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2691D9C2294EE4B1002825B9 /* FootprintListFilterView.swift */; };
 		2691D9C5294EE4B6002825B9 /* FootprintListFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2691D9C4294EE4B6002825B9 /* FootprintListFilterViewModel.swift */; };
 		2691D9C7294EE505002825B9 /* BluePrintBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2691D9C6294EE505002825B9 /* BluePrintBottomSheetView.swift */; };
@@ -414,6 +418,10 @@
 		268BD7AD2CF5512B00788A65 /* SDWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDWebView.swift; sourceTree = "<group>"; };
 		268BD7B12CF55C2600788A65 /* UpdateIsShowSearchBarUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateIsShowSearchBarUseCase.swift; sourceTree = "<group>"; };
 		268BD7B32CF55C7300788A65 /* GetIsShowSearchBarUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetIsShowSearchBarUseCase.swift; sourceTree = "<group>"; };
+		268BD7B52CF5797800788A65 /* SearchMapVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMapVM.swift; sourceTree = "<group>"; };
+		268BD7B72CF57A2300788A65 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
+		268BD7BA2CF57DA400788A65 /* SearchEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchEntity.swift; sourceTree = "<group>"; };
+		268BD7BD2CF57DD100788A65 /* SearchPlaceUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPlaceUseCase.swift; sourceTree = "<group>"; };
 		2691D9C2294EE4B1002825B9 /* FootprintListFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootprintListFilterView.swift; sourceTree = "<group>"; };
 		2691D9C4294EE4B6002825B9 /* FootprintListFilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootprintListFilterViewModel.swift; sourceTree = "<group>"; };
 		2691D9C6294EE505002825B9 /* BluePrintBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluePrintBottomSheetView.swift; sourceTree = "<group>"; };
@@ -590,6 +598,8 @@
 				26756A102CEDC2F80031923F /* MultiMarkerSelector */,
 				267CC17D2C66F2BC00D6015E /* MapView2.swift */,
 				267CC17F2C66F2C700D6015E /* MapVM2.swift */,
+				268BD7B52CF5797800788A65 /* SearchMapVM.swift */,
+				268BD7B72CF57A2300788A65 /* TimerManager.swift */,
 			);
 			path = MapView;
 			sourceTree = "<group>";
@@ -1025,6 +1035,22 @@
 			path = WebView;
 			sourceTree = "<group>";
 		};
+		268BD7B92CF57D9600788A65 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				268BD7BA2CF57DA400788A65 /* SearchEntity.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		268BD7BC2CF57DC400788A65 /* SearchUseCases */ = {
+			isa = PBXGroup;
+			children = (
+				268BD7BD2CF57DD100788A65 /* SearchPlaceUseCase.swift */,
+			);
+			path = SearchUseCases;
+			sourceTree = "<group>";
+		};
 		2691D9C1294EE49E002825B9 /* FootprintListFilter */ = {
 			isa = PBXGroup;
 			children = (
@@ -1127,6 +1153,7 @@
 				26D018BA2CE4396100891B89 /* Error */,
 				2650A0662CE3355600040512 /* Footprint */,
 				2650A0652CE3355300040512 /* Trip */,
+				268BD7B92CF57D9600788A65 /* Search */,
 				2650A0642CE3354B00040512 /* Infos */,
 			);
 			path = Entities;
@@ -1135,6 +1162,7 @@
 		2696F4E92C77555000F56E73 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				268BD7BC2CF57DC400788A65 /* SearchUseCases */,
 				26D018C12CE4597500891B89 /* TripIconUseCases */,
 				26D018B52CE433A200891B89 /* TripUseCases */,
 				2643E0D22CDB00780075BA69 /* SettingUseCases */,
@@ -1759,6 +1787,7 @@
 				264EEF592925128A00B89624 /* AddCategoryViewModel.swift in Sources */,
 				266EDDD92C64EAA9006CF09B /* FootprintApp.swift in Sources */,
 				269CA55F2C78A58B00366005 /* SaveDefaultCategoriesUseCase.swift in Sources */,
+				268BD7B82CF57A2300788A65 /* TimerManager.swift in Sources */,
 				26D018C02CE4557200891B89 /* TripIconDAO.swift in Sources */,
 				267A22D42CEAE7490079D146 /* GetFootprintSortTypeUseCase.swift in Sources */,
 				262424E62CE5B7D900595132 /* LoadTripUseCase.swift in Sources */,
@@ -1774,7 +1803,9 @@
 				266BE0902CCA1FF000E754EB /* MemberEntity.swift in Sources */,
 				261F6E9F2CC9E47200F7CA18 /* CategoryIcon.swift in Sources */,
 				261F6EA12CC9E64100F7CA18 /* CategoryEntity.swift in Sources */,
+				268BD7BB2CF57DA400788A65 /* SearchEntity.swift in Sources */,
 				2694FC8A2C797F2F00F01644 /* MemberRepository.swift in Sources */,
+				268BD7BE2CF57DD100788A65 /* SearchPlaceUseCase.swift in Sources */,
 				26F137072CD48BA300096181 /* LoadNotesUseCaseWithAddress.swift in Sources */,
 				2627409129699B2F00B47566 /* CategorySelectorViewModel.swift in Sources */,
 				2691D9C5294EE4B6002825B9 /* FootprintListFilterViewModel.swift in Sources */,
@@ -1817,6 +1848,7 @@
 				26332176292095E90065AE3A /* ShowFootPrintView.swift in Sources */,
 				63F132972914A1C000B3A9E0 /* EmailSender.swift in Sources */,
 				267CC17B2C66F28E00D6015E /* Destination.swift in Sources */,
+				268BD7B62CF5797800788A65 /* SearchMapVM.swift in Sources */,
 				260C87D0296AAF5C00ADCC32 /* FootprintItem.swift in Sources */,
 				2613ED4B2973C5AC0060EF23 /* MainMenuBar.swift in Sources */,
 				26FAB54D2C6B4091006304AE /* SelectLocationView.swift in Sources */,

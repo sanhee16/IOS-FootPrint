@@ -260,3 +260,10 @@ extension Container {
         Factory(self) { DeleteTripUseCase(tripRepository: self.tripRepository()) }
     }
 }
+
+//MARK: UseCase - Search
+extension Container {
+    var searchPlaceUseCase: Factory<SearchPlaceUseCase> {
+        Factory(self) { SearchPlaceUseCase() }
+    }
+}
