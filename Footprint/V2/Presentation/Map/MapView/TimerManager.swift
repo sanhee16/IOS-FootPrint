@@ -22,8 +22,8 @@ class TimerManager {
     // 타이머를 시작하는 함수
     func startTimer() {
         timer = Task {
-            // 3초 대기
-            try? await Task.sleep(nanoseconds: 3_000_000_000)
+            // 2초 대기
+            try? await Task.sleep(nanoseconds: 2_000_000_000)
             // 특정 함수 실행
             if !Task.isCancelled {
                 task?()

@@ -8,6 +8,7 @@
 import Combine
 import Factory
 import CoreLocation
+import GooglePlaces
 
 enum SearchStatus {
     case none
@@ -22,6 +23,7 @@ class SearchMapVM: ObservableObject {
     @Published var location: Location
     @Published var searchStatus: SearchStatus = .none
     private let timerManager: TimerManager
+    let sessionToken = GMSAutocompleteSessionToken()
     
     
     init() {
@@ -35,7 +37,7 @@ class SearchMapVM: ObservableObject {
             self.location = Location(latitude: 12.0, longitude: 25.0)
         }
         resetSearchItem()
-        timerManager.setTask(task: self.onSearchText)
+//        timerManager.setTask(task: self.onSearchText)
     }
     
     private func resetSearchItem() {
@@ -50,19 +52,20 @@ class SearchMapVM: ObservableObject {
     // Typing Text
     func onTypeText() {
         if self.searchText.isEmpty {
-            timerManager.stopTimer()
+//            timerManager.stopTimer()
             self.searchStatus = .none
             return
         }
         self.resetSearchItem()
         self.searchStatus = .searching
-        timerManager.restartTimer()
+//        timerManager.restartTimer()
+        self.onSearchText()
     }
     
     // Search Text
     private func onSearchText() {
         if self.searchText.isEmpty {
-            timerManager.stopTimer()
+//            timerManager.stopTimer()
             self.searchStatus = .none
             return
         }
@@ -70,7 +73,7 @@ class SearchMapVM: ObservableObject {
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
             Task {
-                self.searchItems = await self.searchPlaceUseCase.execute(self.searchText, location: self.location)
+                self.searchItems = await self.searchPlaceUseCase.execute(self.searchText, location: self.location, sessionToken: self.sessionToken)
                 self.searchStatus = .finish
             }
         }
@@ -79,7 +82,7 @@ class SearchMapVM: ObservableObject {
     @MainActor
     // remove all, cacnel search
     func onCancel() {
-        timerManager.stopTimer()
+//        timerManager.stopTimer()
         self.searchStatus = .none
         self.searchItems.removeAll()
         self.searchText.removeAll()

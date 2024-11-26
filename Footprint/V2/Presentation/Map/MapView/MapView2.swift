@@ -236,11 +236,10 @@ struct MapView2: View {
                     }
                 }
                 .sdPadding(top: 0, leading: 16, bottom: 8, trailing: 16)
-                .ignoresSafeArea(.keyboard)
-            }
-            
-            MainMenuBar(current: .map) { type in
-                tabBarVM.onChangeTab(type)
+                
+                MainMenuBar(current: .map) { type in
+                    tabBarVM.onChangeTab(type)
+                }
             }
         })
     }
