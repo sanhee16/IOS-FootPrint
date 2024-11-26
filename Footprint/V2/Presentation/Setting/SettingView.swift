@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SDSwiftUIPack
+import MessageUI
 
 struct SettingView: View {
     struct Output {
@@ -22,6 +23,9 @@ struct SettingView: View {
     @EnvironmentObject private var coordinator: SettingCoordinator
     @EnvironmentObject private var tabBarVM: TabBarVM
     @StateObject private var vm: SettingVM = SettingVM()
+    @State var isShowMailView = false
+    @State var isShowMailAlert = false
+    @State var result: Result<MFMailComposeResult, Error>? = nil
     
     init(output: Output) {
         self.output = output
@@ -59,8 +63,11 @@ struct SettingView: View {
                         
                         title("운영")
                             .sdPaddingTop(40)
-                        SettingArrowItem(text: "문의하기") {
-                            
+                        
+                        if MFMailComposeViewController.canSendMail() {
+                            SettingArrowItem(text: "문의하기") {
+                                self.isShowMailView = true
+                            }
                         }
                         if let url = $vm.url.wrappedValue {
                             SettingArrowItem(text: "개인정보 처리방침") {
@@ -82,6 +89,9 @@ struct SettingView: View {
             .navigationBarBackButtonHidden()
             .navigationDestination(for: Destination.self) { destination in
                 coordinator.moveToDestination(destination: destination)
+            }
+            .sheet(isPresented: $isShowMailView) {
+                MailView(isShowing: $isShowMailView, result: $result)
             }
             .onAppear {
                 

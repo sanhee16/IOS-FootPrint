@@ -11,6 +11,7 @@ import Foundation
 import CoreLocation
 import Contacts
 import MapKit
+import MessageUI
 
 class SettingVM: ObservableObject {
     @Injected(\.saveNoteUseCase) var saveNoteUseCase
@@ -21,6 +22,7 @@ class SettingVM: ObservableObject {
     
     
     @Published var isShowSearchBar: Bool = false
+    @Published var result: Result<MFMailComposeResult, Error>? = nil
     var url: String? = nil
     
     
@@ -41,6 +43,7 @@ class SettingVM: ObservableObject {
             self.url = lan == "ko" ? "https://sanhee16.github.io/footprint-policy/ko/privacy.html" : "https://sanhee16.github.io/footprint-policy/en/privacy.html"
         }
     }
+    
     
     private func addNotes() async {
         func getAddress(lat: Double, lon: Double) async -> String {
