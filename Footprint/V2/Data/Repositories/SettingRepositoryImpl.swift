@@ -38,4 +38,11 @@ class SettingRepositoryImpl: SettingRepository {
         self.userDefaultsManager.footprintSortType
     }
     
+    func updateIsShowSearchBar(_ isShow: Bool) {
+        self.userDefaultsManager.isShowSearchBar = isShow
+    }
+    
+    func getIsShowSearchBar() -> Bool {
+        self.userDefaultsManager.isShowSearchBar
+    }
 }

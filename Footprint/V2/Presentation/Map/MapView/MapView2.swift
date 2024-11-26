@@ -176,27 +176,29 @@ struct MapView2: View {
                     Spacer()
                 })
             }
-            HStack(alignment: .center, spacing: 0, content: {
-                Spacer()
-                if isShowSearchBar {
-                    VStack(alignment: .leading, spacing: 9, content: {
-                        drawSearchBox()
-                            .sdPadding(top: 8, leading: 16, bottom: 0, trailing: 16)
-                            .onTapGesture { }
-                        //                                    if !$vm.searchItems.wrappedValue.isEmpty {
-                        //                                        drawSearchList()
-                        //                                            .padding(.top, 6)
-                        //                                    }
-                    })
-                } else {
+            if $vm.isShowSearchBar.wrappedValue {
+                HStack(alignment: .center, spacing: 0, content: {
+                    Spacer()
+                    if isShowSearchBar {
+                        VStack(alignment: .leading, spacing: 9, content: {
+                            drawSearchBox()
+                                .sdPadding(top: 8, leading: 16, bottom: 0, trailing: 16)
+                                .onTapGesture { }
+                            //                                    if !$vm.searchItems.wrappedValue.isEmpty {
+                            //                                        drawSearchList()
+                            //                                            .padding(.top, 6)
+                            //                                    }
+                        })
+                    }
+                    
                     mapMenuButton("search") {
                         withAnimation {
-                            self.isShowSearchBar = true
+                            self.isShowSearchBar.toggle()
                         }
                     }
                     .sdPadding(top: 8, leading: 0, bottom: 0, trailing: 16)
-                }
-            })
+                })
+            }
             
             HStack(alignment: .center, spacing: 0, content: {
                 Spacer()
@@ -382,19 +384,8 @@ struct MapView2: View {
     
     private func drawSearchBox() -> some View {
         return HStack(alignment: .center) {
-            Image("search")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 20)
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    self.isShowSearchBar = false
-                }
-                .sdPaddingLeading(8)
-            
-            TextField("", text: $vm.searchText)
-                .font(.body1)
-                .foregroundColor(.gray90)
+            TextField("", text: $vm.searchText, prompt: Text("검색어를 입력하세요").sdFont(.body1, color: Color.cont_gray_low).sdPaddingLeading(12) as? Text)
+                .sdFont(.body1, color: Color.cont_gray_default)
                 .accentColor(.fColor2)
                 .sdPaddingHorizontal(8)
                 .layoutPriority(.greatestFiniteMagnitude)
@@ -403,14 +394,12 @@ struct MapView2: View {
                 }
             
             if !$vm.searchText.wrappedValue.isEmpty {
-                Image("close")
+                Image("ic_close")
                     .resizable()
+                    .renderingMode(.template)
+                    .foregroundColor(Color.cont_gray_mid)
                     .frame(both: 10.0, alignment: .center)
-                    .sdPaddingTrailing(8)
-                    .background(
-                        Circle()
-                            .foregroundColor(.fColor4)
-                    )
+                    .sdPaddingTrailing(12)
                     .contentShape(Rectangle())
                     .sdPaddingTrailing(8)
                     .onTapGesture {
@@ -422,8 +411,8 @@ struct MapView2: View {
         .sdPaddingVertical(10)
         .background(
             RoundedRectangle(cornerRadius: 8)
-                .foregroundColor(Color(hex: "#FAFAFA"))
-                .border(Color(hex: "#E4E4E7"), lineWidth: 0.75, cornerRadius: 8)
+                .foregroundColor(Color.bg_white)
+                .border(Color.btn_ic_stroke_default, lineWidth: 0.75, cornerRadius: 8)
         )
         .contentShape(Rectangle())
         .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: 2)

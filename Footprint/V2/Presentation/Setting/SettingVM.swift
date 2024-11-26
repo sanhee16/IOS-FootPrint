@@ -11,7 +11,6 @@ import Foundation
 import CoreLocation
 import Contacts
 import MapKit
-import MessageUI
 
 class SettingVM: ObservableObject {
     @Injected(\.saveNoteUseCase) var saveNoteUseCase
@@ -19,15 +18,26 @@ class SettingVM: ObservableObject {
     @Injected(\.saveTripUseCase) var saveTripUseCase
     @Injected(\.loadAllNoteUseCase) var loadAllNoteUseCase
     @Injected(\.loadTripIconsUseCase) var loadTripIconsUseCase
-    
-    
-    @Published var isShowSearchBar: Bool = false
-    @Published var result: Result<MFMailComposeResult, Error>? = nil
+    @Injected(\.getIsShowSearchBarUseCase) var getIsShowSearchBarUseCase
+    @Injected(\.updateIsShowSearchBarUseCase) var updateIsShowSearchBarUseCase
+        
+    @Published var isShowSearchBar: Bool = false {
+        didSet { self.updateIsShowSearchBar() }
+    }
     var url: String? = nil
     
     
     init() {
         self.getPrivacyPolicyUrl()
+        self.getIsShowSearchBar()
+    }
+    
+    func getIsShowSearchBar() {
+        isShowSearchBar = self.getIsShowSearchBarUseCase.execute()
+    }
+    
+    func updateIsShowSearchBar() {
+        let _ = self.updateIsShowSearchBarUseCase.execute(self.isShowSearchBar)
     }
     
     //MARK: DebugMode

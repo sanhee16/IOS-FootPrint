@@ -197,6 +197,14 @@ extension Container {
     var getPhotoPermissionUseCase: Factory<GetPhotoPermissionUseCase> {
         Factory(self) { GetPhotoPermissionUseCase() }
     }
+    
+    var updateIsShowSearchBarUseCase: Factory<UpdateIsShowSearchBarUseCase> {
+        Factory(self) { UpdateIsShowSearchBarUseCase(settingRepository: self.settingRepository()) }
+    }
+    
+    var getIsShowSearchBarUseCase: Factory<GetIsShowSearchBarUseCase> {
+        Factory(self) { GetIsShowSearchBarUseCase(settingRepository: self.settingRepository()) }
+    }
 }
 
 //MARK: UseCase - TripIcon

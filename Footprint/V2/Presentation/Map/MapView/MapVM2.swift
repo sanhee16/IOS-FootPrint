@@ -45,6 +45,7 @@ enum MarkerStatus {
 
 class MapVM2: BaseViewModel {
     @Injected(\.getIsShowMarkerUseCase) var getIsShowMarkerUseCase
+    @Injected(\.getIsShowSearchBarUseCase) var getIsShowSearchBarUseCase
     @Injected(\.updateIsShowMarkerUseCase) var updateIsShowMarkerUseCase
     @Injected(\.temporaryNoteService) var temporaryNoteService
     @Injected(\.loadNotesUseCaseWithAddress) var loadNotesUseCaseWithAddress
@@ -69,6 +70,7 @@ class MapVM2: BaseViewModel {
     @Published var centerAddress: String = ""
     
     @Published var isShowMarkers: Bool = true
+    @Published var isShowSearchBar: Bool = true
     
     @Published var isLoading: Bool = false
     
@@ -86,6 +88,7 @@ class MapVM2: BaseViewModel {
         super.init()
         
         self.isShowMarkers = getIsShowMarkerUseCase.execute()
+        self.isShowSearchBar = getIsShowSearchBarUseCase.execute()
         
         Remote.init().getIsShowAds({[weak self] value in
             DispatchQueue.main.async {

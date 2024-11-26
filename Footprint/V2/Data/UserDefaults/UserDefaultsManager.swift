@@ -21,6 +21,7 @@ enum UserDefaultKey: String {
     case isShowMarker = "IS_SHOW_MARKER"
     case tripSortType = "TRIP_SORT_TYPE"
     case footprintSortType = "FOOTPRINT_SORT_TYPE"
+    case isShowSearchBar = "IS_SHOW_SEARCH_BAR"
 }
 
 
@@ -64,6 +65,9 @@ class Defaults {
     
     @UserDefault<Int>(key: UserDefaultKey.footprintSortType.rawValue, defaultValue: 0)
     var footprintSortType
+    
+    @UserDefault<Bool>(key: UserDefaultKey.isShowSearchBar.rawValue, defaultValue: true)
+    var isShowSearchBar
     
     //MARK: Setting
     /*

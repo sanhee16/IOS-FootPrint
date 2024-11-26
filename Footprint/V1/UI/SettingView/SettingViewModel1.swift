@@ -9,11 +9,13 @@
 
 import Foundation
 import Combine
+import MessageUI
 import SwiftUI
 import SDSwiftUIPack
 
 class SettingViewModel1: BaseViewModelV1 {
     @Published var isShowingMailView = false
+    @Published var result: Result<MFMailComposeResult, Error>? = nil
     @Published var isOnSearchBar: Bool
     
     @Published var tapCnt: Int = 0
@@ -43,6 +45,14 @@ class SettingViewModel1: BaseViewModelV1 {
     
     func onClickCheckPermission() {
         self.coordinator?.presentCheckPermission()
+    }
+    
+    func onClickContact() {
+        if MFMailComposeViewController.canSendMail() {
+            self.isShowingMailView = true
+        } else {
+            self.alert(.ok, description: "alert_no_email".localized())
+        }
     }
     
     func onClickDevInfo() {

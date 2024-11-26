@@ -12,4 +12,6 @@ protocol SettingRepository {
     func getTripSortType() -> Int
     func updateFootprintSortType(_ value: Int)
     func getFootprintSortType() -> Int
+    func updateIsShowSearchBar(_ isShow: Bool)
+    func getIsShowSearchBar() -> Bool
 }

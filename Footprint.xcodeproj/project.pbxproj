@@ -133,6 +133,8 @@
 		268546E82A28DB1200BDA2EA /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268546E72A28DB1200BDA2EA /* ReviewView.swift */; };
 		268546EA2A28DB1800BDA2EA /* ReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268546E92A28DB1800BDA2EA /* ReviewViewModel.swift */; };
 		268BD7AE2CF5512B00788A65 /* SDWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268BD7AD2CF5512B00788A65 /* SDWebView.swift */; };
+		268BD7B22CF55C2600788A65 /* UpdateIsShowSearchBarUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268BD7B12CF55C2600788A65 /* UpdateIsShowSearchBarUseCase.swift */; };
+		268BD7B42CF55C7300788A65 /* GetIsShowSearchBarUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268BD7B32CF55C7300788A65 /* GetIsShowSearchBarUseCase.swift */; };
 		2691D9C3294EE4B1002825B9 /* FootprintListFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2691D9C2294EE4B1002825B9 /* FootprintListFilterView.swift */; };
 		2691D9C5294EE4B6002825B9 /* FootprintListFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2691D9C4294EE4B6002825B9 /* FootprintListFilterViewModel.swift */; };
 		2691D9C7294EE505002825B9 /* BluePrintBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2691D9C6294EE505002825B9 /* BluePrintBottomSheetView.swift */; };
@@ -410,6 +412,8 @@
 		268546E72A28DB1200BDA2EA /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
 		268546E92A28DB1800BDA2EA /* ReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
 		268BD7AD2CF5512B00788A65 /* SDWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDWebView.swift; sourceTree = "<group>"; };
+		268BD7B12CF55C2600788A65 /* UpdateIsShowSearchBarUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateIsShowSearchBarUseCase.swift; sourceTree = "<group>"; };
+		268BD7B32CF55C7300788A65 /* GetIsShowSearchBarUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetIsShowSearchBarUseCase.swift; sourceTree = "<group>"; };
 		2691D9C2294EE4B1002825B9 /* FootprintListFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootprintListFilterView.swift; sourceTree = "<group>"; };
 		2691D9C4294EE4B6002825B9 /* FootprintListFilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootprintListFilterViewModel.swift; sourceTree = "<group>"; };
 		2691D9C6294EE505002825B9 /* BluePrintBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluePrintBottomSheetView.swift; sourceTree = "<group>"; };
@@ -680,6 +684,8 @@
 				26A880742CE71C41003F4FA9 /* UpdateTripSortTypeUseCase.swift */,
 				267A22D32CEAE7490079D146 /* GetFootprintSortTypeUseCase.swift */,
 				267A22D12CEAE71F0079D146 /* UpdateFootprintSortTypeUseCase.swift */,
+				268BD7B12CF55C2600788A65 /* UpdateIsShowSearchBarUseCase.swift */,
+				268BD7B32CF55C7300788A65 /* GetIsShowSearchBarUseCase.swift */,
 			);
 			path = SettingUseCases;
 			sourceTree = "<group>";
@@ -1749,6 +1755,7 @@
 				2643E0D42CDB3DD30075BA69 /* UpdateMemberOrderUseCase.swift in Sources */,
 				63B1FAFD2914B324007E94B6 /* GalleryViewModel.swift in Sources */,
 				262424E22CE5ADC800595132 /* LoadTripsUseCase.swift in Sources */,
+				268BD7B42CF55C7300788A65 /* GetIsShowSearchBarUseCase.swift in Sources */,
 				264EEF592925128A00B89624 /* AddCategoryViewModel.swift in Sources */,
 				266EDDD92C64EAA9006CF09B /* FootprintApp.swift in Sources */,
 				269CA55F2C78A58B00366005 /* SaveDefaultCategoriesUseCase.swift in Sources */,
@@ -1892,6 +1899,7 @@
 				63E5C82D2975361C00D32FD2 /* MapView.swift in Sources */,
 				263A97BD29458533008A69F5 /* PeopleWithSelectorViewModel.swift in Sources */,
 				26332178292095F10065AE3A /* ShowFootPrintViewModel.swift in Sources */,
+				268BD7B22CF55C2600788A65 /* UpdateIsShowSearchBarUseCase.swift in Sources */,
 				63F1324A2914A18800B3A9E0 /* Util.swift in Sources */,
 				63F1325B2914A1A300B3A9E0 /* CoordinatorV1.swift in Sources */,
 				63F132482914A18800B3A9E0 /* AlertView.swift in Sources */,
