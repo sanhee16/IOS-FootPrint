@@ -29,10 +29,10 @@ struct PermissionView: View {
                 .sdPaddingVertical(24)
                 .frame(maxWidth: .infinity, alignment: .center)
             VStack(alignment: .leading) {
-                SettingToggleItem(text: "위치 사용 권한", isOn: $vm.isOnLocationPermission)
-                SettingToggleItem(text: "추적 권한", isOn: $vm.isOnTrackingPermission)
-                SettingToggleItem(text: "사진 접근 권한", isOn: $vm.isOnPhotoPermission)
-                SettingToggleItem(text: "알림 허용", isOn: $vm.isOnNotificationPermission)
+                SettingToggleItem(text: "위치 사용 권한", isOn: $vm.isAllowPhotoPermission)
+                SettingToggleItem(text: "추적 권한", isOn: $vm.isAllowLocationPermission)
+                SettingToggleItem(text: "사진 접근 권한", isOn: $vm.isAllowTrackingPermission)
+                SettingToggleItem(text: "알림 허용", isOn: $vm.isAllowNotificationPermission)
             }
             .sdPaddingHorizontal(16)
             

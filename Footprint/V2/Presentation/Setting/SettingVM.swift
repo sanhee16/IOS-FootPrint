@@ -18,7 +18,11 @@ class SettingVM: ObservableObject {
     @Injected(\.saveTripUseCase) var saveTripUseCase
     @Injected(\.loadAllNoteUseCase) var loadAllNoteUseCase
     @Injected(\.loadTripIconsUseCase) var loadTripIconsUseCase
+    
+    
     @Published var isShowSearchBar: Bool = false
+    init() {
+    }
     
     //MARK: DebugMode
     func addData() {
@@ -28,7 +32,8 @@ class SettingVM: ObservableObject {
         }
     }
     
-    func addNotes() async {
+    
+    private func addNotes() async {
         func getAddress(lat: Double, lon: Double) async -> String {
             let geocoder = CLGeocoder()
             var addr: String = ""
@@ -94,8 +99,7 @@ class SettingVM: ObservableObject {
             )
         }
     }
-    
-    func addTrips() {
+    private func addTrips() {
         let notes: [String] = self.loadAllNoteUseCase.execute(.earliest).map({ $0.id })
         let icons: [String] = self.loadTripIconsUseCase.execute().map({ $0.id})
         
