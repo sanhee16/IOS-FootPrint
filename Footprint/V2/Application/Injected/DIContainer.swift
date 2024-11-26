@@ -181,6 +181,22 @@ extension Container {
     var updateFootprintSortTypeUseCase: Factory<UpdateFootprintSortTypeUseCase> {
         Factory(self) { UpdateFootprintSortTypeUseCase(settingRepository: self.settingRepository()) }
     }
+    
+    var getLocationPermissionUseCase: Factory<GetLocationPermissionUseCase> {
+        Factory(self) { GetLocationPermissionUseCase() }
+    }
+    
+    var getNotificationPermissionUseCase: Factory<GetNotificationPermissionUseCase> {
+        Factory(self) { GetNotificationPermissionUseCase() }
+    }
+    
+    var getTrackingPermissionUseCase: Factory<GetTrackingPermissionUseCase> {
+        Factory(self) { GetTrackingPermissionUseCase() }
+    }
+    
+    var getPhotoPermissionUseCase: Factory<GetPhotoPermissionUseCase> {
+        Factory(self) { GetPhotoPermissionUseCase() }
+    }
 }
 
 //MARK: UseCase - TripIcon
