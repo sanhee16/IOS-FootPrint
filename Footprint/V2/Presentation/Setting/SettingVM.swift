@@ -21,7 +21,11 @@ class SettingVM: ObservableObject {
     
     
     @Published var isShowSearchBar: Bool = false
+    var url: String? = nil
+    
+    
     init() {
+        self.getPrivacyPolicyUrl()
     }
     
     //MARK: DebugMode
@@ -32,6 +36,11 @@ class SettingVM: ObservableObject {
         }
     }
     
+    func getPrivacyPolicyUrl() {
+        if let lan = UserLocale.currentLanguage() {
+            self.url = lan == "ko" ? "https://sanhee16.github.io/footprint-policy/ko/privacy.html" : "https://sanhee16.github.io/footprint-policy/en/privacy.html"
+        }
+    }
     
     private func addNotes() async {
         func getAddress(lat: Double, lon: Double) async -> String {

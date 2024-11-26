@@ -17,7 +17,7 @@ enum Destination: Hashable {
     case tripDetailView(id: String, output: TripDetailView.Output)
     case setMapIconView
     case permissionView(output: PermissionView.Output)
-    case privacyPolicyView
+    case privacyPolicyView(url: String)
     
     var viewName: String {
         switch self {
@@ -61,8 +61,8 @@ enum Destination: Hashable {
             EmptyView()
         case .permissionView(let output):
             PermissionView(output: output)
-        case .privacyPolicyView:
-            EmptyView()
+        case .privacyPolicyView(let url):
+            WebView(title: "개인정보 처리방침", url: url)
         }
     }
 }

@@ -14,7 +14,7 @@ struct SettingView: View {
         var pushPermissionView: () -> ()
         var pushMemberListEditView: () -> ()
         var pushCategoryListEditView: () -> ()
-        var pushPrivacyPolicyView: () -> ()
+        var pushPrivacyPolicyView: (String) -> ()
     }
     
     private var output: Output
@@ -62,8 +62,10 @@ struct SettingView: View {
                         SettingArrowItem(text: "문의하기") {
                             
                         }
-                        SettingArrowItem(text: "개인정보 처리방침") {
-                            self.output.pushPrivacyPolicyView()
+                        if let url = $vm.url.wrappedValue {
+                            SettingArrowItem(text: "개인정보 처리방침") {
+                                self.output.pushPrivacyPolicyView(url)
+                            }
                         }
                     })
                     .sdPaddingHorizontal(16)

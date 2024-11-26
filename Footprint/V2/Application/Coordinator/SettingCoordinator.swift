@@ -24,8 +24,8 @@ class SettingCoordinator: BaseCoordinator<Destination> {
         self.push(.permissionView(output: permissionViewOutput))
     }
     
-    private func pushPrivacyPolicyView() {
-        self.push(.privacyPolicyView)
+    private func pushPrivacyPolicyView(url: String) {
+        self.push(.privacyPolicyView(url: url))
     }
 }
 
@@ -57,8 +57,8 @@ extension SettingCoordinator {
             self.pushMemberListEditView()
         } pushCategoryListEditView: {
             self.pushCategoryListEditView()
-        } pushPrivacyPolicyView: {
-            self.pushPrivacyPolicyView()
+        } pushPrivacyPolicyView: { url in
+            self.pushPrivacyPolicyView(url: url)
         }
     }
 }
