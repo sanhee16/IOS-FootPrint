@@ -81,6 +81,13 @@ class FPMapManager: NSObject, ObservableObject {
         self.zoom = mapView.camera.zoom
         mapView.camera = camera
     }
+    @MainActor
+    func moveToPlaceID(_ placeID: String) {
+        
+//        let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: (zoom == nil ? 18.0 : mapView.camera.zoom))
+//        self.zoom = mapView.camera.zoom
+//        mapView.camera = camera
+    }
     
     @MainActor
     func settingMapView() {

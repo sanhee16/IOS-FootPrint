@@ -25,14 +25,14 @@ public class GoogleArrayResponse<T: Codable>: Codable {
         results = nil
     }
 }
+//
+//public class GoogleErrorResponse: Codable {
+//    let status: String?
+//    let error_message: String?
+//}
 
-public class GoogleErrorResponse: Codable {
-    let status: String?
-    let error_message: String?
-}
-
-class GoogleApi {
-    public static let instance = GoogleApi()
+class GoogleApi1 {
+    public static let instance = GoogleApi1()
     
     private init() {
         

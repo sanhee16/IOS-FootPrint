@@ -358,6 +358,7 @@ struct MapView2: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .onTapGesture {
             //            vm.onClickSearchItem(item)
+//            mapManager.moveToLocation()
         }
     }
     

@@ -78,13 +78,13 @@ class MapVM2: BaseViewModel {
     
     private var searchCnt: Int = 0
     private var lastSearchText: String? = nil
-    private let googleApi: GoogleApi
+    private let googleApi: GoogleApi1
     
     
     override init() {
         self.locationManager = CLLocationManager()
         self.locationManager.allowsBackgroundLocationUpdates = false
-        self.googleApi = GoogleApi.instance
+        self.googleApi = GoogleApi1.instance
         super.init()
         
         self.isShowMarkers = getIsShowMarkerUseCase.execute()

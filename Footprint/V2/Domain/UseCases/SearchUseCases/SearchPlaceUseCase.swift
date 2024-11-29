@@ -33,6 +33,7 @@ class SearchPlaceUseCase {
                     continuation.resume(returning: searchItems)
                     return
                 }
+                
                 results.forEach {
                     searchItems.append(
                         SearchEntity(
