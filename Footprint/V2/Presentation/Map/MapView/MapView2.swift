@@ -360,6 +360,7 @@ struct MapView2: View {
             searchMapVM.getLocation(item.placeId) { location in
                 if let location = location {
                     mapManager.moveToLocation(location)
+                    self.isShowSearchBar.toggle()
                 }
             }
             //            vm.onClickSearchItem(item)
