@@ -46,10 +46,10 @@ class GoogleRemoteDataProvider {
 }
 
 extension GoogleRemoteDataProvider {
-    func fetchGeocoding(_ placeId: String) -> Result<GoogleGeocodingRemoteResponse<GoogleGeocodingModel>, GoogleNetworkError> {
+    func fetchGeocoding(_ placeId: String) async -> Result<GoogleGeocodingRemoteResponse<GoogleGeocodingModel>, GoogleNetworkError> {
         // 일반적으로 주소 조회 시 "results" 배열의 한 항목만 반환되지만 주소 쿼리가 모호한 경우 지오코더가 여러 결과를 반환할 수 있습니다.
         let key = Bundle.main.geocodingApiKey
         let param = ["language": UserLocale.currentLanguage()] as? Parameters
-        self.get(C.GEOCODING_HOST + "json?place_id=\(placeId)&key=\(key)", auth: false, parameters: param)
+        return await self.get("/json?place_id=\(placeId)&key=\(key)", auth: false, parameters: param)
     }
 }

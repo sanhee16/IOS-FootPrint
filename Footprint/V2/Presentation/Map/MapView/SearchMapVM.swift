@@ -82,7 +82,6 @@ class SearchMapVM: ObservableObject {
     @MainActor
     // remove all, cacnel search
     func onCancel() {
-//        timerManager.stopTimer()
         self.searchStatus = .none
         self.searchItems.removeAll()
         self.searchText.removeAll()

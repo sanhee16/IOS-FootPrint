@@ -197,6 +197,9 @@
 		26BD8FCB29694CE5005F7E5C /* ApiInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26BD8FCA29694CE5005F7E5C /* ApiInfo.plist */; };
 		26BFFD942C5F8C400001B02B /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 26BFFD932C5F8C400001B02B /* Kingfisher */; };
 		26C04F6D2917667F00890A76 /* SwiftUIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */; };
+		26CBA89E2D15659000381D83 /* LocationRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CBA89D2D15659000381D83 /* LocationRepositoryImpl.swift */; };
+		26CBA8A02D15663600381D83 /* LocationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CBA89F2D15663600381D83 /* LocationRepository.swift */; };
+		26CBA8A22D15665900381D83 /* GetLocationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CBA8A12D15665900381D83 /* GetLocationUseCase.swift */; };
 		26D018B42CE4336C00891B89 /* TripRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D018B32CE4336C00891B89 /* TripRepositoryImpl.swift */; };
 		26D018B72CE433B600891B89 /* TripRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D018B62CE433B600891B89 /* TripRepository.swift */; };
 		26D018B92CE436A200891B89 /* TripIconRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D018B82CE436A200891B89 /* TripIconRepository.swift */; };
@@ -490,6 +493,9 @@
 		26A880762CE73FCA003F4FA9 /* DeleteTripUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTripUseCase.swift; sourceTree = "<group>"; };
 		26BD8FCA29694CE5005F7E5C /* ApiInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiInfo.plist; sourceTree = "<group>"; };
 		26C04F6C2917667F00890A76 /* SwiftUIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIExtension.swift; sourceTree = "<group>"; };
+		26CBA89D2D15659000381D83 /* LocationRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRepositoryImpl.swift; sourceTree = "<group>"; };
+		26CBA89F2D15663600381D83 /* LocationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRepository.swift; sourceTree = "<group>"; };
+		26CBA8A12D15665900381D83 /* GetLocationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetLocationUseCase.swift; sourceTree = "<group>"; };
 		26D018B32CE4336C00891B89 /* TripRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripRepositoryImpl.swift; sourceTree = "<group>"; };
 		26D018B62CE433B600891B89 /* TripRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripRepository.swift; sourceTree = "<group>"; };
 		26D018B82CE436A200891B89 /* TripIconRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripIconRepository.swift; sourceTree = "<group>"; };
@@ -1174,6 +1180,7 @@
 				2675D2092CDDDF8F00BD7633 /* SettingRepositoryImpl.swift */,
 				26D018B32CE4336C00891B89 /* TripRepositoryImpl.swift */,
 				26D018BD2CE4554C00891B89 /* TripIconRepositoryImpl.swift */,
+				26CBA89D2D15659000381D83 /* LocationRepositoryImpl.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1187,6 +1194,7 @@
 				2675D2052CDDDE4500BD7633 /* SettingRepository.swift */,
 				26D018B62CE433B600891B89 /* TripRepository.swift */,
 				26D018B82CE436A200891B89 /* TripIconRepository.swift */,
+				26CBA89F2D15663600381D83 /* LocationRepository.swift */,
 			);
 			path = RepositoryProtocols;
 			sourceTree = "<group>";
@@ -1218,6 +1226,7 @@
 		2696F4E92C77555000F56E73 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				26CBA89C2D15629400381D83 /* LocationUseCases */,
 				268BD7BC2CF57DC400788A65 /* SearchUseCases */,
 				26D018C12CE4597500891B89 /* TripIconUseCases */,
 				26D018B52CE433A200891B89 /* TripUseCases */,
@@ -1314,6 +1323,14 @@
 				26A880702CE70D39003F4FA9 /* TripDetailVM.swift */,
 			);
 			path = TripDetail;
+			sourceTree = "<group>";
+		};
+		26CBA89C2D15629400381D83 /* LocationUseCases */ = {
+			isa = PBXGroup;
+			children = (
+				26CBA8A12D15665900381D83 /* GetLocationUseCase.swift */,
+			);
+			path = LocationUseCases;
 			sourceTree = "<group>";
 		};
 		26D018B52CE433A200891B89 /* TripUseCases */ = {
@@ -1907,6 +1924,7 @@
 				26332176292095E90065AE3A /* ShowFootPrintView.swift in Sources */,
 				63F132972914A1C000B3A9E0 /* EmailSender.swift in Sources */,
 				267CC17B2C66F28E00D6015E /* Destination.swift in Sources */,
+				26CBA8A22D15665900381D83 /* GetLocationUseCase.swift in Sources */,
 				268BD7B62CF5797800788A65 /* SearchMapVM.swift in Sources */,
 				260C87D0296AAF5C00ADCC32 /* FootprintItem.swift in Sources */,
 				2613ED4B2973C5AC0060EF23 /* MainMenuBar.swift in Sources */,
@@ -2039,6 +2057,7 @@
 				26D018C32CE4598500891B89 /* SaveTripIconUseCase.swift in Sources */,
 				265917112CD857CC008C39E9 /* ToogleStarUseCase.swift in Sources */,
 				262424E02CE5AD6000595132 /* SaveTripUseCase.swift in Sources */,
+				26CBA89E2D15659000381D83 /* LocationRepositoryImpl.swift in Sources */,
 				2694FC8F2C7984CA00F01644 /* SaveMemberUseCase.swift in Sources */,
 				63F1329A2914A1C000B3A9E0 /* MYWebView.swift in Sources */,
 				2691D9C3294EE4B1002825B9 /* FootprintListFilterView.swift in Sources */,
@@ -2071,6 +2090,7 @@
 				63D32FD729CACEAC0049F567 /* AdView.swift in Sources */,
 				269CA5632C78A5D400366005 /* SaveCategoryUseCase.swift in Sources */,
 				267CC1802C66F2C700D6015E /* MapVM2.swift in Sources */,
+				26CBA8A02D15663600381D83 /* LocationRepository.swift in Sources */,
 				26FAB54F2C6B4095006304AE /* SelectLocationVM.swift in Sources */,
 				2682FE2D2CF46510008664C8 /* PermissionVM.swift in Sources */,
 				265917182CD8BE55008C39E9 /* DeleteImageUrlUseCase.swift in Sources */,

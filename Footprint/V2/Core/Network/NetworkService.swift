@@ -9,14 +9,26 @@ import Foundation
 import Alamofire
 
 class NetworkService {
-    var session: Session
+    let reachabilityManager = NetworkReachabilityManager()
+    let session: Session = {
+        let configuration = URLSessionConfiguration.af.default
+        configuration.timeoutIntervalForRequest = 5 * 60
+        configuration.waitsForConnectivity = true
+        
+        return Session(
+            configuration: configuration
+        )
+    }()
+    
     var host: String
     
-    init(session: Session, host: String) {
-        self.session = session
+    init(host: String) {
         self.host = host
     }
-    
+}
+
+
+extension NetworkService {
     func request<T>(
         url: String,
         auth: Bool,

@@ -81,6 +81,7 @@ class FPMapManager: NSObject, ObservableObject {
         self.zoom = mapView.camera.zoom
         mapView.camera = camera
     }
+    
     @MainActor
     func moveToPlaceID(_ placeID: String) {
         
