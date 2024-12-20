@@ -357,8 +357,13 @@ struct MapView2: View {
         .contentShape(Rectangle())
         .frame(maxWidth: .infinity, alignment: .leading)
         .onTapGesture {
+            searchMapVM.getLocation(item.placeId) { location in
+                if let location = location {
+                    mapManager.moveToLocation(location)
+                }
+            }
             //            vm.onClickSearchItem(item)
-            mapManager.moveToLocation()
+//            mapManager.moveToLocation()
         }
     }
     

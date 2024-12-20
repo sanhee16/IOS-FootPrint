@@ -17,7 +17,8 @@ enum SearchStatus {
 }
 
 class SearchMapVM: ObservableObject {
-    @Injected(\.searchPlaceUseCase) var searchPlaceUseCase
+    @Injected(\.searchPlaceUseCase) private var searchPlaceUseCase
+    @Injected(\.getLocationUseCase) private var getLocationUseCase
     @Published var searchItems: [SearchEntity] = []
     @Published var searchText: String = ""
     @Published var location: Location
@@ -46,6 +47,18 @@ class SearchMapVM: ObservableObject {
             SearchEntity(name: "temp name", fullAddress: "temp full address for skeleton", placeId: "", types: []),
             SearchEntity(name: "temp name", fullAddress: "temp full address for skeleton", placeId: "", types: [])
         ]
+    }
+    
+    func getLocation(_ placeId: String, onDone: @escaping (Location?) -> ()) {
+        Task {
+            switch await self.getLocationUseCase.execute(placeId) {
+            case .success(let location):
+                onDone(location)
+            case .failure(let error):
+                print(error)
+                onDone(nil)
+            }
+        }
     }
     
     @MainActor
