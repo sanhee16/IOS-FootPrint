@@ -357,6 +357,12 @@ struct MapView2: View {
         .contentShape(Rectangle())
         .frame(maxWidth: .infinity, alignment: .leading)
         .onTapGesture {
+            searchMapVM.getLocation(item.placeId) { location in
+                if let location = location {
+                    mapManager.moveToLocation(location)
+                    self.isShowSearchBar.toggle()
+                }
+            }
             //            vm.onClickSearchItem(item)
 //            mapManager.moveToLocation()
         }
@@ -374,17 +380,19 @@ struct MapView2: View {
                 }
             
             if !$searchMapVM.searchText.wrappedValue.isEmpty {
-                Image("ic_close")
-                    .resizable()
-                    .renderingMode(.template)
-                    .foregroundColor(Color.cont_gray_mid)
-                    .frame(both: 10.0, alignment: .center)
-                    .sdPaddingTrailing(12)
-                    .contentShape(Rectangle())
-                    .sdPaddingTrailing(8)
-                    .onTapGesture {
-                        searchMapVM.onCancel()
-                    }
+                Button {
+                    searchMapVM.onCancel()
+                } label: {
+                    Image("ic_close")
+                        .resizable()
+                        .renderingMode(.template)
+                        .foregroundColor(Color.cont_gray_mid)
+                        .frame(both: 10.0, alignment: .center)
+                        .sdPaddingTrailing(12)
+                        .sdPaddingTrailing(8)
+                        .contentShape(Rectangle())
+                }
+                .zIndex(10)
             }
         }
         .sdPaddingVertical(10)

@@ -13,12 +13,20 @@ extension Container {
         Factory(self) { Defaults() }
     }
     
+    var googleGeocodingNetworkService: Factory<NetworkService> {
+        Factory(self) { NetworkService(host: C.GEOCODING_HOST) }.singleton
+    }
+    
     var permissionService: Factory<PermissionService> {
         Factory(self) { PermissionService() }
     }
     
     var temporaryNoteService: Factory<TemporaryNoteService> {
         Factory(self) { TemporaryNoteService(loadNoteUseCaseWithId: self.loadNoteUseCaseWithId()) }.singleton
+    }
+    
+    var googleRemoteDataProvider: Factory<GoogleRemoteDataProvider> {
+        Factory(self) { GoogleRemoteDataProvider(networkService: self.googleGeocodingNetworkService()) }.singleton
     }
 }
 
@@ -46,6 +54,17 @@ extension Container {
     
     var tripRepository: Factory<TripRepository> {
         Factory(self) { TripRepositoryImpl() }
+    }
+    
+    var locationRepository: Factory<LocationRepository> {
+        Factory(self) { LocationRepositoryImpl(dataProvider: self.googleRemoteDataProvider()) }
+    }
+}
+
+//MARK: UseCase - Location
+extension Container {
+    var getLocationUseCase: Factory<GetLocationUseCase> {
+        Factory(self) { GetLocationUseCase(locationRepository: self.locationRepository()) }
     }
 }
 
