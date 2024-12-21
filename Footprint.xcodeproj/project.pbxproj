@@ -130,12 +130,13 @@
 		2682FE332CF46E8D008664C8 /* GetTrackingPermissionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2682FE322CF46E8D008664C8 /* GetTrackingPermissionUseCase.swift */; };
 		2682FE352CF4716E008664C8 /* GetNotificationPermissionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2682FE342CF4716E008664C8 /* GetNotificationPermissionUseCase.swift */; };
 		2682FE372CF471D5008664C8 /* GetLocationPermissionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2682FE362CF471D5008664C8 /* GetLocationPermissionUseCase.swift */; };
+		26847D642D163DDE00B80067 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26847D632D163DDE00B80067 /* SearchView.swift */; };
+		26847D662D163DE300B80067 /* SearchVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26847D652D163DE300B80067 /* SearchVM.swift */; };
 		268546E82A28DB1200BDA2EA /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268546E72A28DB1200BDA2EA /* ReviewView.swift */; };
 		268546EA2A28DB1800BDA2EA /* ReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268546E92A28DB1800BDA2EA /* ReviewViewModel.swift */; };
 		268BD7AE2CF5512B00788A65 /* SDWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268BD7AD2CF5512B00788A65 /* SDWebView.swift */; };
 		268BD7B22CF55C2600788A65 /* UpdateIsShowSearchBarUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268BD7B12CF55C2600788A65 /* UpdateIsShowSearchBarUseCase.swift */; };
 		268BD7B42CF55C7300788A65 /* GetIsShowSearchBarUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268BD7B32CF55C7300788A65 /* GetIsShowSearchBarUseCase.swift */; };
-		268BD7B62CF5797800788A65 /* SearchMapVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268BD7B52CF5797800788A65 /* SearchMapVM.swift */; };
 		268BD7B82CF57A2300788A65 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268BD7B72CF57A2300788A65 /* TimerManager.swift */; };
 		268BD7BB2CF57DA400788A65 /* SearchEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268BD7BA2CF57DA400788A65 /* SearchEntity.swift */; };
 		268BD7BE2CF57DD100788A65 /* SearchPlaceUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268BD7BD2CF57DD100788A65 /* SearchPlaceUseCase.swift */; };
@@ -427,12 +428,13 @@
 		2682FE322CF46E8D008664C8 /* GetTrackingPermissionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTrackingPermissionUseCase.swift; sourceTree = "<group>"; };
 		2682FE342CF4716E008664C8 /* GetNotificationPermissionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNotificationPermissionUseCase.swift; sourceTree = "<group>"; };
 		2682FE362CF471D5008664C8 /* GetLocationPermissionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetLocationPermissionUseCase.swift; sourceTree = "<group>"; };
+		26847D632D163DDE00B80067 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		26847D652D163DE300B80067 /* SearchVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVM.swift; sourceTree = "<group>"; };
 		268546E72A28DB1200BDA2EA /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
 		268546E92A28DB1800BDA2EA /* ReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
 		268BD7AD2CF5512B00788A65 /* SDWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDWebView.swift; sourceTree = "<group>"; };
 		268BD7B12CF55C2600788A65 /* UpdateIsShowSearchBarUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateIsShowSearchBarUseCase.swift; sourceTree = "<group>"; };
 		268BD7B32CF55C7300788A65 /* GetIsShowSearchBarUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetIsShowSearchBarUseCase.swift; sourceTree = "<group>"; };
-		268BD7B52CF5797800788A65 /* SearchMapVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMapVM.swift; sourceTree = "<group>"; };
 		268BD7B72CF57A2300788A65 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		268BD7BA2CF57DA400788A65 /* SearchEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchEntity.swift; sourceTree = "<group>"; };
 		268BD7BD2CF57DD100788A65 /* SearchPlaceUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPlaceUseCase.swift; sourceTree = "<group>"; };
@@ -623,10 +625,10 @@
 		260C3CD62C6CA53D004A9206 /* MapView */ = {
 			isa = PBXGroup;
 			children = (
+				26847D622D163DCB00B80067 /* Search */,
 				26756A102CEDC2F80031923F /* MultiMarkerSelector */,
 				267CC17D2C66F2BC00D6015E /* MapView2.swift */,
 				267CC17F2C66F2C700D6015E /* MapVM2.swift */,
-				268BD7B52CF5797800788A65 /* SearchMapVM.swift */,
 				268BD7B72CF57A2300788A65 /* TimerManager.swift */,
 			);
 			path = MapView;
@@ -1047,6 +1049,15 @@
 				2682FE362CF471D5008664C8 /* GetLocationPermissionUseCase.swift */,
 			);
 			path = Permission;
+			sourceTree = "<group>";
+		};
+		26847D622D163DCB00B80067 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				26847D632D163DDE00B80067 /* SearchView.swift */,
+				26847D652D163DE300B80067 /* SearchVM.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		268546E62A28DB0300BDA2EA /* Review */ = {
@@ -1925,7 +1936,6 @@
 				63F132972914A1C000B3A9E0 /* EmailSender.swift in Sources */,
 				267CC17B2C66F28E00D6015E /* Destination.swift in Sources */,
 				26CBA8A22D15665900381D83 /* GetLocationUseCase.swift in Sources */,
-				268BD7B62CF5797800788A65 /* SearchMapVM.swift in Sources */,
 				260C87D0296AAF5C00ADCC32 /* FootprintItem.swift in Sources */,
 				2613ED4B2973C5AC0060EF23 /* MainMenuBar.swift in Sources */,
 				26FAB54D2C6B4091006304AE /* SelectLocationView.swift in Sources */,
@@ -1953,6 +1963,7 @@
 				26D018B72CE433B600891B89 /* TripRepository.swift in Sources */,
 				63F132AA2914A1C000B3A9E0 /* MainViewModel.swift in Sources */,
 				2650A06E2CE33D4000040512 /* TripFootprintEntity.swift in Sources */,
+				26847D642D163DDE00B80067 /* SearchView.swift in Sources */,
 				26940CAD293C9D0F0091E996 /* ShowImageView.swift in Sources */,
 				2694FC8C2C79821500F01644 /* MemberRepositoryImpl.swift in Sources */,
 				268BD7C72CF5A53A00788A65 /* NetworkError.swift in Sources */,
@@ -2052,6 +2063,7 @@
 				260C87CD296AADBE00ADCC32 /* ShowTravelViewModel.swift in Sources */,
 				266EDDDE2C64EAD9006CF09B /* SplashVM2.swift in Sources */,
 				63F1324C2914A18800B3A9E0 /* CommonApi.swift in Sources */,
+				26847D662D163DE300B80067 /* SearchVM.swift in Sources */,
 				2694FC932C79851000F01644 /* DeleteMemberUseCase.swift in Sources */,
 				2650A05D2CE3253E00040512 /* TripIcon.swift in Sources */,
 				26D018C32CE4598500891B89 /* SaveTripIconUseCase.swift in Sources */,

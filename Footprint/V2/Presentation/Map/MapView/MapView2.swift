@@ -24,7 +24,6 @@ struct MapView2: View {
     @StateObject var vm: MapVM2 = MapVM2()
     @StateObject var mapManager: FPMapManager = FPMapManager.shared
     @StateObject private var footprintVM: FootprintVM = FootprintVM()
-    @StateObject private var searchMapVM: SearchMapVM = SearchMapVM()
     @EnvironmentObject private var coordinator: MapCoordinator
     @EnvironmentObject private var tabBarVM: TabBarVM
     
@@ -41,6 +40,8 @@ struct MapView2: View {
     @Environment(\.centerLocation) var centerLocation
     
     @State private var selectorWidth: CGFloat = .zero
+    
+    @State private var menuIconSize: CGSize = .zero
     
     init(output: Output) {
         self.output = output
@@ -177,44 +178,43 @@ struct MapView2: View {
                     Spacer()
                 })
             }
-            if $vm.isShowSearchBar.wrappedValue {
-                HStack(alignment: .center, spacing: 0, content: {
-                    Spacer()
-                    if isShowSearchBar {
-                        VStack(alignment: .leading, spacing: 9, content: {
-                            drawSearchBox()
-                                .sdPadding(top: 8, leading: 16, bottom: 0, trailing: 16)
-                        })
-                    }
-                    
-                    mapMenuButton("search") {
-                        withAnimation {
-                            self.isShowSearchBar.toggle()
-                        }
-                    }
-                    .sdPadding(top: 8, leading: 0, bottom: 0, trailing: 16)
-                })
-            }
-            ZStack(alignment: .top, content: {
+            
+            ZStack(alignment: .topLeading, content: {
                 if isShowSearchBar {
-                    if $searchMapVM.searchStatus.wrappedValue != .none {
-                        drawSearchList()
-                            .sdPaddingTop(8)
-                            .zIndex(5)
-                    }
+                    SearchView(isShowSearchBar: $isShowSearchBar, menuIconSize: $menuIconSize)
+                        .sdPadding(top: 8, leading: 16, bottom: 0, trailing: 16)
+                        .environmentObject(mapManager)
+                        .zIndex(5)
                 }
+                
+                
                 HStack(alignment: .center, spacing: 0, content: {
                     Spacer()
-                    markerMenuButton("paw-foot") {
-                        if !isShowSearchBar {
-                            vm.toggleIsShowMarker()
-                            if $vm.isShowMarkers.wrappedValue {
-                                mapManager.loadMarkers()
-                            } else {
-                                mapManager.deleteMarkers()
+                    VStack(alignment: .trailing, spacing: 8, content: {
+                        mapMenuButton("search") {
+                            withAnimation {
+                                self.isShowSearchBar.toggle()
                             }
                         }
-                    }
+                        .background {
+                            GeometryReader(content: { geometry in
+                                Color.clear
+                                    .onAppear {
+                                        menuIconSize = geometry.size
+                                    }
+                            })
+                        }
+                        markerMenuButton("paw-foot") {
+                            if !isShowSearchBar {
+                                vm.toggleIsShowMarker()
+                                if $vm.isShowMarkers.wrappedValue {
+                                    mapManager.loadMarkers()
+                                } else {
+                                    mapManager.deleteMarkers()
+                                }
+                            }
+                        }
+                    })
                     .sdPadding(top: 8, leading: 0, bottom: 0, trailing: 16)
                 })
             })
@@ -330,78 +330,5 @@ struct MapView2: View {
                 .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: 2)
                 .contentShape(Rectangle())
         })
-    }
-    
-    private func drawSearchList() -> some View {
-        return ScrollView(.vertical, showsIndicators: true) {
-            VStack(alignment: .leading, spacing: 8) {
-                ForEach($searchMapVM.searchItems.wrappedValue.indices, id: \.self) { idx in
-                    searchItem($searchMapVM.searchItems.wrappedValue[idx])
-                        .skeleton($searchMapVM.searchStatus.wrappedValue == .searching, reason: .placeholder)
-                }
-            }
-        }
-        .frame(width: UIScreen.main.bounds.size.width - 16 * 2, height: 65 * 3, alignment: .center)
-        .background(Color.dim_white_high)
-        .sdPaddingHorizontal(16)
-    }
-    
-    private func searchItem(_ item: SearchEntity) -> some View {
-        return VStack(alignment: .leading, spacing: 4) {
-            Text(item.name)
-                .sdFont(.body1, color: Color.cont_gray_default)
-            Text(item.fullAddress)
-                .sdFont(.body3, color: Color.cont_gray_mid)
-        }
-        .sdPadding(top: 8, leading: 16, bottom: 12, trailing: 16)
-        .contentShape(Rectangle())
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .onTapGesture {
-            searchMapVM.getLocation(item.placeId) { location in
-                if let location = location {
-                    mapManager.moveToLocation(location)
-                    self.isShowSearchBar.toggle()
-                }
-            }
-            //            vm.onClickSearchItem(item)
-//            mapManager.moveToLocation()
-        }
-    }
-    
-    private func drawSearchBox() -> some View {
-        return HStack(alignment: .center) {
-            TextField("", text: $searchMapVM.searchText, prompt: Text("검색어를 입력하세요").sdFont(.body1, color: Color.cont_gray_low).sdPaddingLeading(12) as? Text)
-                .sdFont(.body1, color: Color.cont_gray_default)
-                .accentColor(.fColor2)
-                .sdPaddingHorizontal(8)
-                .layoutPriority(.greatestFiniteMagnitude)
-                .onChange(of: $searchMapVM.searchText.wrappedValue) { _ in
-                    searchMapVM.onTypeText()
-                }
-            
-            if !$searchMapVM.searchText.wrappedValue.isEmpty {
-                Button {
-                    searchMapVM.onCancel()
-                } label: {
-                    Image("ic_close")
-                        .resizable()
-                        .renderingMode(.template)
-                        .foregroundColor(Color.cont_gray_mid)
-                        .frame(both: 10.0, alignment: .center)
-                        .sdPaddingTrailing(12)
-                        .sdPaddingTrailing(8)
-                        .contentShape(Rectangle())
-                }
-                .zIndex(10)
-            }
-        }
-        .sdPaddingVertical(10)
-        .background(
-            RoundedRectangle(cornerRadius: 8)
-                .foregroundColor(Color.bg_white)
-                .border(Color.btn_ic_stroke_default, lineWidth: 0.75, cornerRadius: 8)
-        )
-        .contentShape(Rectangle())
-        .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: 2)
     }
 }

@@ -14,6 +14,10 @@ private struct CenterLocation: EnvironmentKey {
     static let defaultValue = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
 }
 
+private struct DeviceWidth: EnvironmentKey {
+    static let defaultValue = UIScreen.main.bounds.size.width
+}
+
 private struct IsShowMain: EnvironmentKey {
     static let defaultValue = false
 }
@@ -22,6 +26,11 @@ extension EnvironmentValues {
     var centerLocation: CLLocationCoordinate2D {
         get { self[CenterLocation.self] }
         set { self[CenterLocation.self] = newValue }
+    }
+    
+    var deviceWidth: CGFloat {
+        get { self[DeviceWidth.self] }
+        set { self[DeviceWidth.self] = newValue }
     }
     
     var isShowMain: Bool {

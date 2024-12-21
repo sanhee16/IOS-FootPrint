@@ -1,8 +1,8 @@
 //
-//  SearchMapVM.swift
+//  SearchVM.swift
 //  Footprint
 //
-//  Created by sandy on 11/26/24.
+//  Created by sandy on 12/21/24.
 //
 
 import Combine
@@ -16,13 +16,12 @@ enum SearchStatus {
     case finish
 }
 
-class SearchMapVM: ObservableObject {
+class SearchVM: ObservableObject {
     @Injected(\.searchPlaceUseCase) private var searchPlaceUseCase
     @Injected(\.getLocationUseCase) private var getLocationUseCase
     @Published var searchItems: [SearchEntity] = []
     @Published var searchText: String = ""
     @Published var location: Location
-    @Published var searchStatus: SearchStatus = .none
     private let timerManager: TimerManager
     let sessionToken = GMSAutocompleteSessionToken()
     
@@ -63,23 +62,21 @@ class SearchMapVM: ObservableObject {
     
     @MainActor
     // Typing Text
-    func onTypeText() {
+    func onTypeText(_ onDone: @escaping (SearchStatus) -> ()) {
         if self.searchText.isEmpty {
-//            timerManager.stopTimer()
-            self.searchStatus = .none
+            onDone(.none)
             return
         }
         self.resetSearchItem()
-        self.searchStatus = .searching
-//        timerManager.restartTimer()
-        self.onSearchText()
+        self.onSearchText { status in
+            onDone(status)
+        }
     }
     
     // Search Text
-    private func onSearchText() {
+    private func onSearchText(_ onDone: @escaping (SearchStatus) -> ()) {
         if self.searchText.isEmpty {
-//            timerManager.stopTimer()
-            self.searchStatus = .none
+            onDone(.none)
             return
         }
         
@@ -87,16 +84,17 @@ class SearchMapVM: ObservableObject {
             guard let self = self else { return }
             Task {
                 self.searchItems = await self.searchPlaceUseCase.execute(self.searchText, location: self.location, sessionToken: self.sessionToken)
-                self.searchStatus = .finish
+                onDone(.finish)
             }
         }
     }
     
     @MainActor
     // remove all, cacnel search
-    func onCancel() {
-        self.searchStatus = .none
+    func onCancel(_ onDone: @escaping (SearchStatus) -> ()) {
+        onDone(.none)
         self.searchItems.removeAll()
         self.searchText.removeAll()
     }
 }
+
