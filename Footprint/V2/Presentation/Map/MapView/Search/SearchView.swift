@@ -16,6 +16,7 @@ struct SearchView: View {
     @Binding var menuIconSize: CGSize
     @State private var status: SearchStatus = .none
     @State private var boxSize: CGSize = .zero
+    @FocusState private var isFocused: Bool
     
     
     var body: some View {
@@ -40,27 +41,33 @@ struct SearchView: View {
         }
         .frame(height: 65 * 3, alignment: .center)
         .background(Color.dim_white_high)
-//        .sdPaddingHorizontal(16)
     }
     
     private func searchItem(_ item: SearchEntity) -> some View {
-        return VStack(alignment: .leading, spacing: 4) {
-            Text(item.name)
-                .sdFont(.body1, color: Color.cont_gray_default)
-            Text(item.fullAddress)
-                .sdFont(.body3, color: Color.cont_gray_mid)
-        }
-        .sdPadding(top: 8, leading: 16, bottom: 12, trailing: 16)
-        .contentShape(Rectangle())
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .onTapGesture {
+        return Button(action: {
             searchVM.getLocation(item.placeId) { location in
                 if let location = location {
                     mapManager.moveToLocation(location)
                     self.isShowSearchBar.toggle()
                 }
             }
-        }
+        }, label: {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(item.name)
+                    .sdFont(.body1, color: Color.cont_gray_default)
+                    .multilineTextAlignment(.leading)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(alignment: .leading)
+                Text(item.fullAddress)
+                    .sdFont(.body3, color: Color.cont_gray_mid)
+                    .multilineTextAlignment(.leading)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(alignment: .leading)
+            }
+            .sdPadding(top: 8, leading: 16, bottom: 12, trailing: 16)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .contentShape(Rectangle())
+        })
     }
     
     private func searchBox() -> some View {
@@ -69,6 +76,7 @@ struct SearchView: View {
                 .sdFont(.body1, color: Color.cont_gray_default)
                 .accentColor(.fColor2)
                 .sdPaddingHorizontal(8)
+                .focused($isFocused)
                 .layoutPriority(.greatestFiniteMagnitude)
                 .onChange(of: $searchVM.searchText.wrappedValue) { _ in
                     searchVM.onTypeText { status in
@@ -98,7 +106,7 @@ struct SearchView: View {
         .background(
             RoundedRectangle(cornerRadius: 8)
                 .foregroundColor(Color.bg_white)
-                .border(Color.btn_ic_stroke_default, lineWidth: 0.75, cornerRadius: 8)
+                .border($isFocused.wrappedValue ? Color.stroke_active : Color.btn_ic_stroke_default, lineWidth: 0.75, cornerRadius: 8)
         )
         .contentShape(Rectangle())
         .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: 2)

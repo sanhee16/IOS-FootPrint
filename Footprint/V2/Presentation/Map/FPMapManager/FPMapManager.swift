@@ -58,7 +58,7 @@ class FPMapManager: NSObject, ObservableObject {
         addObserver()
     }
     
-    @MainActor
+    
     func moveToCurrentLocation() {
         self.getCurrentLocation()
         
@@ -67,10 +67,13 @@ class FPMapManager: NSObject, ObservableObject {
         
         let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: (zoom == nil ? 18.0 : mapView.camera.zoom))
         self.zoom = mapView.camera.zoom
-        mapView.camera = camera
+        
+        Task.detached { @MainActor in
+            self.mapView.camera = camera
+        }
     }
     
-    @MainActor
+    
     func moveToLocation(_ location: Location) {
         self.getCurrentLocation()
         
@@ -79,28 +82,24 @@ class FPMapManager: NSObject, ObservableObject {
         
         let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: (zoom == nil ? 18.0 : mapView.camera.zoom))
         self.zoom = mapView.camera.zoom
-        mapView.camera = camera
-    }
-    
-    @MainActor
-    func moveToPlaceID(_ placeID: String) {
         
-//        let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: (zoom == nil ? 18.0 : mapView.camera.zoom))
-//        self.zoom = mapView.camera.zoom
-//        mapView.camera = camera
+        Task.detached { @MainActor in
+            self.mapView.camera = camera
+        }
     }
     
-    @MainActor
     func settingMapView() {
-        self.moveToCurrentLocation()
-        
-        // 지도 setting
-        mapView.mapType = .normal
-        mapView.isIndoorEnabled = false
-        mapView.isBuildingsEnabled = false
-        mapView.isMyLocationEnabled = true
-        
-        C.mapView = mapView
+        Task.detached { @MainActor in
+            self.moveToCurrentLocation()
+            
+            // 지도 setting
+            self.mapView.mapType = .normal
+            self.mapView.isIndoorEnabled = false
+            self.mapView.isBuildingsEnabled = false
+            self.mapView.isMyLocationEnabled = true
+            
+            C.mapView = self.mapView
+        }
     }
     
     func addObserver() {
