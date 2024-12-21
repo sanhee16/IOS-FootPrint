@@ -39,7 +39,7 @@ class EditNoteVM: BaseViewModel {
     @Published var selectedMembers: [MemberEntity] = []
     @Published var entireMembers: [MemberEntity] = []
     
-    private var noteId: String? = nil
+    @Published var noteId: String? = nil
     
     @Published var location: Location? = nil
     
@@ -76,6 +76,10 @@ class EditNoteVM: BaseViewModel {
     
     func loadMembers() {
         self.entireMembers = loadMembersUseCase.execute()
+    }
+    
+    func deleteNote(_ id: String, onDone: @escaping (Bool)->()) {
+        //TODO: delete note useCase
     }
     
     func saveNote(_ onDone: @escaping ()->()) {

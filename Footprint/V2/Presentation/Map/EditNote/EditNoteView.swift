@@ -352,21 +352,22 @@ struct EditNoteView: View {
     
     private func drawHeader() -> some View {
         return ZStack(alignment: .leading) {
-            Topbar("발자국 남기기", type: .back) {
+            Topbar($vm.noteId.wrappedValue == nil ? "발자국 남기기" : "발자국 편집하기", type: .back) {
                 vm.clearFootprint()
                 self.output.pop()
             }
             HStack(alignment: .center, spacing: 12) {
                 Spacer()
-                Image("ic_star")
-                    .renderingMode(.template)
-                    .resizable()
-                    .scaledToFit()
-                    .foregroundColor($vm.isStar.wrappedValue ? Color.btn_ic_cont_default : Color.btn_ic_cont_disable)
-                    .frame(both: 20.0, alignment: .center)
-                    .onTapGesture {
-                        $vm.isStar.wrappedValue = !$vm.isStar.wrappedValue
+                
+                if let noteId = $vm.noteId.wrappedValue {
+                    FPButton(text: "삭제", status: .able, size: .small, type: .textGray) {
+                        vm.deleteNote(noteId) { isSuccess in
+                            if isSuccess {
+                                self.output.pop()
+                            }
+                        }
                     }
+                }
                 FPButton(text: "완료", status: $vm.isAvailableToSave.wrappedValue ? .able : .disable, size: .small, type: .textPrimary) {
                     vm.saveNote {
                         self.output.pop()
