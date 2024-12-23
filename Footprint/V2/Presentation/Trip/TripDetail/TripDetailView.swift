@@ -13,6 +13,7 @@ struct TripDetailView: View {
     struct Output {
         var pop: () -> ()
         var goToEditTrip: () -> ()
+        var pushFootprintListWtihSameAddressView: (String) -> ()
     }
     private let output: Output
     @StateObject private var vm: TripDetailVM
@@ -94,6 +95,8 @@ struct TripDetailView: View {
         }, content: {
             FootprintView(isPresented: $isPresentFootprint, output: FootprintView.Output(pushEditNoteView: {
                 
+            }, pushFootprintListWtihSameAddressView: { address in
+                self.output.pushFootprintListWtihSameAddressView(address)
             }), isEditable: false)
                 .environmentObject(footprintVM)
                 .presentationDetents([.fraction(0.8), .large])

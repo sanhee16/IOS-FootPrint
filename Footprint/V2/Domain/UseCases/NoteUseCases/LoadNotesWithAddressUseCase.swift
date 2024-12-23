@@ -1,5 +1,5 @@
 //
-//  LoadNotesUseCaseWithAddress.swift
+//  loadNoteWithAddressUseCase.swift
 //  Footprint
 //
 //  Created by sandy on 11/1/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class LoadNotesUseCaseWithAddress {
+class LoadNotesWithAddressUseCase {
     let noteRepository: NoteRepository
     let categoryRepository: CategoryRepository
     let memberRepository: MemberRepository

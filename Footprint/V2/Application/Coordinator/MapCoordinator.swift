@@ -25,19 +25,11 @@ class MapCoordinator: BaseCoordinator<Destination> {
     }
     
     private func pushEditTripView(_ type: EditTripType) {
-        self.push(.editTrip(type: type, output:  EditTripView.Output {
-            self.pop()
-        } popToList: {
-            self.popToRoot()
-        }))
+        self.push(.editTrip(type: type, output: self.editTripViewOutput))
     }
     
     private func pushTripDetailView(_ id: String) {
-        self.push(.tripDetailView(id: id, output: TripDetailView.Output(pop: {
-            self.pop()
-        }, goToEditTrip: {
-            self.pushEditTripView(.modify(id: id))
-        })))
+        self.push(.tripDetailView(id: id, output: self.tripDetailViewOutput(id)))
     }
     
     private func pushSelectLocationView(_ location: Location) {
@@ -45,13 +37,20 @@ class MapCoordinator: BaseCoordinator<Destination> {
             self.pop()
         }), location: location))
     }
+    
+    private func pushFootprintListWtihSameAddressView(_ address: String) {
+        self.push(.footprintListWtihSameAddressView(address: address, output: self.footprintListWtihSameAddressViewOutput))
+    }
 }
 
 //MARK: Output
 extension MapCoordinator {
-    var mapOutput: MapView2.Output {
-        MapView2.Output { type in
-            self.pushEditNote(type: type, output: self.editNoteOutput)
+    
+    var editTripViewOutput: EditTripView.Output {
+        EditTripView.Output {
+            self.pop()
+        } popToList: {
+            self.popToRoot()
         }
     }
     
@@ -60,17 +59,31 @@ extension MapCoordinator {
             self.pop()
         } pushCategoryListEditView: {
             self.pushCategoryListEditView(self.categoryListEditViewOutput)
-        } pushPeopleWithListEditView: { 
+        } pushPeopleWithListEditView: {
             self.pushPeopleWithListEditView(self.peopleWithListEditViewOutput)
         } pushSelectLocation: { location in
-            NotificationCenter.default.post(name: .changeMapStatus, object: MapStatus.adding.rawValue)
-            self.pop()
-            Task {
-                await self.mapManager.moveToLocation(location)
-            }
+            self.pushSelectLocationView(location)
         }
     }
     
+    func tripDetailViewOutput(_ id: String) -> TripDetailView.Output {
+        TripDetailView.Output(pop: {
+            self.pop()
+        }, goToEditTrip: {
+            self.pushEditTripView(.modify(id: id))
+        }, pushFootprintListWtihSameAddressView: { address in
+            self.pushFootprintListWtihSameAddressView(address)
+        })
+    }
+    
+    var mapOutput: MapView2.Output {
+        MapView2.Output { type in
+            self.pushEditNote(type: type, output: self.editNoteOutput)
+        } pushFootprintListWtihSameAddressView: { address in
+            self.pushFootprintListWtihSameAddressView(address)
+        }
+    }
+
     var selectLocationOutput: SelectLocationView.Output {
         SelectLocationView.Output {
             self.pop()
@@ -100,6 +113,16 @@ extension MapCoordinator {
     var footprintListViewOutput: FootprintListViewV2.Output {
         FootprintListViewV2.Output { type in
             self.pushEditNote(type: type, output: self.editNoteOutput)
+        } pushFootprintListWtihSameAddressView: { address in
+            self.pushFootprintListWtihSameAddressView(address)
+        }
+    }
+    
+    var footprintListWtihSameAddressViewOutput: FootprintListWtihSameAddressView.Output {
+        FootprintListWtihSameAddressView.Output { type in
+            self.pushEditNote(type: type, output: self.editNoteOutput)
+        } pop: {
+            self.pop()
         }
     }
 }

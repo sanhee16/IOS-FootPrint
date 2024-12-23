@@ -16,6 +16,7 @@ import Combine
 struct MapView2: View {
     struct Output {
         var goToEditNote: (EditNoteType) -> ()
+        var pushFootprintListWtihSameAddressView: (String) -> ()
     }
     
     private var output: Output
@@ -59,8 +60,7 @@ struct MapView2: View {
                         $isPresentFootprint.wrappedValue = true
                     } onClickViewAll: {
                         $isPresentFootprintSelector.wrappedValue = false
-                        //TODO: View All
-                        
+                        self.output.pushFootprintListWtihSameAddressView(selectedAddress)
                     } onClickAddNote: { location in
                         $isPresentFootprintSelector.wrappedValue = false
                         vm.updateTempLocation(location, address: selectedAddress)
@@ -137,6 +137,8 @@ struct MapView2: View {
                         //MARK: 편집하기
                         self.output.goToEditNote(.update(id: id))
                     }
+                }, pushFootprintListWtihSameAddressView: { address in
+                    self.output.pushFootprintListWtihSameAddressView(address)
                 }))
                 .environmentObject(footprintVM)
                 .presentationDetents([.fraction(0.8), .large])

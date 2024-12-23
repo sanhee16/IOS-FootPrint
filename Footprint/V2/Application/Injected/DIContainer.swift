@@ -94,9 +94,9 @@ extension Container {
         }
     }
     
-    var loadNotesUseCaseWithAddress: Factory<LoadNotesUseCaseWithAddress> {
+    var loadNoteWithAddressUseCase: Factory<LoadNotesWithAddressUseCase> {
         Factory(self) {
-            LoadNotesUseCaseWithAddress(
+            LoadNotesWithAddressUseCase(
                 noteRepository: self.noteRepository(),
                 categoryRepository: self.categoryRepository(),
                 memberRepository: self.memberRepository()

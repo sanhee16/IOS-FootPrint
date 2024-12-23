@@ -18,6 +18,7 @@ enum Destination: Hashable {
     case setMapIconView
     case permissionView(output: PermissionView.Output)
     case privacyPolicyView(url: String)
+    case footprintListWtihSameAddressView(address: String, output: FootprintListWtihSameAddressView.Output)
     
     var viewName: String {
         switch self {
@@ -39,6 +40,8 @@ enum Destination: Hashable {
             return "permissionView"
         case .privacyPolicyView:
             return "privacyPolicyView"
+        case .footprintListWtihSameAddressView:
+            return "footprintListWtihSameAddressView"
         }
     }
     
@@ -63,6 +66,8 @@ enum Destination: Hashable {
             PermissionView(output: output)
         case .privacyPolicyView(let url):
             WebView(title: "개인정보 처리방침", url: url)
+        case .footprintListWtihSameAddressView(let address, let output):
+            FootprintListWtihSameAddressView(output: output, address: address)
         }
     }
 }

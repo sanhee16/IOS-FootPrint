@@ -14,6 +14,7 @@ import Factory
 
 class FootprintVM: BaseViewModel {
     @Injected(\.loadNoteWithIdUseCase) var loadNoteWithIdUseCase
+    @Injected(\.loadNoteWithAddressUseCase) var loadNoteWithAddressUseCase
     @Injected(\.toogleStarUseCase) var toogleStarUseCase
     
     var footPrint: NoteEntity? = nil
@@ -21,6 +22,7 @@ class FootprintVM: BaseViewModel {
     private var id: String? = nil
     @Published var isFailToLoad: Bool = false
     @Published var isStar: Bool = false
+    @Published var isHasMore: Bool = false
     
     override init() {
         super.init()
@@ -42,6 +44,7 @@ class FootprintVM: BaseViewModel {
         }
         self.footPrint = note
         self.isStar = self.footPrint?.isStar ?? false
+        self.isHasMore = self.loadNoteWithAddressUseCase.execute(note.address, type: .latest).count > 0
         self.objectWillChange.send()
     }
 

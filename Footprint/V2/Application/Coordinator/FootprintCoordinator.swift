@@ -27,6 +27,10 @@ class FootprintCoordinator: BaseCoordinator<Destination> {
             self.pop()
         }), location: location))
     }
+    
+    private func pushFootprintListWtihSameAddressView(_ address: String) {
+        self.push(.footprintListWtihSameAddressView(address: address, output: self.footprintListWtihSameAddressViewOutput))
+    }
 }
 
 //MARK: Output
@@ -64,6 +68,16 @@ extension FootprintCoordinator {
     var footprintListViewOutput: FootprintListViewV2.Output {
         FootprintListViewV2.Output { type in
             self.pushEditNote(type: type, output: self.editNoteOutput)
+        } pushFootprintListWtihSameAddressView: { address in
+            self.pushFootprintListWtihSameAddressView(address)
+        }
+    }
+    
+    var footprintListWtihSameAddressViewOutput: FootprintListWtihSameAddressView.Output {
+        FootprintListWtihSameAddressView.Output { type in
+            self.pushEditNote(type: type, output: self.editNoteOutput)
+        } pop: {
+            self.pop()
         }
     }
 }

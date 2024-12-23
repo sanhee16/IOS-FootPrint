@@ -48,7 +48,7 @@ class MapVM2: BaseViewModel {
     @Injected(\.getIsShowSearchBarUseCase) var getIsShowSearchBarUseCase
     @Injected(\.updateIsShowMarkerUseCase) var updateIsShowMarkerUseCase
     @Injected(\.temporaryNoteService) var temporaryNoteService
-    @Injected(\.loadNotesUseCaseWithAddress) var loadNotesUseCaseWithAddress
+    @Injected(\.loadNoteWithAddressUseCase) var loadNoteWithAddressUseCase
     @Injected(\.loadNoteWithIdUseCase) var loadNoteWithIdUseCase
     
     private var locationManager: CLLocationManager

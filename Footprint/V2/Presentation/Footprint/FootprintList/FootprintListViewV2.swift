@@ -10,6 +10,7 @@ import SwiftUI
 struct FootprintListViewV2: View {
     struct Output {
         var goToEditNote: (EditNoteType) -> ()
+        var pushFootprintListWtihSameAddressView: (String) -> ()
     }
     
     private var output: Output
@@ -124,6 +125,8 @@ struct FootprintListViewV2: View {
                         vm.clearTempNote()
                         self.output.goToEditNote(.update(id: id))
                     }
+                }, pushFootprintListWtihSameAddressView: { address in
+                    self.output.pushFootprintListWtihSameAddressView(address)
                 }))
                 .environmentObject(footprintVM)
                 .presentationDetents([.fraction(0.8), .large])

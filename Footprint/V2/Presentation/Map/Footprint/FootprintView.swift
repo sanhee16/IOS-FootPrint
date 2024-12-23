@@ -22,6 +22,7 @@ struct FootprintView: View {
     
     struct Output {
         var pushEditNoteView: () -> ()
+        var pushFootprintListWtihSameAddressView: (String) -> ()
     }
     
     private var output: Output
@@ -86,7 +87,14 @@ struct FootprintView: View {
                             }
                             
                             VStack(alignment: .leading, spacing: 0, content: {
-                                drawTitle("위치", alignment: .bottomLeading)
+                                if $vm.isHasMore.wrappedValue {
+                                    drawTitleWithButton("위치", buttonText: "이 위치 발자국 전체보기", alignment: .bottomLeading) {
+                                        $isPresented.wrappedValue = false
+                                        self.output.pushFootprintListWtihSameAddressView(note.address)
+                                    }
+                                } else {
+                                    drawTitle("위치", alignment: .bottomLeading)
+                                }
                                 Text(note.address)
                                     .sdFont(.body1, color: .cont_gray_default)
                                     .sdPadding(top: 16, leading: 0, bottom: 8, trailing: 16)
@@ -149,10 +157,32 @@ struct FootprintView: View {
         }
         .navigationBarBackButtonHidden()
     }
-
+    
     private func drawTitle(_ text: String, alignment: Alignment = .leading) -> some View {
         Text(text)
             .sdFont(.headline4, color: .zineGray_700)
             .frame(width: 100, height: 40, alignment: alignment)
+    }
+    
+    private func drawTitleWithButton(_ text: String, buttonText: String, alignment: Alignment = .leading, onTapButton: @escaping () -> ()) -> some View {
+        HStack(alignment: .center, spacing: 0, content: {
+            Text(text)
+                .sdFont(.headline4, color: .zineGray_700)
+                .frame(width: 100, height: 40, alignment: alignment)
+            Spacer()
+            HStack(alignment: .center, spacing: 0, content: {
+                Text(buttonText)
+                    .sdFont(.headline4, color: .zineGray_700)
+                    .lineLimit(1)
+                Image("ic_arrow_right")
+                    .resizable()
+                    .frame(both: 12)
+            })
+            .frame(height: 40, alignment: alignment)
+            .contentShape(Rectangle())
+            .onTapGesture {
+                onTapButton()
+            }
+        })
     }
 }
