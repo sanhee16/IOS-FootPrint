@@ -19,7 +19,7 @@ class FootprintVM: BaseViewModel {
     
     var footPrint: NoteEntity? = nil
     private var isLoading: Bool = false
-    private var id: String? = nil
+    var id: String? = nil
     @Published var isFailToLoad: Bool = false
     @Published var isStar: Bool = false
     @Published var isHasMore: Bool = false

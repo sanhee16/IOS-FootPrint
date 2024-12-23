@@ -93,13 +93,15 @@ struct TripDetailView: View {
         .sheet(isPresented: $isPresentFootprint, onDismiss: {
             selectedId = nil
         }, content: {
-            FootprintView(isPresented: $isPresentFootprint, output: FootprintView.Output(pushEditNoteView: {
-                
+            FootprintView(isPresented: $isPresentFootprint, output: FootprintView.Output(pushUpdateNoteView: { id in
+//                self.output.goToEditNote(.update(id: id))
+            }, pushCreateNoteView: { location, address in
+//                self.output.goToEditNote(.create(address: address, location: location))
             }, pushFootprintListWtihSameAddressView: { address in
-                self.output.pushFootprintListWtihSameAddressView(address)
+//                self.output.pushFootprintListWtihSameAddressView(address)
             }), isEditable: false)
-                .environmentObject(footprintVM)
-                .presentationDetents([.fraction(0.8), .large])
+            .environmentObject(footprintVM)
+            .presentationDetents([.fraction(0.8), .large])
         })
     }
     

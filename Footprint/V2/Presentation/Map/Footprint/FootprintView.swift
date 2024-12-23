@@ -10,6 +10,7 @@ import SwiftUI
 import SwiftUIPager
 import SDSwiftUIPack
 
+
 struct FootprintView: View {
     @EnvironmentObject var vm: FootprintVM
     @Binding var isPresented: Bool
@@ -21,7 +22,8 @@ struct FootprintView: View {
     private let IMAGE_SIZE: CGFloat = 70.0
     
     struct Output {
-        var pushEditNoteView: () -> ()
+        var pushUpdateNoteView: (String) -> ()
+        var pushCreateNoteView: (Location, String) -> ()
         var pushFootprintListWtihSameAddressView: (String) -> ()
     }
     
@@ -40,25 +42,26 @@ struct FootprintView: View {
                 Topbar("", type: .close, backgroundColor: .white) {
                     $isPresented.wrappedValue = false
                 }
+                
                 if isEditable && (!$vm.isFailToLoad.wrappedValue) {
                     HStack(alignment: .center, spacing: 0, content: {
                         Spacer()
-                        Image("ic_star")
-                            .renderingMode(.template)
-                            .foregroundColor($vm.isStar.wrappedValue ? Color.btn_ic_cont_default : Color.btn_ic_cont_disable)
-                            .font(.system(size: 20))
-                            .contentShape(Rectangle())
-                            .onTapGesture {
-                                vm.onToggleStar()
+                        
+                        Button(action: {
+                            vm.onToggleStar()
+                        }, label: {
+                            Image("ic_star")
+                                .renderingMode(.template)
+                                .foregroundColor($vm.isStar.wrappedValue ? Color.btn_ic_cont_default : Color.btn_ic_cont_disable)
+                                .font(.system(size: 20))
+                        })
+                        
+                        FPButton(text: "편집", status: .able, size: .small, type: .textGray) {
+                            $isPresented.wrappedValue = false
+                            if let id = vm.id {
+                                self.output.pushUpdateNoteView(id)
                             }
-                        Text("편집")
-                            .sdFont(.btn3, color: Color.btn_lightSolid_cont_default)
-                            .padding(16)
-                            .contentShape(Rectangle())
-                            .onTapGesture {
-                                $isPresented.wrappedValue = false
-                                self.output.pushEditNoteView()
-                            }
+                        }
                     })
                 }
             })
@@ -75,10 +78,21 @@ struct FootprintView: View {
             } else {
                 ScrollView(.vertical, showsIndicators: false, content: {
                     VStack(alignment: .leading, spacing: 0) {
+                        FPButton(text: "여기에 발자국 남기기", location: .leading(name: "ic_feet"), status: .able, size: .large, type: .lightSolid) {
+                            $isPresented.wrappedValue = false
+                            if let note = $vm.footPrint.wrappedValue {
+                                self.output.pushCreateNoteView(Location(latitude: note.latitude, longitude: note.longitude), note.address)
+                            }
+                        }
+                        .padding(.bottom, 10)
+                        .sdPaddingHorizontal(16)
+                        
                         if let note = $vm.footPrint.wrappedValue {
                             Text(note.title)
                                 .sdFont(.title, color: .cont_gray_default)
                                 .sdPaddingHorizontal(16)
+                                .padding(.top, 16)
+                                .padding(.bottom, 8)
                             
                             if !note.content.isEmpty {
                                 Text(note.content)

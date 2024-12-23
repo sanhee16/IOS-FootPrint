@@ -132,11 +132,12 @@ struct MapView2: View {
                 $isPresentFootprint.wrappedValue = false
                 vm.clearTempNote()
             }, content: {
-                FootprintView(isPresented: $isPresentFootprint, output: FootprintView.Output(pushEditNoteView: {
-                    if let id = selectedId {
-                        //MARK: 편집하기
-                        self.output.goToEditNote(.update(id: id))
-                    }
+                FootprintView(isPresented: $isPresentFootprint, output: FootprintView.Output(pushUpdateNoteView: { id in
+                    vm.clearTempNote()
+                    self.output.goToEditNote(.update(id: id))
+                }, pushCreateNoteView: { location, address in
+                    vm.clearTempNote()
+                    self.output.goToEditNote(.create(address: address, location: location))
                 }, pushFootprintListWtihSameAddressView: { address in
                     self.output.pushFootprintListWtihSameAddressView(address)
                 }))
