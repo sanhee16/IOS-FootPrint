@@ -92,6 +92,7 @@ struct TripListView: View {
                             }
                         })
                         .sdPaddingHorizontal(16)
+                        .sdPaddingBottom(40)
                     })
                 })
                 .frame(maxWidth: .infinity, alignment: .topLeading)

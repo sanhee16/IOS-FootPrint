@@ -16,51 +16,57 @@ struct MemberEditView: View {
     @Binding var isPresented: Bool
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0, content: {
-            drawHeader()
-            
+        ZStack(content: {
+            Color.bg_default
             VStack(alignment: .leading, spacing: 0, content: {
-                drawTitle("사진", isEssential: false)
-                PhotosPicker(
-                    selection: $vm.selectedPhoto,
-                    matching: .images,
-                    photoLibrary: .shared()
-                ) {
-                    HStack(alignment: .center, spacing: 0, content: {
-                        Spacer()
-                        if let image = vm.image {
-                            Image(uiImage: image)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(both: 80.0, alignment: .center)
-                                .clipShape(Circle())
-                                .contentShape(Rectangle())
-                        } else {
-                            Image("profile 1")
-                                .resizable()
-                                .frame(both: 80.0, alignment: .center)
-                                .clipShape(Circle())
-                                .contentShape(Rectangle())
-                        }
-                        Spacer()
+                drawHeader()
+                
+                VStack(alignment: .leading, spacing: 0, content: {
+                    drawTitle("사진", isEssential: false)
+                    PhotosPicker(
+                        selection: $vm.selectedPhoto,
+                        matching: .images,
+                        photoLibrary: .shared()
+                    ) {
+                        HStack(alignment: .center, spacing: 0, content: {
+                            Spacer()
+                            if let image = vm.image {
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(both: 80.0, alignment: .center)
+                                    .clipShape(Circle())
+                                    .contentShape(Rectangle())
+                            } else {
+                                Image("profile 1")
+                                    .resizable()
+                                    .frame(both: 80.0, alignment: .center)
+                                    .clipShape(Circle())
+                                    .contentShape(Rectangle())
+                            }
+                            Spacer()
+                        })
+                        .sdPaddingVertical(8)
+                    }
+                    .onChange(of: vm.selectedPhoto, perform: { value in
+                        vm.selectImage()
                     })
-                    .sdPaddingVertical(8)
-                }
-                .onChange(of: vm.selectedPhoto, perform: { value in
-                    vm.selectImage()
+                    
+                    drawTitle("이름", isEssential: true)
+                    FPTextField(placeHolder: "name".localized(), text: $vm.name, fieldStyle: .line, lineStyle: .single(limit: nil))
+                        .ignoresSafeArea(.keyboard)
+                    
+                    drawTitle("설명", isEssential: false)
+                    FPTextField(placeHolder: "intro".localized(), text: $vm.intro, fieldStyle: .line, lineStyle: .single(limit: nil))
+                        .ignoresSafeArea(.keyboard)
+                    Spacer()
                 })
-                
-                drawTitle("이름", isEssential: true)
-                FPTextField(placeHolder: "name".localized(), text: $vm.name, fieldStyle: .line, lineStyle: .single(limit: nil))
-                    .ignoresSafeArea(.keyboard)
-                
-                drawTitle("설명", isEssential: false)
-                FPTextField(placeHolder: "intro".localized(), text: $vm.intro, fieldStyle: .line, lineStyle: .single(limit: nil))
-                    .ignoresSafeArea(.keyboard)
-                Spacer()
+                .sdPaddingHorizontal(16)
             })
-            .sdPaddingHorizontal(16)
         })
+        .onTapGesture {
+            hideKeyboard()
+        }
     }
     
     private func colorItem(_ hexColor: String) -> some View {

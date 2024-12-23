@@ -45,53 +45,81 @@ struct EditNoteView: View {
     private let LOCATION_ID: String = "LOCATION_ID"
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            drawHeader()
-            ScrollViewReader { scrollProxy in
-                ScrollView(showsIndicators: false) {
-                    VStack(alignment: .leading, spacing: 10) {
-                        drawTitle("제목", isEssential: true)
-                            .sdPaddingTop(24)
-                        Group {
-                            FPTextField(placeHolder: "title".localized(), text: $vm.title, fieldStyle: .line, lineStyle: .single(limit: nil))
-                            
-                            drawTitle("내용", isEssential: false)
+        ZStack(content: {
+            Color.bg_default
+            VStack(alignment: .leading, spacing: 0) {
+                drawHeader()
+                ScrollViewReader { scrollProxy in
+                    ScrollView(showsIndicators: false) {
+                        VStack(alignment: .leading, spacing: 10) {
+                            drawTitle("제목", isEssential: true)
                                 .sdPaddingTop(24)
-                            FPTextField(placeHolder: "content".localized(), text: $vm.content, fieldStyle: .line, lineStyle: .multi(limit: nil))
-                            
-                            drawTitle("위치", isEssential: true)
-                                .sdPaddingTop(24)
-                            FPTextField(placeHolder: "".localized(), text: $vm.address, fieldStyle: .none, lineStyle: .multi(limit: nil), isDisabled: true)
-                            
-                            FPButton(text: "발자국 위치 확인하기", status: .able, size: .large, type: .lightSolid) {
-                                vm.saveTempNote {
-                                    if let location = $vm.location.wrappedValue {
-                                        self.output.pushSelectLocation(location)
+                            Group {
+                                FPTextField(placeHolder: "title".localized(), text: $vm.title, fieldStyle: .line, lineStyle: .single(limit: nil))
+                                
+                                drawTitle("내용", isEssential: false)
+                                    .sdPaddingTop(24)
+                                FPTextField(placeHolder: "content".localized(), text: $vm.content, fieldStyle: .line, lineStyle: .multi(limit: nil))
+                                
+                                drawTitle("위치", isEssential: true)
+                                    .sdPaddingTop(24)
+                                FPTextField(placeHolder: "".localized(), text: $vm.address, fieldStyle: .none, lineStyle: .multi(limit: nil), isDisabled: true)
+                                
+                                FPButton(text: "발자국 위치 확인하기", status: .able, size: .large, type: .lightSolid) {
+                                    vm.saveTempNote {
+                                        if let location = $vm.location.wrappedValue {
+                                            self.output.pushSelectLocation(location)
+                                        }
                                     }
                                 }
-                            }
-                            .sdPaddingVertical(8)
-                            .id(LOCATION_ID)
-                            
-                            Divider()
-                                .background(Color.dim_black_low)
                                 .sdPaddingVertical(8)
-                        }
-                        
-                        drawDate(scrollProxy: scrollProxy)
-                        drawCategory(scrollProxy: scrollProxy)
-                        
-                        if (!$vm.images.wrappedValue.isEmpty) || (!$vm.imageUrls.wrappedValue.isEmpty) {
-                            drawTitle("사진", isEssential: false)
-                                .sdPaddingTop(24)
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                LazyHStack(alignment: .center, spacing: 16, content: {
-                                    if !$vm.imageUrls.wrappedValue.isEmpty {
-                                        ForEach(0..<$vm.imageUrls.wrappedValue.count, id: \.self) { index in
-                                            if let dir = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false),
-                                               let uiImage = UIImage(contentsOfFile: URL(fileURLWithPath: dir.absoluteString).appendingPathComponent($vm.imageUrls.wrappedValue[index]).path) {
+                                .id(LOCATION_ID)
+                                
+                                Divider()
+                                    .background(Color.dim_black_low)
+                                    .sdPaddingVertical(8)
+                            }
+                            
+                            drawDate(scrollProxy: scrollProxy)
+                            drawCategory(scrollProxy: scrollProxy)
+                            
+                            if (!$vm.images.wrappedValue.isEmpty) || (!$vm.imageUrls.wrappedValue.isEmpty) {
+                                drawTitle("사진", isEssential: false)
+                                    .sdPaddingTop(24)
+                                ScrollView(.horizontal, showsIndicators: false) {
+                                    LazyHStack(alignment: .center, spacing: 16, content: {
+                                        if !$vm.imageUrls.wrappedValue.isEmpty {
+                                            ForEach(0..<$vm.imageUrls.wrappedValue.count, id: \.self) { index in
+                                                if let dir = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false),
+                                                   let uiImage = UIImage(contentsOfFile: URL(fileURLWithPath: dir.absoluteString).appendingPathComponent($vm.imageUrls.wrappedValue[index]).path) {
+                                                    ZStack(alignment: .topTrailing) {
+                                                        Image(uiImage: uiImage)
+                                                            .resizable()
+                                                            .scaledToFill()
+                                                            .frame(both: 80.0, alignment: .center)
+                                                            .clipShape(
+                                                                Rectangle()
+                                                            )
+                                                        
+                                                        Image("DeleteButton")
+                                                            .resizable()
+                                                            .scaledToFit()
+                                                            .frame(both: 16.0, alignment: .center)
+                                                            .contentShape(Rectangle())
+                                                            .offset(x: 8, y: -8)
+                                                            .zIndex(1)
+                                                            .onTapGesture {
+                                                                vm.deleteImageUrl(index)
+                                                            }
+                                                    }
+                                                    .frame(both: 88.0, alignment: .bottomLeading)
+                                                }
+                                            }
+                                        }
+                                        if !$vm.images.wrappedValue.isEmpty {
+                                            ForEach(0..<$vm.images.wrappedValue.count, id: \.self) { index in
                                                 ZStack(alignment: .topTrailing) {
-                                                    Image(uiImage: uiImage)
+                                                    Image(uiImage: $vm.images.wrappedValue[index])
                                                         .resizable()
                                                         .scaledToFill()
                                                         .frame(both: 80.0, alignment: .center)
@@ -107,146 +135,124 @@ struct EditNoteView: View {
                                                         .offset(x: 8, y: -8)
                                                         .zIndex(1)
                                                         .onTapGesture {
-                                                            vm.deleteImageUrl(index)
+                                                            vm.deleteImage(index)
                                                         }
                                                 }
                                                 .frame(both: 88.0, alignment: .bottomLeading)
                                             }
                                         }
-                                    }
-                                    if !$vm.images.wrappedValue.isEmpty {
-                                        ForEach(0..<$vm.images.wrappedValue.count, id: \.self) { index in
-                                            ZStack(alignment: .topTrailing) {
-                                                Image(uiImage: $vm.images.wrappedValue[index])
-                                                    .resizable()
-                                                    .scaledToFill()
-                                                    .frame(both: 80.0, alignment: .center)
-                                                    .clipShape(
-                                                        Rectangle()
-                                                    )
-                                                
-                                                Image("DeleteButton")
-                                                    .resizable()
-                                                    .scaledToFit()
-                                                    .frame(both: 16.0, alignment: .center)
-                                                    .contentShape(Rectangle())
-                                                    .offset(x: 8, y: -8)
-                                                    .zIndex(1)
-                                                    .onTapGesture {
-                                                        vm.deleteImage(index)
-                                                    }
-                                            }
-                                            .frame(both: 88.0, alignment: .bottomLeading)
-                                        }
-                                    }
-                                })
+                                    })
+                                }
+                            }
+                            if !$vm.selectedMembers.wrappedValue.isEmpty {
+                                PeopleWithView(members: $vm.selectedMembers.wrappedValue)
+                                    .sdPaddingVertical(8)
                             }
                         }
-                        if !$vm.selectedMembers.wrappedValue.isEmpty {
-                            PeopleWithView(members: $vm.selectedMembers.wrappedValue)
-                                .sdPaddingVertical(8)
-                        }
+                        .sdPaddingHorizontal(16)
+                        .sdPaddingBottom(14)
                     }
-                    .sdPaddingHorizontal(16)
-                    .sdPaddingBottom(14)
                 }
-            }
-            .ignoresSafeArea(.keyboard, edges: [.bottom])
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Color.bg_default)
-            .toolbar {
-                ToolbarItemGroup(placement: .keyboard) {
-                    Spacer() // Spacer to push button to the right
-                    Button(action: {
-                        UIApplication.shared.hideKeyborad()
-                    }, label: {
-                        Image("ic_keyboardOff")
-                    })
+                .ignoresSafeArea(.keyboard, edges: [.bottom])
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Color.bg_default)
+                .toolbar {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        Spacer() // Spacer to push button to the right
+                        Button(action: {
+                            UIApplication.shared.hideKeyborad()
+                        }, label: {
+                            Image("ic_keyboardOff")
+                        })
+                    }
                 }
-            }
-            .onAppear(perform: {
-                vm.loadNote()
-            })
-            
-            
-            HStack(alignment: .center, spacing: 8, content: {
-                PhotosPicker(
-                    selection: $vm.selectedPhotos, // holds the selected photos from the picker
-                    maxSelectionCount: nil, // sets the max number of photos the user can select
-                    selectionBehavior: .ordered, // ensures we get the photos in the same order that the user selected them
-                    matching: .images, // filter the photos library to only show images,
-                    photoLibrary: .shared()
-                ) {
-                    HStack(alignment: .center, spacing: 8, content: {
-                        Image("picture")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(both: 16, alignment: .center)
-                        Text("사진")
-                            .sdFont(.btn3, color: .btn_lightSolid_cont_default)
-                    })
-                    .padding(8)
-                    .contentShape(Rectangle())
-                }
-                .onChange(of: vm.selectedPhotos, perform: { value in
-                    vm.addImage()
+                .onAppear(perform: {
+                    vm.loadNote()
                 })
                 
                 
                 HStack(alignment: .center, spacing: 8, content: {
-                    Image("user-add")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(both: 16, alignment: .center)
-                    Text("함께한 사람")
-                        .sdFont(.btn3, color: .btn_lightSolid_cont_default)
-                })
-                .padding(8)
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    $isPresentPeopleWith.wrappedValue = true
-                }
-                .sheet(isPresented: $isPresentPeopleWith, onDismiss: {
+                    PhotosPicker(
+                        selection: $vm.selectedPhotos, // holds the selected photos from the picker
+                        maxSelectionCount: nil, // sets the max number of photos the user can select
+                        selectionBehavior: .ordered, // ensures we get the photos in the same order that the user selected them
+                        matching: .images, // filter the photos library to only show images,
+                        photoLibrary: .shared()
+                    ) {
+                        HStack(alignment: .center, spacing: 8, content: {
+                            Image("picture")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(both: 16, alignment: .center)
+                            Text("사진")
+                                .sdFont(.btn3, color: .btn_lightSolid_cont_default)
+                        })
+                        .padding(8)
+                        .contentShape(Rectangle())
+                    }
+                    .onChange(of: vm.selectedPhotos, perform: { value in
+                        vm.addImage()
+                    })
                     
-                }, content: {
-                    VStack(alignment: .leading, spacing: 0, content: {
-                        HStack(alignment: .center, spacing: 0) {
-                            Text("함께한 사람")
-                            Spacer()
-                            FPButton(text: "편집", status: .able, size: .small, type: .textGray) {
-                                $isPresentPeopleWith.wrappedValue = false
-                                output.pushPeopleWithListEditView()
-                            }
-                        }
-                        .sdPaddingHorizontal(24)
-                        .sdPaddingTop(26)
-                        .onAppear {
-                            vm.loadMembers()
-                        }
+                    
+                    HStack(alignment: .center, spacing: 8, content: {
+                        Image("user-add")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(both: 16, alignment: .center)
+                        Text("함께한 사람")
+                            .sdFont(.btn3, color: .btn_lightSolid_cont_default)
+                    })
+                    .padding(8)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        $isPresentPeopleWith.wrappedValue = true
+                    }
+                    .sheet(isPresented: $isPresentPeopleWith, onDismiss: {
                         
-                        ScrollView(.vertical, showsIndicators: false, content: {
-                            ForEach($vm.entireMembers.wrappedValue, id: \.self) { item in
-                                HStack(alignment: .center, spacing: 0, content: {
-                                    memberItem(item)
-                                    Spacer()
-                                })
-                                .padding(16)
-                                .contentShape(Rectangle())
-                                .onTapGesture {
-                                    vm.toggleMember(item)
+                    }, content: {
+                        VStack(alignment: .leading, spacing: 0, content: {
+                            HStack(alignment: .center, spacing: 0) {
+                                Text("함께한 사람")
+                                Spacer()
+                                FPButton(text: "편집", status: .able, size: .small, type: .textGray) {
+                                    $isPresentPeopleWith.wrappedValue = false
+                                    output.pushPeopleWithListEditView()
                                 }
                             }
-                            .sdPaddingBottom(20)
+                            .sdPaddingHorizontal(24)
+                            .sdPaddingTop(26)
+                            .onAppear {
+                                vm.loadMembers()
+                            }
+                            
+                            ScrollView(.vertical, showsIndicators: false, content: {
+                                ForEach($vm.entireMembers.wrappedValue, id: \.self) { item in
+                                    HStack(alignment: .center, spacing: 0, content: {
+                                        memberItem(item)
+                                        Spacer()
+                                    })
+                                    .padding(16)
+                                    .contentShape(Rectangle())
+                                    .onTapGesture {
+                                        vm.toggleMember(item)
+                                    }
+                                }
+                                .sdPaddingBottom(20)
+                            })
                         })
+                        .presentationDetents([.medium, .large])
                     })
-                    .presentationDetents([.medium, .large])
+                    Spacer()
                 })
-                Spacer()
-            })
-            .sdPaddingVertical(4)
-            .sdPaddingHorizontal(16)
-            .frame(width: UIScreen.main.bounds.width)
-            .background(Color.bg_bgb)
+                .sdPaddingVertical(4)
+                .sdPaddingHorizontal(16)
+                .frame(width: UIScreen.main.bounds.width)
+                .background(Color.bg_bgb)
+            }
+        })
+        .onTapGesture {
+            hideKeyboard()
         }
         .navigationBarBackButtonHidden()
     }

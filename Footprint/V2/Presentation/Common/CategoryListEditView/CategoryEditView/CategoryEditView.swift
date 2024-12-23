@@ -15,92 +15,98 @@ struct CategoryEditView: View {
     @Binding var isPresented: Bool
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0, content: {
-            drawHeader()
-            ScrollView(.vertical, showsIndicators: false, content: {
-                VStack(alignment: .leading, spacing: 0, content: {
-                    drawTitle("이름", isEssential: false)
-                    
-                    FPTextField(placeHolder: "name".localized(), text: $vm.name, fieldStyle: .line, lineStyle: .single(limit: nil))
-                        .ignoresSafeArea(.keyboard)
-                    
-                    Divider()
-                    
-                    drawTitle("색상", isEssential: false)
-                    HStack(alignment: .bottom, spacing: 0, content: {
-                        ForEach(vm.DEFAULT_COLORS, id: \.self) { color in
-                            ZStack(alignment: .bottomTrailing, content: {
-                                colorItem(color.hex)
-                                    .padding(8)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 2)
-                                            .foregroundStyle($vm.color.wrappedValue == color ? Color.zineGray_200 : Color.clear)
-                                    )
-                                if $vm.color.wrappedValue == color {
-                                    Image("SelectButton")
-                                        .resizable()
-                                        .offset(x: 4, y: 4)
-                                        .frame(width: 16.0, height: 16.0, alignment: .center)
-                                        .zIndex(1)
+        ZStack(content: {
+            Color.bg_default
+            VStack(alignment: .leading, spacing: 0, content: {
+                drawHeader()
+                ScrollView(.vertical, showsIndicators: false, content: {
+                    VStack(alignment: .leading, spacing: 0, content: {
+                        drawTitle("이름", isEssential: false)
+                        
+                        FPTextField(placeHolder: "name".localized(), text: $vm.name, fieldStyle: .line, lineStyle: .single(limit: nil))
+                            .ignoresSafeArea(.keyboard)
+                        
+                        Divider()
+                        
+                        drawTitle("색상", isEssential: false)
+                        HStack(alignment: .bottom, spacing: 0, content: {
+                            ForEach(vm.DEFAULT_COLORS, id: \.self) { color in
+                                ZStack(alignment: .bottomTrailing, content: {
+                                    colorItem(color.hex)
+                                        .padding(8)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 2)
+                                                .foregroundStyle($vm.color.wrappedValue == color ? Color.zineGray_200 : Color.clear)
+                                        )
+                                    if $vm.color.wrappedValue == color {
+                                        Image("SelectButton")
+                                            .resizable()
+                                            .offset(x: 4, y: 4)
+                                            .frame(width: 16.0, height: 16.0, alignment: .center)
+                                            .zIndex(1)
+                                    }
+                                })
+                                .frame(maxWidth: .infinity)
+                                .layoutPriority(.greatestFiniteMagnitude)
+                                .contentShape(Rectangle())
+                                .onTapGesture {
+                                    $vm.color.wrappedValue = color
                                 }
-                            })
-                            .frame(maxWidth: .infinity)
-                            .layoutPriority(.greatestFiniteMagnitude)
-                            .contentShape(Rectangle())
-                            .onTapGesture {
-                                $vm.color.wrappedValue = color
                             }
+                        })
+                        .sdPaddingVertical(16)
+                        
+                        drawTitle("아이콘", isEssential: false)
+                            .sdFont(.headline3, color: Color.zineGray_700)
+                        
+                        Text("감정")
+                            .sdFont(.headline4, color: Color.zineGray_700)
+                            .sdPaddingTop(24)
+                        SDFlowLayout(data: vm.emotionIcons, id: \.self) { icon in
+                            iconItem(icon)
                         }
+                        .sdPaddingVertical(16)
+                        
+                        Text("일상")
+                            .sdFont(.headline4, color: Color.zineGray_700)
+                            .sdPaddingTop(24)
+                        SDFlowLayout(data: vm.dailyIcons, id: \.self) { icon in
+                            iconItem(icon)
+                        }
+                        .sdPaddingVertical(16)
+                        
+                        Text("활동")
+                            .sdFont(.headline4, color: Color.zineGray_700)
+                            .sdPaddingTop(24)
+                        SDFlowLayout(data: vm.activityIcons, id: \.self) { icon in
+                            iconItem(icon)
+                        }
+                        .sdPaddingVertical(16)
+                        
+                        Text("자연")
+                            .sdFont(.headline4, color: Color.zineGray_700)
+                            .sdPaddingTop(24)
+                        SDFlowLayout(data: vm.natureIcons, id: \.self) { icon in
+                            iconItem(icon)
+                        }
+                        .sdPaddingVertical(16)
+                        
+                        Text("기타")
+                            .sdFont(.headline4, color: Color.zineGray_700)
+                            .sdPaddingTop(24)
+                        SDFlowLayout(data: vm.etcIcons, id: \.self) { icon in
+                            iconItem(icon)
+                        }
+                        .sdPaddingTop(16)
                     })
-                    .sdPaddingVertical(16)
-                    
-                    drawTitle("아이콘", isEssential: false)
-                        .sdFont(.headline3, color: Color.zineGray_700)
-                    
-                    Text("감정")
-                        .sdFont(.headline4, color: Color.zineGray_700)
-                        .sdPaddingTop(24)
-                    SDFlowLayout(data: vm.emotionIcons, id: \.self) { icon in
-                        iconItem(icon)
-                    }
-                    .sdPaddingVertical(16)
-                    
-                    Text("일상")
-                        .sdFont(.headline4, color: Color.zineGray_700)
-                        .sdPaddingTop(24)
-                    SDFlowLayout(data: vm.dailyIcons, id: \.self) { icon in
-                        iconItem(icon)
-                    }
-                    .sdPaddingVertical(16)
-                    
-                    Text("활동")
-                        .sdFont(.headline4, color: Color.zineGray_700)
-                        .sdPaddingTop(24)
-                    SDFlowLayout(data: vm.activityIcons, id: \.self) { icon in
-                        iconItem(icon)
-                    }
-                    .sdPaddingVertical(16)
-                    
-                    Text("자연")
-                        .sdFont(.headline4, color: Color.zineGray_700)
-                        .sdPaddingTop(24)
-                    SDFlowLayout(data: vm.natureIcons, id: \.self) { icon in
-                        iconItem(icon)
-                    }
-                    .sdPaddingVertical(16)
-                    
-                    Text("기타")
-                        .sdFont(.headline4, color: Color.zineGray_700)
-                        .sdPaddingTop(24)
-                    SDFlowLayout(data: vm.etcIcons, id: \.self) { icon in
-                        iconItem(icon)
-                    }
-                    .sdPaddingTop(16)
+                    .sdPaddingHorizontal(16)
+                    .sdPaddingBottom(40)
                 })
-                .sdPaddingHorizontal(16)
-                .sdPaddingBottom(40)
             })
         })
+        .onTapGesture {
+            hideKeyboard()
+        }
     }
     
     private func colorItem(_ hexColor: String) -> some View {

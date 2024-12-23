@@ -33,168 +33,172 @@ struct EditTripView: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading,
-               spacing: 0,
-               content: {
-            drawHeader()
-            
-            ScrollViewReader { scrollProxy in
-                ScrollView(showsIndicators: false) {
-                    VStack(alignment: .leading, spacing: 10) {
-                        drawTitle("제목", isEssential: true)
-                            .sdPaddingTop(24)
-                        FPTextField(placeHolder: "title".localized(), text: $vm.title, fieldStyle: .line, lineStyle: .single(limit: nil))
-                        
-                        
-                        drawTitle("내용", isEssential: false)
-                            .sdPaddingTop(24)
-                        FPTextField(placeHolder: "content".localized(), text: $vm.content, fieldStyle: .line, lineStyle: .multi(limit: nil))
-                            .id(CONTENT_ID)
-                        
-                        
-                        drawTitle("기간", isEssential: true)
-                            .sdPaddingTop(24)
-                        drawPeriod(scrollProxy: scrollProxy)
-                        
-                        Rectangle()
-                            .frame(maxWidth: .infinity, idealHeight: 0.25)
-                            .foregroundStyle(Color.dim_black_low.opacity(0.15))
-                        
-                        drawTitle("발자취 컨셉", isEssential: true)
-                            .sdPaddingTop(24)
-                        if let icon = $vm.icon.wrappedValue {
-                            TripIconItem(item: icon)
-                                .padding(8)
-                        }
-                        
-                        VStack(alignment: .leading,
-                               spacing: 0,
-                               content: {
-                            SDFlowLayout(data: $vm.icons.wrappedValue, id: \.self) { icon in
-                                iconItem(icon)
-                                    .sdPaddingBottom(8)
+        ZStack(content: {
+            Color.bg_default
+            VStack(alignment: .leading, spacing: 0, content: {
+                drawHeader()
+                
+                ScrollViewReader { scrollProxy in
+                    ScrollView(showsIndicators: false) {
+                        VStack(alignment: .leading, spacing: 10) {
+                            drawTitle("제목", isEssential: true)
+                                .sdPaddingTop(24)
+                            FPTextField(placeHolder: "title".localized(), text: $vm.title, fieldStyle: .line, lineStyle: .single(limit: nil))
+                            
+                            
+                            drawTitle("내용", isEssential: false)
+                                .sdPaddingTop(24)
+                            FPTextField(placeHolder: "content".localized(), text: $vm.content, fieldStyle: .line, lineStyle: .multi(limit: nil))
+                                .id(CONTENT_ID)
+                            
+                            
+                            drawTitle("기간", isEssential: true)
+                                .sdPaddingTop(24)
+                            drawPeriod(scrollProxy: scrollProxy)
+                            
+                            Rectangle()
+                                .frame(maxWidth: .infinity, idealHeight: 0.25)
+                                .foregroundStyle(Color.dim_black_low.opacity(0.15))
+                            
+                            drawTitle("발자취 컨셉", isEssential: true)
+                                .sdPaddingTop(24)
+                            if let icon = $vm.icon.wrappedValue {
+                                TripIconItem(item: icon)
+                                    .padding(8)
                             }
                             
-                            if $vm.isExpanded.wrappedValue {
-                                FPButton(
-                                    text: "컨셉 목록 숨기기",
-                                    location: .trailing(name: "ic_arrow_up"),
-                                    status: .able,
-                                    size: .small,
-                                    type: .textGray
-                                ) {
-                                    vm.toggleExpandIcon()
+                            VStack(alignment: .leading,
+                                   spacing: 0,
+                                   content: {
+                                SDFlowLayout(data: $vm.icons.wrappedValue, id: \.self) { icon in
+                                    iconItem(icon)
+                                        .sdPaddingBottom(8)
                                 }
-                                .sdPaddingVertical(12)
-                                .frame(maxWidth: .infinity, alignment: .center)
-                            } else {
-                                FPButton(
-                                    text: "컨셉 목록 전체보기",
-                                    location: .trailing(name: "ic_arrow_down"),
-                                    status: .able,
-                                    size: .small,
-                                    type: .textGray
-                                ) {
-                                    vm.toggleExpandIcon()
+                                
+                                if $vm.isExpanded.wrappedValue {
+                                    FPButton(
+                                        text: "컨셉 목록 숨기기",
+                                        location: .trailing(name: "ic_arrow_up"),
+                                        status: .able,
+                                        size: .small,
+                                        type: .textGray
+                                    ) {
+                                        vm.toggleExpandIcon()
+                                    }
+                                    .sdPaddingVertical(12)
+                                    .frame(maxWidth: .infinity, alignment: .center)
+                                } else {
+                                    FPButton(
+                                        text: "컨셉 목록 전체보기",
+                                        location: .trailing(name: "ic_arrow_down"),
+                                        status: .able,
+                                        size: .small,
+                                        type: .textGray
+                                    ) {
+                                        vm.toggleExpandIcon()
+                                    }
+                                    .sdPaddingVertical(12)
+                                    .frame(maxWidth: .infinity, alignment: .center)
                                 }
-                                .sdPaddingVertical(12)
-                                .frame(maxWidth: .infinity, alignment: .center)
-                            }
-                        })
-                        .sdPaddingVertical(16)
-                        
-                        HStack(alignment: .center, spacing: 0, content: {
-                            drawTitle("발자국 모음", isEssential: true)
-                            Spacer()
-                            if !$vm.footprints.wrappedValue.filter({ $0.idx != nil }).isEmpty {
-                                FPButton(text: "편집", status: .able, size: .small, type: .textGray) {
+                            })
+                            .sdPaddingVertical(16)
+                            
+                            HStack(alignment: .center, spacing: 0, content: {
+                                drawTitle("발자국 모음", isEssential: true)
+                                Spacer()
+                                if !$vm.footprints.wrappedValue.filter({ $0.idx != nil }).isEmpty {
+                                    FPButton(text: "편집", status: .able, size: .small, type: .textGray) {
+                                        $isPresentFootprints.wrappedValue = true
+                                        vm.originalFootprints = $vm.footprints.wrappedValue
+                                    }
+                                }
+                            })
+                            .sdPaddingTop(24)
+                            if $vm.footprints.wrappedValue.filter({ $0.idx != nil }).isEmpty {
+                                FPButton(text: "발자국 추가하기", status: .able, size: .large, type: .lightSolid) {
                                     $isPresentFootprints.wrappedValue = true
                                     vm.originalFootprints = $vm.footprints.wrappedValue
                                 }
+                                .sdPaddingVertical(8)
+                            } else {
+                                ForEach($vm.selectedFootprints.wrappedValue, id: \.self) { item in
+                                    FootprintItem(item: item)
+                                }
                             }
-                        })
-                        .sdPaddingTop(24)
-                        if $vm.footprints.wrappedValue.filter({ $0.idx != nil }).isEmpty {
-                            FPButton(text: "발자국 추가하기", status: .able, size: .large, type: .lightSolid) {
-                                $isPresentFootprints.wrappedValue = true
-                                vm.originalFootprints = $vm.footprints.wrappedValue
-                            }
-                            .sdPaddingVertical(8)
-                        } else {
-                            ForEach($vm.selectedFootprints.wrappedValue, id: \.self) { item in
-                                FootprintItem(item: item)
-                            }
-                        }
-                        
-                        VStack{}
-                            .alert(isPresented: $isPresentDelete) {
-                                Alert(
-                                    title: Text("발자취 삭제하기"),
-                                    message: Text("삭제한 발자취는 복구할 수 없습니다.\n‘\($vm.title.wrappedValue)’를 삭제하시겠습니까?\n(발자국은 삭제되지 않습니다.)"),
-                                    primaryButton: .default(Text("취소"), action: {
-                                        
-                                    }),
-                                    secondaryButton: .default(Text("삭제"), action: {
-                                        vm.onDelete {
-                                            DispatchQueue.main.async {
-                                                $isPresentDeleteComplete.wrappedValue = true
+                            
+                            VStack{}
+                                .alert(isPresented: $isPresentDelete) {
+                                    Alert(
+                                        title: Text("발자취 삭제하기"),
+                                        message: Text("삭제한 발자취는 복구할 수 없습니다.\n‘\($vm.title.wrappedValue)’를 삭제하시겠습니까?\n(발자국은 삭제되지 않습니다.)"),
+                                        primaryButton: .default(Text("취소"), action: {
+                                            
+                                        }),
+                                        secondaryButton: .default(Text("삭제"), action: {
+                                            vm.onDelete {
+                                                DispatchQueue.main.async {
+                                                    $isPresentDeleteComplete.wrappedValue = true
+                                                }
                                             }
-                                        }
-                                    })
-                                )
-                            }
-                        
-                        VStack{}
-                            .alert(isPresented: $isPresentDeleteComplete) {
-                                Alert(
-                                    title: Text("삭제 완료"),
-                                    message: Text("‘\($vm.title.wrappedValue)’가 삭제 되었습니다."),
-                                    dismissButton: .default(Text("확인"), action: {
-                                        self.output.popToList()
-                                    })
-                                )
-                            }
-                        
-                        VStack{}
-                            .alert(isPresented: $isPresentCreateComplete) {
-                                Alert(
-                                    title: Text("발자취 만들기 성공"),
-                                    message: Text("‘\($vm.title.wrappedValue)’ 발자취를 만들었어요."),
-                                    dismissButton: .default(Text("확인"), action: {
-                                        self.output.pop()
-                                    })
-                                )
-                            }
+                                        })
+                                    )
+                                }
+                            
+                            VStack{}
+                                .alert(isPresented: $isPresentDeleteComplete) {
+                                    Alert(
+                                        title: Text("삭제 완료"),
+                                        message: Text("‘\($vm.title.wrappedValue)’가 삭제 되었습니다."),
+                                        dismissButton: .default(Text("확인"), action: {
+                                            self.output.popToList()
+                                        })
+                                    )
+                                }
+                            
+                            VStack{}
+                                .alert(isPresented: $isPresentCreateComplete) {
+                                    Alert(
+                                        title: Text("발자취 만들기 성공"),
+                                        message: Text("‘\($vm.title.wrappedValue)’ 발자취를 만들었어요."),
+                                        dismissButton: .default(Text("확인"), action: {
+                                            self.output.pop()
+                                        })
+                                    )
+                                }
+                        }
+                        .sdPaddingVertical(4)
+                        .sdPaddingHorizontal(16)
+                        .background(Color.bg_default)
                     }
-                    .sdPaddingVertical(4)
-                    .sdPaddingHorizontal(16)
-                    .background(Color.bg_default)
+                    .ignoresSafeArea(.keyboard, edges: [.bottom])
                 }
-                .ignoresSafeArea(.keyboard, edges: [.bottom])
+            })
+            .background(Color.bg_bgb)
+            .navigationBarBackButtonHidden()
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            .sheet(isPresented: $isPresentFootprints, onDismiss: {
+                vm.setSelectedFootprints()
+            }, content: {
+                SelectFootprintsViewV2(
+                    isPresented: $isPresentFootprints,
+                    originalFootprints: vm.originalFootprints
+                )
+                .environmentObject(vm)
+                .presentationDetents([.large])
+            })
+            .toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer() // Spacer to push button to the right
+                    Button(action: {
+                        UIApplication.shared.hideKeyborad()
+                    }, label: {
+                        Image("ic_keyboardOff")
+                    })
+                }
             }
         })
-        .background(Color.bg_bgb)
-        .navigationBarBackButtonHidden()
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .sheet(isPresented: $isPresentFootprints, onDismiss: {
-            vm.setSelectedFootprints()
-        }, content: {
-            SelectFootprintsViewV2(
-                isPresented: $isPresentFootprints,
-                originalFootprints: vm.originalFootprints
-            )
-            .environmentObject(vm)
-            .presentationDetents([.large])
-        })
-        .toolbar {
-            ToolbarItemGroup(placement: .keyboard) {
-                Spacer() // Spacer to push button to the right
-                Button(action: {
-                    UIApplication.shared.hideKeyborad()
-                }, label: {
-                    Image("ic_keyboardOff")
-                })
-            }
+        .onTapGesture {
+            hideKeyboard()
         }
     }
     
