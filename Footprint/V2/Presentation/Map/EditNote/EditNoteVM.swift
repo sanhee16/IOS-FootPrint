@@ -93,6 +93,7 @@ class EditNoteVM: BaseViewModel {
             case .create(let address, let location):
                 self.address = address
                 self.location = location
+                self.category = self.categories.first
                 return
             case .update(let id):
                 if let note = self.loadNoteWithIdUseCase.execute(id) {
