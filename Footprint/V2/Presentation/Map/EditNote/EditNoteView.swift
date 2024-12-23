@@ -37,6 +37,8 @@ struct EditNoteView: View {
     @State private var isPresentPeopleWith: Bool = false
     @State private var isPresentDelete: Bool = false
     @State private var isPresentDeleteComplete: Bool = false
+    @State private var isPresentSaveComplete: Bool = false
+    @State private var isPresentUpdateComplete: Bool = false
     
     private let CALENDAR_ID: String = "CALENDAR_ID"
     private let CATEGORY_ID: String = "CATEGORY_ID"
@@ -367,7 +369,11 @@ struct EditNoteView: View {
                 }
                 FPButton(text: "완료", status: $vm.isAvailableToSave.wrappedValue ? .able : .disable, size: .small, type: .textPrimary) {
                     vm.saveNote {
-                        self.output.pop()
+                        if case .create = $vm.type.wrappedValue {
+                            $isPresentSaveComplete.wrappedValue = true
+                        } else {
+                            $isPresentUpdateComplete.wrappedValue = true
+                        }
                     }
                 }
             }
@@ -393,10 +399,43 @@ struct EditNoteView: View {
                 }
             
             VStack{}
-                .alert(isPresented: $isPresentDeleteComplete) {
+                .alert(isPresented: $isPresentDelete) {
                     Alert(
-                        title: Text("삭제 완료"),
-                        message: Text("‘\($vm.title.wrappedValue)’를 삭제했어요."),
+                        title: Text("발자국 삭제하기"),
+                        message: Text("삭제한 사람은 복구할 수 없습니다.\n‘\($vm.title.wrappedValue)’를 삭제 하시겠습니까?"),
+                        primaryButton: .default(Text("취소"), action: {
+                            
+                        }),
+                        secondaryButton: .default(Text("삭제"), action: {
+                            vm.deleteNote() { isSuccess in
+                                if isSuccess {
+                                    DispatchQueue.main.async {
+                                        $isPresentDeleteComplete.wrappedValue = true
+                                    }
+                                }
+                            }
+                        })
+                    )
+                }
+            
+            VStack{}
+                .alert(isPresented: $isPresentSaveComplete) {
+                    Alert(
+                        title: Text("발자국 남기기 성공"),
+                        message: Text("‘\($vm.title.wrappedValue)’발자국을 남겼어요."),
+                        dismissButton: .default(Text("확인"), action: {
+                            DispatchQueue.main.async {
+                                self.output.pop()
+                            }
+                        })
+                    )
+                }
+            
+            VStack{}
+                .alert(isPresented: $isPresentUpdateComplete) {
+                    Alert(
+                        title: Text("발자국 편집하기 성공"),
+                        message: Text("‘\($vm.title.wrappedValue)’발자국을 편집했어요."),
                         dismissButton: .default(Text("확인"), action: {
                             DispatchQueue.main.async {
                                 self.output.pop()
