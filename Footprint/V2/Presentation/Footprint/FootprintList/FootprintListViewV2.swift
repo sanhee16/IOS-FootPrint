@@ -36,6 +36,8 @@ struct FootprintListViewV2: View {
         NavigationStack(path: $coordinator.paths) {
             ScrollViewReader(content: { proxy in
                 ZStack(alignment: .topLeading) {
+                    Color.bg_default
+                    
                     if isShowSorting {
                         ZStack(alignment: .bottom, content: {
                             VStack(alignment: .leading, spacing: 0, content: {
@@ -94,24 +96,39 @@ struct FootprintListViewV2: View {
                             .rectReader($sortButtonLocation, in: .global)
                         })
                         
-                        ScrollView(.vertical, showsIndicators: false, content: {
-                            Color.clear
-                                .id(topID)
-                            VStack(alignment: .leading, spacing: 0, content: {
-                                ForEach($vm.notes.wrappedValue, id: \.self) { item in
-                                    NoteItem(item: item)
-                                        .onTapGesture {
-                                            self.selectedId = item.id
-                                            self.footprintVM.updateId(item.id)
-                                            $isPresentFootprint.wrappedValue = true
-                                        }
-                                    
+                        if $vm.notes.wrappedValue.isEmpty {
+                            VStack(alignment: .center, spacing: 0, content: {
+                                Spacer()
+                                Text("아직 남긴 발자국이 없어요!\n발자국을 만들어 볼까요?")
+                                    .multilineTextAlignment(.center)
+                                    .sdFont(.headline4, color: Color.cont_gray_mid)
+                                    .sdPaddingVertical(24)
+                                FPButton(text: "발자국 남기기", location: .leading(name: "ic_feet"), status: .able, size: .large, type: .solid) {
+                                    tabBarVM.onChangeTab(.map)
                                 }
+                                .sdPaddingHorizontal(16)
+                                .sdPaddingVertical(8)
+                                Spacer()
                             })
-                            .sdPaddingHorizontal(16)
-                            .sdPadding(bottom: 40)
-                        })
-                        .background(Color.bg_default)
+                        } else {
+                            ScrollView(.vertical, showsIndicators: false, content: {
+                                Color.clear
+                                    .id(topID)
+                                VStack(alignment: .leading, spacing: 0, content: {
+                                    ForEach($vm.notes.wrappedValue, id: \.self) { item in
+                                        NoteItem(item: item)
+                                            .onTapGesture {
+                                                self.selectedId = item.id
+                                                self.footprintVM.updateId(item.id)
+                                                $isPresentFootprint.wrappedValue = true
+                                            }
+                                        
+                                    }
+                                })
+                                .sdPaddingHorizontal(16)
+                                .sdPaddingBottom(40)
+                            })
+                        }
                         
                         MainMenuBar(current: .footprints) { type in
                             if type == .footprints {
@@ -122,7 +139,6 @@ struct FootprintListViewV2: View {
                         }
                     })
                     .frame(maxWidth: .infinity, alignment: .topLeading)
-                    .background(Color.bg_default)
                     .onAppear {
                         vm.loadData()
                     }

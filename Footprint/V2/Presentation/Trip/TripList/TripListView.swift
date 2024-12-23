@@ -22,7 +22,9 @@ struct TripListView: View {
     @State private var sortBoxWidth: CGFloat = .zero
     
     let topID = "TOP_ID"
-    
+    @State private var bottomMenu: CGRect = .zero
+    @State private var bottomButton: CGSize = .zero
+    private var safeBottom: CGFloat { get { Util.safeBottom() }}
     
     init(output: Output) {
         self.output = output
@@ -30,8 +32,11 @@ struct TripListView: View {
     
     var body: some View {
         NavigationStack(path: $coordinator.paths) {
-            ScrollViewReader(content: { proxy in
+            ScrollViewReader(content: {
+                proxy in
                 ZStack(alignment: .topLeading) {
+                    Color.bg_default
+                    
                     if isShowSorting {
                         ZStack(alignment: .bottom, content: {
                             VStack(alignment: .leading, spacing: 0, content: {
@@ -77,8 +82,10 @@ struct TripListView: View {
                             isShowSorting = false
                         }
                     }
+                    
                     VStack(alignment: .leading, spacing: 0, content: {
                         Topbar("발자취")
+                        
                         HStack(alignment: .center, spacing: 0, content: {
                             Spacer()
                             FPButton(text: "정렬", location: .leading(name: "ic_arrow_transfer"), status: .able, size: .small, type: .textGray) {
@@ -88,39 +95,37 @@ struct TripListView: View {
                             .rectReader($sortButtonLocation, in: .global)
                         })
                         
-                        ScrollView(.vertical, showsIndicators: false, content: {
-                            VStack(alignment: .leading, spacing: 0, content: {
-                                Color.clear
-                                    .id(topID)
-                                ForEach($vm.trips.wrappedValue, id: \.self) { item in
-                                    TripItem(item: item)
-                                        .onTapGesture {
-                                            self.output.goToTripDetail(item.id)
-                                            proxy.scrollTo(topID)
-                                        }
+                        if $vm.trips.wrappedValue.isEmpty {
+                            VStack(alignment: .center, spacing: 0, content: {
+                                Spacer()
+                                Text("아직 남긴 발자취가 없어요!\n발자국을 만들어 볼까요?")
+                                    .multilineTextAlignment(.center)
+                                    .sdFont(.headline4, color: Color.cont_gray_mid)
+                                    .sdPaddingVertical(24)
+                                FPButton(text: "발자취 만들기", location: .leading(name: "ic_arrow-roadmap"), status: .able, size: .large, type: .solid) {
+                                    self.output.goToEditTrip(.create)
                                 }
+                                .sdPaddingHorizontal(16)
+                                .sdPaddingVertical(8)
+                                Spacer()
                             })
-                            .sdPaddingHorizontal(16)
-                            .sdPaddingBottom(70)
-                        })
-                    })
-                    .frame(maxWidth: .infinity, alignment: .topLeading)
-                    .background(Color.bg_default)
-                    .onAppear {
-                        vm.loadData()
-                    }
-                    
-                    VStack(alignment: .leading, spacing: 0, content: {
-                        Spacer()
-                        HStack(alignment: .center, spacing: 0, content: {
-                            Spacer()
-                            FPButton(text: "발자취 만들기", location: .leading(name: "arrow-roadmap"), status: .able, size: .medium, type: .solid) {
-                                self.output.goToEditTrip(.create)
-                            }
-                            .shadow(color: Color.dropSahdow_primary_low.opacity(0.15), radius: 4, x: 0, y: 2)
-                            .padding(16)
-                            .zIndex(1)
-                        })
+                        } else {
+                            ScrollView(.vertical, showsIndicators: false, content: {
+                                VStack(alignment: .leading, spacing: 0, content: {
+                                    Color.clear
+                                        .id(topID)
+                                    ForEach($vm.trips.wrappedValue, id: \.self) { item in
+                                        TripItem(item: item)
+                                            .onTapGesture {
+                                                self.output.goToTripDetail(item.id)
+                                                proxy.scrollTo(topID)
+                                            }
+                                    }
+                                })
+                                .sdPaddingHorizontal(16)
+                                .sdPaddingBottom(40)
+                            })
+                        }
                         
                         MainMenuBar(current: .trip) { type in
                             if type == .trip {
@@ -129,7 +134,32 @@ struct TripListView: View {
                                 tabBarVM.onChangeTab(type)
                             }
                         }
+                        .rectReader($bottomMenu, in: .global)
                     })
+                    .frame(maxWidth: .infinity, alignment: .topLeading)
+                    .onAppear {
+                        vm.loadData()
+                    }
+                    
+                    if !$vm.trips.wrappedValue.isEmpty {
+                        FPButton(text: "발자취 만들기", location: .leading(name: "arrow-roadmap"), status: .able, size: .medium, type: .solid) {
+                            self.output.goToEditTrip(.create)
+                        }
+                        .shadow(color: Color.dropSahdow_primary_low.opacity(0.15), radius: 4, x: 0, y: 2)
+                        .zIndex(1)
+                        .background(
+                            GeometryReader(content: { geometry in
+                                Color.clear
+                                    .onAppear(perform: {
+                                        bottomButton = geometry.size
+                                    })
+                            })
+                        )
+                        .offset(
+                            x: UIScreen.main.bounds.size.width - $bottomButton.wrappedValue.width - 16,
+                            y: UIScreen.main.bounds.size.height - $bottomMenu.wrappedValue.height - $bottomButton.wrappedValue.height * 2 - safeBottom - 16
+                        )
+                    }
                 }
                 .frame(maxWidth: .infinity, alignment: .center)
                 .navigationDestination(for: Destination.self) { destination in
