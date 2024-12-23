@@ -20,15 +20,16 @@ enum EditNoteType {
     
     var title: String {
         switch self {
-        case .create(let address, let location):
+        case .create:
             return "발자국 남기기"
-        case .update(let id):
+        case .update:
             return "발자국 편집하기"
         }
     }
 }
 
 class EditNoteVM: BaseViewModel {
+    @Injected(\.deleteNoteUseCase) var deleteNoteUseCase
     @Injected(\.saveNoteUseCase) var saveNoteUseCase
     @Injected(\.updateNoteUseCase) var updateNoteUseCase
     @Injected(\.deleteImageUrlUseCase) var deleteImageUrlUseCase
@@ -120,8 +121,10 @@ class EditNoteVM: BaseViewModel {
         self.entireMembers = loadMembersUseCase.execute()
     }
     
-    func deleteNote(_ id: String, onDone: @escaping (Bool)->()) {
+    func deleteNote(_ onDone: @escaping (Bool)->()) {
         //TODO: delete note useCase
+        guard let id = self.noteId else { return }
+        onDone(self.deleteNoteUseCase.execute(id) != nil)
     }
     
     func saveNote(_ onDone: @escaping ()->()) {

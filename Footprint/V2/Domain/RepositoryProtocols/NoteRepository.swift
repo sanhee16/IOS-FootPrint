@@ -34,7 +34,7 @@ protocol NoteRepository {
         longitude: Double,
         address: String
     )
-    func deleteNote(_ id: String)
+    func deleteNote(_ id: String) -> String?
     func loadNotes() -> [NoteEntity.DAO]
     func loadNote(id: String) -> NoteEntity.DAO?
     func loadNotes(address: String) -> [NoteEntity.DAO]

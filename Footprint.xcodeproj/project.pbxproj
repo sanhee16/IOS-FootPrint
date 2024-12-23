@@ -13,6 +13,7 @@
 		260C87CB296AADB900ADCC32 /* ShowTravelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260C87CA296AADB900ADCC32 /* ShowTravelView.swift */; };
 		260C87CD296AADBE00ADCC32 /* ShowTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260C87CC296AADBE00ADCC32 /* ShowTravelViewModel.swift */; };
 		260C87D0296AAF5C00ADCC32 /* FootprintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260C87CF296AAF5C00ADCC32 /* FootprintItem.swift */; };
+		26128D6D2D18F3FF00297474 /* DeleteNoteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26128D6C2D18F3FF00297474 /* DeleteNoteUseCase.swift */; };
 		2613ED4B2973C5AC0060EF23 /* MainMenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2613ED4A2973C5AC0060EF23 /* MainMenuBar.swift */; };
 		2619FE8A2940D6AC00D24778 /* CheckPermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2619FE892940D6AC00D24778 /* CheckPermissionView.swift */; };
 		2619FE8C2940D6B300D24778 /* CheckPermissionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2619FE8B2940D6B300D24778 /* CheckPermissionViewModel.swift */; };
@@ -318,6 +319,7 @@
 		260C87CA296AADB900ADCC32 /* ShowTravelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTravelView.swift; sourceTree = "<group>"; };
 		260C87CC296AADBE00ADCC32 /* ShowTravelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTravelViewModel.swift; sourceTree = "<group>"; };
 		260C87CF296AAF5C00ADCC32 /* FootprintItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootprintItem.swift; sourceTree = "<group>"; };
+		26128D6C2D18F3FF00297474 /* DeleteNoteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteNoteUseCase.swift; sourceTree = "<group>"; };
 		2613ED4A2973C5AC0060EF23 /* MainMenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuBar.swift; sourceTree = "<group>"; };
 		2619FE892940D6AC00D24778 /* CheckPermissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPermissionView.swift; sourceTree = "<group>"; };
 		2619FE8B2940D6B300D24778 /* CheckPermissionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPermissionViewModel.swift; sourceTree = "<group>"; };
@@ -1256,6 +1258,7 @@
 				26F137062CD48BA300096181 /* LoadNotesUseCaseWithAddress.swift */,
 				265917102CD857CC008C39E9 /* ToogleStarUseCase.swift */,
 				265917172CD8BE55008C39E9 /* DeleteImageUrlUseCase.swift */,
+				26128D6C2D18F3FF00297474 /* DeleteNoteUseCase.swift */,
 			);
 			path = NoteUseCases;
 			sourceTree = "<group>";
@@ -1963,6 +1966,7 @@
 				26847D642D163DDE00B80067 /* SearchView.swift in Sources */,
 				26940CAD293C9D0F0091E996 /* ShowImageView.swift in Sources */,
 				2694FC8C2C79821500F01644 /* MemberRepositoryImpl.swift in Sources */,
+				26128D6D2D18F3FF00297474 /* DeleteNoteUseCase.swift in Sources */,
 				268BD7C72CF5A53A00788A65 /* NetworkError.swift in Sources */,
 				264EEF572925128300B89624 /* AddCategoryView.swift in Sources */,
 				262D2A02293E2BA4005984DA /* SettingView1.swift in Sources */,

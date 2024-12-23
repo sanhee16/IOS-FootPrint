@@ -84,19 +84,20 @@ class NoteRepositoryImpl: NoteRepository {
         }
     }
     
-    func deleteNote(_ id: String) {
+    func deleteNote(_ id: String) -> String? {
         let realm = try! Realm()
         
         // 데이터를 가져와서 필터링
         let deleteItem = realm.objects(NoteData.self)
             .filter { $0.id == id }
             .first
-        guard let deleteItem = deleteItem else { return }
+        guard let deleteItem = deleteItem else { return nil }
         
         // 데이터 삭제
         try! realm.write {
             realm.delete(deleteItem)
         }
+        return id
     }
     
     func loadNotes() -> [NoteEntity.DAO] {

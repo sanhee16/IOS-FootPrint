@@ -35,6 +35,8 @@ struct EditNoteView: View {
     @State private var isPresentCalendar: Bool = false
     @State private var isPresentGallery: Bool = false
     @State private var isPresentPeopleWith: Bool = false
+    @State private var isPresentDelete: Bool = false
+    @State private var isPresentDeleteComplete: Bool = false
     
     private let CALENDAR_ID: String = "CALENDAR_ID"
     private let CATEGORY_ID: String = "CATEGORY_ID"
@@ -356,16 +358,11 @@ struct EditNoteView: View {
                 vm.clearTempNote()
                 self.output.pop()
             }
-            HStack(alignment: .center, spacing: 12) {
+            HStack(alignment: .center, spacing: 0) {
                 Spacer()
-                
-                if let noteId = $vm.noteId.wrappedValue {
+                if case .update = $vm.type.wrappedValue {
                     FPButton(text: "삭제", status: .able, size: .small, type: .textGray) {
-                        vm.deleteNote(noteId) { isSuccess in
-                            if isSuccess {
-                                self.output.pop()
-                            }
-                        }
+                        $isPresentDelete.wrappedValue = true
                     }
                 }
                 FPButton(text: "완료", status: $vm.isAvailableToSave.wrappedValue ? .able : .disable, size: .small, type: .textPrimary) {
@@ -374,6 +371,39 @@ struct EditNoteView: View {
                     }
                 }
             }
+            
+            VStack{}
+                .alert(isPresented: $isPresentDelete) {
+                    Alert(
+                        title: Text("발자국 삭제하기"),
+                        message: Text("삭제한 사람은 복구할 수 없습니다.\n‘\($vm.title.wrappedValue)’를 삭제 하시겠습니까?"),
+                        primaryButton: .default(Text("취소"), action: {
+                            
+                        }),
+                        secondaryButton: .default(Text("삭제"), action: {
+                            vm.deleteNote() { isSuccess in
+                                if isSuccess {
+                                    DispatchQueue.main.async {
+                                        $isPresentDeleteComplete.wrappedValue = true
+                                    }
+                                }
+                            }
+                        })
+                    )
+                }
+            
+            VStack{}
+                .alert(isPresented: $isPresentDeleteComplete) {
+                    Alert(
+                        title: Text("삭제 완료"),
+                        message: Text("‘\($vm.title.wrappedValue)’를 삭제했어요."),
+                        dismissButton: .default(Text("확인"), action: {
+                            DispatchQueue.main.async {
+                                self.output.pop()
+                            }
+                        })
+                    )
+                }
         }
     }
     

@@ -103,7 +103,7 @@ struct CategoryListEditView: View {
                     .alert(isPresented: $isPresentDeleteComplete) {
                         Alert(
                             title: Text("삭제완료"),
-                            message: Text("‘\($vm.deleteCategory.wrappedValue?.name ?? "")’를 삭제했습니다."),
+                            message: Text("‘\($vm.deleteCategory.wrappedValue?.name ?? "")’를 삭제했어요."),
                             dismissButton: .default(Text("확인"), action: {
                                 $vm.deleteCategory.wrappedValue = nil
                             })

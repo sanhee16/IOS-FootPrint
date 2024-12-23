@@ -97,7 +97,7 @@ struct MemberListEditView: View {
                     .alert(isPresented: $isPresentDeleteComplete) {
                         Alert(
                             title: Text("삭제 완료"),
-                            message: Text("‘\($vm.deleteMember.wrappedValue?.name ?? "")’를 삭제했습니다."),
+                            message: Text("‘\($vm.deleteMember.wrappedValue?.name ?? "")’를 삭제했어요."),
                             dismissButton: .default(Text("확인"), action: {
                                 $vm.deleteMember.wrappedValue = nil
                             })

@@ -115,6 +115,10 @@ extension Container {
     var updateNoteUseCase: Factory<UpdateNoteUseCase> {
         Factory(self) { UpdateNoteUseCase(noteRepository: self.noteRepository()) }
     }
+    
+    var deleteNoteUseCase: Factory<DeleteNoteUseCase> {
+        Factory(self) { DeleteNoteUseCase(noteRepository: self.noteRepository()) }
+    }
 }
 
 //MARK: UseCase - Category
