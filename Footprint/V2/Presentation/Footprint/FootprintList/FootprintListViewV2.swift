@@ -26,119 +26,130 @@ struct FootprintListViewV2: View {
     @State private var sortButtonLocation: CGRect = .zero
     @State private var sortBoxWidth: CGFloat = .zero
     
+    let topID = "TOP_ID"
+    
     init(output: Output) {
         self.output = output
     }
     
     var body: some View {
         NavigationStack(path: $coordinator.paths) {
-            ZStack(alignment: .topLeading) {
-                if isShowSorting {
-                    ZStack(alignment: .bottom, content: {
-                        VStack(alignment: .leading, spacing: 0, content: {
-                            ForEach(vm.sortTypes.indices, id: \.self) { idx in
-                                sortItem(vm.sortTypes[idx]) {
-                                    vm.onSelectSortType(vm.sortTypes[idx]) {
-                                        isShowSorting = false
+            ScrollViewReader(content: { proxy in
+                ZStack(alignment: .topLeading) {
+                    if isShowSorting {
+                        ZStack(alignment: .bottom, content: {
+                            VStack(alignment: .leading, spacing: 0, content: {
+                                ForEach(vm.sortTypes.indices, id: \.self) { idx in
+                                    sortItem(vm.sortTypes[idx]) {
+                                        vm.onSelectSortType(vm.sortTypes[idx]) {
+                                            isShowSorting = false
+                                            proxy.scrollTo(topID)
+                                        }
+                                    }
+                                    if idx < vm.sortTypes.count - 1 {
+                                        Rectangle()
+                                            .frame(height: 0.5)
+                                            .foregroundStyle(Color.dim_black_low)
                                     }
                                 }
-                                if idx < vm.sortTypes.count - 1 {
-                                    Rectangle()
-                                        .frame(height: 0.5)
-                                        .foregroundStyle(Color.dim_black_low)
+                                .frame(width: 187, alignment: .leading)
+                            })
+                            .background(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .foregroundStyle(Color.white)
+                            )
+                            .background(
+                                GeometryReader { geometry in
+                                    Color.clear
+                                        .onAppear {
+                                            self.sortBoxWidth = geometry.size.height
+                                        }
                                 }
-                            }
-                            .frame(width: 187, alignment: .leading)
+                            )
+                            .zIndex(3)
+                            .shadow(color: Color.black.opacity(0.2), radius: 32, x: 0, y: 0)
+                            .offset(
+                                x: -16,
+                                y: $sortButtonLocation.wrappedValue.minY
+                            )
                         })
-                        .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .foregroundStyle(Color.white)
-                        )
-                        .background(
-                            GeometryReader { geometry in
-                                Color.clear
-                                    .onAppear {
-                                        self.sortBoxWidth = geometry.size.height
-                                    }
-                            }
-                        )
-                        .zIndex(3)
-                        .shadow(color: Color.black.opacity(0.2), radius: 32, x: 0, y: 0)
-                        .offset(
-                            x: -16,
-                            y: $sortButtonLocation.wrappedValue.minY
-                        )
-                    })
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-                    .zIndex(2)
-                    .background(Color.clear)
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        isShowSorting = false
-                    }
-                }
-                
-                VStack(alignment: .leading, spacing: 0, content: {
-                    Topbar("발자국")
-                    
-                    HStack(alignment: .center, spacing: 0, content: {
-                        Spacer()
-                        FPButton(text: "정렬", location: .leading(name: "ic_arrow_transfer"), status: .able, size: .small, type: .textGray) {
-                            isShowSorting.toggle()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                        .zIndex(2)
+                        .background(Color.clear)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            isShowSorting = false
                         }
-                        .sdPadding(top: 4, leading: 6, bottom: 4, trailing: 6)
-                        .rectReader($sortButtonLocation, in: .global)
-                    })
-                    
-                    ScrollView(.vertical, showsIndicators: false, content: {
-                        VStack(alignment: .leading, spacing: 0, content: {
-                            ForEach($vm.notes.wrappedValue, id: \.self) { item in
-                                NoteItem(item: item)
-                                    .onTapGesture {
-                                        self.selectedId = item.id
-                                        self.footprintVM.updateId(item.id)
-                                        $isPresentFootprint.wrappedValue = true
-                                    }
-                                
-                            }
-                        })
-                        .sdPaddingHorizontal(16)
-                        .sdPadding(bottom: 40)
-                    })
-                    .background(Color.bg_default)
-                    
-                    MainMenuBar(current: .footprints) { type in
-                        tabBarVM.onChangeTab(type)
                     }
+                    
+                    VStack(alignment: .leading, spacing: 0, content: {
+                        Topbar("발자국")
+                        
+                        HStack(alignment: .center, spacing: 0, content: {
+                            Spacer()
+                            FPButton(text: "정렬", location: .leading(name: "ic_arrow_transfer"), status: .able, size: .small, type: .textGray) {
+                                isShowSorting.toggle()
+                            }
+                            .sdPadding(top: 4, leading: 6, bottom: 4, trailing: 6)
+                            .rectReader($sortButtonLocation, in: .global)
+                        })
+                        
+                        ScrollView(.vertical, showsIndicators: false, content: {
+                            Color.clear
+                                .id(topID)
+                            VStack(alignment: .leading, spacing: 0, content: {
+                                ForEach($vm.notes.wrappedValue, id: \.self) { item in
+                                    NoteItem(item: item)
+                                        .onTapGesture {
+                                            self.selectedId = item.id
+                                            self.footprintVM.updateId(item.id)
+                                            $isPresentFootprint.wrappedValue = true
+                                        }
+                                    
+                                }
+                            })
+                            .sdPaddingHorizontal(16)
+                            .sdPadding(bottom: 40)
+                        })
+                        .background(Color.bg_default)
+                        
+                        MainMenuBar(current: .footprints) { type in
+                            if type == .footprints {
+                                proxy.scrollTo(topID)
+                            } else {
+                                tabBarVM.onChangeTab(type)
+                            }
+                        }
+                    })
+                    .frame(maxWidth: .infinity, alignment: .topLeading)
+                    .background(Color.bg_default)
+                    .onAppear {
+                        vm.loadData()
+                    }
+                }
+                .sheet(isPresented: $isPresentFootprint, onDismiss: {
+                    $isPresentFootprint.wrappedValue = false
+                }, content: {
+                    FootprintView(
+                        isPresented: $isPresentFootprint,
+                        output: FootprintView.Output(pushUpdateNoteView: { id in
+                            vm.clearTempNote()
+                            self.output.goToEditNote(.update(id: id))
+                        }, pushCreateNoteView: { location, address in
+                            vm.clearTempNote()
+                            self.output.goToEditNote(.create(address: address, location: location))
+                        }, pushFootprintListWtihSameAddressView: { address in
+                            self.output.pushFootprintListWtihSameAddressView(address)
+                        }))
+                    .environmentObject(footprintVM)
+                    .presentationDetents([.fraction(0.8), .large])
                 })
-                .frame(maxWidth: .infinity, alignment: .topLeading)
-                .background(Color.bg_default)
-                .onAppear {
-                    vm.loadData()
+                .frame(maxWidth: .infinity, alignment: .center)
+                .navigationDestination(for: Destination.self) { destination in
+                    coordinator.moveToDestination(destination: destination)
                 }
             }
-            .sheet(isPresented: $isPresentFootprint, onDismiss: {
-                $isPresentFootprint.wrappedValue = false
-            }, content: {
-                FootprintView(
-                    isPresented: $isPresentFootprint,
-                    output: FootprintView.Output(pushUpdateNoteView: { id in
-                    vm.clearTempNote()
-                    self.output.goToEditNote(.update(id: id))
-                }, pushCreateNoteView: { location, address in
-                    vm.clearTempNote()
-                    self.output.goToEditNote(.create(address: address, location: location))
-                }, pushFootprintListWtihSameAddressView: { address in
-                    self.output.pushFootprintListWtihSameAddressView(address)
-                }))
-                .environmentObject(footprintVM)
-                .presentationDetents([.fraction(0.8), .large])
-            })
-            .frame(maxWidth: .infinity, alignment: .center)
-            .navigationDestination(for: Destination.self) { destination in
-                coordinator.moveToDestination(destination: destination)
-            }
-        }
+        )}
     }
     
     private func sortItem(_ item: FootprintSortType, onTap: @escaping () -> ()) -> some View {

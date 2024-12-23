@@ -21,108 +21,121 @@ struct TripListView: View {
     @State private var sortButtonLocation: CGRect = .zero
     @State private var sortBoxWidth: CGFloat = .zero
     
+    let topID = "TOP_ID"
+    
+    
     init(output: Output) {
         self.output = output
     }
     
     var body: some View {
         NavigationStack(path: $coordinator.paths) {
-            ZStack(alignment: .topLeading) {
-                if isShowSorting {
-                    ZStack(alignment: .bottom, content: {
-                        VStack(alignment: .leading, spacing: 0, content: {
-                            ForEach(vm.sortTypes.indices, id: \.self) { idx in
-                                sortItem(vm.sortTypes[idx]) {
-                                    vm.onSelectSortType(vm.sortTypes[idx]) {
-                                        isShowSorting = false
+            ScrollViewReader(content: { proxy in
+                ZStack(alignment: .topLeading) {
+                    if isShowSorting {
+                        ZStack(alignment: .bottom, content: {
+                            VStack(alignment: .leading, spacing: 0, content: {
+                                ForEach(vm.sortTypes.indices, id: \.self) { idx in
+                                    sortItem(vm.sortTypes[idx]) {
+                                        vm.onSelectSortType(vm.sortTypes[idx]) {
+                                            isShowSorting = false
+                                            proxy.scrollTo(topID)
+                                        }
+                                    }
+                                    if idx < vm.sortTypes.count - 1 {
+                                        Rectangle()
+                                            .frame(height: 0.5)
+                                            .foregroundStyle(Color.dim_black_low)
                                     }
                                 }
-                                if idx < vm.sortTypes.count - 1 {
-                                    Rectangle()
-                                        .frame(height: 0.5)
-                                        .foregroundStyle(Color.dim_black_low)
+                                .frame(width: 187, alignment: .leading)
+                            })
+                            .background(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .foregroundStyle(Color.white)
+                            )
+                            .background(
+                                GeometryReader { geometry in
+                                    Color.clear
+                                        .onAppear {
+                                            self.sortBoxWidth = geometry.size.height
+                                        }
                                 }
-                            }
-                            .frame(width: 187, alignment: .leading)
+                            )
+                            .zIndex(3)
+                            .shadow(color: Color.black.opacity(0.2), radius: 32, x: 0, y: 0)
+                            .offset(
+                                x: -16,
+                                y: $sortButtonLocation.wrappedValue.minY
+                            )
                         })
-                        .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .foregroundStyle(Color.white)
-                        )
-                        .background(
-                            GeometryReader { geometry in
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                        .zIndex(2)
+                        .background(Color.clear)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            isShowSorting = false
+                        }
+                    }
+                    VStack(alignment: .leading, spacing: 0, content: {
+                        Topbar("발자취")
+                        HStack(alignment: .center, spacing: 0, content: {
+                            Spacer()
+                            FPButton(text: "정렬", location: .leading(name: "ic_arrow_transfer"), status: .able, size: .small, type: .textGray) {
+                                isShowSorting.toggle()
+                            }
+                            .sdPadding(top: 4, leading: 6, bottom: 4, trailing: 6)
+                            .rectReader($sortButtonLocation, in: .global)
+                        })
+                        
+                        ScrollView(.vertical, showsIndicators: false, content: {
+                            VStack(alignment: .leading, spacing: 0, content: {
                                 Color.clear
-                                    .onAppear {
-                                        self.sortBoxWidth = geometry.size.height
-                                    }
-                            }
-                        )
-                        .zIndex(3)
-                        .shadow(color: Color.black.opacity(0.2), radius: 32, x: 0, y: 0)
-                        .offset(
-                            x: -16,
-                            y: $sortButtonLocation.wrappedValue.minY
-                        )
-                    })
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-                    .zIndex(2)
-                    .background(Color.clear)
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        isShowSorting = false
-                    }
-                }
-                VStack(alignment: .leading, spacing: 0, content: {
-                    Topbar("발자취")
-                    HStack(alignment: .center, spacing: 0, content: {
-                        Spacer()
-                        FPButton(text: "정렬", location: .leading(name: "ic_arrow_transfer"), status: .able, size: .small, type: .textGray) {
-                            isShowSorting.toggle()
-                        }
-                        .sdPadding(top: 4, leading: 6, bottom: 4, trailing: 6)
-                        .rectReader($sortButtonLocation, in: .global)
-                    })
-                    ScrollView(.vertical, showsIndicators: false, content: {
-                        VStack(alignment: .leading, spacing: 0, content: {
-                            ForEach($vm.trips.wrappedValue, id: \.self) { item in
-                                TripItem(item: item)
-                                    .onTapGesture {
-                                        self.output.goToTripDetail(item.id)
-                                    }
-                            }
+                                    .id(topID)
+                                ForEach($vm.trips.wrappedValue, id: \.self) { item in
+                                    TripItem(item: item)
+                                        .onTapGesture {
+                                            self.output.goToTripDetail(item.id)
+                                            proxy.scrollTo(topID)
+                                        }
+                                }
+                            })
+                            .sdPaddingHorizontal(16)
+                            .sdPaddingBottom(70)
                         })
-                        .sdPaddingHorizontal(16)
-                        .sdPaddingBottom(40)
                     })
-                })
-                .frame(maxWidth: .infinity, alignment: .topLeading)
-                .background(Color.bg_default)
-                .onAppear {
-                    vm.loadData()
-                }
-                
-                VStack(alignment: .leading, spacing: 0, content: {
-                    Spacer()
-                    HStack(alignment: .center, spacing: 0, content: {
-                        Spacer()
-                        FPButton(text: "발자취 만들기", location: .leading(name: "arrow-roadmap"), status: .able, size: .medium, type: .solid) {
-                            self.output.goToEditTrip(.create)
-                        }
-                        .shadow(color: Color.dropSahdow_primary_low.opacity(0.15), radius: 4, x: 0, y: 2)
-                        .padding(16)
-                        .zIndex(1)
-                    })
-                    
-                    MainMenuBar(current: .trip) { type in
-                        tabBarVM.onChangeTab(type)
+                    .frame(maxWidth: .infinity, alignment: .topLeading)
+                    .background(Color.bg_default)
+                    .onAppear {
+                        vm.loadData()
                     }
-                })
-            
-            }
-            .frame(maxWidth: .infinity, alignment: .center)
-            .navigationDestination(for: Destination.self) { destination in
-                coordinator.moveToDestination(destination: destination)
-            }
+                    
+                    VStack(alignment: .leading, spacing: 0, content: {
+                        Spacer()
+                        HStack(alignment: .center, spacing: 0, content: {
+                            Spacer()
+                            FPButton(text: "발자취 만들기", location: .leading(name: "arrow-roadmap"), status: .able, size: .medium, type: .solid) {
+                                self.output.goToEditTrip(.create)
+                            }
+                            .shadow(color: Color.dropSahdow_primary_low.opacity(0.15), radius: 4, x: 0, y: 2)
+                            .padding(16)
+                            .zIndex(1)
+                        })
+                        
+                        MainMenuBar(current: .trip) { type in
+                            if type == .trip {
+                                proxy.scrollTo(topID)
+                            } else {
+                                tabBarVM.onChangeTab(type)
+                            }
+                        }
+                    })
+                }
+                .frame(maxWidth: .infinity, alignment: .center)
+                .navigationDestination(for: Destination.self) { destination in
+                    coordinator.moveToDestination(destination: destination)
+                }
+            })
         }
     }
     
@@ -246,6 +259,6 @@ struct TripListView: View {
 
 //#Preview {
 //    TripListView(output: TripListView.Output{ _ in
-//        
+//
 //    })
 //}
