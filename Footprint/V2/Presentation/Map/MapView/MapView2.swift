@@ -191,18 +191,20 @@ struct MapView2: View {
                 HStack(alignment: .center, spacing: 0, content: {
                     Spacer()
                     VStack(alignment: .trailing, spacing: 8, content: {
-                        mapMenuButton("search") {
-                            withAnimation {
-                                self.isShowSearchBar.toggle()
+                        if $vm.isShowSearchBar.wrappedValue {
+                            mapMenuButton("search") {
+                                withAnimation {
+                                    self.isShowSearchBar.toggle()
+                                }
                             }
-                        }
-                        .background {
-                            GeometryReader(content: { geometry in
-                                Color.clear
-                                    .onAppear {
-                                        menuIconSize = geometry.size
-                                    }
-                            })
+                            .background {
+                                GeometryReader(content: { geometry in
+                                    Color.clear
+                                        .onAppear {
+                                            menuIconSize = geometry.size
+                                        }
+                                })
+                            }
                         }
                         markerMenuButton("paw-foot") {
                             if !isShowSearchBar {

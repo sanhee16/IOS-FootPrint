@@ -25,6 +25,7 @@ struct PermissionView: View {
                 self.output.pop()
             }
             Text("원활한 사용을 위해 모든 권한허용을 추천합니다.\n권한 허용 후 사용되는 정보들은 수집되지 않습니다.")
+                .multilineTextAlignment(.center)
                 .sdFont(.headline4, color: .cont_gray_mid)
                 .sdPaddingVertical(24)
                 .frame(maxWidth: .infinity, alignment: .center)
