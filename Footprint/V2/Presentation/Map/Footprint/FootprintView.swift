@@ -29,7 +29,6 @@ struct FootprintView: View {
     
     private var output: Output
     
-    
     init(isPresented: Binding<Bool>, output: Output, isEditable: Bool = true) {
         self._isPresented = isPresented
         self.output = output
@@ -38,12 +37,12 @@ struct FootprintView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            ZStack(content: {
-                Topbar("", type: .close, backgroundColor: .white) {
-                    $isPresented.wrappedValue = false
-                }
-                
-                if isEditable && (!$vm.isFailToLoad.wrappedValue) {
+            if isEditable && (!$vm.isFailToLoad.wrappedValue) {
+                ZStack(content: {
+                    Topbar("", type: .close, backgroundColor: .white) {
+                        $isPresented.wrappedValue = false
+                    }
+                    
                     HStack(alignment: .center, spacing: 0, content: {
                         Spacer()
                         
@@ -63,9 +62,9 @@ struct FootprintView: View {
                             }
                         }
                     })
-                }
-            })
-            .padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 8))
+                })
+                .padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 8))
+            }
             
             if $vm.isFailToLoad.wrappedValue {
                 VStack(alignment: .leading, spacing: 0) {
@@ -78,14 +77,16 @@ struct FootprintView: View {
             } else {
                 ScrollView(.vertical, showsIndicators: false, content: {
                     VStack(alignment: .leading, spacing: 0) {
-                        FPButton(text: "여기에 발자국 남기기", location: .leading(name: "ic_feet"), status: .able, size: .large, type: .lightSolid) {
-                            $isPresented.wrappedValue = false
-                            if let note = $vm.footPrint.wrappedValue {
-                                self.output.pushCreateNoteView(Location(latitude: note.latitude, longitude: note.longitude), note.address)
+                        if isEditable {
+                            FPButton(text: "여기에 발자국 남기기", location: .leading(name: "ic_feet"), status: .able, size: .large, type: .lightSolid) {
+                                $isPresented.wrappedValue = false
+                                if let note = $vm.footPrint.wrappedValue {
+                                    self.output.pushCreateNoteView(Location(latitude: note.latitude, longitude: note.longitude), note.address)
+                                }
                             }
+                            .padding(.bottom, 10)
+                            .sdPaddingHorizontal(16)
                         }
-                        .padding(.bottom, 10)
-                        .sdPaddingHorizontal(16)
                         
                         if let note = $vm.footPrint.wrappedValue {
                             Text(note.title)
@@ -101,7 +102,7 @@ struct FootprintView: View {
                             }
                             
                             VStack(alignment: .leading, spacing: 0, content: {
-                                if $vm.isHasMore.wrappedValue {
+                                if isEditable, $vm.isHasMore.wrappedValue {
                                     drawTitleWithButton("위치", buttonText: "이 위치 발자국 전체보기", alignment: .bottomLeading) {
                                         $isPresented.wrappedValue = false
                                         self.output.pushFootprintListWtihSameAddressView(note.address)
