@@ -95,8 +95,8 @@ struct TripDetailView: View {
             FootprintView(isPresented: $isPresentFootprint, output: FootprintView.Output(pushEditNoteView: {
                 
             }), isEditable: false)
-            .environmentObject(footprintVM)
-            .presentationDetents([.fraction(0.8), .large])
+                .environmentObject(footprintVM)
+                .presentationDetents([.fraction(0.8), .large])
         })
     }
     

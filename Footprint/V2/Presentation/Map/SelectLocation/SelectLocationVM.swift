@@ -16,15 +16,11 @@ class SelectLocationVM: BaseViewModel {
     }
     
     //MARK: temporary note
-    func updateTempLocation(_ location: Location, address: String) -> TemporaryNote? {
-        self.temporaryNoteService.updateTempLocation(address: address, location: location)
+    func updateTempLocation(_ location: Location, address: String) {
+        self.temporaryNoteService.updateLocation(address: address, location: location)
     }
     
-    func updateTempNote(_ id: String) {
-        self.temporaryNoteService.updateTempNote(id)
-    }
-    
-    func clearFootprint() {
+    func clearTempNote() {
         self.temporaryNoteService.clear()
     }
     

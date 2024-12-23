@@ -22,8 +22,8 @@ struct EditNoteView: View {
     
     @StateObject var vm: EditNoteVM
     
-    init(output: Output) {
-        _vm = StateObject(wrappedValue: EditNoteVM())
+    init(output: Output, type: EditNoteType) {
+        _vm = StateObject(wrappedValue: EditNoteVM(type: type))
         self.output = output
     }
     
@@ -352,8 +352,8 @@ struct EditNoteView: View {
     
     private func drawHeader() -> some View {
         return ZStack(alignment: .leading) {
-            Topbar($vm.noteId.wrappedValue == nil ? "발자국 남기기" : "발자국 편집하기", type: .back) {
-                vm.clearFootprint()
+            Topbar($vm.type.wrappedValue.title, type: .back) {
+                vm.clearTempNote()
                 self.output.pop()
             }
             HStack(alignment: .center, spacing: 12) {

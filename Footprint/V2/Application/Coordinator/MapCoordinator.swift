@@ -12,8 +12,8 @@ import SwiftUI
 class MapCoordinator: BaseCoordinator<Destination> {
     private let mapManager: FPMapManager = FPMapManager.shared
     
-    private func pushEditNote(output: EditNoteView.Output) {
-        self.push(.editNote(output: output))
+    private func pushEditNote(type: EditNoteType, output: EditNoteView.Output) {
+        self.push(.editNote(type: type, output: output))
     }
     
     private func pushCategoryListEditView(_ output: CategoryListEditView.Output) {
@@ -50,8 +50,8 @@ class MapCoordinator: BaseCoordinator<Destination> {
 //MARK: Output
 extension MapCoordinator {
     var mapOutput: MapView2.Output {
-        MapView2.Output {
-            self.pushEditNote(output: self.editNoteOutput)
+        MapView2.Output { type in
+            self.pushEditNote(type: type, output: self.editNoteOutput)
         }
     }
     
@@ -98,8 +98,8 @@ extension MapCoordinator {
     }
     
     var footprintListViewOutput: FootprintListViewV2.Output {
-        FootprintListViewV2.Output {
-            self.pushEditNote(output: self.editNoteOutput)
+        FootprintListViewV2.Output { type in
+            self.pushEditNote(type: type, output: self.editNoteOutput)
         }
     }
 }

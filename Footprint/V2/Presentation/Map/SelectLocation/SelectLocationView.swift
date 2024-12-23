@@ -77,7 +77,8 @@ struct SelectLocationView: View {
                     HStack(alignment: .center, spacing: 8, content: {
                         
                         FPButton(text: "여기에 발자국 남기기", status: $mapManager.centerMarkerStatus.wrappedValue == .move ? .disable : .able, size: .large, type: .solid) {
-                            if let location = $mapManager.centerPosition.wrappedValue, let _ = vm.updateTempLocation(Location(latitude: location.latitude, longitude: location.longitude), address: $mapManager.centerAddress.wrappedValue) {
+                            if let location = $mapManager.centerPosition.wrappedValue {
+                                vm.updateTempLocation(Location(latitude: location.latitude, longitude: location.longitude), address: $mapManager.centerAddress.wrappedValue)
                                 self.output.pop()
                             }
                         }

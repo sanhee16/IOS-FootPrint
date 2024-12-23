@@ -13,14 +13,13 @@ import UIKit
 
 class TemporaryNoteService {
     private var temporaryNote: TemporaryNote?
-    private let loadNoteUseCaseWithId: LoadNoteUseCaseWithId
     
-    init(loadNoteUseCaseWithId: LoadNoteUseCaseWithId) {
+    init(loadNoteWithIdUseCase: LoadNoteWithIdUseCase) {
         self.temporaryNote = nil
-        self.loadNoteUseCaseWithId = loadNoteUseCaseWithId
     }
     
-    func saveTempNote(
+    func save(
+        type: EditNoteType,
         id: String? = nil,
         isStar: Bool,
         title: String,
@@ -36,6 +35,7 @@ class TemporaryNoteService {
     ) {
         self.temporaryNote = TemporaryNote()
         
+        self.temporaryNote?.type = type
         self.temporaryNote?.id = id
         self.temporaryNote?.isStar = isStar
         self.temporaryNote?.title = title
@@ -50,45 +50,16 @@ class TemporaryNoteService {
         self.temporaryNote?.location = location
     }
     
-    func updateTempLocation(
-        address: String = "",
-        location: Location? = nil
-    ) -> TemporaryNote? {
-        self.temporaryNote = self.temporaryNote ?? TemporaryNote()
-        self.temporaryNote?.address = address
-        self.temporaryNote?.location = location
+    func load() -> TemporaryNote? {
         return self.temporaryNote
-    }
-    
-    func updateTempNote(_ id: String) {
-        self.temporaryNote = TemporaryNote()
-        
-        guard let note = self.loadNoteUseCaseWithId.execute(id) else {
-            return
-        }
-        
-        self.temporaryNote?.id = id
-        self.temporaryNote?.isStar = note.isStar
-        self.temporaryNote?.title = note.title
-        self.temporaryNote?.content = note.content
-        self.temporaryNote?.address = note.address
-        self.temporaryNote?.createdAt = Date(timeIntervalSince1970: Double(note.createdAt))
-        self.temporaryNote?.category = note.category
-        self.temporaryNote?.imageUrls = note.imageUrls
-        self.temporaryNote?.location = Location(latitude: note.latitude, longitude: note.longitude)
-        self.temporaryNote?.selectedPhotos = []
-        self.temporaryNote?.members = note.members
-
-        return
-    }
-    
-    func loadTempNote() -> TemporaryNote {
-        if let temporaryNote = self.temporaryNote { return temporaryNote }
-        self.temporaryNote = TemporaryNote()
-        return self.temporaryNote!
     }
     
     func clear() {
         self.temporaryNote = nil
+    }
+    
+    func updateLocation(address: String, location: Location) {
+        self.temporaryNote?.address = address
+        self.temporaryNote?.location = location
     }
 }

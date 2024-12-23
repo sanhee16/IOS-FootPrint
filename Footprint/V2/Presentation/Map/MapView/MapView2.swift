@@ -15,7 +15,7 @@ import Combine
 
 struct MapView2: View {
     struct Output {
-        var goToEditNote: () -> ()
+        var goToEditNote: (EditNoteType) -> ()
     }
     
     private var output: Output
@@ -63,9 +63,8 @@ struct MapView2: View {
                         
                     } onClickAddNote: { location in
                         $isPresentFootprintSelector.wrappedValue = false
-                        if let _ = vm.updateTempLocation(Location(latitude: location.latitude, longitude: location.longitude), address: selectedAddress) {
-                            output.goToEditNote()
-                        }
+                        vm.updateTempLocation(location, address: selectedAddress)
+                        output.goToEditNote(.create(address: selectedAddress, location: location))
                     }
                     .background(
                         GeometryReader { geo in
@@ -124,7 +123,6 @@ struct MapView2: View {
                 coordinator.moveToDestination(destination: destination)
             }
             .onAppear {
-                print("onAppear Map!")
                 if $vm.isShowMarkers.wrappedValue {
                     mapManager.loadMarkers()
                 }
@@ -132,13 +130,12 @@ struct MapView2: View {
             }
             .sheet(isPresented: $isPresentFootprint, onDismiss: {
                 $isPresentFootprint.wrappedValue = false
-                vm.clearFootprint()
+                vm.clearTempNote()
             }, content: {
                 FootprintView(isPresented: $isPresentFootprint, output: FootprintView.Output(pushEditNoteView: {
                     if let id = selectedId {
                         //MARK: 편집하기
-                        vm.updateTempNote(id)
-                        self.output.goToEditNote()
+                        self.output.goToEditNote(.update(id: id))
                     }
                 }))
                 .environmentObject(footprintVM)
@@ -247,7 +244,7 @@ struct MapView2: View {
     private func drawAddingStatus() -> some View {
         VStack(alignment: .leading, spacing: 0, content: {
             Topbar("위치 선택", type: .close) {
-                vm.clearFootprint()
+                vm.clearTempNote()
                 mapManager.updateMapStatus(.normal)
                 if $vm.isShowMarkers.wrappedValue {
                     mapManager.loadMarkers()
@@ -277,10 +274,10 @@ struct MapView2: View {
                 Text($mapManager.centerAddress.wrappedValue)
                 
                 HStack(alignment: .center, spacing: 8, content: {
-                    
                     FPButton(text: "여기에 발자국 남기기", status: $mapManager.centerMarkerStatus.wrappedValue == .move ? .disable : .able, size: .large, type: .solid) {
-                        if let location = $mapManager.centerPosition.wrappedValue, let _ = vm.updateTempLocation(Location(latitude: location.latitude, longitude: location.longitude), address: $mapManager.centerAddress.wrappedValue) {
-                            output.goToEditNote()
+                        if let location = $mapManager.centerPosition.wrappedValue {
+                            vm.updateTempLocation(Location(latitude: location.latitude, longitude: location.longitude), address: $mapManager.centerAddress.wrappedValue)
+                            output.goToEditNote(.create(address: $mapManager.centerAddress.wrappedValue, location: Location(latitude: location.latitude, longitude: location.longitude)))
                         }
                     }
                 })

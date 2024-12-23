@@ -14,6 +14,20 @@ import Photos
 import PhotosUI
 import _PhotosUI_SwiftUI
 
+enum EditNoteType {
+    case create(address: String, location: Location)
+    case update(id: String)
+    
+    var title: String {
+        switch self {
+        case .create(let address, let location):
+            return "발자국 남기기"
+        case .update(let id):
+            return "발자국 편집하기"
+        }
+    }
+}
+
 class EditNoteVM: BaseViewModel {
     @Injected(\.saveNoteUseCase) var saveNoteUseCase
     @Injected(\.updateNoteUseCase) var updateNoteUseCase
@@ -21,7 +35,7 @@ class EditNoteVM: BaseViewModel {
     @Injected(\.loadCategoriesUseCase) var loadCategoriesUseCase
     @Injected(\.loadMembersUseCase) var loadMembersUseCase
     @Injected(\.permissionService) var permissionService
-    @Injected(\.loadNoteUseCaseWithId) var loadNoteUseCaseWithId
+    @Injected(\.loadNoteWithIdUseCase) var loadNoteWithIdUseCase
     @Injected(\.temporaryNoteService) var temporaryNoteService
     
     @Published var isAvailableToSave: Bool = false
@@ -42,8 +56,10 @@ class EditNoteVM: BaseViewModel {
     @Published var noteId: String? = nil
     
     @Published var location: Location? = nil
+    @Published var type: EditNoteType
     
-    override init() {
+    init(type: EditNoteType) {
+        self.type = type
         super.init()
         
         // load categories, members
@@ -53,21 +69,47 @@ class EditNoteVM: BaseViewModel {
         self.loadNote()
     }
     
+    
+    
+    
     func loadNote() {
-        let tempNote: TemporaryNote = self.temporaryNoteService.loadTempNote()
-        
-        self.noteId = tempNote.id
-        self.isStar = tempNote.isStar
-        self.title = tempNote.title
-        self.content = tempNote.content
-        self.address = tempNote.address
-        self.createdAt = tempNote.createdAt
-        self.category = tempNote.category ?? self.categories.first
-        self.images = tempNote.images
-        self.imageUrls = tempNote.imageUrls
-        self.selectedPhotos = tempNote.selectedPhotos
-        self.selectedMembers = tempNote.members
-        self.location = tempNote.location
+        if let tempNote = self.temporaryNoteService.load() {
+            self.type = tempNote.type
+            self.noteId = tempNote.id
+            self.isStar = tempNote.isStar
+            self.title = tempNote.title
+            self.content = tempNote.content
+            self.address = tempNote.address
+            self.createdAt = tempNote.createdAt
+            self.category = tempNote.category ?? self.categories.first
+            self.images = tempNote.images
+            self.imageUrls = tempNote.imageUrls
+            self.selectedPhotos = tempNote.selectedPhotos
+            self.selectedMembers = tempNote.members
+            self.location = tempNote.location
+        } else {
+            switch type {
+            case .create(let address, let location):
+                self.address = address
+                self.location = location
+                return
+            case .update(let id):
+                if let note = self.loadNoteWithIdUseCase.execute(id) {
+                    self.noteId = note.id
+                    self.isStar = note.isStar
+                    self.title = note.title
+                    self.content = note.content
+                    self.address = note.address
+                    self.createdAt = Date(timeIntervalSince1970: Double(note.createdAt))
+                    self.category = note.category
+                    self.images = []
+                    self.imageUrls = note.imageUrls
+                    self.selectedPhotos = []
+                    self.selectedMembers = note.members
+                    self.location = Location(latitude: note.latitude, longitude: note.longitude)
+                }
+            }
+        }
     }
     
     func loadCategories() {
@@ -129,7 +171,8 @@ class EditNoteVM: BaseViewModel {
     
     func saveTempNote(_ onDone: @escaping ()->()) {
         guard let location = self.location else { return }
-        self.temporaryNoteService.saveTempNote(
+        self.temporaryNoteService.save(
+            type: self.type,
             id: self.noteId,
             isStar: self.isStar,
             title: self.title,
@@ -147,7 +190,7 @@ class EditNoteVM: BaseViewModel {
         onDone()
     }
     
-    func clearFootprint() {
+    func clearTempNote() {
         self.temporaryNoteService.clear()
     }
     

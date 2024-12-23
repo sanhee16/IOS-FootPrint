@@ -22,7 +22,7 @@ extension Container {
     }
     
     var temporaryNoteService: Factory<TemporaryNoteService> {
-        Factory(self) { TemporaryNoteService(loadNoteUseCaseWithId: self.loadNoteUseCaseWithId()) }.singleton
+        Factory(self) { TemporaryNoteService(loadNoteWithIdUseCase: self.loadNoteWithIdUseCase()) }.singleton
     }
     
     var googleRemoteDataProvider: Factory<GoogleRemoteDataProvider> {
@@ -84,9 +84,9 @@ extension Container {
         }
     }
     
-    var loadNoteUseCaseWithId: Factory<LoadNoteUseCaseWithId> {
+    var loadNoteWithIdUseCase: Factory<LoadNoteWithIdUseCase> {
         Factory(self) {
-            LoadNoteUseCaseWithId(
+            LoadNoteWithIdUseCase(
                 noteRepository: self.noteRepository(),
                 categoryRepository: self.categoryRepository(),
                 memberRepository: self.memberRepository()

@@ -20,7 +20,7 @@
 		261F6E9F2CC9E47200F7CA18 /* CategoryIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261F6E9E2CC9E47200F7CA18 /* CategoryIcon.swift */; };
 		261F6EA12CC9E64100F7CA18 /* CategoryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261F6EA02CC9E64100F7CA18 /* CategoryEntity.swift */; };
 		261F6EA32CC9E67A00F7CA18 /* CategoryColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261F6EA22CC9E67A00F7CA18 /* CategoryColor.swift */; };
-		261FF6E42CD3569300B49442 /* LoadNoteUseCaseWithId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261FF6E32CD3569300B49442 /* LoadNoteUseCaseWithId.swift */; };
+		261FF6E42CD3569300B49442 /* LoadNoteWithIdUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261FF6E32CD3569300B49442 /* LoadNoteWithIdUseCase.swift */; };
 		26205C812C6ED65D00AB8325 /* GooglePlaces in Frameworks */ = {isa = PBXBuildFile; productRef = 26205C802C6ED65D00AB8325 /* GooglePlaces */; };
 		262424D92CE590BD00595132 /* SaveDefaultTripIconUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262424D82CE590BD00595132 /* SaveDefaultTripIconUseCase.swift */; };
 		262424DC2CE595A200595132 /* EditTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262424DB2CE595A200595132 /* EditTripView.swift */; };
@@ -174,7 +174,6 @@
 		2696F4E82C77540800F56E73 /* NoteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2696F4E72C77540800F56E73 /* NoteData.swift */; };
 		2696F4EC2C77556800F56E73 /* SaveNoteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2696F4EB2C77556800F56E73 /* SaveNoteUseCase.swift */; };
 		2696F4EF2C7757F300F56E73 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2696F4EE2C7757F300F56E73 /* DIContainer.swift */; };
-		269CA5542C78A11500366005 /* EditNoteTempStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269CA5532C78A11500366005 /* EditNoteTempStorage.swift */; };
 		269CA5582C78A43300366005 /* CategoryV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269CA5572C78A43300366005 /* CategoryV2.swift */; };
 		269CA55A2C78A4D900366005 /* CategoryRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269CA5592C78A4D900366005 /* CategoryRepositoryImpl.swift */; };
 		269CA55C2C78A4DF00366005 /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269CA55B2C78A4DF00366005 /* CategoryRepository.swift */; };
@@ -326,7 +325,7 @@
 		261F6E9E2CC9E47200F7CA18 /* CategoryIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryIcon.swift; sourceTree = "<group>"; };
 		261F6EA02CC9E64100F7CA18 /* CategoryEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEntity.swift; sourceTree = "<group>"; };
 		261F6EA22CC9E67A00F7CA18 /* CategoryColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryColor.swift; sourceTree = "<group>"; };
-		261FF6E32CD3569300B49442 /* LoadNoteUseCaseWithId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadNoteUseCaseWithId.swift; sourceTree = "<group>"; };
+		261FF6E32CD3569300B49442 /* LoadNoteWithIdUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadNoteWithIdUseCase.swift; sourceTree = "<group>"; };
 		262424D82CE590BD00595132 /* SaveDefaultTripIconUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveDefaultTripIconUseCase.swift; sourceTree = "<group>"; };
 		262424DB2CE595A200595132 /* EditTripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTripView.swift; sourceTree = "<group>"; };
 		262424DD2CE595A700595132 /* EditTripVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTripVM.swift; sourceTree = "<group>"; };
@@ -472,7 +471,6 @@
 		2696F4E72C77540800F56E73 /* NoteData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteData.swift; sourceTree = "<group>"; };
 		2696F4EB2C77556800F56E73 /* SaveNoteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNoteUseCase.swift; sourceTree = "<group>"; };
 		2696F4EE2C7757F300F56E73 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
-		269CA5532C78A11500366005 /* EditNoteTempStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteTempStorage.swift; sourceTree = "<group>"; };
 		269CA5572C78A43300366005 /* CategoryV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryV2.swift; sourceTree = "<group>"; };
 		269CA5592C78A4D900366005 /* CategoryRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRepositoryImpl.swift; sourceTree = "<group>"; };
 		269CA55B2C78A4DF00366005 /* CategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRepository.swift; sourceTree = "<group>"; };
@@ -1017,7 +1015,6 @@
 			children = (
 				267CC1952C67823E00D6015E /* EditNoteView.swift */,
 				267CC1972C67824200D6015E /* EditNoteVM.swift */,
-				269CA5532C78A11500366005 /* EditNoteTempStorage.swift */,
 			);
 			path = EditNote;
 			sourceTree = "<group>";
@@ -1255,7 +1252,7 @@
 				2696F4EB2C77556800F56E73 /* SaveNoteUseCase.swift */,
 				26756A172CEE04CF0031923F /* UpdateNoteUseCase.swift */,
 				2694FCA12C7AA95000F01644 /* LoadAllNoteUseCase.swift */,
-				261FF6E32CD3569300B49442 /* LoadNoteUseCaseWithId.swift */,
+				261FF6E32CD3569300B49442 /* LoadNoteWithIdUseCase.swift */,
 				26F137062CD48BA300096181 /* LoadNotesUseCaseWithAddress.swift */,
 				265917102CD857CC008C39E9 /* ToogleStarUseCase.swift */,
 				265917172CD8BE55008C39E9 /* DeleteImageUrlUseCase.swift */,
@@ -1904,7 +1901,7 @@
 				26756A0F2CEC42BA0031923F /* TemporaryNoteService.swift in Sources */,
 				26EB9D1B2CD9A34300D3B0CE /* TempNote.swift in Sources */,
 				63E5C82F2975362300D32FD2 /* MapViewModel.swift in Sources */,
-				261FF6E42CD3569300B49442 /* LoadNoteUseCaseWithId.swift in Sources */,
+				261FF6E42CD3569300B49442 /* LoadNoteWithIdUseCase.swift in Sources */,
 				63F1328F2914A1C000B3A9E0 /* SplashView.swift in Sources */,
 				2675D2062CDDDE4500BD7633 /* SettingRepository.swift in Sources */,
 				268BD7CB2CF5A55900788A65 /* EndPoint.swift in Sources */,
@@ -2047,7 +2044,6 @@
 				63D32FC629CA92B60049F567 /* PremiumCodeView.swift in Sources */,
 				262424EA2CE5DF1400595132 /* UpdateTripUseCase.swift in Sources */,
 				63F132492914A18800B3A9E0 /* SwiftExtension.swift in Sources */,
-				269CA5542C78A11500366005 /* EditNoteTempStorage.swift in Sources */,
 				26F1370A2CD4AADB00096181 /* PeopleWithView.swift in Sources */,
 				2619FE8A2940D6AC00D24778 /* CheckPermissionView.swift in Sources */,
 				262424DE2CE595A700595132 /* EditTripVM.swift in Sources */,

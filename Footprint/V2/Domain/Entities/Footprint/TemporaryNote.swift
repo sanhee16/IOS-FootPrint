@@ -12,6 +12,7 @@ import _PhotosUI_SwiftUI
 import UIKit
 
 public final class TemporaryNote {
+    var type: EditNoteType = .create(address: "", location: Location(latitude: 0.0, longitude: 0.0))
     var id: String? = nil
     var isStar: Bool = false
     var title: String = ""

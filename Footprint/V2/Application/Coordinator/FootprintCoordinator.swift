@@ -10,8 +10,8 @@ import Factory
 import SwiftUI
 
 class FootprintCoordinator: BaseCoordinator<Destination> {
-    private func pushEditNote(output: EditNoteView.Output) {
-        self.push(.editNote(output: output))
+    private func pushEditNote(type: EditNoteType, output: EditNoteView.Output) {
+        self.push(.editNote(type: type, output: output))
     }
     
     private func pushCategoryListEditView(_ output: CategoryListEditView.Output) {
@@ -62,8 +62,8 @@ extension FootprintCoordinator {
     }
     
     var footprintListViewOutput: FootprintListViewV2.Output {
-        FootprintListViewV2.Output {
-            self.pushEditNote(output: self.editNoteOutput)
+        FootprintListViewV2.Output { type in
+            self.pushEditNote(type: type, output: self.editNoteOutput)
         }
     }
 }

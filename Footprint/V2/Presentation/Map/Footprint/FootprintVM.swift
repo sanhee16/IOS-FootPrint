@@ -13,7 +13,7 @@ import SwiftUIPullToRefresh
 import Factory
 
 class FootprintVM: BaseViewModel {
-    @Injected(\.loadNoteUseCaseWithId) var loadNoteUseCaseWithId
+    @Injected(\.loadNoteWithIdUseCase) var loadNoteWithIdUseCase
     @Injected(\.toogleStarUseCase) var toogleStarUseCase
     
     var footPrint: NoteEntity? = nil
@@ -36,7 +36,7 @@ class FootprintVM: BaseViewModel {
     }
     
     func loadData() {
-        guard let id = id, let note = self.loadNoteUseCaseWithId.execute(id) else {
+        guard let id = id, let note = self.loadNoteWithIdUseCase.execute(id) else {
             self.isFailToLoad = true
             return
         }

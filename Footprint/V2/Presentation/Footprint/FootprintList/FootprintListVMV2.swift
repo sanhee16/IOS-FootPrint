@@ -46,11 +46,7 @@ class FootprintListVMV2: ObservableObject {
         onDone()
     }
     
-    func updateTempNote(_ id: String) {
-        self.temporaryNoteService.updateTempNote(id)
-    }
-    
-    func clearFootprint() {
+    func clearTempNote() {
         self.temporaryNoteService.clear()
     }
 }

@@ -49,7 +49,7 @@ class MapVM2: BaseViewModel {
     @Injected(\.updateIsShowMarkerUseCase) var updateIsShowMarkerUseCase
     @Injected(\.temporaryNoteService) var temporaryNoteService
     @Injected(\.loadNotesUseCaseWithAddress) var loadNotesUseCaseWithAddress
-    @Injected(\.loadNoteUseCaseWithId) var loadNoteUseCaseWithId
+    @Injected(\.loadNoteWithIdUseCase) var loadNoteWithIdUseCase
     
     private var locationManager: CLLocationManager
     @Published var isShowAds: Bool = false
@@ -110,20 +110,16 @@ class MapVM2: BaseViewModel {
     }
     
     //MARK: temporary note
-    func updateTempLocation(_ location: Location, address: String) -> TemporaryNote? {
-        self.temporaryNoteService.updateTempLocation(address: address, location: location)
+    func updateTempLocation(_ location: Location, address: String) {
+        self.temporaryNoteService.updateLocation(address: address, location: location)
     }
     
-    func updateTempNote(_ id: String) {
-        self.temporaryNoteService.updateTempNote(id)
-    }
-    
-    func clearFootprint() {
+    func clearTempNote() {
         self.temporaryNoteService.clear()
     }
     
     func getMultiNoteAddress(_ id: String, onDone: @escaping (String?) -> ()) {
-        guard let note = self.loadNoteUseCaseWithId.execute(id) else {
+        guard let note = self.loadNoteWithIdUseCase.execute(id) else {
             onDone(nil)
             return
         }
