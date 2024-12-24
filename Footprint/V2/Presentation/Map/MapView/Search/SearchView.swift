@@ -72,7 +72,8 @@ struct SearchView: View {
     
     private func searchBox() -> some View {
         return HStack(alignment: .center) {
-            TextField("", text: $searchVM.searchText, prompt: Text("검색어를 입력하세요").sdFont(.body1, color: Color.cont_gray_low).sdPaddingLeading(12) as? Text)
+            TextField("", text: $searchVM.searchText, prompt: 
+                        Text("검색어를 입력하세요").sdFont(.body1, color: Color.cont_gray_low).sdPaddingLeading(12) as? Text)
                 .sdFont(.body1, color: Color.cont_gray_default)
                 .accentColor(.fColor2)
                 .sdPaddingHorizontal(8)

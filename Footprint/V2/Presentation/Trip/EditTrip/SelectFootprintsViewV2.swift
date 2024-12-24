@@ -12,17 +12,21 @@ import SDFlowLayout
 struct SelectFootprintsViewV2: View {
     @EnvironmentObject var vm: EditTripVM
     @Binding var isPresented: Bool
+    @State var searchText: String = ""
     let originalFootprints: [TripFootprintEntity]
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0, content: {
             drawHeader()
+            drawSearchBar()
             ScrollView(.vertical, showsIndicators: false, content: {
                 VStack(alignment: .leading, spacing: 0, content: {
                     ForEach($vm.footprints.wrappedValue, id: \.self) { item in
-                        Item(item: item)
-                            .environmentObject(vm)
-                            .sdPaddingBottom(16)
+                        if (searchText.isEmpty) || (!searchText.isEmpty && item.title.contains(searchText)) {
+                            Item(item: item)
+                                .environmentObject(vm)
+                                .sdPaddingBottom(16)
+                        }
                     }
                 })
                 .sdPaddingHorizontal(16)
@@ -31,6 +35,41 @@ struct SelectFootprintsViewV2: View {
             })
         })
         .background(Color.bg_default)
+    }
+    
+    private func drawSearchBar() -> some View {
+        HStack(alignment: .center, spacing: 0) {
+            Image("ic_search")
+                .resizable()
+                .frame(both: 16)
+                .sdPaddingTrailing(8)
+            
+            TextField(text: $searchText) {
+                
+            }
+            .sdFont(.body1, color: Color.cont_gray_high)
+            
+            Button {
+                self.searchText.removeAll()
+            } label: {
+                Image("ic_close")
+                    .resizable()
+                    .renderingMode(.template)
+                    .foregroundColor(Color.cont_gray_mid)
+                    .frame(both: 10.0, alignment: .center)
+                    .sdPaddingLeading(8)
+                    .contentShape(Rectangle())
+            }
+        }
+        .sdPaddingVertical(8)
+        .sdPaddingHorizontal(12)
+        .background(
+            RoundedRectangle(cornerRadius: 8)
+                .foregroundStyle(Color.bg_white)
+                .border(Color.stroke_done, lineWidth: 0.75, cornerRadius: 8)
+        )
+        .sdPaddingHorizontal(16)
+        .sdPaddingBottom(8)
     }
     
     private func drawHeader() -> some View {
