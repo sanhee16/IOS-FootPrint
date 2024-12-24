@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SettingCoordinator: BaseCoordinator<Destination> {
+class SettingCoordinator: AppCoordinator {
     private func pushCategoryListEditView() {
         self.push(.categoryListEditView(output: categoryListEditViewOutput))
     }
@@ -31,17 +31,6 @@ class SettingCoordinator: BaseCoordinator<Destination> {
 
 //MARK: Output
 extension SettingCoordinator {
-    var categoryListEditViewOutput: CategoryListEditView.Output {
-        CategoryListEditView.Output {
-            self.pop()
-        }
-    }
-    
-    var memberListEditViewOutput: MemberListEditView.Output {
-        MemberListEditView.Output {
-            self.pop()
-        }
-    }
     var permissionViewOutput: PermissionView.Output {
         PermissionView.Output {
             self.pop()

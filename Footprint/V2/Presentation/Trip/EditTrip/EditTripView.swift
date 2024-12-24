@@ -16,9 +16,12 @@ struct EditTripView: View {
     }
     private let output: Output
     @StateObject private var vm: EditTripVM
+    @StateObject private var footprintVM: FootprintVM = FootprintVM()
     @State private var isPresentStartAtCalendar: Bool = false
     @State private var isPresentEndAtCalendar: Bool = false
     @State private var isPresentFootprints: Bool = false
+    @State private var isPresentFootprint: Bool = false
+    @State private var selectedId: String? = nil
     @State private var isMoveNextCalendar: Bool = false
     @State private var isPresentCreateComplete: Bool = false
     @State private var isPresentDelete: Bool = false
@@ -122,7 +125,12 @@ struct EditTripView: View {
                                 .sdPaddingVertical(8)
                             } else {
                                 ForEach($vm.selectedFootprints.wrappedValue, id: \.self) { item in
-                                    FootprintItem(item: item)
+                                    TripFootprintItem(item: item)
+                                        .onTapGesture {
+                                            selectedId = item.id
+                                            self.footprintVM.updateId(item.id)
+                                            $isPresentFootprint.wrappedValue = true
+                                        }
                                 }
                             }
                             
@@ -185,6 +193,19 @@ struct EditTripView: View {
                 )
                 .environmentObject(vm)
                 .presentationDetents([.large])
+            })
+            .sheet(isPresented: $isPresentFootprint, onDismiss: {
+                selectedId = nil
+            }, content: {
+                FootprintView(isPresented: $isPresentFootprint, output: FootprintView.Output(pushUpdateNoteView: { id in
+
+                }, pushCreateNoteView: { location, address in
+
+                }, pushFootprintListWtihSameAddressView: { address in
+
+                }), isEditable: false)
+                .environmentObject(footprintVM)
+                .presentationDetents([.fraction(0.8), .large])
             })
             .toolbar {
                 ToolbarItemGroup(placement: .keyboard) {
@@ -361,31 +382,6 @@ struct EditTripView: View {
         .contentShape(Rectangle())
         .onTapGesture {
             $vm.icon.wrappedValue = item
-        }
-    }
-    
-    private struct FootprintItem: View {
-        let item: TripFootprintEntity
-        
-        var body: some View {
-            VStack(alignment: .leading, spacing: 0, content: {
-                Text(item.title)
-                    .sdFont(.headline2, color: Color.cont_gray_default)
-                    .lineLimit(1)
-                
-                Text(item.content)
-                    .sdFont(.body3, color: Color.cont_gray_high)
-                    .sdPaddingTop(16)
-                    .lineLimit(1)
-            })
-            .sdPaddingHorizontal(16)
-            .sdPaddingVertical(18)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .contentShape(Rectangle())
-            .background(
-                RoundedRectangle(cornerRadius: 12)
-                    .foregroundStyle(Color.bg_white)
-            )
         }
     }
 }

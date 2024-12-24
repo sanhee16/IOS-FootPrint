@@ -69,7 +69,7 @@ struct TripDetailView: View {
                         
                         drawTitle("발자국 모음")
                         ForEach(vm.footprints, id: \.self) { item in
-                            drawFootprintItem(item)
+                            TripFootprintItem(item: item)
                                 .onTapGesture {
                                     selectedId = item.id
                                     self.footprintVM.updateId(item.id)
@@ -124,28 +124,6 @@ struct TripDetailView: View {
         Text(text)
             .sdFont(.headline4, color: Color.zineGray_700)
             .sdPaddingTop(24)
-    }
-    
-    
-    private func drawFootprintItem(_ item: TripFootprintEntity) -> some View {
-        VStack(alignment: .leading, spacing: 0, content: {
-            Text(item.title)
-                .sdFont(.headline2, color: Color.cont_gray_default)
-                .lineLimit(1)
-            
-            Text(item.content)
-                .sdFont(.body3, color: Color.cont_gray_high)
-                .sdPaddingTop(16)
-                .lineLimit(1)
-        })
-        .sdPaddingHorizontal(16)
-        .sdPaddingVertical(18)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .contentShape(Rectangle())
-        .background(
-            RoundedRectangle(cornerRadius: 12)
-                .foregroundStyle(Color.bg_white)
-        )
     }
 }
 

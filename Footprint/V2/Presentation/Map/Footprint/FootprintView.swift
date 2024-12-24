@@ -92,8 +92,8 @@ struct FootprintView: View {
                             Text(note.title)
                                 .sdFont(.title, color: .cont_gray_default)
                                 .sdPaddingHorizontal(16)
-                                .padding(.top, 16)
                                 .padding(.bottom, 8)
+                                .padding(.top, isEditable ? 16 : 24 + 16)
                             
                             if !note.content.isEmpty {
                                 Text(note.content)

@@ -41,6 +41,8 @@
 		262D2A02293E2BA4005984DA /* SettingView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262D2A01293E2BA4005984DA /* SettingView1.swift */; };
 		262D2A04293E2BAA005984DA /* SettingViewModel1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262D2A03293E2BAA005984DA /* SettingViewModel1.swift */; };
 		262D2A06293E310E005984DA /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262D2A05293E310E005984DA /* MailView.swift */; };
+		262E7DDE2D1A347F003CBDE1 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262E7DDD2D1A347F003CBDE1 /* AppCoordinator.swift */; };
+		262E7DE02D1A3F4E003CBDE1 /* TripFootprintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262E7DDF2D1A3F4E003CBDE1 /* TripFootprintItem.swift */; };
 		26332176292095E90065AE3A /* ShowFootPrintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26332175292095E90065AE3A /* ShowFootPrintView.swift */; };
 		26332178292095F10065AE3A /* ShowFootPrintViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26332177292095F10065AE3A /* ShowFootPrintViewModel.swift */; };
 		2639921F291FEBA60049F047 /* KeyboardReadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2639921E291FEBA60049F047 /* KeyboardReadable.swift */; };
@@ -348,6 +350,8 @@
 		262D2A01293E2BA4005984DA /* SettingView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView1.swift; sourceTree = "<group>"; };
 		262D2A03293E2BAA005984DA /* SettingViewModel1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel1.swift; sourceTree = "<group>"; };
 		262D2A05293E310E005984DA /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
+		262E7DDD2D1A347F003CBDE1 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		262E7DDF2D1A3F4E003CBDE1 /* TripFootprintItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripFootprintItem.swift; sourceTree = "<group>"; };
 		26332175292095E90065AE3A /* ShowFootPrintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowFootPrintView.swift; sourceTree = "<group>"; };
 		26332177292095F10065AE3A /* ShowFootPrintViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowFootPrintViewModel.swift; sourceTree = "<group>"; };
 		2639921E291FEBA60049F047 /* KeyboardReadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardReadable.swift; sourceTree = "<group>"; };
@@ -769,6 +773,7 @@
 				26A8806D2CE70D2A003F4FA9 /* TripDetail */,
 				262424DA2CE5959B00595132 /* EditTrip */,
 				2650A05F2CE3352A00040512 /* TripList */,
+				262E7DDF2D1A3F4E003CBDE1 /* TripFootprintItem.swift */,
 			);
 			path = Trip;
 			sourceTree = "<group>";
@@ -970,6 +975,7 @@
 			isa = PBXGroup;
 			children = (
 				267CC1762C66F27000D6015E /* BaseCoordinator.swift */,
+				262E7DDD2D1A347F003CBDE1 /* AppCoordinator.swift */,
 				267CC1782C66F28300D6015E /* MapCoordinator.swift */,
 				26756A192CEE0B670031923F /* FootprintCoordinator.swift */,
 				26756A1B2CEE0B7C0031923F /* TripCoordinator.swift */,
@@ -2095,6 +2101,7 @@
 				63C81AB52963BD3D0001A70B /* SelectFootprintsView.swift in Sources */,
 				63F132562914A19F00B3A9E0 /* SceneDelegate.swift in Sources */,
 				269CA55C2C78A4DF00366005 /* CategoryRepository.swift in Sources */,
+				262E7DE02D1A3F4E003CBDE1 /* TripFootprintItem.swift in Sources */,
 				26D018B42CE4336C00891B89 /* TripRepositoryImpl.swift in Sources */,
 				2694FC992C79B99500F01644 /* MemberListEditVM.swift in Sources */,
 				2696F4EC2C77556800F56E73 /* SaveNoteUseCase.swift in Sources */,
@@ -2118,6 +2125,7 @@
 				63D32FD729CACEAC0049F567 /* AdView.swift in Sources */,
 				269CA5632C78A5D400366005 /* SaveCategoryUseCase.swift in Sources */,
 				267CC1802C66F2C700D6015E /* MapVM2.swift in Sources */,
+				262E7DDE2D1A347F003CBDE1 /* AppCoordinator.swift in Sources */,
 				26CBA8A02D15663600381D83 /* LocationRepository.swift in Sources */,
 				26FAB54F2C6B4095006304AE /* SelectLocationVM.swift in Sources */,
 				2682FE2D2CF46510008664C8 /* PermissionVM.swift in Sources */,
