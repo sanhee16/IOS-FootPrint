@@ -79,6 +79,21 @@ enum PinColor: Int {
         case .pin9: return UIColor.pin9
         }
     }
+    
+    var v2Color: CategoryColor {
+        switch self {
+        case .pin0: return CategoryColor.black
+        case .pin1: return CategoryColor.pink
+        case .pin2: return CategoryColor.orange
+        case .pin3: return CategoryColor.purple
+        case .pin4: return CategoryColor.purple
+        case .pin5: return CategoryColor.blue
+        case .pin6: return CategoryColor.blue
+        case .pin7: return CategoryColor.green
+        case .pin8: return CategoryColor.green
+        case .pin9: return CategoryColor.yellow
+        }
+    }
 }
 
 
@@ -216,6 +231,26 @@ enum PinType: Int {
         case .exclamation: return "mark_exclamation_clear"
         case .happy: return "mark_happy_clear"
         case .square: return "mark_square_clear"
+        }
+    }
+    
+    var v2Icon: CategoryIcon {
+        switch self {
+            case .restaurant: return .daily_03_forkSpoon
+            case .coffee: return .daily_01_coffee_mug
+            case .bread: return .daily_06_donut
+            case .cake: return .emotion_18_magicWand
+            case .wine: return .daily_02_wine
+            case .exercise: return .daily_12_car
+            case .heart: return .emotion_14_heart
+            case .star: return .emotion_13_star
+            case .multiply: return .emotion_09_skull
+            case .like: return .emotion_12_thumbsUp
+            case .unlike: return .emotion_02_emojiSad
+            case .done: return .emotion_11_handOk
+            case .exclamation: return .emotion_16_chatSquare_warning
+            case .happy: return .emotion_01_emojiFace
+            case .square: return .etc_02_cursorArrow1
         }
     }
 }

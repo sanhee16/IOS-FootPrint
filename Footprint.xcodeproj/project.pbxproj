@@ -123,6 +123,12 @@
 		267CC1962C67823E00D6015E /* EditNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC1952C67823E00D6015E /* EditNoteView.swift */; };
 		267CC1982C67824200D6015E /* EditNoteVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267CC1972C67824200D6015E /* EditNoteVM.swift */; };
 		26823C092A13B93000BF41EA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26823C0B2A13B93000BF41EA /* InfoPlist.strings */; };
+		26825E622D3F5036007CEB4E /* MigrationFootprintUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26825E612D3F5036007CEB4E /* MigrationFootprintUseCase.swift */; };
+		26825E642D3F5049007CEB4E /* MigrationTripUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26825E632D3F5049007CEB4E /* MigrationTripUseCase.swift */; };
+		26825E662D3F5055007CEB4E /* MigrationMemberUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26825E652D3F5055007CEB4E /* MigrationMemberUseCase.swift */; };
+		26825E682D3F505D007CEB4E /* MigrationCategoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26825E672D3F505D007CEB4E /* MigrationCategoryUseCase.swift */; };
+		26825E6A2D3F5093007CEB4E /* MigrationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26825E692D3F5093007CEB4E /* MigrationRepository.swift */; };
+		26825E6C2D3F68DD007CEB4E /* MigrationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26825E6B2D3F68DD007CEB4E /* MigrationUseCase.swift */; };
 		2682622A2C60E2EA0069134C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 268262292C60E2EA0069134C /* RealmSwift */; settings = {ATTRIBUTES = (Required, ); }; };
 		2682A76D2C6D785C00DF1F8A /* FPMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2682A76C2C6D785C00DF1F8A /* FPMapView.swift */; };
 		2682A76F2C6D79C700DF1F8A /* FPMapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2682A76E2C6D79C700DF1F8A /* FPMapManager.swift */; };
@@ -426,6 +432,12 @@
 		267CC1972C67824200D6015E /* EditNoteVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteVM.swift; sourceTree = "<group>"; };
 		26823C0A2A13B93000BF41EA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		26823C0C2A13B93300BF41EA /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		26825E612D3F5036007CEB4E /* MigrationFootprintUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationFootprintUseCase.swift; sourceTree = "<group>"; };
+		26825E632D3F5049007CEB4E /* MigrationTripUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationTripUseCase.swift; sourceTree = "<group>"; };
+		26825E652D3F5055007CEB4E /* MigrationMemberUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationMemberUseCase.swift; sourceTree = "<group>"; };
+		26825E672D3F505D007CEB4E /* MigrationCategoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationCategoryUseCase.swift; sourceTree = "<group>"; };
+		26825E692D3F5093007CEB4E /* MigrationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationRepository.swift; sourceTree = "<group>"; };
+		26825E6B2D3F68DD007CEB4E /* MigrationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationUseCase.swift; sourceTree = "<group>"; };
 		2682A76C2C6D785C00DF1F8A /* FPMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPMapView.swift; sourceTree = "<group>"; };
 		2682A76E2C6D79C700DF1F8A /* FPMapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPMapManager.swift; sourceTree = "<group>"; };
 		2682A7702C6DB04900DF1F8A /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
@@ -1040,6 +1052,18 @@
 			path = EditNote;
 			sourceTree = "<group>";
 		};
+		26825E602D3F5024007CEB4E /* MigrationUseCases */ = {
+			isa = PBXGroup;
+			children = (
+				26825E612D3F5036007CEB4E /* MigrationFootprintUseCase.swift */,
+				26825E632D3F5049007CEB4E /* MigrationTripUseCase.swift */,
+				26825E652D3F5055007CEB4E /* MigrationMemberUseCase.swift */,
+				26825E672D3F505D007CEB4E /* MigrationCategoryUseCase.swift */,
+				26825E6B2D3F68DD007CEB4E /* MigrationUseCase.swift */,
+			);
+			path = MigrationUseCases;
+			sourceTree = "<group>";
+		};
 		2682A76B2C6D783C00DF1F8A /* FPMapManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -1224,6 +1248,7 @@
 				26D018B62CE433B600891B89 /* TripRepository.swift */,
 				26D018B82CE436A200891B89 /* TripIconRepository.swift */,
 				26CBA89F2D15663600381D83 /* LocationRepository.swift */,
+				26825E692D3F5093007CEB4E /* MigrationRepository.swift */,
 			);
 			path = RepositoryProtocols;
 			sourceTree = "<group>";
@@ -1255,6 +1280,7 @@
 		2696F4E92C77555000F56E73 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				26825E602D3F5024007CEB4E /* MigrationUseCases */,
 				26CBA89C2D15629400381D83 /* LocationUseCases */,
 				268BD7BC2CF57DC400788A65 /* SearchUseCases */,
 				26D018C12CE4597500891B89 /* TripIconUseCases */,
@@ -1900,6 +1926,7 @@
 				63E2756929502DFA00E4AABC /* PinchZoom.swift in Sources */,
 				267A22CE2CEAE5CF0079D146 /* FootprintListViewV2.swift in Sources */,
 				267CC1822C66FA1200D6015E /* GoogleMapView2.swift in Sources */,
+				26825E662D3F5055007CEB4E /* MigrationMemberUseCase.swift in Sources */,
 				63E848A3295ABE7E0037D7A3 /* EditTravelViewModel.swift in Sources */,
 				269CA5792C78E1B800366005 /* PermissionService.swift in Sources */,
 				63F1328E2914A1C000B3A9E0 /* SplashViewModel.swift in Sources */,
@@ -1907,6 +1934,7 @@
 				262424DC2CE595A200595132 /* EditTripView.swift in Sources */,
 				269CA5742C78BE3400366005 /* CategoryEditView.swift in Sources */,
 				266BE0902CCA1FF000E754EB /* MemberEntity.swift in Sources */,
+				26825E6C2D3F68DD007CEB4E /* MigrationUseCase.swift in Sources */,
 				261F6E9F2CC9E47200F7CA18 /* CategoryIcon.swift in Sources */,
 				261F6EA12CC9E64100F7CA18 /* CategoryEntity.swift in Sources */,
 				268BD7BB2CF57DA400788A65 /* SearchEntity.swift in Sources */,
@@ -1915,6 +1943,7 @@
 				26F137072CD48BA300096181 /* LoadNotesWithAddressUseCase.swift in Sources */,
 				268BD7CD2CF5A5AE00788A65 /* GoogleNetworkError.swift in Sources */,
 				2627409129699B2F00B47566 /* CategorySelectorViewModel.swift in Sources */,
+				26825E622D3F5036007CEB4E /* MigrationFootprintUseCase.swift in Sources */,
 				2691D9C5294EE4B6002825B9 /* FootprintListFilterViewModel.swift in Sources */,
 				631D7528296661FA00464F33 /* MainMapOptionView.swift in Sources */,
 				265924C929445BE1001E7025 /* FootprintListViewModel.swift in Sources */,
@@ -1946,6 +1975,7 @@
 				26EB9D1D2CD9E2C500D3B0CE /* MapStatusVM.swift in Sources */,
 				26756A182CEE04CF0031923F /* UpdateNoteUseCase.swift in Sources */,
 				26C04F6D2917667F00890A76 /* SwiftUIExtension.swift in Sources */,
+				26825E642D3F5049007CEB4E /* MigrationTripUseCase.swift in Sources */,
 				631D75242966619B00464F33 /* SToggleView.swift in Sources */,
 				269CA5762C78BE9600366005 /* CategoryEditVM.swift in Sources */,
 				267A22D22CEAE71F0079D146 /* UpdateFootprintSortTypeUseCase.swift in Sources */,
@@ -1992,9 +2022,11 @@
 				268BD7C72CF5A53A00788A65 /* NetworkError.swift in Sources */,
 				264EEF572925128300B89624 /* AddCategoryView.swift in Sources */,
 				262D2A02293E2BA4005984DA /* SettingView1.swift in Sources */,
+				26825E6A2D3F5093007CEB4E /* MigrationRepository.swift in Sources */,
 				269CA5722C78B69A00366005 /* CategoryListEditVM.swift in Sources */,
 				26A880712CE70D39003F4FA9 /* TripDetailVM.swift in Sources */,
 				63F1325A2914A1A300B3A9E0 /* AppCoordinatorV1.swift in Sources */,
+				26825E682D3F505D007CEB4E /* MigrationCategoryUseCase.swift in Sources */,
 				2682A7712C6DB04900DF1F8A /* Date+Extension.swift in Sources */,
 				26940CAF293C9D170091E996 /* ShowImageViewModel.swift in Sources */,
 				263A97BB2945852E008A69F5 /* PeopleWithSelectorView.swift in Sources */,

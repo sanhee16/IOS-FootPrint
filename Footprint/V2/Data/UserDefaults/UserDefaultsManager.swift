@@ -22,6 +22,7 @@ enum UserDefaultKey: String {
     case tripSortType = "TRIP_SORT_TYPE"
     case footprintSortType = "FOOTPRINT_SORT_TYPE"
     case isShowSearchBar = "IS_SHOW_SEARCH_BAR"
+    case isCompleteMigrationV2 = "IS_COMPLETE_MIGRATION_V2"
 }
 
 
@@ -68,6 +69,9 @@ class Defaults {
     
     @UserDefault<Bool>(key: UserDefaultKey.isShowSearchBar.rawValue, defaultValue: true)
     var isShowSearchBar
+    
+    @UserDefault<Bool>(key: UserDefaultKey.isCompleteMigrationV2.rawValue, defaultValue: false)
+    var isCompleteMigrationV2
     
     //MARK: Setting
     /*
