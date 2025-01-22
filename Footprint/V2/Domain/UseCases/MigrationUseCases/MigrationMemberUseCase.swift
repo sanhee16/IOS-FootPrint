@@ -25,17 +25,24 @@ class MigrationMemberUseCase {
             if list.isEmpty {
                 return .success(Void())
             }
+            
             var idx: Int = 0
-            list.forEach {
-                updateMemberUseCase.execute(
-                    $0.id,
-                    idx: idx,
-                    name: $0.name,
-                    image: ImageManager.shared.getSavedImage(named: $0.image),
-                    intro: $0.intro
-                )
-                idx += 1
+            for item in list {
+                do {
+                    let id = try self.migrationRepository.saveMemberId(item.id).get()
+                    updateMemberUseCase.execute(
+                        id,
+                        idx: idx,
+                        name: item.name,
+                        image: ImageManager.shared.getSavedImage(named: item.image),
+                        intro: item.intro
+                    )
+                    idx += 1
+                } catch {
+                    continue
+                }
             }
+            
             return .success(Void())
             
         case .failure(let failure):

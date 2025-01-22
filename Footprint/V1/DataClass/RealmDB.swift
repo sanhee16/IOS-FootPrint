@@ -57,6 +57,24 @@ class FootPrint: Object {
     }
 }
 
+extension FootPrint {
+    func toFootprintV1() -> FootprintV1 {
+        FootprintV1(
+            id: self.id.stringValue,
+            title: self.title,
+            content: self.content,
+            images: self.images.map({ String($0) }),
+            createdAt: self.createdAt,
+            latitude: self.latitude,
+            longitude: self.longitude,
+            tag: self.tag,
+            peopleWithIds: self.peopleWithIds.map({ String($0) }),
+            address: self.address ?? "",
+            isStar: self.isStar
+        )
+    }
+}
+
 class Travel: Object {
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var footprints: List<FootPrint>
@@ -86,6 +104,22 @@ class Travel: Object {
     }
 }
 
+extension Travel {
+    func toTripV1() -> TripV1 {
+        TripV1(
+            id: self.id.stringValue,
+            footprintIds: self.footprints.map({ String($0.id.stringValue) }),
+            title: self.title,
+            intro: self.intro,
+            createdAt: self.createdAt,
+            color: self.color,
+            fromDate: self.fromDate,
+            toDate: self.toDate,
+            isStar: self.isStar
+        )
+    }
+}
+
 class Category: Object {
     public static func == (lhs: Category, rhs: Category) -> Bool {
         return lhs.tag == rhs.tag
@@ -105,6 +139,16 @@ class Category: Object {
     }
 }
 
+extension Category {
+    func toCategoryV1() -> CategoryV1 {
+        CategoryV1(
+            tag: self.tag,
+            name: self.name,
+            pinType: self.pinType,
+            pinColor: self.pinColor
+        )
+    }
+}
 
 public class PeopleWith: Object {
     public static func == (lhs: PeopleWith, rhs: PeopleWith) -> Bool {
@@ -125,3 +169,9 @@ public class PeopleWith: Object {
     }
 }
 
+
+extension PeopleWith {
+    func toMemberV1() -> MemberV1 {
+        MemberV1(id: self.id, name: self.name, image: self.image, intro: self.intro)
+    }
+}

@@ -290,3 +290,14 @@ extension Container {
         Factory(self) { SearchPlaceUseCase() }
     }
 }
+
+//MARK: UseCase - Migration
+extension Container {
+//    var migrationFootprintUseCase: Factory<MigrationFootprintUseCase> {
+//        Factory(self) { MigrationFootprintUseCase(
+//            migrationRepository: <#T##any MigrationRepository#>,
+//            updateNoteUseCase: <#T##UpdateNoteUseCase#>
+//        )
+//        }
+//    }
+}

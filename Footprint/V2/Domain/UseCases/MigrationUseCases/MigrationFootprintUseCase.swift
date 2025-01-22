@@ -28,6 +28,13 @@ class MigrationFootprintUseCase {
             
             for item in list {
                 do {
+                    var memberIds: [String] = []
+                    
+                    try item.peopleWithIds.forEach { id in
+                        let newId = try self.migrationRepository.getMemberId(id).get()
+                        memberIds.append(newId)
+                    }
+                    
                     let categoryId = try self.migrationRepository.getCategoryId(item.tag).get()
                     self.updateNoteUseCase.execute(
                         id: item.id.stringValue,
@@ -36,7 +43,7 @@ class MigrationFootprintUseCase {
                         createdAt: item.createdAt,
                         imageUrls: item.images.map({ url in String(url) }),
                         categoryId: categoryId,
-                        memberIds: item.peopleWithIds.map({ id in String(id) }),
+                        memberIds: memberIds,
                         isStar: item.isStar,
                         latitude: item.latitude,
                         longitude: item.longitude,
