@@ -39,6 +39,11 @@ class FootPrint: Object {
     @Persisted var address: String?
     @Persisted var isStar: Bool
     @Persisted var deleteTime: Int
+    
+    // V2
+    @Persisted var newID: String
+    @Persisted var categoryId: String
+    @Persisted var memberIds: List<String>
 
     convenience init(title: String, content: String, images: List<String>, createdAt: Date, latitude: Double, longitude: Double, tag: Int, peopleWithIds: List<Int>, placeId: String? = nil, address: String?, isStar: Bool, deleteTime: Int = 0) {
         self.init()
@@ -54,6 +59,9 @@ class FootPrint: Object {
         self.address = address
         self.isStar = isStar
         self.deleteTime = deleteTime
+        self.newID = UUID().uuidString
+        self.categoryId = ""
+        self.memberIds = List()
     }
 }
 
@@ -87,6 +95,10 @@ class Travel: Object {
     @Persisted var isStar: Bool
     @Persisted var deleteTime: Int
     
+    // V2
+    @Persisted var newID: String
+    @Persisted var footprintIDs: List<String>
+    
     convenience init(id: ObjectId? = nil, footprints: List<FootPrint>, title: String, intro: String, color: String, fromDate: Date, toDate: Date, isStar: Bool, deleteTime: Int = 0) {
         self.init()
         if let id = id {
@@ -101,6 +113,9 @@ class Travel: Object {
         self.toDate = Int(toDate.timeIntervalSince1970)
         self.isStar = isStar
         self.deleteTime = deleteTime
+        
+        self.newID = UUID().uuidString
+        self.footprintIDs = List()
     }
 }
 
@@ -130,12 +145,20 @@ class Category: Object {
     @Persisted var pinType: Int
     @Persisted var pinColor: Int
     
+    // V2
+    @Persisted var newID: String
+    @Persisted var newColor: Int
+    @Persisted var newIcon: String
+    
     convenience init(tag: Int, name: String, pinType: PinType, pinColor: PinColor) {
         self.init()
         self.tag = tag
         self.name = name
         self.pinType = pinType.rawValue
         self.pinColor = pinColor.rawValue
+        self.newID = UUID().uuidString
+        self.newColor = 0
+        self.newIcon = ""
     }
 }
 
@@ -160,12 +183,16 @@ public class PeopleWith: Object {
     @Persisted var image: String
     @Persisted var intro: String
     
+    // V2
+    @Persisted var newID: String
+    
     convenience init(id: Int, name: String, image: String, intro: String) {
         self.init()
         self.id = id
         self.name = name
         self.image = image
         self.intro = intro
+        self.newID = UUID().uuidString
     }
 }
 

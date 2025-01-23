@@ -23,12 +23,12 @@ class MigrationCategoryUseCase {
             if list.isEmpty {
                 return .success(Void())
             }
-                        for item in list {
+            for item in list {
                 let tag: Int = item.tag
                 if let pinType = PinType(rawValue: item.pinType),
                     let pinColor = PinColor(rawValue: item.pinColor) {
                     do {
-                        let id = try self.migrationRepository.saveTag(tag).get()
+                        let id = try self.migrationRepository.saveCategoryTag(tag).get()
                         self.saveCategoryUseCase.execute(
                             id,
                             name: item.name,

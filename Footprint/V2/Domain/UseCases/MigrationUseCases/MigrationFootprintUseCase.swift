@@ -37,7 +37,7 @@ class MigrationFootprintUseCase {
                     
                     let categoryId = try self.migrationRepository.getCategoryId(item.tag).get()
                     self.updateNoteUseCase.execute(
-                        id: item.id.stringValue,
+                        id: item.id,
                         title: item.title,
                         content: item.content,
                         createdAt: item.createdAt,
@@ -47,7 +47,7 @@ class MigrationFootprintUseCase {
                         isStar: item.isStar,
                         latitude: item.latitude,
                         longitude: item.longitude,
-                        address: item.address ?? ""
+                        address: item.address
                     )
                 } catch {
                     continue

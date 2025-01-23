@@ -33,7 +33,7 @@ class MigrationTripUseCase {
                     title: item.title,
                     content: item.intro,
                     iconId: (tripIcons.randomElement() ?? .ic_concept_01_smile).rawValue,
-                    footprintIds: item.footprints.map({ $0.id.stringValue }),
+                    footprintIds: item.footprintIds,
                     startAt: item.fromDate,
                     endAt: item.toDate
                 )

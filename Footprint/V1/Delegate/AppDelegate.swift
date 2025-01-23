@@ -12,6 +12,7 @@ import GooglePlaces
 import FirebaseCore
 import FirebaseFirestore
 import GoogleMobileAds
+import RealmSwift
 
 //@UIApplicationDelegateAdaptor(AppDelegate.self) var delegate ??
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -67,6 +68,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // network connection
         NetworkMonitor.shared.startMonitoring()
 
+        // migration
+        dbMigration()
+
         return true
     }
     
@@ -113,6 +117,105 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             //            print(userInfo["name"]!)
         }
         completionHandler()
+    }
+}
+
+extension AppDelegate {
+    func createDummyData() {
+        print("[DB]path= \(Realm.Configuration.defaultConfiguration.fileURL!)");
+        
+        let useCase = CreateDummyDataUseCase()
+        useCase.execute()
+    }
+    
+    func dbMigration() {
+        print("[DB] Realm.Configuration.defaultConfiguration: \(Realm.Configuration.defaultConfiguration.schemaVersion)")
+//         ✅ schemaVersion 수정
+        let config = Realm.Configuration(schemaVersion: 6) { migration, oldSchemaVersion in
+            // ✅ 0 -> 1로 업데이트, 새로운 컬럼 추가
+            print("[DB] oldSchemaVersion: \(oldSchemaVersion)")
+            if oldSchemaVersion < 10 {
+                var memberIds: [Int: String] = [:]
+                var categoryIds: [Int: String] = [:]
+                var footprintIds: [ObjectId: String] = [:]
+                
+                migration.enumerateObjects(ofType: PeopleWith.className()) { oldObject, newObject in
+                    let newID = UUID().uuidString
+                    newObject?["newID"] = newID
+                    
+                    if let oldID = oldObject?["id"] as? Int {
+                        memberIds[oldID] = newID
+                    }
+                }
+                
+                migration.enumerateObjects(ofType: Category.className()) { oldObject, newObject in
+                    let newID = UUID().uuidString
+                    
+                    if let type = oldObject?["pinType"] as? Int, let color = oldObject?["pinColor"] as? Int, let pinType = PinType(rawValue: type), let pinColor = PinColor(rawValue: color) {
+                        newObject?["newColor"] = pinColor.v2Color.rawValue
+                        newObject?["newIcon"] = pinType.v2Icon.rawValue
+                    } else {
+                        newObject?["newColor"] = 0
+                        newObject?["newIcon"] = ""
+                    }
+                    newObject?["newID"] = newID
+                    
+                    if let oldID = oldObject?["tag"] as? Int {
+                        categoryIds[oldID] = newID
+                    }
+                }
+                
+                migration.enumerateObjects(ofType: FootPrint.className()) { oldObject, newObject in
+                    let newID = UUID().uuidString
+                    newObject?["newID"] = newID
+                    
+                    if let memberOldIDs = oldObject?["peopleWithIds"] as? List<Int> {
+                        var newIds: List<String> = List<String>()
+                        for oldID in memberOldIDs {
+                            if let id = memberIds[oldID] {
+                                newIds.append(id)
+                            }
+                        }
+                        newObject?["memberIds"] = newIds
+                    }
+                    
+                    if let categoryOldID = oldObject?["tag"] as? Int {
+                        if let categoryNewID = categoryIds[categoryOldID] {
+                            newObject!["categoryId"] = categoryNewID
+                        }
+                    }
+                    
+                    if let oldID = oldObject?["id"] as? ObjectId {
+                        footprintIds[oldID] = newID
+                    }
+                }
+                
+                migration.enumerateObjects(ofType: Travel.className()) { oldObject, newObject in
+                    let newID = UUID().uuidString
+                    newObject?["newID"] = newID
+                    
+                    
+                    
+                    if let footprintsOldIDs = oldObject?.dynamicList("footprints").map({ $0.id }) {
+//                        let footprintsOldIDs = items.map({ $0.id })
+                        var newIds: List<String> = List<String>()
+                        footprintsOldIDs.forEach { oldID in
+                            if let oldID = oldID as? ObjectId, let id = footprintIds[oldID] {
+                                newIds.append(id)
+                            }
+                        }
+                        newObject?["footprintIDs"] = newIds
+                    }
+                }
+                
+                
+                
+            }
+        }
+        
+        Realm.Configuration.defaultConfiguration = config
+        print("[DB]path= \(Realm.Configuration.defaultConfiguration.fileURL!)");
+
     }
 }
 
