@@ -1,13 +1,11 @@
 PODS:
-  - Google-Mobile-Ads-SDK (11.7.0):
+  - Google-Mobile-Ads-SDK (11.13.0):
     - GoogleUserMessagingPlatform (>= 1.1)
-  - GoogleMaps (9.0.0):
-    - GoogleMaps/Maps (= 9.0.0)
-  - GoogleMaps/Base (9.0.0)
-  - GoogleMaps/Maps (9.0.0):
-    - GoogleMaps/Base
-  - GooglePlaces (9.0.0)
-  - GoogleUserMessagingPlatform (2.5.0)
+  - GoogleMaps (9.2.0):
+    - GoogleMaps/Maps (= 9.2.0)
+  - GoogleMaps/Maps (9.2.0)
+  - GooglePlaces (9.2.0)
+  - GoogleUserMessagingPlatform (2.7.0)
 
 DEPENDENCIES:
   - Google-Mobile-Ads-SDK
@@ -22,11 +20,11 @@ SPEC REPOS:
     - GoogleUserMessagingPlatform
 
 SPEC CHECKSUMS:
-  Google-Mobile-Ads-SDK: 204b517c9765169144cf39763c7f5d23c57a9db0
-  GoogleMaps: 4907d0d42bf8cd58f56743e31f91d23c10682745
-  GooglePlaces: cf1f5b61297da7ac64bcb147cfa7b435d74ed6d9
-  GoogleUserMessagingPlatform: 6b4f48a370e77ce121d034c908cc6ee4fdafaf13
+  Google-Mobile-Ads-SDK: 14f57f2dc33532a24db288897e26494640810407
+  GoogleMaps: 634ec3ca99698b31ca2253d64f017217d70cfb38
+  GooglePlaces: f997a80fb7b88233ad53aa8c9d5f092c86ceae54
+  GoogleUserMessagingPlatform: a8b56893477f67212fbc8411c139e61d463349f5
 
 PODFILE CHECKSUM: c34b613a4073552f1129496dbc37ebbaa3f74c6d
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.16.2

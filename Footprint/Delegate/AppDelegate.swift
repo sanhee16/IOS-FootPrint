@@ -12,6 +12,7 @@ import GooglePlaces
 import FirebaseCore
 import FirebaseFirestore
 import GoogleMobileAds
+import RealmSwift
 
 //@UIApplicationDelegateAdaptor(AppDelegate.self) var delegate ??
 @main
@@ -36,6 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         print("application : didFinishLaunchingWithOptions")
         UNUserNotificationCenter.current().delegate = self // notification
+        print("path= \(Realm.Configuration.defaultConfiguration.fileURL!)");
 
         let googleApiKey: String = Bundle.main.googleApiKey
         GMSServices.provideAPIKey(googleApiKey)

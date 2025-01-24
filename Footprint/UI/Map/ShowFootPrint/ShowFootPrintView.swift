@@ -32,7 +32,7 @@ struct ShowFootPrintView: View {
                 drawBody(geometry)
             }
             .padding(EdgeInsets(top: 0, leading: 0, bottom: safeBottom, trailing: 0))
-            .edgesIgnoringSafeArea(.all)
+//            .edgesIgnoringSafeArea(.all)
             .frame(width: geometry.size.width, alignment: .leading)
         }
         .onAppear {
