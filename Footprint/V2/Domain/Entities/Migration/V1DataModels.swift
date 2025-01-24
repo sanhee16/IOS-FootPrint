@@ -8,14 +8,14 @@
 import Foundation
 
 struct CategoryV1 {
-    var tag: Int
+    var id: String
     var name: String
-    var pinType: Int
-    var pinColor: Int
+    var icon: CategoryIcon
+    var color: CategoryColor
 }
 
 struct MemberV1 {
-    var id: Int
+    var id: String
     var name: String
     var image: String
     var intro: String
@@ -43,8 +43,8 @@ struct FootprintV1 {
     var createdAt: Int
     var latitude: Double
     var longitude: Double
-    var tag: Int
-    var peopleWithIds: [String]
+    var categoryId: String
+    var memberIds: [String]
     var address: String
     var isStar: Bool
 }

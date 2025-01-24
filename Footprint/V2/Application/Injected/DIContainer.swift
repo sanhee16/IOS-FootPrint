@@ -293,11 +293,57 @@ extension Container {
 
 //MARK: UseCase - Migration
 extension Container {
-//    var migrationFootprintUseCase: Factory<MigrationFootprintUseCase> {
-//        Factory(self) { MigrationFootprintUseCase(
-//            migrationRepository: <#T##any MigrationRepository#>,
-//            updateNoteUseCase: <#T##UpdateNoteUseCase#>
-//        )
-//        }
-//    }
+    var migrationRepositoryImpl: Factory<MigrationRepository> {
+        Factory(self) {
+            MigrationRepositoryImpl()
+        }.singleton
+    }
+    
+    var migrationFootprintUseCase: Factory<MigrationFootprintUseCase> {
+        Factory(self) {
+            MigrationFootprintUseCase(
+                migrationRepository: self.migrationRepositoryImpl(),
+                updateNoteUseCase: self.updateNoteUseCase()
+            )
+        }
+    }
+    
+    var migrationTripUseCase: Factory<MigrationTripUseCase> {
+        Factory(self) {
+            MigrationTripUseCase(
+                migrationRepository: self.migrationRepositoryImpl(),
+                updateTripUseCase: self.updateTripUseCase()
+            )
+        }
+    }
+    
+    var migrationCategoryUseCase: Factory<MigrationCategoryUseCase> {
+        Factory(self) {
+            MigrationCategoryUseCase(
+                migrationRepository: self.migrationRepositoryImpl(),
+                saveCategoryUseCase: self.saveCategoryUseCase()
+            )
+        }
+    }
+    
+    var migrationMemberUseCase: Factory<MigrationMemberUseCase> {
+        Factory(self) {
+            MigrationMemberUseCase(
+                migrationRepository: self.migrationRepositoryImpl(),
+                updateMemberUseCase: self.updateMemberUseCase()
+            )
+        }
+    }
+    
+    var migrationUseCase: Factory<MigrationUseCase> {
+        Factory(self) {
+            MigrationUseCase(
+                migrationFootprintUseCase: self.migrationFootprintUseCase(),
+                migrationTripUseCase: self.migrationTripUseCase(),
+                migrationMemberUseCase: self.migrationMemberUseCase(),
+                migrationCategoryUseCase: self.migrationCategoryUseCase()
+            )
+        }
+    }
+    
 }

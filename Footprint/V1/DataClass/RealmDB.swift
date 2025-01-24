@@ -68,15 +68,15 @@ class FootPrint: Object {
 extension FootPrint {
     func toFootprintV1() -> FootprintV1 {
         FootprintV1(
-            id: self.id.stringValue,
+            id: self.newID,
             title: self.title,
             content: self.content,
             images: self.images.map({ String($0) }),
             createdAt: self.createdAt,
             latitude: self.latitude,
             longitude: self.longitude,
-            tag: self.tag,
-            peopleWithIds: self.peopleWithIds.map({ String($0) }),
+            categoryId: self.categoryId,
+            memberIds: self.memberIds.map({ String($0) }),
             address: self.address ?? "",
             isStar: self.isStar
         )
@@ -122,8 +122,8 @@ class Travel: Object {
 extension Travel {
     func toTripV1() -> TripV1 {
         TripV1(
-            id: self.id.stringValue,
-            footprintIds: self.footprints.map({ String($0.id.stringValue) }),
+            id: self.newID,
+            footprintIds: self.footprintIDs.map({ $0 }),
             title: self.title,
             intro: self.intro,
             createdAt: self.createdAt,
@@ -164,12 +164,10 @@ class Category: Object {
 
 extension Category {
     func toCategoryV1() -> CategoryV1 {
-        CategoryV1(
-            tag: self.tag,
-            name: self.name,
-            pinType: self.pinType,
-            pinColor: self.pinColor
-        )
+        if let newIcon = CategoryIcon(rawValue: self.newIcon), let newColor = CategoryColor(rawValue: self.newColor) {
+            return CategoryV1(id: self.newID, name: self.name, icon: newIcon, color: newColor)
+        }
+        return CategoryV1(id: self.newID, name: self.name, icon: .emotion_10_chatSmiley, color: .black)
     }
 }
 
@@ -199,6 +197,6 @@ public class PeopleWith: Object {
 
 extension PeopleWith {
     func toMemberV1() -> MemberV1 {
-        MemberV1(id: self.id, name: self.name, image: self.image, intro: self.intro)
+        MemberV1(id: self.newID, name: self.name, image: self.image, intro: self.intro)
     }
 }

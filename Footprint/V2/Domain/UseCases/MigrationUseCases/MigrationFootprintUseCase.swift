@@ -27,31 +27,19 @@ class MigrationFootprintUseCase {
             }
             
             for item in list {
-                do {
-                    var memberIds: [String] = []
-                    
-                    try item.peopleWithIds.forEach { id in
-                        let newId = try self.migrationRepository.getMemberId(id).get()
-                        memberIds.append(newId)
-                    }
-                    
-                    let categoryId = try self.migrationRepository.getCategoryId(item.tag).get()
-                    self.updateNoteUseCase.execute(
+                self.updateNoteUseCase.execute(
                         id: item.id,
                         title: item.title,
                         content: item.content,
                         createdAt: item.createdAt,
                         imageUrls: item.images.map({ url in String(url) }),
-                        categoryId: categoryId,
-                        memberIds: memberIds,
+                        categoryId: item.categoryId,
+                        memberIds: item.memberIds,
                         isStar: item.isStar,
                         latitude: item.latitude,
                         longitude: item.longitude,
                         address: item.address
                     )
-                } catch {
-                    continue
-                }
             }
             return .success(Void())
             

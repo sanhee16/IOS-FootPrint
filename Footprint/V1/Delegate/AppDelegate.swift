@@ -12,10 +12,12 @@ import GooglePlaces
 import FirebaseCore
 import FirebaseFirestore
 import GoogleMobileAds
+import Factory
 import RealmSwift
 
 //@UIApplicationDelegateAdaptor(AppDelegate.self) var delegate ??
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    @Injected(\.migrationUseCase) var migrationUseCase
     /*
      UISceneSession 객체 = scene의 고유의 런타임 인스턴스를 관리함
      scene을 추적하는 session -> session 안에는 고유한 식별자와 scene의 구성 세부사항이 들어있음
@@ -36,11 +38,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         print("application : didFinishLaunchingWithOptions")
         UNUserNotificationCenter.current().delegate = self // notification
-
+        
         let googleApiKey: String = Bundle.main.googleApiKey
         GMSServices.provideAPIKey(googleApiKey)
         GMSPlacesClient.provideAPIKey(googleApiKey)
-
+        
         
         if #available(iOS 11.0, *) {
             // 경고창 배지 사운드를 사용하는 알림 환경 정보를 생성하고, 사용자 동의여부 창을 실행
@@ -61,16 +63,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // FireStore (firebase)
         FirebaseApp.configure()
-
+        
         //admob
         GADMobileAds.sharedInstance().start(completionHandler: nil)
-
+        
         // network connection
         NetworkMonitor.shared.startMonitoring()
-
+        
         // migration
         dbMigration()
-
+        
         return true
     }
     
@@ -130,11 +132,12 @@ extension AppDelegate {
     
     func dbMigration() {
         print("[DB] Realm.Configuration.defaultConfiguration: \(Realm.Configuration.defaultConfiguration.schemaVersion)")
-//         ✅ schemaVersion 수정
-        let config = Realm.Configuration(schemaVersion: 6) { migration, oldSchemaVersion in
+        //         ✅ schemaVersion 수정
+        let config = Realm.Configuration(schemaVersion: 1) { migration, oldSchemaVersion in
             // ✅ 0 -> 1로 업데이트, 새로운 컬럼 추가
             print("[DB] oldSchemaVersion: \(oldSchemaVersion)")
-            if oldSchemaVersion < 10 {
+            
+            if oldSchemaVersion < 1 {
                 var memberIds: [Int: String] = [:]
                 var categoryIds: [Int: String] = [:]
                 var footprintIds: [ObjectId: String] = [:]
@@ -170,7 +173,7 @@ extension AppDelegate {
                     newObject?["newID"] = newID
                     
                     if let memberOldIDs = oldObject?["peopleWithIds"] as? List<Int> {
-                        var newIds: List<String> = List<String>()
+                        let newIds: List<String> = List<String>()
                         for oldID in memberOldIDs {
                             if let id = memberIds[oldID] {
                                 newIds.append(id)
@@ -194,10 +197,7 @@ extension AppDelegate {
                     let newID = UUID().uuidString
                     newObject?["newID"] = newID
                     
-                    
-                    
                     if let footprintsOldIDs = oldObject?.dynamicList("footprints").map({ $0.id }) {
-//                        let footprintsOldIDs = items.map({ $0.id })
                         var newIds: List<String> = List<String>()
                         footprintsOldIDs.forEach { oldID in
                             if let oldID = oldID as? ObjectId, let id = footprintIds[oldID] {
@@ -208,14 +208,14 @@ extension AppDelegate {
                     }
                 }
                 
-                
-                
+                // 새로운 DB 설정
+                self.migrationUseCase.execute()
             }
         }
         
         Realm.Configuration.defaultConfiguration = config
         print("[DB]path= \(Realm.Configuration.defaultConfiguration.fileURL!)");
-
+        
     }
 }
 
