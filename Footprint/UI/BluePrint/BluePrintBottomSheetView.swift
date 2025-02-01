@@ -31,7 +31,6 @@ struct BluePrintBottomSheetView: View {
                     vm.onClose()
                 }
             }
-            .ignoresSafeArea(.container, edges: [.top, .bottom])
             .frame(width: geometry.size.width, alignment: .leading)
             .padding([.leading, .trailing], horizontalPadding)
         }

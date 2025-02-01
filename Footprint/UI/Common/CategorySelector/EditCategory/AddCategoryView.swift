@@ -82,7 +82,6 @@ struct AddCategoryView: View, KeyboardReadable {
             .padding(EdgeInsets(top: 4, leading: 0, bottom: 10, trailing: 0))
             Spacer()
         }
-        .ignoresSafeArea(.container, edges: [.top, .bottom])
         .frame(width: UIScreen.main.bounds.width, alignment: .leading)
         .onAppear {
             vm.onAppear()

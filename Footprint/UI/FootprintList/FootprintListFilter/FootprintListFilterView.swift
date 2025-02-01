@@ -79,7 +79,6 @@ struct FootprintListFilterView: View {
                 }
                 .frame(width: geometry.size.width - horizontalPadding * 2, height: 400 - 50, alignment: .center)
             }
-            .ignoresSafeArea(.container, edges: [.top, .bottom])
             .frame(width: geometry.size.width, alignment: .leading)
             .padding([.leading, .trailing], horizontalPadding)
         }

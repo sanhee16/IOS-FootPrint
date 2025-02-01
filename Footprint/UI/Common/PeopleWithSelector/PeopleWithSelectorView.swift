@@ -73,7 +73,6 @@ struct PeopleWithSelectorView: View {
                 .frame(width: geometry.size.width - 24, height: scrollViewHeight, alignment: .leading)
             }
             .padding(EdgeInsets(top: 0, leading: 0, bottom: safeBottom, trailing: 0))
-            .ignoresSafeArea(.container, edges: [.top, .bottom])
             .frame(width: geometry.size.width, alignment: .leading)
             .padding([.leading, .trailing], 12)
         }

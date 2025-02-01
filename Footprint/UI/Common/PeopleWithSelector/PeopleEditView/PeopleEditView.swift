@@ -34,7 +34,6 @@ struct PeopleEditView: View {
                 Spacer()
             }
             .padding(EdgeInsets(top: 0, leading: 0, bottom: safeBottom, trailing: 0))
-            .ignoresSafeArea(.container, edges: [.top, .bottom])
             .frame(width: geometry.size.width, alignment: .leading)
         }
         .onAppear {

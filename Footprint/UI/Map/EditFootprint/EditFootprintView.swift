@@ -71,7 +71,6 @@ struct EditFootprintView: View, KeyboardReadable {
                 Spacer()
             }
             .padding(EdgeInsets(top: safeTop, leading: 0, bottom: $vm.isKeyboardVisible.wrappedValue ? 0 : safeBottom, trailing: 0))
-            .ignoresSafeArea(.container, edges: [.top, .bottom])
             .frame(width: geometry.size.width, alignment: .leading)
         }
         .onAppear {

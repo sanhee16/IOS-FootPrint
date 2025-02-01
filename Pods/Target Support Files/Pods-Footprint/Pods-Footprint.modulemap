@@ -1,6 +1,3 @@
-framework module Pods_Footprint {
-  umbrella header "Pods-Footprint-umbrella.h"
-
-  export *
-  module * { export * }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:4ddd1075a9b6c910c9cd8a3d319eb9083b3a36fa6253fd36bf85023269ee5088
+size 118
