@@ -18,6 +18,10 @@ import RealmSwift
 //@UIApplicationDelegateAdaptor(AppDelegate.self) var delegate ??
 class AppDelegate: UIResponder, UIApplicationDelegate {
     @Injected(\.migrationUseCase) var migrationUseCase
+    @Injected(\.saveDefaultCategoriesUseCase) var saveDefaultCategoriesUseCase
+    @Injected(\.loadCategoriesUseCase) var loadCategoriesUseCase
+    @Injected(\.saveDefaultTripIconUseCase) var saveDefaultTripIconUseCase
+    
     /*
      UISceneSession 객체 = scene의 고유의 런타임 인스턴스를 관리함
      scene을 추적하는 session -> session 안에는 고유한 식별자와 scene의 구성 세부사항이 들어있음
@@ -132,12 +136,17 @@ extension AppDelegate {
     
     func dbMigration() {
         print("[DB] Realm.Configuration.defaultConfiguration: \(Realm.Configuration.defaultConfiguration.schemaVersion)")
-        //         ✅ schemaVersion 수정
-        let config = Realm.Configuration(schemaVersion: 1) { migration, oldSchemaVersion in
-            // ✅ 0 -> 1로 업데이트, 새로운 컬럼 추가
+        
+        // schemaVersion 수정
+        let config = Realm.Configuration(schemaVersion: 1) {[weak self] migration, oldSchemaVersion in
+            // 0 -> 1로 업데이트, 새로운 컬럼 추가
             print("[DB] oldSchemaVersion: \(oldSchemaVersion)")
+            Task {
+                self?.saveDefaultCategoriesUseCase.execute()
+                self?.saveDefaultTripIconUseCase.execute()
+            }
             
-            if oldSchemaVersion < 1 {
+            if oldSchemaVersion < 100 {
                 var memberIds: [Int: String] = [:]
                 var categoryIds: [Int: String] = [:]
                 var footprintIds: [ObjectId: String] = [:]
@@ -162,6 +171,11 @@ extension AppDelegate {
                         newObject?["newIcon"] = ""
                     }
                     newObject?["newID"] = newID
+                    if let tag = oldObject?["tag"] as? Int, tag == 0 {
+                        newObject?["isDeletable"] = false
+                    } else {
+                        newObject?["isDeletable"] = true
+                    }
                     
                     if let oldID = oldObject?["tag"] as? Int {
                         categoryIds[oldID] = newID
@@ -198,7 +212,7 @@ extension AppDelegate {
                     newObject?["newID"] = newID
                     
                     if let footprintsOldIDs = oldObject?.dynamicList("footprints").map({ $0.id }) {
-                        var newIds: List<String> = List<String>()
+                        let newIds: List<String> = List<String>()
                         footprintsOldIDs.forEach { oldID in
                             if let oldID = oldID as? ObjectId, let id = footprintIds[oldID] {
                                 newIds.append(id)
@@ -207,15 +221,16 @@ extension AppDelegate {
                         newObject?["footprintIDs"] = newIds
                     }
                 }
-                
-                // 새로운 DB 설정
-                self.migrationUseCase.execute()
+            }
+            
+            // 새로운 DB 설정
+            Task {
+                let _ = self?.migrationUseCase.execute()
             }
         }
         
         Realm.Configuration.defaultConfiguration = config
         print("[DB]path= \(Realm.Configuration.defaultConfiguration.fileURL!)");
-        
     }
 }
 

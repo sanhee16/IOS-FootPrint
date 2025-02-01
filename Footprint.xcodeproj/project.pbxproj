@@ -165,6 +165,7 @@
 		268BD7D32CF5A80300788A65 /* GoogleGeocodingRemoteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268BD7D22CF5A80300788A65 /* GoogleGeocodingRemoteResponse.swift */; };
 		268BD7D52CF5A84B00788A65 /* GoogleGeocodingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268BD7D42CF5A84B00788A65 /* GoogleGeocodingModel.swift */; };
 		268BD7D72CF5C06000788A65 /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268BD7D62CF5C06000788A65 /* Data+Extension.swift */; };
+		269048952D4D9BA9001CE4E2 /* GetAddressUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269048942D4D9BA9001CE4E2 /* GetAddressUseCase.swift */; };
 		2691D9C3294EE4B1002825B9 /* FootprintListFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2691D9C2294EE4B1002825B9 /* FootprintListFilterView.swift */; };
 		2691D9C5294EE4B6002825B9 /* FootprintListFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2691D9C4294EE4B6002825B9 /* FootprintListFilterViewModel.swift */; };
 		2691D9C7294EE505002825B9 /* BluePrintBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2691D9C6294EE505002825B9 /* BluePrintBottomSheetView.swift */; };
@@ -476,6 +477,7 @@
 		268BD7D22CF5A80300788A65 /* GoogleGeocodingRemoteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleGeocodingRemoteResponse.swift; sourceTree = "<group>"; };
 		268BD7D42CF5A84B00788A65 /* GoogleGeocodingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleGeocodingModel.swift; sourceTree = "<group>"; };
 		268BD7D62CF5C06000788A65 /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
+		269048942D4D9BA9001CE4E2 /* GetAddressUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAddressUseCase.swift; sourceTree = "<group>"; };
 		2691D9C2294EE4B1002825B9 /* FootprintListFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootprintListFilterView.swift; sourceTree = "<group>"; };
 		2691D9C4294EE4B6002825B9 /* FootprintListFilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootprintListFilterViewModel.swift; sourceTree = "<group>"; };
 		2691D9C6294EE505002825B9 /* BluePrintBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluePrintBottomSheetView.swift; sourceTree = "<group>"; };
@@ -1403,6 +1405,7 @@
 			isa = PBXGroup;
 			children = (
 				26CBA8A12D15665900381D83 /* GetLocationUseCase.swift */,
+				269048942D4D9BA9001CE4E2 /* GetAddressUseCase.swift */,
 			);
 			path = LocationUseCases;
 			sourceTree = "<group>";
@@ -2056,6 +2059,7 @@
 				2675D2082CDDDE9000BD7633 /* GetIsShowMarkerUseCase.swift in Sources */,
 				269CA5612C78A5B900366005 /* LoadCategoriesUseCase.swift in Sources */,
 				269CA5652C78A5EC00366005 /* DeleteCategoryUseCase.swift in Sources */,
+				269048952D4D9BA9001CE4E2 /* GetAddressUseCase.swift in Sources */,
 				63C8CCF62941D60400BB861D /* DevInfoView.swift in Sources */,
 				262424EE2CE5E94900595132 /* SelectFootprintsViewV2.swift in Sources */,
 				2619FE8C2940D6B300D24778 /* CheckPermissionViewModel.swift in Sources */,

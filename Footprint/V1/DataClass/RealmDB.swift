@@ -149,6 +149,7 @@ class Category: Object {
     @Persisted var newID: String
     @Persisted var newColor: Int
     @Persisted var newIcon: String
+    @Persisted var isDeletable: Bool
     
     convenience init(tag: Int, name: String, pinType: PinType, pinColor: PinColor) {
         self.init()
@@ -159,15 +160,16 @@ class Category: Object {
         self.newID = UUID().uuidString
         self.newColor = 0
         self.newIcon = ""
+        self.isDeletable = true
     }
 }
 
 extension Category {
     func toCategoryV1() -> CategoryV1 {
         if let newIcon = CategoryIcon(rawValue: self.newIcon), let newColor = CategoryColor(rawValue: self.newColor) {
-            return CategoryV1(id: self.newID, name: self.name, icon: newIcon, color: newColor)
+            return CategoryV1(id: self.newID, name: self.name, icon: newIcon, color: newColor, isDeletable: self.isDeletable)
         }
-        return CategoryV1(id: self.newID, name: self.name, icon: .emotion_10_chatSmiley, color: .black)
+        return CategoryV1(id: self.newID, name: self.name, icon: .emotion_10_chatSmiley, color: .black, isDeletable: self.isDeletable)
     }
 }
 

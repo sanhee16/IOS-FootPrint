@@ -123,7 +123,7 @@ class SettingVM: ObservableObject {
     }
     private func addTrips() {
         let notes: [String] = self.loadAllNoteUseCase.execute(.earliest).map({ $0.id })
-        let icons: [String] = self.loadTripIconsUseCase.execute().map({ $0.id})
+        let icons: [String] = self.loadTripIconsUseCase.execute().map({ $0.id })
         
         for i in 0..<10 {
             self.saveTripUseCase.execute(

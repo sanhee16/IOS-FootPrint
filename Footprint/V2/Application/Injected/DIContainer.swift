@@ -63,6 +63,10 @@ extension Container {
 
 //MARK: UseCase - Location
 extension Container {
+    var getAddressUseCase: Factory<GetAddressUseCase> {
+        Factory(self) { GetAddressUseCase() }
+    }
+    
     var getLocationUseCase: Factory<GetLocationUseCase> {
         Factory(self) { GetLocationUseCase(locationRepository: self.locationRepository()) }
     }
@@ -303,7 +307,8 @@ extension Container {
         Factory(self) {
             MigrationFootprintUseCase(
                 migrationRepository: self.migrationRepositoryImpl(),
-                updateNoteUseCase: self.updateNoteUseCase()
+                updateNoteUseCase: self.updateNoteUseCase(), 
+                getAddressUseCase: self.getAddressUseCase()
             )
         }
     }

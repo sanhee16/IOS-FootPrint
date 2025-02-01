@@ -18,8 +18,7 @@ class UpdateMemberUseCase {
     func execute(_ id: String, idx: Int, name: String, image: UIImage? = nil, intro: String) {
         var imageName: String = ""
         if let image = image {
-            let currentTimeStamp = Int(Date().timeIntervalSince1970)
-            imageName = "\(currentTimeStamp)_member"
+            imageName = "\(UUID().uuidString)_member"
             _ = ImageManager.shared.saveImage(image: image, imageName: imageName)
         } else {
             imageName = ""

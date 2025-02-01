@@ -12,6 +12,7 @@ struct CategoryV1 {
     var name: String
     var icon: CategoryIcon
     var color: CategoryColor
+    var isDeletable: Bool
 }
 
 struct MemberV1 {

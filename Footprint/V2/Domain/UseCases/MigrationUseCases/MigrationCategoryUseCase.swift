@@ -29,7 +29,7 @@ class MigrationCategoryUseCase {
                     name: item.name,
                     color: item.color,
                     icon: item.icon,
-                    isDeletable: true
+                    isDeletable: item.isDeletable
                 )
             }
             

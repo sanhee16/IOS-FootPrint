@@ -6,14 +6,17 @@
 //
 
 import Foundation
+import CoreLocation
 
 class MigrationFootprintUseCase {
     let migrationRepository: MigrationRepository
     let updateNoteUseCase: UpdateNoteUseCase
+    let getAddressUseCase: GetAddressUseCase
     
-    init(migrationRepository: MigrationRepository, updateNoteUseCase: UpdateNoteUseCase) {
+    init(migrationRepository: MigrationRepository, updateNoteUseCase: UpdateNoteUseCase, getAddressUseCase: GetAddressUseCase) {
         self.migrationRepository = migrationRepository
         self.updateNoteUseCase = updateNoteUseCase
+        self.getAddressUseCase = getAddressUseCase
     }
     
     func execute() -> Result<Void, DBError> {
@@ -27,19 +30,22 @@ class MigrationFootprintUseCase {
             }
             
             for item in list {
-                self.updateNoteUseCase.execute(
-                        id: item.id,
-                        title: item.title,
-                        content: item.content,
-                        createdAt: item.createdAt,
-                        imageUrls: item.images.map({ url in String(url) }),
-                        categoryId: item.categoryId,
-                        memberIds: item.memberIds,
-                        isStar: item.isStar,
-                        latitude: item.latitude,
-                        longitude: item.longitude,
-                        address: item.address
-                    )
+                Task {
+                    let address = await self.getAddressUseCase.execute(CLLocation(latitude: item.latitude, longitude: item.longitude))
+                    self.updateNoteUseCase.execute(
+                            id: item.id,
+                            title: item.title,
+                            content: item.content,
+                            createdAt: item.createdAt,
+                            imageUrls: item.images.map({ url in String(url) }),
+                            categoryId: item.categoryId,
+                            memberIds: item.memberIds,
+                            isStar: item.isStar,
+                            latitude: item.latitude,
+                            longitude: item.longitude,
+                            address: address
+                        )
+                }
             }
             return .success(Void())
             

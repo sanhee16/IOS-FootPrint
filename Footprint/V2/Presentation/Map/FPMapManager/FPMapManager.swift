@@ -23,6 +23,7 @@ enum MapStatus: String {
 class FPMapManager: NSObject, ObservableObject {
     @Injected(\.loadAllNoteUseCase) var loadAllNoteUseCase
     @Injected(\.loadCategoryUseCase) var loadCategoryUseCase
+    @Injected(\.getAddressUseCase) var getAddressUseCase
     
     static let shared = FPMapManager()
     private var myLocation: Location? = nil
@@ -204,24 +205,9 @@ class FPMapManager: NSObject, ObservableObject {
         guard let target = target else { return }
         
         let location = CLLocation(latitude: target.latitude, longitude: target.longitude)
-        let geocoder = CLGeocoder()
-        let locale = Locale(identifier: "Ko-kr") //TODO: 언어 바꾸기!
         
-        geocoder.reverseGeocodeLocation(location, preferredLocale: locale) { [weak self] placemarks, _ in
-            guard let placemarks = placemarks,
-                  let address = placemarks.last
-            else { return }
-            
-            if let postalAddress = address.postalAddress {
-                let formatter = CNPostalAddressFormatter()
-                let addressString = formatter.string(from: postalAddress)
-                
-                var result: String = ""
-                addressString.split(separator: "\n").forEach { value in
-                    result.append(contentsOf: "\(value) ")
-                }
-                self?.centerAddress = result
-            }
+        Task {
+            self.centerAddress = await getAddressUseCase.execute(location)
         }
     }
     
